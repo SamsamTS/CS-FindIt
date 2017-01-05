@@ -4,6 +4,8 @@ using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
 using ColossalFramework;
+using ColossalFramework.DataBinding;
+using ColossalFramework.Globalization;
 using ColossalFramework.PlatformServices;
 using ColossalFramework.Packaging;
 
@@ -16,6 +18,128 @@ namespace FindIt
         public ulong steamID;
         public string author;
         public float score;
+
+        public static string GetLocalizedTitle(PrefabInfo prefab)
+        {
+            string result;
+
+            if (prefab is BuildingInfo)
+            {
+                if (Locale.GetUnchecked("BUILDING_TITLE", prefab.name, out result))
+                {
+                    return result;
+                }
+            }
+            else if (prefab is PropInfo)
+            {
+                if (Locale.GetUnchecked("PROPS_TITLE", prefab.name, out result))
+                {
+                    return result;
+                }
+            }
+            else if (prefab is TreeInfo)
+            {
+                if (Locale.GetUnchecked("TREE_TITLE", prefab.name, out result))
+                {
+                    return result;
+                }
+            }
+
+            string name = prefab.name;
+
+            if (name.Contains("."))
+            {
+                name = prefab.name.Substring(prefab.name.IndexOf('.') + 1);
+            }
+
+            if (name.EndsWith("_Data"))
+            {
+                name = name.Substring(0, name.LastIndexOf("_Data"));
+            }
+
+            return name;
+        }
+
+        public static string GetLocalizedDescription(PrefabInfo prefab)
+        {
+            string result;
+
+            if (prefab is BuildingInfo)
+            {
+                if (Locale.GetUnchecked("BUILDING_DESC", prefab.name, out result))
+                {
+                    return result;
+                }
+            }
+            else if (prefab is PropInfo)
+            {
+                if (Locale.GetUnchecked("PROPS_DESC", prefab.name, out result))
+                {
+                    return result;
+                }
+            }
+            else if (prefab is TreeInfo)
+            {
+                if (Locale.GetUnchecked("TREE_DESC", prefab.name, out result))
+                {
+                    return result;
+                }
+            }
+
+            return "";
+        }
+
+        public static string GetLocalizedTooltip(PrefabInfo prefab)
+        {
+            MilestoneInfo unlockMilestone = prefab.GetUnlockMilestone();
+
+            string text = TooltipHelper.Format(new string[]
+	        {
+		        LocaleFormatter.Title,
+		        Asset.GetLocalizedTitle(prefab),
+		        LocaleFormatter.Sprite,
+		        (!string.IsNullOrEmpty(prefab.m_InfoTooltipThumbnail)) ? prefab.m_InfoTooltipThumbnail : prefab.name,
+		        LocaleFormatter.Text,
+		        Asset.GetLocalizedDescription(prefab),
+		        LocaleFormatter.Locked,
+		        (!ToolsModifierControl.IsUnlocked(unlockMilestone)).ToString()
+	        });
+
+            string unlockDesc, currentValue, targetValue, progress, locked;
+            ToolsModifierControl.GetUnlockingInfo(unlockMilestone, out unlockDesc, out currentValue, out targetValue, out progress, out locked);
+
+            string addTooltip = TooltipHelper.Format(new string[]
+	        {
+		        LocaleFormatter.LockedInfo,
+		        locked,
+		        LocaleFormatter.UnlockDesc,
+		        unlockDesc,
+		        LocaleFormatter.UnlockPopulationProgressText,
+		        progress,
+		        LocaleFormatter.UnlockPopulationTarget,
+		        targetValue,
+		        LocaleFormatter.UnlockPopulationCurrent,
+		        currentValue
+	        });
+
+            text = TooltipHelper.Append(text, addTooltip);
+            PrefabAI aI = prefab.GetAI();
+            if (aI != null)
+            {
+                text = TooltipHelper.Append(text, aI.GetLocalizedTooltip());
+            }
+
+            if (prefab is PropInfo || prefab is TreeInfo)
+            {
+                text = TooltipHelper.Append(text, TooltipHelper.Format(new string[]
+	            {
+		            LocaleFormatter.Cost,
+		            LocaleFormatter.FormatCost(prefab.GetConstructionCost(), false)
+	            }));
+            }
+
+            return text;
+        }
     }
 
     public class AssetTagList
@@ -29,30 +153,28 @@ namespace FindIt
 
         public List<Asset> matches = new List<Asset>();
 
-        public string m_search = "";
-
-        public string search
+        public List<Asset> Find(string text)
         {
-            set
+            matches.Clear();
+
+            text = text.Trim();
+
+            if (!text.IsNullOrWhiteSpace())
             {
-                m_search = value;
-                matches.Clear();
+                string[] values = text.ToLower().Split(' ');
 
-                if(value.IsNullOrWhiteSpace()) return;
-
-                string[] values = value.ToLower().Split(' ');
-
-                Find(values, authors, 10, false);
-                Find(values, tagsTitle, 5, true);
+                Find(values, authors, 100, false);
+                Find(values, tagsTitle, 10, true);
                 Find(values, tagsDesc, 1, true);
 
                 matches = matches.OrderByDescending(s => s.score).ToList();
             }
-
-            get
+            else
             {
-                return m_search;
+                matches = assets.Values.OrderBy(s => s.name).ToList();
             }
+
+            return matches;
         }
 
         public AssetTagList()
@@ -103,8 +225,8 @@ namespace FindIt
             {
                 if (asset.prefab != null)
                 {
-                    AddAssetTags(asset, tagsTitle, asset.prefab.GetLocalizedTitle());
-                    AddAssetTags(asset, tagsDesc, asset.prefab.GetLocalizedDescription());
+                    AddAssetTags(asset, tagsTitle, Asset.GetLocalizedTitle(asset.prefab));
+                    AddAssetTags(asset, tagsDesc, Asset.GetLocalizedDescription(asset.prefab));
 
                     if (!asset.author.IsNullOrWhiteSpace())
                     {

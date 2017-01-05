@@ -107,7 +107,7 @@ namespace FindIt.GUI
             set
             {
                 if (m_itemWidth <= 0) return;
-                if (m_pos != value)
+                if (m_pos != value && m_itemsData != null)
                 {
                     float pos = Mathf.Max(Mathf.Min(value, m_itemsData.m_size - width / m_itemWidth), 0);
                     m_updateContent = Mathf.FloorToInt(m_pos) != Mathf.FloorToInt(pos);
@@ -241,6 +241,8 @@ namespace FindIt.GUI
                             listPosition--;
                         }
                     };
+
+                    m_leftArrow.eventMouseWheel += (c, p) => OnMouseWheel(p);
                 }
             }
         }
@@ -265,6 +267,8 @@ namespace FindIt.GUI
                             listPosition++;
                         }
                     };
+
+                    m_rightArrow.eventMouseWheel += (c, p) => OnMouseWheel(p);
                 }
             }
         }
@@ -297,12 +301,22 @@ namespace FindIt.GUI
         /// </summary>
         public void Clear()
         {
-            m_itemsData.Clear();
+            itemsData.Clear();
 
-            for (int i = 0; i < m_items.m_size; i++)
+            if (m_items != null)
             {
-                m_items[i].item.enabled = false;
+                for (int i = 0; i < m_items.m_size; i++)
+                {
+                    if (m_items[i].item == null)
+                    {
+                        m_items[i].item = CreateItem();
+                        m_items[i].Init();
+                    }
+                    m_items[i].item.enabled = false;
+                }
             }
+
+            CheckItems();
         }
 
         /// <summary>
@@ -319,6 +333,11 @@ namespace FindIt.GUI
 
             for (int i = 0; i < m_items.m_size; i++)
             {
+                if(m_items[i].item == null)
+                {
+                    Clear();
+                    return;
+                }
                 int dataPos = Mathf.FloorToInt(m_pos + i);
                 float offset = itemWidth * (m_pos + i - dataPos);
                 if (dataPos < m_itemsData.m_size)
@@ -399,13 +418,13 @@ namespace FindIt.GUI
         {
             base.OnMouseWheel(p);
 
-            if (!p.used)
+            //if (!p.used)
             {
                 float prevPos = listPosition;
                 if (m_stepSize > 0 && m_itemWidth > 0)
-                    listPosition = m_pos - p.wheelDelta * m_stepSize / m_itemWidth;
+                    listPosition = m_pos - Mathf.Sign(p.wheelDelta) * m_stepSize / m_itemWidth;
                 else
-                    listPosition = m_pos - p.wheelDelta;
+                    listPosition = m_pos - Mathf.Sign(p.wheelDelta);
 
                 if(prevPos != listPosition)
                 {

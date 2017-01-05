@@ -42,7 +42,6 @@ namespace FindIt
             try
             {
                 AssetTagList.instance = new AssetTagList();
-                Redirection.Redirector<Detours.GeneratedScrollPanelDetour>.Deploy();
 
                 UIHelper group = helper.AddGroup(Name) as UIHelper;
                 UIPanel panel = group.self as UIPanel;
@@ -58,6 +57,6 @@ namespace FindIt
             }
         }
 
-        public const string version = "0.0.0";
+        public const string version = "0.1.0";
     }
 }

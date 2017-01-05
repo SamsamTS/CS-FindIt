@@ -14,6 +14,9 @@ namespace FindIt.Detours
     [TargetType(typeof(GeneratedScrollPanel))]
     public class GeneratedScrollPanelDetour : GeneratedScrollPanel
     {
+        public static List<UIFakeButton> fakeButtons;
+        public static object lockObject = new object();
+
         [RedirectMethod]
         new protected UIButton CreateButton(string name, string tooltip, string baseIconName, int index, UITextureAtlas atlas, UIComponent tooltipBox, bool enabled)
         {
@@ -23,48 +26,10 @@ namespace FindIt.Detours
             {
                 UIScrollablePanel oldPanel = GetComponentInChildren<UIScrollablePanel>();
 
-                scrollPanel = oldPanel.parent.AddUIComponent<UIScrollPanel>();
-                scrollPanel.template = "PlaceableItemTemplate";
-                scrollPanel.itemWidth = 109f;
-                scrollPanel.canSelect = true;
-                scrollPanel.size = new Vector2(763, 100);
-                scrollPanel.relativePosition = new Vector3(48, 5);
-                scrollPanel.atlas = oldPanel.atlas;
+                scrollPanel = UIScrollPanel.Create(oldPanel, buttonsAlignment);
 
                 FieldInfo m_ScrollablePanel = typeof(GeneratedScrollPanel).GetField("m_ScrollablePanel", BindingFlags.Instance | BindingFlags.NonPublic);
                 m_ScrollablePanel.SetValue(this, scrollPanel as UIScrollablePanel);
-
-                Destroy(oldPanel);
-
-                UIButton button = scrollPanel.parent.AddUIComponent<UIButton>();
-                button.name = "ArrowLeft";
-                button.size = new Vector2(32, 109);
-                button.foregroundSpriteMode = UIForegroundSpriteMode.Scale;
-                button.horizontalAlignment = UIHorizontalAlignment.Center;
-                button.verticalAlignment = UIVerticalAlignment.Middle;
-                button.normalFgSprite = "ArrowLeft";
-                button.focusedFgSprite = "ArrowLeftFocused";
-                button.hoveredFgSprite = "ArrowLeftHovered";
-                button.pressedFgSprite = "ArrowLeftPressed";
-                button.disabledFgSprite = "ArrowLeftDisabled";
-                button.isEnabled = false;
-                button.relativePosition = new Vector3(16, 0);
-                scrollPanel.LeftArrow = button;
-
-                button = scrollPanel.parent.AddUIComponent<UIButton>();
-                button.name = "ArrowRight";
-                button.size = new Vector2(32, 109);
-                button.foregroundSpriteMode = UIForegroundSpriteMode.Scale;
-                button.horizontalAlignment = UIHorizontalAlignment.Center;
-                button.verticalAlignment = UIVerticalAlignment.Middle;
-                button.normalFgSprite = "ArrowRight";
-                button.focusedFgSprite = "ArrowRightFocused";
-                button.hoveredFgSprite = "ArrowRightHovered";
-                button.pressedFgSprite = "ArrowRightPressed";
-                button.disabledFgSprite = "ArrowRightDisabled";
-                button.isEnabled = false;
-                button.relativePosition = new Vector3(811, 0);
-                scrollPanel.RightArrow = button;
             }
 
             if (atlas == null)
@@ -89,7 +54,7 @@ namespace FindIt.Detours
                 }
             }
 
-            if(data == null)
+            if (data == null)
             {
                 data = new UIScrollPanelItem.ItemData();
                 scrollPanel.itemsData.Add(data);
@@ -104,8 +69,28 @@ namespace FindIt.Detours
             data.verticalAlignment = this.buttonsAlignment;
             scrollPanel.DisplayAt(0);
 
-            UIFakeButton uiButton = component.AddUIComponent<UIFakeButton>();
+            UIFakeButton uiButton = new UIFakeButton();
             uiButton.data = data;
+
+            lock (lockObject)
+            {
+                if (fakeButtons == null)
+                {
+                    fakeButtons = new List<UIFakeButton>();
+                    SimulationManager.instance.AddAction(() =>
+                    {
+                        lock (lockObject)
+                        {
+                            foreach (UIFakeButton button in fakeButtons)
+                            {
+                                button.data.objectUserData = button.objectUserData;
+                            }
+                            fakeButtons = null;
+                        }
+                    });
+                }
+                fakeButtons.Add(uiButton);
+            }
 
             return uiButton;
         }
@@ -175,6 +160,6 @@ namespace FindIt.Detours
         public override ItemClass.Service service
         {
             get { throw new NotImplementedException(); }
-        } 
+        }
     }
 }

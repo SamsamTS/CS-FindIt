@@ -53,8 +53,10 @@
     <Compile Include="AssetTagList.cs" />
     <Compile Include="Detours\GeneratedScrollPanelDetour.cs" />
     <Compile Include="FindIt.cs" />
+    <Compile Include="GUI\UIGroupPanel.cs" />
     <Compile Include="GUI\UIScrollPanel.cs" />
     <Compile Include="GUI\UIHorizontalFastList.cs" />
+    <Compile Include="GUI\UISearchBox.cs" />
     <Compile Include="GUI\UIUtils.cs" />
     <Compile Include="ModInfo.cs" />
     <Compile Include="DebugUtils.cs" />
@@ -69,8 +71,13 @@
     <Compile Include="Redirection\Tuple.cs" />
     <Compile Include="ResourceLoader.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Icons\" />
+    <EmbeddedResource Include="Icons\FindIt.png" />
+    <EmbeddedResource Include="Icons\FindItDisabled.png" />
+    <EmbeddedResource Include="Icons\FindItFocused.png" />
+    <EmbeddedResource Include="Icons\FindItHovered.png" />
+    <EmbeddedResource Include="Icons\FindItPressed.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
