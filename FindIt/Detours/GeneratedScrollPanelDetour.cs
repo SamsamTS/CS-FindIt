@@ -34,7 +34,7 @@ namespace FindIt.Detours
 
             if (atlas == null)
             {
-                atlas = scrollPanel.atlas;
+                atlas = UIView.GetAView().defaultAtlas;
             }
 
             UIScrollPanelItem.ItemData data = null;
@@ -69,8 +69,9 @@ namespace FindIt.Detours
             data.verticalAlignment = this.buttonsAlignment;
             scrollPanel.DisplayAt(0);
 
-            UIFakeButton uiButton = new UIFakeButton();
-            uiButton.data = data;
+            UIFakeButton fakeButton = new UIFakeButton();
+            fakeButton.data = data;
+            fakeButton.atlas = data.atlas;
 
             lock (lockObject)
             {
@@ -84,15 +85,16 @@ namespace FindIt.Detours
                             foreach (UIFakeButton button in fakeButtons)
                             {
                                 button.data.objectUserData = button.objectUserData;
+                                button.data.atlas = button.atlas;
                             }
                             fakeButtons = null;
                         }
                     });
                 }
-                fakeButtons.Add(uiButton);
+                fakeButtons.Add(fakeButton);
             }
 
-            return uiButton;
+            return fakeButton;
         }
 
         [RedirectMethod]

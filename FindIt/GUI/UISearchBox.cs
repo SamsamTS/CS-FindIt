@@ -16,13 +16,25 @@ namespace FindIt.GUI
 
         public override void Start()
         {
+            atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericTab";
             size = new Vector2(300, 40);
 
             input = SamsamTS.UIUtils.CreateTextField(this);
-            input.size = new Vector2(284, 30);
+            input.size = new Vector2(width - 45, 30);
             input.padding.top = 7;
-            input.relativePosition = new Vector3(8, 5);
+            input.relativePosition = new Vector3(5, 5);
+
+            UISprite sprite = AddUIComponent<UISprite>();
+            sprite.atlas = FindIt.instance.m_mainButton.atlas;
+            sprite.spriteName = "FindIt";
+            sprite.relativePosition = new Vector3(width - 41, -3);
+
+            sprite.eventClick += (c, p) =>
+            {
+                input.Focus();
+                input.SelectAll();
+            };
 
             input.eventTextChanged += OnTextChanged;
         }
@@ -31,18 +43,11 @@ namespace FindIt.GUI
         {
             base.OnVisibilityChanged();
 
-            if (input != null)
+            if (input != null && !isVisible)
             {
-                if (isVisible)
-                {
-                    input.Focus();
-                    input.SelectAll();
-                }
-                else
-                {
-                    input.Unfocus();
-                }
+                input.Unfocus();
             }
+
         }
 
         public void OnTextChanged(UIComponent c, string p)

@@ -19,6 +19,10 @@ namespace FindIt
         public string author;
         public float score;
 
+        public HashSet<string> tagsTitle = new HashSet<string>();
+        public HashSet<string> tagsDesc = new HashSet<string>();
+        public HashSet<string> tagsHash = new HashSet<string>();
+
         public static string GetLocalizedTitle(PrefabInfo prefab)
         {
             string result;
@@ -57,7 +61,7 @@ namespace FindIt
                 name = name.Substring(0, name.LastIndexOf("_Data"));
             }
 
-            return name;
+            return Regex.Replace(name, "([A-Z][a-z]+)", " $1");
         }
 
         public static string GetLocalizedDescription(PrefabInfo prefab)
@@ -146,9 +150,8 @@ namespace FindIt
     {
         public static AssetTagList instance;
 
-        public Dictionary<string, HashSet<Asset>> tagsTitle = new Dictionary<string, HashSet<Asset>>();
-        public Dictionary<string, HashSet<Asset>> tagsDesc = new Dictionary<string, HashSet<Asset>>();
-        public Dictionary<string, HashSet<Asset>> authors = new Dictionary<string, HashSet<Asset>>();
+        public Dictionary<string, int> tagsTitle = new Dictionary<string, int>();
+        public Dictionary<string, int> tagsDesc = new Dictionary<string, int>();
         public Dictionary<string, Asset> assets = new Dictionary<string, Asset>();
 
         public List<Asset> matches = new List<Asset>();
@@ -157,24 +160,95 @@ namespace FindIt
         {
             matches.Clear();
 
-            text = text.Trim();
+            text = text.ToLower().Trim();
 
             if (!text.IsNullOrWhiteSpace())
             {
-                string[] values = text.ToLower().Split(' ');
+                string[] tags = Regex.Split(text, @"([^\w]|\s)+", RegexOptions.IgnoreCase);
 
-                Find(values, authors, 100, false);
-                Find(values, tagsTitle, 10, true);
-                Find(values, tagsDesc, 1, true);
+                foreach (Asset asset in assets.Values)
+                {
+                    if (asset.prefab != null)
+                    {
+                        foreach (string t1 in tags)
+                        {
+                            if (!t1.IsNullOrWhiteSpace())
+                            {
+                                float score = 0;
 
+                                if (asset.author != null)
+                                {
+                                    score = 100 * GetScore(t1, asset.author, null);
+                                }
+
+                                foreach (string t2 in asset.tagsTitle)
+                                {
+                                    score += 10 * GetScore(t1, t2, tagsTitle);
+                                }
+
+                                foreach (string t2 in asset.tagsDesc)
+                                {
+                                    score += GetScore(t1, t2, tagsDesc);
+                                }
+
+                                if (score > 0)
+                                {
+                                    asset.score += score;
+                                }
+                                else
+                                {
+                                    asset.score = 0;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (asset.score > 0)
+                    {
+                        matches.Add(asset);
+                    }
+                }
                 matches = matches.OrderByDescending(s => s.score).ToList();
             }
             else
             {
-                matches = assets.Values.OrderBy(s => s.name).ToList();
+                foreach (Asset asset in assets.Values)
+                {
+                    if (asset.prefab != null)
+                    {
+                        matches.Add(asset);
+                    }
+                }
+                matches = matches.OrderBy(s => s.name).ToList();
             }
 
             return matches;
+        }
+
+        private float GetScore(string t1, string t2, Dictionary<string, int> dico)
+        {
+            int index = t2.IndexOf(t1);
+            float scoreMultiplier = 1f;
+
+            if (index >= 0)
+            {
+                if (index == 0)
+                { 
+                    scoreMultiplier = 10f;
+                }
+                if (dico != null && dico.ContainsKey(t2))
+                {
+                    return scoreMultiplier / dico[t2] * ((t2.Length - index) / (float)t2.Length) * (t1.Length / (float)t2.Length);
+                }
+                else
+                {
+                    if (dico != null) DebugUtils.Log("Tag not found in dico: " + t2);
+                    return scoreMultiplier * ((t2.Length - index) / (float)t2.Length) * (t1.Length / (float)t2.Length);
+                }
+            }
+
+            return 0;
         }
 
         public AssetTagList()
@@ -190,6 +264,7 @@ namespace FindIt
                     if (UInt64.TryParse(current.package.packageAuthor.Substring("steamid:".Length), out authorID))
                     {
                         author = new Friend(new UserID(authorID)).personaName;
+                        author = Regex.Replace(author.ToLower().Trim(), @"([^\w]|\s)+", "_");
                     }
                 }
 
@@ -214,7 +289,6 @@ namespace FindIt
 
             tagsTitle.Clear();
             tagsDesc.Clear();
-            authors.Clear();
             
             GetPrefabs<BuildingInfo>();
             //GetPrefab<NetInfo>();
@@ -225,61 +299,13 @@ namespace FindIt
             {
                 if (asset.prefab != null)
                 {
-                    AddAssetTags(asset, tagsTitle, Asset.GetLocalizedTitle(asset.prefab));
-                    AddAssetTags(asset, tagsDesc, Asset.GetLocalizedDescription(asset.prefab));
-
-                    if (!asset.author.IsNullOrWhiteSpace())
-                    {
-                        string author = Regex.Replace(asset.author.ToLower().Trim(), @"([^\w]|\s)+", "_");
-                        if (!authors.ContainsKey(author))
-                        {
-                            authors[author] = new HashSet<Asset>();
-                        }
-                        authors[author].Add(asset);
-                    }
+                    asset.tagsTitle = AddAssetTags(asset, tagsTitle, Asset.GetLocalizedTitle(asset.prefab));
+                    asset.tagsDesc = AddAssetTags(asset, tagsDesc, Asset.GetLocalizedDescription(asset.prefab));
                 }
             }
 
             CleanDictionary(tagsTitle);
             CleanDictionary(tagsDesc);
-        }
-
-        private void Find(string[] tags, Dictionary<string, HashSet<Asset>> dico, float scoreMultiplier, bool weight)
-        {
-            foreach (string tag in dico.Keys)
-            {
-                float score = 0;
-                foreach (string t in tags)
-                {
-                    int index = tag.IndexOf(t);
-
-                    if (index >= 0)
-                    {
-                        float w = 1f;
-                        if(weight)
-                        {
-                            w = dico[tag].Count;
-                        }
-                        score += scoreMultiplier / w * ((tag.Length - index) / (float)tag.Length) * (t.Length / (float)tag.Length);
-                    }
-                }
-
-                if (score > 0)
-                {
-                    foreach (Asset asset in dico[tag])
-                    {
-                        if (matches.Contains(asset))
-                        {
-                            asset.score += score;
-                        }
-                        else
-                        {
-                            matches.Add(asset);
-                            asset.score = score;
-                        }
-                    }
-                }
-            }
         }
 
         private void GetPrefabs<T>() where T : PrefabInfo
@@ -312,28 +338,33 @@ namespace FindIt
             }
         }
 
-        private void AddAssetTags(Asset asset, Dictionary<string, HashSet<Asset>> dico, string text)
+        private HashSet<string> AddAssetTags(Asset asset, Dictionary<string, int> dico, string text)
         {
-            text = Regex.Replace(text, "([A-Z][a-z]+)", " $1");
+            //text = Regex.Replace(text, "([A-Z][a-z]+)", " $1");
 
             string[] tagsArr = Regex.Split(text, @"([^\w]|\s)+", RegexOptions.IgnoreCase);
+
+            HashSet<string> tags = new HashSet<string>();
 
             foreach (string t in tagsArr)
             {
                 string tag = t.ToLower().Trim();
 
-                if (tag.Length > 0 && !tag.Contains("_"))
+                if (tag.Length > 1 && !tag.Contains("_"))
                 {
                     if (!dico.ContainsKey(tag))
                     {
-                        dico[tag] = new HashSet<Asset>();
+                        dico.Add(tag, 0);
                     }
-                    dico[tag].Add(asset);
+                    dico[tag]++;
+                    tags.Add(tag);
                 }
             }
+
+            return tags;
         }
 
-        private void CleanDictionary(Dictionary<string, HashSet<Asset>> dico)
+        private void CleanDictionary(Dictionary<string, int> dico)
         {
             List<string> keys = new List<string>(dico.Keys);
             foreach (string key in keys)
@@ -343,7 +374,7 @@ namespace FindIt
                     string tag = key.Substring(0, key.Length - 1);
                     if (dico.ContainsKey(tag))
                     {
-                        dico[tag].UnionWith(dico[key]);
+                        dico[tag] += dico[key];
                         dico.Remove(key);
                     }
                 }

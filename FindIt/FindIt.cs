@@ -24,7 +24,7 @@ namespace FindIt
 
         public static AssetTagList list;
 
-        private UIButton m_mainButton;
+        public UIButton m_mainButton;
         private UIGroupPanel m_groupPanel;
 
         public void Start()
@@ -68,6 +68,13 @@ namespace FindIt
 
                     UIScrollPanel scrollPanel = UIScrollPanel.Create(m_groupPanel.GetComponentInChildren<UIScrollablePanel>(), UIVerticalAlignment.Middle);
                     scrollPanel.eventClicked += OnButtonClicked;
+                    scrollPanel.eventVisibilityChanged += (c, p) =>
+                    {
+                        if (p && scrollPanel.selectedItem != null)
+                        {
+                            SelectPrefab(scrollPanel.selectedItem.objectUserData as PrefabInfo);
+                        }
+                    };
 
                     UISearchBox searchBox = scrollPanel.parent.AddUIComponent<UISearchBox>();
                     searchBox.scrollPanel = scrollPanel;
@@ -87,6 +94,8 @@ namespace FindIt
                 m_mainButton.pressedFgSprite = "FindItPressed";
                 m_mainButton.disabledFgSprite = "FindItDisabled";
 
+                m_mainButton.tooltip = "Find It! " + ModInfo.version;
+
                 DebugUtils.Log("Initialized");
             }
             catch (Exception e)
@@ -102,31 +111,34 @@ namespace FindIt
             UIButton uIButton = p.source as UIButton;
             if (uIButton != null && uIButton.parent is UIScrollPanel)
             {
-                PrefabInfo prefab = uIButton.objectUserData as PrefabInfo;
+                SelectPrefab(uIButton.objectUserData as PrefabInfo);
+            }
+        }
 
-                if (prefab is BuildingInfo)
+        public void SelectPrefab(PrefabInfo prefab)
+        {
+            if (prefab is BuildingInfo)
+            {
+                BuildingTool tool = ToolsModifierControl.SetTool<BuildingTool>();
+                if (tool != null)
                 {
-                    BuildingTool tool = ToolsModifierControl.SetTool<BuildingTool>();
-                    if (tool != null)
-                    {
-                        tool.m_prefab = prefab as BuildingInfo;
-                    }
+                    tool.m_prefab = prefab as BuildingInfo;
                 }
-                else if (prefab is PropInfo)
+            }
+            else if (prefab is PropInfo)
+            {
+                PropTool tool = ToolsModifierControl.SetTool<PropTool>();
+                if (tool != null)
                 {
-                    PropTool tool = ToolsModifierControl.SetTool<PropTool>();
-                    if (tool != null)
-                    {
-                        tool.m_prefab = prefab as PropInfo;
-                    }
+                    tool.m_prefab = prefab as PropInfo;
                 }
-                else if (prefab is TreeInfo)
+            }
+            else if (prefab is TreeInfo)
+            {
+                TreeTool tool = ToolsModifierControl.SetTool<TreeTool>();
+                if (tool != null)
                 {
-                    TreeTool tool = ToolsModifierControl.SetTool<TreeTool>();
-                    if (tool != null)
-                    {
-                        tool.m_prefab = prefab as TreeInfo;
-                    }
+                    tool.m_prefab = prefab as TreeInfo;
                 }
             }
         }
@@ -186,7 +198,10 @@ namespace FindIt
     {
         public override void OnCreated(ILoading loading)
         {
-            Redirector<Detours.GeneratedScrollPanelDetour>.Deploy();
+            if ((ToolManager.instance.m_properties.m_mode & ItemClass.Availability.GameAndMap) != ItemClass.Availability.None)
+            {
+                Redirector<Detours.GeneratedScrollPanelDetour>.Deploy();
+            }
         }
 
         public override void OnReleased()
@@ -196,14 +211,19 @@ namespace FindIt
 
         public override void OnLevelLoaded(LoadMode mode)
         {
-            if (FindIt.instance == null)
+            if ((ToolManager.instance.m_properties.m_mode & ItemClass.Availability.GameAndMap) != ItemClass.Availability.None)
+            //if (mode == LoadMode.LoadGame || mode == LoadMode.NewGame || mode == LoadMode.NewGameFromScenario)
+            //if (mode != LoadMode.NewAsset && mode != LoadMode.LoadAsset)
             {
-                // Creating the instance
-                FindIt.instance = new GameObject("FindIt").AddComponent<FindIt>();
-            }
-            else
-            {
-                FindIt.instance.Start();
+                if (FindIt.instance == null)
+                {
+                    // Creating the instance
+                    FindIt.instance = new GameObject("FindIt").AddComponent<FindIt>();
+                }
+                else
+                {
+                    FindIt.instance.Start();
+                }
             }
         }
     }
