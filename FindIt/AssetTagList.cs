@@ -149,6 +149,8 @@ namespace FindIt
 
     public class AssetTagList
     {
+        private bool initialized = false;
+
         public static AssetTagList instance;
 
         public Dictionary<string, int> tagsTitle = new Dictionary<string, int>();
@@ -159,6 +161,11 @@ namespace FindIt
 
         public List<Asset> Find(string text)
         {
+            if(!initialized)
+            {
+                Init();
+            }
+
             matches.Clear();
 
             text = text.ToLower().Trim();
@@ -179,12 +186,12 @@ namespace FindIt
 
                                 if (!asset.author.IsNullOrWhiteSpace())
                                 {
-                                    score = 10 * GetScore(keyword, asset.author, null);
+                                    score += 10 * GetScore(keyword, asset.author, null);
                                 }
 
                                 if (!asset.service.IsNullOrWhiteSpace())
                                 {
-                                    score = 10 * GetScore(keyword, asset.service, null);
+                                    score += 10 * GetScore(keyword, asset.service, null);
                                 }
 
                                 foreach (string tag in asset.tagsTitle)
@@ -308,6 +315,30 @@ namespace FindIt
                     asset.tagsTitle = AddAssetTags(asset, tagsTitle, Asset.GetLocalizedTitle(asset.prefab));
                     asset.tagsDesc = AddAssetTags(asset, tagsDesc, Asset.GetLocalizedDescription(asset.prefab));
 
+                    string tag = null;
+                    if (asset.prefab is BuildingInfo)
+                    {
+                        tag = "building";
+                    }
+                    else if (asset.prefab is PropInfo)
+                    {
+                        tag = "prop";
+                    }
+                    else if (asset.prefab is TreeInfo)
+                    {
+                        tag = "tree";
+                    }
+
+                    if(!tag.IsNullOrWhiteSpace())
+                    {
+                        asset.tagsTitle.Add(tag);
+                        if (!tagsTitle.ContainsKey(tag))
+                        {
+                            tagsTitle.Add(tag, 0);
+                        }
+                        tagsTitle[tag]++;
+                    }
+
                     if (asset.prefab.GetService() != ItemClass.Service.None)
                     {
                         asset.service = asset.prefab.GetService().ToString().ToLower();
@@ -315,8 +346,9 @@ namespace FindIt
                 }
             }
 
-            CleanDictionary(tagsTitle);
-            CleanDictionary(tagsDesc);
+            CleanDictionarys();
+
+            initialized = true;
         }
 
         private void GetPrefabs<T>() where T : PrefabInfo
@@ -375,18 +407,45 @@ namespace FindIt
             return tags;
         }
 
-        private void CleanDictionary(Dictionary<string, int> dico)
+        private void CleanDictionarys()
         {
-            List<string> keys = new List<string>(dico.Keys);
-            foreach (string key in keys)
+            foreach (Asset asset in assets.Values)
             {
-                if (key.EndsWith("s"))
+                List<string> keys = asset.tagsTitle.ToList();
+                foreach (string key in keys)
                 {
-                    string tag = key.Substring(0, key.Length - 1);
-                    if (dico.ContainsKey(tag))
+                    if (key.EndsWith("s"))
                     {
-                        dico[tag] += dico[key];
-                        dico.Remove(key);
+                        string tag = key.Substring(0, key.Length - 1);
+                        if (tagsTitle.ContainsKey(tag))
+                        {
+                            if (tagsTitle.ContainsKey(key))
+                            {
+                                tagsTitle[tag] += tagsTitle[key];
+                                tagsTitle.Remove(key);
+                            }
+                            asset.tagsTitle.Remove(key);
+                            asset.tagsTitle.Add(tag);
+                        }
+                    }
+                }
+
+                keys = asset.tagsDesc.ToList();
+                foreach (string key in keys)
+                {
+                    if (key.EndsWith("s"))
+                    {
+                        string tag = key.Substring(0, key.Length - 1);
+                        if (tagsDesc.ContainsKey(tag))
+                        {
+                            if (tagsDesc.ContainsKey(key))
+                            {
+                                tagsDesc[tag] += tagsDesc[key];
+                                tagsDesc.Remove(key);
+                            }
+                            asset.tagsDesc.Remove(key);
+                            asset.tagsDesc.Add(tag);
+                        }
                     }
                 }
             }

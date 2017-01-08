@@ -13,6 +13,7 @@ namespace FindIt.GUI
     {
         public UITextField input;
         public UIScrollPanel scrollPanel;
+        public UIButton searchButton;
 
         public override void Start()
         {
@@ -28,15 +29,15 @@ namespace FindIt.GUI
 
             input.eventTextChanged += OnTextChanged;
 
-            UIButton button = AddUIComponent<UIButton>();
-            button.size = new Vector2(43, 49);
-            button.atlas = FindIt.instance.m_mainButton.atlas;
-            button.normalFgSprite = "FindIt";
-            button.hoveredFgSprite = "FindItFocused";
-            button.pressedFgSprite = "FindItPressed";
-            button.relativePosition = new Vector3(width - 41, -3);
+            searchButton = AddUIComponent<UIButton>();
+            searchButton.size = new Vector2(43, 49);
+            searchButton.atlas = FindIt.instance.m_mainButton.atlas;
+            searchButton.normalFgSprite = "FindIt";
+            searchButton.hoveredFgSprite = "FindItFocused";
+            searchButton.pressedFgSprite = "FindItPressed";
+            searchButton.relativePosition = new Vector3(width - 41, -3);
 
-            button.eventClick += (c, p) =>
+            searchButton.eventClick += (c, p) =>
             {
                 input.Focus();
                 input.SelectAll();

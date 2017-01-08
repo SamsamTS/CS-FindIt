@@ -41,7 +41,12 @@ namespace FindIt
         {
             try
             {
-                AssetTagList.instance = new AssetTagList();
+                Redirection.Redirector<Detours.UIComponentDetour>.Deploy();
+                
+                if (FindIt.instance == null)
+                {
+                    AssetTagList.instance = new AssetTagList();
+                }
 
                 UIHelper group = helper.AddGroup(Name) as UIHelper;
                 UIPanel panel = group.self as UIPanel;
@@ -57,6 +62,6 @@ namespace FindIt
             }
         }
 
-        public const string version = "1.0.0";
+        public const string version = "1.0.1";
     }
 }

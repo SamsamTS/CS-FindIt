@@ -26,6 +26,7 @@ namespace FindIt
 
         public UIButton m_mainButton;
         private UIGroupPanel m_groupPanel;
+        private UISearchBox searchBox;
 
         public void Start()
         {
@@ -76,7 +77,7 @@ namespace FindIt
                         }
                     };
 
-                    UISearchBox searchBox = scrollPanel.parent.AddUIComponent<UISearchBox>();
+                    searchBox = scrollPanel.parent.AddUIComponent<UISearchBox>();
                     searchBox.scrollPanel = scrollPanel;
                     searchBox.relativePosition = new Vector3(5, -40);
                     searchBox.OnTextChanged(searchBox, "");
@@ -155,7 +156,11 @@ namespace FindIt
                     // Checking key presses
                     if (OptionsKeymapping.search.IsPressed(e))
                     {
-                        m_mainButton.SimulateClick();
+                        if (!searchBox.isVisible)
+                        {
+                            m_mainButton.SimulateClick();
+                        }
+                        searchBox.searchButton.SimulateClick();
                     }
                 }
             }

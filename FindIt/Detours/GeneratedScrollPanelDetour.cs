@@ -11,6 +11,45 @@ using FindIt.GUI;
 
 namespace FindIt.Detours
 {
+    public class UIComponentDetour : UIComponent
+    {
+        private static MethodInfo from = typeof(UIComponent).GetMethod("OnResolutionChanged", BindingFlags.NonPublic | BindingFlags.Instance);
+        private static MethodInfo to = typeof(UIComponentDetour).GetMethod("OnResolutionChanged", BindingFlags.NonPublic | BindingFlags.Instance);
+
+        private static RedirectCallsState m_state;
+        private static bool m_deployed = false;
+
+        public static void Deploy()
+        {
+            if (!m_deployed)
+            {
+                m_state = RedirectionHelper.RedirectCalls(from, to);
+                m_deployed = true;
+            }
+        }
+        
+        public static void Revert()
+        {
+            if (m_deployed)
+            {
+                RedirectionHelper.RevertRedirect(from, m_state);
+                m_deployed = false;
+            }
+        }
+
+        protected override void OnResolutionChanged(Vector2 previousResolution, Vector2 currentResolution)
+        {
+            if (m_Layout == null)
+            {
+                UIAnchorStyle anchor = this.anchor;
+            }
+
+            RedirectionHelper.RevertRedirect(from, m_state);
+            base.OnResolutionChanged(previousResolution, currentResolution);
+            m_state = RedirectionHelper.RedirectCalls(from, to);
+        }
+    }
+
     [TargetType(typeof(GeneratedScrollPanel))]
     public class GeneratedScrollPanelDetour : GeneratedScrollPanel
     {
