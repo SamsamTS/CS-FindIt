@@ -336,9 +336,10 @@ namespace FindIt.GUI
             {
                 if(m_items[i].item == null)
                 {
-                    Clear();
-                    return;
+                    m_items[i].item = CreateItem();
+                    m_items[i].Init();
                 }
+
                 int dataPos = Mathf.FloorToInt(m_pos + i);
                 float offset = itemWidth * (m_pos + i - dataPos);
                 if (dataPos < m_itemsData.m_size)

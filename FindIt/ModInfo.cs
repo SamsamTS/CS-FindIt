@@ -41,7 +41,7 @@ namespace FindIt
         {
             try
             {
-                Redirection.Redirector<Detours.UIComponentDetour>.Deploy();
+                Detours.UIComponentDetour.Deploy();
                 
                 if (FindIt.instance == null)
                 {
@@ -62,6 +62,6 @@ namespace FindIt
             }
         }
 
-        public const string version = "1.0.1";
+        public const string version = "1.0.2";
     }
 }
