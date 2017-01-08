@@ -17,6 +17,7 @@ namespace FindIt
         public PrefabInfo prefab;
         public ulong steamID;
         public string author;
+        public string service;
         public float score;
 
         public HashSet<string> tagsTitle = new HashSet<string>();
@@ -164,31 +165,36 @@ namespace FindIt
 
             if (!text.IsNullOrWhiteSpace())
             {
-                string[] tags = Regex.Split(text, @"([^\w]|\s)+", RegexOptions.IgnoreCase);
+                string[] keywords = Regex.Split(text, @"([^\w]|\s)+", RegexOptions.IgnoreCase);
 
                 foreach (Asset asset in assets.Values)
                 {
                     if (asset.prefab != null)
                     {
-                        foreach (string t1 in tags)
+                        foreach (string keyword in keywords)
                         {
-                            if (!t1.IsNullOrWhiteSpace())
+                            if (!keyword.IsNullOrWhiteSpace())
                             {
                                 float score = 0;
 
-                                if (asset.author != null)
+                                if (!asset.author.IsNullOrWhiteSpace())
                                 {
-                                    score = 100 * GetScore(t1, asset.author, null);
+                                    score = 10 * GetScore(keyword, asset.author, null);
                                 }
 
-                                foreach (string t2 in asset.tagsTitle)
+                                if (!asset.service.IsNullOrWhiteSpace())
                                 {
-                                    score += 10 * GetScore(t1, t2, tagsTitle);
+                                    score = 10 * GetScore(keyword, asset.service, null);
                                 }
 
-                                foreach (string t2 in asset.tagsDesc)
+                                foreach (string tag in asset.tagsTitle)
                                 {
-                                    score += GetScore(t1, t2, tagsDesc);
+                                    score += 5 * GetScore(keyword, tag, tagsTitle);
+                                }
+
+                                foreach (string tag in asset.tagsDesc)
+                                {
+                                    score += GetScore(keyword, tag, tagsDesc);
                                 }
 
                                 if (score > 0)
@@ -226,9 +232,9 @@ namespace FindIt
             return matches;
         }
 
-        private float GetScore(string t1, string t2, Dictionary<string, int> dico)
+        private float GetScore(string keyword, string tag, Dictionary<string, int> dico)
         {
-            int index = t2.IndexOf(t1);
+            int index = tag.IndexOf(keyword);
             float scoreMultiplier = 1f;
 
             if (index >= 0)
@@ -237,14 +243,14 @@ namespace FindIt
                 { 
                     scoreMultiplier = 10f;
                 }
-                if (dico != null && dico.ContainsKey(t2))
+                if (dico != null && dico.ContainsKey(tag))
                 {
-                    return scoreMultiplier / dico[t2] * ((t2.Length - index) / (float)t2.Length) * (t1.Length / (float)t2.Length);
+                    return scoreMultiplier / dico[tag] * ((tag.Length - index) / (float)tag.Length) * (keyword.Length / (float)tag.Length);
                 }
                 else
                 {
-                    if (dico != null) DebugUtils.Log("Tag not found in dico: " + t2);
-                    return scoreMultiplier * ((t2.Length - index) / (float)t2.Length) * (t1.Length / (float)t2.Length);
+                    if (dico != null) DebugUtils.Log("Tag not found in dico: " + tag);
+                    return scoreMultiplier * ((tag.Length - index) / (float)tag.Length) * (keyword.Length / (float)tag.Length);
                 }
             }
 
@@ -301,6 +307,11 @@ namespace FindIt
                 {
                     asset.tagsTitle = AddAssetTags(asset, tagsTitle, Asset.GetLocalizedTitle(asset.prefab));
                     asset.tagsDesc = AddAssetTags(asset, tagsDesc, Asset.GetLocalizedDescription(asset.prefab));
+
+                    if (asset.prefab.GetService() != ItemClass.Service.None)
+                    {
+                        asset.service = asset.prefab.GetService().ToString().ToLower();
+                    }
                 }
             }
 

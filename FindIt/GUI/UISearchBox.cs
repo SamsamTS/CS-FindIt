@@ -19,24 +19,28 @@ namespace FindIt.GUI
             atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericTab";
             size = new Vector2(300, 40);
+            clipChildren = true;
 
             input = SamsamTS.UIUtils.CreateTextField(this);
             input.size = new Vector2(width - 45, 30);
             input.padding.top = 7;
             input.relativePosition = new Vector3(5, 5);
 
-            UISprite sprite = AddUIComponent<UISprite>();
-            sprite.atlas = FindIt.instance.m_mainButton.atlas;
-            sprite.spriteName = "FindIt";
-            sprite.relativePosition = new Vector3(width - 41, -3);
+            input.eventTextChanged += OnTextChanged;
 
-            sprite.eventClick += (c, p) =>
+            UIButton button = AddUIComponent<UIButton>();
+            button.size = new Vector2(43, 49);
+            button.atlas = FindIt.instance.m_mainButton.atlas;
+            button.normalFgSprite = "FindIt";
+            button.hoveredFgSprite = "FindItFocused";
+            button.pressedFgSprite = "FindItPressed";
+            button.relativePosition = new Vector3(width - 41, -3);
+
+            button.eventClick += (c, p) =>
             {
                 input.Focus();
                 input.SelectAll();
             };
-
-            input.eventTextChanged += OnTextChanged;
         }
 
         protected override void OnVisibilityChanged()
@@ -52,6 +56,14 @@ namespace FindIt.GUI
 
         public void OnTextChanged(UIComponent c, string p)
         {
+
+            PrefabInfo current = null;
+            int selected = -1;
+            if(scrollPanel.selectedItem != null)
+            {
+                current = scrollPanel.selectedItem.objectUserData as PrefabInfo;
+            }
+
             List<Asset> matches = AssetTagList.instance.Find(p);
             scrollPanel.Clear();
             foreach (Asset asset in matches)
@@ -76,9 +88,25 @@ namespace FindIt.GUI
                     data.objectUserData = asset.prefab;
 
                     scrollPanel.itemsData.Add(data);
+
+                    if(asset.prefab == current)
+                    {
+                        selected = scrollPanel.itemsData.m_size - 1;
+                    }
                 }
             }
+
             scrollPanel.DisplayAt(0);
+            scrollPanel.selectedIndex = selected;
+
+            if (scrollPanel.selectedItem != null)
+            {
+                FindIt.SelectPrefab(scrollPanel.selectedItem.objectUserData as PrefabInfo);
+            }
+            else
+            {
+                ToolsModifierControl.SetTool<DefaultTool>();
+            }
         }
 
         public static string GetThumbNail(PrefabInfo prefab, UITextureAtlas atlas)

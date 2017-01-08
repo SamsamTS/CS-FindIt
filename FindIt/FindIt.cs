@@ -115,7 +115,7 @@ namespace FindIt
             }
         }
 
-        public void SelectPrefab(PrefabInfo prefab)
+        public static void SelectPrefab(PrefabInfo prefab)
         {
             if (prefab is BuildingInfo)
             {

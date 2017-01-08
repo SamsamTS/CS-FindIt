@@ -302,6 +302,7 @@ namespace FindIt.GUI
         public void Clear()
         {
             itemsData.Clear();
+            m_selectedDataId = -1;
 
             if (m_items != null)
             {
