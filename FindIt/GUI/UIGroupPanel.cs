@@ -1,9 +1,4 @@
-﻿using UnityEngine;
-
-using ColossalFramework;
-using ColossalFramework.UI;
-
-namespace FindIt.GUI
+﻿namespace FindIt.GUI
 {
     public class UIGroupPanel : GeneratedGroupPanel
     {

@@ -1,10 +1,6 @@
 ﻿using UnityEngine;
 
-using ColossalFramework;
-using ColossalFramework.DataBinding;
 using ColossalFramework.UI;
-
-using System.Reflection;
 
 namespace FindIt.GUI
 {
@@ -12,19 +8,98 @@ namespace FindIt.GUI
     {
         public UIVerticalAlignment buttonsAlignment;
 
+        public UIPanel blocker;
+
+        public override void Start()
+        {
+            base.Start();
+
+            blocker = AddUIComponent<UIPanel>();
+            blocker.size = size;
+            blocker.relativePosition = Vector3.zero;
+            blocker.SendToBack();
+
+            Refresh();
+        }
+
+        protected override void OnSizeChanged()
+        {
+            base.OnSizeChanged();
+
+            if (blocker != null)
+            {
+                blocker.size = size;
+            }
+
+            if (height > itemHeight && scrollbar == null)
+            {
+                DestroyScrollbars(parent);
+
+                // Scrollbar
+                UIScrollbar scroll = parent.AddUIComponent<UIScrollbar>();
+                scroll.width = 20f;
+                scroll.height = parent.parent.height;
+                scroll.orientation = UIOrientation.Vertical;
+                scroll.pivot = UIPivotPoint.BottomLeft;
+                scroll.thumbPadding = new RectOffset(0, 0, 5, 5);
+                scroll.AlignTo(scroll.parent, UIAlignAnchor.TopRight);
+                scroll.minValue = 0;
+                scroll.value = 0;
+                scroll.incrementAmount = 50;
+
+                UISlicedSprite tracSprite = scroll.AddUIComponent<UISlicedSprite>();
+                tracSprite.relativePosition = Vector2.zero;
+                tracSprite.autoSize = true;
+                tracSprite.size = tracSprite.parent.size;
+                tracSprite.fillDirection = UIFillDirection.Vertical;
+                tracSprite.spriteName = "ScrollbarTrack";
+
+                scroll.trackObject = tracSprite;
+
+                UISlicedSprite thumbSprite = tracSprite.AddUIComponent<UISlicedSprite>();
+                thumbSprite.relativePosition = Vector2.zero;
+                thumbSprite.fillDirection = UIFillDirection.Vertical;
+                thumbSprite.autoSize = true;
+                thumbSprite.width = thumbSprite.parent.width - 8;
+                thumbSprite.spriteName = "ScrollbarThumb";
+
+                scroll.thumbObject = thumbSprite;
+
+                scrollbar = scroll;
+            }
+            else if (height <= itemHeight && scrollbar != null)
+            {
+                DestroyScrollbars(parent);
+            }
+        }
+
         public static UIScrollPanel Create(UIScrollablePanel oldPanel, UIVerticalAlignment buttonsAlignment)
         {
             UIScrollPanel scrollPanel = oldPanel.parent.AddUIComponent<UIScrollPanel>();
+            scrollPanel.autoLayout = false;
+            scrollPanel.autoReset = false;
+            scrollPanel.autoSize = false;
             scrollPanel.buttonsAlignment = buttonsAlignment;
             scrollPanel.template = "PlaceableItemTemplate";
             scrollPanel.itemWidth = 109f;
+            scrollPanel.itemHeight = 100f;
             scrollPanel.canSelect = true;
             scrollPanel.size = new Vector2(763, 100);
             scrollPanel.relativePosition = new Vector3(48, 5);
             scrollPanel.atlas = oldPanel.atlas;
 
-            DestroyImmediate(oldPanel);
+            scrollPanel.parent.parent.eventSizeChanged += (c, p) =>
+            {
+                if(scrollPanel.isVisible)
+                {
+                    scrollPanel.size = new Vector2((int)((p.x - 40f) / scrollPanel.itemWidth) * scrollPanel.itemWidth, (int)(p.y / scrollPanel.itemHeight) * scrollPanel.itemHeight);
+                }
+            };
 
+            DestroyImmediate(oldPanel);
+            DestroyScrollbars(scrollPanel.parent);
+
+            // Left / Right buttons
             UIButton button = scrollPanel.parent.AddUIComponent<UIButton>();
             button.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             button.name = "ArrowLeft";
@@ -39,7 +114,7 @@ namespace FindIt.GUI
             button.disabledFgSprite = "ArrowLeftDisabled";
             button.isEnabled = false;
             button.relativePosition = new Vector3(16, 0);
-            scrollPanel.LeftArrow = button;
+            scrollPanel.leftArrow = button;
 
             button = scrollPanel.parent.AddUIComponent<UIButton>();
             button.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
@@ -55,9 +130,18 @@ namespace FindIt.GUI
             button.disabledFgSprite = "ArrowRightDisabled";
             button.isEnabled = false;
             button.relativePosition = new Vector3(811, 0);
-            scrollPanel.RightArrow = button;
+            scrollPanel.rightArrow = button;
 
             return scrollPanel;
+        }
+
+        private static void DestroyScrollbars(UIComponent parent)
+        {
+            UIScrollbar[] scrollbars = parent.GetComponentsInChildren<UIScrollbar>();
+            foreach (UIScrollbar scrollbar in scrollbars)
+            {
+                DestroyImmediate(scrollbar);
+            }
         }
     }
 
@@ -91,6 +175,7 @@ namespace FindIt.GUI
             public bool enabled;
             public UIVerticalAlignment verticalAlignment;
             public object objectUserData;
+            public GeneratedScrollPanel panel;
         }
 
         public void Init()
@@ -122,7 +207,12 @@ namespace FindIt.GUI
 
         public void Display(ItemData data, int index)
         {
-            if (item == null) return;
+            if(data == null)
+            {
+                DebugUtils.Log("Data null");
+            }
+
+            if (item == null || data == null) return;
 
             if(oldData != null)
             {
@@ -149,6 +239,15 @@ namespace FindIt.GUI
             item.tooltipBox = data.tooltipBox;
             item.objectUserData = data.objectUserData;
 
+            if (data.enabled)
+            {
+                item.BringToFront();
+            }
+            else
+            {
+                item.SendToBack();
+            }
+
             if (item.containsMouse)
             {
                 item.RefreshTooltip();
@@ -159,8 +258,11 @@ namespace FindIt.GUI
                     data.tooltipBox.Show(true);
                     data.tooltipBox.opacity = 1f;
                     data.tooltipBox.relativePosition = m_tooltipBox.relativePosition + new Vector3(0, m_tooltipBox.height - data.tooltipBox.height);
-                    m_tooltipBox = data.tooltipBox;
                 }
+
+                m_tooltipBox = data.tooltipBox;
+
+                RefreshTooltipAltas(item);
             }
 
             /*item.Invoke("OnClick", new object[]
@@ -194,6 +296,30 @@ namespace FindIt.GUI
         {
             item.normalFgSprite = m_baseIconName;
             item.hoveredFgSprite = m_baseIconName + "Hovered";
+        }
+
+        public static void RefreshTooltipAltas(UIComponent item)
+        {
+            PrefabInfo prefab = item.objectUserData as PrefabInfo;
+            if (prefab != null)
+            {
+                UISprite uISprite = item.tooltipBox.Find<UISprite>("Sprite");
+                if (uISprite != null)
+                {
+                    if (prefab.m_InfoTooltipAtlas != null)
+                    {
+                        uISprite.atlas = prefab.m_InfoTooltipAtlas;
+                    }
+                    if (!string.IsNullOrEmpty(prefab.m_InfoTooltipThumbnail) && uISprite.atlas[prefab.m_InfoTooltipThumbnail] != null)
+                    {
+                        uISprite.spriteName = prefab.m_InfoTooltipThumbnail;
+                    }
+                    else
+                    {
+                        uISprite.spriteName = "ThumbnailBuildingDefault";
+                    }
+                }
+            }
         }
     }
 }

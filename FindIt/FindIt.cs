@@ -2,13 +2,8 @@
 using UnityEngine;
 
 using System;
-using System.Diagnostics;
-using System.Collections;
-using System.Collections.Generic;
 using System.Reflection;
 
-using ColossalFramework;
-using ColossalFramework.Math;
 using ColossalFramework.UI;
 
 using FindIt.Redirection;
@@ -77,6 +72,11 @@ namespace FindIt
                         }
                     };
 
+                    scrollPanel.eventTooltipEnter += (c, p) =>
+                    {
+                        UIScrollPanelItem.RefreshTooltipAltas(p.source);
+                    };
+
                     searchBox = scrollPanel.parent.AddUIComponent<UISearchBox>();
                     searchBox.scrollPanel = scrollPanel;
                     searchBox.relativePosition = new Vector3(5, -40);
@@ -112,7 +112,19 @@ namespace FindIt
             UIButton uIButton = p.source as UIButton;
             if (uIButton != null && uIButton.parent is UIScrollPanel)
             {
-                SelectPrefab(uIButton.objectUserData as PrefabInfo);
+                PrefabInfo prefab = uIButton.objectUserData as PrefabInfo;
+
+                string key = Asset.GetName(prefab);
+                if (AssetTagList.instance.assets.ContainsKey(key) && AssetTagList.instance.assets[key].onButtonClicked != null)
+                {
+                    DebugUtils.Log("Calling delegate " + AssetTagList.instance.assets[key].onButtonClicked.Target.GetType());
+                    AssetTagList.instance.assets[key].onButtonClicked(uIButton);
+                    
+                }
+                else
+                {
+                    SelectPrefab(prefab);
+                }
             }
         }
 

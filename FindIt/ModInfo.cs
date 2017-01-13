@@ -1,13 +1,10 @@
 ﻿using ICities;
 
 using System;
-using System.Linq;
 
 using ColossalFramework;
 using ColossalFramework.UI;
 
-using ColossalFramework.PlatformServices;
-using ColossalFramework.Plugins;
 
 namespace FindIt
 {
@@ -62,6 +59,6 @@ namespace FindIt
             }
         }
 
-        public const string version = "1.0.2";
+        public const string version = "1.1.0";
     }
 }

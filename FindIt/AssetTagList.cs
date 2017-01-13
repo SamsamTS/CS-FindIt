@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
 using ColossalFramework;
+using ColossalFramework.UI;
 using ColossalFramework.DataBinding;
 using ColossalFramework.Globalization;
 using ColossalFramework.PlatformServices;
@@ -20,9 +21,22 @@ namespace FindIt
         public string service;
         public float score;
 
+        public delegate void OnButtonClicked(UIComponent comp);
+        public OnButtonClicked onButtonClicked;
+
         public HashSet<string> tagsTitle = new HashSet<string>();
         public HashSet<string> tagsDesc = new HashSet<string>();
         public HashSet<string> tagsHash = new HashSet<string>();
+
+        public static string GetName(PrefabInfo prefab)
+        {
+            string name = prefab.name;
+            if (name.EndsWith("_Data"))
+            {
+                name = name.Substring(0, name.LastIndexOf("_Data"));
+            }
+            return name;
+        }
 
         public static string GetLocalizedTitle(PrefabInfo prefab)
         {
@@ -359,11 +373,7 @@ namespace FindIt
 
                 if (prefab == null) continue;
 
-                string name = prefab.name;
-                if(name.EndsWith("_Data"))
-                {
-                    name = name.Substring(0, name.LastIndexOf("_Data"));
-                }
+                string name = Asset.GetName(prefab);
 
                 if (assets.ContainsKey(name))
                 {

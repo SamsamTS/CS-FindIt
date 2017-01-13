@@ -1,6 +1,4 @@
-﻿using ColossalFramework;
-using ColossalFramework.DataBinding;
-using ColossalFramework.UI;
+﻿using ColossalFramework.UI;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -106,6 +104,8 @@ namespace FindIt.Detours
             data.tooltipBox = tooltipBox;
             data.enabled = enabled;
             data.verticalAlignment = this.buttonsAlignment;
+            data.panel = this;
+
             scrollPanel.DisplayAt(0);
 
             UIFakeButton fakeButton = new UIFakeButton();
@@ -125,6 +125,16 @@ namespace FindIt.Detours
                             {
                                 button.data.objectUserData = button.objectUserData;
                                 button.data.atlas = button.atlas;
+
+                                if (button.objectUserData is PrefabInfo)
+                                {
+                                    string key = Asset.GetName(button.objectUserData as PrefabInfo);
+                                    if (AssetTagList.instance.assets.ContainsKey(key) && AssetTagList.instance.assets[key].onButtonClicked == null)
+                                    {
+                                        MethodInfo onButtonClicked = button.data.panel.GetType().GetMethod("OnButtonClicked", BindingFlags.NonPublic | BindingFlags.Instance);
+                                        AssetTagList.instance.assets[key].onButtonClicked = Delegate.CreateDelegate(typeof(Asset.OnButtonClicked), button.data.panel, onButtonClicked, false) as Asset.OnButtonClicked;
+                                    }
+                                }
                             }
                             fakeButtons = null;
                         }

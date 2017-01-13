@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using ColossalFramework.UI;
 
-using System;
-
 namespace FindIt.GUI
 {
     public interface IUIFastListItem<O, T> where T : UIComponent
@@ -57,13 +55,16 @@ namespace FindIt.GUI
 
         private Color32 m_color = new Color32(255, 255, 255, 255);
         private float m_itemWidth = -1;
+        private float m_itemHeight = -1;
         private float m_pos = -1;
         private float m_stepSize = 0;
         private bool m_canSelect = false;
         private int m_selectedDataId = -1;
         private int m_selectedId = -1;
+        private bool m_lock;
         private bool m_updateContent = true;
         private UIComponent m_lastMouseEnter;
+        private UIScrollbar m_scrollbar;
         private UIComponent m_leftArrow;
         private UIComponent m_rightArrow;
         #endregion
@@ -86,10 +87,13 @@ namespace FindIt.GUI
                     if (m_items == null) return;
                     for (int i = 0; i < m_items.m_size; i++)
                     {
-                        if (m_canSelect)
-                            m_items[i].item.eventClick += OnItemClicked;
-                        else
-                            m_items[i].item.eventClick -= OnItemClicked;
+                        if (m_items.m_buffer[i].item != null)
+                        {
+                            if (m_canSelect)
+                                m_items.m_buffer[i].item.eventClick += OnItemClicked;
+                            else
+                                m_items.m_buffer[i].item.eventClick -= OnItemClicked;
+                        }
                     }
                 }
             }
@@ -109,7 +113,7 @@ namespace FindIt.GUI
                 if (m_itemWidth <= 0) return;
                 if (m_pos != value && m_itemsData != null)
                 {
-                    float pos = Mathf.Max(Mathf.Min(value, m_itemsData.m_size - width / m_itemWidth), 0);
+                    float pos = Mathf.Max(Mathf.Min(value, m_itemsData.m_size - 1), 0);
                     m_updateContent = Mathf.FloorToInt(m_pos) != Mathf.FloorToInt(pos);
                     DisplayAt(pos);
                 }
@@ -163,6 +167,22 @@ namespace FindIt.GUI
                 }
             }
         }
+        
+        /// <summary>
+        /// This MUST be set, it is the width in pixels of each item
+        /// </summary>
+        public float itemHeight
+        {
+            get { return m_itemHeight; }
+            set
+            {
+                if (m_itemHeight != value)
+                {
+                    m_itemHeight = value;
+                    CheckItems();
+                }
+            }
+        }
 
         /// <summary>
         /// Currently selected item
@@ -191,14 +211,14 @@ namespace FindIt.GUI
 
                 if (m_selectedId >= 0)
                 {
-                    m_items[m_selectedId].Deselect(oldId);
+                    m_items.m_buffer[m_selectedId].Deselect(oldId);
                     m_selectedId = -1;
                 }
 
                 if (newItemId >= 0)
                 {
                     m_selectedId = newItemId;
-                    m_items[m_selectedId].Select(m_selectedDataId);
+                    m_items.m_buffer[m_selectedId].Select(m_selectedDataId);
                 }
 
                 if (eventSelectedIndexChanged != null && m_selectedDataId != oldId)
@@ -221,7 +241,38 @@ namespace FindIt.GUI
         public bool selectOnMouseEnter
         { get; set; }
 
-        public UIComponent LeftArrow
+        public UIScrollbar scrollbar
+        {
+            get
+            {
+                return m_scrollbar;
+            }
+            set
+            {
+                m_scrollbar = value;
+
+                if (m_scrollbar != null)
+                {
+                    m_scrollbar.eventValueChanged += (c, t) =>
+                    {
+                        if (m_lock || m_itemHeight <= 0) return;
+
+                        int nbRow = /*Mathf.CeilToInt*/(int)(height / m_itemHeight);
+                        int nbCol = /*Mathf.CeilToInt*/(int)(width / m_itemWidth);
+                        int totalRow = Mathf.CeilToInt(itemsData.m_size / nbCol);
+
+                        m_lock = true;
+
+                        listPosition = nbCol * m_scrollbar.value; // * (totalRow - height / m_itemHeight) / (height - m_scrollbar.scrollSize - 1f);
+                        m_lock = false;
+                    };
+                }
+
+                UpdateScrollbar();
+            }
+        }
+
+        public UIComponent leftArrow
         {
             get
             {
@@ -247,7 +298,7 @@ namespace FindIt.GUI
             }
         }
 
-        public UIComponent RightArrow
+        public UIComponent rightArrow
         {
             get
             {
@@ -279,7 +330,7 @@ namespace FindIt.GUI
         /// </summary>
         public float stepSize
         {
-            get { return (m_stepSize > 0) ? m_stepSize : m_itemWidth; }
+            get { return (m_stepSize > 0) ? m_stepSize : 1f; }
             set { m_stepSize = value; }
         }
         #endregion
@@ -308,16 +359,17 @@ namespace FindIt.GUI
             {
                 for (int i = 0; i < m_items.m_size; i++)
                 {
-                    if (m_items[i].item == null)
+                    if (m_items.m_buffer[i].item == null)
                     {
-                        m_items[i].item = CreateItem();
-                        m_items[i].Init();
+                        m_items.m_buffer[i].item = CreateItem();
+                        m_items.m_buffer[i].Init();
                     }
-                    m_items[i].item.enabled = false;
+                    m_items.m_buffer[i].item.enabled = false;
                 }
             }
 
             CheckItems();
+            UpdateScrollbar();
         }
 
         /// <summary>
@@ -327,55 +379,125 @@ namespace FindIt.GUI
         /// <param name="pos">Index position in the list</param>
         public void DisplayAt(float pos)
         {
-            if (m_itemsData == null || m_itemWidth <= 0) return;
+            if (m_itemsData == null || m_itemWidth <= 0 || m_itemHeight <= 0) return;
 
-            float maxPos = m_itemsData.m_size - width / m_itemWidth;
-            m_pos = Mathf.Max(Mathf.Min(pos, m_itemsData.m_size - width / m_itemWidth), 0f);
+            int nbRow = /*Mathf.CeilToInt*/(int)(height / m_itemHeight);
 
-            for (int i = 0; i < m_items.m_size; i++)
+            if (nbRow > 1)
             {
-                if(m_items[i].item == null)
+                int nbCol = /*Mathf.CeilToInt*/(int)(width / m_itemWidth);
+
+                float maxPos = (Mathf.Ceil(itemsData.m_size / nbCol) - nbRow + 1) * nbCol;
+                m_pos = Mathf.Max(Mathf.Min(pos, maxPos), 0);
+
+                //float offset = itemHeight * (m_pos - Mathf.Floor(m_pos));
+                int startPos = (Mathf.FloorToInt(m_pos) / nbCol) * nbCol;
+
+                for (int i = 0; i < nbRow; i++)
                 {
-                    m_items[i].item = CreateItem();
-                    m_items[i].Init();
+                    for (int j = 0; j < nbCol; j++)
+                    {
+                        int itemPos = i * nbCol + j;
+                        I item = m_items.m_buffer[itemPos];
+                        if (item.item == null)
+                        {
+                            item.item = CreateItem();
+                            item.Init();
+
+                            if (m_canSelect)
+                                item.item.eventClick += OnItemClicked;
+                        }
+
+                        int dataPos = startPos + itemPos;
+                        if (dataPos < m_itemsData.m_size)
+                        {
+                            if (m_updateContent)
+                                item.Display(m_itemsData[dataPos], dataPos);
+
+                            if (dataPos == m_selectedDataId && m_updateContent)
+                            {
+                                m_selectedId = itemPos;
+                                m_items.m_buffer[m_selectedId].Select(dataPos);
+                            }
+
+                            item.item.enabled = true;
+                        }
+                        else
+                        {
+                            item.item.enabled = false;
+                        }
+
+                        item.item.relativePosition = new Vector3(j * itemWidth, i * itemHeight /*- offset*/);
+                    }
                 }
 
-                int dataPos = Mathf.FloorToInt(m_pos + i);
-                float offset = itemWidth * (m_pos + i - dataPos);
-                if (dataPos < m_itemsData.m_size)
+                if (m_leftArrow != null)
                 {
-                    if (m_updateContent)
-                        m_items[i].Display(m_itemsData[dataPos], dataPos);
+                    m_leftArrow.isVisible = false;
+                }
 
-                    if (dataPos == m_selectedDataId && m_updateContent)
+                if (m_rightArrow != null)
+                {
+                    m_rightArrow.isVisible = false;
+                }
+            }
+            else
+            {
+                float maxPos = m_itemsData.m_size - width / m_itemWidth;
+                m_pos = Mathf.Max(Mathf.Min(pos, maxPos), 0);
+
+                for (int i = 0; i < m_items.m_size; i++)
+                {
+                    I item = m_items.m_buffer[i];
+                    if (item.item == null)
                     {
-                        m_selectedId = i;
-                        m_items[m_selectedId].Select(dataPos);
+                        item.item = CreateItem();
+                        item.Init();
+
+                        if (m_canSelect)
+                            item.item.eventClick += OnItemClicked;
                     }
 
-                    m_items[i].item.enabled = true;
-                }
-                else
-                    m_items[i].item.enabled = false;
+                    int dataPos = Mathf.FloorToInt(m_pos + i);
+                    float offset = itemWidth * (m_pos + i - dataPos);
+                    if (dataPos < m_itemsData.m_size)
+                    {
+                        if (m_updateContent)
+                            item.Display(m_itemsData[dataPos], dataPos);
 
-                m_items[i].item.relativePosition = new Vector3(i * itemWidth - offset, 0);
+                        if (dataPos == m_selectedDataId && m_updateContent)
+                        {
+                            m_selectedId = i;
+                            m_items.m_buffer[m_selectedId].Select(dataPos);
+                        }
+
+                        item.item.enabled = true;
+                    }
+                    else
+                    {
+                        item.item.enabled = false;
+                    }
+
+                    item.item.relativePosition = new Vector3(i * itemWidth - offset, 0);
+                }
+
+                if (m_leftArrow != null)
+                {
+                    m_leftArrow.isEnabled = m_pos > 0f;
+                    m_leftArrow.isVisible = maxPos > 0f;
+                }
+
+                if (m_rightArrow != null)
+                {
+                    m_rightArrow.isEnabled = m_pos < maxPos;
+                    m_rightArrow.isVisible = maxPos > 0f;
+                }
             }
 
             if (eventListPositionChanged != null && m_updateContent)
                 eventListPositionChanged(this, Mathf.FloorToInt(m_pos));
 
-            if(m_leftArrow != null)
-            {
-                m_leftArrow.isEnabled = m_pos > 0f;
-                m_leftArrow.isVisible = maxPos > 0f;
-            }
-
-            if (m_rightArrow != null)
-            {
-                m_rightArrow.isEnabled = m_pos < maxPos;
-                m_rightArrow.isVisible = maxPos > 0f;
-            }
-
+            UpdateScrollbar();
             m_updateContent = true;
         }
 
@@ -394,7 +516,7 @@ namespace FindIt.GUI
                 return null;
             }
 
-            return m_items[index];
+            return m_items.m_buffer[index];
         }
         #endregion
 
@@ -402,40 +524,82 @@ namespace FindIt.GUI
         public override void Start()
         {
             base.Start();
-            
+
             clipChildren = true;
 
             // Items
             CheckItems();
         }
 
+        /*public override void Update()
+        {
+            base.Update();
+
+            if (isVisible)
+            {
+                height = (int)(parent.parent.height / itemHeight) * itemHeight;
+            }
+        }*/
+
+        protected override void OnVisibilityChanged()
+        {
+            base.OnVisibilityChanged();
+
+            if (isVisible)
+            {
+                height = (int)(parent.parent.height / itemHeight) * itemHeight;
+            }
+        }
+
         protected override void OnSizeChanged()
         {
+            autoLayout = false;
+            autoReset = false;
+
             base.OnSizeChanged();
 
+            /*m_scrollbar.height = height;
+            m_scrollbar.trackObject.height = height;
+            m_scrollbar.AlignTo(this, UIAlignAnchor.TopRight);*/
+
             CheckItems();
+            DisplayAt(0);
         }
 
         protected override void OnMouseWheel(UIMouseEventParameter p)
         {
-            base.OnMouseWheel(p);
+            //base.OnMouseWheel(p);
 
             //if (!p.used)
-            {
+            //{
                 float prevPos = listPosition;
-                if (m_stepSize > 0 && m_itemWidth > 0)
-                    listPosition = m_pos - Mathf.Sign(p.wheelDelta) * m_stepSize / m_itemWidth;
-                else
-                    listPosition = m_pos - Mathf.Sign(p.wheelDelta);
 
-                if(prevPos != listPosition)
+                int nbRow = /*Mathf.CeilToInt*/(int)(height / m_itemHeight);
+                if (nbRow > 1)
+                {
+                    int nbCol = /*Mathf.CeilToInt*/(int)(width / m_itemWidth);
+
+                    if (m_stepSize > 0 && m_itemWidth > 0)
+                        listPosition = m_pos - Mathf.Round(p.wheelDelta) * m_stepSize * nbCol / m_itemWidth;
+                    else
+                        listPosition = m_pos - Mathf.Round(p.wheelDelta) * nbCol;
+                }
+                else
+                {
+                    if (m_stepSize > 0 && m_itemWidth > 0)
+                        listPosition = m_pos - Mathf.Round(p.wheelDelta) * m_stepSize / m_itemWidth;
+                    else
+                        listPosition = m_pos - Mathf.Round(p.wheelDelta);
+                }
+
+                /*if(prevPos != listPosition)
                 {
                     p.Use();
-                }
+                }*/
 
                 if (selectOnMouseEnter)
                     OnItemClicked(m_lastMouseEnter, p);
-            }
+            //}
         }
         #endregion
 
@@ -448,7 +612,7 @@ namespace FindIt.GUI
             int max = Mathf.Min(m_itemsData.m_size, m_items.m_size);
             for (int i = 0; i < max; i++)
             {
-                if (component == (UIComponent)m_items[i].item)
+                if (component == (UIComponent)m_items.m_buffer[i].item)
                 {
                     selectedIndex = i + Mathf.FloorToInt(m_pos);
                     return;
@@ -458,9 +622,18 @@ namespace FindIt.GUI
 
         private void CheckItems()
         {
-            if (m_itemWidth <= 0 || template == null) return;
+            if (m_itemWidth <= 0 || m_itemHeight <= 0 || template == null) return;
 
-            int nbItems = Mathf.CeilToInt(width / m_itemWidth) + 1;
+            int nbRow = /*Mathf.CeilToInt*/(int)(height / m_itemHeight);
+            int nbCol = /*Mathf.CeilToInt*/(int)(width / m_itemWidth);
+            
+            UIScrollbar scrollbar = parent.parent.GetComponentInChildren<UIScrollbar>();
+            if(scrollbar != null)
+            {
+                scrollbar.isVisible = nbRow > 1;
+            }
+
+            int nbItems = nbCol * nbRow;
 
             if (m_items == null)
             {
@@ -473,19 +646,25 @@ namespace FindIt.GUI
                 // Adding missing items
                 for (int i = m_items.m_size; i < nbItems; i++)
                 {
-                    m_items.Add(new I()
+                    m_items.Add(new I());
+                    /*m_items.Add(new I()
                         {
                             item = CreateItem()
                         });
 
-                    m_items[i].Init();
+                    m_items.m_buffer[i].Init();*/
                 }
             }
             else if (m_items.m_size > nbItems)
             {
                 // Remove excess items
                 for (int i = nbItems; i < m_items.m_size; i++)
-                    Destroy(m_items[i].item);
+                {
+                    if (m_items.m_buffer[i].item != null)
+                    {
+                        Destroy(m_items.m_buffer[i].item);
+                    }
+                }
 
                 m_items.SetCapacity(nbItems);
             }
@@ -500,6 +679,43 @@ namespace FindIt.GUI
             else if (m_canSelect) item.eventMouseEnter += OnItemClicked;
 
             return item;
+        }
+
+        private void UpdateScrollbar()
+        {
+            if (m_scrollbar == null || m_itemsData == null || m_itemHeight <= 0) return;
+
+            if (height > itemHeight)
+            {
+                int nbRow = /*Mathf.CeilToInt*/(int)(height / m_itemHeight);
+                int nbCol = /*Mathf.CeilToInt*/(int)(width / m_itemWidth);
+                int totalRow = Mathf.CeilToInt(itemsData.m_size / nbCol);
+                float maxPos = (totalRow - nbRow + 1) * nbCol;
+
+                if (totalRow <= nbRow)
+                {
+                    m_scrollbar.isVisible = false;
+                    return;
+                }
+
+                m_scrollbar.isVisible = true;
+                
+                m_scrollbar.scrollSize = 1f;
+                m_scrollbar.minValue = 0f;
+                m_scrollbar.maxValue = totalRow - 1;
+                m_scrollbar.incrementAmount = stepSize;
+
+                if (!m_lock)
+                {
+                    m_lock = true;
+
+                    float pos = Mathf.FloorToInt(m_pos) / nbCol;
+                    if (pos != m_scrollbar.value)
+                        m_scrollbar.value = pos;
+
+                    m_lock = false;
+                }
+            }
         }
         #endregion
     }
