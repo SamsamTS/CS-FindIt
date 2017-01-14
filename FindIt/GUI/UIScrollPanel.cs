@@ -8,28 +8,9 @@ namespace FindIt.GUI
     {
         public UIVerticalAlignment buttonsAlignment;
 
-        public UIPanel blocker;
-
-        public override void Start()
-        {
-            base.Start();
-
-            blocker = AddUIComponent<UIPanel>();
-            blocker.size = size;
-            blocker.relativePosition = Vector3.zero;
-            blocker.SendToBack();
-
-            Refresh();
-        }
-
         protected override void OnSizeChanged()
         {
             base.OnSizeChanged();
-
-            if (blocker != null)
-            {
-                blocker.size = size;
-            }
 
             if (height > itemHeight && scrollbar == null)
             {
@@ -238,15 +219,7 @@ namespace FindIt.GUI
             item.tooltip = data.tooltip;
             item.tooltipBox = data.tooltipBox;
             item.objectUserData = data.objectUserData;
-
-            if (data.enabled)
-            {
-                item.BringToFront();
-            }
-            else
-            {
-                item.SendToBack();
-            }
+            item.forceZOrder = index;
 
             if (item.containsMouse)
             {
