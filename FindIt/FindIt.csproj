@@ -53,6 +53,7 @@
     <Compile Include="AssetTagList.cs" />
     <Compile Include="Detours\GeneratedScrollPanelDetour.cs" />
     <Compile Include="FindIt.cs" />
+    <Compile Include="GUI\PreviewRenderer.cs" />
     <Compile Include="GUI\UIGroupPanel.cs" />
     <Compile Include="GUI\UIScrollPanel.cs" />
     <Compile Include="GUI\UIHorizontalFastList.cs" />
@@ -71,7 +72,9 @@
     <Compile Include="Redirection\Tuple.cs" />
     <Compile Include="ResourceLoader.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\SelectFilter.png" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icons\FindIt.png" />
     <EmbeddedResource Include="Icons\FindItDisabled.png" />

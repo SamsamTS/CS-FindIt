@@ -81,7 +81,7 @@ namespace FindIt.GUI
                         data.atlas = scrollPanel.atlas;
                     }
 
-                    data.baseIconName = GetThumbNail(asset.prefab, data.atlas);
+                    data.baseIconName = asset.prefab.m_Thumbnail;
 
                     data.tooltipBox = GeneratedPanel.GetTooltipBox(TooltipHelper.GetHashCode(data.tooltip));
                     data.enabled = ToolsModifierControl.IsUnlocked(asset.prefab.GetUnlockMilestone());
@@ -108,18 +108,6 @@ namespace FindIt.GUI
             {
                 ToolsModifierControl.SetTool<DefaultTool>();
             }
-        }
-
-        public static string GetThumbNail(PrefabInfo prefab, UITextureAtlas atlas)
-        {
-            string thumbnail = prefab.m_Thumbnail;
-
-            if (thumbnail.IsNullOrWhiteSpace() || atlas[thumbnail] == null)
-            {
-                thumbnail = "ThumbnailBuildingDefault";
-            }
-
-            return thumbnail;
         }
     }
 }

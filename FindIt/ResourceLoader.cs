@@ -12,7 +12,7 @@ namespace FindIt
         public static UITextureAtlas CreateTextureAtlas(string atlasName, string[] spriteNames, string assemblyPath)
         {
             int maxSize = 1024;
-            Texture2D texture2D = new Texture2D(maxSize, maxSize, TextureFormat.ARGB32, false);
+            Texture2D texture2D = new Texture2D(1, 1, TextureFormat.ARGB32, false);
             Texture2D[] textures = new Texture2D[spriteNames.Length];
             Rect[] regions = new Rect[spriteNames.Length];
 
@@ -104,7 +104,7 @@ namespace FindIt
             return UIView.GetAView().defaultAtlas;
         }
 
-        private static Texture2D loadTextureFromAssembly(string path)
+        public static Texture2D loadTextureFromAssembly(string path)
         {
             Stream manifestResourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(path);
 
@@ -117,5 +117,33 @@ namespace FindIt
             return texture2D;
         }
 
+        public static Texture2D ConvertRenderTexture(RenderTexture renderTexture)
+        {
+            RenderTexture active = RenderTexture.active;
+            Texture2D texture2D = new Texture2D(renderTexture.width, renderTexture.height);
+            RenderTexture.active = renderTexture;
+            texture2D.ReadPixels(new Rect(0f, 0f, (float)renderTexture.width, (float)renderTexture.height), 0, 0);
+            texture2D.Apply();
+            RenderTexture.active = active;
+
+            return texture2D;
+        }
+
+        public static void ResizeTexture(Texture2D texture, int width, int height)
+        {
+            RenderTexture active = RenderTexture.active;
+
+            texture.filterMode = FilterMode.Trilinear;
+            RenderTexture renderTexture = RenderTexture.GetTemporary(width, height);
+            renderTexture.filterMode = FilterMode.Trilinear;
+
+            RenderTexture.active = renderTexture;
+            Graphics.Blit(texture, renderTexture);
+            texture.Resize(width, height);
+            texture.ReadPixels(new Rect(0, 0, width, width), 0, 0);
+            texture.Apply();
+
+            RenderTexture.active = active;
+        }
     }
 }
