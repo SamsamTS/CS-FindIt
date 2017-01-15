@@ -144,6 +144,21 @@ namespace FindIt
             texture.Apply();
 
             RenderTexture.active = active;
+            RenderTexture.ReleaseTemporary(renderTexture);
+        }
+
+        public static void CopyTexture(Texture2D texture2D, Texture2D dest)
+        {
+            RenderTexture renderTexture = RenderTexture.GetTemporary(texture2D.width, texture2D.height, 0);
+            Graphics.Blit(texture2D, renderTexture);
+
+            RenderTexture active = RenderTexture.active;
+            RenderTexture.active = renderTexture;
+            dest.ReadPixels(new Rect(0f, 0f, (float)renderTexture.width, (float)renderTexture.height), 0, 0);
+            dest.Apply();
+            RenderTexture.active = active;
+
+            RenderTexture.ReleaseTemporary(renderTexture);
         }
     }
 }

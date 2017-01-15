@@ -77,7 +77,7 @@ namespace FindIt.GUI
 
             sunLight.intensity = 2f;
             sunLight.color = Color.white;
-            sunLight.transform.eulerAngles = new Vector3(50, 180, 70);
+            sunLight.transform.eulerAngles = new Vector3(50, 210, 70);
 
             Light mainLight = RenderManager.instance.MainLight;
             RenderManager.instance.MainLight = sunLight;

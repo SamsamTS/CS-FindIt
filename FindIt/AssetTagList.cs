@@ -3,6 +3,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
+using UnityEngine;
+
 using ColossalFramework;
 using ColossalFramework.UI;
 using ColossalFramework.DataBinding;
@@ -14,11 +16,91 @@ namespace FindIt
 {
     public class Asset
     {
+        private PrefabInfo m_prefab;
+
+        public static Shader shaderDefault = Shader.Find("Custom/Props/Decal/Default");
+        public static Shader shaderBlend = Shader.Find("Custom/Props/Decal/Blend");
+        public static Shader shaderSolid = Shader.Find("Custom/Props/Decal/Solid");
+        public static Shader shaderFence = Shader.Find("Custom/Props/Decal/Fence");
+
+        public enum AssetType
+        {
+            Unknown,
+            Building,
+            Rico,
+            Prop,
+            Decal,
+            Fence,
+            Tree
+        }
+
         public string name;
-        public PrefabInfo prefab;
+        public PrefabInfo prefab
+        {
+            get { return m_prefab; }
+            set
+            {
+                if (m_prefab != value)
+                {
+                    m_prefab = value;
+
+                    if (m_prefab != null)
+                    {
+                        service = m_prefab.GetService();
+                        subService = m_prefab.GetSubService();
+
+                        BuildingInfo buildingPrefab = m_prefab as BuildingInfo;
+                        if (buildingPrefab != null)
+                        {
+                            assetType = AssetType.Building;
+                            size = new Vector2(buildingPrefab.m_cellWidth, buildingPrefab.m_cellLength);
+
+                            if (buildingPrefab.m_placementStyle == ItemClass.Placement.Manual && (
+                                service == ItemClass.Service.Residential ||
+                                service == ItemClass.Service.Industrial ||
+                                service == ItemClass.Service.Commercial ||
+                                service == ItemClass.Service.Office))
+                            {
+                                assetType = AssetType.Rico;
+                            }
+
+                            return;
+                        }
+
+                        PropInfo propPrefab = m_prefab as PropInfo;
+                        if (propPrefab != null)
+                        {
+                            assetType = AssetType.Prop;
+
+                            if (propPrefab.m_material != null)
+                            {
+                                if (propPrefab.m_material.shader == shaderBlend || propPrefab.m_material.shader == shaderSolid)
+                                {
+                                    assetType = AssetType.Decal;
+                                }
+                                else if (propPrefab.m_material.shader == shaderFence)
+                                {
+                                    assetType = AssetType.Fence;
+                                }
+                            }
+
+                            return;
+                        }
+
+                        else if (m_prefab is TreeInfo)
+                        {
+                            assetType = AssetType.Tree;
+                        }
+                    }
+                }
+            }
+        }
+        public AssetType assetType = AssetType.Unknown;
+        public ItemClass.Service service = ItemClass.Service.None;
+        public ItemClass.SubService subService = ItemClass.SubService.None;
+        public Vector2 size;
         public ulong steamID;
         public string author;
-        public string service;
         public float score;
 
         public delegate void OnButtonClicked(UIComponent comp);
@@ -175,7 +257,7 @@ namespace FindIt
 
         public List<Asset> Find(string text)
         {
-            if(!initialized)
+            if (!initialized)
             {
                 Init();
             }
@@ -203,9 +285,24 @@ namespace FindIt
                                     score += 10 * GetScore(keyword, asset.author, null);
                                 }
 
-                                if (!asset.service.IsNullOrWhiteSpace())
+                                if (asset.assetType != Asset.AssetType.Unknown)
                                 {
-                                    score += 10 * GetScore(keyword, asset.service, null);
+                                    score += 10 * GetScore(keyword, asset.assetType.ToString().ToLower(), null);
+                                }
+
+                                if (asset.service != ItemClass.Service.None)
+                                {
+                                    score += 10 * GetScore(keyword, asset.service.ToString().ToLower(), null);
+                                }
+
+                                if (asset.subService != ItemClass.SubService.None)
+                                {
+                                    score += 10 * GetScore(keyword, asset.service.ToString().ToLower(), null);
+                                }
+
+                                if (asset.size != Vector2.zero)
+                                {
+                                    score += 10 * GetScore(keyword, asset.size.x + "x" + asset.size.y, null);
                                 }
 
                                 foreach (string tag in asset.tagsTitle)
@@ -261,7 +358,7 @@ namespace FindIt
             if (index >= 0)
             {
                 if (index == 0)
-                { 
+                {
                     scoreMultiplier = 10f;
                 }
                 if (dico != null && dico.ContainsKey(tag))
@@ -316,7 +413,7 @@ namespace FindIt
 
             tagsTitle.Clear();
             tagsDesc.Clear();
-            
+
             GetPrefabs<BuildingInfo>();
             //GetPrefab<NetInfo>();
             GetPrefabs<PropInfo>();
@@ -343,7 +440,7 @@ namespace FindIt
                         tag = "tree";
                     }
 
-                    if(!tag.IsNullOrWhiteSpace())
+                    if (!tag.IsNullOrWhiteSpace())
                     {
                         asset.tagsTitle.Add(tag);
                         if (!tagsTitle.ContainsKey(tag))
@@ -351,11 +448,6 @@ namespace FindIt
                             tagsTitle.Add(tag, 0);
                         }
                         tagsTitle[tag]++;
-                    }
-
-                    if (asset.prefab.GetService() != ItemClass.Service.None)
-                    {
-                        asset.service = asset.prefab.GetService().ToString().ToLower();
                     }
                 }
             }

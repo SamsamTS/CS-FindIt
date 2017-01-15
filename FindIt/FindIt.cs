@@ -3,7 +3,10 @@ using UnityEngine;
 
 using System;
 using System.Reflection;
+using System.Collections;
+using System.Collections.Generic;
 
+using ColossalFramework;
 using ColossalFramework.UI;
 
 using FindIt.Redirection;
@@ -16,6 +19,7 @@ namespace FindIt
         public const string settingsFileName = "FindIt";
 
         public static FindIt instance;
+        public static SavedBool unlockAll = new SavedBool("unlockAll", settingsFileName, false, true);
 
         public static AssetTagList list;
 
@@ -35,6 +39,8 @@ namespace FindIt
 
                 list = AssetTagList.instance;
                 list.Init();
+
+                StartCoroutine("FixFocusedThumbnails");
 
                 UITabstrip tabstrip = ToolsModifierControl.mainToolbar.GetComponentInChildren<UITabstrip>();
 
@@ -107,6 +113,25 @@ namespace FindIt
             }
         }
 
+        private IEnumerator FixFocusedThumbnails()
+        {
+            HashSet<UITextureAtlas> refreshList = new HashSet<UITextureAtlas>();
+
+            foreach (Asset asset in list.assets.Values)
+            {
+                if (ImageUtils.FixFocusedTexture(asset.prefab))
+                {
+                    refreshList.Add(asset.prefab.m_Atlas);
+                }
+            }
+
+            foreach (UITextureAtlas atlas in refreshList)
+            {
+                ImageUtils.RefreshAtlas(atlas);
+                yield return null;
+            }
+        }
+
         public void OnButtonClicked(UIComponent c, UIMouseEventParameter p)
         {
             UIButton uIButton = p.source as UIButton;
@@ -119,7 +144,7 @@ namespace FindIt
                 {
                     DebugUtils.Log("Calling delegate " + AssetTagList.instance.assets[key].onButtonClicked.Target.GetType());
                     AssetTagList.instance.assets[key].onButtonClicked(uIButton);
-                    
+
                 }
                 else
                 {

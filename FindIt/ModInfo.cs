@@ -5,7 +5,6 @@ using System;
 using ColossalFramework;
 using ColossalFramework.UI;
 
-
 namespace FindIt
 {
     public class ModInfo : IUserMod
@@ -39,7 +38,7 @@ namespace FindIt
             try
             {
                 Detours.UIComponentDetour.Deploy();
-                
+
                 if (FindIt.instance == null)
                 {
                     AssetTagList.instance = new AssetTagList();
@@ -47,6 +46,12 @@ namespace FindIt
 
                 UIHelper group = helper.AddGroup(Name) as UIHelper;
                 UIPanel panel = group.self as UIPanel;
+
+                UICheckBox checkBox = (UICheckBox)group.AddCheckbox("Unlock all", FindIt.unlockAll.value, (b) =>
+                {
+                    FindIt.unlockAll.value = b;
+                });
+                checkBox.tooltip = "Let you select and place items even when locked";
 
                 panel.gameObject.AddComponent<OptionsKeymapping>();
 
@@ -59,6 +64,6 @@ namespace FindIt
             }
         }
 
-        public const string version = "1.2.0";
+        public const string version = "1.2.1";
     }
 }

@@ -47,7 +47,7 @@ namespace FindIt.GUI
     public class UIHorizontalFastList<O, I, T> : UIScrollablePanel
         where O : class
         where I : class, IUIFastListItem<O, T>, new()
-        where T : UIComponent 
+        where T : UIComponent
     {
         #region Private members
         private FastList<I> m_items;
@@ -167,7 +167,7 @@ namespace FindIt.GUI
                 }
             }
         }
-        
+
         /// <summary>
         /// This MUST be set, it is the width in pixels of each item
         /// </summary>
@@ -259,7 +259,7 @@ namespace FindIt.GUI
 
                         int nbRow = /*Mathf.CeilToInt*/(int)(height / m_itemHeight);
                         int nbCol = /*Mathf.CeilToInt*/(int)(width / m_itemWidth);
-                        int totalRow = Mathf.CeilToInt(itemsData.m_size / nbCol);
+                        int totalRow = Mathf.CeilToInt((itemsData.m_size - 1) / nbCol);
 
                         m_lock = true;
 
@@ -308,7 +308,7 @@ namespace FindIt.GUI
             {
                 m_rightArrow = value;
 
-                if(m_rightArrow != null)
+                if (m_rightArrow != null)
                 {
                     m_rightArrow.eventMouseDown += (c, p) =>
                     {
@@ -387,7 +387,7 @@ namespace FindIt.GUI
             {
                 int nbCol = /*Mathf.CeilToInt*/(int)(width / m_itemWidth);
 
-                float maxPos = (Mathf.Ceil(itemsData.m_size / nbCol) - nbRow + 1) * nbCol;
+                float maxPos = (Mathf.Ceil((itemsData.m_size - 1) / nbCol) - nbRow + 1) * nbCol;
                 m_pos = Mathf.Max(Mathf.Min(pos, maxPos), 0);
 
                 //float offset = itemHeight * (m_pos - Mathf.Floor(m_pos));
@@ -511,7 +511,7 @@ namespace FindIt.GUI
 
         public I GetItem(int index)
         {
-            if(index < 0 || index >= m_items.m_size)
+            if (index < 0 || index >= m_items.m_size)
             {
                 return null;
             }
@@ -572,33 +572,33 @@ namespace FindIt.GUI
 
             //if (!p.used)
             //{
-                float prevPos = listPosition;
+            float prevPos = listPosition;
 
-                int nbRow = /*Mathf.CeilToInt*/(int)(height / m_itemHeight);
-                if (nbRow > 1)
-                {
-                    int nbCol = /*Mathf.CeilToInt*/(int)(width / m_itemWidth);
+            int nbRow = /*Mathf.CeilToInt*/(int)(height / m_itemHeight);
+            if (nbRow > 1)
+            {
+                int nbCol = /*Mathf.CeilToInt*/(int)(width / m_itemWidth);
 
-                    if (m_stepSize > 0 && m_itemWidth > 0)
-                        listPosition = m_pos - Mathf.Round(p.wheelDelta) * m_stepSize * nbCol / m_itemWidth;
-                    else
-                        listPosition = m_pos - Mathf.Round(p.wheelDelta) * nbCol;
-                }
+                if (m_stepSize > 0 && m_itemWidth > 0)
+                    listPosition = m_pos - Mathf.Round(p.wheelDelta) * m_stepSize * nbCol / m_itemWidth;
                 else
-                {
-                    if (m_stepSize > 0 && m_itemWidth > 0)
-                        listPosition = m_pos - Mathf.Round(p.wheelDelta) * m_stepSize / m_itemWidth;
-                    else
-                        listPosition = m_pos - Mathf.Round(p.wheelDelta);
-                }
+                    listPosition = m_pos - Mathf.Round(p.wheelDelta) * nbCol;
+            }
+            else
+            {
+                if (m_stepSize > 0 && m_itemWidth > 0)
+                    listPosition = m_pos - Mathf.Round(p.wheelDelta) * m_stepSize / m_itemWidth;
+                else
+                    listPosition = m_pos - Mathf.Round(p.wheelDelta);
+            }
 
-                /*if(prevPos != listPosition)
-                {
-                    p.Use();
-                }*/
+            /*if(prevPos != listPosition)
+            {
+                p.Use();
+            }*/
 
-                if (selectOnMouseEnter)
-                    OnItemClicked(m_lastMouseEnter, p);
+            if (selectOnMouseEnter)
+                OnItemClicked(m_lastMouseEnter, p);
             //}
         }
         #endregion
@@ -626,9 +626,9 @@ namespace FindIt.GUI
 
             int nbRow = /*Mathf.CeilToInt*/(int)(height / m_itemHeight);
             int nbCol = /*Mathf.CeilToInt*/(int)(width / m_itemWidth);
-            
+
             UIScrollbar scrollbar = parent.parent.GetComponentInChildren<UIScrollbar>();
-            if(scrollbar != null)
+            if (scrollbar != null)
             {
                 scrollbar.isVisible = nbRow > 1;
             }
@@ -689,7 +689,7 @@ namespace FindIt.GUI
             {
                 int nbRow = /*Mathf.CeilToInt*/(int)(height / m_itemHeight);
                 int nbCol = /*Mathf.CeilToInt*/(int)(width / m_itemWidth);
-                int totalRow = Mathf.CeilToInt(itemsData.m_size / nbCol);
+                int totalRow = Mathf.CeilToInt((itemsData.m_size - 1) / nbCol);
                 float maxPos = (totalRow - nbRow + 1) * nbCol;
 
                 if (totalRow <= nbRow)
@@ -699,7 +699,7 @@ namespace FindIt.GUI
                 }
 
                 m_scrollbar.isVisible = true;
-                
+
                 m_scrollbar.scrollSize = 1f;
                 m_scrollbar.minValue = 0f;
                 m_scrollbar.maxValue = totalRow - 1;

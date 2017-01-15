@@ -60,7 +60,7 @@ namespace FindIt.GUI
 
             PrefabInfo current = null;
             int selected = -1;
-            if(scrollPanel.selectedItem != null)
+            if (scrollPanel.selectedItem != null)
             {
                 current = scrollPanel.selectedItem.objectUserData as PrefabInfo;
             }
@@ -84,13 +84,13 @@ namespace FindIt.GUI
                     data.baseIconName = asset.prefab.m_Thumbnail;
 
                     data.tooltipBox = GeneratedPanel.GetTooltipBox(TooltipHelper.GetHashCode(data.tooltip));
-                    data.enabled = ToolsModifierControl.IsUnlocked(asset.prefab.GetUnlockMilestone());
+                    data.enabled = ToolsModifierControl.IsUnlocked(asset.prefab.GetUnlockMilestone()) || asset.assetType == Asset.AssetType.Rico;
                     data.verticalAlignment = scrollPanel.buttonsAlignment;
                     data.objectUserData = asset.prefab;
 
                     scrollPanel.itemsData.Add(data);
 
-                    if(asset.prefab == current)
+                    if (asset.prefab == current)
                     {
                         selected = scrollPanel.itemsData.m_size - 1;
                     }
