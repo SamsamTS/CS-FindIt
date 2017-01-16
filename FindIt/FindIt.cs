@@ -115,21 +115,22 @@ namespace FindIt
 
         private IEnumerator FixFocusedThumbnails()
         {
-            HashSet<UITextureAtlas> refreshList = new HashSet<UITextureAtlas>();
+            //HashSet<UITextureAtlas> refreshList = new HashSet<UITextureAtlas>();
 
             foreach (Asset asset in list.assets.Values)
             {
                 if (ImageUtils.FixFocusedTexture(asset.prefab))
                 {
-                    refreshList.Add(asset.prefab.m_Atlas);
+                    //refreshList.Add(asset.prefab.m_Atlas);
                 }
+                yield return null;
             }
 
-            foreach (UITextureAtlas atlas in refreshList)
+            /*foreach (UITextureAtlas atlas in refreshList)
             {
                 ImageUtils.RefreshAtlas(atlas);
                 yield return null;
-            }
+            }*/
         }
 
         public void OnButtonClicked(UIComponent c, UIMouseEventParameter p)
@@ -142,9 +143,7 @@ namespace FindIt
                 string key = Asset.GetName(prefab);
                 if (AssetTagList.instance.assets.ContainsKey(key) && AssetTagList.instance.assets[key].onButtonClicked != null)
                 {
-                    DebugUtils.Log("Calling delegate " + AssetTagList.instance.assets[key].onButtonClicked.Target.GetType());
                     AssetTagList.instance.assets[key].onButtonClicked(uIButton);
-
                 }
                 else
                 {

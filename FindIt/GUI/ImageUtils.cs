@@ -228,14 +228,23 @@ namespace FindIt.GUI
                         maxH = Mathf.Max(maxH, h);
                         minS = Mathf.Min(minS, s);
 
+                        if (minH < 0.66f || maxH > 0.68f || minS < 0.98f)
+                        {
+                            return false;
+                        }
+
                         count++;
                     }
                 }
 
                 if (count > 0 && minH > 0.66f && maxH < 0.68f && minS > 0.98f)
                 {
-                    DebugUtils.Log("Fixing " + prefab.name);
                     ImageUtils.FixFocusedTexture(prefab.m_Atlas[prefab.m_Thumbnail].texture, sprite.texture);
+                    Color32[] colors = sprite.texture.GetPixels32();
+
+                    prefab.m_Atlas.texture.SetPixels32((int)(sprite.region.x * prefab.m_Atlas.texture.width), (int)(sprite.region.y * prefab.m_Atlas.texture.height), sprite.texture.width, sprite.texture.height, colors);
+                    prefab.m_Atlas.texture.Apply();
+
                     return true;
                 }
             }

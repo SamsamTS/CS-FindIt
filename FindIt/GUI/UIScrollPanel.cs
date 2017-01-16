@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 using ColossalFramework;
 using ColossalFramework.UI;
@@ -189,97 +190,141 @@ namespace FindIt.GUI
 
         public void Display(ItemData data, int index)
         {
-            if (data == null)
+            try
             {
-                DebugUtils.Log("Data null");
-            }
-
-            if (item == null || data == null) return;
-
-            if (oldData != null)
-            {
-                oldData.atlas = item.atlas;
-            }
-
-            item.Unfocus();
-            item.name = data.name;
-            item.gameObject.GetComponent<TutorialUITag>().tutorialTag = data.name;
-
-            PrefabInfo prefab = data.objectUserData as PrefabInfo;
-            if (prefab != null)
-            {
-                if (prefab.m_Atlas == null || prefab.m_Thumbnail.IsNullOrWhiteSpace() ||
-                    prefab.m_Thumbnail == "Thumboldasphalt" ||
-                    prefab.m_Thumbnail == "Thumbbirdbathresidential" ||
-                    prefab.m_Thumbnail == "Thumbcrate" ||
-                    prefab.m_Thumbnail == "Thumbhedge" ||
-                    prefab.m_Thumbnail == "Thumbhedge2" ||
-                    prefab.m_Thumbnail == "ThumbnailRoadTypeTrainTracksHovered")
+                if (data == null)
                 {
-                    string name = Asset.GetName(prefab);
-                    if (!ImageUtils.CreateThumbnailAtlas(name, prefab) && !data.baseIconName.IsNullOrWhiteSpace())
+                    DebugUtils.Log("Data null");
+                }
+
+                if (item == null || data == null) return;
+
+                if (oldData != null)
+                {
+                    oldData.atlas = item.atlas;
+                }
+                oldData = data;
+
+                item.Unfocus();
+                item.name = data.name;
+                item.gameObject.GetComponent<TutorialUITag>().tutorialTag = data.name;
+
+                PrefabInfo prefab = data.objectUserData as PrefabInfo;
+                if (prefab != null)
+                {
+                    if (prefab.m_Atlas == null || prefab.m_Thumbnail.IsNullOrWhiteSpace() ||
+                        prefab.m_Thumbnail == "Thumboldasphalt" ||
+                        prefab.m_Thumbnail == "Thumbbirdbathresidential" ||
+                        prefab.m_Thumbnail == "Thumbcrate" ||
+                        prefab.m_Thumbnail == "Thumbhedge" ||
+                        prefab.m_Thumbnail == "Thumbhedge2" ||
+                        prefab.m_Thumbnail == "ThumbnailRoadTypeTrainTracksHovered")
                     {
-                        prefab.m_Thumbnail = data.baseIconName;
+                        string name = Asset.GetName(prefab);
+                        if (!ImageUtils.CreateThumbnailAtlas(name, prefab) && !data.baseIconName.IsNullOrWhiteSpace())
+                        {
+                            prefab.m_Thumbnail = data.baseIconName;
+                        }
+                    }
+
+                    data.baseIconName = prefab.m_Thumbnail;
+                    if (prefab.m_Atlas != null)
+                    {
+                        data.atlas = prefab.m_Atlas;
                     }
                 }
 
-                data.baseIconName = prefab.m_Thumbnail;
-                if (prefab.m_Atlas != null)
+                m_baseIconName = data.baseIconName;
+                if (data.atlas != null)
                 {
-                    data.atlas = prefab.m_Atlas;
-                }
-            }
-
-            m_baseIconName = data.baseIconName;
-            if (data.atlas != null)
-            {
-                item.atlas = data.atlas;
-            }
-
-            item.verticalAlignment = data.verticalAlignment;
-
-            item.normalFgSprite = m_baseIconName;
-            item.hoveredFgSprite = m_baseIconName + "Hovered";
-            item.pressedFgSprite = m_baseIconName + "Pressed";
-            item.disabledFgSprite = m_baseIconName + "Disabled";
-            item.focusedFgSprite = null;
-
-            item.isEnabled = data.enabled || FindIt.unlockAll.value;
-            item.tooltip = data.tooltip;
-            item.tooltipBox = data.tooltipBox;
-            item.objectUserData = data.objectUserData;
-            item.forceZOrder = index;
-
-            if (item.containsMouse)
-            {
-                item.RefreshTooltip();
-
-                if (m_tooltipBox != null && m_tooltipBox.isVisible && m_tooltipBox != data.tooltipBox)
-                {
-                    m_tooltipBox.Hide();
-                    data.tooltipBox.Show(true);
-                    data.tooltipBox.opacity = 1f;
-                    data.tooltipBox.relativePosition = m_tooltipBox.relativePosition + new Vector3(0, m_tooltipBox.height - data.tooltipBox.height);
+                    item.atlas = data.atlas;
                 }
 
-                m_tooltipBox = data.tooltipBox;
+                item.verticalAlignment = data.verticalAlignment;
 
-                RefreshTooltipAltas(item);
+                item.normalFgSprite = m_baseIconName;
+                item.hoveredFgSprite = m_baseIconName + "Hovered";
+                item.pressedFgSprite = m_baseIconName + "Pressed";
+                item.disabledFgSprite = m_baseIconName + "Disabled";
+                item.focusedFgSprite = null;
+
+                item.isEnabled = data.enabled || FindIt.unlockAll.value;
+                item.tooltip = data.tooltip;
+                item.tooltipBox = data.tooltipBox;
+                item.objectUserData = data.objectUserData;
+                item.forceZOrder = index;
+
+                if (item.containsMouse)
+                {
+                    item.RefreshTooltip();
+
+                    if (m_tooltipBox != null && m_tooltipBox.isVisible && m_tooltipBox != data.tooltipBox)
+                    {
+                        m_tooltipBox.Hide();
+                        data.tooltipBox.Show(true);
+                        data.tooltipBox.opacity = 1f;
+                        data.tooltipBox.relativePosition = m_tooltipBox.relativePosition + new Vector3(0, m_tooltipBox.height - data.tooltipBox.height);
+                    }
+
+                    m_tooltipBox = data.tooltipBox;
+
+                    RefreshTooltipAltas(item);
+                }
             }
-
-            oldData = data;
+            catch (Exception e)
+            {
+                if (data != null)
+                {
+                    DebugUtils.Log("Display failed : " + data.name);
+                }
+                else
+                {
+                    DebugUtils.Log("Display failed");
+                }
+                DebugUtils.LogException(e);
+            }
         }
 
         public void Select(int index)
         {
-            item.normalFgSprite = m_baseIconName + "Focused";
-            item.hoveredFgSprite = m_baseIconName + "Focused";
+            try
+            {
+                item.normalFgSprite = m_baseIconName + "Focused";
+                item.hoveredFgSprite = m_baseIconName + "Focused";
+            }
+            catch (Exception e)
+            {
+                if (oldData != null)
+                {
+                    DebugUtils.Log("Select failed : " + oldData.name);
+                }
+                else
+                {
+                    DebugUtils.Log("Select failed");
+                }
+                DebugUtils.LogException(e);
+            }
         }
 
         public void Deselect(int index)
         {
-            item.normalFgSprite = m_baseIconName;
-            item.hoveredFgSprite = m_baseIconName + "Hovered";
+            try
+            {
+                item.normalFgSprite = m_baseIconName;
+                item.hoveredFgSprite = m_baseIconName + "Hovered";
+            }
+            catch (Exception e)
+            {
+                if (oldData != null)
+                {
+                    DebugUtils.Log("Deselect failed : " + oldData.name);
+                }
+                else
+                {
+                    DebugUtils.Log("Deselect failed");
+                }
+                DebugUtils.LogException(e);
+            }
         }
 
         public static void RefreshTooltipAltas(UIComponent item)
