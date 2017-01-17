@@ -253,6 +253,8 @@ namespace FindIt
         public Dictionary<string, int> tagsDesc = new Dictionary<string, int>();
         public Dictionary<string, Asset> assets = new Dictionary<string, Asset>();
 
+        public Dictionary<ulong, string> authors = new Dictionary<ulong, string>();
+
         public List<Asset> matches = new List<Asset>();
 
         public List<Asset> Find(string text)
@@ -380,26 +382,20 @@ namespace FindIt
             foreach (Package.Asset current in PackageManager.FilterAssets(new Package.AssetType[] { UserAssetType.CustomAssetMetaData }))
             {
                 PublishedFileId id = current.package.GetPublishedFileID();
-                string author = null;
 
-                if (!current.package.packageAuthor.IsNullOrWhiteSpace())
+                ulong steamid;
+                if (UInt64.TryParse(current.package.packageName, out steamid))
                 {
-                    ulong authorID;
-                    if (UInt64.TryParse(current.package.packageAuthor.Substring("steamid:".Length), out authorID))
+                    if (!authors.ContainsKey(steamid) && !current.package.packageAuthor.IsNullOrWhiteSpace())
                     {
-                        author = new Friend(new UserID(authorID)).personaName;
-                        author = Regex.Replace(author.ToLower().Trim(), @"([^\w]|\s)+", "_");
+                        ulong authorID;
+                        if (UInt64.TryParse(current.package.packageAuthor.Substring("steamid:".Length), out authorID))
+                        {
+                            string author = new Friend(new UserID(authorID)).personaName;
+                            author = Regex.Replace(author.ToLower().Trim(), @"([^\w]|\s)+", "_");
+                            authors.Add(steamid, author);
+                        }
                     }
-                }
-
-                if (!assets.ContainsKey(current.fullName))
-                {
-                    assets[current.fullName] = new Asset()
-                    {
-                        name = current.fullName,
-                        steamID = id.AsUInt64,
-                        author = author
-                    };
                 }
             }
         }
@@ -473,12 +469,16 @@ namespace FindIt
                 }
                 else
                 {
+                    ulong steamID = GetSteamID(prefab);
                     assets[name] = new Asset()
                     {
                         name = name,
                         prefab = prefab,
-                        steamID = GetSteamID(prefab)
+                        steamID = steamID
                     };
+
+                    if (steamID != 0 && authors.ContainsKey(steamID))
+                        assets[name].author = authors[steamID];
                 }
             }
         }
