@@ -8,6 +8,7 @@ using System.Collections.Generic;
 
 using ColossalFramework;
 using ColossalFramework.UI;
+using ColossalFramework.Globalization;
 
 using FindIt.Redirection;
 using FindIt.GUI;
@@ -49,6 +50,26 @@ namespace FindIt
 
                 m_mainButton = tabstrip.AddTab("FindItMainButton", asGameObject, asGameObject2, new Type[] { typeof(UIGroupPanel) }) as UIButton;
                 m_mainButton.atlas = LoadResources();
+
+                Locale locale = (Locale)typeof(LocaleManager).GetField("m_Locale", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(LocaleManager.instance);
+                Locale.Key key = new Locale.Key
+                {
+                    m_Identifier = "TUTORIAL_ADVISER_TITLE",
+                    m_Key = m_mainButton.name
+                };
+                if (!locale.Exists(key))
+                {
+                    locale.AddLocalizedString(key, "Find It! " + ModInfo.version);
+                }
+                key = new Locale.Key
+                {
+                    m_Identifier = "TUTORIAL_ADVISER",
+                    m_Key = m_mainButton.name
+                };
+                if (!locale.Exists(key))
+                {
+                    locale.AddLocalizedString(key, "Thanks for subscribing to Find It!\n\nStart typing some keywords into the input field to find the desired asset.\n\nIf you like the mod please consider leaving a rating on the steam workshop.");
+                }
 
                 FieldInfo m_ObjectIndex = typeof(MainToolbar).GetField("m_ObjectIndex", BindingFlags.Instance | BindingFlags.NonPublic);
                 m_ObjectIndex.SetValue(ToolsModifierControl.mainToolbar, (int)m_ObjectIndex.GetValue(ToolsModifierControl.mainToolbar) + 1);

@@ -455,11 +455,32 @@ namespace FindIt
 
         private void GetPrefabs<T>() where T : PrefabInfo
         {
+            string filtered = "";
             for (uint i = 0; i < PrefabCollection<T>.PrefabCount(); i++)
             {
                 T prefab = PrefabCollection<T>.GetPrefab(i);
 
                 if (prefab == null) continue;
+
+                BuildingInfo buildingPrefab = prefab as BuildingInfo;
+                if(buildingPrefab != null)
+                {
+                    if (buildingPrefab.m_placementStyle == ItemClass.Placement.Procedural && buildingPrefab.m_buildingAI.GetType() != typeof(BuildingAI))
+                    {
+                        filtered += prefab.name + ", ";
+                        continue;
+                    }
+                }
+
+                PropInfo propPrefab = prefab as PropInfo;
+                if (propPrefab != null)
+                {
+                    if (propPrefab.m_requireWaterMap)
+                    {
+                        filtered += prefab.name + ", ";
+                        continue;
+                    }
+                }
 
                 string name = Asset.GetName(prefab);
 
@@ -480,6 +501,12 @@ namespace FindIt
                     if (steamID != 0 && authors.ContainsKey(steamID))
                         assets[name].author = authors[steamID];
                 }
+            }
+
+            if(!filtered.IsNullOrWhiteSpace())
+            {
+                filtered = filtered.Remove(filtered.Length - 2);
+                DebugUtils.Log("Filtered " + typeof(T) + ": " + filtered);
             }
         }
 
