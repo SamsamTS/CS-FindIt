@@ -25,12 +25,12 @@ namespace FindIt
 
         public enum AssetType
         {
-            Unknown,
+            All,
             Building,
             Rico,
             Prop,
             Decal,
-            Fence,
+            //Fence,
             Tree
         }
 
@@ -78,10 +78,10 @@ namespace FindIt
                                 {
                                     assetType = AssetType.Decal;
                                 }
-                                else if (propPrefab.m_material.shader == shaderFence)
+                                /*else if (propPrefab.m_material.shader == shaderFence)
                                 {
                                     assetType = AssetType.Fence;
-                                }
+                                }*/
                             }
 
                             return;
@@ -95,7 +95,7 @@ namespace FindIt
                 }
             }
         }
-        public AssetType assetType = AssetType.Unknown;
+        public AssetType assetType = (AssetType)(-1);
         public ItemClass.Service service = ItemClass.Service.None;
         public ItemClass.SubService subService = ItemClass.SubService.None;
         public Vector2 size;
@@ -148,14 +148,16 @@ namespace FindIt
 
             string name = prefab.name;
 
-            if (name.Contains("."))
+            int index = name.IndexOf('.');
+            if (index >= 0)
             {
-                name = prefab.name.Substring(prefab.name.IndexOf('.') + 1);
+                name = name.Substring(index + 1);
             }
 
-            if (name.EndsWith("_Data"))
+            index = name.LastIndexOf("_Data");
+            if (index >= 0)
             {
-                name = name.Substring(0, name.LastIndexOf("_Data"));
+                name = name.Substring(0, index);
             }
 
             return Regex.Replace(name, "([A-Z][a-z]+)", " $1");
@@ -257,7 +259,7 @@ namespace FindIt
 
         public List<Asset> matches = new List<Asset>();
 
-        public List<Asset> Find(string text)
+        public List<Asset> Find(string text, Asset.AssetType filter)
         {
             if (!initialized)
             {
@@ -274,7 +276,7 @@ namespace FindIt
 
                 foreach (Asset asset in assets.Values)
                 {
-                    if (asset.prefab != null)
+                    if (asset.prefab != null && (filter == Asset.AssetType.All || asset.assetType == filter))
                     {
                         foreach (string keyword in keywords)
                         {
@@ -287,7 +289,7 @@ namespace FindIt
                                     score += 10 * GetScore(keyword, asset.author, null);
                                 }
 
-                                if (asset.assetType != Asset.AssetType.Unknown)
+                                if (filter == Asset.AssetType.All && asset.assetType != (Asset.AssetType)(-1))
                                 {
                                     score += 10 * GetScore(keyword, asset.assetType.ToString().ToLower(), null);
                                 }
@@ -328,11 +330,11 @@ namespace FindIt
                                 }
                             }
                         }
-                    }
 
-                    if (asset.score > 0)
-                    {
-                        matches.Add(asset);
+                        if (asset.score > 0)
+                        {
+                            matches.Add(asset);
+                        }
                     }
                 }
                 matches = matches.OrderByDescending(s => s.score).ToList();
@@ -341,7 +343,7 @@ namespace FindIt
             {
                 foreach (Asset asset in assets.Values)
                 {
-                    if (asset.prefab != null)
+                    if (asset.prefab != null && (filter == Asset.AssetType.All || asset.assetType == filter))
                     {
                         matches.Add(asset);
                     }
@@ -420,31 +422,17 @@ namespace FindIt
                 if (asset.prefab != null)
                 {
                     asset.tagsTitle = AddAssetTags(asset, tagsTitle, Asset.GetLocalizedTitle(asset.prefab));
-                    asset.tagsDesc = AddAssetTags(asset, tagsDesc, Asset.GetLocalizedDescription(asset.prefab));
 
-                    string tag = null;
-                    if (asset.prefab is BuildingInfo)
+                    if (asset.steamID == 0)
                     {
-                        tag = "building";
-                    }
-                    else if (asset.prefab is PropInfo)
-                    {
-                        tag = "prop";
-                    }
-                    else if (asset.prefab is TreeInfo)
-                    {
-                        tag = "tree";
-                    }
-
-                    if (!tag.IsNullOrWhiteSpace())
-                    {
-                        asset.tagsTitle.Add(tag);
-                        if (!tagsTitle.ContainsKey(tag))
+                        int index = asset.prefab.name.IndexOf(".");
+                        if (index >= 0)
                         {
-                            tagsTitle.Add(tag, 0);
+                            asset.tagsTitle.UnionWith(AddAssetTags(asset, tagsTitle, asset.prefab.name.Substring(0, index)));
                         }
-                        tagsTitle[tag]++;
                     }
+
+                    asset.tagsDesc = AddAssetTags(asset, tagsDesc, Asset.GetLocalizedDescription(asset.prefab));
                 }
             }
 

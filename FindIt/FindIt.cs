@@ -107,7 +107,7 @@ namespace FindIt
                     searchBox = scrollPanel.parent.AddUIComponent<UISearchBox>();
                     searchBox.scrollPanel = scrollPanel;
                     searchBox.relativePosition = new Vector3(5, -40);
-                    searchBox.OnTextChanged(searchBox, "");
+                    searchBox.Search();
                 }
 
                 m_mainButton.normalBgSprite = "ToolbarIconGroup6Normal";
