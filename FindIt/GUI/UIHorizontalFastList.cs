@@ -692,7 +692,7 @@ namespace FindIt.GUI
                 int totalRow = Mathf.CeilToInt((itemsData.m_size - 1) / nbCol);
                 float maxPos = (totalRow - nbRow + 1) * nbCol;
 
-                if (totalRow <= nbRow)
+                if (totalRow < nbRow)
                 {
                     m_scrollbar.isVisible = false;
                     return;

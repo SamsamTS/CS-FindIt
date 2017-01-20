@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Globalization;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -35,6 +36,7 @@ namespace FindIt
         }
 
         public string name;
+        public string title;
         public PrefabInfo prefab
         {
             get { return m_prefab; }
@@ -122,31 +124,29 @@ namespace FindIt
 
         public static string GetLocalizedTitle(PrefabInfo prefab)
         {
-            string result;
+            string name = prefab.name;
 
             if (prefab is BuildingInfo)
             {
-                if (Locale.GetUnchecked("BUILDING_TITLE", prefab.name, out result))
+                if (!Locale.GetUnchecked("BUILDING_TITLE", prefab.name, out name))
                 {
-                    return result;
+                    name = prefab.name;
                 }
             }
             else if (prefab is PropInfo)
             {
-                if (Locale.GetUnchecked("PROPS_TITLE", prefab.name, out result))
+                if (!Locale.GetUnchecked("PROPS_TITLE", prefab.name, out name))
                 {
-                    return result;
+                    name = prefab.name;
                 }
             }
             else if (prefab is TreeInfo)
             {
-                if (Locale.GetUnchecked("TREE_TITLE", prefab.name, out result))
+                if (!Locale.GetUnchecked("TREE_TITLE", prefab.name, out name))
                 {
-                    return result;
+                    name = prefab.name;
                 }
             }
-
-            string name = prefab.name;
 
             int index = name.IndexOf('.');
             if (index >= 0)
@@ -160,7 +160,18 @@ namespace FindIt
                 name = name.Substring(0, index);
             }
 
-            return Regex.Replace(name, "([A-Z][a-z]+)", " $1");
+            name = Regex.Replace(name, @"[_-]+", " ");
+            name = Regex.Replace(name, @"([A-Z][a-z]+)", " $1");
+            name = Regex.Replace(name, @"([^\d])(\d+)", "$1 $2");
+            name = Regex.Replace(name, @"\b(.) (\d+)", " $1$2 ");
+            name = Regex.Replace(name, @"(\d+) ?x (\d+)", " $1x$2 ");
+            name = Regex.Replace(name, @"\s+", " ");
+
+            name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name).Trim();
+
+            DebugUtils.Log(prefab.name + " => " + name);
+
+            return name;
         }
 
         public static string GetLocalizedDescription(PrefabInfo prefab)
@@ -192,14 +203,14 @@ namespace FindIt
             return "";
         }
 
-        public static string GetLocalizedTooltip(PrefabInfo prefab)
+        public static string GetLocalizedTooltip(PrefabInfo prefab, string title)
         {
             MilestoneInfo unlockMilestone = prefab.GetUnlockMilestone();
 
             string text = TooltipHelper.Format(new string[]
 	        {
 		        LocaleFormatter.Title,
-		        Asset.GetLocalizedTitle(prefab),
+		        title,
 		        LocaleFormatter.Sprite,
 		        (!string.IsNullOrEmpty(prefab.m_InfoTooltipThumbnail)) ? prefab.m_InfoTooltipThumbnail : prefab.name,
 		        LocaleFormatter.Text,
@@ -272,7 +283,7 @@ namespace FindIt
 
             if (!text.IsNullOrWhiteSpace())
             {
-                string[] keywords = Regex.Split(text, @"([^\w]|\s)+", RegexOptions.IgnoreCase);
+                string[] keywords = Regex.Split(text, @"([^\w]|[_-]|\s)+", RegexOptions.IgnoreCase);
 
                 foreach (Asset asset in assets.Values)
                 {
@@ -301,7 +312,7 @@ namespace FindIt
 
                                 if (asset.subService != ItemClass.SubService.None)
                                 {
-                                    score += 10 * GetScore(keyword, asset.service.ToString().ToLower(), null);
+                                    score += 10 * GetScore(keyword, asset.subService.ToString().ToLower(), null);
                                 }
 
                                 if (asset.size != Vector2.zero)
@@ -394,7 +405,7 @@ namespace FindIt
                         if (UInt64.TryParse(current.package.packageAuthor.Substring("steamid:".Length), out authorID))
                         {
                             string author = new Friend(new UserID(authorID)).personaName;
-                            author = Regex.Replace(author.ToLower().Trim(), @"([^\w]|\s)+", "_");
+                            //author = Regex.Replace(author.ToLower().Trim(), @"([^\w]|\s)+", "_");
                             authors.Add(steamid, author);
                         }
                     }
@@ -421,7 +432,8 @@ namespace FindIt
             {
                 if (asset.prefab != null)
                 {
-                    asset.tagsTitle = AddAssetTags(asset, tagsTitle, Asset.GetLocalizedTitle(asset.prefab));
+                    asset.title = Asset.GetLocalizedTitle(asset.prefab);
+                    asset.tagsTitle = AddAssetTags(asset, tagsTitle, asset.title);
 
                     if (asset.steamID == 0)
                     {
@@ -502,7 +514,7 @@ namespace FindIt
         {
             //text = Regex.Replace(text, "([A-Z][a-z]+)", " $1");
 
-            string[] tagsArr = Regex.Split(text, @"([^\w]|\s)+", RegexOptions.IgnoreCase);
+            string[] tagsArr = Regex.Split(text, @"([^\w]|[_-]|\s)+", RegexOptions.IgnoreCase);
 
             HashSet<string> tags = new HashSet<string>();
 
@@ -510,7 +522,7 @@ namespace FindIt
             {
                 string tag = t.ToLower().Trim();
 
-                if (tag.Length > 1 && !tag.Contains("_"))
+                if (tag.Length > 1)
                 {
                     if (!dico.ContainsKey(tag))
                     {

@@ -145,7 +145,8 @@ namespace FindIt.GUI
     public class UIScrollPanelItem : IUIFastListItem<UIScrollPanelItem.ItemData, UIButton>
     {
         private string m_baseIconName;
-        private ItemData oldData;
+        private ItemData currentData;
+        private UISprite m_steamSprite;
 
         private static UIComponent m_tooltipBox;
 
@@ -166,6 +167,7 @@ namespace FindIt.GUI
             public UIVerticalAlignment verticalAlignment;
             public object objectUserData;
             public GeneratedScrollPanel panel;
+            public Asset asset;
         }
 
         public void Init()
@@ -193,6 +195,14 @@ namespace FindIt.GUI
             {
                 uIComponent.isVisible = false;
             }
+
+            m_steamSprite = item.AddUIComponent<UISprite>();
+            m_steamSprite.size = new Vector2(26, 16);
+            m_steamSprite.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
+            m_steamSprite.spriteName = "SteamWorkshop";
+            m_steamSprite.opacity = 0.05f;
+            m_steamSprite.relativePosition = new Vector3(item.width - m_steamSprite.width - 5, item.height - m_steamSprite.height - 5);
+            m_steamSprite.isVisible = false;
         }
 
         public void Display(ItemData data, int index)
@@ -206,11 +216,11 @@ namespace FindIt.GUI
 
                 if (item == null || data == null) return;
 
-                if (oldData != null)
+                if (currentData != null)
                 {
-                    oldData.atlas = item.atlas;
+                    currentData.atlas = item.atlas;
                 }
-                oldData = data;
+                currentData = data;
 
                 item.Unfocus();
                 item.name = data.name;
@@ -277,6 +287,11 @@ namespace FindIt.GUI
 
                     RefreshTooltipAltas(item);
                 }
+
+                if (m_steamSprite != null && data.asset != null)
+                {
+                    m_steamSprite.isVisible = data.asset.steamID != 0;
+                }
             }
             catch (Exception e)
             {
@@ -301,9 +316,9 @@ namespace FindIt.GUI
             }
             catch (Exception e)
             {
-                if (oldData != null)
+                if (currentData != null)
                 {
-                    DebugUtils.Log("Select failed : " + oldData.name);
+                    DebugUtils.Log("Select failed : " + currentData.name);
                 }
                 else
                 {
@@ -322,9 +337,9 @@ namespace FindIt.GUI
             }
             catch (Exception e)
             {
-                if (oldData != null)
+                if (currentData != null)
                 {
-                    DebugUtils.Log("Deselect failed : " + oldData.name);
+                    DebugUtils.Log("Deselect failed : " + currentData.name);
                 }
                 else
                 {

@@ -106,8 +106,8 @@ namespace FindIt.GUI
                 if (asset.prefab != null)
                 {
                     UIScrollPanelItem.ItemData data = new UIScrollPanelItem.ItemData();
-                    data.name = Asset.GetLocalizedTitle(asset.prefab);
-                    data.tooltip = Asset.GetLocalizedTooltip(asset.prefab);
+                    data.name = asset.title;
+                    data.tooltip = Asset.GetLocalizedTooltip(asset.prefab, data.name);
 
                     data.atlas = asset.prefab.m_Atlas;
                     if (data.atlas == null)
@@ -121,6 +121,7 @@ namespace FindIt.GUI
                     data.enabled = ToolsModifierControl.IsUnlocked(asset.prefab.GetUnlockMilestone()) || asset.assetType == Asset.AssetType.Rico;
                     data.verticalAlignment = scrollPanel.buttonsAlignment;
                     data.objectUserData = asset.prefab;
+                    data.asset = asset;
 
                     scrollPanel.itemsData.Add(data);
 

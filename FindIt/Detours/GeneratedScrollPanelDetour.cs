@@ -129,10 +129,15 @@ namespace FindIt.Detours
                                 if (button.objectUserData is PrefabInfo)
                                 {
                                     string key = Asset.GetName(button.objectUserData as PrefabInfo);
-                                    if (AssetTagList.instance.assets.ContainsKey(key) && AssetTagList.instance.assets[key].onButtonClicked == null)
+                                    if (AssetTagList.instance.assets.ContainsKey(key))
                                     {
-                                        MethodInfo onButtonClicked = button.data.panel.GetType().GetMethod("OnButtonClicked", BindingFlags.NonPublic | BindingFlags.Instance);
-                                        AssetTagList.instance.assets[key].onButtonClicked = Delegate.CreateDelegate(typeof(Asset.OnButtonClicked), button.data.panel, onButtonClicked, false) as Asset.OnButtonClicked;
+                                        if (AssetTagList.instance.assets[key].onButtonClicked == null)
+                                        {
+                                            MethodInfo onButtonClicked = button.data.panel.GetType().GetMethod("OnButtonClicked", BindingFlags.NonPublic | BindingFlags.Instance);
+                                            AssetTagList.instance.assets[key].onButtonClicked = Delegate.CreateDelegate(typeof(Asset.OnButtonClicked), button.data.panel, onButtonClicked, false) as Asset.OnButtonClicked;
+                                        }
+
+                                        button.data.asset = AssetTagList.instance.assets[key];
                                     }
                                 }
                             }
