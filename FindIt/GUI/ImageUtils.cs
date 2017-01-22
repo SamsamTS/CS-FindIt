@@ -209,35 +209,30 @@ namespace FindIt.GUI
             UITextureAtlas.SpriteInfo sprite = prefab.m_Atlas[prefab.m_Thumbnail + "Focused"];
             if (sprite != null)
             {
-                Color[] pixels = sprite.texture.GetPixels();
-
-                float minH = 1f;
-                float maxH = 0f;
-                float minS = 1f;
+                Color32[] pixels = sprite.texture.GetPixels32();
 
                 int count = 0;
 
-                foreach (Color pixel in pixels)
+                foreach (Color32 pixel in pixels)
                 {
-                    if (pixel.a > 0.5f)
+                    if (pixel.a > 127 && (pixel.r + pixel.g + pixel.b) > 0 )
                     {
                         float h, s, v;
                         Color.RGBToHSV(pixel, out h, out s, out v);
 
-                        minH = Mathf.Min(minH, h);
-                        maxH = Mathf.Max(maxH, h);
-                        minS = Mathf.Min(minS, s);
-
-                        if (minH < 0.66f || maxH > 0.68f || minS < 0.98f)
+                        if (h < 0.66f || h > 0.68f || s < 0.98f)
                         {
                             return false;
                         }
 
-                        count++;
+                        if(++count > 32)
+                        {
+                            break;
+                        }
                     }
                 }
 
-                if (count > 0 && minH > 0.66f && maxH < 0.68f && minS > 0.98f)
+                if (count > 0)
                 {
                     ImageUtils.FixFocusedTexture(prefab.m_Atlas[prefab.m_Thumbnail].texture, sprite.texture);
                     Color32[] colors = sprite.texture.GetPixels32();

@@ -92,6 +92,7 @@ namespace SamsamTS
             dropDown.normalBgSprite = "TextFieldPanel";
             dropDown.focusedBgSprite = "TextFieldPanelHovered";
             dropDown.hoveredBgSprite = "TextFieldPanelHovered";
+            dropDown.listPosition = UIDropDown.PopupListPosition.Above;
             dropDown.listWidth = 90;
             dropDown.listHeight = 500;
             dropDown.foregroundSpriteMode = UIForegroundSpriteMode.Stretch;
@@ -128,6 +129,57 @@ namespace SamsamTS
             });
 
             return dropDown;
+        }
+
+        public static UICheckBox CreateIconToggle(UIComponent parent, string atlas, string checkedSprite, string uncheckedSprite)
+        {
+            UICheckBox checkBox = parent.AddUIComponent<UICheckBox>();
+
+            checkBox.width = 35f;
+            checkBox.height = 35f;
+            checkBox.clipChildren = true;
+
+            UIPanel panel = checkBox.AddUIComponent<UIPanel>();
+            panel.atlas = GetAtlas("Ingame");
+            panel.backgroundSprite = "IconPolicyBaseRect";
+            panel.size = checkBox.size;
+            panel.relativePosition = Vector3.zero;
+
+            checkBox.eventCheckChanged += (c, b) =>
+            {
+                if (checkBox.isChecked)
+                    panel.backgroundSprite = "IconPolicyBaseRect";
+                else
+                    panel.backgroundSprite = "IconPolicyBaseRectDisabled";
+                panel.Invalidate();
+            };
+
+            checkBox.eventMouseEnter += (c, p) =>
+            {
+                panel.backgroundSprite = "IconPolicyBaseRectHovered";
+            };
+
+            checkBox.eventMouseLeave += (c, p) =>
+            {
+                if (checkBox.isChecked)
+                    panel.backgroundSprite = "IconPolicyBaseRect";
+                else
+                    panel.backgroundSprite = "IconPolicyBaseRectDisabled";
+            };
+
+            UISprite sprite = panel.AddUIComponent<UISprite>();
+            sprite.atlas = GetAtlas(atlas);
+            sprite.spriteName = uncheckedSprite;
+            sprite.size = checkBox.size;
+            sprite.relativePosition = Vector3.zero;
+
+            checkBox.checkedBoxObject = sprite.AddUIComponent<UISprite>();
+            ((UISprite)checkBox.checkedBoxObject).atlas = sprite.atlas;
+            ((UISprite)checkBox.checkedBoxObject).spriteName = checkedSprite;
+            checkBox.checkedBoxObject.size = checkBox.size;
+            checkBox.checkedBoxObject.relativePosition = Vector3.zero;
+
+            return checkBox;
         }
 
         private static UIColorField _colorFIeldTemplate;
@@ -182,7 +234,7 @@ namespace SamsamTS
 
         public static UITextureAtlas GetAtlas(string name)
         {
-            if (_atlases == null)
+            if (_atlases == null || !_atlases.ContainsKey(name))
             {
                 _atlases = new Dictionary<string, UITextureAtlas>();
 

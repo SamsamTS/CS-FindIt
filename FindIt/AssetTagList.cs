@@ -13,6 +13,8 @@ using ColossalFramework.Globalization;
 using ColossalFramework.PlatformServices;
 using ColossalFramework.Packaging;
 
+using FindIt.GUI;
+
 namespace FindIt
 {
     public class Asset
@@ -27,7 +29,8 @@ namespace FindIt
         public enum AssetType
         {
             All,
-            Building,
+            Ploppable,
+            Growable,
             Rico,
             Prop,
             Decal,
@@ -54,17 +57,26 @@ namespace FindIt
                         BuildingInfo buildingPrefab = m_prefab as BuildingInfo;
                         if (buildingPrefab != null)
                         {
-                            assetType = AssetType.Building;
-                            size = new Vector2(buildingPrefab.m_cellWidth, buildingPrefab.m_cellLength);
-
-                            if (buildingPrefab.m_placementStyle == ItemClass.Placement.Manual && (
-                                service == ItemClass.Service.Residential ||
-                                service == ItemClass.Service.Industrial ||
-                                service == ItemClass.Service.Commercial ||
-                                service == ItemClass.Service.Office))
+                            if (buildingPrefab.m_placementStyle != ItemClass.Placement.Manual)
                             {
-                                assetType = AssetType.Rico;
+                                assetType = AssetType.Growable;
                             }
+                            else
+                            {
+                                if (service == ItemClass.Service.Residential ||
+                                    service == ItemClass.Service.Industrial ||
+                                    service == ItemClass.Service.Commercial ||
+                                    service == ItemClass.Service.Office)
+                                {
+                                    assetType = AssetType.Rico;
+                                }
+                                else
+                                {
+                                    assetType = AssetType.Ploppable;
+                                }
+                            }
+                                
+                            size = new Vector2(buildingPrefab.m_cellWidth, buildingPrefab.m_cellLength);
 
                             return;
                         }
@@ -168,8 +180,6 @@ namespace FindIt
             name = Regex.Replace(name, @"\s+", " ");
 
             name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name).Trim();
-
-            DebugUtils.Log(prefab.name + " => " + name);
 
             return name;
         }
@@ -289,6 +299,36 @@ namespace FindIt
                 {
                     if (asset.prefab != null && (filter == Asset.AssetType.All || asset.assetType == filter))
                     {
+                        if (filter == Asset.AssetType.Growable || filter == Asset.AssetType.Rico)
+                        {
+                            BuildingInfo buildingInfo = asset.prefab as BuildingInfo;
+
+                            // Level
+                            ItemClass.Level level = UISearchBox.instance.buildingLevel;
+                            if (level != ItemClass.Level.None && buildingInfo.m_class.m_level != level) continue;
+
+                            // size
+                            Vector2 buildingSize = UISearchBox.instance.buildingSize;
+                            if (buildingSize != Vector2.zero && asset.size != buildingSize) continue;
+
+                            // zone
+                            if (!UIFilterGrowable.instance.IsAllSelected())
+                            {
+                                UIFilterGrowable.Category category = UIFilterGrowable.GetCategory(buildingInfo.m_class);
+                                if (category == UIFilterGrowable.Category.None || !UIFilterGrowable.instance.IsSelected(category)) continue;
+                            }
+                        }
+                        else if (filter == Asset.AssetType.Ploppable)
+                        {
+                            BuildingInfo buildingInfo = asset.prefab as BuildingInfo;
+
+                            if (!UIFilterPloppable.instance.IsAllSelected())
+                            {
+                                UIFilterPloppable.Category category = UIFilterPloppable.GetCategory(buildingInfo.m_class);
+                                if (category == UIFilterPloppable.Category.None || !UIFilterPloppable.instance.IsSelected(category)) continue;
+                            }
+                        }
+
                         foreach (string keyword in keywords)
                         {
                             if (!keyword.IsNullOrWhiteSpace())
@@ -297,7 +337,7 @@ namespace FindIt
 
                                 if (!asset.author.IsNullOrWhiteSpace())
                                 {
-                                    score += 10 * GetScore(keyword, asset.author, null);
+                                    score += 10 * GetScore(keyword, asset.author.ToLower(), null);
                                 }
 
                                 if (filter == Asset.AssetType.All && asset.assetType != (Asset.AssetType)(-1))
@@ -356,6 +396,36 @@ namespace FindIt
                 {
                     if (asset.prefab != null && (filter == Asset.AssetType.All || asset.assetType == filter))
                     {
+                        if (filter == Asset.AssetType.Growable || filter == Asset.AssetType.Rico)
+                        {
+                            BuildingInfo buildingInfo = asset.prefab as BuildingInfo;
+
+                            // Level
+                            ItemClass.Level level = UISearchBox.instance.buildingLevel;
+                            if (level != ItemClass.Level.None && buildingInfo.m_class.m_level != level) continue;
+
+                            // size
+                            Vector2 buildingSize = UISearchBox.instance.buildingSize;
+                            if (buildingSize != Vector2.zero && asset.size != buildingSize) continue;
+
+                            // zone
+                            if (!UIFilterGrowable.instance.IsAllSelected())
+                            {
+                                UIFilterGrowable.Category category = UIFilterGrowable.GetCategory(buildingInfo.m_class);
+                                if (category == UIFilterGrowable.Category.None || !UIFilterGrowable.instance.IsSelected(category)) continue;
+                            }
+                        }
+                        else if (filter == Asset.AssetType.Ploppable)
+                        {
+                            BuildingInfo buildingInfo = asset.prefab as BuildingInfo;
+
+                            if (!UIFilterPloppable.instance.IsAllSelected())
+                            {
+                                UIFilterPloppable.Category category = UIFilterPloppable.GetCategory(buildingInfo.m_class);
+                                if (category == UIFilterPloppable.Category.None || !UIFilterPloppable.instance.IsSelected(category)) continue;
+                            }
+                        }
+
                         matches.Add(asset);
                     }
                 }
@@ -462,23 +532,26 @@ namespace FindIt
 
                 if (prefab == null) continue;
 
-                BuildingInfo buildingPrefab = prefab as BuildingInfo;
-                if(buildingPrefab != null)
+                if (FindIt.inEditor)
                 {
-                    if (buildingPrefab.m_placementStyle == ItemClass.Placement.Procedural && buildingPrefab.m_buildingAI.GetType() != typeof(BuildingAI))
+                    BuildingInfo buildingPrefab = prefab as BuildingInfo;
+                    if (buildingPrefab != null)
                     {
-                        filtered += prefab.name + ", ";
-                        continue;
+                        if (buildingPrefab.m_placementStyle == ItemClass.Placement.Procedural && buildingPrefab.m_buildingAI.GetType() != typeof(BuildingAI))
+                        {
+                            filtered += prefab.name + ", ";
+                            continue;
+                        }
                     }
-                }
 
-                PropInfo propPrefab = prefab as PropInfo;
-                if (propPrefab != null)
-                {
-                    if (propPrefab.m_requireWaterMap)
+                    PropInfo propPrefab = prefab as PropInfo;
+                    if (propPrefab != null)
                     {
-                        filtered += prefab.name + ", ";
-                        continue;
+                        if (propPrefab.m_requireWaterMap)
+                        {
+                            filtered += prefab.name + ", ";
+                            continue;
+                        }
                     }
                 }
 

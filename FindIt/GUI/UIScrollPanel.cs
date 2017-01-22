@@ -2,6 +2,7 @@
 using UnityEngine;
 
 using ColossalFramework;
+using ColossalFramework.PlatformServices;
 using ColossalFramework.UI;
 
 namespace FindIt.GUI
@@ -144,7 +145,6 @@ namespace FindIt.GUI
 
     public class UIScrollPanelItem : IUIFastListItem<UIScrollPanelItem.ItemData, UIButton>
     {
-        private string m_baseIconName;
         private ItemData currentData;
         private UISprite m_steamSprite;
 
@@ -201,8 +201,14 @@ namespace FindIt.GUI
             m_steamSprite.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             m_steamSprite.spriteName = "SteamWorkshop";
             m_steamSprite.opacity = 0.05f;
+            m_steamSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
             m_steamSprite.relativePosition = new Vector3(item.width - m_steamSprite.width - 5, item.height - m_steamSprite.height - 5);
             m_steamSprite.isVisible = false;
+
+            if(PlatformService.IsOverlayEnabled())
+            {
+                m_steamSprite.eventMouseUp += OnTooltipClicked;
+            }
         }
 
         public void Display(ItemData data, int index)
@@ -251,7 +257,6 @@ namespace FindIt.GUI
                     }
                 }
 
-                m_baseIconName = data.baseIconName;
                 if (data.atlas != null)
                 {
                     item.atlas = data.atlas;
@@ -259,10 +264,10 @@ namespace FindIt.GUI
 
                 item.verticalAlignment = data.verticalAlignment;
 
-                item.normalFgSprite = m_baseIconName;
-                item.hoveredFgSprite = m_baseIconName + "Hovered";
-                item.pressedFgSprite = m_baseIconName + "Pressed";
-                item.disabledFgSprite = m_baseIconName + "Disabled";
+                item.normalFgSprite = data.baseIconName;
+                item.hoveredFgSprite = data.baseIconName + "Hovered";
+                item.pressedFgSprite = data.baseIconName + "Pressed";
+                item.disabledFgSprite = data.baseIconName + "Disabled";
                 item.focusedFgSprite = null;
 
                 item.isEnabled = data.enabled || FindIt.unlockAll.value;
@@ -288,9 +293,31 @@ namespace FindIt.GUI
                     RefreshTooltipAltas(item);
                 }
 
-                if (m_steamSprite != null && data.asset != null)
+                if (m_steamSprite != null)
                 {
-                    m_steamSprite.isVisible = data.asset.steamID != 0;
+                    m_steamSprite.tooltip = null;
+
+                    if (data.asset != null)
+                    {
+                        m_steamSprite.isVisible = data.asset.steamID != 0;
+                        if (!data.asset.author.IsNullOrWhiteSpace())
+                        {
+                            m_steamSprite.tooltip = "By " + data.asset.author;
+                        }
+                    }
+
+                    if (m_steamSprite.containsMouse)
+                    {
+                        m_steamSprite.tooltipBox.isVisible = m_steamSprite.tooltip != null;
+                    }
+
+                    m_steamSprite.isVisible = m_steamSprite.tooltip != null;
+
+                    if (m_steamSprite.containsMouse)
+                    {
+                        m_steamSprite.RefreshTooltip();
+                        m_steamSprite.tooltipBox.isVisible = m_steamSprite.tooltip != null;
+                    }
                 }
             }
             catch (Exception e)
@@ -311,8 +338,13 @@ namespace FindIt.GUI
         {
             try
             {
-                item.normalFgSprite = m_baseIconName + "Focused";
-                item.hoveredFgSprite = m_baseIconName + "Focused";
+                if (FindIt.thumbnailFixRunning && currentData != null && currentData.asset != null && currentData.asset.prefab != null)
+                {
+                    ImageUtils.FixFocusedTexture(currentData.asset.prefab);
+                }
+
+                item.normalFgSprite = currentData.baseIconName + "Focused";
+                item.hoveredFgSprite = currentData.baseIconName + "Focused";
             }
             catch (Exception e)
             {
@@ -332,8 +364,8 @@ namespace FindIt.GUI
         {
             try
             {
-                item.normalFgSprite = m_baseIconName;
-                item.hoveredFgSprite = m_baseIconName + "Hovered";
+                item.normalFgSprite = currentData.baseIconName;
+                item.hoveredFgSprite = currentData.baseIconName + "Hovered";
             }
             catch (Exception e)
             {
@@ -346,6 +378,20 @@ namespace FindIt.GUI
                     DebugUtils.Log("Deselect failed");
                 }
                 DebugUtils.LogException(e);
+            }
+        }
+
+        private void OnTooltipClicked(UIComponent c, UIMouseEventParameter p)
+        {
+            if (!p.used && p.buttons == UIMouseButton.Right && currentData != null && currentData.asset != null)
+            {
+                PublishedFileId publishedFileId = new PublishedFileId(currentData.asset.steamID);
+
+                if (publishedFileId != PublishedFileId.invalid)
+                {
+                    PlatformService.ActivateGameOverlayToWorkshopItem(publishedFileId);
+                    p.Use();
+                }
             }
         }
 

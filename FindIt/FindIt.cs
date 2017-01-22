@@ -5,6 +5,7 @@ using System;
 using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 using ColossalFramework;
 using ColossalFramework.UI;
@@ -21,12 +22,16 @@ namespace FindIt
 
         public static FindIt instance;
         public static SavedBool unlockAll = new SavedBool("unlockAll", settingsFileName, false, true);
+        public static UITextureAtlas atlas;
+        public static bool inEditor = false;
+        public static bool thumbnailFixRunning = false;
 
         public static AssetTagList list;
 
-        public UIButton m_mainButton;
+        public UIButton mainButton;
+        public UISearchBox searchBox;
+
         private UIGroupPanel m_groupPanel;
-        private UISearchBox searchBox;
 
         public void Start()
         {
@@ -42,20 +47,21 @@ namespace FindIt
                 list.Init();
 
                 StartCoroutine("FixFocusedThumbnails");
+                LoadResources();
 
                 UITabstrip tabstrip = ToolsModifierControl.mainToolbar.GetComponentInChildren<UITabstrip>();
 
                 GameObject asGameObject = UITemplateManager.GetAsGameObject("MainToolbarButtonTemplate");
                 GameObject asGameObject2 = UITemplateManager.GetAsGameObject("ScrollableSubPanelTemplate");
 
-                m_mainButton = tabstrip.AddTab("FindItMainButton", asGameObject, asGameObject2, new Type[] { typeof(UIGroupPanel) }) as UIButton;
-                m_mainButton.atlas = LoadResources();
+                mainButton = tabstrip.AddTab("FindItMainButton", asGameObject, asGameObject2, new Type[] { typeof(UIGroupPanel) }) as UIButton;
+                mainButton.atlas = atlas;
 
                 Locale locale = (Locale)typeof(LocaleManager).GetField("m_Locale", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(LocaleManager.instance);
                 Locale.Key key = new Locale.Key
                 {
                     m_Identifier = "TUTORIAL_ADVISER_TITLE",
-                    m_Key = m_mainButton.name
+                    m_Key = mainButton.name
                 };
                 if (!locale.Exists(key))
                 {
@@ -64,7 +70,7 @@ namespace FindIt
                 key = new Locale.Key
                 {
                     m_Identifier = "TUTORIAL_ADVISER",
-                    m_Key = m_mainButton.name
+                    m_Key = mainButton.name
                 };
                 if (!locale.Exists(key))
                 {
@@ -74,8 +80,8 @@ namespace FindIt
                 FieldInfo m_ObjectIndex = typeof(MainToolbar).GetField("m_ObjectIndex", BindingFlags.Instance | BindingFlags.NonPublic);
                 m_ObjectIndex.SetValue(ToolsModifierControl.mainToolbar, (int)m_ObjectIndex.GetValue(ToolsModifierControl.mainToolbar) + 1);
 
-                m_mainButton.gameObject.GetComponent<TutorialUITag>().tutorialTag = name;
-                m_groupPanel = tabstrip.GetComponentInContainer(m_mainButton, typeof(UIGroupPanel)) as UIGroupPanel;
+                mainButton.gameObject.GetComponent<TutorialUITag>().tutorialTag = name;
+                m_groupPanel = tabstrip.GetComponentInContainer(mainButton, typeof(UIGroupPanel)) as UIGroupPanel;
 
                 if (m_groupPanel != null)
                 {
@@ -106,23 +112,23 @@ namespace FindIt
 
                     searchBox = scrollPanel.parent.AddUIComponent<UISearchBox>();
                     searchBox.scrollPanel = scrollPanel;
-                    searchBox.relativePosition = new Vector3(5, -40);
+                    searchBox.relativePosition = new Vector3(0, -45);
                     searchBox.Search();
                 }
 
-                m_mainButton.normalBgSprite = "ToolbarIconGroup6Normal";
-                m_mainButton.focusedBgSprite = "ToolbarIconGroup6Focused";
-                m_mainButton.hoveredBgSprite = "ToolbarIconGroup6Hovered";
-                m_mainButton.pressedBgSprite = "ToolbarIconGroup6ressed";
-                m_mainButton.disabledBgSprite = "ToolbarIconGroup6Disabled";
+                mainButton.normalBgSprite = "ToolbarIconGroup6Normal";
+                mainButton.focusedBgSprite = "ToolbarIconGroup6Focused";
+                mainButton.hoveredBgSprite = "ToolbarIconGroup6Hovered";
+                mainButton.pressedBgSprite = "ToolbarIconGroup6ressed";
+                mainButton.disabledBgSprite = "ToolbarIconGroup6Disabled";
 
-                m_mainButton.normalFgSprite = "FindIt";
-                m_mainButton.focusedFgSprite = "FindItFocused";
-                m_mainButton.hoveredFgSprite = "FindItHovered";
-                m_mainButton.pressedFgSprite = "FindItPressed";
-                m_mainButton.disabledFgSprite = "FindItDisabled";
+                mainButton.normalFgSprite = "FindIt";
+                mainButton.focusedFgSprite = "FindItFocused";
+                mainButton.hoveredFgSprite = "FindItHovered";
+                mainButton.pressedFgSprite = "FindItPressed";
+                mainButton.disabledFgSprite = "FindItDisabled";
 
-                m_mainButton.tooltip = "Find It! " + ModInfo.version;
+                mainButton.tooltip = "Find It! " + ModInfo.version;
 
                 DebugUtils.Log("Initialized");
             }
@@ -136,22 +142,32 @@ namespace FindIt
 
         private IEnumerator FixFocusedThumbnails()
         {
-            //HashSet<UITextureAtlas> refreshList = new HashSet<UITextureAtlas>();
+            DebugUtils.Log("FixFocusedThumbnails started");
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            thumbnailFixRunning = true;
+            int fixedCount = 0;
+
+            Stopwatch stopWatch2 = new Stopwatch();
+            stopWatch2.Start();
 
             foreach (Asset asset in list.assets.Values)
             {
-                if (ImageUtils.FixFocusedTexture(asset.prefab))
+                if(ImageUtils.FixFocusedTexture(asset.prefab))
                 {
-                    //refreshList.Add(asset.prefab.m_Atlas);
+                    fixedCount++;
                 }
-                yield return null;
-            }
 
-            /*foreach (UITextureAtlas atlas in refreshList)
-            {
-                ImageUtils.RefreshAtlas(atlas);
-                yield return null;
-            }*/
+                if (stopWatch2.ElapsedMilliseconds > 3)
+                {
+                    yield return null;
+                    stopWatch2.Reset();
+                    stopWatch2.Start();
+                }
+            }
+            thumbnailFixRunning = false;
+            stopWatch.Stop();
+            DebugUtils.Log("FixFocusedThumbnails ended. Fixed " + fixedCount + " thumbnails in " + (stopWatch.ElapsedMilliseconds / 1000) + "s");
         }
 
         public void OnButtonClicked(UIComponent c, UIMouseEventParameter p)
@@ -215,7 +231,7 @@ namespace FindIt
                     {
                         if (!searchBox.isVisible)
                         {
-                            m_mainButton.SimulateClick();
+                            mainButton.SimulateClick();
                         }
                         searchBox.searchButton.SimulateClick();
                     }
@@ -228,31 +244,36 @@ namespace FindIt
             }
         }
 
-        private UITextureAtlas LoadResources()
+        public static void LoadResources()
         {
-            string[] spriteNames = new string[]
-			{
-				"FindIt",
-				"FindItDisabled",
-				"FindItFocused",
-				"FindItHovered",
-				"FindItPressed"
-			};
-
-            UITextureAtlas atlas = ResourceLoader.CreateTextureAtlas("FindIt", spriteNames, "FindIt.Icons.");
-
-            UITextureAtlas defaultAtlas = ResourceLoader.GetAtlas("Ingame");
-            Texture2D[] textures = new Texture2D[]
+            if (atlas == null)
             {
-                defaultAtlas["ToolbarIconGroup6Focused"].texture,
-                defaultAtlas["ToolbarIconGroup6Hovered"].texture,
-                defaultAtlas["ToolbarIconGroup6Normal"].texture,
-                defaultAtlas["ToolbarIconGroup6Pressed"].texture
-            };
+                string[] spriteNames = new string[]
+			    {
+				    "FindIt",
+				    "FindItDisabled",
+				    "FindItFocused",
+				    "FindItHovered",
+				    "FindItPressed",
+				    "IconPolicyLeisureDisabled",
+				    "IconPolicyTouristDisabled"
+			    };
 
-            ResourceLoader.AddTexturesInAtlas(atlas, textures);
+                atlas = ResourceLoader.CreateTextureAtlas("FindItAtlas", spriteNames, "FindIt.Icons.");
 
-            return atlas;
+                UITextureAtlas defaultAtlas = ResourceLoader.GetAtlas("Ingame");
+                Texture2D[] textures = new Texture2D[]
+                {
+                    defaultAtlas["ToolbarIconGroup6Focused"].texture,
+                    defaultAtlas["ToolbarIconGroup6Hovered"].texture,
+                    defaultAtlas["ToolbarIconGroup6Normal"].texture,
+                    defaultAtlas["ToolbarIconGroup6Pressed"].texture,
+                    defaultAtlas["IconPolicyLeisure"].texture,
+                    defaultAtlas["IconPolicyTourist"].texture
+                };
+
+                ResourceLoader.AddTexturesInAtlas(atlas, textures);
+            }
         }
     }
 
@@ -277,6 +298,8 @@ namespace FindIt
             //if (mode == LoadMode.LoadGame || mode == LoadMode.NewGame || mode == LoadMode.NewGameFromScenario)
             //if (mode != LoadMode.NewAsset && mode != LoadMode.LoadAsset)
             {
+                FindIt.inEditor = false;
+
                 if (FindIt.instance == null)
                 {
                     // Creating the instance
@@ -286,6 +309,27 @@ namespace FindIt
                 {
                     FindIt.instance.Start();
                 }
+            }
+            else if (mode == LoadMode.NewAsset || mode == LoadMode.LoadAsset)
+            {
+                FindIt.inEditor = true;
+
+                ToolsModifierControl.toolController.eventEditPrefabChanged += (p) =>
+                {
+                    DebugUtils.Log("eventEditPrefabChanged");
+                    SimulationManager.instance.AddAction(() =>
+                    {
+                        if (FindIt.instance == null)
+                        {
+                            // Creating the instance
+                            FindIt.instance = new GameObject("FindIt").AddComponent<FindIt>();
+                        }
+                        else
+                        {
+                            FindIt.instance.Start();
+                        }
+                    });
+                };
             }
         }
     }
