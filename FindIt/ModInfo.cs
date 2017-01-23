@@ -64,6 +64,6 @@ namespace FindIt
             }
         }
 
-        public const string version = "1.4.0";
+        public const string version = "1.4.1";
     }
 }
