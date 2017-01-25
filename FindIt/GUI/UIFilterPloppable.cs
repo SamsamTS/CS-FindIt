@@ -28,7 +28,6 @@ namespace FindIt.GUI
 
         public UICheckBox[] toggles;
         public UIButton all;
-        public UIButton none;
 
         public static Category GetCategory(ItemClass itemClass)
         {
@@ -79,7 +78,7 @@ namespace FindIt.GUI
             for (int i = 0; i < (int)Category.All; i++)
             {
                 toggles[i] = SamsamTS.UIUtils.CreateIconToggle(this, "Ingame", "ToolbarIcon" + ((Category)i), "ToolbarIcon" + ((Category)i) + "Disabled");
-                toggles[i].tooltip = Locale.Get("MAIN_TOOL", ((Category)i).ToString());
+                toggles[i].tooltip = Locale.Get("MAIN_TOOL", ((Category)i).ToString()) + "\nHold SHIFT or CTRL to select multiple categories";
                 toggles[i].relativePosition = new Vector3(5 + 40 * i, 5);
                 toggles[i].isChecked = true;
                 toggles[i].readOnly = true;
@@ -87,17 +86,21 @@ namespace FindIt.GUI
 
                 toggles[i].eventClick += (c, p) =>
                 {
-                    ((UICheckBox)c).isChecked = !((UICheckBox)c).isChecked;
-                    eventFilteringChanged(this, 0);
-                };
+                    Event e = Event.current;
 
-                toggles[i].eventDoubleClick += (c, p) =>
-                {
-                    for (int j = 0; j < (int)Category.All; j++)
-                        toggles[j].isChecked = false;
-                    ((UICheckBox)c).isChecked = true;
+                    if (e.shift || e.control)
+                    {
+                        ((UICheckBox)c).isChecked = !((UICheckBox)c).isChecked;
+                        eventFilteringChanged(this, 0);
+                    }
+                    else
+                    {
+                        for (int j = 0; j < (int)Category.All; j++)
+                            toggles[j].isChecked = false;
+                        ((UICheckBox)c).isChecked = true;
 
-                    eventFilteringChanged(this, 0);
+                        eventFilteringChanged(this, 0);
+                    }
                 };
             }
 
@@ -113,20 +116,6 @@ namespace FindIt.GUI
                 for (int i = 0; i < (int)Category.All; i++)
                 {
                     toggles[i].isChecked = true;
-                }
-                eventFilteringChanged(this, 0);
-            };
-
-            none = SamsamTS.UIUtils.CreateButton(this);
-            none.size = new Vector2(55, 35);
-            none.text = "None";
-            none.relativePosition = new Vector3(all.relativePosition.x + all.width + 5, 5);
-
-            none.eventClick += (c, p) =>
-            {
-                for (int i = 0; i < (int)Category.All; i++)
-                {
-                    toggles[i].isChecked = false;
                 }
                 eventFilteringChanged(this, 0);
             };

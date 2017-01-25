@@ -57,11 +57,22 @@ namespace FindIt.GUI
             input.padding.top = 7;
             input.relativePosition = new Vector3(5, 5);
 
-            input.eventTextChanged += (c, p) => Search();
+            string search = null;
+            input.eventTextChanged += (c, p) =>
+            {
+                search = p;
+                Search();
+            };
+
+            input.eventTextCancelled += (c, p) =>
+            {
+                input.text = search;
+            };
 
             searchButton = inputPanel.AddUIComponent<UIButton>();
             searchButton.size = new Vector2(43, 49);
             searchButton.atlas = FindIt.instance.mainButton.atlas;
+            searchButton.playAudioEvents = true;
             searchButton.normalFgSprite = "FindIt";
             searchButton.hoveredFgSprite = "FindItFocused";
             searchButton.pressedFgSprite = "FindItPressed";

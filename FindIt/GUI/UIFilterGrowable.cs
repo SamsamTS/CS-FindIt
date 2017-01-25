@@ -14,8 +14,8 @@ namespace FindIt.GUI
             ResidentialHigh,
             CommercialLow,
             CommercialHigh,
-            Industrial,
             Office,
+            Industrial,
             Farming,
             Forestry,
             Oil,
@@ -78,7 +78,6 @@ namespace FindIt.GUI
 
         public UICheckBox[] toggles;
         public UIButton all;
-        public UIButton none;
 
         public static Category GetCategory(ItemClass itemClass)
         {
@@ -105,20 +104,15 @@ namespace FindIt.GUI
 
         public bool IsAllSelected()
         {
-            return toggles[(int)Category.ResidentialLow].isChecked &&
-                toggles[(int)Category.ResidentialHigh].isChecked &&
-                toggles[(int)Category.CommercialLow].isChecked &&
-                toggles[(int)Category.CommercialHigh].isChecked &&
-                toggles[(int)Category.CommercialLeisure].isChecked &&
-                toggles[(int)Category.CommercialTourism].isChecked &&
-                toggles[(int)Category.Industrial].isChecked &&
-                toggles[(int)Category.Farming].isChecked &&
-                toggles[(int)Category.Forestry].isChecked &&
-                toggles[(int)Category.Oil].isChecked &&
-                toggles[(int)Category.Ore].isChecked &&
-                toggles[(int)Category.Office].isChecked;
+            for (int i = 0; i < (int)Category.All; i++)
+            {
+                if (!toggles[i].isChecked)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
-
 
         public event PropertyChangedEventHandler<int> eventFilteringChanged;
 
@@ -135,25 +129,29 @@ namespace FindIt.GUI
             for (int i = 0; i < (int)Category.All; i++)
             {
                 toggles[i] = SamsamTS.UIUtils.CreateIconToggle(this, CategoryIcons.atlases[i], CategoryIcons.spriteNames[i], CategoryIcons.spriteNames[i] + "Disabled");
-                toggles[i].tooltip = CategoryIcons.tooltips[i];
+                toggles[i].tooltip = CategoryIcons.tooltips[i] + "\nHold SHIFT or CTRL to select multiple categories";
                 toggles[i].relativePosition = new Vector3(5 + 40 * i, 5);
                 toggles[i].isChecked = true;
                 toggles[i].readOnly = true;
-                toggles[i].checkedBoxObject.isInteractive = false; // Don't eat my double click event please
+                toggles[i].checkedBoxObject.isInteractive = false;
 
                 toggles[i].eventClick += (c, p) =>
                 {
-                    ((UICheckBox)c).isChecked = !((UICheckBox)c).isChecked;
-                    eventFilteringChanged(this, 0);
-                };
+                    Event e = Event.current;
 
-                toggles[i].eventDoubleClick += (c, p) =>
-                {
-                    for (int j = 0; j < (int)Category.All; j++)
-                        toggles[j].isChecked = false;
-                    ((UICheckBox)c).isChecked = true;
+                    if (e.shift || e.control)
+                    {
+                        ((UICheckBox)c).isChecked = !((UICheckBox)c).isChecked;
+                        eventFilteringChanged(this, 0);
+                    }
+                    else
+                    {
+                        for (int j = 0; j < (int)Category.All; j++)
+                            toggles[j].isChecked = false;
+                        ((UICheckBox)c).isChecked = true;
 
-                    eventFilteringChanged(this, 0);
+                        eventFilteringChanged(this, 0);
+                    }
                 };
             }
 
@@ -169,20 +167,6 @@ namespace FindIt.GUI
                 for (int i = 0; i < (int)Category.All; i++)
                 {
                     toggles[i].isChecked = true;
-                }
-                eventFilteringChanged(this, 0);
-            };
-
-            none = SamsamTS.UIUtils.CreateButton(this);
-            none.size = new Vector2(55, 35);
-            none.text = "None";
-            none.relativePosition = new Vector3(all.relativePosition.x + all.width + 5, 5);
-
-            none.eventClick += (c, p) =>
-            {
-                for (int i = 0; i < (int)Category.All; i++)
-                {
-                    toggles[i].isChecked = false;
                 }
                 eventFilteringChanged(this, 0);
             };

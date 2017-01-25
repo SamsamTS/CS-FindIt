@@ -209,11 +209,12 @@ namespace FindIt.GUI
 
                 if (newItemId >= 0 && newItemId == m_selectedId && !m_updateContent) return;
 
-                if (m_selectedId >= 0)
+                if (m_selectedId >= 0 && m_selectedId < m_items.m_size)
                 {
                     m_items.m_buffer[m_selectedId].Deselect(oldId);
-                    m_selectedId = -1;
                 }
+
+                m_selectedId = -1;
 
                 if (newItemId >= 0)
                 {
@@ -564,6 +565,7 @@ namespace FindIt.GUI
 
             CheckItems();
             DisplayAt(0);
+            selectedIndex = selectedIndex;
         }
 
         protected override void OnMouseWheel(UIMouseEventParameter p)
