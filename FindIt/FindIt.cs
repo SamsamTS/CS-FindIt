@@ -22,6 +22,7 @@ namespace FindIt
 
         public static FindIt instance;
         public static SavedBool unlockAll = new SavedBool("unlockAll", settingsFileName, false, true);
+        public static bool fixBadProps;
         public static UITextureAtlas atlas;
         public static bool inEditor = false;
         public static bool thumbnailFixRunning = false;
@@ -244,6 +245,37 @@ namespace FindIt
             }
         }
 
+        public static void FixBadProps()
+        {
+            PropInstance[] buffer = PropManager.instance.m_props.m_buffer;
+            uint size = PropManager.instance.m_props.m_size;
+
+            string log = "";
+
+            for (uint i = 0; i < size; i++)
+            {
+                try
+                {
+                    if (buffer[i].m_flags != 0)
+                    {
+                        PropInfo info = buffer[i].Info;
+
+                        if(info == null) continue;
+
+                        if (info.m_requireWaterMap && info.m_lodWaterHeightMap == null)
+                        {
+                            PropManager.instance.ReleaseProp((ushort)i);
+                            log += "Removed " + info.name + "\n";
+                        }
+                    }
+                }
+                catch
+                { }
+            }
+            
+            if(log != "") DebugUtils.Log(log);
+        }
+
         public static void LoadResources()
         {
             if (atlas == null)
@@ -294,6 +326,14 @@ namespace FindIt
 
         public override void OnLevelLoaded(LoadMode mode)
         {
+            if(FindIt.fixBadProps)
+            {
+                DebugUtils.Log("Fixing bad props");
+                FindIt.FixBadProps();
+                FindIt.fixBadProps = false;
+                DebugUtils.Log("Bad props fixed");
+            }
+
             if ((ToolManager.instance.m_properties.m_mode & ItemClass.Availability.GameAndMap) != ItemClass.Availability.None)
             //if (mode == LoadMode.LoadGame || mode == LoadMode.NewGame || mode == LoadMode.NewGameFromScenario)
             //if (mode != LoadMode.NewAsset && mode != LoadMode.LoadAsset)

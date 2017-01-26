@@ -525,8 +525,6 @@ namespace FindIt
 
         private void GetPrefabs<T>() where T : PrefabInfo
         {
-            Shader floatingShader = Shader.Find("Custom/Props/Prop/Floating");
-
             string filtered = "";
             for (uint i = 0; i < PrefabCollection<T>.PrefabCount(); i++)
             {
@@ -549,8 +547,7 @@ namespace FindIt
                     PropInfo propPrefab = prefab as PropInfo;
                     if (propPrefab != null)
                     {
-                        if (propPrefab.m_material.shader == floatingShader)
-                        //if (propPrefab.m_requireWaterMap)
+                        if (propPrefab.m_requireWaterMap && propPrefab.m_lodWaterHeightMap == null)
                         {
                             filtered += prefab.name + ", ";
                             continue;

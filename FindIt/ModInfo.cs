@@ -53,6 +53,12 @@ namespace FindIt
                 });
                 checkBox.tooltip = "Let you select and place items even when locked";
 
+                UICheckBox fixProps = (UICheckBox)group.AddCheckbox("Fix bad props next loaded save", false, (b) =>
+                {
+                    FindIt.fixBadProps = b;
+                });
+                fixProps.tooltip = "Remove all props causing issue\nCheck the option and load your save";
+
                 panel.gameObject.AddComponent<OptionsKeymapping>();
 
                 group.AddSpace(10);
@@ -64,6 +70,6 @@ namespace FindIt
             }
         }
 
-        public const string version = "1.4.2";
+        public const string version = "1.4.3";
     }
 }
