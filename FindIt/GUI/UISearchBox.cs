@@ -188,13 +188,13 @@ namespace FindIt.GUI
 
             filterPloppable = AddUIComponent<UIFilterPloppable>();
             filterPloppable.isVisible = false;
-            filterPloppable.relativePosition = new Vector3(5, 0);
+            filterPloppable.relativePosition = new Vector3(5, -45);
 
             filterPloppable.eventFilteringChanged += (c,p) => Search();
 
             filterGrowable = AddUIComponent<UIFilterGrowable>();
             filterGrowable.isVisible = false;
-            filterGrowable.relativePosition = new Vector3(5, 0);
+            filterGrowable.relativePosition = new Vector3(5, -45);
 
             filterGrowable.eventFilteringChanged += (c, p) => Search();
 
@@ -263,15 +263,17 @@ namespace FindIt.GUI
 
         public void ShowFilterPanel(UIPanel panel)
         {
-            inputPanel.relativePosition = new Vector3(inputPanel.relativePosition.x, panel.relativePosition.y - inputPanel.height);
-            filterPanel.relativePosition = new Vector3(filterPanel.relativePosition.x, panel.relativePosition.y - filterPanel.height);
+            inputPanel.relativePosition = new Vector2(inputPanel.relativePosition.x, -inputPanel.height - 45);
+            filterPanel.relativePosition = new Vector2(filterPanel.relativePosition.x, -filterPanel.height - 45);
+
             panel.isVisible = true;
         }
 
         public void HideFilterPanel(UIPanel panel)
         {
-            inputPanel.relativePosition = new Vector3(inputPanel.relativePosition.x, panel.relativePosition.y + panel.height - inputPanel.height);
-            filterPanel.relativePosition = new Vector3(filterPanel.relativePosition.x, panel.relativePosition.y + panel.height - filterPanel.height);
+            inputPanel.relativePosition = new Vector2(inputPanel.relativePosition.x, -inputPanel.height);
+            filterPanel.relativePosition = new Vector2(filterPanel.relativePosition.x, -filterPanel.height);
+
             panel.isVisible = false;
         }
 

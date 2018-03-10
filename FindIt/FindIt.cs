@@ -113,7 +113,7 @@ namespace FindIt
 
                     searchBox = scrollPanel.parent.AddUIComponent<UISearchBox>();
                     searchBox.scrollPanel = scrollPanel;
-                    searchBox.relativePosition = new Vector3(0, -45);
+                    searchBox.relativePosition = new Vector3(0, 0);
                     searchBox.Search();
                 }
 
