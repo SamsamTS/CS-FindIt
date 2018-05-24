@@ -69,8 +69,8 @@ namespace FindIt.GUI
         {
             instance = this;
             
-            atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
-            backgroundSprite = "GenericTabHovered";
+            /*atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
+            backgroundSprite = "GenericTabHovered";*/
             size = new Vector2(605, 45);
 
             // Zoning
@@ -120,7 +120,7 @@ namespace FindIt.GUI
                 eventFilteringChanged(this, 0);
             };
 
-            width = parent.parent.width - 10;
+            width = parent.width;
         }
     }
 }

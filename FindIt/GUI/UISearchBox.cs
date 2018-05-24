@@ -50,7 +50,7 @@ namespace FindIt.GUI
             inputPanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             inputPanel.backgroundSprite = "GenericTab";
             inputPanel.size = new Vector2(300, 40);
-            inputPanel.relativePosition = new Vector2(5, 0);
+            inputPanel.relativePosition = new Vector2(5, -inputPanel.height - 40);
 
             input = SamsamTS.UIUtils.CreateTextField(inputPanel);
             input.size = new Vector2(inputPanel.width - 45, 30);
@@ -90,13 +90,40 @@ namespace FindIt.GUI
             filterPanel.color = new Color32(196, 200, 206, 255);
             filterPanel.size = new Vector2(105, 35);
             filterPanel.SendToBack();
-            filterPanel.relativePosition = inputPanel.relativePosition + new Vector3(inputPanel.width - 5, 5);
+            filterPanel.relativePosition = new Vector3(inputPanel.width, -filterPanel.height - 40);
 
             typeFilter = SamsamTS.UIUtils.CreateDropDown(filterPanel);
-            typeFilter.size = new Vector2(100, 25);
+            typeFilter.size = new Vector2(130, 25);
             typeFilter.relativePosition = new Vector3(10, 5);
 
-            typeFilter.items = Enum.GetNames(typeof(Asset.AssetType));
+            if (FindIt.rico)
+            {
+                string[] items = {
+                    "All",
+                    "Net Structures",
+                    "Ploppable",
+                    "Growable",
+                    "Rico",
+                    "Prop",
+                    "Decal",
+                    "Tree"
+                };
+                typeFilter.items = items;
+
+            }
+            else
+            {
+                string[] items = {
+                    "All",
+                    "Net Structures",
+                    "Ploppable",
+                    "Growable",
+                    "Prop",
+                    "Decal",
+                    "Tree"
+                };
+                typeFilter.items = items;
+            }
             typeFilter.selectedIndex = 0;
 
             typeFilter.eventSelectedIndexChanged += (c, p) =>
@@ -104,7 +131,7 @@ namespace FindIt.GUI
                 UpdateFilterPanels();
                 Search();
             };
-
+            
             buildingFilters = filterPanel.AddUIComponent<UIPanel>();
             buildingFilters.size = new Vector2(90, 35);
             buildingFilters.relativePosition = new Vector3(typeFilter.relativePosition.x + typeFilter.width, 0);
@@ -185,16 +212,21 @@ namespace FindIt.GUI
 
             sizeFilterY.eventSelectedIndexChanged += (c, i) => Search();
 
+            UIPanel panel = AddUIComponent<UIPanel>();
+            panel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
+            panel.backgroundSprite = "GenericTabHovered";
+            panel.size = new Vector2(parent.width, 45);
+            panel.relativePosition = new Vector3(0, -panel.height + 5);
 
-            filterPloppable = AddUIComponent<UIFilterPloppable>();
+            filterPloppable = panel.AddUIComponent<UIFilterPloppable>();
             filterPloppable.isVisible = false;
-            filterPloppable.relativePosition = new Vector3(5, -45);
+            filterPloppable.relativePosition = new Vector3(0, 0);
 
             filterPloppable.eventFilteringChanged += (c,p) => Search();
 
-            filterGrowable = AddUIComponent<UIFilterGrowable>();
+            filterGrowable = panel.AddUIComponent<UIFilterGrowable>();
             filterGrowable.isVisible = false;
-            filterGrowable.relativePosition = new Vector3(5, -45);
+            filterGrowable.relativePosition = new Vector3(0, 0);
 
             filterGrowable.eventFilteringChanged += (c, p) => Search();
 
@@ -211,7 +243,6 @@ namespace FindIt.GUI
             {
                 input.Unfocus();
             }
-
         }
 
         public void UpdateBuildingFilters()
@@ -239,7 +270,13 @@ namespace FindIt.GUI
         {
             SimulationManager.instance.AddAction(() =>
             {
-                switch ((Asset.AssetType)typeFilter.selectedIndex)
+                int index = typeFilter.selectedIndex;
+                if (!FindIt.rico && index >= (int)Asset.AssetType.Rico)
+                {
+                    index++;
+                }
+
+                switch ((Asset.AssetType)index)
                 {
                     case Asset.AssetType.Ploppable:
                         HideFilterPanel(filterGrowable);
@@ -263,16 +300,16 @@ namespace FindIt.GUI
 
         public void ShowFilterPanel(UIPanel panel)
         {
-            inputPanel.relativePosition = new Vector2(inputPanel.relativePosition.x, -inputPanel.height - 45);
-            filterPanel.relativePosition = new Vector2(filterPanel.relativePosition.x, -filterPanel.height - 45);
+            //inputPanel.relativePosition = new Vector2(inputPanel.relativePosition.x, -inputPanel.height - 45);
+            //filterPanel.relativePosition = new Vector2(filterPanel.relativePosition.x, -filterPanel.height - 45);
 
             panel.isVisible = true;
         }
 
         public void HideFilterPanel(UIPanel panel)
         {
-            inputPanel.relativePosition = new Vector2(inputPanel.relativePosition.x, -inputPanel.height);
-            filterPanel.relativePosition = new Vector2(filterPanel.relativePosition.x, -filterPanel.height);
+            //inputPanel.relativePosition = new Vector2(inputPanel.relativePosition.x, -inputPanel.height);
+            //filterPanel.relativePosition = new Vector2(filterPanel.relativePosition.x, -filterPanel.height);
 
             panel.isVisible = false;
         }
@@ -292,7 +329,7 @@ namespace FindIt.GUI
         public void Search()
         {
             PrefabInfo current = null;
-            int selected = -1;
+            UIScrollPanelItem.ItemData selected = null;
             if (scrollPanel.selectedItem != null)
             {
                 current = scrollPanel.selectedItem.objectUserData as PrefabInfo;
@@ -305,6 +342,11 @@ namespace FindIt.GUI
             {
                 text = input.text;
                 type = (Asset.AssetType)typeFilter.selectedIndex;
+
+                if (!FindIt.rico && type >= Asset.AssetType.Rico)
+                {
+                    type++;
+                }
             }
 
             List<Asset> matches = AssetTagList.instance.Find(text, type);
@@ -335,16 +377,17 @@ namespace FindIt.GUI
 
                     if (asset.prefab == current)
                     {
-                        selected = scrollPanel.itemsData.m_size - 1;
+                        selected = data;
                     }
                 }
             }
 
             scrollPanel.DisplayAt(0);
-            scrollPanel.selectedIndex = selected;
+            scrollPanel.selectedItem = selected;
 
             if (scrollPanel.selectedItem != null)
             {
+
                 FindIt.SelectPrefab(scrollPanel.selectedItem.objectUserData as PrefabInfo);
             }
             else

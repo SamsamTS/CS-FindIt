@@ -9,6 +9,7 @@ using System.Diagnostics;
 
 using ColossalFramework;
 using ColossalFramework.UI;
+using ColossalFramework.Plugins;
 using ColossalFramework.Globalization;
 
 using FindIt.Redirection;
@@ -21,11 +22,13 @@ namespace FindIt
         public const string settingsFileName = "FindIt";
 
         public static FindIt instance;
+        public static SavedBool detourGeneratedScrollPanels = new SavedBool("detourGeneratedScrollPanels", settingsFileName, true, true);
         public static SavedBool unlockAll = new SavedBool("unlockAll", settingsFileName, false, true);
         public static bool fixBadProps;
-        public static UITextureAtlas atlas;
+        public static UITextureAtlas atlas = LoadResources();
         public static bool inEditor = false;
-        public static bool thumbnailFixRunning = false;
+        public static bool rico = false;
+        //public static bool thumbnailFixRunning = false;
 
         public static AssetTagList list;
 
@@ -38,6 +41,8 @@ namespace FindIt
         {
             try
             {
+                rico = IsRicoEnabled();
+
                 GameObject gameObject = GameObject.Find("FindItMainButton");
                 if (gameObject != null)
                 {
@@ -45,10 +50,6 @@ namespace FindIt
                 }
 
                 list = AssetTagList.instance;
-                list.Init();
-
-                StartCoroutine("FixFocusedThumbnails");
-                LoadResources();
 
                 UITabstrip tabstrip = ToolsModifierControl.mainToolbar.GetComponentInChildren<UITabstrip>();
 
@@ -100,9 +101,20 @@ namespace FindIt
                     scrollPanel.eventClicked += OnButtonClicked;
                     scrollPanel.eventVisibilityChanged += (c, p) =>
                     {
+                        HideAllOptionPanels();
+
                         if (p && scrollPanel.selectedItem != null)
                         {
-                            SelectPrefab(scrollPanel.selectedItem.objectUserData as PrefabInfo);
+                            // Simulate item click
+                            UIScrollPanelItem.ItemData item = scrollPanel.selectedItem;
+
+                            UIScrollPanelItem panelItem = scrollPanel.GetItem(0);
+                            panelItem.Display(scrollPanel.selectedItem, 0);
+                            panelItem.component.SimulateClick();
+
+                            scrollPanel.selectedItem = item;
+
+                            scrollPanel.Refresh();
                         }
                     };
 
@@ -115,6 +127,10 @@ namespace FindIt
                     searchBox.scrollPanel = scrollPanel;
                     searchBox.relativePosition = new Vector3(0, 0);
                     searchBox.Search();
+                }
+                else
+                {
+                    DebugUtils.Warning("GroupPanel not found");
                 }
 
                 mainButton.normalBgSprite = "ToolbarIconGroup6Normal";
@@ -141,38 +157,19 @@ namespace FindIt
             }
         }
 
-        private IEnumerator FixFocusedThumbnails()
+        public static void HideAllOptionPanels()
         {
-            DebugUtils.Log("FixFocusedThumbnails started");
-            Stopwatch stopWatch = new Stopwatch();
-            stopWatch.Start();
-            thumbnailFixRunning = true;
-            int fixedCount = 0;
+            OptionPanelBase[] panels = ToolsModifierControl.mainToolbar.m_OptionsBar.GetComponentsInChildren<OptionPanelBase>();
 
-            Stopwatch stopWatch2 = new Stopwatch();
-            stopWatch2.Start();
-
-            foreach (Asset asset in list.assets.Values)
+            foreach(OptionPanelBase panel in panels)
             {
-                if(ImageUtils.FixFocusedTexture(asset.prefab))
-                {
-                    fixedCount++;
-                }
-
-                if (stopWatch2.ElapsedMilliseconds > 3)
-                {
-                    yield return null;
-                    stopWatch2.Reset();
-                    stopWatch2.Start();
-                }
+                panel.Hide();
             }
-            thumbnailFixRunning = false;
-            stopWatch.Stop();
-            DebugUtils.Log("FixFocusedThumbnails ended. Fixed " + fixedCount + " thumbnails in " + (stopWatch.ElapsedMilliseconds / 1000) + "s");
         }
 
         public void OnButtonClicked(UIComponent c, UIMouseEventParameter p)
         {
+
             UIButton uIButton = p.source as UIButton;
             if (uIButton != null && uIButton.parent is UIScrollPanel)
             {
@@ -181,6 +178,7 @@ namespace FindIt
                 string key = Asset.GetName(prefab);
                 if (AssetTagList.instance.assets.ContainsKey(key) && AssetTagList.instance.assets[key].onButtonClicked != null)
                 {
+                    HideAllOptionPanels();
                     AssetTagList.instance.assets[key].onButtonClicked(uIButton);
                 }
                 else
@@ -192,28 +190,77 @@ namespace FindIt
 
         public static void SelectPrefab(PrefabInfo prefab)
         {
-            if (prefab is BuildingInfo)
+            HideAllOptionPanels();
+
+            BeautificationPanel beautificationPanel = UIView.FindObjectOfType<BeautificationPanel>();
+
+            BuildingInfo buildingInfo = prefab as BuildingInfo;
+            NetInfo netInfo = prefab as NetInfo;
+            TransportInfo transportInfo = prefab as TransportInfo;
+            TreeInfo treeInfo = prefab as TreeInfo;
+            PropInfo propInfo = prefab as PropInfo;
+            if (buildingInfo != null)
             {
-                BuildingTool tool = ToolsModifierControl.SetTool<BuildingTool>();
-                if (tool != null)
-                {
-                    tool.m_prefab = prefab as BuildingInfo;
+                BuildingTool buildingTool = ToolsModifierControl.SetTool<BuildingTool>();
+                if (buildingTool != null)
+                {                    
+                    buildingTool.m_prefab = buildingInfo;
+                    buildingTool.m_relocate = 0;
                 }
             }
-            else if (prefab is PropInfo)
+            if (netInfo != null)
             {
-                PropTool tool = ToolsModifierControl.SetTool<PropTool>();
-                if (tool != null)
+                NetTool netTool = ToolsModifierControl.SetTool<NetTool>();
+                if (netTool != null)
                 {
-                    tool.m_prefab = prefab as PropInfo;
+                    if (netInfo.GetSubService() == ItemClass.SubService.BeautificationParks)
+                    {
+                        //base.ShowPathsOptionPanel();
+                        typeof(BeautificationPanel).GetMethod("ShowPathsOptionPanel", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(beautificationPanel, null);
+                    }
+                    else if (netInfo.GetClassLevel() == ItemClass.Level.Level3)
+                    {
+                        //base.ShowFloodwallsOptionPanel();
+                        typeof(BeautificationPanel).GetMethod("ShowFloodwallsOptionPanel", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(beautificationPanel, null);
+                    }
+                    else if (netInfo.GetClassLevel() == ItemClass.Level.Level4)
+                    {
+                        //base.ShowQuaysOptionPanel();
+                        typeof(BeautificationPanel).GetMethod("ShowQuaysOptionPanel", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(beautificationPanel, null);
+                    }
+                    else
+                    {
+                        //base.ShowCanalsOptionPanel();
+                        typeof(BeautificationPanel).GetMethod("ShowCanalsOptionPanel", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(beautificationPanel, null);
+                    }
+                    netTool.Prefab = netInfo;
                 }
             }
-            else if (prefab is TreeInfo)
+            if (transportInfo != null)
             {
-                TreeTool tool = ToolsModifierControl.SetTool<TreeTool>();
-                if (tool != null)
+                TransportTool transportTool = ToolsModifierControl.SetTool<TransportTool>();
+                if (transportTool != null)
                 {
-                    tool.m_prefab = prefab as TreeInfo;
+                    transportTool.m_prefab = transportInfo;
+                    transportTool.m_building = 0;
+                }
+            }
+            if (treeInfo != null)
+            {
+                TreeTool treeTool = ToolsModifierControl.SetTool<TreeTool>();
+                if (treeTool != null)
+                {
+                    treeTool.m_prefab = treeInfo;
+                    treeTool.m_mode = TreeTool.Mode.Single;
+                }
+            }
+            if (propInfo != null)
+            {
+                PropTool propTool = ToolsModifierControl.SetTool<PropTool>();
+                if (propTool != null)
+                {
+                    propTool.m_prefab = propInfo;
+                    propTool.m_mode = PropTool.Mode.Single;
                 }
             }
         }
@@ -237,12 +284,33 @@ namespace FindIt
                         searchBox.searchButton.SimulateClick();
                     }
                 }
+
+                if (Input.GetKeyDown(KeyCode.Escape) && searchBox.isVisible)
+                {
+                    searchBox.input.Unfocus();
+                }
             }
             catch (Exception e)
             {
                 DebugUtils.Log("OnGUI failed");
                 DebugUtils.LogException(e);
             }
+        }
+
+        public static bool IsRicoEnabled()
+        {
+            foreach(PluginManager.PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
+            {
+                foreach(Assembly assembly in plugin.GetAssemblies())
+                {
+                    if(assembly.GetName().Name == "PloppableRICO")
+                    {
+                        return plugin.isEnabled;
+                    }
+                }
+            }
+
+            return false;
         }
 
         public static void FixBadProps()
@@ -276,7 +344,7 @@ namespace FindIt
             if(log != "") DebugUtils.Log(log);
         }
 
-        public static void LoadResources()
+        public static UITextureAtlas LoadResources()
         {
             if (atlas == null)
             {
@@ -287,6 +355,7 @@ namespace FindIt
 				    "FindItFocused",
 				    "FindItHovered",
 				    "FindItPressed",
+                    "Tag",
 				    "IconPolicyLeisureDisabled",
 				    "IconPolicyTouristDisabled"
 			    };
@@ -302,10 +371,13 @@ namespace FindIt
                     defaultAtlas["ToolbarIconGroup6Pressed"].texture,
                     defaultAtlas["IconPolicyLeisure"].texture,
                     defaultAtlas["IconPolicyTourist"].texture
+
                 };
 
                 ResourceLoader.AddTexturesInAtlas(atlas, textures);
             }
+
+            return atlas;
         }
     }
 
@@ -315,7 +387,10 @@ namespace FindIt
         {
             if ((ToolManager.instance.m_properties.m_mode & ItemClass.Availability.GameAndMap) != ItemClass.Availability.None)
             {
-                Redirector<Detours.GeneratedScrollPanelDetour>.Deploy();
+                if (FindIt.detourGeneratedScrollPanels.value)
+                {
+                    Redirector<Detours.GeneratedScrollPanelDetour>.Deploy();
+                }
             }
         }
 
@@ -326,6 +401,8 @@ namespace FindIt
 
         public override void OnLevelLoaded(LoadMode mode)
         {
+            AssetTagList.instance.Init();
+
             if(FindIt.fixBadProps)
             {
                 DebugUtils.Log("Fixing bad props");
@@ -348,6 +425,11 @@ namespace FindIt
                 else
                 {
                     FindIt.instance.Start();
+                }
+
+                if(UITagsWindow.instance == null)
+                {
+                    UITagsWindow.instance = UIView.GetAView().AddUIComponent(typeof(UITagsWindow)) as UITagsWindow;
                 }
             }
             else if (mode == LoadMode.NewAsset || mode == LoadMode.LoadAsset)

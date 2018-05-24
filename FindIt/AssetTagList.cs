@@ -28,13 +28,14 @@ namespace FindIt
 
         public enum AssetType
         {
+            Invalid = -1,
             All,
+            Road,
             Ploppable,
             Growable,
             Rico,
             Prop,
             Decal,
-            //Fence,
             Tree
         }
 
@@ -100,7 +101,10 @@ namespace FindIt
 
                             return;
                         }
-
+                        else if(m_prefab is NetInfo)
+                        {
+                            assetType = AssetType.Road;
+                        }
                         else if (m_prefab is TreeInfo)
                         {
                             assetType = AssetType.Tree;
@@ -109,7 +113,7 @@ namespace FindIt
                 }
             }
         }
-        public AssetType assetType = (AssetType)(-1);
+        public AssetType assetType = AssetType.Invalid;
         public ItemClass.Service service = ItemClass.Service.None;
         public ItemClass.SubService subService = ItemClass.SubService.None;
         public Vector2 size;
@@ -122,7 +126,7 @@ namespace FindIt
 
         public HashSet<string> tagsTitle = new HashSet<string>();
         public HashSet<string> tagsDesc = new HashSet<string>();
-        public HashSet<string> tagsHash = new HashSet<string>();
+        public HashSet<string> tagsCustom = new HashSet<string>();
 
         public static string GetName(PrefabInfo prefab)
         {
@@ -144,12 +148,20 @@ namespace FindIt
                 {
                     name = prefab.name;
                 }
+                else
+                {
+                    name = name.Replace(".", "");
+                }
             }
             else if (prefab is PropInfo)
             {
                 if (!Locale.GetUnchecked("PROPS_TITLE", prefab.name, out name))
                 {
                     name = prefab.name;
+                }
+                else
+                {
+                    name = name.Replace(".", "");
                 }
             }
             else if (prefab is TreeInfo)
@@ -158,12 +170,32 @@ namespace FindIt
                 {
                     name = prefab.name;
                 }
+                else
+                {
+                    name = name.Replace(".", "");
+                }
+            }
+            else if (prefab is NetInfo)
+            {
+                if (!Locale.GetUnchecked("NET_TITLE", prefab.name, out name))
+                {
+                    name = prefab.name;
+                }
+                else
+                {
+                    name = name.Replace(".", "");
+                }
             }
 
             int index = name.IndexOf('.');
             if (index >= 0)
             {
                 name = name.Substring(index + 1);
+            }
+
+            if (name.IsNullOrWhiteSpace())
+            {
+                name = prefab.name;
             }
 
             index = name.LastIndexOf("_Data");
@@ -209,6 +241,13 @@ namespace FindIt
                     return result;
                 }
             }
+            else if (prefab is NetInfo)
+            {
+                if (Locale.GetUnchecked("NET_DESC", prefab.name, out result))
+                {
+                    return result;
+                }
+            }
 
             return "";
         }
@@ -229,8 +268,7 @@ namespace FindIt
 		        (!ToolsModifierControl.IsUnlocked(unlockMilestone)).ToString()
 	        });
 
-            string unlockDesc, currentValue, targetValue, progress, locked;
-            ToolsModifierControl.GetUnlockingInfo(unlockMilestone, out unlockDesc, out currentValue, out targetValue, out progress, out locked);
+            ToolsModifierControl.GetUnlockingInfo(unlockMilestone, out string unlockDesc, out string currentValue, out string targetValue, out string progress, out string locked);
 
             string addTooltip = TooltipHelper.Format(new string[]
 	        {
@@ -268,12 +306,12 @@ namespace FindIt
 
     public class AssetTagList
     {
-        private bool initialized = false;
-
         public static AssetTagList instance;
 
-        public Dictionary<string, int> tagsTitle = new Dictionary<string, int>();
-        public Dictionary<string, int> tagsDesc = new Dictionary<string, int>();
+        public Dictionary<string, int> tagsTitleDictionary = new Dictionary<string, int>();
+        public Dictionary<string, int> tagsDescDictionary = new Dictionary<string, int>();
+        public Dictionary<string, int> tagsCustomDictionary = new Dictionary<string, int>();
+
         public Dictionary<string, Asset> assets = new Dictionary<string, Asset>();
 
         public Dictionary<ulong, string> authors = new Dictionary<ulong, string>();
@@ -282,11 +320,6 @@ namespace FindIt
 
         public List<Asset> Find(string text, Asset.AssetType filter)
         {
-            if (!initialized)
-            {
-                Init();
-            }
-
             matches.Clear();
 
             text = text.ToLower().Trim();
@@ -340,11 +373,11 @@ namespace FindIt
                                     score += 10 * GetScore(keyword, asset.author.ToLower(), null);
                                 }
 
-                                if (filter == Asset.AssetType.All && asset.assetType != (Asset.AssetType)(-1))
+                                if (filter == Asset.AssetType.All && asset.assetType != Asset.AssetType.Invalid)
                                 {
                                     score += 10 * GetScore(keyword, asset.assetType.ToString().ToLower(), null);
                                 }
-
+                                
                                 if (asset.service != ItemClass.Service.None)
                                 {
                                     score += 10 * GetScore(keyword, asset.service.ToString().ToLower(), null);
@@ -360,14 +393,19 @@ namespace FindIt
                                     score += 10 * GetScore(keyword, asset.size.x + "x" + asset.size.y, null);
                                 }
 
+                                foreach (string tag in asset.tagsCustom)
+                                {
+                                    score += 20 * GetScore(keyword, tag, tagsCustomDictionary);
+                                }
+
                                 foreach (string tag in asset.tagsTitle)
                                 {
-                                    score += 5 * GetScore(keyword, tag, tagsTitle);
+                                    score += 5 * GetScore(keyword, tag, tagsTitleDictionary);
                                 }
 
                                 foreach (string tag in asset.tagsDesc)
                                 {
-                                    score += GetScore(keyword, tag, tagsDesc);
+                                    score += GetScore(keyword, tag, tagsDescDictionary);
                                 }
 
                                 if (score > 0)
@@ -429,7 +467,7 @@ namespace FindIt
                         matches.Add(asset);
                     }
                 }
-                matches = matches.OrderBy(s => s.name).ToList();
+                matches = matches.OrderBy(s => s.title).ToList();
             }
 
             return matches;
@@ -466,16 +504,13 @@ namespace FindIt
             {
                 PublishedFileId id = current.package.GetPublishedFileID();
 
-                ulong steamid;
-                if (UInt64.TryParse(current.package.packageName, out steamid))
+                if (UInt64.TryParse(current.package.packageName, out ulong steamid))
                 {
                     if (!authors.ContainsKey(steamid) && !current.package.packageAuthor.IsNullOrWhiteSpace())
                     {
-                        ulong authorID;
-                        if (UInt64.TryParse(current.package.packageAuthor.Substring("steamid:".Length), out authorID))
+                        if (UInt64.TryParse(current.package.packageAuthor.Substring("steamid:".Length), out ulong authorID))
                         {
                             string author = new Friend(new UserID(authorID)).personaName;
-                            //author = Regex.Replace(author.ToLower().Trim(), @"([^\w]|\s)+", "_");
                             authors.Add(steamid, author);
                         }
                     }
@@ -490,37 +525,91 @@ namespace FindIt
                 asset.prefab = null;
             }
 
-            tagsTitle.Clear();
-            tagsDesc.Clear();
+            tagsTitleDictionary.Clear();
+            tagsDescDictionary.Clear();
+            tagsCustomDictionary.Clear();
 
             GetPrefabs<BuildingInfo>();
-            //GetPrefab<NetInfo>();
+            GetPrefabs<NetInfo>();
             GetPrefabs<PropInfo>();
             GetPrefabs<TreeInfo>();
+
+            if (CustomTagsLibrary.assetTags.Count == 0)
+            {
+                CustomTagsLibrary.Deserialize();
+            }
 
             foreach (Asset asset in assets.Values)
             {
                 if (asset.prefab != null)
                 {
                     asset.title = Asset.GetLocalizedTitle(asset.prefab);
-                    asset.tagsTitle = AddAssetTags(asset, tagsTitle, asset.title);
+                    asset.tagsTitle = AddAssetTags(asset, tagsTitleDictionary, asset.title);
 
                     if (asset.steamID == 0)
                     {
                         int index = asset.prefab.name.IndexOf(".");
                         if (index >= 0)
                         {
-                            asset.tagsTitle.UnionWith(AddAssetTags(asset, tagsTitle, asset.prefab.name.Substring(0, index)));
+                            asset.tagsTitle.UnionWith(AddAssetTags(asset, tagsTitleDictionary, asset.prefab.name.Substring(0, index)));
                         }
                     }
 
-                    asset.tagsDesc = AddAssetTags(asset, tagsDesc, Asset.GetLocalizedDescription(asset.prefab));
+                    asset.tagsDesc = AddAssetTags(asset, tagsDescDictionary, Asset.GetLocalizedDescription(asset.prefab));
+
+                    string name = Asset.GetName(asset.prefab);
+                    if (CustomTagsLibrary.assetTags.ContainsKey(name))
+                    {
+                        asset.tagsCustom = AddAssetTags(asset, tagsCustomDictionary, CustomTagsLibrary.assetTags[name]);
+                    }
                 }
             }
 
             CleanDictionarys();
+        }
 
-            initialized = true;
+        public void AddCustomTags(Asset asset, string text)
+        {
+            if (asset == null || asset.prefab == null || text.IsNullOrWhiteSpace()) return;
+
+            string name = Asset.GetName(asset.prefab);
+
+            asset.tagsCustom.UnionWith(AddAssetTags(asset, tagsCustomDictionary, text));
+
+            if (asset.tagsCustom.Count > 0)
+            {
+                CustomTagsLibrary.assetTags[name] = string.Join(" ", asset.tagsCustom.OrderBy(s => s).ToArray<string>());
+                CustomTagsLibrary.Serialize();
+            }
+        }
+
+        public void RemoveCustomTag(Asset asset, string tag)
+        {
+            if (asset == null || asset.prefab == null || tag.IsNullOrWhiteSpace()) return;
+
+            if (!asset.tagsCustom.Remove(tag)) return;
+
+            string name = Asset.GetName(asset.prefab);
+
+            if(tagsCustomDictionary.ContainsKey(tag))
+            {
+                tagsCustomDictionary[tag]--;
+                if(tagsCustomDictionary[tag] == 0)
+                {
+                    tagsCustomDictionary.Remove(tag);
+                }
+            }
+
+            if (asset.tagsCustom.Count == 0)
+            {
+                CustomTagsLibrary.assetTags.Remove(name);
+            }
+            else
+            {
+                CustomTagsLibrary.assetTags[name] = string.Join(" ", asset.tagsCustom.OrderBy(s => s).ToArray<string>());
+            }
+
+            CustomTagsLibrary.Serialize();
         }
 
         private void GetPrefabs<T>() where T : PrefabInfo
@@ -555,6 +644,16 @@ namespace FindIt
                     }
                 }
 
+                NetInfo netPrefab = prefab as NetInfo;
+                if (netPrefab != null)
+                {
+                    if (netPrefab.category == PrefabInfo.kDefaultCategory || netPrefab.m_Thumbnail.IsNullOrWhiteSpace() ||
+                        (netPrefab.name != "Pedestrian Pavement" && netPrefab.m_Thumbnail == "ThumbnailBuildingBeautificationPedestrianPavement"))
+                    {
+                        continue;
+                    }
+                }
+
                 string name = Asset.GetName(prefab);
 
                 if (assets.ContainsKey(name))
@@ -585,15 +684,13 @@ namespace FindIt
 
         private HashSet<string> AddAssetTags(Asset asset, Dictionary<string, int> dico, string text)
         {
-            //text = Regex.Replace(text, "([A-Z][a-z]+)", " $1");
-
             string[] tagsArr = Regex.Split(text, @"([^\w]|[_-]|\s)+", RegexOptions.IgnoreCase);
 
             HashSet<string> tags = new HashSet<string>();
 
             foreach (string t in tagsArr)
             {
-                string tag = t.ToLower().Trim();
+                string tag = CleanTag(t);
 
                 if (tag.Length > 1)
                 {
@@ -609,6 +706,12 @@ namespace FindIt
             return tags;
         }
 
+        private string CleanTag(string tag)
+        {
+            tag = tag.ToLower().Trim();
+            return tag;
+        }
+
         private void CleanDictionarys()
         {
             foreach (Asset asset in assets.Values)
@@ -619,12 +722,12 @@ namespace FindIt
                     if (key.EndsWith("s"))
                     {
                         string tag = key.Substring(0, key.Length - 1);
-                        if (tagsTitle.ContainsKey(tag))
+                        if (tagsTitleDictionary.ContainsKey(tag))
                         {
-                            if (tagsTitle.ContainsKey(key))
+                            if (tagsTitleDictionary.ContainsKey(key))
                             {
-                                tagsTitle[tag] += tagsTitle[key];
-                                tagsTitle.Remove(key);
+                                tagsTitleDictionary[tag] += tagsTitleDictionary[key];
+                                tagsTitleDictionary.Remove(key);
                             }
                             asset.tagsTitle.Remove(key);
                             asset.tagsTitle.Add(tag);
@@ -638,12 +741,12 @@ namespace FindIt
                     if (key.EndsWith("s"))
                     {
                         string tag = key.Substring(0, key.Length - 1);
-                        if (tagsDesc.ContainsKey(tag))
+                        if (tagsDescDictionary.ContainsKey(tag))
                         {
-                            if (tagsDesc.ContainsKey(key))
+                            if (tagsDescDictionary.ContainsKey(key))
                             {
-                                tagsDesc[tag] += tagsDesc[key];
-                                tagsDesc.Remove(key);
+                                tagsDescDictionary[tag] += tagsDescDictionary[key];
+                                tagsDescDictionary.Remove(key);
                             }
                             asset.tagsDesc.Remove(key);
                             asset.tagsDesc.Add(tag);

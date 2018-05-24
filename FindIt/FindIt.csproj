@@ -24,7 +24,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>
@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssetTagList.cs" />
+    <Compile Include="CustomTagsLibrary.cs" />
     <Compile Include="Detours\GeneratedScrollPanelDetour.cs" />
     <Compile Include="FindIt.cs" />
     <Compile Include="GUI\ImageUtils.cs" />
@@ -59,8 +60,10 @@
     <Compile Include="GUI\UIGroupPanel.cs" />
     <Compile Include="GUI\UIFilterPloppable.cs" />
     <Compile Include="GUI\UIScrollPanel.cs" />
-    <Compile Include="GUI\UIHorizontalFastList.cs" />
+    <Compile Include="GUI\UIFastList.cs" />
     <Compile Include="GUI\UISearchBox.cs" />
+    <Compile Include="GUI\UITag.cs" />
+    <Compile Include="GUI\UITagsWindow.cs" />
     <Compile Include="GUI\UIUtils.cs" />
     <Compile Include="ModInfo.cs" />
     <Compile Include="DebugUtils.cs" />
@@ -89,13 +92,14 @@
     <EmbeddedResource Include="Icons\IconPolicyLeisureDisabled.png" />
     <EmbeddedResource Include="Icons\IconPolicyTouristDisabled.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\Tag.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>mkdir "%25LOCALAPPDATA%25\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)"
 del "%25LOCALAPPDATA%25\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)\$(TargetFileName)"
-xcopy /y "$(TargetPath)" "%25LOCALAPPDATA%25\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)"
-del "%25LOCALAPPDATA%25\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)\$(TargetName).pdb"
-xcopy /y "$(TargetDir)$(TargetName).pdb" "%25LOCALAPPDATA%25\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)"</PostBuildEvent>
+xcopy /y "$(TargetPath)" "%25LOCALAPPDATA%25\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

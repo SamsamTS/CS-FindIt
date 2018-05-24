@@ -5,7 +5,7 @@ namespace FindIt.GUI
 {
     public interface IUIFastListItem<O, T> where T : UIComponent
     {
-        T item
+        T component
         {
             get;
             set;
@@ -44,7 +44,7 @@ namespace FindIt.GUI
     /// /*...*/
     /// component.AddUIComponent<MyHorizontalFastList>();
     /// </summary>
-    public class UIHorizontalFastList<O, I, T> : UIScrollablePanel
+    public class UIFastList<O, I, T> : UIScrollablePanel
         where O : class
         where I : class, IUIFastListItem<O, T>, new()
         where T : UIComponent
@@ -59,7 +59,7 @@ namespace FindIt.GUI
         private float m_pos = -1;
         private float m_stepSize = 0;
         private bool m_canSelect = false;
-        private int m_selectedDataId = -1;
+        //private int m_selectedDataId = -1;
         private int m_selectedId = -1;
         private bool m_lock;
         private bool m_updateContent = true;
@@ -87,12 +87,12 @@ namespace FindIt.GUI
                     if (m_items == null) return;
                     for (int i = 0; i < m_items.m_size; i++)
                     {
-                        if (m_items.m_buffer[i].item != null)
+                        if (m_items.m_buffer[i].component != null)
                         {
                             if (m_canSelect)
-                                m_items.m_buffer[i].item.eventClick += OnItemClicked;
+                                m_items.m_buffer[i].component.eventClick += OnItemClicked;
                             else
-                                m_items.m_buffer[i].item.eventClick -= OnItemClicked;
+                                m_items.m_buffer[i].component.eventClick -= OnItemClicked;
                         }
                     }
                 }
@@ -147,6 +147,7 @@ namespace FindIt.GUI
                 if (m_itemsData != value)
                 {
                     m_itemsData = value;
+                    //m_selectedDataId = -1;
                     DisplayAt(0);
                 }
             }
@@ -188,7 +189,7 @@ namespace FindIt.GUI
         /// Currently selected item
         /// -1 if none selected
         /// </summary>
-        public int selectedIndex
+        /*public int selectedIndex
         {
             get { return m_selectedDataId; }
             set
@@ -225,15 +226,11 @@ namespace FindIt.GUI
                 if (eventSelectedIndexChanged != null && m_selectedDataId != oldId)
                     eventSelectedIndexChanged(this, m_selectedDataId);
             }
-        }
+        }*/
 
         public O selectedItem
         {
-            get
-            {
-                if (m_selectedDataId == -1) return null;
-                return m_itemsData.m_buffer[m_selectedDataId];
-            }
+            get; set;
         }
 
         public string template
@@ -340,7 +337,7 @@ namespace FindIt.GUI
         /// <summary>
         /// Called when the currently selected item changed
         /// </summary>
-        public event PropertyChangedEventHandler<int> eventSelectedIndexChanged;
+        //public event PropertyChangedEventHandler<int> eventSelectedIndexChanged;
         /// <summary>
         /// Called when the current display position is changed
         /// </summary>
@@ -354,18 +351,18 @@ namespace FindIt.GUI
         public void Clear()
         {
             itemsData.Clear();
-            m_selectedDataId = -1;
+            selectedItem = null;
 
             if (m_items != null)
             {
                 for (int i = 0; i < m_items.m_size; i++)
                 {
-                    if (m_items.m_buffer[i].item == null)
+                    if (m_items.m_buffer[i].component == null)
                     {
-                        m_items.m_buffer[i].item = CreateItem();
+                        m_items.m_buffer[i].component = CreateItem();
                         m_items.m_buffer[i].Init();
                     }
-                    m_items.m_buffer[i].item.enabled = false;
+                    m_items.m_buffer[i].component.enabled = false;
                 }
             }
 
@@ -380,7 +377,9 @@ namespace FindIt.GUI
         /// <param name="pos">Index position in the list</param>
         public void DisplayAt(float pos)
         {
-            if (m_itemsData == null || m_itemWidth <= 0 || m_itemHeight <= 0) return;
+            if (m_itemsData == null || m_itemsData.m_size == 0 || m_itemWidth <= 0 || m_itemHeight <= 0) return;
+
+            m_selectedId = -1;
 
             int nbRow = /*Mathf.CeilToInt*/(int)(height / m_itemHeight);
 
@@ -400,13 +399,13 @@ namespace FindIt.GUI
                     {
                         int itemPos = i * nbCol + j;
                         I item = m_items.m_buffer[itemPos];
-                        if (item.item == null)
+                        if (item.component == null)
                         {
-                            item.item = CreateItem();
+                            item.component = CreateItem();
                             item.Init();
 
                             if (m_canSelect)
-                                item.item.eventClick += OnItemClicked;
+                                item.component.eventClick += OnItemClicked;
                         }
 
                         int dataPos = startPos + itemPos;
@@ -415,20 +414,20 @@ namespace FindIt.GUI
                             if (m_updateContent)
                                 item.Display(m_itemsData[dataPos], dataPos);
 
-                            if (dataPos == m_selectedDataId && m_updateContent)
+                            if (m_updateContent && m_itemsData[dataPos] == selectedItem)
                             {
+                                m_items.m_buffer[itemPos].Select(dataPos);
                                 m_selectedId = itemPos;
-                                m_items.m_buffer[m_selectedId].Select(dataPos);
                             }
 
-                            item.item.enabled = true;
+                            item.component.enabled = true;
                         }
                         else
                         {
-                            item.item.enabled = false;
+                            item.component.enabled = false;
                         }
 
-                        item.item.relativePosition = new Vector3(j * itemWidth, i * itemHeight /*- offset*/);
+                        item.component.relativePosition = new Vector3(j * itemWidth, i * itemHeight /*- offset*/);
                     }
                 }
 
@@ -450,13 +449,13 @@ namespace FindIt.GUI
                 for (int i = 0; i < m_items.m_size; i++)
                 {
                     I item = m_items.m_buffer[i];
-                    if (item.item == null)
+                    if (item.component == null)
                     {
-                        item.item = CreateItem();
+                        item.component = CreateItem();
                         item.Init();
 
                         if (m_canSelect)
-                            item.item.eventClick += OnItemClicked;
+                            item.component.eventClick += OnItemClicked;
                     }
 
                     int dataPos = Mathf.FloorToInt(m_pos + i);
@@ -466,20 +465,20 @@ namespace FindIt.GUI
                         if (m_updateContent)
                             item.Display(m_itemsData[dataPos], dataPos);
 
-                        if (dataPos == m_selectedDataId && m_updateContent)
+                        if (m_updateContent && m_itemsData[dataPos] == selectedItem)
                         {
+                            m_items.m_buffer[i].Select(dataPos);
                             m_selectedId = i;
-                            m_items.m_buffer[m_selectedId].Select(dataPos);
                         }
 
-                        item.item.enabled = true;
+                        item.component.enabled = true;
                     }
                     else
                     {
-                        item.item.enabled = false;
+                        item.component.enabled = false;
                     }
 
-                    item.item.relativePosition = new Vector3(i * itemWidth - offset, 0);
+                    item.component.relativePosition = new Vector3(i * itemWidth - offset, 0);
                 }
 
                 if (m_leftArrow != null)
@@ -565,7 +564,6 @@ namespace FindIt.GUI
 
             CheckItems();
             DisplayAt(0);
-            selectedIndex = selectedIndex;
         }
 
         protected override void OnMouseWheel(UIMouseEventParameter p)
@@ -612,11 +610,22 @@ namespace FindIt.GUI
             if (selectOnMouseEnter) m_lastMouseEnter = component;
 
             int max = Mathf.Min(m_itemsData.m_size, m_items.m_size);
+
             for (int i = 0; i < max; i++)
             {
-                if (component == (UIComponent)m_items.m_buffer[i].item)
+                if (component == (UIComponent)m_items.m_buffer[i].component)
                 {
-                    selectedIndex = i + Mathf.FloorToInt(m_pos);
+                    int selectedIndex = i + Mathf.FloorToInt(m_pos);
+                    selectedItem = m_itemsData[selectedIndex];
+
+                    if(m_selectedId >= 0)
+                    {
+                        m_items.m_buffer[m_selectedId].Deselect(selectedIndex);
+                    }
+
+                    m_items.m_buffer[i].Select(selectedIndex);
+                    m_selectedId = i;
+
                     return;
                 }
             }
@@ -662,9 +671,9 @@ namespace FindIt.GUI
                 // Remove excess items
                 for (int i = nbItems; i < m_items.m_size; i++)
                 {
-                    if (m_items.m_buffer[i].item != null)
+                    if (m_items.m_buffer[i].component != null)
                     {
-                        Destroy(m_items.m_buffer[i].item);
+                        Destroy(m_items.m_buffer[i].component);
                     }
                 }
 

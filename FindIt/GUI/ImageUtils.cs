@@ -143,6 +143,14 @@ namespace FindIt.GUI
             return rendered;
         }
 
+        public static void AddThumbnailVariantsInAtlas(PrefabInfo prefab)
+        {
+            Texture2D texture = prefab.m_Atlas[prefab.m_Thumbnail].texture;
+            prefab.m_Atlas = ResourceLoader.CreateTextureAtlas("FindItThumbnails_" + prefab.m_Thumbnail, new string[] { }, null);
+
+            ResourceLoader.AddTexturesInAtlas(prefab.m_Atlas, GenerateMissingThumbnailVariants(texture));
+        }
+
         public static void ScaleTexture(Texture2D tex, int width, int height)
         {
             tex.filterMode = FilterMode.Trilinear;

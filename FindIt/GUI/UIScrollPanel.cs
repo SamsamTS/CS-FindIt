@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 using ColossalFramework;
@@ -7,8 +8,10 @@ using ColossalFramework.UI;
 
 namespace FindIt.GUI
 {
-    public class UIScrollPanel : UIHorizontalFastList<UIScrollPanelItem.ItemData, UIScrollPanelItem, UIButton>
+    public class UIScrollPanel : UIFastList<UIScrollPanelItem.ItemData, UIScrollPanelItem, UIButton>
     {
+        public FastList<UIScrollPanelItem.ItemData> savedItems;
+
         public UIVerticalAlignment buttonsAlignment;
 
         protected override void OnSizeChanged()
@@ -87,8 +90,12 @@ namespace FindIt.GUI
                 }
             };
 
-            DestroyImmediate(oldPanel);
+            int zOrder = oldPanel.zOrder;
+
+            DestroyImmediate(oldPanel.gameObject);
             DestroyScrollbars(scrollPanel.parent);
+
+            scrollPanel.zOrder = zOrder;
 
             // Left / Right buttons
             UIButton button = scrollPanel.parent.AddUIComponent<UIButton>();
@@ -131,7 +138,7 @@ namespace FindIt.GUI
             UIScrollbar[] scrollbars = parent.GetComponentsInChildren<UIScrollbar>();
             foreach (UIScrollbar scrollbar in scrollbars)
             {
-                DestroyImmediate(scrollbar);
+                DestroyImmediate(scrollbar.gameObject);
             }
         }
     }
@@ -146,11 +153,14 @@ namespace FindIt.GUI
     public class UIScrollPanelItem : IUIFastListItem<UIScrollPanelItem.ItemData, UIButton>
     {
         private ItemData currentData;
+        private UISprite m_tagSprite;
         private UISprite m_steamSprite;
 
         private static UIComponent m_tooltipBox;
 
-        public UIButton item
+        private static HashSet<PrefabInfo> m_fixedFocusedTexture = new HashSet<PrefabInfo>();
+
+        public UIButton component
         {
             get;
             set;
@@ -172,16 +182,16 @@ namespace FindIt.GUI
 
         public void Init()
         {
-            item.text = string.Empty;
-            item.tooltipAnchor = UITooltipAnchor.Anchored;
-            item.tabStrip = true;
-            item.horizontalAlignment = UIHorizontalAlignment.Center;
-            item.verticalAlignment = UIVerticalAlignment.Middle;
-            item.pivot = UIPivotPoint.TopCenter;
-            item.foregroundSpriteMode = UIForegroundSpriteMode.Fill;
-            item.group = item.parent;
+            component.text = string.Empty;
+            component.tooltipAnchor = UITooltipAnchor.Anchored;
+            component.tabStrip = true;
+            component.horizontalAlignment = UIHorizontalAlignment.Center;
+            component.verticalAlignment = UIVerticalAlignment.Middle;
+            component.pivot = UIPivotPoint.TopCenter;
+            component.foregroundSpriteMode = UIForegroundSpriteMode.Fill;
+            component.group = component.parent;
 
-            item.eventTooltipShow += (c, p) =>
+            component.eventTooltipShow += (c, p) =>
             {
                 if (m_tooltipBox != null && m_tooltipBox.isVisible && m_tooltipBox != p.tooltip)
                 {
@@ -190,19 +200,62 @@ namespace FindIt.GUI
                 m_tooltipBox = p.tooltip;
             };
 
-            UIComponent uIComponent = (item.childCount <= 0) ? null : item.components[0];
+            UIComponent uIComponent = (component.childCount <= 0) ? null : component.components[0];
             if (uIComponent != null)
             {
                 uIComponent.isVisible = false;
             }
 
-            m_steamSprite = item.AddUIComponent<UISprite>();
+            m_tagSprite = component.AddUIComponent<UISprite>();
+            m_tagSprite.size = new Vector2(20, 16);
+            m_tagSprite.atlas = FindIt.atlas;
+            m_tagSprite.spriteName = "Tag";
+            m_tagSprite.opacity = 0.5f;
+            m_tagSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
+            m_tagSprite.relativePosition = new Vector3(component.width - m_tagSprite.width - 5, 5);
+            m_tagSprite.isVisible = false;
+
+            m_tagSprite.eventMouseEnter += (c, p) =>
+            {
+                m_tagSprite.opacity = 1f;
+            };
+
+            m_tagSprite.eventMouseLeave += (c, p) =>
+            {
+                m_tagSprite.opacity = 0.5f;
+            };
+
+            m_tagSprite.eventClick += (c, p) =>
+            {
+                p.Use();
+
+                UITagsWindow.ShowAt(currentData.asset, m_tagSprite.absolutePosition);
+            };
+
+            component.eventMouseEnter += (c, p) =>
+            {
+                if (currentData != null && currentData.asset != null &&
+                    AssetTagList.instance.assets.ContainsValue(currentData.asset))
+                {
+                    m_tagSprite.isVisible = true;
+                }
+            };
+
+            component.eventMouseLeave += (c, p) =>
+            {
+                if (m_tagSprite.isVisible && currentData != null && currentData.asset != null && currentData.asset.tagsCustom.Count == 0)
+                {
+                    m_tagSprite.isVisible = false;
+                }
+            };
+
+            m_steamSprite = component.AddUIComponent<UISprite>();
             m_steamSprite.size = new Vector2(26, 16);
             m_steamSprite.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             m_steamSprite.spriteName = "SteamWorkshop";
             m_steamSprite.opacity = 0.05f;
             m_steamSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
-            m_steamSprite.relativePosition = new Vector3(item.width - m_steamSprite.width - 5, item.height - m_steamSprite.height - 5);
+            m_steamSprite.relativePosition = new Vector3(component.width - m_steamSprite.width - 5, component.height - m_steamSprite.height - 5);
             m_steamSprite.isVisible = false;
 
             if(PlatformService.IsOverlayEnabled())
@@ -220,17 +273,17 @@ namespace FindIt.GUI
                     DebugUtils.Log("Data null");
                 }
 
-                if (item == null || data == null) return;
+                if (component == null || data == null) return;
 
                 if (currentData != null)
                 {
-                    currentData.atlas = item.atlas;
+                    currentData.atlas = component.atlas;
                 }
                 currentData = data;
 
-                item.Unfocus();
-                item.name = data.name;
-                item.gameObject.GetComponent<TutorialUITag>().tutorialTag = data.name;
+                component.Unfocus();
+                component.name = data.name;
+                component.gameObject.GetComponent<TutorialUITag>().tutorialTag = data.name;
 
                 PrefabInfo prefab = data.objectUserData as PrefabInfo;
                 if (prefab != null)
@@ -250,6 +303,15 @@ namespace FindIt.GUI
                         }
                     }
 
+                    if (prefab.m_Atlas != null && (
+                        prefab.m_Atlas.name == "AssetThumbs" ||
+                        prefab.m_Atlas.name == "Monorailthumbs" ||
+                        prefab.m_Atlas.name == "Netpropthumbs" ||
+                        prefab.m_Atlas.name == "Animalthumbs"))
+                    {
+                        ImageUtils.AddThumbnailVariantsInAtlas(prefab);
+                    }
+
                     data.baseIconName = prefab.m_Thumbnail;
                     if (prefab.m_Atlas != null)
                     {
@@ -259,26 +321,26 @@ namespace FindIt.GUI
 
                 if (data.atlas != null)
                 {
-                    item.atlas = data.atlas;
+                    component.atlas = data.atlas;
                 }
 
-                item.verticalAlignment = data.verticalAlignment;
+                component.verticalAlignment = data.verticalAlignment;
 
-                item.normalFgSprite = data.baseIconName;
-                item.hoveredFgSprite = data.baseIconName + "Hovered";
-                item.pressedFgSprite = data.baseIconName + "Pressed";
-                item.disabledFgSprite = data.baseIconName + "Disabled";
-                item.focusedFgSprite = null;
+                component.normalFgSprite = data.baseIconName;
+                component.hoveredFgSprite = data.baseIconName + "Hovered";
+                component.pressedFgSprite = data.baseIconName + "Pressed";
+                component.disabledFgSprite = data.baseIconName + "Disabled";
+                component.focusedFgSprite = null;
 
-                item.isEnabled = data.enabled || FindIt.unlockAll.value;
-                item.tooltip = data.tooltip;
-                item.tooltipBox = data.tooltipBox;
-                item.objectUserData = data.objectUserData;
-                item.forceZOrder = index;
+                component.isEnabled = data.enabled || FindIt.unlockAll.value;
+                component.tooltip = data.tooltip;
+                component.tooltipBox = data.tooltipBox;
+                component.objectUserData = data.objectUserData;
+                component.forceZOrder = index;
 
-                if (item.containsMouse)
+                if (component.containsMouse)
                 {
-                    item.RefreshTooltip();
+                    component.RefreshTooltip();
 
                     if (m_tooltipBox != null && m_tooltipBox.isVisible && m_tooltipBox != data.tooltipBox)
                     {
@@ -290,7 +352,14 @@ namespace FindIt.GUI
 
                     m_tooltipBox = data.tooltipBox;
 
-                    RefreshTooltipAltas(item);
+                    RefreshTooltipAltas(component);
+                }
+
+                if(m_tagSprite != null)
+                {
+                    m_tagSprite.atlas = FindIt.atlas;
+
+                    m_tagSprite.isVisible = currentData.asset != null && AssetTagList.instance.assets.ContainsValue(currentData.asset) && (component.containsMouse || currentData.asset.tagsCustom.Count > 0);
                 }
 
                 if (m_steamSprite != null)
@@ -338,13 +407,17 @@ namespace FindIt.GUI
         {
             try
             {
-                if (FindIt.thumbnailFixRunning && currentData != null && currentData.asset != null && currentData.asset.prefab != null)
+                if (currentData != null && currentData.asset != null && currentData.asset.prefab != null && !m_fixedFocusedTexture.Contains(currentData.asset.prefab))
                 {
-                    ImageUtils.FixFocusedTexture(currentData.asset.prefab);
+                    if (ImageUtils.FixFocusedTexture(currentData.asset.prefab))
+                    {
+                        DebugUtils.Log("Fixed focused texture: " + currentData.asset.prefab.name);
+                    }
+                    m_fixedFocusedTexture.Add(currentData.asset.prefab);
                 }
 
-                item.normalFgSprite = currentData.baseIconName + "Focused";
-                item.hoveredFgSprite = currentData.baseIconName + "Focused";
+                component.normalFgSprite = currentData.baseIconName + "Focused";
+                component.hoveredFgSprite = currentData.baseIconName + "Focused";
             }
             catch (Exception e)
             {
@@ -364,8 +437,8 @@ namespace FindIt.GUI
         {
             try
             {
-                item.normalFgSprite = currentData.baseIconName;
-                item.hoveredFgSprite = currentData.baseIconName + "Hovered";
+                component.normalFgSprite = currentData.baseIconName;
+                component.hoveredFgSprite = currentData.baseIconName + "Hovered";
             }
             catch (Exception e)
             {
