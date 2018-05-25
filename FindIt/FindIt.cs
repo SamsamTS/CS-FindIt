@@ -22,7 +22,7 @@ namespace FindIt
         public const string settingsFileName = "FindIt";
 
         public static FindIt instance;
-        public static SavedBool detourGeneratedScrollPanels = new SavedBool("detourGeneratedScrollPanels", settingsFileName, true, true);
+        //public static SavedBool detourGeneratedScrollPanels = new SavedBool("detourGeneratedScrollPanels", settingsFileName, true, true);
         public static SavedBool unlockAll = new SavedBool("unlockAll", settingsFileName, false, true);
         public static bool fixBadProps;
         public static UITextureAtlas atlas = LoadResources();
@@ -387,10 +387,10 @@ namespace FindIt
         {
             if ((ToolManager.instance.m_properties.m_mode & ItemClass.Availability.GameAndMap) != ItemClass.Availability.None)
             {
-                if (FindIt.detourGeneratedScrollPanels.value)
-                {
+                //if (FindIt.detourGeneratedScrollPanels.value)
+                //{
                     Redirector<Detours.GeneratedScrollPanelDetour>.Deploy();
-                }
+                //}
             }
         }
 

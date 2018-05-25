@@ -40,6 +40,7 @@ namespace FindIt.GUI
                 AssetTagList.instance.RemoveCustomTag(asset, text);
                 isVisible = false;
                 UITagsWindow.instance.input.Focus();
+                UITagsWindow.instance.Refresh(asset);
             };
         }
 

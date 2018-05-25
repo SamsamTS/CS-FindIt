@@ -57,7 +57,7 @@ namespace FindIt
 
                 group.AddSpace(10);
 
-                checkBox = (UICheckBox)group.AddCheckbox("Replace all menus", FindIt.detourGeneratedScrollPanels.value, (b) =>
+                /*checkBox = (UICheckBox)group.AddCheckbox("Replace all menus", FindIt.detourGeneratedScrollPanels.value, (b) =>
                 {
                     FindIt.detourGeneratedScrollPanels.value = b;
 
@@ -70,13 +70,13 @@ namespace FindIt
                         Redirector<Detours.GeneratedScrollPanelDetour>.Revert();
                     }
                 });
-                checkBox.tooltip = "Enhance all menu. May be incompatible with some mods. Changes require a reload.";
+                checkBox.tooltip = "Enhance all menu. May be incompatible with some mods. Changes require a reload.";*/
 
                 checkBox = (UICheckBox)group.AddCheckbox("Unlock all", FindIt.unlockAll.value, (b) =>
                 {
                     FindIt.unlockAll.value = b;
                 });
-                checkBox.tooltip = "Let you select and place items even when locked. Replace all menus must be selected.";
+                checkBox.tooltip = "Let you select and place items even when locked.";
 
                 group.AddSpace(10);
 
@@ -99,6 +99,6 @@ namespace FindIt
             }
         }
 
-        public const string version = "1.5.0";
+        public const string version = "1.5.1";
     }
 }

@@ -158,7 +158,7 @@ namespace FindIt.GUI
 
         private static UIComponent m_tooltipBox;
 
-        private static HashSet<PrefabInfo> m_fixedFocusedTexture = new HashSet<PrefabInfo>();
+        public static HashSet<PrefabInfo> fixedFocusedTexture = new HashSet<PrefabInfo>();
 
         public UIButton component
         {
@@ -229,7 +229,7 @@ namespace FindIt.GUI
             {
                 p.Use();
 
-                UITagsWindow.ShowAt(currentData.asset, m_tagSprite.absolutePosition);
+                UITagsWindow.ShowAt(currentData.asset, m_tagSprite);
             };
 
             component.eventMouseEnter += (c, p) =>
@@ -407,13 +407,13 @@ namespace FindIt.GUI
         {
             try
             {
-                if (currentData != null && currentData.asset != null && currentData.asset.prefab != null && !m_fixedFocusedTexture.Contains(currentData.asset.prefab))
+                if (currentData != null && currentData.asset != null && currentData.asset.prefab != null && !fixedFocusedTexture.Contains(currentData.asset.prefab))
                 {
                     if (ImageUtils.FixFocusedTexture(currentData.asset.prefab))
                     {
                         DebugUtils.Log("Fixed focused texture: " + currentData.asset.prefab.name);
                     }
-                    m_fixedFocusedTexture.Add(currentData.asset.prefab);
+                    fixedFocusedTexture.Add(currentData.asset.prefab);
                 }
 
                 component.normalFgSprite = currentData.baseIconName + "Focused";

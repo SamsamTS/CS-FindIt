@@ -1,7 +1,9 @@
-﻿using ColossalFramework.UI;
-using System;
-using System.Collections.Generic;
-using System.Collections;
+﻿using System;
+
+using ColossalFramework;
+using ColossalFramework.UI;
+using ColossalFramework.PlatformServices;
+
 using System.Reflection;
 using UnityEngine;
 
@@ -65,7 +67,222 @@ namespace FindIt.Detours
     [TargetType(typeof(GeneratedScrollPanel))]
     public class GeneratedScrollPanelDetour : GeneratedScrollPanel
     {
-        public static List<UIFakeButton> fakeButtons;
+        [RedirectMethod]
+        new protected UIButton CreateButton(string name, string tooltip, string baseIconName, int index, UITextureAtlas atlas, UIComponent tooltipBox, bool enabled)
+        {
+            UIScrollablePanel m_ScrollablePanel = (UIScrollablePanel)typeof(GeneratedScrollPanel).GetField("m_ScrollablePanel", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(this);
+            FieldInfo m_ObjectIndexField = typeof(GeneratedScrollPanel).GetField("m_ObjectIndex", BindingFlags.Instance | BindingFlags.NonPublic);
+            int m_ObjectIndex = (int)m_ObjectIndexField.GetValue(this);
+
+            UIButton uIButton;
+            if (m_ScrollablePanel.childCount > m_ObjectIndex)
+            {
+                uIButton = (m_ScrollablePanel.components[m_ObjectIndex] as UIButton);
+            }
+            else
+            {
+                GameObject asGameObject = UITemplateManager.GetAsGameObject("PlaceableItemTemplate");
+                uIButton = (m_ScrollablePanel.AttachUIComponent(asGameObject) as UIButton);
+            }
+            uIButton.gameObject.GetComponent<TutorialUITag>().tutorialTag = name;
+            uIButton.text = string.Empty;
+            uIButton.name = name;
+            uIButton.tooltipAnchor = UITooltipAnchor.Anchored;
+            uIButton.tabStrip = true;
+            uIButton.horizontalAlignment = UIHorizontalAlignment.Center;
+            uIButton.verticalAlignment = UIVerticalAlignment.Middle;
+            uIButton.pivot = UIPivotPoint.TopCenter;
+            if (atlas != null)
+            {
+                uIButton.atlas = atlas;
+            }
+            if (index != -1)
+            {
+                uIButton.zOrder = index;
+            }
+            uIButton.verticalAlignment = this.buttonsAlignment;
+            uIButton.foregroundSpriteMode = UIForegroundSpriteMode.Fill;
+            uIButton.normalFgSprite = baseIconName;
+            uIButton.focusedFgSprite = baseIconName + "Focused";
+            uIButton.hoveredFgSprite = baseIconName + "Hovered";
+            uIButton.pressedFgSprite = baseIconName + "Pressed";
+            uIButton.disabledFgSprite = baseIconName + "Disabled";
+            UIComponent uIComponent = (uIButton.childCount <= 0) ? null : uIButton.components[0];
+            if (uIComponent != null)
+            {
+                uIComponent.isVisible = false;
+            }
+            uIButton.isEnabled = enabled;
+            uIButton.tooltip = tooltip;
+            uIButton.tooltipBox = tooltipBox;
+            uIButton.group = base.component;
+            m_ObjectIndexField.SetValue(this, m_ObjectIndex + 1);
+
+            // Start mod
+
+            uIButton.eventVisibilityChanged += new PropertyChangedEventHandler<bool>(Init);
+
+            // End mod
+
+            return uIButton;
+        }
+
+        private void Init(UIComponent component, bool b)
+        {
+            component.eventVisibilityChanged -= new PropertyChangedEventHandler<bool>(Init);
+
+            try
+            {
+                if (component.objectUserData is PrefabInfo prefab)
+                {
+                    string name = Asset.GetName(prefab);
+
+                    // Fixing thumbnails
+                    /*if (prefab.m_Atlas == null || prefab.m_Thumbnail.IsNullOrWhiteSpace() ||
+                        prefab.m_Thumbnail == "Thumboldasphalt" ||
+                        prefab.m_Thumbnail == "Thumbbirdbathresidential" ||
+                        prefab.m_Thumbnail == "Thumbcrate" ||
+                        prefab.m_Thumbnail == "Thumbhedge" ||
+                        prefab.m_Thumbnail == "Thumbhedge2" ||
+                        prefab.m_Thumbnail == "ThumbnailRoadTypeTrainTracksHovered")
+                    {
+                        string baseIconName = prefab.m_Thumbnail;
+                        if (!ImageUtils.CreateThumbnailAtlas(base.name, prefab) && !baseIconName.IsNullOrWhiteSpace())
+                        {
+                            prefab.m_Thumbnail = baseIconName;
+                        }
+                    }
+
+                    if (prefab.m_Atlas != null && (
+                        prefab.m_Atlas.name == "AssetThumbs" ||
+                        prefab.m_Atlas.name == "Monorailthumbs" ||
+                        prefab.m_Atlas.name == "Netpropthumbs" ||
+                        prefab.m_Atlas.name == "Animalthumbs"))
+                    {
+                        ImageUtils.AddThumbnailVariantsInAtlas(prefab);
+                    }*/
+
+
+                    if (AssetTagList.instance.assets.ContainsKey(name))
+                    {
+                        Asset asset = AssetTagList.instance.assets[name];
+
+                        // Fixing focused texture
+                        component.eventClicked += new MouseEventHandler(FixFocusedTexture);
+
+                        // Adding custum tag icon
+                        UISprite tagSprite = component.AddUIComponent<UISprite>();
+                        tagSprite.size = new Vector2(20, 16);
+                        tagSprite.atlas = FindIt.atlas;
+                        tagSprite.spriteName = "Tag";
+                        tagSprite.opacity = 0.5f;
+                        tagSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
+                        tagSprite.relativePosition = new Vector3(component.width - tagSprite.width - 5, 5);
+                        tagSprite.isVisible = false;
+
+                        if (CustomTagsLibrary.assetTags.ContainsKey(name))
+                        {
+                            tagSprite.tooltip = CustomTagsLibrary.assetTags[name];
+                        }
+                        else
+                        {
+                            tagSprite.tooltip = null;
+                        }
+
+                        tagSprite.eventMouseEnter += (c, p) =>
+                        {
+                            tagSprite.opacity = 1f;
+                        };
+
+                        tagSprite.eventMouseLeave += (c, p) =>
+                        {
+                            tagSprite.opacity = 0.5f;
+                        };
+
+                        tagSprite.eventClick += (c, p) =>
+                        {
+                            p.Use();
+
+                            UITagsWindow.ShowAt(asset, tagSprite);
+                        };
+
+                        component.eventMouseEnter += (c, p) =>
+                        {
+                            tagSprite.isVisible = true;
+                        };
+
+                        component.eventMouseLeave += (c, p) =>
+                        {
+                            if (asset.tagsCustom.Count == 0)
+                            {
+                                tagSprite.isVisible = false;
+                            }
+                        };
+
+                        // Adding steam icon
+                        if (asset.steamID != 0)
+                        {
+                            UISprite steamSprite = component.AddUIComponent<UISprite>();
+                            steamSprite.size = new Vector2(26, 16);
+                            steamSprite.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
+                            steamSprite.spriteName = "SteamWorkshop";
+                            steamSprite.opacity = 0.05f;
+                            steamSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
+                            steamSprite.relativePosition = new Vector3(component.width - steamSprite.width - 5, component.height - steamSprite.height - 5);
+
+                            if (!asset.author.IsNullOrWhiteSpace())
+                            {
+                                steamSprite.tooltip = "By " + asset.author;
+                            }
+
+                            if (PlatformService.IsOverlayEnabled())
+                            {
+                                steamSprite.eventMouseUp += (c, p) =>
+                                {
+                                    if (!p.used && p.buttons == UIMouseButton.Right)
+                                    {
+                                        PublishedFileId publishedFileId = new PublishedFileId(asset.steamID);
+
+                                        if (publishedFileId != PublishedFileId.invalid)
+                                        {
+                                            PlatformService.ActivateGameOverlayToWorkshopItem(publishedFileId);
+                                            p.Use();
+                                        }
+                                    }
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                DebugUtils.LogException(e);
+            }
+        }
+
+        private void FixFocusedTexture(UIComponent component, UIMouseEventParameter p)
+        {
+            component.eventClicked -= new MouseEventHandler(FixFocusedTexture);
+
+            try
+            {
+                if (component.objectUserData is PrefabInfo prefab)
+                {
+                    if (ImageUtils.FixFocusedTexture(prefab))
+                    {
+                        DebugUtils.Log("Fixed focused texture: " + prefab.name);
+                    }
+                    UIScrollPanelItem.fixedFocusedTexture.Add(prefab);
+                }
+            }
+            catch (Exception e)
+            {
+                DebugUtils.LogException(e);
+            }
+        }
+
+        /*public static List<UIFakeButton> fakeButtons;
         public static object lockObject = new object();
 
         [RedirectMethod]
@@ -381,7 +598,7 @@ namespace FindIt.Detours
             }
 
             scrollPanel.DisplayAt(0);
-        }
+        }*/
 
         public override ItemClass.Service service
         {

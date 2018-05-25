@@ -12,6 +12,8 @@ namespace FindIt.GUI
         public UITextField input;
         private UIDragHandle m_dragHandle;
 
+        private UIComponent m_tagSprite;
+
         private UIPanel m_tagsPanel;
 
         private Asset m_asset;
@@ -92,10 +94,11 @@ namespace FindIt.GUI
             base.OnKeyDown(p);
         }
 
-        public static void ShowAt(Asset asset, Vector3 position)
+        public static void ShowAt(Asset asset, UIComponent component)
         {
+            instance.m_tagSprite = component;
             instance.Display(asset);
-            instance.absolutePosition = new Vector3(position.x, position.y - instance.height);
+
             instance.Show(true);
 
             UIView.PushModal(instance);
@@ -133,12 +136,29 @@ namespace FindIt.GUI
                 m_tagsPanel.Reset();
             }
 
+            Refresh(asset);
+        }
+
+        public void Refresh(Asset asset)
+        {
+            if (asset.tagsCustom.Count == 0)
+            {
+                m_tagSprite.isVisible = false;
+            }
+            else
+            {
+                m_tagSprite.opacity = 0.5f;
+                m_tagSprite.isVisible = true;
+            }
+
             height = m_tagsPanel.relativePosition.y + m_tagsPanel.height + 2 * spacing + input.height + spacing;
             m_dragHandle.size = size;
             input.relativePosition = new Vector3(spacing, height - input.height - spacing);
 
             input.text = "";
             input.Focus();
+
+            absolutePosition = new Vector3(m_tagSprite.absolutePosition.x, m_tagSprite.absolutePosition.y - instance.height);
         }
 
         protected override void OnVisibilityChanged()
