@@ -167,6 +167,18 @@ namespace FindIt.Detours
                     {
                         Asset asset = AssetTagList.instance.assets[name];
 
+                        component.eventVisibilityChanged += (c, p) =>
+                        {
+                            if (FindIt.unlockAll)
+                            {
+                                c.isEnabled = true;
+                            }
+                            else
+                            {
+                                c.isEnabled = IsUnlocked(prefab.GetUnlockMilestone());
+                            }
+                        };
+
                         // Fixing focused texture
                         component.eventClicked += new MouseEventHandler(FixFocusedTexture);
 

@@ -46,73 +46,78 @@ namespace FindIt
             get { return m_prefab; }
             set
             {
-                if (m_prefab != value)
+                m_prefab = value;
+
+                if (m_prefab != null)
                 {
-                    m_prefab = value;
+                    service = m_prefab.GetService();
+                    subService = m_prefab.GetSubService();
 
-                    if (m_prefab != null)
+                    BuildingInfo buildingPrefab = m_prefab as BuildingInfo;
+                    if (buildingPrefab != null)
                     {
-                        service = m_prefab.GetService();
-                        subService = m_prefab.GetSubService();
-
-                        BuildingInfo buildingPrefab = m_prefab as BuildingInfo;
-                        if (buildingPrefab != null)
+                        if (buildingPrefab.m_placementStyle != ItemClass.Placement.Manual)
                         {
-                            if (buildingPrefab.m_placementStyle != ItemClass.Placement.Manual)
+                            assetType = AssetType.Growable;
+                        }
+                        else
+                        {
+                            assetType = AssetType.Ploppable;
+                        }
+
+                        size = new Vector2(buildingPrefab.m_cellWidth, buildingPrefab.m_cellLength);
+
+                        return;
+                    }
+
+                    PropInfo propPrefab = m_prefab as PropInfo;
+                    if (propPrefab != null)
+                    {
+                        assetType = AssetType.Prop;
+
+                        if (propPrefab.m_material != null)
+                        {
+                            if (propPrefab.m_material.shader == shaderBlend || propPrefab.m_material.shader == shaderSolid)
                             {
-                                assetType = AssetType.Growable;
+                                assetType = AssetType.Decal;
                             }
-                            else
+                            /*else if (propPrefab.m_material.shader == shaderFence)
                             {
-                                if (service == ItemClass.Service.Residential ||
-                                    service == ItemClass.Service.Industrial ||
-                                    service == ItemClass.Service.Commercial ||
-                                    service == ItemClass.Service.Office)
-                                {
-                                    assetType = AssetType.Rico;
-                                }
-                                else
-                                {
-                                    assetType = AssetType.Ploppable;
-                                }
-                            }
-                                
-                            size = new Vector2(buildingPrefab.m_cellWidth, buildingPrefab.m_cellLength);
-
-                            return;
+                                assetType = AssetType.Fence;
+                            }*/
                         }
 
-                        PropInfo propPrefab = m_prefab as PropInfo;
-                        if (propPrefab != null)
-                        {
-                            assetType = AssetType.Prop;
-
-                            if (propPrefab.m_material != null)
-                            {
-                                if (propPrefab.m_material.shader == shaderBlend || propPrefab.m_material.shader == shaderSolid)
-                                {
-                                    assetType = AssetType.Decal;
-                                }
-                                /*else if (propPrefab.m_material.shader == shaderFence)
-                                {
-                                    assetType = AssetType.Fence;
-                                }*/
-                            }
-
-                            return;
-                        }
-                        else if(m_prefab is NetInfo)
-                        {
-                            assetType = AssetType.Road;
-                        }
-                        else if (m_prefab is TreeInfo)
-                        {
-                            assetType = AssetType.Tree;
-                        }
+                        return;
+                    }
+                    else if (m_prefab is NetInfo)
+                    {
+                        assetType = AssetType.Road;
+                    }
+                    else if (m_prefab is TreeInfo)
+                    {
+                        assetType = AssetType.Tree;
                     }
                 }
             }
         }
+
+        public void RefreshRico()
+        {
+            if (FindIt.rico && m_prefab != null && assetType == AssetType.Ploppable)
+            {
+                service = m_prefab.GetService();
+                subService = m_prefab.GetSubService();
+
+                if (service == ItemClass.Service.Residential ||
+                   service == ItemClass.Service.Industrial ||
+                   service == ItemClass.Service.Commercial ||
+                   service == ItemClass.Service.Office)
+                {
+                    assetType = AssetType.Rico;
+                }
+            }
+        }
+
         public AssetType assetType = AssetType.Invalid;
         public ItemClass.Service service = ItemClass.Service.None;
         public ItemClass.SubService subService = ItemClass.SubService.None;
@@ -330,6 +335,7 @@ namespace FindIt
 
                 foreach (Asset asset in assets.Values)
                 {
+                    asset.RefreshRico();
                     if (asset.prefab != null && (filter == Asset.AssetType.All || asset.assetType == filter))
                     {
                         if (filter == Asset.AssetType.Growable || filter == Asset.AssetType.Rico)
@@ -432,6 +438,7 @@ namespace FindIt
             {
                 foreach (Asset asset in assets.Values)
                 {
+                    asset.RefreshRico();
                     if (asset.prefab != null && (filter == Asset.AssetType.All || asset.assetType == filter))
                     {
                         if (filter == Asset.AssetType.Growable || filter == Asset.AssetType.Rico)

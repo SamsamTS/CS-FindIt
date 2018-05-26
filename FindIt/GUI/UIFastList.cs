@@ -673,7 +673,7 @@ namespace FindIt.GUI
                 {
                     if (m_items.m_buffer[i].component != null)
                     {
-                        Destroy(m_items.m_buffer[i].component);
+                        Destroy(m_items.m_buffer[i].component.gameObject);
                     }
                 }
 

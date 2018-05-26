@@ -170,7 +170,6 @@ namespace FindIt.GUI
         {
             public string name;
             public string tooltip;
-            public string baseIconName;
             public UITextureAtlas atlas;
             public UIComponent tooltipBox;
             public bool enabled;
@@ -296,11 +295,12 @@ namespace FindIt.GUI
                         prefab.m_Thumbnail == "Thumbhedge2" ||
                         prefab.m_Thumbnail == "ThumbnailRoadTypeTrainTracksHovered")
                     {
-                        string name = Asset.GetName(prefab);
+                        /*string name = Asset.GetName(prefab);
                         if (!ImageUtils.CreateThumbnailAtlas(name, prefab) && !data.baseIconName.IsNullOrWhiteSpace())
                         {
                             prefab.m_Thumbnail = data.baseIconName;
-                        }
+                        }*/
+                        FindIt.thumbnailsToGenerate.Add(prefab);
                     }
 
                     if (prefab.m_Atlas != null && (
@@ -311,8 +311,7 @@ namespace FindIt.GUI
                     {
                         ImageUtils.AddThumbnailVariantsInAtlas(prefab);
                     }
-
-                    data.baseIconName = prefab.m_Thumbnail;
+                    
                     if (prefab.m_Atlas != null)
                     {
                         data.atlas = prefab.m_Atlas;
@@ -326,10 +325,10 @@ namespace FindIt.GUI
 
                 component.verticalAlignment = data.verticalAlignment;
 
-                component.normalFgSprite = data.baseIconName;
-                component.hoveredFgSprite = data.baseIconName + "Hovered";
-                component.pressedFgSprite = data.baseIconName + "Pressed";
-                component.disabledFgSprite = data.baseIconName + "Disabled";
+                component.normalFgSprite = prefab.m_Thumbnail;
+                component.hoveredFgSprite = prefab.m_Thumbnail + "Hovered";
+                component.pressedFgSprite = prefab.m_Thumbnail + "Pressed";
+                component.disabledFgSprite = prefab.m_Thumbnail + "Disabled";
                 component.focusedFgSprite = null;
 
                 component.isEnabled = data.enabled || FindIt.unlockAll.value;
@@ -416,8 +415,8 @@ namespace FindIt.GUI
                     fixedFocusedTexture.Add(currentData.asset.prefab);
                 }
 
-                component.normalFgSprite = currentData.baseIconName + "Focused";
-                component.hoveredFgSprite = currentData.baseIconName + "Focused";
+                component.normalFgSprite = currentData.asset.prefab.m_Thumbnail + "Focused";
+                component.hoveredFgSprite = currentData.asset.prefab.m_Thumbnail + "Focused";
             }
             catch (Exception e)
             {
@@ -437,8 +436,8 @@ namespace FindIt.GUI
         {
             try
             {
-                component.normalFgSprite = currentData.baseIconName;
-                component.hoveredFgSprite = currentData.baseIconName + "Hovered";
+                component.normalFgSprite = currentData.asset.prefab.m_Thumbnail;
+                component.hoveredFgSprite = currentData.asset.prefab.m_Thumbnail + "Hovered";
             }
             catch (Exception e)
             {

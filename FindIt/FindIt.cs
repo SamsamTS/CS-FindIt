@@ -34,6 +34,7 @@ namespace FindIt
 
         public UIButton mainButton;
         public UISearchBox searchBox;
+        public UIScrollPanel scrollPanel;
 
         private UIGroupPanel m_groupPanel;
 
@@ -97,7 +98,7 @@ namespace FindIt
                         m_groupPanel.RefreshPanel();
                     }
 
-                    UIScrollPanel scrollPanel = UIScrollPanel.Create(m_groupPanel.GetComponentInChildren<UIScrollablePanel>(), UIVerticalAlignment.Middle);
+                    scrollPanel = UIScrollPanel.Create(m_groupPanel.GetComponentInChildren<UIScrollablePanel>(), UIVerticalAlignment.Middle);
                     scrollPanel.eventClicked += OnButtonClicked;
                     scrollPanel.eventVisibilityChanged += (c, p) =>
                     {
@@ -154,6 +155,49 @@ namespace FindIt
                 DebugUtils.Log("Start failed");
                 DebugUtils.LogException(e);
                 enabled = false;
+            }
+        }
+
+        public static HashSet<PrefabInfo> thumbnailsToGenerate = new HashSet<PrefabInfo>();
+
+        public void Update()
+        {
+            try
+            {
+                if (thumbnailsToGenerate.Count > 0)
+                {
+                    List<PrefabInfo> prefabs;
+                    lock (thumbnailsToGenerate)
+                    {
+                        prefabs = new List<PrefabInfo>(thumbnailsToGenerate);
+                    }
+
+                    int count = 0;
+                    foreach (PrefabInfo prefab in prefabs)
+                    {
+                        string name = Asset.GetName(prefab);
+                        string baseIconName = prefab.m_Thumbnail;
+                        if (!ImageUtils.CreateThumbnailAtlas(name, prefab) && !baseIconName.IsNullOrWhiteSpace())
+                        {
+                            prefab.m_Thumbnail = baseIconName;
+                        }
+                        lock (thumbnailsToGenerate)
+                        {
+                            thumbnailsToGenerate.Remove(prefab);
+                        }
+                        count++;
+
+                        // Generate 7 thumbnails max
+                        if (count > 7) break;
+                    }
+
+                    scrollPanel.Refresh();
+                }
+            }
+            catch (Exception e)
+            {
+                DebugUtils.Log("Update failed");
+                DebugUtils.LogException(e);
             }
         }
 
@@ -303,8 +347,9 @@ namespace FindIt
             {
                 foreach(Assembly assembly in plugin.GetAssemblies())
                 {
-                    if(assembly.GetName().Name == "PloppableRICO")
+                    if(assembly.GetName().Name.ToLower() == "ploppablerico")
                     {
+                        DebugUtils.Log("Rico found");
                         return plugin.isEnabled;
                     }
                 }

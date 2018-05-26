@@ -365,8 +365,6 @@ namespace FindIt.GUI
                         data.atlas = scrollPanel.atlas;
                     }
 
-                    data.baseIconName = asset.prefab.m_Thumbnail;
-
                     data.tooltipBox = GeneratedPanel.GetTooltipBox(TooltipHelper.GetHashCode(data.tooltip));
                     data.enabled = ToolsModifierControl.IsUnlocked(asset.prefab.GetUnlockMilestone()) || asset.assetType == Asset.AssetType.Rico;
                     data.verticalAlignment = scrollPanel.buttonsAlignment;
