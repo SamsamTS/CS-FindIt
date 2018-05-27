@@ -126,9 +126,6 @@ namespace FindIt
         public string author;
         public float score;
 
-        public delegate void OnButtonClicked(UIComponent comp);
-        public OnButtonClicked onButtonClicked;
-
         public HashSet<string> tagsTitle = new HashSet<string>();
         public HashSet<string> tagsDesc = new HashSet<string>();
         public HashSet<string> tagsCustom = new HashSet<string>();

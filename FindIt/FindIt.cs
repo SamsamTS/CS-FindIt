@@ -37,6 +37,7 @@ namespace FindIt
         public UIScrollPanel scrollPanel;
 
         private UIGroupPanel m_groupPanel;
+        private BeautificationPanel m_beautificationPanel;
 
         public void Start()
         {
@@ -148,6 +149,8 @@ namespace FindIt
 
                 mainButton.tooltip = "Find It! " + ModInfo.version;
 
+                m_beautificationPanel = FindObjectOfType<BeautificationPanel>();
+
                 DebugUtils.Log("Initialized");
             }
             catch (Exception e)
@@ -201,7 +204,7 @@ namespace FindIt
             }
         }
 
-        public static void HideAllOptionPanels()
+        public void HideAllOptionPanels()
         {
             OptionPanelBase[] panels = ToolsModifierControl.mainToolbar.m_OptionsBar.GetComponentsInChildren<OptionPanelBase>();
 
@@ -209,35 +212,42 @@ namespace FindIt
             {
                 panel.Hide();
             }
+
+            UIComponent brushPanel = ToolsModifierControl.mainToolbar.m_OptionsBar.Find("BrushPanel");
+            if(brushPanel != null)
+            {
+                brushPanel.isVisible = false;
+            }
+            /*m_beautificationPanel = FindObjectOfType<BeautificationPanel>();
+            if (m_beautificationPanel != null)
+            {
+               // Extra Lanscaping Tool hack
+               m_beautificationPanel.component.isVisible = true;
+               m_beautificationPanel.component.isVisible = false;
+            }*/
         }
 
         public void OnButtonClicked(UIComponent c, UIMouseEventParameter p)
         {
-
             UIButton uIButton = p.source as UIButton;
             if (uIButton != null && uIButton.parent is UIScrollPanel)
             {
-                PrefabInfo prefab = uIButton.objectUserData as PrefabInfo;
+                HideAllOptionPanels();
 
-                string key = Asset.GetName(prefab);
-                if (AssetTagList.instance.assets.ContainsKey(key) && AssetTagList.instance.assets[key].onButtonClicked != null)
+                if (m_beautificationPanel != null)
                 {
-                    HideAllOptionPanels();
-                    AssetTagList.instance.assets[key].onButtonClicked(uIButton);
+                    typeof(BeautificationPanel).GetMethod("OnButtonClicked", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(m_beautificationPanel, new object[] { uIButton });
                 }
                 else
                 {
-                    SelectPrefab(prefab);
+                    SelectPrefab(uIButton.objectUserData as PrefabInfo);
                 }
+
             }
         }
 
         public static void SelectPrefab(PrefabInfo prefab)
         {
-            HideAllOptionPanels();
-
-            BeautificationPanel beautificationPanel = UIView.FindObjectOfType<BeautificationPanel>();
-
             BuildingInfo buildingInfo = prefab as BuildingInfo;
             NetInfo netInfo = prefab as NetInfo;
             TransportInfo transportInfo = prefab as TransportInfo;
@@ -257,7 +267,7 @@ namespace FindIt
                 NetTool netTool = ToolsModifierControl.SetTool<NetTool>();
                 if (netTool != null)
                 {
-                    if (netInfo.GetSubService() == ItemClass.SubService.BeautificationParks)
+                    /*if (netInfo.GetSubService() == ItemClass.SubService.BeautificationParks)
                     {
                         //base.ShowPathsOptionPanel();
                         typeof(BeautificationPanel).GetMethod("ShowPathsOptionPanel", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(beautificationPanel, null);
@@ -276,7 +286,7 @@ namespace FindIt
                     {
                         //base.ShowCanalsOptionPanel();
                         typeof(BeautificationPanel).GetMethod("ShowCanalsOptionPanel", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(beautificationPanel, null);
-                    }
+                    }*/
                     netTool.Prefab = netInfo;
                 }
             }
