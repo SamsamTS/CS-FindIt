@@ -26,7 +26,6 @@ namespace FindIt.GUI
             atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericPanelWhite";
             size = new Vector2(300, 180);
-            isVisible = false;
 
             UILabel title = AddUIComponent<UILabel>();
             title.text = "Custom Tags";
@@ -53,8 +52,7 @@ namespace FindIt.GUI
 
             close.eventClicked += (c, p) =>
             {
-                Hide();
-                UIView.PopModal();
+                Close();
             };
 
             m_tagsPanel = AddUIComponent<UIPanel>();
@@ -80,6 +78,20 @@ namespace FindIt.GUI
                 AssetTagList.instance.AddCustomTags(m_asset, t);
                 Display(m_asset);
             };
+
+            Display(m_asset);
+        }
+
+        public static void Close()
+        {
+            if (instance != null)
+            {
+                UIView.PopModal();
+
+                instance.isVisible = false;
+                Destroy(instance.gameObject);
+                instance = null;
+            }
         }
 
         protected override void OnKeyDown(UIKeyEventParameter p)
@@ -87,8 +99,7 @@ namespace FindIt.GUI
             if (Input.GetKey(KeyCode.Escape))
             {
                 p.Use();
-                UIView.PopModal();
-                Hide();
+                Close();
             }
 
             base.OnKeyDown(p);
@@ -96,12 +107,24 @@ namespace FindIt.GUI
 
         public static void ShowAt(Asset asset, UIComponent component)
         {
-            instance.m_tagSprite = component;
-            instance.Display(asset);
+            if (instance == null)
+            {
+                instance = UIView.GetAView().AddUIComponent(typeof(UITagsWindow)) as UITagsWindow;
 
-            instance.Show(true);
+                instance.m_tagSprite = component;
+                instance.m_asset = asset;
 
-            UIView.PushModal(instance);
+                instance.Show(true);
+
+                UIView.PushModal(instance);
+            }
+            else
+            {
+                instance.m_tagSprite = component;
+                instance.Display(asset);
+
+                instance.Show(true);
+            }
         }
 
         public void Display(Asset asset)
@@ -158,7 +181,7 @@ namespace FindIt.GUI
             input.text = "";
             input.Focus();
 
-            absolutePosition = new Vector3(m_tagSprite.absolutePosition.x, m_tagSprite.absolutePosition.y - instance.height);
+            absolutePosition = new Vector3(m_tagSprite.absolutePosition.x, m_tagSprite.absolutePosition.y - height);
         }
 
         protected override void OnVisibilityChanged()

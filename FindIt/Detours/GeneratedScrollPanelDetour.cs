@@ -12,58 +12,6 @@ using FindIt.GUI;
 
 namespace FindIt.Detours
 {
-    /*[TargetType(typeof(UIView))]
-    public class UIViewDetour : UIView
-    {
-        [RedirectMethod]
-        private void OnResolutionChanged(Vector2 oldSize, Vector2 currentSize)
-        {
-            //this.m_CachedScreenResolution = currentSize;
-            typeof(UIView).GetField("m_CachedScreenResolution", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(this, currentSize);
-
-            UIUtils.NeedHalfPixelOffset(this.m_PreserveSizes, true);
-            float aspect = this.m_UICamera.aspect;
-            float x = oldSize.y * aspect;
-            float x2 = currentSize.y * aspect;
-            Vector2 previousResolution = new Vector2(x, oldSize.y);
-            Vector2 currentResolution = new Vector2(x2, currentSize.y);
-            UIComponent[] componentsInChildren = base.GetComponentsInChildren<UIComponent>();
-            Array.Sort<UIComponent>(componentsInChildren, new Comparison<UIComponent>(this.RenderSortFunc));
-            for (int i = 0; i < componentsInChildren.Length; i++)
-            {
-                if (this.m_PreserveSizes && componentsInChildren[i].parent == null)
-                {
-                    componentsInChildren[i].MakePixelPerfect();
-                }
-                try
-                {
-                    componentsInChildren[i].GetType().GetMethod("OnResolutionChanged", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(componentsInChildren[i], new object[] { previousResolution, currentResolution });
-                    //componentsInChildren[i].OnResolutionChanged(previousResolution, currentResolution);
-                }
-                catch(Exception e)
-                {
-                    DebugUtils.Log(componentsInChildren[i].name + " " + componentsInChildren[i].GetType());
-                }
-            }
-            for (int j = 0; j < componentsInChildren.Length; j++)
-            {
-                try
-                {
-                    componentsInChildren[j].PerformLayout();
-                }
-                catch (Exception e)
-                {
-                    DebugUtils.Log(componentsInChildren[j].name + " " + componentsInChildren[j].GetType());
-                }
-            }
-        }
-
-        private int RenderSortFunc(UIComponent lhs, UIComponent rhs)
-        {
-            return lhs.renderOrder.CompareTo(rhs.renderOrder);
-        }
-    }*/
-
     [TargetType(typeof(GeneratedScrollPanel))]
     public class GeneratedScrollPanelDetour : GeneratedScrollPanel
     {
@@ -122,6 +70,23 @@ namespace FindIt.Detours
 
             uIButton.eventVisibilityChanged += new PropertyChangedEventHandler<bool>(Init);
 
+            GeneratedScrollPanel panel = this;
+            SimulationManager.instance.AddAction(() =>
+            {
+                if (uIButton.objectUserData is PrefabInfo prefab)
+                {
+                    string key = Asset.GetName(prefab);
+                    if (AssetTagList.instance.assets.ContainsKey(key))
+                    {
+                        if (AssetTagList.instance.assets[key].onButtonClicked == null)
+                        {
+                            MethodInfo onButtonClicked = panel.GetType().GetMethod("OnButtonClicked", BindingFlags.NonPublic | BindingFlags.Instance);
+                            AssetTagList.instance.assets[key].onButtonClicked = Delegate.CreateDelegate(typeof(Asset.OnButtonClicked), panel, onButtonClicked, false) as Asset.OnButtonClicked;
+                        }
+                    }
+                }
+            });
+
             // End mod
 
             return uIButton;
@@ -137,34 +102,10 @@ namespace FindIt.Detours
                 {
                     string name = Asset.GetName(prefab);
 
-                    // Fixing thumbnails
-                    /*if (prefab.m_Atlas == null || prefab.m_Thumbnail.IsNullOrWhiteSpace() ||
-                        prefab.m_Thumbnail == "Thumboldasphalt" ||
-                        prefab.m_Thumbnail == "Thumbbirdbathresidential" ||
-                        prefab.m_Thumbnail == "Thumbcrate" ||
-                        prefab.m_Thumbnail == "Thumbhedge" ||
-                        prefab.m_Thumbnail == "Thumbhedge2" ||
-                        prefab.m_Thumbnail == "ThumbnailRoadTypeTrainTracksHovered")
-                    {
-                        string baseIconName = prefab.m_Thumbnail;
-                        if (!ImageUtils.CreateThumbnailAtlas(base.name, prefab) && !baseIconName.IsNullOrWhiteSpace())
-                        {
-                            prefab.m_Thumbnail = baseIconName;
-                        }
-                    }
-
-                    if (prefab.m_Atlas != null && (
-                        prefab.m_Atlas.name == "AssetThumbs" ||
-                        prefab.m_Atlas.name == "Monorailthumbs" ||
-                        prefab.m_Atlas.name == "Netpropthumbs" ||
-                        prefab.m_Atlas.name == "Animalthumbs"))
-                    {
-                        ImageUtils.AddThumbnailVariantsInAtlas(prefab);
-                    }*/
-
-
                     if (AssetTagList.instance.assets.ContainsKey(name))
                     {
+                        ImageUtils.FixThumbnails(prefab, component as UIButton);
+
                         Asset asset = AssetTagList.instance.assets[name];
 
                         component.eventVisibilityChanged += (c, p) =>
@@ -182,7 +123,7 @@ namespace FindIt.Detours
                         // Fixing focused texture
                         component.eventClicked += new MouseEventHandler(FixFocusedTexture);
 
-                        // Adding custum tag icon
+                        // Adding custom tag icon
                         UISprite tagSprite = component.AddUIComponent<UISprite>();
                         tagSprite.size = new Vector2(20, 16);
                         tagSprite.atlas = FindIt.atlas;

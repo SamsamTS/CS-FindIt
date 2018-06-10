@@ -12,8 +12,6 @@ namespace FindIt.GUI
     {
         public FastList<UIScrollPanelItem.ItemData> savedItems;
 
-        public UIVerticalAlignment buttonsAlignment;
-
         protected override void OnSizeChanged()
         {
             base.OnSizeChanged();
@@ -60,14 +58,13 @@ namespace FindIt.GUI
             }
         }
 
-        public static UIScrollPanel Create(UIScrollablePanel oldPanel, UIVerticalAlignment buttonsAlignment)
+        public static UIScrollPanel Create(UIScrollablePanel oldPanel)
         {
             UIScrollPanel scrollPanel = oldPanel.parent.AddUIComponent<UIScrollPanel>();
             scrollPanel.name = oldPanel.name;
             scrollPanel.autoLayout = false;
             scrollPanel.autoReset = false;
             scrollPanel.autoSize = false;
-            scrollPanel.buttonsAlignment = buttonsAlignment;
             scrollPanel.template = "PlaceableItemTemplate";
             scrollPanel.itemWidth = 109f;
             scrollPanel.itemHeight = 100f;
@@ -143,13 +140,6 @@ namespace FindIt.GUI
         }
     }
 
-    public class UIFakeButton : UIButton
-    {
-        public UIScrollPanelItem.ItemData data;
-
-        public override void Invalidate() { }
-    }
-
     public class UIScrollPanelItem : IUIFastListItem<UIScrollPanelItem.ItemData, UIButton>
     {
         private ItemData currentData;
@@ -170,11 +160,7 @@ namespace FindIt.GUI
         {
             public string name;
             public string tooltip;
-            public UITextureAtlas atlas;
             public UIComponent tooltipBox;
-            public bool enabled;
-            public UIVerticalAlignment verticalAlignment;
-            public object objectUserData;
             public GeneratedScrollPanel panel;
             public Asset asset;
         }
@@ -274,56 +260,23 @@ namespace FindIt.GUI
 
                 if (component == null || data == null) return;
 
-                if (currentData != null)
-                {
-                    currentData.atlas = component.atlas;
-                }
                 currentData = data;
 
                 component.Unfocus();
                 component.name = data.name;
                 component.gameObject.GetComponent<TutorialUITag>().tutorialTag = data.name;
 
-                PrefabInfo prefab = data.objectUserData as PrefabInfo;
-                if (prefab != null)
+                PrefabInfo prefab = data.asset.prefab;
+                if (prefab == null)
                 {
-                    if (prefab.m_Atlas == null || prefab.m_Thumbnail.IsNullOrWhiteSpace() ||
-                        prefab.m_Thumbnail == "Thumboldasphalt" ||
-                        prefab.m_Thumbnail == "Thumbbirdbathresidential" ||
-                        prefab.m_Thumbnail == "Thumbcrate" ||
-                        prefab.m_Thumbnail == "Thumbhedge" ||
-                        prefab.m_Thumbnail == "Thumbhedge2" ||
-                        prefab.m_Thumbnail == "ThumbnailRoadTypeTrainTracksHovered")
-                    {
-                        /*string name = Asset.GetName(prefab);
-                        if (!ImageUtils.CreateThumbnailAtlas(name, prefab) && !data.baseIconName.IsNullOrWhiteSpace())
-                        {
-                            prefab.m_Thumbnail = data.baseIconName;
-                        }*/
-                        FindIt.thumbnailsToGenerate.Add(prefab);
-                    }
-
-                    if (prefab.m_Atlas != null && (
-                        prefab.m_Atlas.name == "AssetThumbs" ||
-                        prefab.m_Atlas.name == "Monorailthumbs" ||
-                        prefab.m_Atlas.name == "Netpropthumbs" ||
-                        prefab.m_Atlas.name == "Animalthumbs"))
-                    {
-                        ImageUtils.AddThumbnailVariantsInAtlas(prefab);
-                    }
-                    
-                    if (prefab.m_Atlas != null)
-                    {
-                        data.atlas = prefab.m_Atlas;
-                    }
+                    DebugUtils.Warning("Couldn't display item. Prefab is null");
+                    return;
                 }
 
-                if (data.atlas != null)
-                {
-                    component.atlas = data.atlas;
-                }
+                ImageUtils.FixThumbnails(prefab, null);
 
-                component.verticalAlignment = data.verticalAlignment;
+                component.atlas = prefab.m_Atlas;
+                component.verticalAlignment = UIVerticalAlignment.Middle;
 
                 component.normalFgSprite = prefab.m_Thumbnail;
                 component.hoveredFgSprite = prefab.m_Thumbnail + "Hovered";
@@ -331,10 +284,20 @@ namespace FindIt.GUI
                 component.disabledFgSprite = prefab.m_Thumbnail + "Disabled";
                 component.focusedFgSprite = null;
 
-                component.isEnabled = data.enabled || FindIt.unlockAll.value;
+                bool rico = false;
+                if (FindIt.isRicoEnabled)
+                {
+                    string name = Asset.GetName(prefab);
+                    if (AssetTagList.instance.assets.ContainsKey(name))
+                    {
+                        rico = AssetTagList.instance.assets[name].assetType == Asset.AssetType.Rico;
+                    }
+                }
+
+                component.isEnabled = rico || FindIt.unlockAll.value || ToolsModifierControl.IsUnlocked(prefab.GetUnlockMilestone());
                 component.tooltip = data.tooltip;
                 component.tooltipBox = data.tooltipBox;
-                component.objectUserData = data.objectUserData;
+                component.objectUserData = data.asset.prefab;
                 component.forceZOrder = index;
 
                 if (component.containsMouse)

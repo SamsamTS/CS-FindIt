@@ -16,11 +16,14 @@ namespace FindIt
             try
             {
                 // Creating setting file
-                GameSettings.AddSettingsFile(new SettingsFile[] { new SettingsFile() { fileName = FindIt.settingsFileName } });
+                if (GameSettings.FindSettingsFileByName(FindIt.settingsFileName) == null)
+                {
+                    GameSettings.AddSettingsFile(new SettingsFile[] { new SettingsFile() { fileName = FindIt.settingsFileName } });
+                }
             }
             catch (Exception e)
             {
-                DebugUtils.Log("Could load/create the setting file.");
+                DebugUtils.Log("Couldn't load/create the setting file.");
                 DebugUtils.LogException(e);
             }
         }
@@ -39,8 +42,6 @@ namespace FindIt
         {
             try
             {
-                //Detours.UIComponentDetour.Deploy();
-
                 if (FindIt.instance == null)
                 {
                     AssetTagList.instance = new AssetTagList();
@@ -57,20 +58,17 @@ namespace FindIt
 
                 group.AddSpace(10);
 
-                /*checkBox = (UICheckBox)group.AddCheckbox("Replace all menus", FindIt.detourGeneratedScrollPanels.value, (b) =>
-                {
-                    FindIt.detourGeneratedScrollPanels.value = b;
 
-                    if(b)
+                checkBox = (UICheckBox)group.AddCheckbox("Center the main toolbar", FindIt.centerToolbar.value, (b) =>
+                {
+                    FindIt.centerToolbar.value = b;
+
+                    if(FindIt.instance != null)
                     {
-                        Redirector<Detours.GeneratedScrollPanelDetour>.Deploy();
-                    }
-                    else
-                    {
-                        Redirector<Detours.GeneratedScrollPanelDetour>.Revert();
+                        FindIt.instance.UpdateMainToolbar();
                     }
                 });
-                checkBox.tooltip = "Enhance all menu. May be incompatible with some mods. Changes require a reload.";*/
+                checkBox.tooltip = "The main toolbar will be centered if it exceed a certain length.";
 
                 checkBox = (UICheckBox)group.AddCheckbox("Unlock all", FindIt.unlockAll.value, (b) =>
                 {
@@ -99,6 +97,6 @@ namespace FindIt
             }
         }
 
-        public const string version = "1.5.3";
+        public const string version = "1.5.4";
     }
 }

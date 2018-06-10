@@ -85,6 +85,8 @@ namespace FindIt.GUI
                     prefab.m_Atlas = ResourceLoader.CreateTextureAtlas("FindItThumbnails_" + name, new string[] { }, null);
                     ResourceLoader.AddTexturesInAtlas(prefab.m_Atlas, GenerateMissingThumbnailVariants(texture));
 
+                    DebugUtils.Log("Generated thumbnails for: " + name);
+
                     return true;
                 }
                 else
@@ -134,6 +136,8 @@ namespace FindIt.GUI
 
                 ResourceLoader.ResizeTexture(texture, 109, 100);
                 ResourceLoader.AddTexturesInAtlas(prefab.m_Atlas, GenerateMissingThumbnailVariants(texture));
+
+                DebugUtils.Log("Generated thumbnails for: " + name);
             }
             else
             {
@@ -149,6 +153,78 @@ namespace FindIt.GUI
             prefab.m_Atlas = ResourceLoader.CreateTextureAtlas("FindItThumbnails_" + prefab.m_Thumbnail, new string[] { }, null);
 
             ResourceLoader.AddTexturesInAtlas(prefab.m_Atlas, GenerateMissingThumbnailVariants(texture));
+
+            DebugUtils.Log("Generated thumbnails variants for: " + prefab.name);
+        }
+
+        public static void FixThumbnails(PrefabInfo prefab, UIButton button)
+        {
+            // Fixing thumbnails
+            if (prefab.m_Atlas == null || prefab.m_Thumbnail.IsNullOrWhiteSpace() ||
+                // used for more than one prefab
+                prefab.m_Thumbnail == "Thumboldasphalt" ||
+                prefab.m_Thumbnail == "Thumbbirdbathresidential" ||
+                prefab.m_Thumbnail == "Thumbcrate" ||
+                prefab.m_Thumbnail == "Thumbhedge" ||
+                prefab.m_Thumbnail == "Thumbhedge2" ||
+                // empty thumbnails
+                prefab.m_Thumbnail == "thumb_Ferry Info Sign" ||
+                prefab.m_Thumbnail == "thumb_Paddle Car 01" ||
+                prefab.m_Thumbnail == "thumb_Paddle Car 02" ||
+                prefab.m_Thumbnail == "thumb_Pier Rope Pole" ||
+                prefab.m_Thumbnail == "thumb_RailwayPowerline Singular" ||
+                prefab.m_Thumbnail == "thumb_Rubber Tire Row" ||
+                prefab.m_Thumbnail == "thumb_Dam" ||
+                prefab.m_Thumbnail == "thumb_Power Line" ||
+                // terrible thumbnails
+                prefab.m_Thumbnail == "thumb_Railway Crossing Long" ||
+                prefab.m_Thumbnail == "thumb_Railway Crossing Medium" ||
+                prefab.m_Thumbnail == "thumb_Railway Crossing Short" ||
+                prefab.m_Thumbnail == "thumb_Railway Crossing Very Long"
+                )
+            {
+                if(!FindIt.thumbnailsToGenerate.ContainsKey(prefab))
+                {
+                    FindIt.thumbnailsToGenerate.Add(prefab, button);
+                }
+                else if(button != null)
+                {
+                    FindIt.thumbnailsToGenerate[prefab] = button;
+                }
+
+                return;
+            }
+
+            if (prefab.m_Atlas != null && (
+                // Missing variations
+                prefab.m_Atlas.name == "AssetThumbs" ||
+                prefab.m_Atlas.name == "Monorailthumbs" ||
+                prefab.m_Atlas.name == "Netpropthumbs" ||
+                prefab.m_Atlas.name == "Animalthumbs" ||
+                prefab.m_Atlas.name == "PublictransportProps" ||
+                prefab.m_Thumbnail == "thumb_Path Rock 01" ||
+                prefab.m_Thumbnail == "thumb_Path Rock 02" ||
+                prefab.m_Thumbnail == "thumb_Path Rock 03" ||
+                prefab.m_Thumbnail == "thumb_Path Rock 04" ||
+                prefab.m_Thumbnail == "thumb_Path Rock Small 01" ||
+                prefab.m_Thumbnail == "thumb_Path Rock Small 02" ||
+                prefab.m_Thumbnail == "thumb_Path Rock Small 03" ||
+                prefab.m_Thumbnail == "thumb_Path Rock Small 04"
+                ))
+            {
+                AddThumbnailVariantsInAtlas(prefab);
+
+                if (button != null)
+                {
+                    button.atlas = prefab.m_Atlas;
+
+                    button.normalFgSprite = prefab.m_Thumbnail;
+                    button.hoveredFgSprite = prefab.m_Thumbnail + "Hovered";
+                    button.pressedFgSprite = prefab.m_Thumbnail + "Pressed";
+                    button.disabledFgSprite = prefab.m_Thumbnail + "Disabled";
+                    button.focusedFgSprite = null;
+                }
+            }
         }
 
         public static void ScaleTexture(Texture2D tex, int width, int height)
@@ -225,8 +301,7 @@ namespace FindIt.GUI
                 {
                     if (pixel.a > 127 && (pixel.r + pixel.g + pixel.b) > 0 )
                     {
-                        float h, s, v;
-                        Color.RGBToHSV(pixel, out h, out s, out v);
+                        Color.RGBToHSV(pixel, out float h, out float s, out float v);
 
                         if (h < 0.66f || h > 0.68f || s < 0.98f)
                         {

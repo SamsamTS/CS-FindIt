@@ -103,7 +103,7 @@ namespace FindIt
 
         public void RefreshRico()
         {
-            if (FindIt.rico && m_prefab != null && assetType == AssetType.Ploppable)
+            if (FindIt.isRicoEnabled && m_prefab != null && assetType == AssetType.Ploppable)
             {
                 service = m_prefab.GetService();
                 subService = m_prefab.GetSubService();
@@ -125,6 +125,9 @@ namespace FindIt
         public ulong steamID;
         public string author;
         public float score;
+
+        public delegate void OnButtonClicked(UIComponent comp);
+        public OnButtonClicked onButtonClicked;
 
         public HashSet<string> tagsTitle = new HashSet<string>();
         public HashSet<string> tagsDesc = new HashSet<string>();

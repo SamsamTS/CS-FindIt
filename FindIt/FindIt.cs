@@ -22,13 +22,12 @@ namespace FindIt
         public const string settingsFileName = "FindIt";
 
         public static FindIt instance;
-        //public static SavedBool detourGeneratedScrollPanels = new SavedBool("detourGeneratedScrollPanels", settingsFileName, true, true);
         public static SavedBool unlockAll = new SavedBool("unlockAll", settingsFileName, false, true);
+        public static SavedBool centerToolbar = new SavedBool("centerToolbar", settingsFileName, true, true);
         public static bool fixBadProps;
         public static UITextureAtlas atlas = LoadResources();
         public static bool inEditor = false;
-        public static bool rico = false;
-        //public static bool thumbnailFixRunning = false;
+        public static bool isRicoEnabled = false;
 
         public static AssetTagList list;
 
@@ -39,11 +38,13 @@ namespace FindIt
         private UIGroupPanel m_groupPanel;
         private BeautificationPanel m_beautificationPanel;
 
+        private float m_defaultXPos;
+
         public void Start()
         {
             try
             {
-                rico = IsRicoEnabled();
+                isRicoEnabled = IsRicoEnabled();
 
                 GameObject gameObject = GameObject.Find("FindItMainButton");
                 if (gameObject != null)
@@ -53,7 +54,35 @@ namespace FindIt
 
                 list = AssetTagList.instance;
 
-                UITabstrip tabstrip = ToolsModifierControl.mainToolbar.GetComponentInChildren<UITabstrip>();
+                UITabstrip tabstrip = ToolsModifierControl.mainToolbar.component as UITabstrip;
+
+
+                // TODO: temporary
+                /*tabstrip.eventComponentAdded += (c, p) =>
+                {
+                    foreach (UIComponent tab in tabstrip.tabPages.components)
+                    {
+                        DebugUtils.Log(tab.name);
+
+                        if(tab.name == "LandscapingPanel")
+                        {
+                            tab.components[0].relativePosition = new Vector3(0, -134);
+                            tab.components[1].relativePosition = new Vector3(0, -109);
+                            tab.components[1].height = 218;
+                            foreach(UIScrollablePanel panel in tab.components[1].GetComponentsInChildren<UIScrollablePanel>())
+                            {
+                                panel.autoLayoutStart = LayoutStart.TopLeft;
+                                panel.scrollWheelDirection = UIOrientation.Vertical;
+                                panel.scrollWheelAmount = 104;
+                                panel.wrapLayout = true;
+                                panel.width = 764;
+                            }
+                        }
+                    }
+                };*/
+
+                m_defaultXPos = tabstrip.relativePosition.x;
+                UpdateMainToolbar();
 
                 GameObject asGameObject = UITemplateManager.GetAsGameObject("MainToolbarButtonTemplate");
                 GameObject asGameObject2 = UITemplateManager.GetAsGameObject("ScrollableSubPanelTemplate");
@@ -99,7 +128,7 @@ namespace FindIt
                         m_groupPanel.RefreshPanel();
                     }
 
-                    scrollPanel = UIScrollPanel.Create(m_groupPanel.GetComponentInChildren<UIScrollablePanel>(), UIVerticalAlignment.Middle);
+                    scrollPanel = UIScrollPanel.Create(m_groupPanel.GetComponentInChildren<UIScrollablePanel>());
                     scrollPanel.eventClicked += OnButtonClicked;
                     scrollPanel.eventVisibilityChanged += (c, p) =>
                     {
@@ -152,6 +181,7 @@ namespace FindIt
                 m_beautificationPanel = FindObjectOfType<BeautificationPanel>();
 
                 DebugUtils.Log("Initialized");
+
             }
             catch (Exception e)
             {
@@ -161,7 +191,42 @@ namespace FindIt
             }
         }
 
-        public static HashSet<PrefabInfo> thumbnailsToGenerate = new HashSet<PrefabInfo>();
+        public void UpdateMainToolbar()
+        {
+            UITabstrip tabstrip = ToolsModifierControl.mainToolbar.component as UITabstrip;
+            if (tabstrip == null) return;
+
+            tabstrip.eventComponentAdded -= new ChildComponentEventHandler(UpdatePosition);
+            tabstrip.eventComponentRemoved -= new ChildComponentEventHandler(UpdatePosition);
+
+            if (centerToolbar.value)
+            {
+                tabstrip.eventComponentAdded += new ChildComponentEventHandler(UpdatePosition);
+                tabstrip.eventComponentRemoved += new ChildComponentEventHandler(UpdatePosition);
+                UpdatePosition(tabstrip, null);
+            }
+            else
+            {
+                tabstrip.relativePosition = new Vector3(m_defaultXPos, tabstrip.relativePosition.y);
+            }
+
+        }
+
+        private void UpdatePosition(UIComponent c, UIComponent p)
+        {
+            UITabstrip tabstrip = c as UITabstrip;
+
+            float width = 0;
+            foreach (UIComponent child in tabstrip.tabs)
+            {
+                width += child.width;
+            }
+
+            float newXPos = (tabstrip.parent.width - width) / 2;
+            tabstrip.relativePosition = new Vector3(Mathf.Min(m_defaultXPos, newXPos), tabstrip.relativePosition.y);
+        }
+
+        public static Dictionary<PrefabInfo, UIButton> thumbnailsToGenerate = new Dictionary<PrefabInfo, UIButton>();
 
         public void Update()
         {
@@ -172,7 +237,7 @@ namespace FindIt
                     List<PrefabInfo> prefabs;
                     lock (thumbnailsToGenerate)
                     {
-                        prefabs = new List<PrefabInfo>(thumbnailsToGenerate);
+                        prefabs = new List<PrefabInfo>(thumbnailsToGenerate.Keys);
                     }
 
                     int count = 0;
@@ -184,14 +249,26 @@ namespace FindIt
                         {
                             prefab.m_Thumbnail = baseIconName;
                         }
+                        UIButton button = thumbnailsToGenerate[prefab];
+                        if (button != null)
+                        {
+                            button.atlas = prefab.m_Atlas;
+
+                            button.normalFgSprite = prefab.m_Thumbnail;
+                            button.hoveredFgSprite = prefab.m_Thumbnail + "Hovered";
+                            button.pressedFgSprite = prefab.m_Thumbnail + "Pressed";
+                            button.disabledFgSprite = prefab.m_Thumbnail + "Disabled";
+                            button.focusedFgSprite = null;
+                        }
+
                         lock (thumbnailsToGenerate)
                         {
                             thumbnailsToGenerate.Remove(prefab);
                         }
                         count++;
 
-                        // Generate 7 thumbnails max
-                        if (count > 7) break;
+                        // Generate 1 thumbnail max
+                        if (count > 1) break;
                     }
 
                     scrollPanel.Refresh();
@@ -218,13 +295,6 @@ namespace FindIt
             {
                 brushPanel.isVisible = false;
             }
-            /*m_beautificationPanel = FindObjectOfType<BeautificationPanel>();
-            if (m_beautificationPanel != null)
-            {
-               // Extra Lanscaping Tool hack
-               m_beautificationPanel.component.isVisible = true;
-               m_beautificationPanel.component.isVisible = false;
-            }*/
         }
 
         public void OnButtonClicked(UIComponent c, UIMouseEventParameter p)
@@ -234,15 +304,21 @@ namespace FindIt
             {
                 HideAllOptionPanels();
 
-                if (m_beautificationPanel != null)
+                PrefabInfo prefab = uIButton.objectUserData as PrefabInfo;
+
+                string key = Asset.GetName(prefab);
+                if (AssetTagList.instance.assets.ContainsKey(key) && AssetTagList.instance.assets[key].onButtonClicked != null)
+                {
+                    AssetTagList.instance.assets[key].onButtonClicked(uIButton);
+                }
+                else if (m_beautificationPanel != null)
                 {
                     typeof(BeautificationPanel).GetMethod("OnButtonClicked", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(m_beautificationPanel, new object[] { uIButton });
                 }
                 else
                 {
-                    SelectPrefab(uIButton.objectUserData as PrefabInfo);
+                    SelectPrefab(prefab);
                 }
-
             }
         }
 
@@ -267,26 +343,6 @@ namespace FindIt
                 NetTool netTool = ToolsModifierControl.SetTool<NetTool>();
                 if (netTool != null)
                 {
-                    /*if (netInfo.GetSubService() == ItemClass.SubService.BeautificationParks)
-                    {
-                        //base.ShowPathsOptionPanel();
-                        typeof(BeautificationPanel).GetMethod("ShowPathsOptionPanel", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(beautificationPanel, null);
-                    }
-                    else if (netInfo.GetClassLevel() == ItemClass.Level.Level3)
-                    {
-                        //base.ShowFloodwallsOptionPanel();
-                        typeof(BeautificationPanel).GetMethod("ShowFloodwallsOptionPanel", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(beautificationPanel, null);
-                    }
-                    else if (netInfo.GetClassLevel() == ItemClass.Level.Level4)
-                    {
-                        //base.ShowQuaysOptionPanel();
-                        typeof(BeautificationPanel).GetMethod("ShowQuaysOptionPanel", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(beautificationPanel, null);
-                    }
-                    else
-                    {
-                        //base.ShowCanalsOptionPanel();
-                        typeof(BeautificationPanel).GetMethod("ShowCanalsOptionPanel", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(beautificationPanel, null);
-                    }*/
                     netTool.Prefab = netInfo;
                 }
             }
@@ -467,8 +523,6 @@ namespace FindIt
             }
 
             if ((ToolManager.instance.m_properties.m_mode & ItemClass.Availability.GameAndMap) != ItemClass.Availability.None)
-            //if (mode == LoadMode.LoadGame || mode == LoadMode.NewGame || mode == LoadMode.NewGameFromScenario)
-            //if (mode != LoadMode.NewAsset && mode != LoadMode.LoadAsset)
             {
                 FindIt.inEditor = false;
 
@@ -481,11 +535,6 @@ namespace FindIt
                 {
                     FindIt.instance.Start();
                 }
-
-                if(UITagsWindow.instance == null)
-                {
-                    UITagsWindow.instance = UIView.GetAView().AddUIComponent(typeof(UITagsWindow)) as UITagsWindow;
-                }
             }
             else if (mode == LoadMode.NewAsset || mode == LoadMode.LoadAsset)
             {
@@ -493,9 +542,8 @@ namespace FindIt
 
                 ToolsModifierControl.toolController.eventEditPrefabChanged += (p) =>
                 {
-                    DebugUtils.Log("eventEditPrefabChanged");
-                    SimulationManager.instance.AddAction(() =>
-                    {
+                    //SimulationManager.instance.AddAction(() =>
+                    //{
                         if (FindIt.instance == null)
                         {
                             // Creating the instance
@@ -505,7 +553,7 @@ namespace FindIt
                         {
                             FindIt.instance.Start();
                         }
-                    });
+                    //});
                 };
             }
         }

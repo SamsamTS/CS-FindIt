@@ -96,7 +96,7 @@ namespace FindIt.GUI
             typeFilter.size = new Vector2(130, 25);
             typeFilter.relativePosition = new Vector3(10, 5);
 
-            if (FindIt.rico)
+            if (FindIt.isRicoEnabled)
             {
                 string[] items = {
                     "All",
@@ -271,7 +271,7 @@ namespace FindIt.GUI
             SimulationManager.instance.AddAction(() =>
             {
                 int index = typeFilter.selectedIndex;
-                if (!FindIt.rico && index >= (int)Asset.AssetType.Rico)
+                if (!FindIt.isRicoEnabled && index >= (int)Asset.AssetType.Rico)
                 {
                     index++;
                 }
@@ -332,7 +332,7 @@ namespace FindIt.GUI
             UIScrollPanelItem.ItemData selected = null;
             if (scrollPanel.selectedItem != null)
             {
-                current = scrollPanel.selectedItem.objectUserData as PrefabInfo;
+                current = scrollPanel.selectedItem.asset.prefab;
             }
 
             string text = "";
@@ -343,7 +343,7 @@ namespace FindIt.GUI
                 text = input.text;
                 type = (Asset.AssetType)typeFilter.selectedIndex;
 
-                if (!FindIt.rico && type >= Asset.AssetType.Rico)
+                if (!FindIt.isRicoEnabled && type >= Asset.AssetType.Rico)
                 {
                     type++;
                 }
@@ -359,16 +359,7 @@ namespace FindIt.GUI
                     data.name = asset.title;
                     data.tooltip = Asset.GetLocalizedTooltip(asset.prefab, data.name);
 
-                    data.atlas = asset.prefab.m_Atlas;
-                    if (data.atlas == null)
-                    {
-                        data.atlas = scrollPanel.atlas;
-                    }
-
                     data.tooltipBox = GeneratedPanel.GetTooltipBox(TooltipHelper.GetHashCode(data.tooltip));
-                    data.enabled = ToolsModifierControl.IsUnlocked(asset.prefab.GetUnlockMilestone()) || asset.assetType == Asset.AssetType.Rico;
-                    data.verticalAlignment = scrollPanel.buttonsAlignment;
-                    data.objectUserData = asset.prefab;
                     data.asset = asset;
 
                     scrollPanel.itemsData.Add(data);
@@ -386,7 +377,7 @@ namespace FindIt.GUI
             if (scrollPanel.selectedItem != null)
             {
 
-                FindIt.SelectPrefab(scrollPanel.selectedItem.objectUserData as PrefabInfo);
+                FindIt.SelectPrefab(scrollPanel.selectedItem.asset.prefab);
             }
             else
             {
