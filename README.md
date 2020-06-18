@@ -10,4 +10,4 @@ Forked from SamSamTS's original Find It! mod.
 - Investigate shortcut conflicts with the bulldoze tool
 - Improve performance(hopefully) 
 
-Steam worksho [link](https://steamcommunity.com/sharedfiles/filedetails/?id=2133885971)
+Steam workshop [link](https://steamcommunity.com/sharedfiles/filedetails/?id=2133885971)
