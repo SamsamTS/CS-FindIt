@@ -471,8 +471,20 @@ namespace FindIt
 				    "FindItPressed",
                     "Tag",
 				    "IconPolicyLeisureDisabled",
-				    "IconPolicyTouristDisabled"
-			    };
+				    "IconPolicyTouristDisabled",
+                    "ZoningCommercialEco",
+                    "ZoningCommercialEcoDisabled",
+                    "ZoningCommercialLeisure",
+                    "ZoningCommercialLeisureDisabled",
+                    "ZoningCommercialTourist",
+                    "ZoningCommercialTouristDisabled",
+                    "ZoningOfficeHightech",
+                    "ZoningOfficeHightechDisabled",
+                    "ZoningResidentialHighEco",
+                    "ZoningResidentialHighEcoDisabled",
+                    "ZoningResidentialLowEco",
+                    "ZoningResidentialLowEcoDisabled"
+                };
 
                 atlas = ResourceLoader.CreateTextureAtlas("FindItAtlas", spriteNames, "FindIt.Icons.");
 

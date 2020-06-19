@@ -95,6 +95,20 @@
   <ItemGroup>
     <EmbeddedResource Include="Icons\Tag.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\ZoningCommercialEco.png" />
+    <EmbeddedResource Include="Icons\ZoningCommercialEcoDisabled.png" />
+    <EmbeddedResource Include="Icons\ZoningCommercialLeisure.png" />
+    <EmbeddedResource Include="Icons\ZoningCommercialLeisureDisabled.png" />
+    <EmbeddedResource Include="Icons\ZoningCommercialTourist.png" />
+    <EmbeddedResource Include="Icons\ZoningCommercialTouristDisabled.png" />
+    <EmbeddedResource Include="Icons\ZoningOfficeHightech.png" />
+    <EmbeddedResource Include="Icons\ZoningOfficeHightechDisabled.png" />
+    <EmbeddedResource Include="Icons\ZoningResidentialHighEco.png" />
+    <EmbeddedResource Include="Icons\ZoningResidentialHighEcoDisabled.png" />
+    <EmbeddedResource Include="Icons\ZoningResidentialLowEco.png" />
+    <EmbeddedResource Include="Icons\ZoningResidentialLowEcoDisabled.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>mkdir "%25LOCALAPPDATA%25\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)"

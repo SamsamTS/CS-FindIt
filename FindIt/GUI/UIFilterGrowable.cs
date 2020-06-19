@@ -35,20 +35,20 @@ namespace FindIt.GUI
             {
                 "Thumbnails",
                 "Thumbnails",
-                "InAssetImporter",
-                "InAssetImporter",
+                "FindItAtlas",
+                "FindItAtlas",
                 "Thumbnails",
                 "Thumbnails",
-                "InAssetImporter",
+                "FindItAtlas",
                 "Thumbnails",
-                "InAssetImporter",
+                "FindItAtlas",
                 "Thumbnails",
                 "Ingame",
                 "Ingame",
                 "Ingame",
                 "Ingame",
-                "InAssetImporter",
-                "InAssetImporter"
+                "FindItAtlas",
+                "FindItAtlas"
             };
             
             public static readonly string[] spriteNames =
