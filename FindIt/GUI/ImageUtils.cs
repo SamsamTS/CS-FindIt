@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿// modified from SamsamTS's original Find It mod
+// https://github.com/SamsamTS/CS-FindIt
+
+using UnityEngine;
 
 using ColossalFramework;
 using ColossalFramework.UI;
@@ -85,7 +88,7 @@ namespace FindIt.GUI
                     prefab.m_Atlas = ResourceLoader.CreateTextureAtlas("FindItThumbnails_" + name, new string[] { }, null);
                     ResourceLoader.AddTexturesInAtlas(prefab.m_Atlas, GenerateMissingThumbnailVariants(texture));
 
-                    DebugUtils.Log("Generated thumbnails for: " + name);
+                    Debugging.Message("Generated thumbnails for: " + name);
 
                     return true;
                 }
@@ -137,7 +140,7 @@ namespace FindIt.GUI
                 ResourceLoader.ResizeTexture(texture, 109, 100);
                 ResourceLoader.AddTexturesInAtlas(prefab.m_Atlas, GenerateMissingThumbnailVariants(texture));
 
-                DebugUtils.Log("Generated thumbnails for: " + name);
+                Debugging.Message("Generated thumbnails for: " + name);
             }
             else
             {
@@ -154,7 +157,7 @@ namespace FindIt.GUI
 
             ResourceLoader.AddTexturesInAtlas(prefab.m_Atlas, GenerateMissingThumbnailVariants(texture));
 
-            DebugUtils.Log("Generated thumbnails variants for: " + prefab.name);
+            Debugging.Message("Generated thumbnails variants for: " + prefab.name);
         }
 
         public static void FixThumbnails(PrefabInfo prefab, UIButton button)

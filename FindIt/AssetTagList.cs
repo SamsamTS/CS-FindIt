@@ -1,4 +1,7 @@
-﻿using System;
+﻿// modified from SamsamTS's original Find It mod
+// https://github.com/SamsamTS/CS-FindIt
+
+using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Globalization;
@@ -521,7 +524,7 @@ namespace FindIt
                 }
                 else
                 {
-                    if (dico != null) DebugUtils.Log("Tag not found in dico: " + tag);
+                    if (dico != null) Debugging.Message("Tag not found in dico: " + tag);
                     return scoreMultiplier * ((tag.Length - index) / (float)tag.Length) * (keyword.Length / (float)tag.Length);
                 }
             }
@@ -709,7 +712,7 @@ namespace FindIt
             if(!filtered.IsNullOrWhiteSpace())
             {
                 filtered = filtered.Remove(filtered.Length - 2);
-                DebugUtils.Log("Filtered " + typeof(T) + ": " + filtered);
+                Debugging.Message("Filtered " + typeof(T) + ": " + filtered);
             }
         }
 

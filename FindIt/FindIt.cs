@@ -1,11 +1,12 @@
-﻿using ICities;
+﻿// modified from SamsamTS's original Find It mod
+// https://github.com/SamsamTS/CS-FindIt
+
+using ICities;
 using UnityEngine;
 
 using System;
 using System.Reflection;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 using ColossalFramework;
 using ColossalFramework.UI;
@@ -112,6 +113,7 @@ namespace FindIt
                     locale.AddLocalizedString(key, "Thanks for subscribing to Find It! Fix [Test].\n\nStart typing some keywords into the input field to find the desired asset.");
                 }
                 
+                
 
                 FieldInfo m_ObjectIndex = typeof(MainToolbar).GetField("m_ObjectIndex", BindingFlags.Instance | BindingFlags.NonPublic);
                 m_ObjectIndex.SetValue(ToolsModifierControl.mainToolbar, (int)m_ObjectIndex.GetValue(ToolsModifierControl.mainToolbar) + 1);
@@ -164,7 +166,7 @@ namespace FindIt
                 }
                 else
                 {
-                    DebugUtils.Warning("GroupPanel not found");
+                    Debugging.Message("GroupPanel not found");
                 }
 
                 mainButton.normalBgSprite = "ToolbarIconGroup6Normal";
@@ -183,13 +185,13 @@ namespace FindIt
 
                 m_beautificationPanel = FindObjectOfType<BeautificationPanel>();
 
-                DebugUtils.Log("Initialized");
+                Debugging.Message("Initialized");
 
             }
             catch (Exception e)
             {
-                DebugUtils.Log("Start failed");
-                DebugUtils.LogException(e);
+                Debugging.Message("Start failed");
+                Debugging.LogException(e);
                 enabled = false;
             }
         }
@@ -279,8 +281,8 @@ namespace FindIt
             }
             catch (Exception e)
             {
-                DebugUtils.Log("Update failed");
-                DebugUtils.LogException(e);
+                Debugging.Message("Update failed");
+                Debugging.LogException(e);
             }
         }
 
@@ -405,8 +407,8 @@ namespace FindIt
             }
             catch (Exception e)
             {
-                DebugUtils.Log("OnGUI failed");
-                DebugUtils.LogException(e);
+                Debugging.Message("OnGUI failed");
+                Debugging.LogException(e);
             }
         }
 
@@ -418,7 +420,7 @@ namespace FindIt
                 {
                     if(assembly.GetName().Name.ToLower() == "ploppablerico")
                     {
-                        DebugUtils.Log("Rico found");
+                        Debugging.Message("Rico found");
                         return plugin.isEnabled;
                     }
                 }
@@ -455,7 +457,7 @@ namespace FindIt
                 { }
             }
             
-            if(log != "") DebugUtils.Log(log);
+            if(log != "") Debugging.Message(log);
         }
 
         public static UITextureAtlas LoadResources()
@@ -531,10 +533,10 @@ namespace FindIt
 
             if(FindIt.fixBadProps)
             {
-                DebugUtils.Log("Fixing bad props");
+                Debugging.Message("Fixing bad props");
                 FindIt.FixBadProps();
                 FindIt.fixBadProps = false;
-                DebugUtils.Log("Bad props fixed");
+                Debugging.Message("Bad props fixed");
             }
 
             if ((ToolManager.instance.m_properties.m_mode & ItemClass.Availability.GameAndMap) != ItemClass.Availability.None)

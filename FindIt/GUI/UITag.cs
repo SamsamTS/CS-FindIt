@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿// modified from SamsamTS's original Find It mod
+// https://github.com/SamsamTS/CS-FindIt
+
+using UnityEngine;
 
 using ColossalFramework.UI;
 

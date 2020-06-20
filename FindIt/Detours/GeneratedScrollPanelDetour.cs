@@ -1,9 +1,10 @@
-﻿using System;
+﻿// modified from SamsamTS's original Find It mod
+// https://github.com/SamsamTS/CS-FindIt
 
+using System;
 using ColossalFramework;
 using ColossalFramework.UI;
 using ColossalFramework.PlatformServices;
-
 using System.Reflection;
 using UnityEngine;
 
@@ -210,7 +211,7 @@ namespace FindIt.Detours
             }
             catch(Exception e)
             {
-                DebugUtils.LogException(e);
+                Debugging.LogException(e);
             }
         }
 
@@ -224,14 +225,14 @@ namespace FindIt.Detours
                 {
                     if (ImageUtils.FixFocusedTexture(prefab))
                     {
-                        DebugUtils.Log("Fixed focused texture: " + prefab.name);
+                        Debugging.Message("Fixed focused texture: " + prefab.name);
                     }
                     UIScrollPanelItem.fixedFocusedTexture.Add(prefab);
                 }
             }
             catch (Exception e)
             {
-                DebugUtils.LogException(e);
+                Debugging.LogException(e);
             }
         }
 

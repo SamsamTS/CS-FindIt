@@ -1,15 +1,16 @@
-﻿using ICities;
+﻿// modified from SamsamTS's original Find It mod
+// https://github.com/SamsamTS/CS-FindIt
+
+using ICities;
 using System;
 using ColossalFramework;
 using ColossalFramework.UI;
-
-using FindIt.Redirection;
 
 namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "1.6.2";
+        public const string version = "1.6.3";
 
         public ModInfo()
         {
@@ -23,8 +24,8 @@ namespace FindIt
             }
             catch (Exception e)
             {
-                DebugUtils.Log("Couldn't load/create the setting file.");
-                DebugUtils.LogException(e);
+                Debugging.Message("Couldn't load/create the setting file.");
+                Debugging.LogException(e);
             }
         }
 
@@ -35,7 +36,7 @@ namespace FindIt
 
         public string Description
         {
-            get { return "Find and organize your assets"; }
+            get { return Translations.Translate("FIF_DESC");  }
         }
 
         public void OnSettingsUI(UIHelperBase helper)
@@ -50,16 +51,16 @@ namespace FindIt
                 UIHelper group = helper.AddGroup(Name) as UIHelper;
                 UIPanel panel = group.self as UIPanel;
 
-                UICheckBox checkBox = (UICheckBox)group.AddCheckbox("Disable debug messages logging", DebugUtils.hideDebugMessages.value, (b) =>
+                UICheckBox checkBox = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DM"), Debugging.hideDebugMessages.value, (b) =>
                 {
-                    DebugUtils.hideDebugMessages.value = b;
+                   Debugging.hideDebugMessages.value = b;
                 });
-                checkBox.tooltip = "If checked, debug messages won't be logged.";
+                checkBox.tooltip = Translations.Translate("FIF_SET_DMTP");
 
                 group.AddSpace(10);
 
 
-                checkBox = (UICheckBox)group.AddCheckbox("Center the main toolbar", FindIt.centerToolbar.value, (b) =>
+                checkBox = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_CMT"), FindIt.centerToolbar.value, (b) =>
                 {
                     FindIt.centerToolbar.value = b;
 
@@ -68,21 +69,21 @@ namespace FindIt
                         FindIt.instance.UpdateMainToolbar();
                     }
                 });
-                checkBox.tooltip = "The main toolbar will be centered if it exceed a certain length.";
+                checkBox.tooltip = Translations.Translate("FIF_SET_CMTTP");
 
-                checkBox = (UICheckBox)group.AddCheckbox("Unlock all", FindIt.unlockAll.value, (b) =>
+                checkBox = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_UL"), FindIt.unlockAll.value, (b) =>
                 {
                     FindIt.unlockAll.value = b;
                 });
-                checkBox.tooltip = "Let you select and place items even when locked.";
+                checkBox.tooltip = Translations.Translate("FIF_SET_ULTP");
 
                 group.AddSpace(10);
 
-                UICheckBox fixProps = (UICheckBox)group.AddCheckbox("Fix bad props next loaded save", false, (b) =>
+                UICheckBox fixProps = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_BP"), false, (b) =>
                 {
                     FindIt.fixBadProps = b;
                 });
-                fixProps.tooltip = "Remove all props causing issue\nCheck the option and load your save";
+                fixProps.tooltip = Translations.Translate("FIF_SET_BPTP");
 
                 group.AddSpace(10);
 
@@ -92,8 +93,8 @@ namespace FindIt
             }
             catch (Exception e)
             {
-                DebugUtils.Log("OnSettingsUI failed");
-                DebugUtils.LogException(e);
+                Debugging.Message("OnSettingsUI failed");
+                Debugging.LogException(e);
             }
         }
 

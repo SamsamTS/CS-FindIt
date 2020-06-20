@@ -1,4 +1,7 @@
-﻿using ColossalFramework;
+﻿// modified from SamsamTS's original Find It mod
+// https://github.com/SamsamTS/CS-FindIt
+
+using ColossalFramework;
 using ColossalFramework.Globalization;
 using ColossalFramework.UI;
 

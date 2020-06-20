@@ -1,4 +1,7 @@
-﻿using System;
+﻿// modified from SamsamTS's original Find It mod
+// https://github.com/SamsamTS/CS-FindIt
+
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -255,7 +258,7 @@ namespace FindIt.GUI
             {
                 if (data == null)
                 {
-                    DebugUtils.Log("Data null");
+                    Debugging.Message("Data null");
                 }
 
                 if (component == null || data == null) return;
@@ -269,7 +272,7 @@ namespace FindIt.GUI
                 PrefabInfo prefab = data.asset.prefab;
                 if (prefab == null)
                 {
-                    DebugUtils.Warning("Couldn't display item. Prefab is null");
+                    Debugging.Message("Couldn't display item. Prefab is null");
                     return;
                 }
 
@@ -355,13 +358,13 @@ namespace FindIt.GUI
             {
                 if (data != null)
                 {
-                    DebugUtils.Log("Display failed : " + data.name);
+                    Debugging.Message("Display failed : " + data.name);
                 }
                 else
                 {
-                    DebugUtils.Log("Display failed");
+                    Debugging.Message("Display failed");
                 }
-                DebugUtils.LogException(e);
+                Debugging.LogException(e);
             }
         }
 
@@ -373,7 +376,7 @@ namespace FindIt.GUI
                 {
                     if (ImageUtils.FixFocusedTexture(currentData.asset.prefab))
                     {
-                        DebugUtils.Log("Fixed focused texture: " + currentData.asset.prefab.name);
+                        Debugging.Message("Fixed focused texture: " + currentData.asset.prefab.name);
                     }
                     fixedFocusedTexture.Add(currentData.asset.prefab);
                 }
@@ -385,13 +388,13 @@ namespace FindIt.GUI
             {
                 if (currentData != null)
                 {
-                    DebugUtils.Log("Select failed : " + currentData.name);
+                    Debugging.Message("Select failed : " + currentData.name);
                 }
                 else
                 {
-                    DebugUtils.Log("Select failed");
+                    Debugging.Message("Select failed");
                 }
-                DebugUtils.LogException(e);
+                Debugging.LogException(e);
             }
         }
 
@@ -406,13 +409,13 @@ namespace FindIt.GUI
             {
                 if (currentData != null)
                 {
-                    DebugUtils.Log("Deselect failed : " + currentData.name);
+                    Debugging.Message("Deselect failed : " + currentData.name);
                 }
                 else
                 {
-                    DebugUtils.Log("Deselect failed");
+                    Debugging.Message("Deselect failed");
                 }
-                DebugUtils.LogException(e);
+                Debugging.LogException(e);
             }
         }
 

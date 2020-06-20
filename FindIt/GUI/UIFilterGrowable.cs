@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿// modified from SamsamTS's original Find It mod
+// https://github.com/SamsamTS/CS-FindIt
+
+using UnityEngine;
 using ColossalFramework.UI;
 
 namespace FindIt.GUI
@@ -73,22 +76,22 @@ namespace FindIt.GUI
 
             public static readonly string[] tooltips =
             {
-                "Low density residential",
-                "High density residential",
-                "Low density residential ECO",
-                "High density residential ECO",
-                "Low density commercial",
-                "High density commercial",
-                "Commercial ECO",
-                "Office",
-                "IT Cluster",
-                "Generic Industry",
-                "Farming Industry",
-                "Forest Industry",
-                "Oil Industry",
-                "Ore Industry",
-                "Leisure commercial",
-                "Tourism commercial"
+                Translations.Translate("FIF_GR_LDR"),
+                Translations.Translate("FIF_GR_HDR"),
+                Translations.Translate("FIF_GR_LDRE"),
+                Translations.Translate("FIF_GR_HDRE"),
+                Translations.Translate("FIF_GR_LDC"),
+                Translations.Translate("FIF_GR_HDC"),
+                Translations.Translate("FIF_GR_CE"),
+                Translations.Translate("FIF_GR_O"),
+                Translations.Translate("FIF_GR_ITC"),
+                Translations.Translate("FIF_GR_GI"),
+                Translations.Translate("FIF_GR_FAI"),
+                Translations.Translate("FIF_GR_FOI"),
+                Translations.Translate("FIF_GR_OII"),
+                Translations.Translate("FIF_GR_ORI"),
+                Translations.Translate("FIF_GR_LC"),
+                Translations.Translate("FIF_GR_TC")
             };
         }
 
@@ -149,7 +152,7 @@ namespace FindIt.GUI
             for (int i = 0; i < (int)Category.All; i++)
             {
                 toggles[i] = SamsamTS.UIUtils.CreateIconToggle(this, CategoryIcons.atlases[i], CategoryIcons.spriteNames[i], CategoryIcons.spriteNames[i] + "Disabled");
-                toggles[i].tooltip = CategoryIcons.tooltips[i] + "\nHold SHIFT or CTRL to select multiple categories";
+                toggles[i].tooltip = CategoryIcons.tooltips[i] + "\n" + Translations.Translate("FIF_SE_SC");
                 toggles[i].relativePosition = new Vector3(5 + 40 * i, 5);
                 toggles[i].isChecked = true;
                 toggles[i].readOnly = true;
@@ -179,7 +182,7 @@ namespace FindIt.GUI
 
             all = SamsamTS.UIUtils.CreateButton(this);
             all.size = new Vector2(55, 35);
-            all.text = "All";
+            all.text = Translations.Translate("FIF_SE_IA");
             all.relativePosition = new Vector3(last.relativePosition.x + last.width + 5, 5);
 
             all.eventClick += (c, p) =>

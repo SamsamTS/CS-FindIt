@@ -1,4 +1,7 @@
-﻿using System;
+﻿// modified from SamsamTS's original Find It mod
+// https://github.com/SamsamTS/CS-FindIt
+
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Xml.Serialization;
@@ -55,8 +58,8 @@ namespace FindIt
             }
             catch(Exception e)
             {
-                DebugUtils.Log("Couldn't serialize custom tags");
-                DebugUtils.LogException(e);
+                Debugging.Message("Couldn't serialize custom tags");
+                Debugging.LogException(e);
             }
         }
 
@@ -80,14 +83,14 @@ namespace FindIt
 
                 for(int i=0; i< tagsEntries.Length; i++)
                 {
-                    DebugUtils.Log(tagsEntries[i].key + " " + tagsEntries[i].value);
+                    Debugging.Message(tagsEntries[i].key + " " + tagsEntries[i].value);
                     assetTags[tagsEntries[i].key] = tagsEntries[i].value;
                 }
             }
             catch (Exception e)
             {
-                DebugUtils.Log("Couldn't serialize custom tags");
-                DebugUtils.LogException(e);
+                Debugging.Message("Couldn't serialize custom tags");
+                Debugging.LogException(e);
             }
         }
     }

@@ -1,3 +1,6 @@
+// modified from SamsamTS's original Find It mod
+// https://github.com/SamsamTS/CS-FindIt
+
 using System.Collections.Generic;
 
 using UnityEngine;
