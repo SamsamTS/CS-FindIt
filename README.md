@@ -4,6 +4,9 @@ Forked from SamSamTS's original Find It! mod.
 
 
 ## Release Notes
+New in v1.6.2:
+- New ploppable tabs & icon change. Some DLC buildings are be moved to new tabs.
+
 New in v1.6.1:
 - New filter checkbox: choose to include/exclude vanilla assets and custom assets (from Steam workshop subscription or saved in local asset folder) in the search results.
 
