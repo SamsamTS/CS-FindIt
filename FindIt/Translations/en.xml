@@ -32,7 +32,7 @@
     <Translation ID="FIF_PLOP_H" String="Healthcare" />
     <Translation ID="FIF_PLOP_F" String="Fire Department" />
     <Translation ID="FIF_PLOP_P" String ="Police" />
-    <Translation ID="FIF_PLOP_E" String="Education" />
+    <Translation ID="FIF_PLOP_ED" String="Education" />
     <Translation ID="FIF_PLOP_PT" String="Public Transportation" />
     <Translation ID="FIF_PLOP_PPW" String="Park/Plaza/Wildlife" />
     <Translation ID="FIF_PLOP_U" String="Unique Buildings" />

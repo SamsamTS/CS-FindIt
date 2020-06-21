@@ -22,11 +22,7 @@ New in v1.6(first release):
 - Buildings added in the newer DLCs now are included and can be found under the filter tabs.
 
 ## Future plans
-- Rearrange filter tabs to match asset editor  
-- Multi-language support  
-- Investigate Extra Landscaping Tools incompatibility issues  
-- Investigate shortcut conflicts with the bulldoze tool
-- Improve performance(hopefully) 
+- Check the issues tab to see WIP and feature suggesions that under investigating.
 
 ### Contact
 Steam workshop [link](https://steamcommunity.com/sharedfiles/filedetails/?id=2133885971)

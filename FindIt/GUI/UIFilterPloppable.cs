@@ -108,7 +108,7 @@ namespace FindIt.GUI
                 Translations.Translate("FIF_PLOP_H"),
                 Translations.Translate("FIF_PLOP_F"),
                 Translations.Translate("FIF_PLOP_P"),
-                Translations.Translate("FIF_PLOP_E"),
+                Translations.Translate("FIF_PLOP_ED"),
                 Translations.Translate("FIF_PLOP_PT"),
                 Translations.Translate("FIF_PLOP_PPW"),
                 Translations.Translate("FIF_PLOP_U"),
