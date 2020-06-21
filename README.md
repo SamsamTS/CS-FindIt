@@ -2,8 +2,12 @@
 
 Forked from SamSamTS's original Find It! mod.  
 
-
 ## Release Notes
+New in v1.6.3:
+- Multi-language support is added(thanks algernon for sharing the translation framework!) and translation is WIP. Volunteers for translation are need. You can use [this google sheet](https://docs.google.com/spreadsheets/d/16KPl6X8SZAJTKzXZtQn_Xnh0kelOF2b56tpS4ax8P2E/edit#gid=0) to help the translation.
+
+- Improve filter tab toggle behavior: Click a highlighted filter tab again will "select all" instead of doing nothing unless shift or crtl is pressed. I think this is more intuitive.
+
 New in v1.6.2:
 - New ploppable tabs & icon change. Some DLC buildings are moved to new tabs.
 
