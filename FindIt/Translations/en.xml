@@ -40,7 +40,7 @@
     <Translation ID="FIF_PLOP_D" String="Disaster" />
     <Translation ID="FIF_PLOP_C" String="Campus" />
     <Translation ID="FIF_PLOP_V" String="Varsity Sports" />
-    <Translation ID="FIF_PLOP_F" String="Fishing" />
+    <Translation ID="FIF_PLOP_FI" String="Fishing" />
     <!--Growable-->
     <Translation ID="FIF_GR_LDR" String="Low Density Residential" />
     <Translation ID="FIF_GR_HDR" String="High Density Residential" />

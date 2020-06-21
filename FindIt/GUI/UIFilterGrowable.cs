@@ -169,11 +169,41 @@ namespace FindIt.GUI
                     }
                     else
                     {
+                        // when all tabs are checked, toggle a tab will uncheck all the other tabs
+                        bool check = true;
                         for (int j = 0; j < (int)Category.All; j++)
-                            toggles[j].isChecked = false;
-                        ((UICheckBox)c).isChecked = true;
+                        {
+                            check = check && toggles[j].isChecked;
+                        }
+                        if (check)
+                        {
+                            for (int j = 0; j < (int)Category.All; j++)
+                            {
+                                toggles[j].isChecked = false;
+                            }
+                            ((UICheckBox)c).isChecked = true;
+                            eventFilteringChanged(this, 0);
+                            return;
+                        }
 
-                        eventFilteringChanged(this, 0);
+                        // when a tab is unchecked, toggle it will uncheck all the other tabs
+                        if (((UICheckBox)c).isChecked == false)
+                        {
+                            for (int j = 0; j < (int)Category.All; j++)
+                                toggles[j].isChecked = false;
+                            ((UICheckBox)c).isChecked = true;
+                            eventFilteringChanged(this, 0);
+                            return;
+                        }
+
+                        // when a tab is already checked, toggle it will move back to select all
+                        if (((UICheckBox)c).isChecked == true)
+                        {
+                            for (int j = 0; j < (int)Category.All; j++)
+                                toggles[j].isChecked = true;
+                            eventFilteringChanged(this, 0);
+                            return;
+                        }
                     }
                 };
             }
