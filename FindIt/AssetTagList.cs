@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Globalization;
 using System.Collections.Generic;
+using System.IO;
 
 using UnityEngine;
 
@@ -128,6 +129,7 @@ namespace FindIt
         public ulong steamID;
         public string author;
         public float score;
+        public ulong downloadTime;
 
         public delegate void OnButtonClicked(UIComponent comp);
         public OnButtonClicked onButtonClicked;
@@ -324,6 +326,8 @@ namespace FindIt
 
         public Dictionary<ulong, string> authors = new Dictionary<ulong, string>();
 
+        public Dictionary<ulong, ulong> downloadTimes = new Dictionary<ulong, ulong>();
+
         public List<Asset> matches = new List<Asset>();
 
         public List<Asset> Find(string text, Asset.AssetType filter)
@@ -441,14 +445,16 @@ namespace FindIt
                                 }
                             }
                         }
-
+                       
                         if (asset.score > 0)
                         {
                             matches.Add(asset);
                         }
                     }
                 }
-                matches = matches.OrderByDescending(s => s.score).ToList();
+            
+                 matches = matches.OrderByDescending(s => s.score).ToList();
+                
             }
             else
             {
@@ -501,9 +507,12 @@ namespace FindIt
                         matches.Add(asset);
                     }
                 }
-                matches = matches.OrderBy(s => s.title).ToList();
+
+                    matches = matches.OrderBy(s => s.title).ToList();
+                
             }
 
+           
             return matches;
         }
 
@@ -534,18 +543,30 @@ namespace FindIt
 
         public AssetTagList()
         {
+
             foreach (Package.Asset current in PackageManager.FilterAssets(new Package.AssetType[] { UserAssetType.CustomAssetMetaData }))
             {
-                PublishedFileId id = current.package.GetPublishedFileID();
+                //PublishedFileId id = current.package.GetPublishedFileID();
 
-                if (UInt64.TryParse(current.package.packageName, out ulong steamid))
+                if (current?.package?.packagePath != null)
                 {
-                    if (!authors.ContainsKey(steamid) && !current.package.packageAuthor.IsNullOrWhiteSpace())
+
+                    if (UInt64.TryParse(current.package.packageName, out ulong steamid))
                     {
-                        if (UInt64.TryParse(current.package.packageAuthor.Substring("steamid:".Length), out ulong authorID))
+                        if (!authors.ContainsKey(steamid) && !current.package.packageAuthor.IsNullOrWhiteSpace())
                         {
-                            string author = new Friend(new UserID(authorID)).personaName;
-                            authors.Add(steamid, author);
+                            if (UInt64.TryParse(current.package.packageAuthor.Substring("steamid:".Length), out ulong authorID))
+                            {
+                                string author = new Friend(new UserID(authorID)).personaName;
+                                authors.Add(steamid, author);
+
+                                // Get custom asset filesystem location (if CRP pacakge).
+                                string path = current.package.packagePath;
+                                string parentPath = Directory.GetParent(path).FullName;
+                                DateTime dt = Directory.GetCreationTimeUtc(parentPath);
+                                ulong time = (ulong)dt.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
+                                downloadTimes.Add(steamid, time);
+                            }
                         }
                     }
                 }
@@ -587,6 +608,13 @@ namespace FindIt
                         {
                             asset.tagsTitle.UnionWith(AddAssetTags(asset, tagsTitleDictionary, asset.prefab.name.Substring(0, index)));
                         }
+
+                        // if steamID == 0, non-workshop, download time = 0
+                        asset.downloadTime = 0;
+                    }
+                    else
+                    {
+                        asset.downloadTime = downloadTimes[asset.steamID];
                     }
 
                     asset.tagsDesc = AddAssetTags(asset, tagsDescDictionary, Asset.GetLocalizedDescription(asset.prefab));

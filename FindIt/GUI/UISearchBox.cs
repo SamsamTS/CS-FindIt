@@ -7,6 +7,7 @@ using ColossalFramework.DataBinding;
 using ColossalFramework.UI;
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FindIt.GUI
 {
@@ -29,6 +30,13 @@ namespace FindIt.GUI
 
         public UICheckBox workshopFilter;
         public UICheckBox vanillaFilter;
+
+        
+        public UIButton sortButton;
+
+        // true = sort by relevance
+        // false = sort by most recently downloaded
+        public bool sortButtonTextState = true;
 
         public ItemClass.Level buildingLevel
         {
@@ -224,15 +232,47 @@ namespace FindIt.GUI
             panel.size = new Vector2(parent.width, 45);
             panel.relativePosition = new Vector3(0, -panel.height + 5);
 
+
+            
+            // sort button
+            sortButton = SamsamTS.UIUtils.CreateButton(panel);
+            sortButton.size = new Vector2(100, 35);
+            sortButton.text = "Relevance"; //Translations.Translate("FIF_SE_IA");
+            sortButton.tooltip = "Sort by relevance. Same as old Find It";
+            sortButton.relativePosition = new Vector3(5, 5);
+
+            sortButton.eventClick += (c, p) =>
+            {
+                if (sortButtonTextState)
+                {
+                    sortButton.text = "New Assets";
+                    sortButtonTextState = false;
+                    sortButton.tooltip = "Sort by most recently downloaded";
+                }
+                else
+                {
+                    sortButton.text = "Relevance";
+                    sortButtonTextState = true;
+                    sortButton.tooltip = "Sort by relevance. Same as old Find It";
+                }
+                Search();
+            };
+
+            
+
+            // ploppable filter tabs
             filterPloppable = panel.AddUIComponent<UIFilterPloppable>();
             filterPloppable.isVisible = false;
-            filterPloppable.relativePosition = new Vector3(0, 0);
+            filterPloppable.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width + 5, 0);
+            //filterPloppable.relativePosition = new Vector3(0, 0);
 
             filterPloppable.eventFilteringChanged += (c,p) => Search();
 
+            // growable filter tabs
             filterGrowable = panel.AddUIComponent<UIFilterGrowable>();
             filterGrowable.isVisible = false;
-            filterGrowable.relativePosition = new Vector3(0, 0);
+            filterGrowable.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width + 5, 0);
+            //filterGrowable.relativePosition = new Vector3(0, 0);
 
             filterGrowable.eventFilteringChanged += (c, p) => Search();
 
@@ -356,6 +396,11 @@ namespace FindIt.GUI
             }
 
             List<Asset> matches = AssetTagList.instance.Find(text, type);
+            if (sortButtonTextState == false) // sort by most recently downloaded
+            {
+                matches = matches.OrderByDescending(s => s.downloadTime).ToList();
+            }
+
             scrollPanel.Clear();
             foreach (Asset asset in matches)
             {
@@ -363,12 +408,13 @@ namespace FindIt.GUI
                 {
 
                     // filter custom/vanilla assets
-                    if (workshopFilter != null && vanillaFilter != null) { 
+                    if (workshopFilter != null && vanillaFilter != null)
+                    {
                         if ((asset.prefab.m_isCustomContent && !workshopFilter.isChecked) || (!asset.prefab.m_isCustomContent && !vanillaFilter.isChecked)) continue;
                     }
 
                     UIScrollPanelItem.ItemData data = new UIScrollPanelItem.ItemData();
-                    data.name = asset.title;
+                    data.name = asset.title; // + "___" + asset.downloadTime.ToString();
                     data.tooltip = Asset.GetLocalizedTooltip(asset.prefab, data.name);
 
                     data.tooltipBox = GeneratedPanel.GetTooltipBox(TooltipHelper.GetHashCode(data.tooltip));
