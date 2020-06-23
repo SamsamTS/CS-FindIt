@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Language UniqueName="ja" ReadableName="日本語">
+  <Translations>
+    <Translation ID="FIF_DESC" String="アセットの検索や整理をする" />
+    <!--Settings-->
+    <Translation ID="FIF_SET_DM" String="デバッグメッセージのログを無効にする" />
+    <Translation ID="FIF_SET_DMTP" String="これをチェックするとデバッグメッセージが保存されません" />
+    <Translation ID="FIF_SET_CMT" String="メインツールバーをセンタリングする" />
+    <Translation ID="FIF_SET_CMTTP" String="メインツールバーが一定の長さを超えるとセンタリングされます" />
+    <Translation ID="FIF_SET_UL" String="すべてをアンロック" />
+    <Translation ID="FIF_SET_ULTP" String="まだアンロックされていないアイテムでも選択して配置できます" />
+    <Translation ID="FIF_SET_BP" String="次回のロード時に問題のあるプロップを修正する" />
+    <Translation ID="FIF_SET_BPTP" String="問題を引き起こす全てのプロップを削除します、オプションをチェックしてセーブデータをロードしてください" />
+    <!--Search Bar-->
+    <Translation ID="FIF_SE_WF" String="カスタム" />
+    <Translation ID="FIF_SE_VF" String="バニラ" />
+    <Translation ID="FIF_SE_IA" String="全て" />
+    <Translation ID="FIF_SE_IN" String="ネットワーク" />
+    <Translation ID="FIF_SE_IP" String="Ploppable" />
+    <Translation ID="FIF_SE_IG" String="Growable" />
+    <Translation ID="FIF_SE_IR" String="RICO" />
+    <Translation ID="FIF_SE_IPR" String="プロップ" />
+    <Translation ID="FIF_SE_ID" String="デカール" />
+    <Translation ID="FIF_SE_IT" String="木" />
+    <Translation ID="FIF_SE_LV" String="レベル: " />
+    <Translation ID="FIF_SE_SZ" String="サイズ: " />
+    <!--Ploppable-->
+    <Translation ID="FIF_PLOP_E" String="電力" />
+    <Translation ID="FIF_PLOP_W" String="上下水道" />
+    <Translation ID="FIF_PLOP_G" String="ゴミ" />
+    <Translation ID="FIF_PLOP_H" String="健康管理" />
+    <Translation ID="FIF_PLOP_F" String="消防" />
+    <Translation ID="FIF_PLOP_P" String ="警察" />
+    <Translation ID="FIF_PLOP_ED" String="教育" />
+    <Translation ID="FIF_PLOP_PT" String="公共交通" />
+    <Translation ID="FIF_PLOP_PPW" String="公園" />
+    <Translation ID="FIF_PLOP_U" String="ユニーク施設" />
+    <Translation ID="FIF_PLOP_I" String="産業エリア" />
+    <Translation ID="FIF_PLOP_D" String="災害" />
+    <Translation ID="FIF_PLOP_C" String="キャンパス" />
+    <Translation ID="FIF_PLOP_V" String="大学スポーツ" />
+    <Translation ID="FIF_PLOP_FI" String="漁業" />
+    <!--Growable-->
+    <Translation ID="FIF_GR_LDR" String="低密度住宅" />
+    <Translation ID="FIF_GR_HDR" String="高密度住宅" />
+    <Translation ID="FIF_GR_LDRE" String="低密度 自給自足型住宅" />,
+    <Translation ID="FIF_GR_HDRE" String="高密度 自給自足型住宅" />
+    <Translation ID="FIF_GR_LDC" String="低密度商業" />
+    <Translation ID="FIF_GR_HDC" String="高密度商業" />
+    <Translation ID="FIF_GR_CE" String="オーガニック・地産地消" />
+    <Translation ID="FIF_GR_O" String="オフィス" />
+    <Translation ID="FIF_GR_ITC" String="ITクラスター" />
+    <Translation ID="FIF_GR_GI" String="一般工業" />
+    <Translation ID="FIF_GR_FAI" String="農業" />
+    <Translation ID="FIF_GR_FOI" String="林業" />
+    <Translation ID="FIF_GR_OII" String="石油産業" />
+    <Translation ID="FIF_GR_ORI" String="鉱業" />
+    <Translation ID="FIF_GR_LC" String="レジャー特化" />
+    <Translation ID="FIF_GR_TC" String="観光特化" />
+    <!--Tooltip-->
+    <Translation ID="FIF_SE_SC" String="SHIFTかCTRLキーを押しながら選択するとカテゴリーを複数選べます" />
+    <Translation ID="FIF_SO_RETP" String="関連性で並べ替えます。オリジナルのFind Itと同じ" />
+    <Translation ID="FIF_SO_NETP" String="最近ダウンロードしたもので並べ替え" />
+    <Translation ID="FIF_SO_RE" String="関連性" />
+    <Translation ID="FIF_SO_NE" String="新アセット" />
+    <!--Settings-->
+    <Translation ID="TRN_CHOICE" String="言語を設定する" />
+    <Translation ID="TRN_SYS" String="システム言語を使用する" />
+    
+  </Translations>
+</Language>

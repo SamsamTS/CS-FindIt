@@ -30,8 +30,6 @@ namespace FindIt.GUI
 
         public UICheckBox workshopFilter;
         public UICheckBox vanillaFilter;
-
-        
         public UIButton sortButton;
 
         // true = sort by relevance
@@ -202,7 +200,7 @@ namespace FindIt.GUI
             sizeFilterX.selectedIndex = 0;
             sizeFilterX.relativePosition = new Vector3(sizeLabel.relativePosition.x + sizeLabel.width + 5, 5);
 
-            
+            /*
             UILabel XLabel = buildingFilters.AddUIComponent<UILabel>();
             XLabel.textScale = 0.8f;
             XLabel.padding = new RectOffset(0, 0, 8, 0);
@@ -210,6 +208,7 @@ namespace FindIt.GUI
             XLabel.text = " ";
             XLabel.isVisible = false;
             XLabel.relativePosition = new Vector3(sizeFilterX.relativePosition.x + sizeFilterX.width - 5, 5);
+            */
 
             sizeFilterY = SamsamTS.UIUtils.CreateDropDown(buildingFilters);
             sizeFilterY.size = new Vector2(55, 25);
@@ -220,11 +219,10 @@ namespace FindIt.GUI
             sizeFilterY.AddItem("4");
             sizeFilterY.selectedIndex = 0;
             //sizeFilterY.isVisible = false;
-            sizeFilterY.relativePosition = new Vector3(XLabel.relativePosition.x + XLabel.width + 5, 5);
+            sizeFilterY.relativePosition = new Vector3(sizeFilterX.relativePosition.x + sizeFilterX.width + 10, 5);
 
             sizeFilterX.eventSelectedIndexChanged += (c, i) => Search();
             sizeFilterY.eventSelectedIndexChanged += (c, i) => Search();
-
 
             UIPanel panel = AddUIComponent<UIPanel>();
             panel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
@@ -232,38 +230,34 @@ namespace FindIt.GUI
             panel.size = new Vector2(parent.width, 45);
             panel.relativePosition = new Vector3(0, -panel.height + 5);
 
-
-            
             // sort button
             sortButton = SamsamTS.UIUtils.CreateButton(panel);
             sortButton.size = new Vector2(100, 35);
-            sortButton.text = "Relevance"; //Translations.Translate("FIF_SE_IA");
-            sortButton.tooltip = "Sort by relevance. Same as old Find It";
+            sortButton.text = Translations.Translate("FIF_SO_RE");
+            sortButton.tooltip = Translations.Translate("FIF_SO_RETP");
             sortButton.relativePosition = new Vector3(5, 5);
 
             sortButton.eventClick += (c, p) =>
             {
                 if (sortButtonTextState)
                 {
-                    sortButton.text = "New Assets";
+                    sortButton.text = Translations.Translate("FIF_SO_NE");
                     sortButtonTextState = false;
-                    sortButton.tooltip = "Sort by most recently downloaded";
+                    sortButton.tooltip = Translations.Translate("FIF_SO_NETP");
                 }
                 else
                 {
-                    sortButton.text = "Relevance";
+                    sortButton.text = Translations.Translate("FIF_SO_RE");
                     sortButtonTextState = true;
-                    sortButton.tooltip = "Sort by relevance. Same as old Find It";
+                    sortButton.tooltip = Translations.Translate("FIF_SO_RETP");
                 }
                 Search();
             };
 
-            
-
             // ploppable filter tabs
             filterPloppable = panel.AddUIComponent<UIFilterPloppable>();
             filterPloppable.isVisible = false;
-            filterPloppable.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width + 5, 0);
+            filterPloppable.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
             //filterPloppable.relativePosition = new Vector3(0, 0);
 
             filterPloppable.eventFilteringChanged += (c,p) => Search();
@@ -271,7 +265,7 @@ namespace FindIt.GUI
             // growable filter tabs
             filterGrowable = panel.AddUIComponent<UIFilterGrowable>();
             filterGrowable.isVisible = false;
-            filterGrowable.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width + 5, 0);
+            filterGrowable.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
             //filterGrowable.relativePosition = new Vector3(0, 0);
 
             filterGrowable.eventFilteringChanged += (c, p) => Search();
@@ -396,7 +390,11 @@ namespace FindIt.GUI
             }
 
             List<Asset> matches = AssetTagList.instance.Find(text, type);
-            if (sortButtonTextState == false) // sort by most recently downloaded
+
+            // sort again by most recently downloaded
+            // I tried to do this directly in Find so the list isn't being sorted twice
+            // however I got some UI glitches and was not able to solve it
+            if (sortButtonTextState == false)
             {
                 matches = matches.OrderByDescending(s => s.downloadTime).ToList();
             }
@@ -406,15 +404,16 @@ namespace FindIt.GUI
             {
                 if (asset.prefab != null)
                 {
-
-                    // filter custom/vanilla assets
+                    // filter custom/vanilla assets based on user choice
+                    // I tried to do this directly in Find
+                    // however I got some UI glitches and was not able to solve it
                     if (workshopFilter != null && vanillaFilter != null)
                     {
                         if ((asset.prefab.m_isCustomContent && !workshopFilter.isChecked) || (!asset.prefab.m_isCustomContent && !vanillaFilter.isChecked)) continue;
                     }
 
                     UIScrollPanelItem.ItemData data = new UIScrollPanelItem.ItemData();
-                    data.name = asset.title; // + "___" + asset.downloadTime.ToString();
+                    data.name = asset.title;// + "___" + asset.downloadTime.ToString();
                     data.tooltip = Asset.GetLocalizedTooltip(asset.prefab, data.name);
 
                     data.tooltipBox = GeneratedPanel.GetTooltipBox(TooltipHelper.GetHashCode(data.tooltip));

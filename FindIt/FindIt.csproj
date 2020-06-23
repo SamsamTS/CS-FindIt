@@ -113,6 +113,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Translations\en.xml" />
+    <Content Include="Translations\ja.xml" />
+    <Content Include="Translations\zh-tw.xml" />
+    <Content Include="Translations\zh.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

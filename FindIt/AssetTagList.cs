@@ -467,11 +467,11 @@ namespace FindIt
                         {
                             BuildingInfo buildingInfo = asset.prefab as BuildingInfo;
 
-                            // Level
+                            // filter by Level
                             ItemClass.Level level = UISearchBox.instance.buildingLevel;
                             if (level != ItemClass.Level.None && buildingInfo.m_class.m_level != level) continue;
 
-                            // size
+                            // filter by size
                             Vector2 buildingSize = UISearchBox.instance.buildingSize;
                             if (buildingSize.x > 0.0f && buildingSize.y > 0.0f)
                             {
@@ -486,7 +486,7 @@ namespace FindIt
                                 if (asset.size.x != buildingSize.x) continue;
                             }
 
-                            // zone
+                            // filter by growable type
                             if (!UIFilterGrowable.instance.IsAllSelected())
                             {
                                 UIFilterGrowable.Category category = UIFilterGrowable.GetCategory(buildingInfo.m_class);
@@ -497,6 +497,7 @@ namespace FindIt
                         {
                             BuildingInfo buildingInfo = asset.prefab as BuildingInfo;
 
+                            // filter by ploppable type
                             if (!UIFilterPloppable.instance.IsAllSelected())
                             {
                                 UIFilterPloppable.Category category = UIFilterPloppable.GetCategory(buildingInfo.m_class);
@@ -509,9 +510,7 @@ namespace FindIt
                 }
 
                     matches = matches.OrderBy(s => s.title).ToList();
-                
             }
-
            
             return matches;
         }
@@ -550,7 +549,6 @@ namespace FindIt
 
                 if (current?.package?.packagePath != null)
                 {
-
                     if (UInt64.TryParse(current.package.packageName, out ulong steamid))
                     {
                         if (!authors.ContainsKey(steamid) && !current.package.packageAuthor.IsNullOrWhiteSpace())
@@ -560,7 +558,8 @@ namespace FindIt
                                 string author = new Friend(new UserID(authorID)).personaName;
                                 authors.Add(steamid, author);
 
-                                // Get custom asset filesystem location (if CRP pacakge).
+                                // Get the downloaded time of an asset by checking the creation time of its parent folder
+                                // store this info and use it for sorting
                                 string path = current.package.packagePath;
                                 string parentPath = Directory.GetParent(path).FullName;
                                 DateTime dt = Directory.GetCreationTimeUtc(parentPath);
@@ -613,7 +612,7 @@ namespace FindIt
                         asset.downloadTime = 0;
                     }
                     else
-                    {
+                    {   
                         asset.downloadTime = downloadTimes[asset.steamID];
                     }
 
@@ -818,6 +817,7 @@ namespace FindIt
             }
         }
 
+        // if SteamID == 0, not a workshop asset
         private static ulong GetSteamID(PrefabInfo prefab)
         {
             ulong id = 0;
