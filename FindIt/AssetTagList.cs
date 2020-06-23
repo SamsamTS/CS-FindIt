@@ -612,8 +612,15 @@ namespace FindIt
                         asset.downloadTime = 0;
                     }
                     else
-                    {   
-                        asset.downloadTime = downloadTimes[asset.steamID];
+                    {
+                        if (downloadTimes.ContainsKey(asset.steamID))
+                        {
+                            asset.downloadTime = downloadTimes[asset.steamID];
+                        }
+                        else
+                        {
+                            asset.downloadTime = 0;
+                        }
                     }
 
                     asset.tagsDesc = AddAssetTags(asset, tagsDescDictionary, Asset.GetLocalizedDescription(asset.prefab));

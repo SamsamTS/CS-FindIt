@@ -14,7 +14,7 @@ On Linux(Flatpak Steam) if an asset creator updates their asset, that asset woul
 
 - 日本語：kei_em さんの [Japanese Localization Mod (日本語化MOD]([url=https://steamcommunity.com/sharedfiles/filedetails/?id=427164957) を使用している場合は、自動的に日本語で表示されます。ゲーム設定で英語に変更してから日本語に戻す必要があるかもしれません
 
-- 繁體中文：目前暫時請照[此連結說明](url=https://github.com/sway2020/CS-FindIt/blob/master/archive/other/%E7%B9%81%E9%AB%94%E4%B8%AD%E6%96%87%E6%9A%AB%E6%99%82%E8%A7%A3%E6%B1%BA%E6%96%B9%E6%B3%95.md)設定 
+- 繁體中文：目前暫時請照[此連結說明](https://github.com/sway2020/CS-FindIt/blob/master/archive/other/%E7%B9%81%E9%AB%94%E4%B8%AD%E6%96%87%E6%9A%AB%E6%99%82%E8%A7%A3%E6%B1%BA%E6%96%B9%E6%B3%95.md)設定 
 
 - 简体中文：若游戏已默认设定显示简体中文, 则此模组会自动显示简体中文
 
