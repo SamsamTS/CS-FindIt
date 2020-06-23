@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Language UniqueName="zh-tw" ReadableName="繁體中文">
+  <Translations>
+    <Translation ID="FIF_DESC" String="查找和分類你的素材" />
+    <!--Settings-->
+    <Translation ID="FIF_SET_DM" String="禁用除錯訊息記錄" />
+    <Translation ID="FIF_SET_DMTP" String="如果勾選, 除錯訊息將不會被記錄。" />
+    <Translation ID="FIF_SET_CMT" String="主工具欄居中" />
+    <Translation ID="FIF_SET_CMTTP" String="如果超過一定長度，主工具欄將居中。" />
+    <Translation ID="FIF_SET_UL" String="全部解鎖" />
+    <Translation ID="FIF_SET_ULTP" String="未解鎖的素材仍然可以被放置。" />
+    <Translation ID="FIF_SET_BP" String="下次讀檔時修正錯誤的物體" />
+    <Translation ID="FIF_SET_BPTP" String="移除所有可能導致錯誤的物體 勾選此設置然後讀取你的存檔" />
+    <!--Search Bar-->
+    <Translation ID="FIF_SE_WF" String="玩家自製" />
+    <Translation ID="FIF_SE_VF" String="遊戲默認" />
+    <Translation ID="FIF_SE_IA" String="全選" />
+    <Translation ID="FIF_SE_IN" String="道路" />
+    <Translation ID="FIF_SE_IP" String="可放置型建築" />
+    <Translation ID="FIF_SE_IG" String="可成長型建築" />
+    <Translation ID="FIF_SE_IR" String="RICO" />
+    <Translation ID="FIF_SE_IPR" String="物體" />
+    <Translation ID="FIF_SE_ID" String="貼花" />
+    <Translation ID="FIF_SE_IT" String="樹木" />
+    <Translation ID="FIF_SE_LV" String="等級: " />
+    <Translation ID="FIF_SE_SZ" String="尺吋: " />
+    <!--Ploppable-->
+    <Translation ID="FIF_PLOP_E" String="電力系統" />
+    <Translation ID="FIF_PLOP_W" String="供水和汙水處理系統" />
+    <Translation ID="FIF_PLOP_G" String="垃圾處理系統" />
+    <Translation ID="FIF_PLOP_H" String="醫療保健系統" />
+    <Translation ID="FIF_PLOP_F" String="消防系統" />
+    <Translation ID="FIF_PLOP_P" String ="警力系統" />
+    <Translation ID="FIF_PLOP_ED" String="教育系統" />
+    <Translation ID="FIF_PLOP_PT" String="大眾運輸系統" />
+    <Translation ID="FIF_PLOP_PPW" String="公園和集市廣場和野生動物" />
+    <Translation ID="FIF_PLOP_U" String="獨特建築" />
+    <Translation ID="FIF_PLOP_I" String="工業產業園區" />
+    <Translation ID="FIF_PLOP_D" String="災難救濟" />
+    <Translation ID="FIF_PLOP_C" String="大學學院" />
+    <Translation ID="FIF_PLOP_V" String="大學競技" />
+    <Translation ID="FIF_PLOP_FI" String="漁業產業" />
+    <!--Growable-->
+    <Translation ID="FIF_GR_LDR" String="低密度住宅建築" />
+    <Translation ID="FIF_GR_HDR" String="高密度住宅建築" />
+    <Translation ID="FIF_GR_LDRE" String="低密度-自給住宅行政專區建築" />,
+    <Translation ID="FIF_GR_HDRE" String="高密度-自給住宅行政專區建築" />
+    <Translation ID="FIF_GR_LDC" String="低密度商業建築" />
+    <Translation ID="FIF_GR_HDC" String="高密度商業建築" />
+    <Translation ID="FIF_GR_CE" String="本土製造服務和有機農業行政專區建築" />
+    <Translation ID="FIF_GR_O" String="辦公區建築" />
+    <Translation ID="FIF_GR_ITC" String="IT產業行政專區建築" />
+    <Translation ID="FIF_GR_GI" String="一般工業區建築" />
+    <Translation ID="FIF_GR_FAI" String="農牧業行政專區建築" />
+    <Translation ID="FIF_GR_FOI" String="林業行政專區建築" />
+    <Translation ID="FIF_GR_OII" String="石化工業行政專區建築" />
+    <Translation ID="FIF_GR_ORI" String="礦業行政專區建築" />
+    <Translation ID="FIF_GR_LC" String="休閒娛樂行政專區建築" />
+    <Translation ID="FIF_GR_TC" String="觀光旅遊行政專區建築" />
+    <!--Tooltip-->
+    <Translation ID="FIF_SE_SC" String="按住SHIFT或CTRL鍵可以選擇多個類別" />
+    <Translation ID="FIF_SO_RETP" String="按關聯性排序。 與原始“Find It”相同" />
+    <Translation ID="FIF_SO_NETP" String="按最近下載的素材排序" />
+    <Translation ID="FIF_SO_RE" String="關聯性" />
+    <Translation ID="FIF_SO_NE" String="新素材" />
+    <!--Settings-->
+    <Translation ID="TRN_CHOICE" String="語言設置" />
+    <Translation ID="TRN_SYS" String="使用遊戲默認語言" />
+
+  </Translations>
+</Language>

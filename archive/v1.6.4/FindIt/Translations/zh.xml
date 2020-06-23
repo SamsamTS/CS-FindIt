@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Language UniqueName="zh" ReadableName="简体中文">
+  <Translations>
+    <Translation ID="FIF_DESC" String="搜索或整理资产" />
+    <!--Settings-->
+    <Translation ID="FIF_SET_DM" String="禁用调试信息日志记录" />
+    <Translation ID="FIF_SET_DMTP" String="如果选中该选项，则不会记录调试信息。" />
+    <Translation ID="FIF_SET_CMT" String="主工具栏居中" />
+    <Translation ID="FIF_SET_CMTTP" String="如果主工具栏超过一定长度，将会强制居中。" />
+    <Translation ID="FIF_SET_UL" String="全部解锁" />
+    <Translation ID="FIF_SET_ULTP" String="允许选择和放置处于未解锁状态的内容。" />
+    <Translation ID="FIF_SET_BP" String="修复下一次加载保存时出现的错误道具" />
+    <Translation ID="FIF_SET_BPTP" String="移除所有引起问题的道具 选中该选项并加载保存" />
+    <!--Search Bar-->
+    <Translation ID="FIF_SE_WF" String="玩家自制" />
+    <Translation ID="FIF_SE_VF" String="游戏原版" />
+    <Translation ID="FIF_SE_IA" String="全部" />
+    <Translation ID="FIF_SE_IN" String="道路" />
+    <Translation ID="FIF_SE_IP" String="可放置的" />
+    <Translation ID="FIF_SE_IG" String="可自长的" />
+    <Translation ID="FIF_SE_IR" String="RICO" />
+    <Translation ID="FIF_SE_IPR" String="道具" />
+    <Translation ID="FIF_SE_ID" String="贴花" />
+    <Translation ID="FIF_SE_IT" String="树木" />
+    <Translation ID="FIF_SE_LV" String="等级: " />
+    <Translation ID="FIF_SE_SZ" String="尺寸: " />
+    <!--Ploppable-->
+    <Translation ID="FIF_PLOP_E" String="电力" />
+    <Translation ID="FIF_PLOP_W" String="水/污水处理" />
+    <Translation ID="FIF_PLOP_G" String="垃圾处理" />
+    <Translation ID="FIF_PLOP_H" String="医疗" />
+    <Translation ID="FIF_PLOP_F" String="消防" />
+    <Translation ID="FIF_PLOP_P" String ="警察" />
+    <Translation ID="FIF_PLOP_ED" String="教育" />
+    <Translation ID="FIF_PLOP_PT" String="公共交通" />
+    <Translation ID="FIF_PLOP_PPW" String="公园/广场/野生动物" />
+    <Translation ID="FIF_PLOP_U" String="独特建筑" />
+    <Translation ID="FIF_PLOP_I" String="工业" />
+    <Translation ID="FIF_PLOP_D" String="自然灾害" />
+    <Translation ID="FIF_PLOP_C" String="校园" />
+    <Translation ID="FIF_PLOP_V" String="大学体育" />
+    <Translation ID="FIF_PLOP_FI" String="捕鱼业" />
+    <!--Growable-->
+    <Translation ID="FIF_GR_LDR" String="低密度住宅" />
+    <Translation ID="FIF_GR_HDR" String="高密度住宅" />
+    <Translation ID="FIF_GR_LDRE" String="低密度环保住宅" />,
+    <Translation ID="FIF_GR_HDRE" String="高密度环保住宅" />
+    <Translation ID="FIF_GR_LDC" String="低密度商业" />
+    <Translation ID="FIF_GR_HDC" String="高密度商业" />
+    <Translation ID="FIF_GR_CE" String="绿色环保商业" />
+    <Translation ID="FIF_GR_O" String="办公区" />
+    <Translation ID="FIF_GR_ITC" String="IT行政专区" />
+    <Translation ID="FIF_GR_GI" String="通用工业" />
+    <Translation ID="FIF_GR_FAI" String="农业" />
+    <Translation ID="FIF_GR_FOI" String="林业" />
+    <Translation ID="FIF_GR_OII" String="石油业" />
+    <Translation ID="FIF_GR_ORI" String="矿业" />
+    <Translation ID="FIF_GR_LC" String="休闲商业" />
+    <Translation ID="FIF_GR_TC" String="旅游商业" />
+    <!--Tooltip-->
+    <Translation ID="FIF_SE_SC" String="按住SHIFT或CTRL键可选择多个类别" />
+    <Translation ID="FIF_SO_RETP" String="按相关性排列。 与原“Find It”相同" />
+    <Translation ID="FIF_SO_NETP" String="按下载时间排列" />
+    <Translation ID="FIF_SO_RE" String="相关性" />
+    <Translation ID="FIF_SO_NE" String="新资产" />
+    <!--Settings-->
+    <Translation ID="TRN_CHOICE" String="语言设定" />
+    <Translation ID="TRN_SYS" String="使用默认语言" />
+    
+  </Translations>
+</Language>
