@@ -58,7 +58,7 @@ namespace FindIt.GUI
             {
                 if (propPrefab.m_material != null && (propPrefab.m_material.shader == Asset.shaderBlend || propPrefab.m_material.shader == Asset.shaderSolid))
                 {
-                    RenderTexture active = RenderTexture.active;
+                    //RenderTexture active = RenderTexture.active;
 
                     Texture2D mainTexture = propPrefab.m_material.GetTexture("_MainTex") as Texture2D;
                     Texture2D aci = propPrefab.m_material.GetTexture("_ACIMap") as Texture2D;
@@ -380,19 +380,22 @@ namespace FindIt.GUI
             pressedTexture.Apply(false);
             pressedTexture.name = baseTexture.name + "Pressed";
 
+            // Don't need to generate disabled thumbnails as they are never used in Find It.
+            /*
             ApplyFilter(pixels, newPixels, c => new Color32(0, 0, 0, c.a));
             Texture2D disabledTexture = new Texture2D(baseTexture.width, baseTexture.height, TextureFormat.ARGB32, false, false);
             disabledTexture.SetPixels32(newPixels);
             disabledTexture.Apply(false);
             disabledTexture.name = baseTexture.name + "Disabled";
+            */
 
             return new Texture2D[]
             {
                 baseTexture,
                 focusedTexture,
                 hoveredTexture,
-                pressedTexture,
-                disabledTexture
+                pressedTexture//,
+                //disabledTexture
             };
         }
 
