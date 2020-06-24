@@ -10,7 +10,7 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "1.6.4";
+        public const string version = "1.6.5";
 
         public ModInfo()
         {
@@ -51,7 +51,8 @@ namespace FindIt
                 UIHelper group = helper.AddGroup(Name) as UIHelper;
                 UIPanel panel = group.self as UIPanel;
 
-                UICheckBox checkBox = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DM"), Debugging.hideDebugMessages.value, (b) =>
+                // Disable debug messages logging
+                 UICheckBox checkBox = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DM"), Debugging.hideDebugMessages.value, (b) =>
                 {
                    Debugging.hideDebugMessages.value = b;
                 });
@@ -59,7 +60,7 @@ namespace FindIt
 
                 group.AddSpace(10);
 
-
+                // Center the main toolbar
                 checkBox = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_CMT"), FindIt.centerToolbar.value, (b) =>
                 {
                     FindIt.centerToolbar.value = b;
@@ -71,6 +72,7 @@ namespace FindIt
                 });
                 checkBox.tooltip = Translations.Translate("FIF_SET_CMTTP");
 
+                // Unlock all
                 checkBox = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_UL"), FindIt.unlockAll.value, (b) =>
                 {
                     FindIt.unlockAll.value = b;
@@ -79,6 +81,8 @@ namespace FindIt
 
                 group.AddSpace(10);
 
+                // Fix bad props next loaded save
+                // Implemented by samsamTS. Need to figure out why this is needed. 
                 UICheckBox fixProps = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_BP"), false, (b) =>
                 {
                     FindIt.fixBadProps = b;
@@ -91,8 +95,14 @@ namespace FindIt
 
                 group.AddSpace(10);
 
-                UIDropDown languageDropDown = (UIDropDown)group.AddDropdown(Translations.Translate("TRN_CHOICE"), Translations.LanguageList, Translations.Index, (value) => { Translations.Index = value; });
-
+                // languate settings
+                UIDropDown languageDropDown = (UIDropDown)group.AddDropdown(Translations.Translate("TRN_CHOICE"), Translations.LanguageList, /*Translations.Index,*/ FindIt.languageChoice.value,  (value) =>
+                { 
+                    Translations.Index = value;
+                    FindIt.languageChoice.value = value;
+                });
+                
+                languageDropDown.width = 300;
                 group.AddSpace(10);
             }
             catch (Exception e)
