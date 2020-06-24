@@ -6,6 +6,7 @@ using UnityEngine;
 using ColossalFramework.DataBinding;
 using ColossalFramework.UI;
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -287,22 +288,30 @@ namespace FindIt.GUI
 
         public void UpdateBuildingFilters()
         {
-            if(buildingFilters.isVisible)
+            try
             {
-                if (sizeFilterY.isVisible)
+                if (buildingFilters.isVisible)
                 {
-                    buildingFilters.width = sizeFilterY.relativePosition.x + sizeFilterY.width;
+                    if (sizeFilterY.isVisible)
+                    {
+                        buildingFilters.width = sizeFilterY.relativePosition.x + sizeFilterY.width;
+                    }
+                    else
+                    {
+                        buildingFilters.width = sizeFilterX.relativePosition.x + sizeFilterX.width;
+                    }
+
+                    filterPanel.width = buildingFilters.relativePosition.x + buildingFilters.width + 5;
                 }
                 else
                 {
-                    buildingFilters.width = sizeFilterX.relativePosition.x + sizeFilterX.width;
+                    filterPanel.width = typeFilter.relativePosition.x + typeFilter.width + 5;
                 }
-
-                filterPanel.width = buildingFilters.relativePosition.x + buildingFilters.width + 5;
             }
-            else
+            catch(Exception e)
             {
-                filterPanel.width = typeFilter.relativePosition.x + typeFilter.width + 5;
+                Debugging.Message("UpdateBuildingFilters exception");
+                Debugging.LogException(e);
             }
         }
 

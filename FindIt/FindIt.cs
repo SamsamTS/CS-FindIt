@@ -30,6 +30,8 @@ namespace FindIt
         public static bool inEditor = false;
         public static bool isRicoEnabled = false;
 
+        public static SavedInt languageChoice = new SavedInt("languageChoice", settingsFileName, 0, true);
+
         public static AssetTagList list;
 
         public UIButton mainButton;
