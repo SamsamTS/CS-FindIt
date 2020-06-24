@@ -90,6 +90,10 @@ namespace FindIt
                 panel.gameObject.AddComponent<OptionsKeymapping>();
 
                 group.AddSpace(10);
+
+                UIDropDown languageDropDown = (UIDropDown)group.AddDropdown(Translations.Translate("TRN_CHOICE"), Translations.LanguageList, Translations.Index, (value) => { Translations.Index = value; });
+
+                group.AddSpace(10);
             }
             catch (Exception e)
             {
