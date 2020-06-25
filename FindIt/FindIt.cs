@@ -387,7 +387,7 @@ namespace FindIt
                     Event e = Event.current;
 
                     // Checking key presses
-                    if (OptionsKeymapping.search.IsPressed(e))
+                    if (Settings.IsSearchPressed(e))
                     {
                         if (!searchBox.isVisible)
                         {
