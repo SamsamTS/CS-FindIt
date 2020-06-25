@@ -111,7 +111,7 @@ namespace FindIt.Detours
 
                         component.eventVisibilityChanged += (c, p) =>
                         {
-                            if (FindIt.unlockAll)
+                            if (Settings.unlockAll)
                             {
                                 c.isEnabled = true;
                             }

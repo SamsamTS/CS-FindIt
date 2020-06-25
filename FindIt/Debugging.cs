@@ -13,15 +13,13 @@ namespace FindIt
     /// </summary>
     internal static class Debugging
     {
-        public static SavedBool hideDebugMessages = new SavedBool("hideDebugMessages", FindIt.settingsFileName, true, true);
-
         /// <summary>
         /// Prints a single-line debugging message to the Unity output log.
         /// </summary>
         /// <param name="message">Message to log</param>
         internal static void Message(string message)
         {
-            if (hideDebugMessages.value) return;
+            if (Settings.hideDebugMessages) return;
             Debug.Log("Find It Fix: " + message + ".");
         }
 

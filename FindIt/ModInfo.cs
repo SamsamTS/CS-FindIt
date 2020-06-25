@@ -39,6 +39,12 @@ namespace FindIt
             get { return Translations.Translate("FIF_DESC");  }
         }
 
+        public void OnEnabled()
+        {
+            XMLUtils.LoadSettings();
+        }
+
+
         public void OnSettingsUI(UIHelperBase helper)
         {
             try
@@ -52,20 +58,22 @@ namespace FindIt
                 UIPanel panel = group.self as UIPanel;
 
                 // Disable debug messages logging
-                 UICheckBox checkBox = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DM"), Debugging.hideDebugMessages.value, (b) =>
+                 UICheckBox checkBox = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DM"), Settings.hideDebugMessages, (b) =>
                 {
-                   Debugging.hideDebugMessages.value = b;
+                    Settings.hideDebugMessages = b;
+                    XMLUtils.SaveSettings();
                 });
                 checkBox.tooltip = Translations.Translate("FIF_SET_DMTP");
 
                 group.AddSpace(10);
 
                 // Center the main toolbar
-                checkBox = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_CMT"), FindIt.centerToolbar.value, (b) =>
+                checkBox = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_CMT"), Settings.centerToolbar, (b) =>
                 {
-                    FindIt.centerToolbar.value = b;
+                    Settings.centerToolbar = b;
+                    XMLUtils.SaveSettings();
 
-                    if(FindIt.instance != null)
+                    if (FindIt.instance != null)
                     {
                         FindIt.instance.UpdateMainToolbar();
                     }
@@ -73,9 +81,10 @@ namespace FindIt
                 checkBox.tooltip = Translations.Translate("FIF_SET_CMTTP");
 
                 // Unlock all
-                checkBox = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_UL"), FindIt.unlockAll.value, (b) =>
+                checkBox = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_UL"), Settings.unlockAll, (b) =>
                 {
-                    FindIt.unlockAll.value = b;
+                    Settings.unlockAll = b;
+                    XMLUtils.SaveSettings();
                 });
                 checkBox.tooltip = Translations.Translate("FIF_SET_ULTP");
 
@@ -85,7 +94,8 @@ namespace FindIt
                 // Implemented by samsamTS. Need to figure out why this is needed. 
                 UICheckBox fixProps = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_BP"), false, (b) =>
                 {
-                    FindIt.fixBadProps = b;
+                    Settings.fixBadProps = b;
+                    XMLUtils.SaveSettings();
                 });
                 fixProps.tooltip = Translations.Translate("FIF_SET_BPTP");
 
@@ -96,10 +106,10 @@ namespace FindIt
                 group.AddSpace(10);
 
                 // languate settings
-                UIDropDown languageDropDown = (UIDropDown)group.AddDropdown(Translations.Translate("TRN_CHOICE"), Translations.LanguageList, /*Translations.Index,*/ FindIt.languageChoice.value,  (value) =>
+                UIDropDown languageDropDown = (UIDropDown)group.AddDropdown(Translations.Translate("TRN_CHOICE"), Translations.LanguageList, /*Translations.Index,*/ Translations.Index,  (value) =>
                 { 
                     Translations.Index = value;
-                    FindIt.languageChoice.value = value;
+                    XMLUtils.SaveSettings();
                 });
                 
                 languageDropDown.width = 300;
