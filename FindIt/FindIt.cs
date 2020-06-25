@@ -485,7 +485,11 @@ namespace FindIt
                     "ZoningResidentialHighEco",
                     "ZoningResidentialHighEcoDisabled",
                     "ZoningResidentialLowEco",
-                    "ZoningResidentialLowEcoDisabled"
+                    "ZoningResidentialLowEcoDisabled",
+                    "ToolbarIconPropsBillboards",
+                    "ToolbarIconPropsSpecialBillboards",
+                    "ToolbarIconPropsBillboardsDisabled",
+                    "ToolbarIconPropsSpecialBillboardsDisabled"
                 };
 
                 atlas = ResourceLoader.CreateTextureAtlas("FindItAtlas", spriteNames, "FindIt.Icons.");
