@@ -17,10 +17,10 @@ namespace FindIt
             try
             {
                 // Creating setting file
-                if (GameSettings.FindSettingsFileByName(FindIt.settingsFileName) == null)
-                {
-                    GameSettings.AddSettingsFile(new SettingsFile[] { new SettingsFile() { fileName = FindIt.settingsFileName } });
-                }
+                //if (GameSettings.FindSettingsFileByName(FindIt.settingsFileName) == null)
+                //{
+                //    GameSettings.AddSettingsFile(new SettingsFile[] { new SettingsFile() { fileName = FindIt.settingsFileName } });
+                //}
             }
             catch (Exception e)
             {

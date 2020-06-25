@@ -384,10 +384,10 @@ namespace FindIt
                 if (!UIView.HasModalInput() &&
                     (!UIView.HasInputFocus() || (UIView.activeComponent != null && UIView.activeComponent.parent is UISearchBox)))
                 {
-                    Event e = Event.current;
+                    //Event e = Event.current;
 
                     // Checking key presses
-                    if (Settings.IsSearchPressed(e))
+                    if (Settings.IsSearchPressed())
                     {
                         if (!searchBox.isVisible)
                         {

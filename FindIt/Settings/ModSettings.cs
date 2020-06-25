@@ -8,11 +8,18 @@ namespace FindIt
     /// <summary>
     /// Class to hold global mod settings.
     /// </summary>
+    [XmlRoot(ElementName = "FindIt2", Namespace = "", IsNullable = false)]
     internal static class Settings
     {
+        [XmlElement("HideDebugMessages")]
         internal static bool hideDebugMessages = true;
+
+        [XmlElement("UnlockAll")]
         internal static bool unlockAll =false;
+
+        [XmlElement("CenterToolbar")]
         internal static bool centerToolbar = true;
+
         internal static bool fixBadProps = false;
         internal static InputKey searchKey = SavedInputKey.Encode(KeyCode.F, true, false, false);
 
@@ -20,9 +27,8 @@ namespace FindIt
         /// <summary>
         /// Checks to see if the search hotkey has been pressed.
         /// </summary>
-        /// <param name="e"></param>
-        /// <returns></returns>
-        public static bool IsSearchPressed(Event e)
+        /// <returns>True if pressed, false otherwise</returns>
+        public static bool IsSearchPressed()
         {
             // Keycode is lower 7 nibbles of CO InputKey.
             KeyCode keyCode = (KeyCode)(searchKey & 0xFFFFFFF);
