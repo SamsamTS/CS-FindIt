@@ -46,16 +46,16 @@ namespace FindIt
         public enum PropType
         {
             Invalid = -1,
-            All,
-            PropsBillboards,
-            PropsSpecialBillboards,
             PropsIndustrial,
             PropsParks,
             PropsCommon,
             PropsResidential,
+            PropsBillboards,
+            PropsSpecialBillboards,
             PropsLights,
-            PropsGroundTiles,
-            PropsUnsorted
+            Natural,
+            Unsorted,
+            Hidden
         }
 
         public string name;
@@ -86,8 +86,8 @@ namespace FindIt
                             assetType = AssetType.Ploppable;
                         }
 
-                        // check if a building is from a content creator pack
-                        if (buildingPrefab.editorCategory.EndsWith("ModderPack"))
+                        // check if a building is from a content creator pack. Only works for Modern Japan CCP
+                        if (buildingPrefab.editorCategory.EndsWith("ModderPack") && buildingPrefab.name.StartsWith("PDX"))
                         {
                             isCCPBuilding = true;
                         }
@@ -101,6 +101,7 @@ namespace FindIt
                     if (propPrefab != null)
                     {
                         assetType = AssetType.Prop;
+                        propType = GetPropType(prefab.editorCategory);
 
                         if (propPrefab.m_material != null)
                         {
@@ -153,6 +154,7 @@ namespace FindIt
         public string author;
         public float score;
         public ulong downloadTime;
+        public PropType propType = PropType.Invalid;
 
         public delegate void OnButtonClicked(UIComponent comp);
         public OnButtonClicked onButtonClicked;
@@ -335,6 +337,62 @@ namespace FindIt
 
             return text;
         }
+
+        // check the type of a prop based on editor category
+        private Asset.PropType GetPropType(string propEditorCategory)
+        {
+            if (propEditorCategory.StartsWith("PropsIndustrial"))
+            {
+                return Asset.PropType.PropsIndustrial;
+            }
+
+            else if (propEditorCategory.StartsWith("PropsParks"))
+            {
+                return Asset.PropType.PropsParks;
+            }
+
+            else if (propEditorCategory.StartsWith("PropsCommonLights") || propEditorCategory.StartsWith("PropsCommonStreets"))
+            {
+                return Asset.PropType.PropsLights;
+            }
+
+            else if (propEditorCategory.StartsWith("PropsCommon"))
+            {
+                return Asset.PropType.PropsCommon;
+            }
+
+            else if (propEditorCategory.StartsWith("PropsResidential"))
+            {
+                return Asset.PropType.PropsResidential;
+            }
+
+            else if (propEditorCategory.StartsWith("PropsBillboards"))
+            {
+                return Asset.PropType.PropsBillboards;
+            }
+
+            else if (propEditorCategory.StartsWith("PropsSpecialBillboards"))
+            {
+                return Asset.PropType.PropsSpecialBillboards;
+            }
+
+            else if (propEditorCategory.StartsWith("PropsRocks"))
+            {
+                return Asset.PropType.Natural;
+            }
+
+            else if (propEditorCategory.StartsWith("Beautification"))
+            {
+                return Asset.PropType.Natural;
+            }
+
+            else if (propEditorCategory.StartsWith("PropsMarker"))
+            {
+                return Asset.PropType.Hidden;
+            }
+
+            return Asset.PropType.Unsorted;
+        }
     }
 
     public class AssetTagList
@@ -394,6 +452,16 @@ namespace FindIt
                             {
                                 UIFilterPloppable.Category category = UIFilterPloppable.GetCategory(buildingInfo.m_class);
                                 if (category == UIFilterPloppable.Category.None || !UIFilterPloppable.instance.IsSelected(category)) continue;
+                            }
+                        }
+
+                        else if (filter == Asset.AssetType.Prop)
+                        {
+                            // filter by ploppable type
+                            if (!UIFilterProp.instance.IsAllSelected())
+                            {
+                                UIFilterProp.Category category = UIFilterProp.GetCategory(asset.propType);
+                                if (category == UIFilterProp.Category.None || !UIFilterProp.instance.IsSelected(category)) continue;
                             }
                         }
 
@@ -499,6 +567,15 @@ namespace FindIt
                             {
                                 UIFilterPloppable.Category category = UIFilterPloppable.GetCategory(buildingInfo.m_class);
                                 if (category == UIFilterPloppable.Category.None || !UIFilterPloppable.instance.IsSelected(category)) continue;
+                            }
+                        }
+                        else if (filter == Asset.AssetType.Prop)
+                        {
+                            // filter by ploppable type
+                            if (!UIFilterProp.instance.IsAllSelected())
+                            {
+                                UIFilterProp.Category category = UIFilterProp.GetCategory(asset.propType);
+                                if (category == UIFilterProp.Category.None || !UIFilterProp.instance.IsSelected(category)) continue;
                             }
                         }
 
@@ -886,6 +963,5 @@ namespace FindIt
 
             return id;
         }
-
     }
 }

@@ -58,6 +58,7 @@
     <Compile Include="GUI\ImageUtils.cs" />
     <Compile Include="GUI\PreviewRenderer.cs" />
     <Compile Include="GUI\UIFilterGrowable.cs" />
+    <Compile Include="GUI\UIFilterProp.cs" />
     <Compile Include="GUI\UIGroupPanel.cs" />
     <Compile Include="GUI\UIFilterPloppable.cs" />
     <Compile Include="GUI\UIScrollPanel.cs" />
@@ -112,6 +113,10 @@
     <EmbeddedResource Include="Icons\ZoningResidentialLowEcoDisabled.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Icons\ToolbarIconPropsBillboards.png" />
+    <EmbeddedResource Include="Icons\ToolbarIconPropsBillboardsDisabled.png" />
+    <EmbeddedResource Include="Icons\ToolbarIconPropsSpecialBillboards.png" />
+    <EmbeddedResource Include="Icons\ToolbarIconPropsSpecialBillboardsDisabled.png" />
     <Content Include="Translations\en.xml" />
     <Content Include="Translations\ja.xml" />
     <Content Include="Translations\zh-tw.xml" />

@@ -28,6 +28,7 @@ namespace FindIt.GUI
         public UIDropDown sizeFilterY;
         public UIFilterGrowable filterGrowable;
         public UIFilterPloppable filterPloppable;
+        public UIFilterProp filterProp;
 
         public UICheckBox workshopFilter;
         public UICheckBox vanillaFilter;
@@ -266,6 +267,13 @@ namespace FindIt.GUI
 
             filterGrowable.eventFilteringChanged += (c, p) => Search();
 
+            // prop filter tabs
+            filterProp = panel.AddUIComponent<UIFilterProp>();
+            filterProp.isVisible = false;
+            filterProp.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
+
+            filterProp.eventFilteringChanged += (c, p) => Search();
+
             UpdateFilterPanels();
 
             size = Vector2.zero;
@@ -324,6 +332,7 @@ namespace FindIt.GUI
                 {
                     case Asset.AssetType.Ploppable:
                         HideFilterPanel(filterGrowable);
+                        HideFilterPanel(filterProp);
                         ShowFilterPanel(filterPloppable);
                         HideBuildingFilters();
                         break;
@@ -331,6 +340,7 @@ namespace FindIt.GUI
                         sizeFilterX.items = filterItemsRICO;
                         sizeFilterY.items = filterItemsRICO;
                         HideFilterPanel(filterPloppable);
+                        HideFilterPanel(filterProp);
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
@@ -341,12 +351,20 @@ namespace FindIt.GUI
                         sizeFilterX.items = filterItemsGrowable;
                         sizeFilterY.items = filterItemsGrowable;
                         HideFilterPanel(filterPloppable);
+                        HideFilterPanel(filterProp);
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
+                        break;
+                    case Asset.AssetType.Prop:
+                        HideFilterPanel(filterGrowable);
+                        HideFilterPanel(filterPloppable);
+                        ShowFilterPanel(filterProp);
+                        HideBuildingFilters();
                         break;
                     default:
                         HideFilterPanel(filterPloppable);
                         HideFilterPanel(filterGrowable);
+                        HideFilterPanel(filterProp);
                         HideBuildingFilters();
                         break;
                 }
@@ -432,7 +450,7 @@ namespace FindIt.GUI
                     }
 
                     UIScrollPanelItem.ItemData data = new UIScrollPanelItem.ItemData();
-                    data.name = asset.title;// + "___" + asset.downloadTime.ToString();
+                    data.name = asset.title;// + "___" + asset.prefab.editorCategory;
                     data.tooltip = Asset.GetLocalizedTooltip(asset.prefab, data.name);
 
                     data.tooltipBox = GeneratedPanel.GetTooltipBox(TooltipHelper.GetHashCode(data.tooltip));

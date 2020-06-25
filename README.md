@@ -2,7 +2,23 @@
 
 Forked from SamSamTS's original Find It! mod.  
 
-## Release Notes
+## Future plans
+- Check the issues tab to see WIP and feature suggesions that are under investigating.
+
+### Contact
+Steam workshop [link](https://steamcommunity.com/sharedfiles/filedetails/?id=2133885971)
+
+You can use Github's issues tab or via Steam. This repo is not under my main Github account so you probably will get a faster response if you send me a Steam message or leave a comment on the workshop page. I'm open to collabration and suggestion. You can use the issues tab to report  bug or provide suggesion, pull requests are also welcome. 
+
+## Change Notes
+
+Implemented and planned be included in the next release:
+- Add filter tabs for props. The categories of the props were decided by which asset editor import templates the asset creators chose, so many are not properly set up. Similar categorization as in More Beautification.
+
+- Three new building size filter options for RICO: 5-8, 9-12, 13+. Easier to find larger RICO buildings.
+
+- Modern Japan Content Creator Pack buildings are counted both as "custom" and "vanilla".
+
 New in v1.6.4:
 - **Experimental** Sort assets by most recently downloaded. A new button is added and you can toggle between the sorting methods.
 
@@ -35,13 +51,3 @@ New in v1.6(first release):
 - Fix some known minor issues in the original Find It.
 - New filter tabs for ECO growables.
 - Buildings added in the newer DLCs now are included and can be found under the filter tabs.
-
-## Future plans
-- Check the issues tab to see WIP and feature suggesions that under investigating.
-
-### Contact
-Steam workshop [link](https://steamcommunity.com/sharedfiles/filedetails/?id=2133885971)
-
-You can use Github's issues tab or via Steam. This repo is not under my main Github account so you probably will get a faster response if you send me a Steam message or leave a comment on the workshop page. I'm open to collabration and suggestion. You can use the issues tab to report  bug or provide suggesion, pull requests are also welcome. 
-
-
