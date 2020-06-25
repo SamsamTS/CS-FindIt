@@ -21,7 +21,9 @@ namespace FindIt
         internal static bool centerToolbar = true;
 
         internal static bool fixBadProps = false;
-        internal static InputKey searchKey = SavedInputKey.Encode(KeyCode.F, true, false, false);
+        //internal static InputKey searchKey = SavedInputKey.Encode(KeyCode.F, true, false, false);
+
+        internal static KeyBinding searchKey = new KeyBinding { keyCode = (int)KeyCode.F, control = true, shift = false, alt = false };
 
 
         /// <summary>
@@ -31,28 +33,28 @@ namespace FindIt
         public static bool IsSearchPressed()
         {
             // Keycode is lower 7 nibbles of CO InputKey.
-            KeyCode keyCode = (KeyCode)(searchKey & 0xFFFFFFF);
+            //KeyCode keyCode = (KeyCode)searchKey & 0xFFFFFFF);
 
-            // Don't do anything if a keycode hasn't been set, or no key has been pressed.
-            if (keyCode == KeyCode.None || !Input.GetKey(keyCode))
+            // Don't do anything if a keycode hasn't been set, or if the key isn't pressed.
+            if (searchKey.keyCode == (int)KeyCode.None || !Input.GetKey((KeyCode)searchKey.keyCode))
             {
                 return false;
             }
 
-            // Check for control (CO InputKey mask 0x4 of high nibble).
-            if ((Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)) != ((searchKey & 0x40000000) != 0))
+            // Check for control.
+            if (searchKey.control && !(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
             {
                 return false;
             }
 
-            // Check for shift (CO InputKey mask 0x2 of high nibble).
-            if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) != ((searchKey & 0x20000000) != 0))
+            // Check for shift.
+            if (searchKey.shift && !(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
             {
                 return false;
             }
 
-            // Check for alt (CO InputKey mask 0x1 of high nibble).
-            if ((Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt) || Input.GetKey(KeyCode.AltGr)) != ((searchKey & 0x10000000) != 0))
+            // Check for alt.
+            if (searchKey.shift && !(Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt) || Input.GetKey(KeyCode.AltGr)))
             {
                 return false;
             }
@@ -82,7 +84,8 @@ namespace FindIt
         public bool FixBadProps { get => Settings.fixBadProps; set => Settings.fixBadProps = value; }
 
         [XmlElement("SearchKey")]
-        public int SearchKey { get => Settings.searchKey; set => Settings.searchKey = value; }
+        //public int SearchKey { get => Settings.searchKey; set => Settings.searchKey = value; }
+        public KeyBinding SearchKey { get => Settings.searchKey; set => Settings.searchKey = value; }
 
         [XmlElement("Language")]
         public string Language
@@ -96,5 +99,20 @@ namespace FindIt
                 Translations.Language = value;
             }
         }
+    }
+
+    public struct KeyBinding
+    {
+        [XmlAttribute("KeyCode")]
+        public int keyCode;
+
+        [XmlAttribute("Control")]
+        public bool control;
+
+        [XmlAttribute("Shift")]
+        public bool shift;
+
+        [XmlAttribute("Alt")]
+        public bool alt;
     }
 }

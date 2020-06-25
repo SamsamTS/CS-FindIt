@@ -22,7 +22,7 @@ namespace FindIt
 
         private void Awake()
         {
-            AddKeymapping("Search", Settings.searchKey);
+            AddKeymapping("Search", SavedInputKey.Encode((KeyCode)Settings.searchKey.keyCode, Settings.searchKey.control, Settings.searchKey.shift, Settings.searchKey.alt));
         }
 
         private void AddKeymapping(string label, InputKey inputKey)
@@ -130,9 +130,8 @@ namespace FindIt
                 uITextComponent.text = SavedInputKey.ToLocalizedString("KEYNAME", m_EditingBinding);
 
                 // Apply and save.
-                Settings.searchKey = inputKey;
+                Settings.searchKey = new KeyBinding { keyCode = inputKey & 0xFFFFFFF, control = (inputKey & 0x40000000) != 0, shift = (inputKey & 0x20000000) != 0, alt = (inputKey & 0x10000000) != 0 };
                 XMLUtils.SaveSettings();
-
 
                 this.m_EditingBinding = 0;
                 this.m_EditingBindingCategory = string.Empty;
