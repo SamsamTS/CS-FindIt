@@ -43,8 +43,25 @@ namespace FindIt
             Tree
         }
 
+        public enum PropType
+        {
+            Invalid = -1,
+            All,
+            PropsBillboards,
+            PropsSpecialBillboards,
+            PropsIndustrial,
+            PropsParks,
+            PropsCommon,
+            PropsResidential,
+            PropsLights,
+            PropsGroundTiles,
+            PropsUnsorted
+        }
+
         public string name;
         public string title;
+        public bool isCCPBuilding = false;
+
         public PrefabInfo prefab
         {
             get { return m_prefab; }
@@ -67,6 +84,12 @@ namespace FindIt
                         else
                         {
                             assetType = AssetType.Ploppable;
+                        }
+
+                        // check if a building is from a content creator pack
+                        if (buildingPrefab.editorCategory.EndsWith("ModderPack"))
+                        {
+                            isCCPBuilding = true;
                         }
 
                         size = new Vector2(buildingPrefab.m_cellWidth, buildingPrefab.m_cellLength);
@@ -624,6 +647,7 @@ namespace FindIt
                 {
                     asset.title = Asset.GetLocalizedTitle(asset.prefab);
                     asset.tagsTitle = AddAssetTags(asset, tagsTitleDictionary, asset.title);
+                   
 
                     if (asset.steamID == 0)
                     {
@@ -862,5 +886,6 @@ namespace FindIt
 
             return id;
         }
+
     }
 }

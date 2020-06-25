@@ -427,8 +427,8 @@ namespace FindIt.GUI
                         // filter out custom asset
                         if (asset.prefab.m_isCustomContent && !workshopFilter.isChecked) continue;
 
-                        // filter out vanilla asset. To-do: should not filter out content creater pack assets
-                        if (!asset.prefab.m_isCustomContent && !vanillaFilter.isChecked) continue;
+                        // filter out vanilla asset. will not filter out content creater pack assets
+                        if (!asset.prefab.m_isCustomContent && !vanillaFilter.isChecked && !asset.isCCPBuilding) continue;
                     }
 
                     UIScrollPanelItem.ItemData data = new UIScrollPanelItem.ItemData();
@@ -460,5 +460,6 @@ namespace FindIt.GUI
                 ToolsModifierControl.SetTool<DefaultTool>();
             }
         }
+
     }
 }
