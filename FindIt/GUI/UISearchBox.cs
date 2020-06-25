@@ -37,12 +37,15 @@ namespace FindIt.GUI
         // false = sort by most recently downloaded
         public bool sortButtonTextState = true;
 
+        public string[] filterItemsGrowable = { Translations.Translate("FIF_SE_IA"), "1", "2", "3", "4"};
+        public string[] filterItemsRICO = { Translations.Translate("FIF_SE_IA"), "1", "2", "3", "4", "5-8", "9-12", "13+"};
+
         public ItemClass.Level buildingLevel
         {
             get { return (ItemClass.Level)(levelFilter.selectedIndex - 1); }
         }
 
-        public Vector2 buildingSize
+        public Vector2 buildingSizeFilterIndex
         {
             get
             {
@@ -193,11 +196,7 @@ namespace FindIt.GUI
 
             sizeFilterX = SamsamTS.UIUtils.CreateDropDown(buildingFilters);
             sizeFilterX.size = new Vector2(55, 25);
-            sizeFilterX.AddItem(Translations.Translate("FIF_SE_IA"));
-            sizeFilterX.AddItem("1");
-            sizeFilterX.AddItem("2");
-            sizeFilterX.AddItem("3");
-            sizeFilterX.AddItem("4");
+            sizeFilterX.items = filterItemsGrowable;
             sizeFilterX.selectedIndex = 0;
             sizeFilterX.relativePosition = new Vector3(sizeLabel.relativePosition.x + sizeLabel.width + 5, 5);
 
@@ -213,11 +212,7 @@ namespace FindIt.GUI
 
             sizeFilterY = SamsamTS.UIUtils.CreateDropDown(buildingFilters);
             sizeFilterY.size = new Vector2(55, 25);
-            sizeFilterY.AddItem(Translations.Translate("FIF_SE_IA"));
-            sizeFilterY.AddItem("1");
-            sizeFilterY.AddItem("2");
-            sizeFilterY.AddItem("3");
-            sizeFilterY.AddItem("4");
+            sizeFilterY.items = filterItemsGrowable;
             sizeFilterY.selectedIndex = 0;
             //sizeFilterY.isVisible = false;
             sizeFilterY.relativePosition = new Vector3(sizeFilterX.relativePosition.x + sizeFilterX.width + 10, 5);
@@ -333,7 +328,18 @@ namespace FindIt.GUI
                         HideBuildingFilters();
                         break;
                     case Asset.AssetType.Rico:
+                        sizeFilterX.items = filterItemsRICO;
+                        sizeFilterY.items = filterItemsRICO;
+                        HideFilterPanel(filterPloppable);
+                        ShowFilterPanel(filterGrowable);
+                        ShowBuildingFilters();
+                        break;
                     case Asset.AssetType.Growable:
+                        // if switch back from rico with size > 4, default size = all
+                        if (sizeFilterX.selectedIndex > filterItemsGrowable.Length - 1) sizeFilterX.selectedIndex = 0;
+                        if (sizeFilterY.selectedIndex > filterItemsGrowable.Length - 1) sizeFilterY.selectedIndex = 0;
+                        sizeFilterX.items = filterItemsGrowable;
+                        sizeFilterY.items = filterItemsGrowable;
                         HideFilterPanel(filterPloppable);
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
@@ -418,7 +424,11 @@ namespace FindIt.GUI
                     // however I got some UI glitches and was not able to solve it
                     if (workshopFilter != null && vanillaFilter != null)
                     {
-                        if ((asset.prefab.m_isCustomContent && !workshopFilter.isChecked) || (!asset.prefab.m_isCustomContent && !vanillaFilter.isChecked)) continue;
+                        // filter out custom asset
+                        if (asset.prefab.m_isCustomContent && !workshopFilter.isChecked) continue;
+
+                        // filter out vanilla asset. To-do: should not filter out content creater pack assets
+                        if (!asset.prefab.m_isCustomContent && !vanillaFilter.isChecked) continue;
                     }
 
                     UIScrollPanelItem.ItemData data = new UIScrollPanelItem.ItemData();
