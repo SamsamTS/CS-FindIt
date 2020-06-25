@@ -353,22 +353,8 @@ namespace FindIt
                             ItemClass.Level level = UISearchBox.instance.buildingLevel;
                             if (level != ItemClass.Level.None && buildingInfo.m_class.m_level != level) continue;
 
-                            // size
-                            Vector2 buildingSize = UISearchBox.instance.buildingSize;
-
-                            if (buildingSize.x > 0.0f && buildingSize.y > 0.0f)
-                            {
-                                if (asset.size != buildingSize) continue;
-                            }
-                            if (buildingSize.x == 0.0f && buildingSize.y != 0.0f)
-                            {
-                                if (asset.size.y != buildingSize.y) continue;
-                            }
-                            if (buildingSize.x != 0.0f && buildingSize.y == 0.0f)
-                            {
-                                if (asset.size.x != buildingSize.x) continue;
-                            }
-
+                            // filter by size
+                            if (!CheckBuildingSize(asset.size, UISearchBox.instance.buildingSizeFilterIndex)) continue;
 
                             // zone
                             if (!UIFilterGrowable.instance.IsAllSelected())
@@ -472,19 +458,7 @@ namespace FindIt
                             if (level != ItemClass.Level.None && buildingInfo.m_class.m_level != level) continue;
 
                             // filter by size
-                            Vector2 buildingSize = UISearchBox.instance.buildingSize;
-                            if (buildingSize.x > 0.0f && buildingSize.y > 0.0f)
-                            {
-                                if (asset.size != buildingSize) continue;
-                            }
-                            if (buildingSize.x == 0.0f && buildingSize.y != 0.0f)
-                            {
-                                if (asset.size.y != buildingSize.y) continue;
-                            }
-                            if (buildingSize.x != 0.0f && buildingSize.y == 0.0f)
-                            {
-                                if (asset.size.x != buildingSize.x) continue;
-                            }
+                            if (!CheckBuildingSize(asset.size, UISearchBox.instance.buildingSizeFilterIndex)) continue;
 
                             // filter by growable type
                             if (!UIFilterGrowable.instance.IsAllSelected())
@@ -513,6 +487,57 @@ namespace FindIt
             }
            
             return matches;
+        }
+
+        // return true if the asset size matches the building size filter options
+        // index 0 = all
+        // index 1 - 4 = corresponding sizes
+        // index 5 = size 5 - 8
+        // index 6 = size 9 - 12
+        // index 7 = size 13+
+        private bool CheckBuildingSize(Vector2 assetSize, Vector2 buildingSizeFilterIndex)
+        {
+            if (buildingSizeFilterIndex.x > 0.0f && buildingSizeFilterIndex.y > 0.0f)
+            {
+                if (!CheckBuildingSizeXY(assetSize.x, buildingSizeFilterIndex.x) || !CheckBuildingSizeXY(assetSize.y, buildingSizeFilterIndex.y)) return false;
+            }
+            // if filter = (All, not All)
+            if (buildingSizeFilterIndex.x == 0.0f && buildingSizeFilterIndex.y != 0.0f)
+            {
+                if (!CheckBuildingSizeXY(assetSize.y, buildingSizeFilterIndex.y)) return false;
+            }
+            // if filter = (not All, All)
+            if (buildingSizeFilterIndex.x != 0.0f && buildingSizeFilterIndex.y == 0.0f)
+            {
+                if (!CheckBuildingSizeXY(assetSize.x, buildingSizeFilterIndex.x)) return false;
+            }
+            return true;
+        }
+
+        private bool CheckBuildingSizeXY(float assetSizeXY, float buildingSizeFilterIndex)
+        {
+            if (buildingSizeFilterIndex == 0.0f) return true; // all
+            if (buildingSizeFilterIndex < 5.0f) // size of 1 - 4
+            {
+                if (assetSizeXY == buildingSizeFilterIndex) return true;
+                else return false;
+            }
+            if (buildingSizeFilterIndex == 5.0f ) // size 5 - 8
+            {
+                if (assetSizeXY <= 8.0f && assetSizeXY >= 5.0f) return true;
+                else return false;
+            }
+            if (buildingSizeFilterIndex == 6.0f) // size 9 - 12
+            {
+                if (assetSizeXY <= 12.0f && assetSizeXY >= 9.0f) return true;
+                else return false;
+            }
+            if (buildingSizeFilterIndex == 7.0f) // size 13+
+            {
+                if (assetSizeXY >= 13.0f) return true;
+                else return false;
+            }
+            return true;
         }
 
         private float GetScore(string keyword, string tag, Dictionary<string, int> dico)
