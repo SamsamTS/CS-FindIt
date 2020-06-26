@@ -11,23 +11,7 @@ namespace FindIt
     public class ModInfo : IUserMod
     {
         public const string version = "1.6.5";
-
-        public ModInfo()
-        {
-            try
-            {
-                // Creating setting file
-                //if (GameSettings.FindSettingsFileByName(FindIt.settingsFileName) == null)
-                //{
-                //    GameSettings.AddSettingsFile(new SettingsFile[] { new SettingsFile() { fileName = FindIt.settingsFileName } });
-                //}
-            }
-            catch (Exception e)
-            {
-                Debugging.Message("Couldn't load/create the setting file.");
-                Debugging.LogException(e);
-            }
-        }
+        
 
         public string Name
         {
@@ -39,8 +23,13 @@ namespace FindIt
             get { return Translations.Translate("FIF_DESC");  }
         }
 
+
+        /// <summary>
+        /// Called by the game when mod is enabled.
+        /// </summary>
         public void OnEnabled()
         {
+            // Load settings here.
             XMLUtils.LoadSettings();
         }
 
@@ -121,6 +110,5 @@ namespace FindIt
                 Debugging.LogException(e);
             }
         }
-
     }
 }

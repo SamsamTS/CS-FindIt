@@ -1,6 +1,5 @@
 ﻿using System.Xml.Serialization;
 using UnityEngine;
-using ColossalFramework;
 
 
 namespace FindIt
@@ -11,17 +10,13 @@ namespace FindIt
     [XmlRoot(ElementName = "FindIt2", Namespace = "", IsNullable = false)]
     internal static class Settings
     {
-        [XmlElement("HideDebugMessages")]
         internal static bool hideDebugMessages = true;
 
-        [XmlElement("UnlockAll")]
         internal static bool unlockAll =false;
 
-        [XmlElement("CenterToolbar")]
         internal static bool centerToolbar = true;
 
         internal static bool fixBadProps = false;
-        //internal static InputKey searchKey = SavedInputKey.Encode(KeyCode.F, true, false, false);
 
         internal static KeyBinding searchKey = new KeyBinding { keyCode = (int)KeyCode.F, control = true, shift = false, alt = false };
 
@@ -84,7 +79,6 @@ namespace FindIt
         public bool FixBadProps { get => Settings.fixBadProps; set => Settings.fixBadProps = value; }
 
         [XmlElement("SearchKey")]
-        //public int SearchKey { get => Settings.searchKey; set => Settings.searchKey = value; }
         public KeyBinding SearchKey { get => Settings.searchKey; set => Settings.searchKey = value; }
 
         [XmlElement("Language")]
@@ -101,6 +95,10 @@ namespace FindIt
         }
     }
 
+
+    /// <summary>
+    /// Basic keybinding class - code and modifiers.
+    /// </summary>
     public struct KeyBinding
     {
         [XmlAttribute("KeyCode")]
