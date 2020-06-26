@@ -13,6 +13,8 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 ## Change Notes
 
 Implemented and planned be included in the next release:
+
+New in v1.6.5:
 - Add filter tabs for props. The categories of the props were decided by which asset editor import templates the asset creators chose, so many are not properly set up. Similar categorization as in More Beautification.
 
 - Three new building size filter options for RICO: 5-8, 9-12, 13+. Easier to find larger RICO buildings.
