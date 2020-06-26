@@ -23,9 +23,6 @@ namespace FindIt
         public const string settingsFileName = "FindIt";
 
         public static FindIt instance;
-        public static SavedBool unlockAll = new SavedBool("unlockAll", settingsFileName, false, true);
-        public static SavedBool centerToolbar = new SavedBool("centerToolbar", settingsFileName, true, true);
-        public static bool fixBadProps;
         public static UITextureAtlas atlas = LoadResources();
         public static bool inEditor = false;
         public static bool isRicoEnabled = false;
@@ -204,7 +201,7 @@ namespace FindIt
             tabstrip.eventComponentAdded -= new ChildComponentEventHandler(UpdatePosition);
             tabstrip.eventComponentRemoved -= new ChildComponentEventHandler(UpdatePosition);
 
-            if (centerToolbar.value)
+            if (Settings.centerToolbar)
             {
                 tabstrip.eventComponentAdded += new ChildComponentEventHandler(UpdatePosition);
                 tabstrip.eventComponentRemoved += new ChildComponentEventHandler(UpdatePosition);
@@ -387,10 +384,10 @@ namespace FindIt
                 if (!UIView.HasModalInput() &&
                     (!UIView.HasInputFocus() || (UIView.activeComponent != null && UIView.activeComponent.parent is UISearchBox)))
                 {
-                    Event e = Event.current;
+                    //Event e = Event.current;
 
                     // Checking key presses
-                    if (OptionsKeymapping.search.IsPressed(e))
+                    if (Settings.IsSearchPressed())
                     {
                         if (!searchBox.isVisible)
                         {
@@ -535,11 +532,11 @@ namespace FindIt
         {
             AssetTagList.instance.Init();
 
-            if(FindIt.fixBadProps)
+            if(Settings.fixBadProps)
             {
                 Debugging.Message("Fixing bad props");
                 FindIt.FixBadProps();
-                FindIt.fixBadProps = false;
+                Settings.fixBadProps = false;
                 Debugging.Message("Bad props fixed");
             }
 

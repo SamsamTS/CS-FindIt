@@ -297,7 +297,7 @@ namespace FindIt.GUI
                     }
                 }
 
-                component.isEnabled = rico || FindIt.unlockAll.value || ToolsModifierControl.IsUnlocked(prefab.GetUnlockMilestone());
+                component.isEnabled = rico || Settings.unlockAll || ToolsModifierControl.IsUnlocked(prefab.GetUnlockMilestone());
                 component.tooltip = data.tooltip;
                 component.tooltipBox = data.tooltipBox;
                 component.objectUserData = data.asset.prefab;

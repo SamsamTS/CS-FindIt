@@ -14,20 +14,18 @@ namespace FindIt
     {
         private static readonly string kKeyBindingTemplate = "KeyBindingTemplate";
 
-        private SavedInputKey m_EditingBinding;
+        private InputKey m_EditingBinding;
 
         private string m_EditingBindingCategory;
-
-        public static readonly SavedInputKey search = new SavedInputKey("search", FindIt.settingsFileName, SavedInputKey.Encode(KeyCode.F, true, false, false), true);
 
         private int count = 0;
 
         private void Awake()
         {
-            AddKeymapping("Search", search);
+            AddKeymapping("Search", SavedInputKey.Encode((KeyCode)Settings.searchKey.keyCode, Settings.searchKey.control, Settings.searchKey.shift, Settings.searchKey.alt));
         }
 
-        private void AddKeymapping(string label, SavedInputKey savedInputKey)
+        private void AddKeymapping(string label, InputKey inputKey)
         {
             UIPanel uIPanel = component.AttachUIComponent(UITemplateManager.GetAsGameObject(kKeyBindingTemplate)) as UIPanel;
             if (count++ % 2 == 1) uIPanel.backgroundSprite = null;
@@ -38,8 +36,8 @@ namespace FindIt
             uIButton.eventMouseDown += new MouseEventHandler(this.OnBindingMouseDown);
 
             uILabel.text = label;
-            uIButton.text = savedInputKey.ToLocalizedString("KEYNAME");
-            uIButton.objectUserData = savedInputKey;
+            uIButton.text = SavedInputKey.ToLocalizedString("KEYNAME", inputKey);
+            uIButton.objectUserData = inputKey;
         }
 
         private void OnEnable()
@@ -117,30 +115,35 @@ namespace FindIt
 
         private void OnBindingKeyDown(UIComponent comp, UIKeyEventParameter p)
         {
-            if (this.m_EditingBinding != null && !this.IsModifierKey(p.keycode))
+            if (this.m_EditingBinding != 0 && !this.IsModifierKey(p.keycode))
             {
                 p.Use();
                 UIView.PopModal();
                 KeyCode keycode = p.keycode;
-                InputKey inputKey = (p.keycode == KeyCode.Escape) ? this.m_EditingBinding.value : SavedInputKey.Encode(keycode, p.control, p.shift, p.alt);
+                InputKey inputKey = (p.keycode == KeyCode.Escape) ? this.m_EditingBinding : SavedInputKey.Encode(keycode, p.control, p.shift, p.alt);
                 if (p.keycode == KeyCode.Backspace)
                 {
                     inputKey = SavedInputKey.Empty;
                 }
-                this.m_EditingBinding.value = inputKey;
+                this.m_EditingBinding = inputKey;
                 UITextComponent uITextComponent = p.source as UITextComponent;
-                uITextComponent.text = this.m_EditingBinding.ToLocalizedString("KEYNAME");
-                this.m_EditingBinding = null;
+                uITextComponent.text = SavedInputKey.ToLocalizedString("KEYNAME", m_EditingBinding);
+
+                // Apply and save.
+                Settings.searchKey = new KeyBinding { keyCode = inputKey & 0xFFFFFFF, control = (inputKey & 0x40000000) != 0, shift = (inputKey & 0x20000000) != 0, alt = (inputKey & 0x10000000) != 0 };
+                XMLUtils.SaveSettings();
+
+                this.m_EditingBinding = 0;
                 this.m_EditingBindingCategory = string.Empty;
             }
         }
 
         private void OnBindingMouseDown(UIComponent comp, UIMouseEventParameter p)
         {
-            if (this.m_EditingBinding == null)
+            if (this.m_EditingBinding == 0)
             {
                 p.Use();
-                this.m_EditingBinding = (SavedInputKey)p.source.objectUserData;
+                this.m_EditingBinding = (InputKey)p.source.objectUserData;
                 this.m_EditingBindingCategory = p.source.stringUserData;
                 UIButton uIButton = p.source as UIButton;
                 uIButton.buttonsMask = (UIMouseButton.Left | UIMouseButton.Right | UIMouseButton.Middle | UIMouseButton.Special0 | UIMouseButton.Special1 | UIMouseButton.Special2 | UIMouseButton.Special3);
@@ -154,15 +157,16 @@ namespace FindIt
                 UIView.PopModal();
                 InputKey inputKey = SavedInputKey.Encode(this.ButtonToKeycode(p.buttons), this.IsControlDown(), this.IsShiftDown(), this.IsAltDown());
 
-                this.m_EditingBinding.value = inputKey;
+                this.m_EditingBinding = inputKey;
                 UIButton uIButton2 = p.source as UIButton;
-                uIButton2.text = this.m_EditingBinding.ToLocalizedString("KEYNAME");
+                uIButton2.text = SavedInputKey.ToLocalizedString("KEYNAME", m_EditingBinding);
                 uIButton2.buttonsMask = UIMouseButton.Left;
-                this.m_EditingBinding = null;
+                this.m_EditingBinding = 0;
                 this.m_EditingBindingCategory = string.Empty;
             }
         }
 
+        // Called from OnLocaleChanged.
         private void RefreshBindableInputs()
         {
             foreach (UIComponent current in component.GetComponentsInChildren<UIComponent>())
@@ -170,10 +174,10 @@ namespace FindIt
                 UITextComponent uITextComponent = current.Find<UITextComponent>("Binding");
                 if (uITextComponent != null)
                 {
-                    SavedInputKey savedInputKey = uITextComponent.objectUserData as SavedInputKey;
-                    if (savedInputKey != null)
+                    InputKey inputKey = (InputKey)uITextComponent.objectUserData;
+                    if (inputKey != 0)
                     {
-                        uITextComponent.text = savedInputKey.ToLocalizedString("KEYNAME");
+                        uITextComponent.text = SavedInputKey.ToLocalizedString("KEYNAME", inputKey);
                     }
                 }
                 UILabel uILabel = current.Find<UILabel>("Name");
@@ -204,10 +208,10 @@ namespace FindIt
             foreach (UIComponent current in component.GetComponentsInChildren<UIComponent>())
             {
                 UITextComponent uITextComponent = current.Find<UITextComponent>("Binding");
-                SavedInputKey savedInputKey = (SavedInputKey)uITextComponent.objectUserData;
-                if (this.m_EditingBinding != savedInputKey)
+                InputKey inputKey = (InputKey)uITextComponent.objectUserData;
+                if (this.m_EditingBinding != inputKey)
                 {
-                    uITextComponent.text = savedInputKey.ToLocalizedString("KEYNAME");
+                    uITextComponent.text = SavedInputKey.ToLocalizedString("KEYNAME", inputKey);
                 }
             }
         }
