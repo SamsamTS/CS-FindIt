@@ -13,7 +13,7 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 ## Change Notes
 
 Implemented and planned be included in the next release:
-- Add language support: 한국어
+- Add language support: 한국어, Русский
 - New XML settings implementation, credit to algernon.
 - New keyboard shortcut implementation, credit to algernon.
 

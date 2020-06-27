@@ -23,8 +23,8 @@
     <Translation ID="FIF_SE_IPR" String="プロップ" />
     <Translation ID="FIF_SE_ID" String="デカール" />
     <Translation ID="FIF_SE_IT" String="木" />
-    <Translation ID="FIF_SE_LV" String="レベル:" />
-    <Translation ID="FIF_SE_SZ" String="サイズ:" />
+    <Translation ID="FIF_SE_LV" String="レベル" />
+    <Translation ID="FIF_SE_SZ" String="サイズ" />
     <!--Ploppable-->
     <Translation ID="FIF_PLOP_E" String="電力" />
     <Translation ID="FIF_PLOP_W" String="上下水道" />

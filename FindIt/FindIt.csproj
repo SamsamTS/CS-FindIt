@@ -122,6 +122,7 @@
     <Content Include="Translations\en.xml" />
     <Content Include="Translations\ja.xml" />
     <Content Include="Translations\ko.xml" />
+    <Content Include="Translations\ru.xml" />
     <Content Include="Translations\zh-tw.xml" />
     <Content Include="Translations\zh.xml" />
   </ItemGroup>
