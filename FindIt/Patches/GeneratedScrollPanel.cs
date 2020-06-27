@@ -184,15 +184,4 @@ namespace FindIt
             }
         }
     }
-
-    /* Is this still needed?
-    [HarmonyPatch(typeof(GeneratedScrollPanel))]
-    [HarmonyPatch("service", MethodType.Getter)]
-    internal static class ServicePatch
-    {
-        private static void Postfix(ItemClass.Service __result, GeneratedScrollPanel __instance)
-        {
-            throw new NotImplementedException();
-        }
-    }*/
 }
