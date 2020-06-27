@@ -22,7 +22,7 @@ namespace FindIt
 
         private void Awake()
         {
-            AddKeymapping("Search", SavedInputKey.Encode((KeyCode)Settings.searchKey.keyCode, Settings.searchKey.control, Settings.searchKey.shift, Settings.searchKey.alt));
+            AddKeymapping(Translations.Translate("FIF_SET_KS"), SavedInputKey.Encode((KeyCode)Settings.searchKey.keyCode, Settings.searchKey.control, Settings.searchKey.shift, Settings.searchKey.alt));
         }
 
         private void AddKeymapping(string label, InputKey inputKey)

@@ -11,6 +11,7 @@
     <Translation ID="FIF_SET_ULTP" String="まだアンロックされていないアイテムでも選択して配置できます" />
     <Translation ID="FIF_SET_BP" String="次回のロード時に問題のあるプロップを修正する" />
     <Translation ID="FIF_SET_BPTP" String="問題を引き起こす全てのプロップを削除します、オプションをチェックしてセーブデータをロードしてください" />
+    <Translation ID="FIF_SET_KS" String="キーボードショートカット" />
     <!--Search Bar-->
     <Translation ID="FIF_SE_WF" String="カスタム" />
     <Translation ID="FIF_SE_VF" String="バニラ" />
@@ -22,8 +23,8 @@
     <Translation ID="FIF_SE_IPR" String="プロップ" />
     <Translation ID="FIF_SE_ID" String="デカール" />
     <Translation ID="FIF_SE_IT" String="木" />
-    <Translation ID="FIF_SE_LV" String="レベル: " />
-    <Translation ID="FIF_SE_SZ" String="サイズ: " />
+    <Translation ID="FIF_SE_LV" String="レベル:" />
+    <Translation ID="FIF_SE_SZ" String="サイズ:" />
     <!--Ploppable-->
     <Translation ID="FIF_PLOP_E" String="電力" />
     <Translation ID="FIF_PLOP_W" String="上下水道" />
@@ -57,6 +58,16 @@
     <Translation ID="FIF_GR_ORI" String="鉱業" />
     <Translation ID="FIF_GR_LC" String="レジャー特化" />
     <Translation ID="FIF_GR_TC" String="観光特化" />
+    <!--Prop-->
+    <Translation ID="FIF_PROP_IND" String="工業" />
+    <Translation ID="FIF_PROP_PAR" String="公園" />
+    <Translation ID="FIF_PROP_COM" String="一般" />
+    <Translation ID="FIF_PROP_RES" String="住宅" />
+    <Translation ID="FIF_PROP_BIL" String="ビルボード" />
+    <Translation ID="FIF_PROP_SPE" String="特別なビルボード" />
+    <Translation ID="FIF_PROP_LIG" String="ライト" />
+    <Translation ID="FIF_PROP_NAT" String="自然" />
+    <Translation ID="FIF_PROP_UNS" String="未分類" />
     <!--Tooltip-->
     <Translation ID="FIF_SE_SC" String="SHIFTかCTRLキーを押しながら選択するとカテゴリーを複数選べます" />
     <Translation ID="FIF_SO_RETP" String="関連性で並べ替えます。オリジナルのFind Itと同じ" />
@@ -64,7 +75,7 @@
     <Translation ID="FIF_SO_RE" String="関連性" />
     <Translation ID="FIF_SO_NE" String="新アセット" />
     <!--Settings-->
-    <Translation ID="TRN_CHOICE" String="言語を設定する" />
+    <Translation ID="TRN_CHOICE" String="言語を設定する (will be effective next time)" />
     <Translation ID="TRN_SYS" String="システム言語を使用する" />
     
   </Translations>

@@ -10,7 +10,7 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "1.6.5";
+        public const string version = "1.6.6";
         
 
         public string Name
@@ -23,7 +23,6 @@ namespace FindIt
             get { return Translations.Translate("FIF_DESC");  }
         }
 
-
         /// <summary>
         /// Called by the game when mod is enabled.
         /// </summary>
@@ -32,7 +31,6 @@ namespace FindIt
             // Load settings here.
             XMLUtils.LoadSettings();
         }
-
 
         public void OnSettingsUI(UIHelperBase helper)
         {
@@ -53,7 +51,6 @@ namespace FindIt
                     XMLUtils.SaveSettings();
                 });
                 checkBox.tooltip = Translations.Translate("FIF_SET_DMTP");
-
                 group.AddSpace(10);
 
                 // Center the main toolbar
@@ -68,6 +65,7 @@ namespace FindIt
                     }
                 });
                 checkBox.tooltip = Translations.Translate("FIF_SET_CMTTP");
+                group.AddSpace(10);
 
                 // Unlock all
                 checkBox = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_UL"), Settings.unlockAll, (b) =>
@@ -76,7 +74,6 @@ namespace FindIt
                     XMLUtils.SaveSettings();
                 });
                 checkBox.tooltip = Translations.Translate("FIF_SET_ULTP");
-
                 group.AddSpace(10);
 
                 // Fix bad props next loaded save
@@ -87,15 +84,14 @@ namespace FindIt
                     XMLUtils.SaveSettings();
                 });
                 fixProps.tooltip = Translations.Translate("FIF_SET_BPTP");
-
                 group.AddSpace(10);
 
+                // shortcut key
                 panel.gameObject.AddComponent<OptionsKeymapping>();
-
                 group.AddSpace(10);
 
                 // languate settings
-                UIDropDown languageDropDown = (UIDropDown)group.AddDropdown(Translations.Translate("TRN_CHOICE"), Translations.LanguageList, /*Translations.Index,*/ Translations.Index,  (value) =>
+                UIDropDown languageDropDown = (UIDropDown)group.AddDropdown(Translations.Translate("TRN_CHOICE"), Translations.LanguageList, Translations.Index,  (value) =>
                 { 
                     Translations.Index = value;
                     XMLUtils.SaveSettings();
