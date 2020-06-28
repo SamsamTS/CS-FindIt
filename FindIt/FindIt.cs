@@ -13,7 +13,6 @@ using ColossalFramework.UI;
 using ColossalFramework.Plugins;
 using ColossalFramework.Globalization;
 
-using FindIt.Redirection;
 using FindIt.GUI;
 
 namespace FindIt
