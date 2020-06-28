@@ -345,9 +345,6 @@ namespace FindIt.GUI
                         ShowBuildingFilters();
                         break;
                     case Asset.AssetType.Growable:
-                        // if switch back from rico with size > 4, default size = all
-                        if (sizeFilterX.selectedIndex > filterItemsGrowable.Length - 1) sizeFilterX.selectedIndex = 0;
-                        if (sizeFilterY.selectedIndex > filterItemsGrowable.Length - 1) sizeFilterY.selectedIndex = 0;
                         sizeFilterX.items = filterItemsGrowable;
                         sizeFilterY.items = filterItemsGrowable;
                         HideFilterPanel(filterPloppable);
@@ -420,6 +417,14 @@ namespace FindIt.GUI
                 {
                     type++;
                 }
+            }
+
+            // extra size check for growable
+            if (type == Asset.AssetType.Growable)
+            {
+                // if switch back from rico with size > 4, default size = all
+                if (UISearchBox.instance.buildingSizeFilterIndex.x > 4) UISearchBox.instance.sizeFilterX.selectedIndex = 0;
+                if (UISearchBox.instance.buildingSizeFilterIndex.y > 4) UISearchBox.instance.sizeFilterY.selectedIndex = 0;
             }
 
             List<Asset> matches = AssetTagList.instance.Find(text, type);

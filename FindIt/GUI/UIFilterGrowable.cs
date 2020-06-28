@@ -76,22 +76,22 @@ namespace FindIt.GUI
 
             public static readonly string[] tooltips =
             {
-                Translations.Translate("FIF_GR_LDR"),
-                Translations.Translate("FIF_GR_HDR"),
-                Translations.Translate("FIF_GR_LDRE"),
-                Translations.Translate("FIF_GR_HDRE"),
-                Translations.Translate("FIF_GR_LDC"),
-                Translations.Translate("FIF_GR_HDC"),
-                Translations.Translate("FIF_GR_CE"),
-                Translations.Translate("FIF_GR_O"),
-                Translations.Translate("FIF_GR_ITC"),
-                Translations.Translate("FIF_GR_GI"),
-                Translations.Translate("FIF_GR_FAI"),
-                Translations.Translate("FIF_GR_FOI"),
-                Translations.Translate("FIF_GR_OII"),
-                Translations.Translate("FIF_GR_ORI"),
-                Translations.Translate("FIF_GR_LC"),
-                Translations.Translate("FIF_GR_TC")
+                Translations.Translate("FIF_GR_LDR"), // low density residential
+                Translations.Translate("FIF_GR_HDR"), // high density residential
+                Translations.Translate("FIF_GR_LDRE"), // low density residential eco
+                Translations.Translate("FIF_GR_HDRE"), // high density residential eco
+                Translations.Translate("FIF_GR_LDC"), // low density commercial
+                Translations.Translate("FIF_GR_HDC"), // high density commercial
+                Translations.Translate("FIF_GR_CE"), // commercial rco
+                Translations.Translate("FIF_GR_O"), // office
+                Translations.Translate("FIF_GR_ITC"), // IT cluster
+                Translations.Translate("FIF_GR_GI"), // industrial
+                Translations.Translate("FIF_GR_FAI"), // farming
+                Translations.Translate("FIF_GR_FOI"), // forest
+                Translations.Translate("FIF_GR_OII"), // oil
+                Translations.Translate("FIF_GR_ORI"), // ore
+                Translations.Translate("FIF_GR_LC"), // leisure commercial
+                Translations.Translate("FIF_GR_TC") // tourist commercial
             };
         }
 
