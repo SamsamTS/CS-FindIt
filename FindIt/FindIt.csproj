@@ -119,6 +119,21 @@
     <EmbeddedResource Include="Icons\ToolbarIconPropsBillboardsDisabled.png" />
     <EmbeddedResource Include="Icons\ToolbarIconPropsSpecialBillboards.png" />
     <EmbeddedResource Include="Icons\ToolbarIconPropsSpecialBillboardsDisabled.png" />
+    <Content Include="packages\CitiesHarmony.API.1.0.5\lib\net35\CitiesHarmony.API.dll" />
+    <Content Include="packages\CitiesHarmony.API.1.0.5\package_icon.png" />
+    <Content Include="packages\Lib.Harmony.2.0.1\HarmonyLogo.png" />
+    <Content Include="packages\Lib.Harmony.2.0.1\lib\net35\0Harmony.dll" />
+    <Content Include="packages\Lib.Harmony.2.0.1\lib\net35\0Harmony.xml" />
+    <Content Include="packages\Lib.Harmony.2.0.1\lib\net45\0Harmony.dll" />
+    <Content Include="packages\Lib.Harmony.2.0.1\lib\net45\0Harmony.xml" />
+    <Content Include="packages\Lib.Harmony.2.0.1\lib\net472\0Harmony.dll" />
+    <Content Include="packages\Lib.Harmony.2.0.1\lib\net472\0Harmony.xml" />
+    <Content Include="packages\Lib.Harmony.2.0.1\lib\net48\0Harmony.dll" />
+    <Content Include="packages\Lib.Harmony.2.0.1\lib\net48\0Harmony.xml" />
+    <Content Include="packages\Lib.Harmony.2.0.1\lib\netcoreapp3.0\0Harmony.dll" />
+    <Content Include="packages\Lib.Harmony.2.0.1\lib\netcoreapp3.0\0Harmony.xml" />
+    <Content Include="packages\Lib.Harmony.2.0.1\lib\netcoreapp3.1\0Harmony.dll" />
+    <Content Include="packages\Lib.Harmony.2.0.1\lib\netcoreapp3.1\0Harmony.xml" />
     <Content Include="Translations\en.xml" />
     <Content Include="Translations\ja.xml" />
     <Content Include="Translations\ko.xml" />
@@ -128,6 +143,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="packages\CitiesHarmony.API.1.0.5\.signature.p7s" />
+    <None Include="packages\CitiesHarmony.API.1.0.5\CitiesHarmony.API.1.0.5.nupkg" />
+    <None Include="packages\Lib.Harmony.2.0.1\.signature.p7s" />
+    <None Include="packages\Lib.Harmony.2.0.1\Lib.Harmony.2.0.1.nupkg" />
+    <None Include="packages\Lib.Harmony.2.0.1\LICENSE" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
