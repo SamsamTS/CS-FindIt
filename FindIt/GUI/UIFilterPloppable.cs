@@ -102,21 +102,21 @@ namespace FindIt.GUI
 
             public static readonly string[] tooltips =
             {
-                Translations.Translate("FIF_PLOP_E"),
-                Translations.Translate("FIF_PLOP_W"),
-                Translations.Translate("FIF_PLOP_G"),
-                Translations.Translate("FIF_PLOP_H"),
-                Translations.Translate("FIF_PLOP_F"),
-                Translations.Translate("FIF_PLOP_P"),
-                Translations.Translate("FIF_PLOP_ED"),
-                Translations.Translate("FIF_PLOP_PT"),
-                Translations.Translate("FIF_PLOP_PPW"),
-                Translations.Translate("FIF_PLOP_U"),
-                Translations.Translate("FIF_PLOP_I"),
-                Translations.Translate("FIF_PLOP_D"),
-                Translations.Translate("FIF_PLOP_C"),
-                Translations.Translate("FIF_PLOP_V"),
-                Translations.Translate("FIF_PLOP_FI")
+                Translations.Translate("FIF_PLOP_E"), // electricity
+                Translations.Translate("FIF_PLOP_W"), // water
+                Translations.Translate("FIF_PLOP_G"), // garbage
+                Translations.Translate("FIF_PLOP_H"), // healthcare
+                Translations.Translate("FIF_PLOP_F"), // fire department
+                Translations.Translate("FIF_PLOP_P"), // police
+                Translations.Translate("FIF_PLOP_ED"), // education
+                Translations.Translate("FIF_PLOP_PT"), // public transportation
+                Translations.Translate("FIF_PLOP_PPW"), // parks
+                Translations.Translate("FIF_PLOP_U"), // unique buildings
+                Translations.Translate("FIF_PLOP_I"), // industry
+                Translations.Translate("FIF_PLOP_D"), // disaster
+                Translations.Translate("FIF_PLOP_C"), // campus
+                Translations.Translate("FIF_PLOP_V"), // varsity sports
+                Translations.Translate("FIF_PLOP_FI") // fishing
             };
         }
 

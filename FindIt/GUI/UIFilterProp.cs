@@ -74,15 +74,15 @@ namespace FindIt.GUI
 
             public static readonly string[] tooltips =
             {
-                "Industrial",
-                "Parks",
-                "Common",
-                "Residential",
-                "Billboards",
-                "Special Billboards",
-                "Lights",
-                "Natural",
-                "Unsorted"
+                Translations.Translate("FIF_PROP_IND"), // Industrial
+                Translations.Translate("FIF_PROP_PAR"), // Parks
+                Translations.Translate("FIF_PROP_COM"), // Common
+                Translations.Translate("FIF_PROP_RES"), // Residential
+                Translations.Translate("FIF_PROP_BIL"), // Billboards
+                Translations.Translate("FIF_PROP_SPE"), // Special Billboards
+                Translations.Translate("FIF_PROP_LIG"), // Lights,
+                Translations.Translate("FIF_PROP_NAT"), // Natural
+                Translations.Translate("FIF_PROP_UNS") // Unsorted"
             };
         }
 

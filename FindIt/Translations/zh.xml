@@ -11,6 +11,7 @@
     <Translation ID="FIF_SET_ULTP" String="允许选择和放置处于未解锁状态的内容。" />
     <Translation ID="FIF_SET_BP" String="修复下一次加载保存时出现的错误道具" />
     <Translation ID="FIF_SET_BPTP" String="移除所有引起问题的道具 选中该选项并加载保存" />
+    <Translation ID="FIF_SET_KS" String="快捷键" />
     <!--Search Bar-->
     <Translation ID="FIF_SE_WF" String="玩家自制" />
     <Translation ID="FIF_SE_VF" String="游戏原版" />
@@ -57,6 +58,16 @@
     <Translation ID="FIF_GR_ORI" String="矿业" />
     <Translation ID="FIF_GR_LC" String="休闲商业" />
     <Translation ID="FIF_GR_TC" String="旅游商业" />
+    <!--Prop-->
+    <Translation ID="FIF_PROP_IND" String="工业" />
+    <Translation ID="FIF_PROP_PAR" String="公园" />
+    <Translation ID="FIF_PROP_COM" String="常见" />
+    <Translation ID="FIF_PROP_RES" String="住宅" />
+    <Translation ID="FIF_PROP_BIL" String="广告" />
+    <Translation ID="FIF_PROP_SPE" String="特殊广告" />
+    <Translation ID="FIF_PROP_LIG" String="灯具" />
+    <Translation ID="FIF_PROP_NAT" String="自然" />
+    <Translation ID="FIF_PROP_UNS" String="未分类" />
     <!--Tooltip-->
     <Translation ID="FIF_SE_SC" String="按住SHIFT或CTRL键可选择多个类别" />
     <Translation ID="FIF_SO_RETP" String="按相关性排列。 与原“Find It”相同" />
@@ -64,7 +75,7 @@
     <Translation ID="FIF_SO_RE" String="相关性" />
     <Translation ID="FIF_SO_NE" String="新资产" />
     <!--Settings-->
-    <Translation ID="TRN_CHOICE" String="语言设定" />
+    <Translation ID="TRN_CHOICE" String="语言设定 (will be effective next time)" />
     <Translation ID="TRN_SYS" String="使用默认语言" />
     
   </Translations>
