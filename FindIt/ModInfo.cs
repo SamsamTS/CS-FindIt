@@ -3,8 +3,9 @@
 
 using ICities;
 using System;
-using ColossalFramework;
 using ColossalFramework.UI;
+using CitiesHarmony.API;
+
 
 namespace FindIt
 {
@@ -28,10 +29,30 @@ namespace FindIt
         /// </summary>
         public void OnEnabled()
         {
+            // Apply Harmony patches via Cities Harmony.
+            // Called here instead of OnCreated to allow the auto-downloader to do its work prior to launch.
+            HarmonyHelper.DoOnHarmonyReady(() => Patcher.PatchAll());
+
             // Load settings here.
             XMLUtils.LoadSettings();
         }
 
+        /// <summary>
+        /// Called by the game when the mod is disabled.
+        /// </summary>
+        public void OnDisabled()
+        {
+            // Unapply Harmony patches via Cities Harmony.
+            if (HarmonyHelper.IsHarmonyInstalled)
+            {
+                Patcher.UnpatchAll();
+            }
+        }
+
+
+        /// <summary>
+        /// Called by the game when the mod options panel is setup.
+        /// </summary>
         public void OnSettingsUI(UIHelperBase helper)
         {
             try

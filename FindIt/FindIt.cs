@@ -13,7 +13,6 @@ using ColossalFramework.UI;
 using ColossalFramework.Plugins;
 using ColossalFramework.Globalization;
 
-using FindIt.Redirection;
 using FindIt.GUI;
 
 namespace FindIt
@@ -519,14 +518,14 @@ namespace FindIt
             {
                 //if (FindIt.detourGeneratedScrollPanels.value)
                 //{
-                    Redirector<Detours.GeneratedScrollPanelDetour>.Deploy();
+                //    Redirector<Detours.GeneratedScrollPanelDetour>.Deploy();
                 //}
             }
         }
 
         public override void OnReleased()
         {
-            Redirector<Detours.GeneratedScrollPanelDetour>.Revert();
+            //Redirector<Detours.GeneratedScrollPanelDetour>.Revert();
         }
 
         public override void OnLevelLoaded(LoadMode mode)
