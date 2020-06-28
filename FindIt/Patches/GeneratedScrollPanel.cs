@@ -25,7 +25,6 @@ namespace FindIt
                 if (__result.objectUserData is PrefabInfo prefab)
                 {
                     string key = Asset.GetName(prefab);
-                    Debugging.Message("Cat! " + key);
 
                     if (AssetTagList.instance.assets.ContainsKey(key))
                     {
