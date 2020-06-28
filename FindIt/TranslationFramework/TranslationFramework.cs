@@ -38,7 +38,6 @@ namespace FindIt
             }
         }
 
-
         /// <summary>
         /// Static interface to instance's language list property.
         /// Returns an alphabetically-sorted (by unique name) string array of language display names, with an additional "system settings" item as the first item.
@@ -63,6 +62,11 @@ namespace FindIt
             {
                 Instance.SetLanguage(value);
             }
+        }
+
+        public static void Refresh()
+        {
+            Instance.SetLanguage();
         }
 
 
@@ -229,11 +233,16 @@ namespace FindIt
                             Debugging.Message("couldn't set current system language");
                         }
                     }
+                    else
+                    {
+                        Debugging.Message("localeManager not exists");
+                    }
 
                     // If we didn't get a valid language, try to fall back.
                     if (currentLanguage == null)
                     {
                         currentLanguage = FallbackLanguage();
+                        Debugging.Message("LocaleManager doesn't return a valid lanaguage. Use fallback");
                     }
 
 

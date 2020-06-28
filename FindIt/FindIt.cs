@@ -44,6 +44,7 @@ namespace FindIt
         {
             try
             {
+                Translations.Refresh();
                 isRicoEnabled = IsRicoEnabled();
 
                 GameObject gameObject = GameObject.Find("FindItMainButton");
