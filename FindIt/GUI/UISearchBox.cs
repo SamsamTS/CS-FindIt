@@ -419,6 +419,14 @@ namespace FindIt.GUI
                 }
             }
 
+            // extra size check for growable
+            if (type == Asset.AssetType.Growable)
+            {
+                // if switch back from rico with size > 4, default size = all
+                if (UISearchBox.instance.buildingSizeFilterIndex.x > 4) UISearchBox.instance.sizeFilterX.selectedIndex = 0;
+                if (UISearchBox.instance.buildingSizeFilterIndex.y > 4) UISearchBox.instance.sizeFilterY.selectedIndex = 0;
+            }
+
             List<Asset> matches = AssetTagList.instance.Find(text, type);
 
             // sort again by most recently downloaded

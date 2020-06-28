@@ -13,7 +13,11 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 ## Change Notes
 
 Implemented and planned be included in the next release:
+
+New in v1.6.5.2:
+- Fix some bugs
 - Add language support: 한국어, Русский
+- Custom language setting menu(needed for 繁體中文), credit to algernon.
 - New XML settings implementation, credit to algernon.
 - New keyboard shortcut implementation, credit to algernon.
 

@@ -415,14 +415,6 @@ namespace FindIt
         {
             matches.Clear();
 
-            // extra size check for growable
-            if (filter == Asset.AssetType.Growable)
-            {
-                // if switch back from rico with size > 4, default size = all
-                if (UISearchBox.instance.buildingSizeFilterIndex.x > 4) UISearchBox.instance.sizeFilterX.selectedIndex = 0;
-                if (UISearchBox.instance.buildingSizeFilterIndex.y > 4) UISearchBox.instance.sizeFilterY.selectedIndex = 0;
-            }
-
             text = text.ToLower().Trim();
 
             if (!text.IsNullOrWhiteSpace())
