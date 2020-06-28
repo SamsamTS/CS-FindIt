@@ -13,6 +13,7 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 ## Change Notes
 
 Implemented and planned be included in the next release:
+- Move from the deprecated detour library to Harmony 2, credit to algernon.
 
 New in v1.6.5.2:
 - Fix some bugs
