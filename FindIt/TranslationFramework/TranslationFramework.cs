@@ -215,15 +215,19 @@ namespace FindIt
                 }
                 else
                 {
-                    // Try to set current language.
-                    try
+                    // Make sure Locale Manager is ready before calling it.
+                    if (LocaleManager.exists)
                     {
-                        currentLanguage = languages[LocaleManager.instance?.language];
-                    }
-                    catch
-                    {
-                        // Don't care.
-                        Debugging.Message("couldn't set current system language");
+                        // Try to set current language.
+                        try
+                        {
+                            currentLanguage = languages[LocaleManager.instance?.language];
+                        }
+                        catch
+                        {
+                            // Don't care.
+                            Debugging.Message("couldn't set current system language");
+                        }
                     }
 
                     // If we didn't get a valid language, try to fall back.
@@ -250,8 +254,8 @@ namespace FindIt
         {
             Language fallbackLanguage = null;
 
-            // First, check to see if there is a shortened version of this language id (e.g. zh-tw -> zh).
-            if (LocaleManager.instance.language.Length > 2)
+            // First (if LocaleManager is ready), check to see if there is a shortened version of this language id (e.g. zh-tw -> zh).
+            if (LocaleManager.exists && LocaleManager.instance.language.Length > 2)
             {
                 string newName = LocaleManager.instance.language.Substring(0, 2);
                 Debugging.Message("language " + LocaleManager.instance.language + " failed; trying " + newName);
