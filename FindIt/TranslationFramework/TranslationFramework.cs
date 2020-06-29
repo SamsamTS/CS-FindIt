@@ -315,15 +315,10 @@ namespace FindIt
             if (attemptedLanguage.Length > 2)
             {
                 string newName = attemptedLanguage.Substring(0, 2);
-                Debugging.Message("language " + attemptedLanguage + " failed; trying " + newName);
 
-                try
+                if (languages.ContainsKey(newName))
                 {
                     fallbackLanguage = languages[newName];
-                }
-                catch
-                {
-                    // Don't care.
                 }
             }
 
