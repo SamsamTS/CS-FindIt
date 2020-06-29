@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using System.Xml.Serialization;
@@ -6,7 +7,7 @@ using ICities;
 using ColossalFramework;
 using ColossalFramework.Plugins;
 using ColossalFramework.Globalization;
-
+using FindIt.GUI;
 
 namespace FindIt
 {
@@ -54,19 +55,17 @@ namespace FindIt
         /// </summary>
         public static int Index
         {
+            // Internal index is one less than here.
+            // I.e. internal index is -1 for system and 0 for first language, here we want 0 for system and 1 for first language.
+            // So we add one when getting and subtract one when setting.
             get
             {
-                return Instance.Index;
+                return Instance.Index + 1;
             }
             set
             {
-                Instance.SetLanguage(value);
+                Instance.SetLanguage(value - 1);
             }
-        }
-
-        public static void Refresh()
-        {
-            Instance.SetLanguage();
         }
 
 
@@ -94,17 +93,36 @@ namespace FindIt
     /// </summary>
     public class Translator
     {
-        private Language currentLanguage;
+        private Language systemLanguage = null;
         private SortedList<string, Language> languages;
         private string defaultLanguage = "en";
-        private int currentIndex = 0;
+        private int currentIndex = -1;
+
+
+        /// <summary>
+        /// Returns the current zero-based index number of the current language setting.
+        /// Less than zero is 'use system setting'.
+        /// </summary>
         public int Index => currentIndex;
 
 
         /// <summary>
         /// Returns the current language code if one has specifically been set; otherwise, return "default".
         /// </summary>
-        public string Language => currentIndex <= 0 ? "default" : currentLanguage.uniqueName;
+        public string Language => currentIndex < 0 ? "default" : languages.Values[currentIndex].uniqueName;
+
+
+        /// <summary>
+        /// Actions to update the UI on a language change go here.
+        /// </summary>
+        public void UpdateUILanguage()
+        {
+            Debugging.Message("setting language to " + (currentIndex < 0 ? "system" : languages.Values[currentIndex].uniqueName));
+
+            // UI update code goes here.
+
+            // TOOO:  Add dynamic UI update.
+        }
 
 
         /// <summary>
@@ -135,12 +153,11 @@ namespace FindIt
             // Initialise languages list.
             languages = new SortedList<string, Language>();
 
-            // Load translation files and set the current language.
+            // Load translation files.
             LoadLanguages();
-            SetLanguage();
 
             // Event handler to update the current language when system locale changes.
-            LocaleManager.eventLocaleChanged += SetLanguage;
+            LocaleManager.eventLocaleChanged += SetSystemLanguage;
         }
 
 
@@ -151,6 +168,25 @@ namespace FindIt
         /// <returns>Translation </returns>
         public string Translate(string key)
         {
+            Language currentLanguage;
+            
+            
+            // Check to see if we're using system settings.
+            if (currentIndex < 0)
+            {
+                // Using system settings - initialise system language if we haven't already.
+                if (systemLanguage == null)
+                {
+                    SetSystemLanguage();
+                }
+
+                currentLanguage = systemLanguage;
+            }
+            else
+            {
+                currentLanguage = languages.Values[currentIndex];
+            }    
+
             // Check that a valid current language is set.
             if (currentLanguage != null)
             {
@@ -164,13 +200,17 @@ namespace FindIt
                 {
                     Debugging.Message("no translation for language " + currentLanguage.uniqueName + " found for key " + key);
 
-                    // Attempt fallack language; if even that fails, just return the key.
-                    return FallbackLanguage().translationDictionary.ContainsKey(key) ? FallbackLanguage().translationDictionary[key] ?? key : key;
+                    // Attempt fallack language.
+                    Language fallbackLanguage = FallbackLanguage(currentLanguage.uniqueName);
+                    if (fallbackLanguage?.translationDictionary != null && fallbackLanguage.translationDictionary.ContainsKey(key))
+                    {
+                        return fallbackLanguage.translationDictionary[key];
+                    }
                 }
             }
             else
             {
-                Debugging.Message("no current language set when translating key " + key);
+                Debugging.Message("no current language when translating key " + key);
             }
 
             // If we've made it this far, something went wrong; just return the key.
@@ -179,95 +219,103 @@ namespace FindIt
 
 
         /// <summary>
-        /// Sets the current language; if there's a previously set valid index number, it'll use that.
-        /// Otherwise, it will fall back to system settings, falling back further to the default language if unsucessful.
+        /// Sets the current system language; sets to null if none.
         /// </summary>
-        public void SetLanguage()
+        public void SetSystemLanguage()
         {
-            SetLanguage(currentIndex);
+            // Make sure Locale Manager is ready before calling it.
+            if (LocaleManager.exists)
+            {
+                // Try to set our system language from system settings.
+                try
+                {
+                    // Get new locale id.
+                    string newLanguageCode = LocaleManager.instance.language;
+
+                    // Check to see if we have a translation for this language code; if not, we revert to default.
+                    if (!languages.ContainsKey(newLanguageCode))
+                    {
+                        newLanguageCode = defaultLanguage;
+                    }
+
+                    // If we've already been set to this locale, do nothing.
+                    if (systemLanguage != null && systemLanguage.uniqueName == newLanguageCode)
+                    {
+                        return;
+                    }
+
+                    // Set the new system language,
+                    systemLanguage = languages[newLanguageCode];
+
+                    // If we're using system language, update the UI.
+                    if (currentIndex < 0)
+                    {
+                        UpdateUILanguage();
+                    }
+
+                    // All done.
+                    return;
+                }
+                catch (Exception e)
+                {
+                    // Don't really care.
+                    Debugging.LogException(e);
+                }
+            }
+
+            // If we made it here, there's no valid system language.
+            systemLanguage = null;
         }
 
 
         /// <summary>
         /// Sets the current language to the provided language code.
-        /// If the key isn't in the list of loaded translations, then the system default is attempted instead.
+        /// If the key isn't in the list of loaded translations, then the system default is assigned instead(IndexOfKey returns -1 if key not found).
         /// </summary>
         /// <param name="uniqueName">Language unique name (code)</param>
-        public void SetLanguage(string uniqueName) => SetLanguage(languages.IndexOfKey(uniqueName) + 1);
+        public void SetLanguage(string uniqueName) => SetLanguage(languages.IndexOfKey(uniqueName));
 
 
         /// <summary>
-        /// Sets the current language based on the supplied index number.
-        /// If index number is invalid (negative or out-of-bounds) then the system language setting is tried instead.
-        /// If even that fails, the default language is used.
+        /// Sets the current language to the supplied index number.
+        /// If index number is invalid (out-of-bounds) then current language is set to -1 (system language setting).
         /// </summary>
-        /// <param name="index">1-based language index number (zero or negative values will use system language settings instead)</param>
+        /// <param name="index">1-based language index number (negative values will use system language settings instead)</param>
         public void SetLanguage(int index)
         {
             // Don't do anything if no languages have been loaded.
             if (languages != null && languages.Count > 0)
             {
-                // If we have a valid index number (greater than zero but within bounds), use that to get the language.
-                // Remember that we've effectively added an additional 'system' index at 0, so less-than-or-equals is needed.
-                if (index > 0 && index <= languages.Count)
+                // Bounds check; if out of bounds, use -1 (system language) instead.
+                int newIndex = index >= languages.Count ? -1 : index;
+
+                // Change the language if what we've done is new.
+                if (newIndex != currentIndex)
                 {
-                    // The index is one greater than the 'real' index in our languages list, as index 0 is for the 'system settings' option.
-                    currentLanguage = languages.Values[index - 1];
+                    currentIndex = newIndex;
 
-                    // Since we've been given a valid index number, we'll store it for future reference (prevent override of settings by system locale changes).
-                    currentIndex = index;
+                    // Trigger UI update.
+                    UpdateUILanguage();
                 }
-                else
-                {
-                    // Make sure Locale Manager is ready before calling it.
-                    if (LocaleManager.exists)
-                    {
-                        // Try to set current language.
-                        try
-                        {
-                            currentLanguage = languages[LocaleManager.instance?.language];
-                        }
-                        catch
-                        {
-                            // Don't care.
-                            Debugging.Message("couldn't set current system language");
-                        }
-                    }
-                    else
-                    {
-                        Debugging.Message("localeManager not exists");
-                    }
-
-                    // If we didn't get a valid language, try to fall back.
-                    if (currentLanguage == null)
-                    {
-                        currentLanguage = FallbackLanguage();
-                        Debugging.Message("LocaleManager doesn't return a valid lanaguage. Use fallback");
-                    }
-
-
-                    // We weren't given a valid index, so remove any stored index.
-                    currentIndex = 0;
-                }
-
-                Debugging.Message("setting language to " + currentLanguage?.uniqueName ?? "none");
             }
         }
 
 
         /// <summary>
         /// Returns a fallback language reference in case the primary one fails (for whatever reason).
+        /// First tries a shortened version of the current reference (e.g. zh-tw -> zh), then system language, then default language.
         /// </summary>
+        /// <param name="attemptedLanguage">Language code that was attempted</param>
         /// <returns>Fallback language reference</returns>
-        private Language FallbackLanguage()
+        private Language FallbackLanguage(string attemptedLanguage)
         {
             Language fallbackLanguage = null;
 
-            // First (if LocaleManager is ready), check to see if there is a shortened version of this language id (e.g. zh-tw -> zh).
-            if (LocaleManager.exists && LocaleManager.instance.language.Length > 2)
+            // First check to see if there is a shortened version of this language id (e.g. zh-tw -> zh).
+            if (attemptedLanguage.Length > 2)
             {
-                string newName = LocaleManager.instance.language.Substring(0, 2);
-                Debugging.Message("language " + LocaleManager.instance.language + " failed; trying " + newName);
+                string newName = attemptedLanguage.Substring(0, 2);
+                Debugging.Message("language " + attemptedLanguage + " failed; trying " + newName);
 
                 try
                 {
@@ -279,8 +327,27 @@ namespace FindIt
                 }
             }
 
-            // If we picked up a fallback language, return that; otherwise, return the default language.
-            return fallbackLanguage ?? languages[defaultLanguage];
+            // Secondly, try to use system language if we're not already doing so.
+            if (currentIndex > 0)
+            {
+                fallbackLanguage = systemLanguage;
+            }
+
+            // See if we've got anything so far.
+            if (fallbackLanguage == null)
+            {
+                // Nope - try default language.
+                try
+                {
+                    fallbackLanguage = languages[defaultLanguage];
+                }
+                catch
+                {
+                    // Don't care.
+                }
+            }
+
+            return fallbackLanguage;
         }
 
 
@@ -319,9 +386,6 @@ namespace FindIt
                             }
                         }
                     }
-
-                    // Sort language list by language key alphabetical order.
-                    //languages.OrderBy(language => language.uniqueName);
                 }
                 else
                 {
