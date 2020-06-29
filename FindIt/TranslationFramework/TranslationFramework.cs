@@ -7,7 +7,7 @@ using ICities;
 using ColossalFramework;
 using ColossalFramework.Plugins;
 using ColossalFramework.Globalization;
-using FindIt.GUI;
+
 
 namespace FindIt
 {
@@ -200,12 +200,8 @@ namespace FindIt
                 {
                     Debugging.Message("no translation for language " + currentLanguage.uniqueName + " found for key " + key);
 
-                    // Attempt fallack language.
-                    Language fallbackLanguage = FallbackLanguage(currentLanguage.uniqueName);
-                    if (fallbackLanguage?.translationDictionary != null && fallbackLanguage.translationDictionary.ContainsKey(key))
-                    {
-                        return fallbackLanguage.translationDictionary[key];
-                    }
+                    // Attempt fallack translation.
+                    return FallbackTranslation(currentLanguage.uniqueName, key);
                 }
             }
             else
@@ -302,15 +298,14 @@ namespace FindIt
 
 
         /// <summary>
-        /// Returns a fallback language reference in case the primary one fails (for whatever reason).
+        /// Attempts to find a fallback language translation in case the primary one fails (for whatever reason).
         /// First tries a shortened version of the current reference (e.g. zh-tw -> zh), then system language, then default language.
+        /// If all that fails, it just returns the raw key.
         /// </summary>
-        /// <param name="attemptedLanguage">Language code that was attempted</param>
-        /// <returns>Fallback language reference</returns>
-        private Language FallbackLanguage(string attemptedLanguage)
+        /// <param name="attemptedLanguage">Language code that was previously attempted</param>
+        /// <returns>Fallback translation if successful, or raw key if failed</returns>
+        private string FallbackTranslation(string attemptedLanguage, string key)
         {
-            Language fallbackLanguage = null;
-
             // First check to see if there is a shortened version of this language id (e.g. zh-tw -> zh).
             if (attemptedLanguage.Length > 2)
             {
@@ -318,31 +313,39 @@ namespace FindIt
 
                 if (languages.ContainsKey(newName))
                 {
-                    fallbackLanguage = languages[newName];
+                    Language fallbackLanguage = languages[newName];
+                    if (fallbackLanguage.translationDictionary.ContainsKey(key))
+                    {
+                        // All good!  Return translation.
+                        return fallbackLanguage.translationDictionary[key];
+                    }
                 }
             }
 
             // Secondly, try to use system language if we're not already doing so.
             if (currentIndex > 0 && systemLanguage != null && attemptedLanguage != systemLanguage.uniqueName)
             {
-                fallbackLanguage = systemLanguage;
+                if (systemLanguage.translationDictionary.ContainsKey(key))
+                {
+                    // All good!  Return translation.
+                    return systemLanguage.translationDictionary[key];
+                }
             }
 
-            // See if we've got anything so far.
-            if (fallbackLanguage == null)
+            // Final attempt - try default language.
+            try
             {
-                // Nope - try default language.
-                try
-                {
-                    fallbackLanguage = languages[defaultLanguage];
-                }
-                catch
-                {
-                    // Don't care.
-                }
+                Language fallbackLanguage = languages[defaultLanguage];
+                return fallbackLanguage.translationDictionary[key];
+            }
+            catch (Exception e)
+            {
+                // Don't care.  Just log the exception, as we really should have a default language.
+                Debugging.LogException(e);
             }
 
-            return fallbackLanguage;
+            // At this point we've failed; just return the key.
+            return key;
         }
 
 
