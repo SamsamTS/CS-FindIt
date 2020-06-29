@@ -57,8 +57,6 @@ namespace FindIt
         {
             try
             {
-                Translations.Refresh();
-
                 if (FindIt.instance == null)
                 {
                     AssetTagList.instance = new AssetTagList();
