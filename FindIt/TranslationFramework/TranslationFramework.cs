@@ -328,7 +328,7 @@ namespace FindIt
             }
 
             // Secondly, try to use system language if we're not already doing so.
-            if (currentIndex > 0)
+            if (currentIndex > 0 && systemLanguage != null && attemptedLanguage != systemLanguage.uniqueName)
             {
                 fallbackLanguage = systemLanguage;
             }
