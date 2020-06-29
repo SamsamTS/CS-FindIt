@@ -30,6 +30,7 @@ namespace FindIt
             // Keycode is lower 7 nibbles of CO InputKey.
             //KeyCode keyCode = (KeyCode)searchKey & 0xFFFFFFF);
 
+            /*
             // Don't do anything if a keycode hasn't been set, or if the key isn't pressed.
             if (searchKey.keyCode == (int)KeyCode.None || !Input.GetKey((KeyCode)searchKey.keyCode))
             {
@@ -56,6 +57,25 @@ namespace FindIt
 
             // If we got here, all checks have passed - search has been pressed.
             return true;
+            */
+
+            // Don't do anything if a keycode hasn't been set, or if the key isn't pressed.
+            if (searchKey.keyCode == (int)KeyCode.None || !Input.GetKey((KeyCode)searchKey.keyCode))
+            {
+                return false;
+            }
+
+            // get the states of the modifier keys
+            bool inputControlState = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl));
+            bool inputShiftState = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
+            bool inputAltState = (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt) || Input.GetKey(KeyCode.AltGr));
+
+            // check if the states match
+            if ((searchKey.control == inputControlState) && (searchKey.shift == inputShiftState) && (searchKey.alt == inputAltState))
+            {
+                return true;
+            }
+            else return false;
         }
     }
 
