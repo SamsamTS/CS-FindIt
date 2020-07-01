@@ -29,6 +29,7 @@ namespace FindIt.GUI
         public UIFilterGrowable filterGrowable;
         public UIFilterPloppable filterPloppable;
         public UIFilterProp filterProp;
+        public UIFilterTags filterTags;
 
         public UICheckBox workshopFilter;
         public UICheckBox vanillaFilter;
@@ -256,7 +257,6 @@ namespace FindIt.GUI
             filterPloppable.isVisible = false;
             filterPloppable.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
             //filterPloppable.relativePosition = new Vector3(0, 0);
-
             filterPloppable.eventFilteringChanged += (c,p) => Search();
 
             // growable filter tabs
@@ -264,15 +264,19 @@ namespace FindIt.GUI
             filterGrowable.isVisible = false;
             filterGrowable.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
             //filterGrowable.relativePosition = new Vector3(0, 0);
-
             filterGrowable.eventFilteringChanged += (c, p) => Search();
 
             // prop filter tabs
             filterProp = panel.AddUIComponent<UIFilterProp>();
             filterProp.isVisible = false;
             filterProp.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
-
             filterProp.eventFilteringChanged += (c, p) => Search();
+
+            // tag filter panel
+            filterTags = panel.AddUIComponent<UIFilterTags>();
+            filterTags.isVisible = false;
+            filterTags.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
+
 
             UpdateFilterPanels();
 
@@ -333,14 +337,16 @@ namespace FindIt.GUI
                     case Asset.AssetType.Ploppable:
                         HideFilterPanel(filterGrowable);
                         HideFilterPanel(filterProp);
-                        ShowFilterPanel(filterPloppable);
                         HideBuildingFilters();
+                        HideFilterPanel(filterTags);
+                        ShowFilterPanel(filterPloppable);
                         break;
                     case Asset.AssetType.Rico:
                         sizeFilterX.items = filterItemsRICO;
                         sizeFilterY.items = filterItemsRICO;
                         HideFilterPanel(filterPloppable);
                         HideFilterPanel(filterProp);
+                        HideFilterPanel(filterTags);
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
@@ -349,20 +355,44 @@ namespace FindIt.GUI
                         sizeFilterY.items = filterItemsGrowable;
                         HideFilterPanel(filterPloppable);
                         HideFilterPanel(filterProp);
+                        HideFilterPanel(filterTags);
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
                     case Asset.AssetType.Prop:
                         HideFilterPanel(filterGrowable);
                         HideFilterPanel(filterPloppable);
-                        ShowFilterPanel(filterProp);
+                        HideFilterPanel(filterTags);
                         HideBuildingFilters();
+                        ShowFilterPanel(filterProp);
+                        break;
+                    case Asset.AssetType.Tree:
+                        HideFilterPanel(filterPloppable);
+                        HideFilterPanel(filterGrowable);
+                        HideFilterPanel(filterProp);
+                        HideBuildingFilters();
+                        HideFilterPanel(filterTags);
+                        break;
+                    case Asset.AssetType.Decal:
+                        HideFilterPanel(filterPloppable);
+                        HideFilterPanel(filterGrowable);
+                        HideFilterPanel(filterProp);
+                        HideBuildingFilters();
+                        HideFilterPanel(filterTags);
+                        break;
+                    case Asset.AssetType.Road:
+                        HideFilterPanel(filterPloppable);
+                        HideFilterPanel(filterGrowable);
+                        HideFilterPanel(filterProp);
+                        HideBuildingFilters();
+                        HideFilterPanel(filterTags);
                         break;
                     default:
                         HideFilterPanel(filterPloppable);
                         HideFilterPanel(filterGrowable);
                         HideFilterPanel(filterProp);
                         HideBuildingFilters();
+                        ShowFilterPanel(filterTags);
                         break;
                 }
             });

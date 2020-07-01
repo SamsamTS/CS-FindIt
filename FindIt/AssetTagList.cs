@@ -457,7 +457,7 @@ namespace FindIt
 
                         else if (filter == Asset.AssetType.Prop)
                         {
-                            // filter by ploppable type
+                            // filter by prop type
                             if (!UIFilterProp.instance.IsAllSelected())
                             {
                                 UIFilterProp.Category category = UIFilterProp.GetCategory(asset.propType);
@@ -571,7 +571,7 @@ namespace FindIt
                         }
                         else if (filter == Asset.AssetType.Prop)
                         {
-                            // filter by ploppable type
+                            // filter by prop type
                             if (!UIFilterProp.instance.IsAllSelected())
                             {
                                 UIFilterProp.Category category = UIFilterProp.GetCategory(asset.propType);
