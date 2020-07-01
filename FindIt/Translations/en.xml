@@ -12,6 +12,9 @@
     <Translation ID="FIF_SET_BP" String="Fix bad props next loaded save" />
     <Translation ID="FIF_SET_BPTP" String="Remove all props causing issue. Check the option and load your save" />
     <Translation ID="FIF_SET_KS" String="Keyboard Shortcut" />
+    <Translation ID="FIF_SET_CTFL" String="Custom Tags File Location (Remember to back up this file periodically)" />
+    <Translation ID="FIF_SET_CTFOP" String="Show in File Explorer" />
+
     <!--Search Bar-->
     <Translation ID="FIF_SE_WF" String="Custom" />
     <Translation ID="FIF_SE_VF" String="Vanilla" />
