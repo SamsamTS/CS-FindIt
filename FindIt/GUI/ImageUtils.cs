@@ -21,23 +21,23 @@ namespace FindIt.GUI
             if (m_previewRenderer == null)
             {
                 m_previewRenderer = new GameObject("FindItPreviewRenderer").AddComponent<PreviewRenderer>();
-                m_previewRenderer.size = new Vector2(109, 100) * 2f;
+                m_previewRenderer.Size = new Vector2(109, 100) * 2f;
             }
 
-            m_previewRenderer.cameraRotation = 210f;
-            m_previewRenderer.zoom = 4f;
+            m_previewRenderer.CameraRotation = 210f;
+            m_previewRenderer.Zoom = 4f;
 
             bool rendered = false;
 
             BuildingInfo buildingPrefab = prefab as BuildingInfo;
             if (buildingPrefab != null)
             {
-                m_previewRenderer.mesh = buildingPrefab.m_mesh;
-                m_previewRenderer.material = buildingPrefab.m_material;
+                m_previewRenderer.Mesh = buildingPrefab.m_mesh;
+                m_previewRenderer.Material = buildingPrefab.m_material;
 
-                if (m_previewRenderer.mesh != null)
+                if (m_previewRenderer.Mesh != null)
                 {
-                    if (buildingPrefab.m_useColorVariations && m_previewRenderer.material != null)
+                    if (buildingPrefab.m_useColorVariations && buildingPrefab.m_material != null)
                     {
                         Color materialColor = buildingPrefab.m_material.color;
                         buildingPrefab.m_material.color = buildingPrefab.m_color0;
@@ -94,12 +94,12 @@ namespace FindIt.GUI
                 }
                 else
                 {
-                    m_previewRenderer.mesh = propPrefab.m_mesh;
-                    m_previewRenderer.material = propPrefab.m_material;
+                    m_previewRenderer.Mesh = propPrefab.m_mesh;
+                    m_previewRenderer.Material = propPrefab.m_material;
 
-                    if (m_previewRenderer.mesh != null)
+                    if (m_previewRenderer.Mesh != null)
                     {
-                        if (propPrefab.m_useColorVariations && m_previewRenderer.material != null)
+                        if (propPrefab.m_useColorVariations && propPrefab.m_material != null)
                         {
                             Color materialColor = propPrefab.m_material.color;
                             propPrefab.m_material.color = propPrefab.m_color0;
@@ -119,10 +119,10 @@ namespace FindIt.GUI
             TreeInfo treePrefab = prefab as TreeInfo;
             if (treePrefab != null)
             {
-                m_previewRenderer.mesh = treePrefab.m_mesh;
-                m_previewRenderer.material = treePrefab.m_material;
+                m_previewRenderer.Mesh = treePrefab.m_mesh;
+                m_previewRenderer.Material = treePrefab.m_material;
 
-                if (m_previewRenderer.mesh != null)
+                if (m_previewRenderer.Mesh != null)
                 {
                     m_previewRenderer.Render();
                     rendered = true;
@@ -131,7 +131,7 @@ namespace FindIt.GUI
 
             if (rendered)
             {
-                Texture2D texture = ResourceLoader.ConvertRenderTexture(m_previewRenderer.texture);
+                Texture2D texture = ResourceLoader.ConvertRenderTexture(m_previewRenderer.Texture);
                 texture.name = name;
 
                 prefab.m_Thumbnail = name;

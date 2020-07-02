@@ -8,118 +8,233 @@ namespace FindIt.GUI
 {
     public class PreviewRenderer : MonoBehaviour
     {
-        private Camera m_camera;
-        private float m_rotation = 120f;
-        private float m_zoom = 4f;
+        private Camera renderCamera;
+        private Mesh currentMesh;
+        private Bounds currentBounds;
+        private float currentRotation = 120f;
+        private float currentZoom = 4f;
+        private Material _material;
 
+
+        /// <summary>
+        /// Sets material to render.
+        /// </summary>
+        public Material Material { set => _material = value; }
+
+
+        /// <summary>
+        /// Initialise the new renderer object.
+        /// </summary>
         public PreviewRenderer()
         {
-            m_camera = new GameObject("Camera").AddComponent<Camera>();
-            m_camera.transform.SetParent(transform);
-            m_camera.backgroundColor = new Color(0, 0, 0, 0);
-            m_camera.fieldOfView = 30f;
-            m_camera.nearClipPlane = 1f;
-            m_camera.farClipPlane = 1000f;
-            m_camera.allowHDR = true;
-            m_camera.enabled = false;
-            m_camera.targetTexture = new RenderTexture(512, 512, 24, RenderTextureFormat.ARGB32);
-            m_camera.pixelRect = new Rect(0f, 0f, 512, 512);
-            m_camera.clearFlags = CameraClearFlags.Color;
+            // Set up camera.
+            renderCamera = new GameObject("Camera").AddComponent<Camera>();
+            renderCamera.transform.SetParent(transform);
+            renderCamera.targetTexture = new RenderTexture(512, 512, 24, RenderTextureFormat.ARGB32);
+            renderCamera.allowHDR = true;
+            renderCamera.enabled = false;
+
+            // Basic defaults.
+            renderCamera.pixelRect = new Rect(0f, 0f, 512, 512);
+            renderCamera.backgroundColor = new Color(0, 0, 0, 0);
+            renderCamera.fieldOfView = 30f;
+            renderCamera.nearClipPlane = 1f;
+            renderCamera.farClipPlane = 1000f;
         }
 
-        public Vector2 size
+
+        /// <summary>
+        /// Image size.
+        /// </summary>
+        public Vector2 Size
         {
-            get { return new Vector2(m_camera.targetTexture.width, m_camera.targetTexture.height); }
+            get => new Vector2(renderCamera.targetTexture.width, renderCamera.targetTexture.height);
+
             set
             {
-                if (size != value)
+                if (Size != value)
                 {
-                    m_camera.targetTexture = new RenderTexture((int)value.x, (int)value.y, 24, RenderTextureFormat.ARGB32);
-                    m_camera.pixelRect = new Rect(0f, 0f, value.x, value.y);
+                    // New size; set camera output sizes accordingly.
+                    renderCamera.targetTexture = new RenderTexture((int)value.x, (int)value.y, 24, RenderTextureFormat.ARGB32);
+                    renderCamera.pixelRect = new Rect(0f, 0f, value.x, value.y);
                 }
             }
         }
 
-        public Mesh mesh;
-        public Material material;
 
-        public RenderTexture texture
+        /// <summary>
+        /// Sets mesh and material from a BuildingInfo prefab.
+        /// </summary>
+        /// <param name="prefab">Prefab to render</param>
+        public void SetTarget(BuildingInfo prefab)
         {
-            get { return m_camera.targetTexture; }
-        }
-
-        public float cameraRotation
-        {
-            get { return m_rotation; }
-            set { m_rotation = value % 360f; }
-        }
-
-        public float zoom
-        {
-            get { return m_zoom; }
-            set
+            // If the prefab has submeshes and the first submesh has more tris than the main mesh (e.g. SoCal Laguna Homes), then use that submesh as our render mesh.
+            if (prefab.m_subMeshes != null && prefab.m_subMeshes.Length > 0 && prefab.m_subMeshes[0].m_subInfo.m_mesh.triangles.Length > prefab.m_mesh.triangles.Length)
             {
-                m_zoom = Mathf.Clamp(value, 0.5f, 5f);
+                Mesh = prefab.m_subMeshes[0].m_subInfo.m_mesh;
+                _material = prefab.m_subMeshes[0].m_subInfo.m_material;
+            }
+            else
+            {
+                // Otherwise, just use the main mesh and material for render.
+                Mesh = prefab.m_mesh;
+                _material = prefab.m_material;
             }
         }
 
+
+        /// <summary>
+        /// Currently rendered mesh.
+        /// </summary>
+        public Mesh Mesh
+        {
+            get => currentMesh;
+
+            set
+            {
+                if (currentMesh != value)
+                {
+                    // Update currently rendered mesh if changed.
+                    currentMesh = value;
+
+                    if (value != null)
+                    {
+                        // Reset the bounding box to be the smallest that can encapsulate all verticies of the new mesh.
+                        // That way the preview image is the largest size that fits cleanly inside the preview size.
+                        currentBounds = new Bounds(Vector3.zero, Vector3.zero);
+
+                        // Use separate verticies instance instead of accessing Mesh.vertices each time (which is slow).
+                        // >10x measured performance improvement by doing things this way instead.
+                        Vector3[] vertices = Mesh.vertices;
+                        for (int i = 0; i < vertices.Length; i++)
+                        {
+                            currentBounds.Encapsulate(vertices[i]);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Current building texture.
+        /// </summary>
+        public RenderTexture Texture
+        {
+            get => renderCamera.targetTexture;
+        }
+
+
+        /// <summary>
+        /// Preview camera rotation (degrees).
+        /// </summary>
+        public float CameraRotation
+        {
+            get { return currentRotation; }
+            set { currentRotation = value % 360f; }
+        }
+
+
+        /// <summary>
+        /// Zoom level.
+        /// </summary>
+        public float Zoom
+        {
+            get { return currentZoom; }
+            set
+            {
+                currentZoom = Mathf.Clamp(value, 0.5f, 5f);
+            }
+        }
+
+
+        /// <summary>
+        /// Render the current mesh.
+        /// </summary>
         public void Render()
         {
-            if (mesh == null) return;
+            if (currentMesh == null)
+            {
+                return;
+            }
 
+            // Set background - plain.
+            renderCamera.clearFlags = CameraClearFlags.Color;
+
+            // Back up current game InfoManager mode.
             InfoManager infoManager = Singleton<InfoManager>.instance;
-            InfoManager.InfoMode currentMod = infoManager.CurrentMode;
-            InfoManager.SubInfoMode currentSubMod = infoManager.CurrentSubMode; ;
+            InfoManager.InfoMode currentMode = infoManager.CurrentMode;
+            InfoManager.SubInfoMode currentSubMode = infoManager.CurrentSubMode; ;
+
+            // Set current game InfoManager to default (don't want to render with an overlay mode).
             infoManager.SetCurrentMode(InfoManager.InfoMode.None, InfoManager.SubInfoMode.Default);
             infoManager.UpdateInfoMode();
 
-            Light sunLight = DayNightProperties.instance.sunLightSource;
-            float lightIntensity = sunLight.intensity;
-            Color lightColor = sunLight.color;
-            Vector3 lightAngles = sunLight.transform.eulerAngles;
+            // Backup current exposure and sky tint.
+            float gameExposure = DayNightProperties.instance.m_Exposure;
+            Color gameSkyTint = DayNightProperties.instance.m_SkyTint;
 
-            sunLight.intensity = 2f;
-            sunLight.color = Color.white;
-            sunLight.transform.eulerAngles = new Vector3(50, 210, 70);
+            // Backup current game lighting.
+            Light gameMainLight = RenderManager.instance.MainLight;
 
-            Light mainLight = RenderManager.instance.MainLight;
-            RenderManager.instance.MainLight = sunLight;
+            // Set exposure and sky tint for render.
+            DayNightProperties.instance.m_Exposure = 0.5f;
+            DayNightProperties.instance.m_SkyTint = new Color(0, 0, 0);
+            DayNightProperties.instance.Refresh();
 
-            if (mainLight == DayNightProperties.instance.moonLightSource)
+            // Set zoom to encapsulate entire model.
+            float magnitude = currentBounds.extents.magnitude;
+            float num = magnitude + 16f;
+            float num2 = magnitude * currentZoom;
+
+            // Transforms and clip.
+            renderCamera.transform.position = -Vector3.forward * num2;
+            renderCamera.transform.rotation = Quaternion.identity;
+            renderCamera.nearClipPlane = Mathf.Max(num2 - num * 1.5f, 0.01f);
+            renderCamera.farClipPlane = num2 + num * 1.5f;
+
+            // Set up our render lighting settings.
+            Light renderLight = DayNightProperties.instance.sunLightSource;
+
+            RenderManager.instance.MainLight = renderLight;
+
+            // If game is currently in nighttime, enable sun and disable moon lighting.
+            if (gameMainLight == DayNightProperties.instance.moonLightSource)
             {
                 DayNightProperties.instance.sunLightSource.enabled = true;
                 DayNightProperties.instance.moonLightSource.enabled = false;
             }
 
-            float magnitude = mesh.bounds.extents.magnitude;
-            float num = magnitude + 16f;
-            float num2 = magnitude * m_zoom;
+            // Light settings.
+            renderLight.intensity = 2f;
+            renderLight.color = Color.white;
+            renderLight.transform.eulerAngles = new Vector3(55, 0, 0);
 
-            m_camera.transform.position = Vector3.forward * num2;
-            m_camera.transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
-            m_camera.nearClipPlane = Mathf.Max(num2 - num * 1.5f, 0.01f);
-            m_camera.farClipPlane = num2 + num * 1.5f;
+            // Yay!  Matrix math, my favourite!
+            Quaternion quaternion = Quaternion.Euler(-20f, 0f, 0f) * Quaternion.Euler(0f, currentRotation, 0f);
+            Vector3 pos = quaternion * -currentBounds.center;
+            Matrix4x4 matrix = Matrix4x4.TRS(pos, quaternion, Vector3.one);
 
-            Quaternion rotation = Quaternion.Euler(-40f, 180f, 0f) * Quaternion.Euler(0f, m_rotation, 0f);
-            Vector3 position = rotation * -mesh.bounds.center;
-            Matrix4x4 matrix = Matrix4x4.TRS(position, rotation, Vector3.one);
+            // Render!
+            Graphics.DrawMesh(currentMesh, matrix, _material, 0, renderCamera, 0, null, true, true);
+            renderCamera.RenderWithShader(_material.shader, "");
 
-            Graphics.DrawMesh(mesh, matrix, material, 0, m_camera, 0, null, true, true);
-            m_camera.RenderWithShader(material.shader, "");
+            // Restore game lighting.
+            RenderManager.instance.MainLight = gameMainLight;
 
-            sunLight.intensity = lightIntensity;
-            sunLight.color = lightColor;
-            sunLight.transform.eulerAngles = lightAngles;
-
-            RenderManager.instance.MainLight = mainLight;
-
-            if (mainLight == DayNightProperties.instance.moonLightSource)
+            // Reset to moon lighting if the game is currently in nighttime.
+            if (gameMainLight == DayNightProperties.instance.moonLightSource)
             {
                 DayNightProperties.instance.sunLightSource.enabled = false;
                 DayNightProperties.instance.moonLightSource.enabled = true;
             }
 
-            infoManager.SetCurrentMode(currentMod, currentSubMod);
+            // Restore game exposure and sky tint.
+            DayNightProperties.instance.m_Exposure = gameExposure;
+            DayNightProperties.instance.m_SkyTint = gameSkyTint;
+
+            // Restore game InfoManager mode.
+            infoManager.SetCurrentMode(currentMode, currentSubMode);
             infoManager.UpdateInfoMode();
         }
     }
