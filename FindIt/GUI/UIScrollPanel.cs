@@ -288,6 +288,7 @@ namespace FindIt.GUI
                 component.focusedFgSprite = null;
 
                 bool rico = false;
+
                 if (FindIt.isRicoEnabled)
                 {
                     string name = Asset.GetName(prefab);
