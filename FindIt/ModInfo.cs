@@ -5,13 +5,15 @@ using ICities;
 using System;
 using ColossalFramework.UI;
 using CitiesHarmony.API;
-
+using System.IO;
+using ColossalFramework.IO;
+using UnityEngine;
 
 namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "1.6.5-3";
+        public const string version = "1.6.7";
         
 
         public string Name
@@ -120,6 +122,19 @@ namespace FindIt
                 
                 languageDropDown.width = 300;
                 group.AddSpace(10);
+
+                // show path to FindItCustomTags.xml
+                string path = Path.Combine(DataLocation.localApplicationData, "FindItCustomTags.xml");
+                UITextField customTagsFilePath = (UITextField)group.AddTextfield(Translations.Translate("FIF_SET_CTFL"), path, _ => { }, _ => { }); 
+                customTagsFilePath.width = panel.width - 30;
+
+                // from aubergine10's AutoRepair
+                if (Application.platform == RuntimePlatform.WindowsPlayer)
+                {
+                    group.AddButton(Translations.Translate("FIF_SET_CTFOP"), () => System.Diagnostics.Process.Start("explorer.exe", "/select," + path));
+                }
+
+
             }
             catch (Exception e)
             {
