@@ -144,15 +144,15 @@ namespace FindIt.GUI
             if (FindIt.isRicoEnabled)
             {
                 string[] items = {
-                    Translations.Translate("FIF_SE_IA"),
-                    Translations.Translate("FIF_SE_IN"),
-                    Translations.Translate("FIF_SE_IP"),
-                    Translations.Translate("FIF_SE_IG"),
-                    Translations.Translate("FIF_SE_IR"),
-                    Translations.Translate("FIF_SE_IGR"),
-                    Translations.Translate("FIF_SE_IPR"),
-                    Translations.Translate("FIF_SE_ID"),
-                    Translations.Translate("FIF_SE_IT")
+                    Translations.Translate("FIF_SE_IA"), // All
+                    Translations.Translate("FIF_SE_IN"), // Network
+                    Translations.Translate("FIF_SE_IP"), // Ploppable
+                    Translations.Translate("FIF_SE_IG"), // Growable
+                    Translations.Translate("FIF_SE_IR"), // RICO
+                    Translations.Translate("FIF_SE_IGR"), // Growable/RICO
+                    Translations.Translate("FIF_SE_IPR"), // Prop
+                    Translations.Translate("FIF_SE_ID"), // Decal
+                    Translations.Translate("FIF_SE_IT") // Tree
                 };
                 typeFilter.items = items;
 
@@ -160,13 +160,13 @@ namespace FindIt.GUI
             else
             {
                 string[] items = {
-                    Translations.Translate("FIF_SE_IA"),
-                    Translations.Translate("FIF_SE_IN"),
-                    Translations.Translate("FIF_SE_IP"),
-                    Translations.Translate("FIF_SE_IG"),
-                    Translations.Translate("FIF_SE_IPR"),
-                    Translations.Translate("FIF_SE_ID"),
-                    Translations.Translate("FIF_SE_IT")
+                    Translations.Translate("FIF_SE_IA"), // All
+                    Translations.Translate("FIF_SE_IN"), // Network
+                    Translations.Translate("FIF_SE_IP"), // Ploppable
+                    Translations.Translate("FIF_SE_IG"), // Growable
+                    Translations.Translate("FIF_SE_IPR"), // Prop
+                    Translations.Translate("FIF_SE_ID"), // Decal
+                    Translations.Translate("FIF_SE_IT") // Tree
                 };
                 typeFilter.items = items;
             }
