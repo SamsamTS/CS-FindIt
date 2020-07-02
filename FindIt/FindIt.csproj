@@ -64,6 +64,7 @@
     <Compile Include="GUI\PreviewRenderer.cs" />
     <Compile Include="GUI\UIFilterGrowable.cs" />
     <Compile Include="GUI\UIFilterProp.cs" />
+    <Compile Include="GUI\UIFilterTags.cs" />
     <Compile Include="GUI\UIGroupPanel.cs" />
     <Compile Include="GUI\UIFilterPloppable.cs" />
     <Compile Include="GUI\UIScrollPanel.cs" />
