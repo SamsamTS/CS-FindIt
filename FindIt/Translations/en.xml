@@ -23,6 +23,7 @@
     <Translation ID="FIF_SE_IP" String="Ploppable" />
     <Translation ID="FIF_SE_IG" String="Growable" />
     <Translation ID="FIF_SE_IR" String="RICO" />
+    <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
     <Translation ID="FIF_SE_IPR" String="Prop" />
     <Translation ID="FIF_SE_ID" String="Decal" />
     <Translation ID="FIF_SE_IT" String="Tree" />
