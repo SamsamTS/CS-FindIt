@@ -14,8 +14,9 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 
 Implemented and planned be included in the next release:
 
+New in v1.6.7:
+- Add new Growable/RICO combined search option. You can select and place both types in one place.  
 - Show custom tags file path in mod settings  
-(- Growable/RICO combined search option)  
 
 New in v1.6.6:
 - Move from the deprecated detour library to Harmony 2, credit to algernon. boformer's [Cities Harmony mod](https://steamcommunity.com/workshop/filedetails/?id=2040656402) now is a required item.
