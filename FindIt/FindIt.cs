@@ -298,6 +298,7 @@ namespace FindIt
 
         public void OnButtonClicked(UIComponent c, UIMouseEventParameter p)
         {
+            Debugging.Message("Boing!");
             UIButton uIButton = p.source as UIButton;
             if (uIButton != null && uIButton.parent is UIScrollPanel)
             {

@@ -1,219 +1,221 @@
-﻿// modified from SamsamTS's original Find It mod
-// https://github.com/SamsamTS/CS-FindIt
+﻿// By algernon via Realistic Population Revisited, based on analysis and refactoring of game code by Colossal Order.
 
 using ColossalFramework;
-using ColossalFramework.Globalization;
 using ColossalFramework.UI;
-
-using System.Reflection;
 using UnityEngine;
+
 
 namespace FindIt
 {
     public class OptionsKeymapping : UICustomControl
     {
-        private static readonly string kKeyBindingTemplate = "KeyBindingTemplate";
+        // Components.
+        UILabel label;
+        UIButton button;
 
-        private InputKey m_EditingBinding;
+        // State flag.
+        private bool isPrimed = false;
 
-        private string m_EditingBindingCategory;
 
-        private int count = 0;
-
-        private void Awake()
+        /// <summary>
+        /// The current hotkey settings as ColossalFramework InputKey
+        /// </summary>
+        /// </summary>
+        private InputKey CurrentHotkey
         {
-            AddKeymapping(Translations.Translate("FIF_SET_KS"), SavedInputKey.Encode((KeyCode)Settings.searchKey.keyCode, Settings.searchKey.control, Settings.searchKey.shift, Settings.searchKey.alt));
+            get => SavedInputKey.Encode((KeyCode)Settings.searchKey.keyCode, Settings.searchKey.control, Settings.searchKey.shift, Settings.searchKey.alt);
+
+            set
+            {
+                Settings.searchKey.keyCode = (int)(value & 0xFFFFFFF);
+                Settings.searchKey.control = (value & 0x40000000) != 0;
+                Settings.searchKey.shift = (value & 0x20000000) != 0;
+                Settings.searchKey.alt = (value & 0x10000000) != 0;
+            }
         }
 
-        private void AddKeymapping(string label, InputKey inputKey)
+
+        /// <summary>
+        /// Setup this control
+        /// Called by Unity immediately before the first update.
+        /// </summary>
+        public void Start()
         {
-            UIPanel uIPanel = component.AttachUIComponent(UITemplateManager.GetAsGameObject(kKeyBindingTemplate)) as UIPanel;
-            if (count++ % 2 == 1) uIPanel.backgroundSprite = null;
+            // Get the template from the game and attach it here.
+            UIPanel uIPanel = component.AttachUIComponent(UITemplateManager.GetAsGameObject("KeyBindingTemplate")) as UIPanel;
 
-            UILabel uILabel = uIPanel.Find<UILabel>("Name");
-            UIButton uIButton = uIPanel.Find<UIButton>("Binding");
-            uIButton.eventKeyDown += new KeyPressHandler(this.OnBindingKeyDown);
-            uIButton.eventMouseDown += new MouseEventHandler(this.OnBindingMouseDown);
+            // Find our sub-components.
+            label = uIPanel.Find<UILabel>("Name");
+            button = uIPanel.Find<UIButton>("Binding");
 
-            uILabel.text = label;
-            uIButton.text = SavedInputKey.ToLocalizedString("KEYNAME", inputKey);
-            uIButton.objectUserData = inputKey;
+            // Attach our event handlers.
+            button.eventKeyDown += (control, keyEvent) => OnKeyDown(keyEvent);
+            button.eventMouseDown += (control, mouseEvent) => OnMouseDown(mouseEvent);
+
+            // Set label and button text.
+            label.text = Translations.Translate("FIF_SET_KS");
+            button.text = SavedInputKey.ToLocalizedString("KEYNAME", CurrentHotkey);
         }
 
-        private void OnEnable()
+
+        /// <summary>
+        /// KeyDown event handler to record the new hotkey.
+        /// </summary>
+        /// <param name="keyEvent">Keypress event parameter</param>
+        public void OnKeyDown(UIKeyEventParameter keyEvent)
         {
-            LocaleManager.eventLocaleChanged += new LocaleManager.LocaleChangedHandler(this.OnLocaleChanged);
+            Debugging.Message("keydown " + isPrimed);
+
+            // Only do this if we're primed and the keypress isn't a modifier key.
+            if (isPrimed && !IsModifierKey(keyEvent.keycode))
+            {
+                // Variables.
+                InputKey inputKey;
+
+                // Use the event.
+                keyEvent.Use();
+
+                // If escape was entered, we don't change the code.
+                if (keyEvent.keycode == KeyCode.Escape)
+                {
+                    inputKey = CurrentHotkey;
+                }
+                else
+                {
+                    // If backspace was pressed, then we blank the input; otherwise, encode the keypress.
+                    inputKey = (keyEvent.keycode == KeyCode.Backspace) ? SavedInputKey.Empty : SavedInputKey.Encode(keyEvent.keycode, keyEvent.control, keyEvent.shift, keyEvent.alt);
+                }
+
+                // Apply our new key.
+                ApplyKey(inputKey);
+            }
         }
 
-        private void OnDisable()
+
+        /// <summary>
+        /// MouseDown event handler to handle mouse clicks; primarily used to prime hotkey entry.
+        /// </summary>
+        /// <param name="mouseEvent">Mouse button event parameter</param>
+        public void OnMouseDown(UIMouseEventParameter mouseEvent)
         {
-            LocaleManager.eventLocaleChanged -= new LocaleManager.LocaleChangedHandler(this.OnLocaleChanged);
+            // Use the event.
+            mouseEvent.Use();
+
+            // Check to see if we're already primed for hotkey entry.
+            if (isPrimed)
+            {
+                // We were already primed; is this a bindable mouse button?
+                if (mouseEvent.buttons == UIMouseButton.Left || mouseEvent.buttons == UIMouseButton.Right)
+                {
+                    // Not a bindable mouse button - set the button text and cancel priming.
+                    button.text = SavedInputKey.ToLocalizedString("KEYNAME", CurrentHotkey);
+                    UIView.PopModal();
+                    isPrimed = false;
+                }
+                else
+                {
+                    // Bindable mouse button - do keybinding as if this was a keystroke.
+                    KeyCode mouseCode;
+
+                    switch (mouseEvent.buttons)
+                    {
+                        // Convert buttons to keycodes (we don't bother with left and right buttons as they're non-bindable).
+                        case UIMouseButton.Middle:
+                            mouseCode = KeyCode.Mouse2;
+                            break;
+                        case UIMouseButton.Special0:
+                            mouseCode = KeyCode.Mouse3;
+                            break;
+                        case UIMouseButton.Special1:
+                            mouseCode = KeyCode.Mouse4;
+                            break;
+                        case UIMouseButton.Special2:
+                            mouseCode = KeyCode.Mouse5;
+                            break;
+                        case UIMouseButton.Special3:
+                            mouseCode = KeyCode.Mouse6;
+                            break;
+                        default:
+                            // No valid button pressed: exit without doing anything.
+                            return;
+                    }
+
+                    // We got a valid mouse button key - apply settings and save.
+                    ApplyKey(SavedInputKey.Encode(mouseCode, IsControlDown(), IsShiftDown(), IsAltDown()));
+                }
+            }
+            else
+            {
+                // We weren't already primed - set our text and focus the button.
+                button.buttonsMask = (UIMouseButton.Left | UIMouseButton.Right | UIMouseButton.Middle | UIMouseButton.Special0 | UIMouseButton.Special1 | UIMouseButton.Special2 | UIMouseButton.Special3);
+                button.text = Translations.Translate("RPR_OPT_PRS");
+                button.Focus();
+
+                // Prime for new keybinding entry.
+                isPrimed = true;
+                UIView.PushModal(button);
+            }
         }
 
-        private void OnLocaleChanged()
+
+        /// <summary>
+        /// Applies a valid key to our settings.
+        /// </summary>
+        /// <param name="key">InputKey to apply</param>
+        private void ApplyKey(InputKey key)
         {
-            this.RefreshBindableInputs();
+            // Apply key to current settings and save.
+            CurrentHotkey = key;
+            XMLUtils.SaveSettings();
+
+            // Set the label for the new hotkey.
+            button.text = SavedInputKey.ToLocalizedString("KEYNAME", key);
+
+            // Remove priming.
+            UIView.PopModal();
+            isPrimed = false;
         }
 
-        private bool IsModifierKey(KeyCode code)
+
+        /// <summary>
+        /// Checks to see if the given keycode is a modifier key.
+        /// </summary>
+        /// <param name="code">Leycode to check</param>
+        /// <returns>True if the key is a modifier key, false otherwise</returns>
+        private bool IsModifierKey(KeyCode keyCode)
         {
-            return code == KeyCode.LeftControl || code == KeyCode.RightControl || code == KeyCode.LeftShift || code == KeyCode.RightShift || code == KeyCode.LeftAlt || code == KeyCode.RightAlt;
+            return (keyCode == KeyCode.LeftControl || keyCode == KeyCode.RightControl || keyCode == KeyCode.LeftShift || keyCode == KeyCode.RightShift || keyCode == KeyCode.LeftAlt || keyCode == KeyCode.RightAlt || keyCode == KeyCode.AltGr);
         }
 
+
+        /// <summary>
+        /// Checks to see if the control key is pressed.
+        /// </summary>
+        /// <returns>True if the control key is down, false otherwise.</returns>
         private bool IsControlDown()
         {
             return Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
         }
 
+
+        /// <summary>
+        /// Checks to see if the shift key is pressed.
+        /// </summary>
+        /// <returns>True if the shift key is down, false otherwise.</returns>
         private bool IsShiftDown()
         {
             return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         }
 
+
+        /// <summary>
+        /// Checks to see if the alt key is pressed.
+        /// </summary>
+        /// <returns>True if the alt key is down, false otherwise.</returns>
         private bool IsAltDown()
         {
-            return Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt);
-        }
-
-        private bool IsUnbindableMouseButton(UIMouseButton code)
-        {
-            return code == UIMouseButton.Left || code == UIMouseButton.Right;
-        }
-
-        private KeyCode ButtonToKeycode(UIMouseButton button)
-        {
-            if (button == UIMouseButton.Left)
-            {
-                return KeyCode.Mouse0;
-            }
-            if (button == UIMouseButton.Right)
-            {
-                return KeyCode.Mouse1;
-            }
-            if (button == UIMouseButton.Middle)
-            {
-                return KeyCode.Mouse2;
-            }
-            if (button == UIMouseButton.Special0)
-            {
-                return KeyCode.Mouse3;
-            }
-            if (button == UIMouseButton.Special1)
-            {
-                return KeyCode.Mouse4;
-            }
-            if (button == UIMouseButton.Special2)
-            {
-                return KeyCode.Mouse5;
-            }
-            if (button == UIMouseButton.Special3)
-            {
-                return KeyCode.Mouse6;
-            }
-            return KeyCode.None;
-        }
-
-        private void OnBindingKeyDown(UIComponent comp, UIKeyEventParameter p)
-        {
-            if (this.m_EditingBinding != 0 && !this.IsModifierKey(p.keycode))
-            {
-                p.Use();
-                UIView.PopModal();
-                KeyCode keycode = p.keycode;
-                InputKey inputKey = (p.keycode == KeyCode.Escape) ? this.m_EditingBinding : SavedInputKey.Encode(keycode, p.control, p.shift, p.alt);
-                if (p.keycode == KeyCode.Backspace)
-                {
-                    inputKey = SavedInputKey.Empty;
-                }
-                this.m_EditingBinding = inputKey;
-                UITextComponent uITextComponent = p.source as UITextComponent;
-                uITextComponent.text = SavedInputKey.ToLocalizedString("KEYNAME", m_EditingBinding);
-
-                // Apply and save.
-                Settings.searchKey = new KeyBinding { keyCode = inputKey & 0xFFFFFFF, control = (inputKey & 0x40000000) != 0, shift = (inputKey & 0x20000000) != 0, alt = (inputKey & 0x10000000) != 0 };
-                XMLUtils.SaveSettings();
-
-                this.m_EditingBinding = 0;
-                this.m_EditingBindingCategory = string.Empty;
-            }
-        }
-
-        private void OnBindingMouseDown(UIComponent comp, UIMouseEventParameter p)
-        {
-            if (this.m_EditingBinding == 0)
-            {
-                p.Use();
-                this.m_EditingBinding = (InputKey)p.source.objectUserData;
-                this.m_EditingBindingCategory = p.source.stringUserData;
-                UIButton uIButton = p.source as UIButton;
-                uIButton.buttonsMask = (UIMouseButton.Left | UIMouseButton.Right | UIMouseButton.Middle | UIMouseButton.Special0 | UIMouseButton.Special1 | UIMouseButton.Special2 | UIMouseButton.Special3);
-                uIButton.text = "Press any key";
-                p.source.Focus();
-                UIView.PushModal(p.source);
-            }
-            else if (!this.IsUnbindableMouseButton(p.buttons))
-            {
-                p.Use();
-                UIView.PopModal();
-                InputKey inputKey = SavedInputKey.Encode(this.ButtonToKeycode(p.buttons), this.IsControlDown(), this.IsShiftDown(), this.IsAltDown());
-
-                this.m_EditingBinding = inputKey;
-                UIButton uIButton2 = p.source as UIButton;
-                uIButton2.text = SavedInputKey.ToLocalizedString("KEYNAME", m_EditingBinding);
-                uIButton2.buttonsMask = UIMouseButton.Left;
-                this.m_EditingBinding = 0;
-                this.m_EditingBindingCategory = string.Empty;
-            }
-        }
-
-        // Called from OnLocaleChanged.
-        private void RefreshBindableInputs()
-        {
-            foreach (UIComponent current in component.GetComponentsInChildren<UIComponent>())
-            {
-                UITextComponent uITextComponent = current.Find<UITextComponent>("Binding");
-                if (uITextComponent != null)
-                {
-                    InputKey inputKey = (InputKey)uITextComponent.objectUserData;
-                    if (inputKey != 0)
-                    {
-                        uITextComponent.text = SavedInputKey.ToLocalizedString("KEYNAME", inputKey);
-                    }
-                }
-                UILabel uILabel = current.Find<UILabel>("Name");
-                if (uILabel != null)
-                {
-                    uILabel.text = Locale.Get("KEYMAPPING", uILabel.stringUserData);
-                }
-            }
-        }
-
-        internal InputKey GetDefaultEntry(string entryName)
-        {
-            FieldInfo field = typeof(DefaultSettings).GetField(entryName, BindingFlags.Static | BindingFlags.Public);
-            if (field == null)
-            {
-                return 0;
-            }
-            object value = field.GetValue(null);
-            if (value is InputKey)
-            {
-                return (InputKey)value;
-            }
-            return 0;
-        }
-
-        private void RefreshKeyMapping()
-        {
-            foreach (UIComponent current in component.GetComponentsInChildren<UIComponent>())
-            {
-                UITextComponent uITextComponent = current.Find<UITextComponent>("Binding");
-                InputKey inputKey = (InputKey)uITextComponent.objectUserData;
-                if (this.m_EditingBinding != inputKey)
-                {
-                    uITextComponent.text = SavedInputKey.ToLocalizedString("KEYNAME", inputKey);
-                }
-            }
+            // Don't worry, Alt.Gr, I still remember you, even if everyone else forgets!
+            return Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt) || Input.GetKey(KeyCode.AltGr);
         }
     }
 }

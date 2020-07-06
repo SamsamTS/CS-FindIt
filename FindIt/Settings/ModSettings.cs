@@ -27,38 +27,6 @@ namespace FindIt
         /// <returns>True if pressed, false otherwise</returns>
         public static bool IsSearchPressed()
         {
-            // Keycode is lower 7 nibbles of CO InputKey.
-            //KeyCode keyCode = (KeyCode)searchKey & 0xFFFFFFF);
-
-            /*
-            // Don't do anything if a keycode hasn't been set, or if the key isn't pressed.
-            if (searchKey.keyCode == (int)KeyCode.None || !Input.GetKey((KeyCode)searchKey.keyCode))
-            {
-                return false;
-            }
-
-            // Check for control.
-            if (searchKey.control && !(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
-            {
-                return false;
-            }
-
-            // Check for shift.
-            if (searchKey.shift && !(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
-            {
-                return false;
-            }
-
-            // Check for alt.
-            if (searchKey.shift && !(Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt) || Input.GetKey(KeyCode.AltGr)))
-            {
-                return false;
-            }
-
-            // If we got here, all checks have passed - search has been pressed.
-            return true;
-            */
-
             // Don't do anything if a keycode hasn't been set, or if the key isn't pressed.
             if (searchKey.keyCode == (int)KeyCode.None || !Input.GetKey((KeyCode)searchKey.keyCode))
             {
