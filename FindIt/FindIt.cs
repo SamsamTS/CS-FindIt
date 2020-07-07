@@ -231,6 +231,7 @@ namespace FindIt
         {
             try
             {
+
                 if (thumbnailsToGenerate.Count > 0)
                 {
                     List<PrefabInfo> prefabs;
@@ -466,8 +467,6 @@ namespace FindIt
 				    "FindItHovered",
 				    "FindItPressed",
                     "Tag",
-				    "IconPolicyLeisureDisabled",
-				    "IconPolicyTouristDisabled",
                     "ZoningCommercialEco",
                     "ZoningCommercialEcoDisabled",
                     "ZoningCommercialLeisure",
@@ -494,10 +493,7 @@ namespace FindIt
                     defaultAtlas["ToolbarIconGroup6Focused"].texture,
                     defaultAtlas["ToolbarIconGroup6Hovered"].texture,
                     defaultAtlas["ToolbarIconGroup6Normal"].texture,
-                    defaultAtlas["ToolbarIconGroup6Pressed"].texture,
-                    defaultAtlas["IconPolicyLeisure"].texture,
-                    defaultAtlas["IconPolicyTourist"].texture
-
+                    defaultAtlas["ToolbarIconGroup6Pressed"].texture
                 };
 
                 ResourceLoader.AddTexturesInAtlas(atlas, textures);
