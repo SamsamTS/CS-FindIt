@@ -63,23 +63,34 @@ namespace FindIt.GUI
 
 
         /// <summary>
-        /// Sets mesh and material from a BuildingInfo prefab.
+        /// Sets mesh and material from a prefab.
         /// </summary>
         /// <param name="prefab">Prefab to render</param>
-        public void SetTarget(BuildingInfo prefab)
+        /// <returns>True if the target was valid (valid mesh and material)</returns>
+        public bool SetTarget(PrefabInfo prefab)
         {
-            // If the prefab has submeshes and the first submesh has more tris than the main mesh (e.g. SoCal Laguna Homes), then use that submesh as our render mesh.
-            if (prefab.m_subMeshes != null && prefab.m_subMeshes.Length > 0 && prefab.m_subMeshes[0].m_subInfo.m_mesh.triangles.Length > prefab.m_mesh.triangles.Length)
+            if (prefab is BuildingInfo buildingPrefab)
             {
-                Mesh = prefab.m_subMeshes[0].m_subInfo.m_mesh;
-                _material = prefab.m_subMeshes[0].m_subInfo.m_material;
+                Mesh = buildingPrefab.m_mesh;
+                _material = buildingPrefab.m_material;
+            }
+            else if (prefab is PropInfo propPrefab)
+            {
+                Mesh = propPrefab.m_mesh;
+                _material = propPrefab.m_material;
+            }
+            else if (prefab is TreeInfo treePrefab)
+            {
+                Mesh = treePrefab.m_mesh;
+                _material = treePrefab.m_material;
             }
             else
             {
-                // Otherwise, just use the main mesh and material for render.
-                Mesh = prefab.m_mesh;
-                _material = prefab.m_material;
+                Debugging.Message("invalid prefab type for " + prefab.name);
+                return false;
             }
+
+            return Mesh != null && _material != null;
         }
 
 

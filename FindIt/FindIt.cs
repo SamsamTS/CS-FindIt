@@ -225,61 +225,6 @@ namespace FindIt
             tabstrip.relativePosition = new Vector3(Mathf.Min(m_defaultXPos, newXPos), tabstrip.relativePosition.y);
         }
 
-        public static Dictionary<PrefabInfo, UIButton> thumbnailsToGenerate = new Dictionary<PrefabInfo, UIButton>();
-
-        public void Update()
-        {
-            try
-            {
-
-                if (thumbnailsToGenerate.Count > 0)
-                {
-                    List<PrefabInfo> prefabs;
-                    lock (thumbnailsToGenerate)
-                    {
-                        prefabs = new List<PrefabInfo>(thumbnailsToGenerate.Keys);
-                    }
-
-                    int count = 0;
-                    foreach (PrefabInfo prefab in prefabs)
-                    {
-                        string name = Asset.GetName(prefab);
-                        string baseIconName = prefab.m_Thumbnail;
-                        if (!ImageUtils.CreateThumbnailAtlas(name, prefab) && !baseIconName.IsNullOrWhiteSpace())
-                        {
-                            prefab.m_Thumbnail = baseIconName;
-                        }
-                        UIButton button = thumbnailsToGenerate[prefab];
-                        if (button != null)
-                        {
-                            button.atlas = prefab.m_Atlas;
-
-                            button.normalFgSprite = prefab.m_Thumbnail;
-                            button.hoveredFgSprite = prefab.m_Thumbnail + "Hovered";
-                            button.pressedFgSprite = prefab.m_Thumbnail + "Pressed";
-                            button.disabledFgSprite = prefab.m_Thumbnail + "Disabled";
-                            button.focusedFgSprite = null;
-                        }
-
-                        lock (thumbnailsToGenerate)
-                        {
-                            thumbnailsToGenerate.Remove(prefab);
-                        }
-                        count++;
-
-                        // Generate 1 thumbnail max
-                        if (count > 1) break;
-                    }
-
-                    scrollPanel.Refresh();
-                }
-            }
-            catch (Exception e)
-            {
-                Debugging.Message("Update failed");
-                Debugging.LogException(e);
-            }
-        }
 
         public void HideAllOptionPanels()
         {
