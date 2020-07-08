@@ -38,6 +38,19 @@ namespace FindIt.GUI
         // false = sort by most recently downloaded
         public bool sortButtonTextState = true;
 
+        public enum DropDownOptions
+        {
+            All = 0,
+            Network,
+            Ploppable,
+            Growable,
+            Rico,
+            GrwbRico,
+            Prop,
+            Decal,
+            Tree
+        }
+
         public string[] filterItemsGrowable = { Translations.Translate("FIF_SE_IA"), "1", "2", "3", "4"};
         public string[] filterItemsRICO = { Translations.Translate("FIF_SE_IA"), "1", "2", "3", "4", "5-8", "9-12", "13+"};
 
@@ -131,14 +144,15 @@ namespace FindIt.GUI
             if (FindIt.isRicoEnabled)
             {
                 string[] items = {
-                    Translations.Translate("FIF_SE_IA"),
-                    Translations.Translate("FIF_SE_IN"),
-                    Translations.Translate("FIF_SE_IP"),
-                    Translations.Translate("FIF_SE_IG"),
-                    Translations.Translate("FIF_SE_IR"),
-                    Translations.Translate("FIF_SE_IPR"),
-                    Translations.Translate("FIF_SE_ID"),
-                    Translations.Translate("FIF_SE_IT")
+                    Translations.Translate("FIF_SE_IA"), // All
+                    Translations.Translate("FIF_SE_IN"), // Network
+                    Translations.Translate("FIF_SE_IP"), // Ploppable
+                    Translations.Translate("FIF_SE_IG"), // Growable
+                    Translations.Translate("FIF_SE_IR"), // RICO
+                    Translations.Translate("FIF_SE_IGR"), // Growable/RICO
+                    Translations.Translate("FIF_SE_IPR"), // Prop
+                    Translations.Translate("FIF_SE_ID"), // Decal
+                    Translations.Translate("FIF_SE_IT") // Tree
                 };
                 typeFilter.items = items;
 
@@ -146,13 +160,13 @@ namespace FindIt.GUI
             else
             {
                 string[] items = {
-                    Translations.Translate("FIF_SE_IA"),
-                    Translations.Translate("FIF_SE_IN"),
-                    Translations.Translate("FIF_SE_IP"),
-                    Translations.Translate("FIF_SE_IG"),
-                    Translations.Translate("FIF_SE_IPR"),
-                    Translations.Translate("FIF_SE_ID"),
-                    Translations.Translate("FIF_SE_IT")
+                    Translations.Translate("FIF_SE_IA"), // All
+                    Translations.Translate("FIF_SE_IN"), // Network
+                    Translations.Translate("FIF_SE_IP"), // Ploppable
+                    Translations.Translate("FIF_SE_IG"), // Growable
+                    Translations.Translate("FIF_SE_IPR"), // Prop
+                    Translations.Translate("FIF_SE_ID"), // Decal
+                    Translations.Translate("FIF_SE_IT") // Tree
                 };
                 typeFilter.items = items;
             }
@@ -323,20 +337,20 @@ namespace FindIt.GUI
             SimulationManager.instance.AddAction(() =>
             {
                 int index = typeFilter.selectedIndex;
-                if (!FindIt.isRicoEnabled && index >= (int)Asset.AssetType.Rico)
+                if (!FindIt.isRicoEnabled && index >= (int)DropDownOptions.Rico)
                 {
-                    index++;
+                    index+=2;
                 }
 
-                switch ((Asset.AssetType)index)
+                switch ((DropDownOptions)index)
                 {
-                    case Asset.AssetType.Ploppable:
+                    case DropDownOptions.Ploppable:
                         HideFilterPanel(filterGrowable);
                         HideFilterPanel(filterProp);
-                        ShowFilterPanel(filterPloppable);
                         HideBuildingFilters();
+                        ShowFilterPanel(filterPloppable);
                         break;
-                    case Asset.AssetType.Rico:
+                    case DropDownOptions.Rico:
                         sizeFilterX.items = filterItemsRICO;
                         sizeFilterY.items = filterItemsRICO;
                         HideFilterPanel(filterPloppable);
@@ -344,7 +358,15 @@ namespace FindIt.GUI
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
-                    case Asset.AssetType.Growable:
+                    case DropDownOptions.GrwbRico:
+                        sizeFilterX.items = filterItemsRICO;
+                        sizeFilterY.items = filterItemsRICO;
+                        HideFilterPanel(filterPloppable);
+                        HideFilterPanel(filterProp);
+                        ShowFilterPanel(filterGrowable);
+                        ShowBuildingFilters();
+                        break;
+                    case DropDownOptions.Growable:
                         sizeFilterX.items = filterItemsGrowable;
                         sizeFilterY.items = filterItemsGrowable;
                         HideFilterPanel(filterPloppable);
@@ -352,13 +374,13 @@ namespace FindIt.GUI
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
-                    case Asset.AssetType.Prop:
+                    case DropDownOptions.Prop:
                         HideFilterPanel(filterGrowable);
                         HideFilterPanel(filterPloppable);
-                        ShowFilterPanel(filterProp);
                         HideBuildingFilters();
+                        ShowFilterPanel(filterProp);
                         break;
-                    default:
+                    default: // All, Network, Tree
                         HideFilterPanel(filterPloppable);
                         HideFilterPanel(filterGrowable);
                         HideFilterPanel(filterProp);
@@ -406,21 +428,21 @@ namespace FindIt.GUI
             }
 
             string text = "";
-            Asset.AssetType type = Asset.AssetType.All;
+            DropDownOptions type = DropDownOptions.All;
 
             if (input != null)
             {
                 text = input.text;
-                type = (Asset.AssetType)typeFilter.selectedIndex;
+                type = (DropDownOptions)typeFilter.selectedIndex;
 
-                if (!FindIt.isRicoEnabled && type >= Asset.AssetType.Rico)
+                if (!FindIt.isRicoEnabled && type >= DropDownOptions.Rico)
                 {
-                    type++;
+                    type+=2;
                 }
             }
 
             // extra size check for growable
-            if (type == Asset.AssetType.Growable)
+            if (type == DropDownOptions.Growable)
             {
                 // if switch back from rico with size > 4, default size = all
                 if (UISearchBox.instance.buildingSizeFilterIndex.x > 4) UISearchBox.instance.sizeFilterX.selectedIndex = 0;

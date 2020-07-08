@@ -94,10 +94,6 @@
     <EmbeddedResource Include="Icons\FindItPressed.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Icons\IconPolicyLeisureDisabled.png" />
-    <EmbeddedResource Include="Icons\IconPolicyTouristDisabled.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Icons\Tag.png" />
   </ItemGroup>
   <ItemGroup>
