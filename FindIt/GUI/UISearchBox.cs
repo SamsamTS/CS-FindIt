@@ -33,6 +33,9 @@ namespace FindIt.GUI
         public UICheckBox workshopFilter;
         public UICheckBox vanillaFilter;
         public UIButton sortButton;
+        public UICheckBox tagToolCheckBox;
+        public UIFilterTag tagPanel;
+        
 
         // true = sort by relevance
         // false = sort by most recently downloaded
@@ -215,26 +218,16 @@ namespace FindIt.GUI
             sizeFilterX.selectedIndex = 0;
             sizeFilterX.relativePosition = new Vector3(sizeLabel.relativePosition.x + sizeLabel.width + 5, 5);
 
-            /*
-            UILabel XLabel = buildingFilters.AddUIComponent<UILabel>();
-            XLabel.textScale = 0.8f;
-            XLabel.padding = new RectOffset(0, 0, 8, 0);
-            //XLabel.text = "X";
-            XLabel.text = " ";
-            XLabel.isVisible = false;
-            XLabel.relativePosition = new Vector3(sizeFilterX.relativePosition.x + sizeFilterX.width - 5, 5);
-            */
-
             sizeFilterY = SamsamTS.UIUtils.CreateDropDown(buildingFilters);
             sizeFilterY.size = new Vector2(55, 25);
             sizeFilterY.items = filterItemsGrowable;
             sizeFilterY.selectedIndex = 0;
-            //sizeFilterY.isVisible = false;
             sizeFilterY.relativePosition = new Vector3(sizeFilterX.relativePosition.x + sizeFilterX.width + 10, 5);
 
             sizeFilterX.eventSelectedIndexChanged += (c, i) => Search();
             sizeFilterY.eventSelectedIndexChanged += (c, i) => Search();
 
+            // panel of sort button and filter tabs
             UIPanel panel = AddUIComponent<UIPanel>();
             panel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             panel.backgroundSprite = "GenericTabHovered";
@@ -263,6 +256,26 @@ namespace FindIt.GUI
                     sortButton.tooltip = Translations.Translate("FIF_SO_RETP");
                 }
                 Search();
+            };
+
+            // panel of tag tools
+            tagPanel = AddUIComponent<UIFilterTag>();
+            tagPanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
+            tagPanel.backgroundSprite = "GenericTab";
+            tagPanel.isVisible = false;
+            tagPanel.size = new Vector2(500, 35);
+            tagPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height - 40);
+
+            // tag tool checkbox
+            tagToolCheckBox = SamsamTS.UIUtils.CreateCheckBox(panel);
+            tagToolCheckBox.isChecked = false;
+            tagToolCheckBox.width = 250;
+            tagToolCheckBox.label.text = "Show Custom Tag Panel";
+            tagToolCheckBox.label.textScale = 0.8f;
+            tagToolCheckBox.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width+10, 15);
+            tagToolCheckBox.eventCheckChanged += (c, i) =>
+            {
+                UpdateTagPanel();
             };
 
             // ploppable filter tabs
@@ -348,6 +361,7 @@ namespace FindIt.GUI
                         HideFilterPanel(filterGrowable);
                         HideFilterPanel(filterProp);
                         HideBuildingFilters();
+                        tagToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterPloppable);
                         break;
                     case DropDownOptions.Rico:
@@ -355,6 +369,7 @@ namespace FindIt.GUI
                         sizeFilterY.items = filterItemsRICO;
                         HideFilterPanel(filterPloppable);
                         HideFilterPanel(filterProp);
+                        tagToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
@@ -363,6 +378,7 @@ namespace FindIt.GUI
                         sizeFilterY.items = filterItemsRICO;
                         HideFilterPanel(filterPloppable);
                         HideFilterPanel(filterProp);
+                        tagToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
@@ -371,6 +387,7 @@ namespace FindIt.GUI
                         sizeFilterY.items = filterItemsGrowable;
                         HideFilterPanel(filterPloppable);
                         HideFilterPanel(filterProp);
+                        tagToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
@@ -378,6 +395,7 @@ namespace FindIt.GUI
                         HideFilterPanel(filterGrowable);
                         HideFilterPanel(filterPloppable);
                         HideBuildingFilters();
+                        tagToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterProp);
                         break;
                     default: // All, Network, Tree
@@ -385,6 +403,7 @@ namespace FindIt.GUI
                         HideFilterPanel(filterGrowable);
                         HideFilterPanel(filterProp);
                         HideBuildingFilters();
+                        tagToolCheckBox.isVisible = true;
                         break;
                 }
             });
@@ -416,6 +435,12 @@ namespace FindIt.GUI
         {
             buildingFilters.isVisible = false;
             UpdateBuildingFilters();
+        }
+
+        public void UpdateTagPanel()
+        {
+            tagPanel.isVisible = !tagPanel.isVisible;
+            if(!tagPanel.isVisible) tagPanel.tagDropDownCheckBox.isChecked = false;
         }
 
         public void Search()
@@ -474,6 +499,12 @@ namespace FindIt.GUI
 
                         // filter out vanilla asset. will not filter out content creater pack assets
                         if (!asset.prefab.m_isCustomContent && !vanillaFilter.isChecked && !asset.isCCPBuilding) continue;
+
+                        // filter out assets without matching custom tag
+                        if (tagPanel.tagDropDownCheckBox.isChecked)
+                        {
+                            if (!asset.tagsCustom.Contains(tagPanel.GetDropDownListKey())) continue;
+                        }
                     }
 
                     UIScrollPanelItem.ItemData data = new UIScrollPanelItem.ItemData();

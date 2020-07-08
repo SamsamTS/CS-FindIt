@@ -907,6 +907,7 @@ namespace FindIt
 
         private HashSet<string> AddAssetTags(Asset asset, Dictionary<string, int> dico, string text)
         {
+            // break input text into multiple tags
             string[] tagsArr = Regex.Split(text, @"([^\w]|[_-]|\s)+", RegexOptions.IgnoreCase);
 
             HashSet<string> tags = new HashSet<string>();
@@ -991,6 +992,16 @@ namespace FindIt
             }
 
             return id;
+        }
+
+        public List<KeyValuePair<string, int>> GetCustomTagList()
+        {
+            List<KeyValuePair<string, int>> list = tagsCustomDictionary.ToList();
+
+            // sort list
+            list = list.OrderByDescending(s => s.Value).ToList();
+
+            return list;
         }
     }
 }
