@@ -95,9 +95,8 @@ namespace FindIt.GUI
             {
                 if (customTagListStrArray.Length != 0)
                 {
-                    DeleteTag();
+                    UITagsDeletePopUp.ShowAt(deleteButton);
                 }
-                UpdateCustomTagList();
             };
         }
 
@@ -129,7 +128,7 @@ namespace FindIt.GUI
         }
 
         // delete a tag and remove it from all tagged assets
-        private void DeleteTag()
+        public void DeleteTag()
         {
             string tag = GetDropDownListKey();
 
