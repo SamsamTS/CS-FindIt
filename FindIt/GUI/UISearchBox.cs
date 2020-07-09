@@ -441,6 +441,7 @@ namespace FindIt.GUI
         {
             tagPanel.isVisible = !tagPanel.isVisible;
             if(!tagPanel.isVisible) tagPanel.tagDropDownCheckBox.isChecked = false;
+            tagPanel.UpdateCustomTagList();
         }
 
         public void Search()
@@ -501,7 +502,7 @@ namespace FindIt.GUI
                         if (!asset.prefab.m_isCustomContent && !vanillaFilter.isChecked && !asset.isCCPBuilding) continue;
 
                         // filter out assets without matching custom tag
-                        if (tagPanel.tagDropDownCheckBox.isChecked)
+                        if (tagPanel.tagDropDownCheckBox.isChecked && tagPanel.customTagListStrArray.Length > 0)
                         {
                             if (!asset.tagsCustom.Contains(tagPanel.GetDropDownListKey())) continue;
                         }

@@ -5,6 +5,7 @@ using UnityEngine;
 
 using ColossalFramework.UI;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace FindIt.GUI
 {
@@ -13,7 +14,6 @@ namespace FindIt.GUI
         public static UITagsWindow instance;
         
         public UITextField input;
-        private UIDragHandle m_dragHandle;
 
         private UIComponent m_tagSprite;
 
@@ -23,22 +23,24 @@ namespace FindIt.GUI
 
         private const float spacing = 5f;
 
+        public UIDropDown tagDropDownMenu;
+        public List<KeyValuePair<string, int>> customTagList;
+        public string[] customTagListStrArray;
+
+        public UIButton tagDropDownAddButton;
+
         public override void Start()
         {
             name = "FindIt_TagsWindow";
             atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericPanelWhite";
-            size = new Vector2(300, 180);
+            size = new Vector2(300, 280);
 
             UILabel title = AddUIComponent<UILabel>();
             title.text = "Custom Tags";
             title.textScale = 0.9f;
             title.textColor = new Color32(0, 0, 0, 255);
             title.relativePosition = new Vector3(spacing, spacing);
-
-            m_dragHandle = AddUIComponent<UIDragHandle>();
-            m_dragHandle.target = parent;
-            m_dragHandle.relativePosition = Vector3.zero;
 
             UIButton close = AddUIComponent<UIButton>();
             close.size = new Vector2(30f, 30f);
@@ -59,23 +61,49 @@ namespace FindIt.GUI
             };
 
             m_tagsPanel = AddUIComponent<UIPanel>();
-            m_tagsPanel.size = new Vector2(width - 2 * spacing, height - 50);
-
+            m_tagsPanel.size = new Vector2(width - 2 * spacing, height - 70);
             m_tagsPanel.autoFitChildrenVertically = true;
             m_tagsPanel.autoLayout = true;
             m_tagsPanel.autoLayoutDirection = LayoutDirection.Horizontal;
             m_tagsPanel.autoLayoutPadding = new RectOffset(0, 0, 0, 0);
             m_tagsPanel.autoLayoutStart = LayoutStart.TopLeft;
             m_tagsPanel.wrapLayout = true;
-
             m_tagsPanel.relativePosition = new Vector3(spacing, title.relativePosition.y + title.height + spacing);
+
+
+            // tag dropdown
+            tagDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
+            tagDropDownMenu.normalBgSprite = "TextFieldPanelHovered";
+            tagDropDownMenu.size = new Vector2(width - 2 * spacing - 50, 30);
+            tagDropDownMenu.tooltip = "Use mouse wheel to scroll up/down";
+            tagDropDownMenu.listHeight = 210;
+            tagDropDownMenu.itemHeight = 30;
+            tagDropDownMenu.relativePosition = new Vector3(spacing, m_tagsPanel.relativePosition.y + m_tagsPanel.height + spacing*6);
+            UpdateCustomTagList();
+           
+            // tag dropdown add button
+            tagDropDownAddButton = SamsamTS.UIUtils.CreateButton(this);
+            tagDropDownAddButton.size = new Vector2(35, 30);
+            tagDropDownAddButton.text = "+";
+            tagDropDownAddButton.tooltip = "Tag this asset with an existing tag";
+            tagDropDownAddButton.relativePosition = new Vector3(spacing + tagDropDownMenu.width + 5, m_tagsPanel.relativePosition.y + m_tagsPanel.height + spacing * 6);
+            tagDropDownAddButton.eventClick += (c, p) =>
+            {
+                if (customTagListStrArray.Length == 0) return;
+                string newTag = GetDropDownListKey();
+                if (!m_asset.tagsCustom.Contains(newTag))
+                {
+                    AssetTagList.instance.AddCustomTags(m_asset, newTag);
+                }
+                Display(m_asset);
+            };
 
             input = SamsamTS.UIUtils.CreateTextField(this);
             input.size = new Vector2(width - 2 * spacing, 30);
             input.padding.top = 7;
-            input.relativePosition = new Vector3(spacing, height - input.height - spacing);
+            input.tooltip = "Press enter to add new tag(s)";
+            input.relativePosition = new Vector3(spacing, tagDropDownMenu.relativePosition.y + tagDropDownMenu.height + spacing + 400);
             input.submitOnFocusLost = false;
-
             input.eventTextSubmitted += (c, t) =>
             {
                 AssetTagList.instance.AddCustomTags(m_asset, t);
@@ -177,9 +205,10 @@ namespace FindIt.GUI
                 m_tagSprite.isVisible = true;
             }
 
-            height = m_tagsPanel.relativePosition.y + m_tagsPanel.height + 2 * spacing + input.height + spacing;
-            m_dragHandle.size = size;
-            input.relativePosition = new Vector3(spacing, height - input.height - spacing);
+            height = m_tagsPanel.relativePosition.y + m_tagsPanel.height + 6 * spacing + tagDropDownMenu.height + spacing + input.height + spacing;
+            tagDropDownMenu.relativePosition = new Vector3(spacing, m_tagsPanel.relativePosition.y + m_tagsPanel.height + spacing*6);
+            tagDropDownAddButton.relativePosition = new Vector3(spacing + tagDropDownMenu.width + 5, m_tagsPanel.relativePosition.y + m_tagsPanel.height + spacing * 6);
+            input.relativePosition = new Vector3(spacing, tagDropDownMenu.relativePosition.y + tagDropDownMenu.height + spacing);
 
             input.text = "";
             input.Focus();
@@ -202,6 +231,27 @@ namespace FindIt.GUI
                 input.text = "";
                 input.Unfocus();
             }
+        }
+
+        // Update custom tag list 
+        private void UpdateCustomTagList()
+        {
+            customTagList = AssetTagList.instance.GetCustomTagList();
+
+            List<string> list = new List<string>();
+
+            foreach (KeyValuePair<string, int> entry in customTagList)
+            {
+                list.Add(entry.Key.ToString() + " (" + entry.Value.ToString() + ")");
+            }
+
+            customTagListStrArray = list.ToArray();
+            tagDropDownMenu.items = customTagListStrArray;
+            tagDropDownMenu.selectedIndex = 0;
+        }
+        public string GetDropDownListKey()
+        {
+            return customTagList[tagDropDownMenu.selectedIndex].Key;
         }
     }
 }

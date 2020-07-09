@@ -32,6 +32,10 @@ namespace FindIt.GUI
             tagDropDownCheckBox.relativePosition = new Vector3(10, 10);
             tagDropDownCheckBox.eventCheckChanged += (c, i) =>
             {
+                if(customTagListStrArray.Length == 0)
+                {
+                    tagDropDownCheckBox.isChecked = false;
+                }
                 ((UISearchBox)parent).Search();
             };
 
@@ -74,6 +78,7 @@ namespace FindIt.GUI
             renameButton.relativePosition = new Vector3(refreshButton.relativePosition.x + refreshButton.width + 5, 5);
             renameButton.eventClick += (c, p) =>
             {
+                if (customTagListStrArray.Length == 0) return;
                 RenameTag();
                 UpdateCustomTagList();
                 ((UISearchBox)parent).Search();
@@ -88,20 +93,19 @@ namespace FindIt.GUI
             deleteButton.relativePosition = new Vector3(renameButton.relativePosition.x + renameButton.width + 5, 5);
             deleteButton.eventClick += (c, p) =>
             {
-                DeleteTag();
-                UpdateCustomTagList();
-                if (customTagListStrArray.Length == 0)
+                if (customTagListStrArray.Length != 0)
                 {
-                    tagDropDownCheckBox.isChecked = false;
-                    ((UISearchBox)parent).Search();
+                    DeleteTag();
                 }
+                UpdateCustomTagList();
             };
         }
 
         // Update custom tag list 
-        private void UpdateCustomTagList()
+        public void UpdateCustomTagList()
         {
             customTagList = AssetTagList.instance.GetCustomTagList();
+
             List<string> list = new List<string>();
 
             foreach (KeyValuePair<string, int> entry in customTagList)
@@ -110,9 +114,13 @@ namespace FindIt.GUI
             }
 
             customTagListStrArray = list.ToArray();
-
             tagDropDownMenu.items = customTagListStrArray;
             tagDropDownMenu.selectedIndex = 0;
+
+            if (customTagListStrArray.Length == 0)
+            {
+                tagDropDownCheckBox.isChecked = false;
+            }
         }
 
         public string GetDropDownListKey()
