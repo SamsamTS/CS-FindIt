@@ -13,11 +13,11 @@ namespace FindIt.GUI
 
         public UICheckBox tagDropDownCheckBox;
         public UIDropDown tagDropDownMenu;
-        public UIButton refreshButton;
-        public UIButton renameButton;
-        public UIButton deleteButton;
+        private UIButton refreshButton;
+        private UIButton renameButton;
+        private UIButton deleteButton;
 
-        public List<KeyValuePair<string, int>> customTagList;
+        private List<KeyValuePair<string, int>> customTagList;
         public string[] customTagListStrArray;
 
         public override void Start()
@@ -78,10 +78,14 @@ namespace FindIt.GUI
             renameButton.relativePosition = new Vector3(refreshButton.relativePosition.x + refreshButton.width + 5, 5);
             renameButton.eventClick += (c, p) =>
             {
-                if (customTagListStrArray.Length == 0) return;
-                RenameTag();
-                UpdateCustomTagList();
-                ((UISearchBox)parent).Search();
+                if (customTagListStrArray.Length != 0)
+                {
+                    UITagsRenamePopUp.ShowAt(renameButton, GetDropDownListKey());
+                }
+                else
+                {
+                    Debugging.Message("Custom tag rename button pressed, but no custom tag exists");
+                }
             };
 
             // delete button 
@@ -95,7 +99,11 @@ namespace FindIt.GUI
             {
                 if (customTagListStrArray.Length != 0)
                 {
-                    UITagsDeletePopUp.ShowAt(deleteButton);
+                    UITagsDeletePopUp.ShowAt(deleteButton, GetDropDownListKey());
+                }
+                else
+                {
+                    Debugging.Message("Custom tag delete button pressed, but no custom tag exists");
                 }
             };
         }
@@ -126,38 +134,6 @@ namespace FindIt.GUI
         {
             return customTagList[tagDropDownMenu.selectedIndex].Key;
         }
-
-        // delete a tag and remove it from all tagged assets
-        public void DeleteTag()
-        {
-            string tag = GetDropDownListKey();
-
-            foreach (Asset asset in AssetTagList.instance.assets.Values)
-            {
-                if (!asset.tagsCustom.Contains(tag)) continue;
-
-                // remove tag
-                AssetTagList.instance.RemoveCustomTag(asset, tag);
-            }
-        }
-
-        // rename or a tag or combine it with another tag
-        private void RenameTag()
-        {
-            string tag = GetDropDownListKey();
-            string newTag = tag;
-
-            foreach (Asset asset in AssetTagList.instance.assets.Values)
-            {
-                if (!asset.tagsCustom.Contains(tag)) continue;
-
-                // remove tag
-                AssetTagList.instance.RemoveCustomTag(asset, tag);
-
-                // add new tag
-                if (asset.tagsCustom.Contains(newTag)) continue;
-                AssetTagList.instance.AddCustomTags(asset, newTag);
-            }
-        }
+        
     }
 }

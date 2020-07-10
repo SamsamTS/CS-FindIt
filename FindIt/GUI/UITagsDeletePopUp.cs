@@ -2,10 +2,7 @@
 // https://github.com/SamsamTS/CS-FindIt
 
 using UnityEngine;
-
 using ColossalFramework.UI;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace FindIt.GUI
 {
@@ -16,8 +13,9 @@ namespace FindIt.GUI
 
         private const float spacing = 5f;
 
-        public UIButton yesButton;
-        public UIButton noButton;
+        private UIButton yesButton;
+        private UIButton noButton;
+        private string tagToDelete;
 
         public override void Start()
         {
@@ -42,7 +40,7 @@ namespace FindIt.GUI
             yesButton.relativePosition = new Vector3(spacing, message.relativePosition.y + message.height + spacing * 2);
             yesButton.eventClick += (c, p) =>
             {
-                ((UIFilterTag)m_button.parent).DeleteTag();
+                DeleteTag(tagToDelete);
                 ((UIFilterTag)m_button.parent).UpdateCustomTagList();
                 Close();
             };
@@ -50,20 +48,18 @@ namespace FindIt.GUI
             noButton = SamsamTS.UIUtils.CreateButton(this);
             noButton.size = new Vector2(60, 45);
             noButton.text = "No";
-            noButton.relativePosition = new Vector3(yesButton.relativePosition.x + yesButton.width + spacing*2, message.relativePosition.y + message.height + spacing * 2);
+            noButton.relativePosition = new Vector3(yesButton.relativePosition.x + yesButton.width + spacing*2, yesButton.relativePosition.y);
             noButton.eventClick += (c, p) =>
             {
                 Close();
             };
-
         }
 
-        public static void Close()
+        private static void Close()
         {
             if (instance != null)
             {
                 UIView.PopModal();
-
                 instance.isVisible = false;
                 Destroy(instance.gameObject);
                 instance = null;
@@ -81,7 +77,7 @@ namespace FindIt.GUI
             base.OnKeyDown(p);
         }
 
-        public static void ShowAt(UIComponent component)
+        public static void ShowAt(UIComponent component, string tag)
         {
             if (instance == null)
             {
@@ -95,6 +91,19 @@ namespace FindIt.GUI
                 instance.m_button = component;
                 instance.Show(true);
             }
+            instance.tagToDelete = tag;
+        }
+
+        // delete a tag and remove it from all tagged assets
+        public void DeleteTag(string tag)
+        {
+            foreach (Asset asset in AssetTagList.instance.assets.Values)
+            {
+                if (!asset.tagsCustom.Contains(tag)) continue;
+                // remove tag
+                AssetTagList.instance.RemoveCustomTag(asset, tag);
+            }
+            Debugging.Message("Custom tag: " + tag + " deleted");
         }
     }
 }

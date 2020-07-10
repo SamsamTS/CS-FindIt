@@ -2,7 +2,6 @@
 // https://github.com/SamsamTS/CS-FindIt
 
 using UnityEngine;
-
 using ColossalFramework.UI;
 using System.Linq;
 using System.Collections.Generic;
@@ -23,11 +22,11 @@ namespace FindIt.GUI
 
         private const float spacing = 5f;
 
-        public UIDropDown tagDropDownMenu;
-        public List<KeyValuePair<string, int>> customTagList;
-        public string[] customTagListStrArray;
+        private UIDropDown tagDropDownMenu;
+        private List<KeyValuePair<string, int>> customTagList;
+        private string[] customTagListStrArray;
 
-        public UIButton tagDropDownAddButton;
+        private UIButton tagDropDownAddButton;
 
         public override void Start()
         {
@@ -85,7 +84,7 @@ namespace FindIt.GUI
             tagDropDownAddButton = SamsamTS.UIUtils.CreateButton(this);
             tagDropDownAddButton.size = new Vector2(35, 30);
             tagDropDownAddButton.text = "+";
-            tagDropDownAddButton.tooltip = "Tag this asset with an existing tag";
+            tagDropDownAddButton.tooltip = "Add an existing tag to this asset";
             tagDropDownAddButton.relativePosition = new Vector3(spacing + tagDropDownMenu.width + 5, m_tagsPanel.relativePosition.y + m_tagsPanel.height + spacing * 6);
             tagDropDownAddButton.eventClick += (c, p) =>
             {
@@ -102,7 +101,7 @@ namespace FindIt.GUI
             input.size = new Vector2(width - 2 * spacing, 30);
             input.padding.top = 7;
             input.tooltip = "Press enter to add new tag(s)";
-            input.relativePosition = new Vector3(spacing, tagDropDownMenu.relativePosition.y + tagDropDownMenu.height + spacing + 400);
+            input.relativePosition = new Vector3(spacing, tagDropDownMenu.relativePosition.y + tagDropDownMenu.height + spacing);
             input.submitOnFocusLost = false;
             input.eventTextSubmitted += (c, t) =>
             {
@@ -113,7 +112,7 @@ namespace FindIt.GUI
             Display(m_asset);
         }
 
-        public static void Close()
+        private static void Close()
         {
             if (instance != null)
             {
@@ -158,7 +157,7 @@ namespace FindIt.GUI
             }
         }
 
-        public void Display(Asset asset)
+        private void Display(Asset asset)
         {
             if (asset == null) return;
 
@@ -249,7 +248,7 @@ namespace FindIt.GUI
             tagDropDownMenu.items = customTagListStrArray;
             tagDropDownMenu.selectedIndex = 0;
         }
-        public string GetDropDownListKey()
+        private string GetDropDownListKey()
         {
             return customTagList[tagDropDownMenu.selectedIndex].Key;
         }

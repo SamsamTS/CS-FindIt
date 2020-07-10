@@ -71,6 +71,7 @@
     <Compile Include="GUI\UIFastList.cs" />
     <Compile Include="GUI\UISearchBox.cs" />
     <Compile Include="GUI\UITag.cs" />
+    <Compile Include="GUI\UITagRenamePopUp.cs" />
     <Compile Include="GUI\UITagsDeletePopUp.cs" />
     <Compile Include="GUI\UITagsWindow.cs" />
     <Compile Include="GUI\UIUtils.cs" />
