@@ -38,7 +38,7 @@ namespace FindIt.GUI
             title.relativePosition = new Vector3(spacing, spacing);
 
             UILabel message = AddUIComponent<UILabel>();
-            message.text = "\nType a new tag name then press Enter.\nThis cannot be undone.";
+            message.text = "\nType a new tag name then press Enter.\n ";
             message.textColor = new Color32(0, 0, 0, 255);
             message.relativePosition = new Vector3(spacing, spacing + title.height + spacing);
 
@@ -63,6 +63,7 @@ namespace FindIt.GUI
                     newTagNameLabel.textColor = new Color32(255, 0, 0, 255);
                     return;
                 }
+
                 newTagNameLabel.textColor = new Color32(0, 0, 0, 255);
                 newTagNameLabel.text = "New Tag Name: " + newTagName;
             };
@@ -83,6 +84,12 @@ namespace FindIt.GUI
                 if (newTagName == "")
                 {
                     newTagNameLabel.text = "Please enter a new tag name";
+                    newTagNameLabel.textColor = new Color32(255, 0, 0, 255);
+                    return;
+                }
+
+                if (AssetTagList.instance.tagsCustomDictionary.ContainsKey(newTagName)){
+                    newTagNameLabel.text = "This tag already exists";
                     newTagNameLabel.textColor = new Color32(255, 0, 0, 255);
                     return;
                 }

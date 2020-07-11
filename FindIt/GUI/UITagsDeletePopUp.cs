@@ -13,8 +13,8 @@ namespace FindIt.GUI
 
         private const float spacing = 5f;
 
-        private UIButton yesButton;
-        private UIButton noButton;
+        private UIButton confirmButton;
+        private UIButton cancelButton;
         private string tagToDelete;
 
         public override void Start()
@@ -22,7 +22,7 @@ namespace FindIt.GUI
             name = "FindIt_TagsWindow";
             atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericPanelWhite";
-            size = new Vector2(400, 150);
+            size = new Vector2(400, 145);
 
             UILabel title = AddUIComponent<UILabel>();
             title.text = "Delete";
@@ -34,22 +34,22 @@ namespace FindIt.GUI
             message.textColor = new Color32(0, 0, 0, 255);
             message.relativePosition = new Vector3(spacing, spacing + title.height + spacing);
 
-            yesButton = SamsamTS.UIUtils.CreateButton(this);
-            yesButton.size = new Vector2(60, 45);
-            yesButton.text = "Yes";
-            yesButton.relativePosition = new Vector3(spacing, message.relativePosition.y + message.height + spacing * 2);
-            yesButton.eventClick += (c, p) =>
+            confirmButton = SamsamTS.UIUtils.CreateButton(this);
+            confirmButton.size = new Vector2(75, 40);
+            confirmButton.text = "Confirm";
+            confirmButton.relativePosition = new Vector3(spacing, message.relativePosition.y + message.height + spacing * 2);
+            confirmButton.eventClick += (c, p) =>
             {
                 DeleteTag(tagToDelete);
                 ((UIFilterTag)m_button.parent).UpdateCustomTagList();
                 Close();
             };
 
-            noButton = SamsamTS.UIUtils.CreateButton(this);
-            noButton.size = new Vector2(60, 45);
-            noButton.text = "No";
-            noButton.relativePosition = new Vector3(yesButton.relativePosition.x + yesButton.width + spacing*2, yesButton.relativePosition.y);
-            noButton.eventClick += (c, p) =>
+            cancelButton = SamsamTS.UIUtils.CreateButton(this);
+            cancelButton.size = new Vector2(75, 40);
+            cancelButton.text = "Cancel";
+            cancelButton.relativePosition = new Vector3(confirmButton.relativePosition.x + confirmButton.width + spacing*2, confirmButton.relativePosition.y);
+            cancelButton.eventClick += (c, p) =>
             {
                 Close();
             };
