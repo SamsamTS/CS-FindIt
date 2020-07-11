@@ -25,7 +25,7 @@ namespace FindIt.GUI
             size = new Vector2(400, 150);
 
             UILabel title = AddUIComponent<UILabel>();
-            title.text = "Delete Tag";
+            title.text = "Delete";
             title.textColor = new Color32(0, 0, 0, 255);
             title.relativePosition = new Vector3(spacing, spacing);
 

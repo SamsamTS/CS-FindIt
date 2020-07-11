@@ -15,6 +15,7 @@ namespace FindIt.GUI
         public UIDropDown tagDropDownMenu;
         private UIButton refreshButton;
         private UIButton renameButton;
+        private UIButton combineButton;
         private UIButton deleteButton;
 
         private List<KeyValuePair<string, int>> customTagList;
@@ -88,13 +89,32 @@ namespace FindIt.GUI
                 }
             };
 
+            // combine button 
+            combineButton = SamsamTS.UIUtils.CreateButton(this);
+            combineButton.size = new Vector2(80, 25);
+            combineButton.text = "Combine";
+            combineButton.textScale = 0.8f;
+            combineButton.tooltip = "Combine this tag to another tag";
+            combineButton.relativePosition = new Vector3(renameButton.relativePosition.x + renameButton.width + 5, 5);
+            combineButton.eventClick += (c, p) =>
+            {
+                if (customTagListStrArray.Length != 0)
+                {
+                    UITagsCombinePopUp.ShowAt(combineButton, GetDropDownListKey());
+                }
+                else
+                {
+                    Debugging.Message("Custom tag combine button pressed, but no custom tag exists");
+                }
+            };
+
             // delete button 
             deleteButton = SamsamTS.UIUtils.CreateButton(this);
             deleteButton.size = new Vector2(80, 25);
             deleteButton.text = "Delete";
             deleteButton.textScale = 0.8f;
             deleteButton.tooltip = "Delete this tag";
-            deleteButton.relativePosition = new Vector3(renameButton.relativePosition.x + renameButton.width + 5, 5);
+            deleteButton.relativePosition = new Vector3(combineButton.relativePosition.x + combineButton.width + 5, 5);
             deleteButton.eventClick += (c, p) =>
             {
                 if (customTagListStrArray.Length != 0)

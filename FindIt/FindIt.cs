@@ -97,7 +97,7 @@ namespace FindIt
                 };
                 if (!locale.Exists(key))
                 {
-                    locale.AddLocalizedString(key, "Find It! " + ModInfo.version);
+                    locale.AddLocalizedString(key, "Find It! 2 " + ModInfo.version);
                 }
                 key = new Locale.Key
                 {
@@ -106,7 +106,7 @@ namespace FindIt
                 };
                 if (!locale.Exists(key))
                 {
-                    locale.AddLocalizedString(key, "Thanks for subscribing to Find It! Fix [Test].\n\nStart typing some keywords into the input field to find the desired asset.\n\nThis mod is still under developing/testing.\n\nCheck the workshop page occasionally for new features or bug reports.");
+                    locale.AddLocalizedString(key, "Thanks for subscribing to Find It! 2 [Test].\n\nStart typing some keywords into the input field to find the desired asset.\n\nThis mod is still under developing/testing.\n\nCheck the workshop page occasionally for new features or bug reports.");
                 }
 
                 FieldInfo m_ObjectIndex = typeof(MainToolbar).GetField("m_ObjectIndex", BindingFlags.Instance | BindingFlags.NonPublic);
@@ -175,7 +175,7 @@ namespace FindIt
                 mainButton.pressedFgSprite = "FindItPressed";
                 mainButton.disabledFgSprite = "FindItDisabled";
 
-                mainButton.tooltip = "Find It! " + ModInfo.version;
+                mainButton.tooltip = "Find It! 2 " + ModInfo.version;
 
                 m_beautificationPanel = FindObjectOfType<BeautificationPanel>();
 

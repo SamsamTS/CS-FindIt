@@ -28,12 +28,15 @@ namespace FindIt.GUI
 
         private UIButton tagDropDownAddButton;
 
+        private UILabel tagDropDownMenuMessage;
+        private UILabel inputMessage;
+
         public override void Start()
         {
             name = "FindIt_TagsWindow";
             atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericPanelWhite";
-            size = new Vector2(300, 280);
+            size = new Vector2(320, 300);
 
             UILabel title = AddUIComponent<UILabel>();
             title.text = "Custom Tags";
@@ -70,6 +73,12 @@ namespace FindIt.GUI
             m_tagsPanel.relativePosition = new Vector3(spacing, title.relativePosition.y + title.height + spacing);
 
 
+            tagDropDownMenuMessage = AddUIComponent<UILabel>();
+            tagDropDownMenuMessage.text = "Add an existing tag to this asset:";
+            tagDropDownMenuMessage.textScale = 0.9f;
+            tagDropDownMenuMessage.textColor = new Color32(0, 0, 0, 255);
+            tagDropDownMenuMessage.relativePosition = new Vector3(spacing, m_tagsPanel.relativePosition.y+m_tagsPanel.height + spacing * 6);
+
             // tag dropdown
             tagDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
             tagDropDownMenu.normalBgSprite = "TextFieldPanelHovered";
@@ -77,7 +86,7 @@ namespace FindIt.GUI
             tagDropDownMenu.tooltip = "Use mouse wheel to scroll up/down";
             tagDropDownMenu.listHeight = 210;
             tagDropDownMenu.itemHeight = 30;
-            tagDropDownMenu.relativePosition = new Vector3(spacing, m_tagsPanel.relativePosition.y + m_tagsPanel.height + spacing*6);
+            tagDropDownMenu.relativePosition = new Vector3(spacing, tagDropDownMenuMessage.relativePosition.y + tagDropDownMenuMessage.height + spacing);
             UpdateCustomTagList();
            
             // tag dropdown add button
@@ -85,7 +94,7 @@ namespace FindIt.GUI
             tagDropDownAddButton.size = new Vector2(35, 30);
             tagDropDownAddButton.text = "+";
             tagDropDownAddButton.tooltip = "Add an existing tag to this asset";
-            tagDropDownAddButton.relativePosition = new Vector3(spacing + tagDropDownMenu.width + 5, m_tagsPanel.relativePosition.y + m_tagsPanel.height + spacing * 6);
+            tagDropDownAddButton.relativePosition = new Vector3(spacing + tagDropDownMenu.width + 5, tagDropDownMenu.relativePosition.y);
             tagDropDownAddButton.eventClick += (c, p) =>
             {
                 if (customTagListStrArray.Length == 0) return;
@@ -97,11 +106,17 @@ namespace FindIt.GUI
                 Display(m_asset);
             };
 
+            inputMessage = AddUIComponent<UILabel>();
+            inputMessage.text = "Or\nType new tag name and press Enter:";
+            inputMessage.textScale = 0.9f;
+            inputMessage.textColor = new Color32(0, 0, 0, 255);
+            inputMessage.relativePosition = new Vector3(spacing, tagDropDownMenu.relativePosition.y + tagDropDownMenu.height + spacing*2);
+
             input = SamsamTS.UIUtils.CreateTextField(this);
             input.size = new Vector2(width - 2 * spacing, 30);
             input.padding.top = 7;
             input.tooltip = "Press enter to add new tag(s)";
-            input.relativePosition = new Vector3(spacing, tagDropDownMenu.relativePosition.y + tagDropDownMenu.height + spacing);
+            input.relativePosition = new Vector3(spacing, inputMessage.relativePosition.y + inputMessage.height + spacing);
             input.submitOnFocusLost = false;
             input.eventTextSubmitted += (c, t) =>
             {
@@ -204,10 +219,12 @@ namespace FindIt.GUI
                 m_tagSprite.isVisible = true;
             }
 
-            height = m_tagsPanel.relativePosition.y + m_tagsPanel.height + 6 * spacing + tagDropDownMenu.height + spacing + input.height + spacing;
-            tagDropDownMenu.relativePosition = new Vector3(spacing, m_tagsPanel.relativePosition.y + m_tagsPanel.height + spacing*6);
-            tagDropDownAddButton.relativePosition = new Vector3(spacing + tagDropDownMenu.width + 5, m_tagsPanel.relativePosition.y + m_tagsPanel.height + spacing * 6);
-            input.relativePosition = new Vector3(spacing, tagDropDownMenu.relativePosition.y + tagDropDownMenu.height + spacing);
+            height = m_tagsPanel.relativePosition.y + m_tagsPanel.height + 6 * spacing + tagDropDownMenuMessage.height + spacing + tagDropDownMenu.height + spacing*2 + inputMessage.height + spacing + input.height + spacing;
+            tagDropDownMenuMessage.relativePosition = new Vector3(spacing, m_tagsPanel.relativePosition.y + m_tagsPanel.height + spacing * 6);
+            tagDropDownMenu.relativePosition = new Vector3(spacing, tagDropDownMenuMessage.relativePosition.y + tagDropDownMenuMessage.height + spacing);
+            tagDropDownAddButton.relativePosition = new Vector3(spacing + tagDropDownMenu.width + 5, tagDropDownMenu.relativePosition.y);
+            inputMessage.relativePosition = new Vector3(spacing, tagDropDownMenu.relativePosition.y + tagDropDownMenu.height + spacing*2);
+            input.relativePosition = new Vector3(spacing, inputMessage.relativePosition.y + inputMessage.height + spacing);
 
             input.text = "";
             input.Focus();

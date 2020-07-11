@@ -18,11 +18,9 @@ namespace FindIt.GUI
         private UIButton cancelButton;
         private UITextField newTagInput;
 
-        private UIDropDown tagDropDownMenu;
         private List<KeyValuePair<string, int>> customTagList;
         private string[] customTagListStrArray;
 
-        private UIButton tagDropDownAddButton;
         private UILabel newTagNameLabel;
         private string oldTagName;
         private string newTagName;
@@ -32,15 +30,15 @@ namespace FindIt.GUI
             name = "FindIt_TagsWindow";
             atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericPanelWhite";
-            size = new Vector2(380, 270);
+            size = new Vector2(380, 210);
 
             UILabel title = AddUIComponent<UILabel>();
-            title.text = "Rename/Combine";
+            title.text = "Rename";
             title.textColor = new Color32(0, 0, 0, 255);
             title.relativePosition = new Vector3(spacing, spacing);
 
             UILabel message = AddUIComponent<UILabel>();
-            message.text = "\nEnter the new tag name,\nor choose an existing tag to combine with.\nThis cannot be undone.";
+            message.text = "\nType a new tag name then press Enter.\nThis cannot be undone.";
             message.textColor = new Color32(0, 0, 0, 255);
             message.relativePosition = new Vector3(spacing, spacing + title.height + spacing);
 
@@ -58,28 +56,14 @@ namespace FindIt.GUI
                 {
                     newTagName = tagsArr[0];
                 }
-                newTagNameLabel.text = "New Tag Name: " + newTagName;
-            };
 
-            // tag dropdown
-            tagDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
-            tagDropDownMenu.normalBgSprite = "TextFieldPanelHovered";
-            tagDropDownMenu.size = new Vector2(width - 2 * spacing - 50, 30);
-            tagDropDownMenu.tooltip = "Use mouse wheel to scroll up/down";
-            tagDropDownMenu.listHeight = 210;
-            tagDropDownMenu.itemHeight = 30;
-            tagDropDownMenu.relativePosition = new Vector3(spacing, newTagInput.relativePosition.y + newTagInput.height + spacing * 2);
-            UpdateCustomTagList();
-
-            // tag dropdown combine button
-            tagDropDownAddButton = SamsamTS.UIUtils.CreateButton(this);
-            tagDropDownAddButton.size = new Vector2(40, 30);
-            tagDropDownAddButton.text = "Use";
-            tagDropDownAddButton.tooltip = "Combine to this existing tag";
-            tagDropDownAddButton.relativePosition = new Vector3(spacing + tagDropDownMenu.width + 5, tagDropDownMenu.relativePosition.y);
-            tagDropDownAddButton.eventClick += (c, p) =>
-            {
-                newTagName = GetDropDownListKey();
+                if (newTagName == "")
+                {
+                    newTagNameLabel.text = "Please enter a new tag name";
+                    newTagNameLabel.textColor = new Color32(255, 0, 0, 255);
+                    return;
+                }
+                newTagNameLabel.textColor = new Color32(0, 0, 0, 255);
                 newTagNameLabel.text = "New Tag Name: " + newTagName;
             };
 
@@ -87,8 +71,8 @@ namespace FindIt.GUI
             newTagNameLabel = AddUIComponent<UILabel>();
             newTagNameLabel.size = new Vector2(200, 50);
             newTagNameLabel.textColor = new Color32(0, 0, 0, 255);
-            newTagNameLabel.text = "New Tag Name: " + oldTagName;
-            newTagNameLabel.relativePosition = new Vector3(spacing, tagDropDownMenu.relativePosition.y + tagDropDownMenu.height + spacing * 2);
+            newTagNameLabel.text = "New Tag Name: ";
+            newTagNameLabel.relativePosition = new Vector3(spacing, newTagInput.relativePosition.y + newTagInput.height + spacing * 2);
 
             confirmButton = SamsamTS.UIUtils.CreateButton(this);
             confirmButton.size = new Vector2(75, 40);
@@ -96,6 +80,13 @@ namespace FindIt.GUI
             confirmButton.relativePosition = new Vector3(spacing, newTagNameLabel.relativePosition.y + newTagNameLabel.height + spacing * 3);
             confirmButton.eventClick += (c, p) =>
             {
+                if (newTagName == "")
+                {
+                    newTagNameLabel.text = "Please enter a new tag name";
+                    newTagNameLabel.textColor = new Color32(255, 0, 0, 255);
+                    return;
+                }
+
                 RenameTag(oldTagName, newTagName);
                 ((UIFilterTag)m_button.parent).UpdateCustomTagList();
                 Close();
@@ -151,6 +142,7 @@ namespace FindIt.GUI
             }
 
             instance.oldTagName = currentTag;
+            instance.newTagName = "";
         }
 
         private void UpdateCustomTagList()
@@ -165,12 +157,6 @@ namespace FindIt.GUI
             }
 
             customTagListStrArray = list.ToArray();
-            tagDropDownMenu.items = customTagListStrArray;
-            tagDropDownMenu.selectedIndex = 0;
-        }
-        private string GetDropDownListKey()
-        {
-            return customTagList[tagDropDownMenu.selectedIndex].Key;
         }
 
         // rename or a tag or combine it with another tag
