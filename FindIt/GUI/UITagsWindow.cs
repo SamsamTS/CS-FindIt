@@ -107,7 +107,7 @@ namespace FindIt.GUI
             };
 
             inputMessage = AddUIComponent<UILabel>();
-            inputMessage.text = "Or\nType new tag name and press Enter:";
+            inputMessage.text = "Or\nType a new tag name and press Enter:";
             inputMessage.textScale = 0.9f;
             inputMessage.textColor = new Color32(0, 0, 0, 255);
             inputMessage.relativePosition = new Vector3(spacing, tagDropDownMenu.relativePosition.y + tagDropDownMenu.height + spacing*2);

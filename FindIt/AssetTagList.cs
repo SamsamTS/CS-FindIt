@@ -998,8 +998,16 @@ namespace FindIt
         {
             List<KeyValuePair<string, int>> list = tagsCustomDictionary.ToList();
 
-            // sort list
-            list = list.OrderByDescending(s => s.Value).ToList();
+            // sort list by number of assets in each tag
+            if (!Settings.customTagListSort)
+            {
+                list = list.OrderByDescending(s => s.Value).ToList();
+            }
+            // sort list alphabetically
+            else
+            {
+                list = list.OrderBy(s => s.Key).ToList();
+            }
 
             return list;
         }
