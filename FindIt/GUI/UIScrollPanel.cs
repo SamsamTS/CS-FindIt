@@ -337,7 +337,7 @@ namespace FindIt.GUI
                         m_steamSprite.isVisible = data.asset.steamID != 0;
                         if (!data.asset.author.IsNullOrWhiteSpace())
                         {
-                            m_steamSprite.tooltip = "By " + data.asset.author;
+                            m_steamSprite.tooltip = "By " + data.asset.author + "\nRight click to view this asset on Steam Workshop";
                         }
                     }
 
