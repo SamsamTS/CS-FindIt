@@ -18,6 +18,10 @@ namespace FindIt
 
         internal static bool fixBadProps = false;
 
+        // false = sort by number of assets in each tag.
+        // true = sort alphabetically
+        internal static bool customTagListSort = false;
+
         internal static KeyBinding searchKey = new KeyBinding { keyCode = (int)KeyCode.F, control = true, shift = false, alt = false };
 
 

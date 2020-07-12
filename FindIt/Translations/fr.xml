@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Language UniqueName="fr" ReadableName="Français">
+  <Translations>
+    <Translation ID="FIF_DESC" String="Trouvez et organisez vos actifs" />
+    <Translation ID="FIF_SET_DM" String="Désactiver la journalisation des messages de débogage" />
+    <Translation ID="FIF_SET_DMTP" String="Si coché, les messages de débogage ne seront pas enregistrés." />
+    <Translation ID="FIF_SET_CMT" String="Centrer la barre d'outils principale" />
+    <Translation ID="FIF_SET_CMTTP" String="La barre d'outils principale sera centrée si elle dépasse une certaine longueur." />
+    <Translation ID="FIF_SET_UL" String="Débloquer tout" />
+    <Translation ID="FIF_SET_ULTP" String="Vous permet de sélectionner et de placer des éléments même lorsqu'ils sont verrouillés." />
+    <Translation ID="FIF_SET_BP" String="Correction des mauvais accessoires lors de la prochaine sauvegarde" />
+    <Translation ID="FIF_SET_BPTP" String="Supprimez tous les accessoires à l'origine du problème \  Cochez l'option et chargez votre sauvegarde" />
+    <Translation ID="FIF_SE_WF" String="Custom" />
+    <Translation ID="FIF_SE_VF" String="Vanilla" />
+    <Translation ID="FIF_SE_IA" String="Tout" />
+    <Translation ID="FIF_SE_IN" String="Réseau" />
+    <Translation ID="FIF_SE_IP" String="Ploppable" />
+    <Translation ID="FIF_SE_IG" String="Growable" />
+    <Translation ID="FIF_SE_IR" String="RICO" />
+    <Translation ID="FIF_SE_IPR" String="Objet" />
+    <Translation ID="FIF_SE_ID" String="Decal" />
+    <Translation ID="FIF_SE_IT" String="Arbre" />
+    <Translation ID="FIF_SE_LV" String="Level:" />
+    <Translation ID="FIF_SE_SZ" String="Size:" />
+    <Translation ID="FIF_SE_SC" String="Maintenez SHIFT ou CTRL pour sélectionner plusieurs catégories" />
+    <Translation ID="FIF_PLOP_E" String="Électricité" />
+    <Translation ID="FIF_PLOP_W" String="Eau / eaux usées" />
+    <Translation ID="FIF_PLOP_G" String="Poubelles" />
+    <Translation ID="FIF_PLOP_H" String="Soins de santé" />
+    <Translation ID="FIF_PLOP_F" String="Pompiers" />
+    <Translation ID="FIF_PLOP_P" String="Police" />
+    <Translation ID="FIF_PLOP_ED" String="Éducation" />
+    <Translation ID="FIF_PLOP_PT" String="Transport public" />
+    <Translation ID="FIF_PLOP_PPW" String="Parc / Place / Faune" />
+    <Translation ID="FIF_PLOP_U" String="Bâtiments uniques" />
+    <Translation ID="FIF_PLOP_I" String="Industrie" />
+    <Translation ID="FIF_PLOP_D" String="Catastrophe" />
+    <Translation ID="FIF_PLOP_C" String="Campus" />
+    <Translation ID="FIF_PLOP_V" String="Sports universitaires" />
+    <Translation ID="FIF_PLOP_FI" String="Pêche" />
+    <Translation ID="FIF_GR_LDR" String="Résidentiel à faible densité" />
+    <Translation ID="FIF_GR_HDR" String="Résidentiel haute densité" />
+    <Translation ID="FIF_GR_LDRE" String="ECO résidentiel à faible densité" />
+    <Translation ID="FIF_GR_HDRE" String="ECO résidentiel haute densité" />
+    <Translation ID="FIF_GR_LDC" String="Commercial à faible densité" />
+    <Translation ID="FIF_GR_HDC" String="Commercial haute densité" />
+    <Translation ID="FIF_GR_CE" String="ECO commercial" />
+    <Translation ID="FIF_GR_O" String="Bureau" />
+    <Translation ID="FIF_GR_ITC" String="Spécialisation informatique" />
+    <Translation ID="FIF_GR_GI" String="Industrie générique" />
+    <Translation ID="FIF_GR_FAI" String="L'industrie agricole" />
+    <Translation ID="FIF_GR_FOI" String="L'industrie forestière" />
+    <Translation ID="FIF_GR_OII" String="Industrie pétrolière" />
+    <Translation ID="FIF_GR_ORI" String="L'industrie du minerai" />
+    <Translation ID="FIF_GR_LC" String="Loisirs Commerciaux" />
+    <Translation ID="FIF_GR_TC" String="Tourisme commercial" />
+    <Translation ID="FIF_SO_RETP" String="Trier par pertinence. Identique à l'original Find It" />
+    <Translation ID="FIF_SO_NETP" String="Trier par le dernier téléchargement" />
+    <Translation ID="FIF_SO_RE" String="Pertinence" />
+    <Translation ID="FIF_SO_NE" String="New Assets" />
+    <Translation ID="TRN_CHOICE" String="Définir la langue" />
+    <Translation ID="TRN_SYS" String="Utiliser la langue du système" />
+    <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
+
+  </Translations>
+</Language>

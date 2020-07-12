@@ -2,7 +2,6 @@
 <Language UniqueName="en" ReadableName="English">
   <Translations>
     <Translation ID="FIF_DESC" String="Find and organize your assets" />
-    <!--Settings-->
     <Translation ID="FIF_SET_DM" String="Disable debug messages logging" />
     <Translation ID="FIF_SET_DMTP" String="If checked, debug messages won't be logged" />
     <Translation ID="FIF_SET_CMT" String="Center the main toolbar" />
@@ -11,11 +10,6 @@
     <Translation ID="FIF_SET_ULTP" String="Let you select and place items even when locked" />
     <Translation ID="FIF_SET_BP" String="Fix bad props next loaded save" />
     <Translation ID="FIF_SET_BPTP" String="Remove all props causing issue. Check the option and load your save" />
-    <Translation ID="FIF_SET_KS" String="Keyboard Shortcut" />
-    <Translation ID="FIF_SET_CTFL" String="Custom Tags File Location (Remember to back up this file periodically)" />
-    <Translation ID="FIF_SET_CTFOP" String="Show in File Explorer" />
-
-    <!--Search Bar-->
     <Translation ID="FIF_SE_WF" String="Custom" />
     <Translation ID="FIF_SE_VF" String="Vanilla" />
     <Translation ID="FIF_SE_IA" String="All" />
@@ -23,13 +17,12 @@
     <Translation ID="FIF_SE_IP" String="Ploppable" />
     <Translation ID="FIF_SE_IG" String="Growable" />
     <Translation ID="FIF_SE_IR" String="RICO" />
-    <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
     <Translation ID="FIF_SE_IPR" String="Prop" />
     <Translation ID="FIF_SE_ID" String="Decal" />
     <Translation ID="FIF_SE_IT" String="Tree" />
     <Translation ID="FIF_SE_LV" String="Level: " />
     <Translation ID="FIF_SE_SZ" String="Size: " />
-    <!--Ploppable-->
+    <Translation ID="FIF_SE_SC" String="Hold SHIFT or CTRL to select multiple categories" />
     <Translation ID="FIF_PLOP_E" String="Electricity" />
     <Translation ID="FIF_PLOP_W" String="Water/Sewage" />
     <Translation ID="FIF_PLOP_G" String="Garbage" />
@@ -45,7 +38,6 @@
     <Translation ID="FIF_PLOP_C" String="Campus" />
     <Translation ID="FIF_PLOP_V" String="Varsity Sports" />
     <Translation ID="FIF_PLOP_FI" String="Fishing" />
-    <!--Growable-->
     <Translation ID="FIF_GR_LDR" String="Low Density Residential" />
     <Translation ID="FIF_GR_HDR" String="High Density Residential" />
     <Translation ID="FIF_GR_LDRE" String="Low Density Residential ECO" />,
@@ -62,7 +54,12 @@
     <Translation ID="FIF_GR_ORI" String="Ore Industry" />
     <Translation ID="FIF_GR_LC" String="Leisure Commercial" />
     <Translation ID="FIF_GR_TC" String="Tourism Commercial" />
-    <!--Prop-->
+    <Translation ID="FIF_SO_RETP" String="Sort by relevance. Same as original Find It" />
+    <Translation ID="FIF_SO_NETP" String="Sort by most recently downloaded" />
+    <Translation ID="FIF_SO_RE" String="Relevance" />
+    <Translation ID="FIF_SO_NE" String="New Assets" />
+    <Translation ID="TRN_CHOICE" String="Set language (will be effective next time)" />
+    <Translation ID="TRN_SYS" String="Use system language" />
     <Translation ID="FIF_PROP_IND" String="Industrial" />
     <Translation ID="FIF_PROP_PAR" String="Parks" />
     <Translation ID="FIF_PROP_COM" String="Common" />
@@ -72,15 +69,46 @@
     <Translation ID="FIF_PROP_LIG" String="Lights" />
     <Translation ID="FIF_PROP_NAT" String="Natural" />
     <Translation ID="FIF_PROP_UNS" String="Unsorted" />
-    <!--Tooltip-->
-    <Translation ID="FIF_SE_SC" String="Hold SHIFT or CTRL to select multiple categories" />
-    <Translation ID="FIF_SO_RETP" String="Sort by relevance. Same as original Find It" />
-    <Translation ID="FIF_SO_NETP" String="Sort by most recently downloaded" />
-    <Translation ID="FIF_SO_RE" String="Relevance" />
-    <Translation ID="FIF_SO_NE" String="New Assets" />
-    <!--Settings-->
-    <Translation ID="TRN_CHOICE" String="Set language (will be effective next time)" />
-    <Translation ID="TRN_SYS" String="Use system language" />
+    <Translation ID="FIF_SET_KS" String="Keyboard Shortcut" />
+    <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
+    <Translation ID="FIF_SET_CTFL" String="Custom Tags File Location (Remember to back up this file periodically)" />
+    <Translation ID="FIF_SET_CTFOP" String="Show in File Explorer" />
+    <Translation ID="FIF_SE_SCTP" String="Show custom tag panel" />
+    <Translation ID="FIF_POP_SCR" String="Use mouse wheel to scroll up/down" />
+    <Translation ID="FIF_POP_CON" String="Confirm" />
+    <Translation ID="FIF_POP_CAN" String="Cancel" />
+    <Translation ID="FIF_POP_NU" String="This cannot be undone." />
+    <Translation ID="FIF_CO_TIT" String="Combine" />
+    <Translation ID="FIF_CO_MSG" String="Choose an existing tag to combine with." />
+    <Translation ID="FIF_CO_CH" String="Choose" />
+    <Translation ID="FIF_CO_CHTP" String="Combine with this existing tag" />
+    <Translation ID="FIF_CO_CHLBL" String="Combine with: " />
+    <Translation ID="FIF_CO_NELBL" String="Please choose an existing tag" />
+    <Translation ID="FIF_DE_TIT" String="Delete" />
+    <Translation ID="FIF_DE_MSG" String="Are you sure you want to delete this tag?" />
+    <Translation ID="FIF_RE_TIT" String="Rename" />
+    <Translation ID="FIF_RE_MSG" String="Type a new tag name and press Enter." />
+    <Translation ID="FIF_RE_ITP" String="Press enter to submit new tag name" />
+    <Translation ID="FIF_RE_ELBL" String="Please enter a new tag name" />
+    <Translation ID="FIF_RE_NEWLBL" String="New Tag Name: " />
+    <Translation ID="FIF_RE_SLBL" String="This tag name is too short" />
+    <Translation ID="FIF_RE_AELBL" String="This tag already exists" />
+    <Translation ID="FIF_CT_TIT" String="Custom Tags" />
+    <Translation ID="FIF_CT_DDMSG" String="Add an existing tag to this asset:" />
+    <Translation ID="FIF_CT_DDTP" String="Add an existing tag to this asset" />
+    <Translation ID="FIF_CT_ILBL1" String="Or" />
+    <Translation ID="FIF_CT_ILBL2" String="Type a new tag name and press Enter:" />
+    <Translation ID="FIF_CT_ITP" String="Press enter to add new tag(s)" />
+    <Translation ID="FIF_SET_CTLS" String="Sort custom tag list alphabetically" />
+    <Translation ID="FIF_TAG_DDTP" String="Only show assets with this tag" />
+    <Translation ID="FIF_TAG_REF" String="Refresh" />
+    <Translation ID="FIF_TAG_REFTP" String="Refresh custom tag drop-down list" />
+    <Translation ID="FIF_TAG_REN" String="Rename" />
+    <Translation ID="FIF_TAG_RENTP" String="Rename this tag" />
+    <Translation ID="FIF_TAG_COM" String="Combine" />
+    <Translation ID="FIF_TAG_COMTP" String="Combine this tag to another tag" />
+    <Translation ID="FIF_TAG_DEL" String="Delete" />
+    <Translation ID="FIF_TAG_DELTP" String="Delete this tag" />
 
   </Translations>
 </Language>

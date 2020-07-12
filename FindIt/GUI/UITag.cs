@@ -2,9 +2,7 @@
 // https://github.com/SamsamTS/CS-FindIt
 
 using UnityEngine;
-
 using ColossalFramework.UI;
-
 
 namespace FindIt.GUI
 {
@@ -42,7 +40,7 @@ namespace FindIt.GUI
             {
                 AssetTagList.instance.RemoveCustomTag(asset, text);
                 isVisible = false;
-                UITagsWindow.instance.input.Focus();
+                //UITagsWindow.instance.input.Focus();
                 UITagsWindow.instance.Refresh(asset);
             };
         }

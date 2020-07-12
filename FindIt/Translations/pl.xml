@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Language UniqueName="pl" ReadableName="polski">
+  <Translations>
+    <Translation ID="FIF_DESC" String="Szukaj i organizuj przedmioty" />
+    <Translation ID="FIF_SET_DM" String="Wyłącz logowanie błędów (debug)" />
+    <Translation ID="FIF_SET_DMTP" String="Jeśli zaznaczone, błędy nie będą logowane (debug)" />
+    <Translation ID="FIF_SET_CMT" String="Wyśrodkuj główny pasek narzędzi" />
+    <Translation ID="FIF_SET_CMTTP" String="Pasek narzędzi będzie wyśrodkowany przy określonej długości" />
+    <Translation ID="FIF_SET_UL" String="Odblokuj wszystkie" />
+    <Translation ID="FIF_SET_ULTP" String="Wybierz i umieść także zablokowane elementy." />
+    <Translation ID="FIF_SET_BP" String="Napraw uszkodzone przy kolejnym wczytaniu zapisu" />
+    <Translation ID="FIF_SET_BPTP" String="Usuwa wszystkie elementy prop z błędami\nZaznacz i wczytaj zapisaną grę." />
+    <Translation ID="FIF_SE_WF" String="Custom" />
+    <Translation ID="FIF_SE_VF" String="Vanilla" />
+    <Translation ID="FIF_SE_IA" String="All" />
+    <Translation ID="FIF_SE_IN" String="Sieci" />
+    <Translation ID="FIF_SE_IP" String="Ploppable" />
+    <Translation ID="FIF_SE_IG" String="Growable" />
+    <Translation ID="FIF_SE_IR" String="RICO" />
+    <Translation ID="FIF_SE_IPR" String="Prop" />
+    <Translation ID="FIF_SE_ID" String="Decal" />
+    <Translation ID="FIF_SE_IT" String="Drzewo" />
+    <Translation ID="FIF_SE_LV" String="Level:" />
+    <Translation ID="FIF_SE_SZ" String="Size:" />
+    <Translation ID="FIF_SE_SC" String="Przytrzymaj SHIFT lub CTRL, aby wybrać wiele kategorii" />
+    <Translation ID="FIF_PLOP_E" String="Elektryczność" />
+    <Translation ID="FIF_PLOP_W" String="Woda/ścieki" />
+    <Translation ID="FIF_PLOP_G" String="Śmieci" />
+    <Translation ID="FIF_PLOP_H" String="Opieka zdrowotna" />
+    <Translation ID="FIF_PLOP_F" String="Straż pożarna" />
+    <Translation ID="FIF_PLOP_P" String="Policja" />
+    <Translation ID="FIF_PLOP_ED" String="Edukacja" />
+    <Translation ID="FIF_PLOP_PT" String="Transport publiczny" />
+    <Translation ID="FIF_PLOP_PPW" String="Parki, skwery, natura" />
+    <Translation ID="FIF_PLOP_U" String="Budynki unikatowe" />
+    <Translation ID="FIF_PLOP_I" String="Przemysł" />
+    <Translation ID="FIF_PLOP_D" String="Kataklizm" />
+    <Translation ID="FIF_PLOP_C" String="Uczelnia" />
+    <Translation ID="FIF_PLOP_V" String="Sporty uniwersyteckie" />
+    <Translation ID="FIF_PLOP_FI" String="Rybołóstwo" />
+    <Translation ID="FIF_GR_LDR" String="Rejon mieszkalny o małym zagęszczeniu" />
+    <Translation ID="FIF_GR_HDR" String="Rejon mieszkalny o dużym zagęszczeniu" />
+    <Translation ID="FIF_GR_LDRE" String="Ekologiczny rejon mieszk. o małym zag." />
+    <Translation ID="FIF_GR_HDRE" String="Ekologiczny rejon mieszk. o dużym zag." />
+    <Translation ID="FIF_GR_LDC" String="Rejon handlowy o małym zagęszczeniu" />
+    <Translation ID="FIF_GR_HDC" String="Rejon handlowy o dużym zagęszczeniu" />
+    <Translation ID="FIF_GR_CE" String="Ekologiczny rejon handlowy" />
+    <Translation ID="FIF_GR_O" String="Biura" />
+    <Translation ID="FIF_GR_ITC" String="Inkubator technologiczny" />
+    <Translation ID="FIF_GR_GI" String="Przemysł ogólny" />
+    <Translation ID="FIF_GR_FAI" String="Przemysł rolniczy" />
+    <Translation ID="FIF_GR_FOI" String="Przemysł leśny" />
+    <Translation ID="FIF_GR_OII" String="Przemysł naftowy" />
+    <Translation ID="FIF_GR_ORI" String="Przemysł wydobywczy" />
+    <Translation ID="FIF_GR_LC" String="Rejon handlowy o specjalności rozrywkowej" />
+    <Translation ID="FIF_GR_TC" String="Rejon handlowy o specjalności turystycznej" />
+    <Translation ID="FIF_SO_RETP" String="Sortuj wg dopasowania (jak w oryg. Find It)" />
+    <Translation ID="FIF_SO_NETP" String="Sortuj wg ostatnio ściągniętych" />
+    <Translation ID="FIF_SO_RE" String="Relevance" />
+    <Translation ID="FIF_SO_NE" String="New Assets" />
+    <Translation ID="TRN_SYS" String="Użyj języka systemu" />
+    <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
+
+  </Translations>
+</Language>

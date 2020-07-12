@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Language UniqueName="es" ReadableName="español">
+  <Translations>
+    <Translation ID="FIF_DESC" String="Encuentra y organiza tus assets" />
+    <Translation ID="FIF_SET_DM" String="Desactivar registro de mensajes de depuración" />
+    <Translation ID="FIF_SET_DMTP" String="Si esta activado, los mensajes de depuración no se registrarán." />
+    <Translation ID="FIF_SET_CMT" String="Centrar la barra de herramientas" />
+    <Translation ID="FIF_SET_CMTTP" String="La barra de herramientas se centrará si excede una cierta longitud" />
+    <Translation ID="FIF_SET_UL" String="Desbloquear todo" />
+    <Translation ID="FIF_SET_ULTP" String="Permite seleccionar y colocar elementos aún cuando estén bloqueados" />
+    <Translation ID="FIF_SET_BP" String="Reparar props dañados en la próxima partida" />
+    <Translation ID="FIF_SET_BPTP" String="Eliminar todos los props problemáticos\nActiva esta opción y carga tu partida" />
+    <Translation ID="FIF_SE_WF" String="Custom" />
+    <Translation ID="FIF_SE_VF" String="Vanilla" />
+    <Translation ID="FIF_SE_IA" String="Todo" />
+    <Translation ID="FIF_SE_IN" String="Network" />
+    <Translation ID="FIF_SE_IP" String="Ploppable" />
+    <Translation ID="FIF_SE_IG" String="Growable" />
+    <Translation ID="FIF_SE_IR" String="RICO" />
+    <Translation ID="FIF_SE_IPR" String="Prop" />
+    <Translation ID="FIF_SE_ID" String="Decal" />
+    <Translation ID="FIF_SE_IT" String="Árboles" />
+    <Translation ID="FIF_SE_LV" String="Nivel:" />
+    <Translation ID="FIF_SE_SZ" String="Size:" />
+    <Translation ID="FIF_SE_SC" String="Mantén SHIFT o CTRL para seleccionar múltiples categorías" />
+    <Translation ID="FIF_PLOP_E" String="Electricidad" />
+    <Translation ID="FIF_PLOP_W" String="Agua/Drenaje" />
+    <Translation ID="FIF_PLOP_G" String="Basura" />
+    <Translation ID="FIF_PLOP_H" String="Salud" />
+    <Translation ID="FIF_PLOP_F" String="Bomberos" />
+    <Translation ID="FIF_PLOP_P" String="Policia" />
+    <Translation ID="FIF_PLOP_ED" String="Educación" />
+    <Translation ID="FIF_PLOP_PT" String="Transporte Público" />
+    <Translation ID="FIF_PLOP_PPW" String="Parques/Plazas/Vida Salvaje" />
+    <Translation ID="FIF_PLOP_U" String="Edificios Únicos" />
+    <Translation ID="FIF_PLOP_I" String="Industria" />
+    <Translation ID="FIF_PLOP_D" String="Desastres" />
+    <Translation ID="FIF_PLOP_C" String="Campus" />
+    <Translation ID="FIF_PLOP_V" String="Deportes Universitarios" />
+    <Translation ID="FIF_PLOP_FI" String="Pesca" />
+    <Translation ID="FIF_GR_LDR" String="Residencial Baja Densidad" />
+    <Translation ID="FIF_GR_HDR" String="Residencial Alta Densidad" />
+    <Translation ID="FIF_GR_LDRE" String="Residencial Ecológico Baja Densidad" />
+    <Translation ID="FIF_GR_HDRE" String="Residencial Ecológico Alta Densidad" />
+    <Translation ID="FIF_GR_LDC" String="Comercial Baja Densidad" />
+    <Translation ID="FIF_GR_HDC" String="Comercial Alta Densidad" />
+    <Translation ID="FIF_GR_CE" String="Comercial Ecológico" />
+    <Translation ID="FIF_GR_O" String="Oficina" />
+    <Translation ID="FIF_GR_ITC" String="Grupo TI" />
+    <Translation ID="FIF_GR_GI" String="Industria Genérica" />
+    <Translation ID="FIF_GR_FAI" String="Industria Agrícola" />
+    <Translation ID="FIF_GR_FOI" String="Industria Forestal" />
+    <Translation ID="FIF_GR_OII" String="Industria Petrolera" />
+    <Translation ID="FIF_GR_ORI" String="Industria Minera" />
+    <Translation ID="FIF_GR_LC" String="Comercio de Ocio" />
+    <Translation ID="FIF_GR_TC" String="Comercio Turístico" />
+    <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
+
+  </Translations>
+</Language>

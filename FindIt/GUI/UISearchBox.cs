@@ -2,10 +2,8 @@
 // https://github.com/SamsamTS/CS-FindIt
 
 using UnityEngine;
-
 using ColossalFramework.DataBinding;
 using ColossalFramework.UI;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +31,9 @@ namespace FindIt.GUI
         public UICheckBox workshopFilter;
         public UICheckBox vanillaFilter;
         public UIButton sortButton;
+        public UICheckBox tagToolCheckBox;
+        public UIFilterTag tagPanel;
+        
 
         // true = sort by relevance
         // false = sort by most recently downloaded
@@ -51,6 +52,7 @@ namespace FindIt.GUI
             Tree
         }
 
+        // building filter sizes
         public string[] filterItemsGrowable = { Translations.Translate("FIF_SE_IA"), "1", "2", "3", "4"};
         public string[] filterItemsRICO = { Translations.Translate("FIF_SE_IA"), "1", "2", "3", "4", "5-8", "9-12", "13+"};
 
@@ -72,12 +74,14 @@ namespace FindIt.GUI
         {
             instance = this;
 
+            // panel for search input box, type filter and building filters
             inputPanel = AddUIComponent<UIPanel>();
             inputPanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             inputPanel.backgroundSprite = "GenericTab";
             inputPanel.size = new Vector2(300, 40);
             inputPanel.relativePosition = new Vector2(0, -inputPanel.height - 40);
 
+            // search input box
             input = SamsamTS.UIUtils.CreateTextField(inputPanel);
             input.size = new Vector2(inputPanel.width - 45, 30);
             input.padding.top = 7;
@@ -95,6 +99,7 @@ namespace FindIt.GUI
                 input.text = search;
             };
 
+            // search button
             searchButton = inputPanel.AddUIComponent<UIButton>();
             searchButton.size = new Vector2(43, 49);
             searchButton.atlas = FindIt.instance.mainButton.atlas;
@@ -110,6 +115,7 @@ namespace FindIt.GUI
                 input.SelectAll();
             };
 
+            // panel for type filters and building filters
             filterPanel = AddUIComponent<UIPanel>();
             filterPanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             filterPanel.backgroundSprite = "GenericTab";
@@ -155,7 +161,6 @@ namespace FindIt.GUI
                     Translations.Translate("FIF_SE_IT") // Tree
                 };
                 typeFilter.items = items;
-
             }
             else
             {
@@ -178,11 +183,12 @@ namespace FindIt.GUI
                 Search();
             };
             
+            // building filters panel
             buildingFilters = filterPanel.AddUIComponent<UIPanel>();
             buildingFilters.size = new Vector2(90, 35);
             buildingFilters.relativePosition = new Vector3(typeFilter.relativePosition.x + typeFilter.width, 0);
 
-            // Level
+            // building level filter
             UILabel levelLabel = buildingFilters.AddUIComponent<UILabel>();
             levelLabel.textScale = 0.8f;
             levelLabel.padding = new RectOffset(0, 0, 8, 0);
@@ -202,7 +208,7 @@ namespace FindIt.GUI
 
             levelFilter.eventSelectedIndexChanged += (c, i) => Search();
 
-            // Size
+            // building size filter
             UILabel sizeLabel = buildingFilters.AddUIComponent<UILabel>();
             sizeLabel.textScale = 0.8f;
             sizeLabel.padding = new RectOffset(0, 0, 8, 0);
@@ -215,26 +221,16 @@ namespace FindIt.GUI
             sizeFilterX.selectedIndex = 0;
             sizeFilterX.relativePosition = new Vector3(sizeLabel.relativePosition.x + sizeLabel.width + 5, 5);
 
-            /*
-            UILabel XLabel = buildingFilters.AddUIComponent<UILabel>();
-            XLabel.textScale = 0.8f;
-            XLabel.padding = new RectOffset(0, 0, 8, 0);
-            //XLabel.text = "X";
-            XLabel.text = " ";
-            XLabel.isVisible = false;
-            XLabel.relativePosition = new Vector3(sizeFilterX.relativePosition.x + sizeFilterX.width - 5, 5);
-            */
-
             sizeFilterY = SamsamTS.UIUtils.CreateDropDown(buildingFilters);
             sizeFilterY.size = new Vector2(55, 25);
             sizeFilterY.items = filterItemsGrowable;
             sizeFilterY.selectedIndex = 0;
-            //sizeFilterY.isVisible = false;
             sizeFilterY.relativePosition = new Vector3(sizeFilterX.relativePosition.x + sizeFilterX.width + 10, 5);
 
             sizeFilterX.eventSelectedIndexChanged += (c, i) => Search();
             sizeFilterY.eventSelectedIndexChanged += (c, i) => Search();
 
+            // panel of sort button and filter toggle tabs
             UIPanel panel = AddUIComponent<UIPanel>();
             panel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             panel.backgroundSprite = "GenericTabHovered";
@@ -263,6 +259,26 @@ namespace FindIt.GUI
                     sortButton.tooltip = Translations.Translate("FIF_SO_RETP");
                 }
                 Search();
+            };
+
+            // panel of custom tags
+            tagPanel = AddUIComponent<UIFilterTag>();
+            tagPanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
+            tagPanel.backgroundSprite = "GenericTab";
+            tagPanel.isVisible = false;
+            tagPanel.size = new Vector2(590, 35);
+            tagPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height - 40 - 5);
+
+            // custom tag panel visibility checkbox
+            tagToolCheckBox = SamsamTS.UIUtils.CreateCheckBox(panel);
+            tagToolCheckBox.isChecked = false;
+            tagToolCheckBox.width = 250;
+            tagToolCheckBox.label.text = Translations.Translate("FIF_SE_SCTP");
+            tagToolCheckBox.label.textScale = 0.8f;
+            tagToolCheckBox.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width+10, 15);
+            tagToolCheckBox.eventCheckChanged += (c, i) =>
+            {
+                UpdateTagPanel();
             };
 
             // ploppable filter tabs
@@ -348,6 +364,7 @@ namespace FindIt.GUI
                         HideFilterPanel(filterGrowable);
                         HideFilterPanel(filterProp);
                         HideBuildingFilters();
+                        tagToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterPloppable);
                         break;
                     case DropDownOptions.Rico:
@@ -355,6 +372,7 @@ namespace FindIt.GUI
                         sizeFilterY.items = filterItemsRICO;
                         HideFilterPanel(filterPloppable);
                         HideFilterPanel(filterProp);
+                        tagToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
@@ -363,6 +381,7 @@ namespace FindIt.GUI
                         sizeFilterY.items = filterItemsRICO;
                         HideFilterPanel(filterPloppable);
                         HideFilterPanel(filterProp);
+                        tagToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
@@ -371,6 +390,7 @@ namespace FindIt.GUI
                         sizeFilterY.items = filterItemsGrowable;
                         HideFilterPanel(filterPloppable);
                         HideFilterPanel(filterProp);
+                        tagToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
@@ -378,6 +398,7 @@ namespace FindIt.GUI
                         HideFilterPanel(filterGrowable);
                         HideFilterPanel(filterPloppable);
                         HideBuildingFilters();
+                        tagToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterProp);
                         break;
                     default: // All, Network, Tree
@@ -385,6 +406,7 @@ namespace FindIt.GUI
                         HideFilterPanel(filterGrowable);
                         HideFilterPanel(filterProp);
                         HideBuildingFilters();
+                        tagToolCheckBox.isVisible = true;
                         break;
                 }
             });
@@ -392,17 +414,11 @@ namespace FindIt.GUI
 
         public void ShowFilterPanel(UIPanel panel)
         {
-            //inputPanel.relativePosition = new Vector2(inputPanel.relativePosition.x, -inputPanel.height - 45);
-            //filterPanel.relativePosition = new Vector2(filterPanel.relativePosition.x, -filterPanel.height - 45);
-
             panel.isVisible = true;
         }
 
         public void HideFilterPanel(UIPanel panel)
         {
-            //inputPanel.relativePosition = new Vector2(inputPanel.relativePosition.x, -inputPanel.height);
-            //filterPanel.relativePosition = new Vector2(filterPanel.relativePosition.x, -filterPanel.height);
-
             panel.isVisible = false;
         }
 
@@ -416,6 +432,13 @@ namespace FindIt.GUI
         {
             buildingFilters.isVisible = false;
             UpdateBuildingFilters();
+        }
+
+        public void UpdateTagPanel()
+        {
+            tagPanel.isVisible = !tagPanel.isVisible;
+            if(!tagPanel.isVisible) tagPanel.tagDropDownCheckBox.isChecked = false;
+            tagPanel.UpdateCustomTagList();
         }
 
         public void Search()
@@ -474,6 +497,12 @@ namespace FindIt.GUI
 
                         // filter out vanilla asset. will not filter out content creater pack assets
                         if (!asset.prefab.m_isCustomContent && !vanillaFilter.isChecked && !asset.isCCPBuilding) continue;
+
+                        // filter out assets without matching custom tag
+                        if (tagPanel.tagDropDownCheckBox.isChecked && tagPanel.customTagListStrArray.Length > 0)
+                        {
+                            if (!asset.tagsCustom.Contains(tagPanel.GetDropDownListKey())) continue;
+                        }
                     }
 
                     UIScrollPanelItem.ItemData data = new UIScrollPanelItem.ItemData();
@@ -505,6 +534,5 @@ namespace FindIt.GUI
                 ToolsModifierControl.SetTool<DefaultTool>();
             }
         }
-
     }
 }
