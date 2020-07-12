@@ -109,6 +109,7 @@
     <Translation ID="FIF_TAG_COMTP" String="將此標籤合併到另一標籤" />
     <Translation ID="FIF_TAG_DEL" String="刪除" />
     <Translation ID="FIF_TAG_DELTP" String="刪除此標籤" />
+    <Translation ID="FIF_UIS_WS" String="右鍵點擊可在Steam工作坊查看此素材" />
 
   </Translations>
 </Language>

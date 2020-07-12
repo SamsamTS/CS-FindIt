@@ -109,6 +109,7 @@
     <Translation ID="FIF_TAG_COMTP" String="Combine this tag to another tag" />
     <Translation ID="FIF_TAG_DEL" String="Delete" />
     <Translation ID="FIF_TAG_DELTP" String="Delete this tag" />
+    <Translation ID="FIF_UIS_WS" String="Right click to view this asset on Steam Workshop" />
 
   </Translations>
 </Language>
