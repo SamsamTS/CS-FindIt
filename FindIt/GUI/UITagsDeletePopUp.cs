@@ -25,18 +25,18 @@ namespace FindIt.GUI
             size = new Vector2(400, 145);
 
             UILabel title = AddUIComponent<UILabel>();
-            title.text = "Delete";
+            title.text = Translations.Translate("FIF_DE_TIT");
             title.textColor = new Color32(0, 0, 0, 255);
             title.relativePosition = new Vector3(spacing, spacing);
 
             UILabel message = AddUIComponent<UILabel>();
-            message.text = "\nAre you sure you want to delete this tag?\nThis cannot be undone.";
+            message.text = "\n" + Translations.Translate("FIF_DE_MSG") + "\n" + Translations.Translate("FIF_POP_NU");
             message.textColor = new Color32(0, 0, 0, 255);
             message.relativePosition = new Vector3(spacing, spacing + title.height + spacing);
 
             confirmButton = SamsamTS.UIUtils.CreateButton(this);
-            confirmButton.size = new Vector2(75, 40);
-            confirmButton.text = "Confirm";
+            confirmButton.size = new Vector2(100, 40);
+            confirmButton.text = Translations.Translate("FIF_POP_CON");
             confirmButton.relativePosition = new Vector3(spacing, message.relativePosition.y + message.height + spacing * 2);
             confirmButton.eventClick += (c, p) =>
             {
@@ -46,9 +46,9 @@ namespace FindIt.GUI
             };
 
             cancelButton = SamsamTS.UIUtils.CreateButton(this);
-            cancelButton.size = new Vector2(75, 40);
-            cancelButton.text = "Cancel";
-            cancelButton.relativePosition = new Vector3(confirmButton.relativePosition.x + confirmButton.width + spacing*2, confirmButton.relativePosition.y);
+            cancelButton.size = new Vector2(100, 40);
+            cancelButton.text = Translations.Translate("FIF_POP_CAN");
+            cancelButton.relativePosition = new Vector3(confirmButton.relativePosition.x + confirmButton.width + spacing*4, confirmButton.relativePosition.y);
             cancelButton.eventClick += (c, p) =>
             {
                 Close();

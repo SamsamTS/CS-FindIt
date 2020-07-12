@@ -29,7 +29,7 @@ namespace FindIt.GUI
             tagDropDownCheckBox = SamsamTS.UIUtils.CreateCheckBox(this);
             tagDropDownCheckBox.isChecked = false;
             tagDropDownCheckBox.width = 20;
-            tagDropDownCheckBox.tooltip = "Only show assets with this tag";
+            tagDropDownCheckBox.tooltip = Translations.Translate("FIF_TAG_DDTP");
             tagDropDownCheckBox.relativePosition = new Vector3(10, 10);
             tagDropDownCheckBox.eventCheckChanged += (c, i) =>
             {
@@ -43,7 +43,7 @@ namespace FindIt.GUI
             // tag dropdown
             tagDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
             tagDropDownMenu.size = new Vector2(200, 25);
-            tagDropDownMenu.tooltip = "Use mouse wheel to scroll up/down";
+            tagDropDownMenu.tooltip = Translations.Translate("FIF_POP_SCR");
             tagDropDownMenu.listHeight = 210;
             tagDropDownMenu.itemHeight = 30;
             UpdateCustomTagList();
@@ -60,9 +60,9 @@ namespace FindIt.GUI
             // refresh button 
             refreshButton = SamsamTS.UIUtils.CreateButton(this);
             refreshButton.size = new Vector2(80, 25);
-            refreshButton.text = "Refresh";
+            refreshButton.text = Translations.Translate("FIF_TAG_REF");
             refreshButton.textScale = 0.8f;
-            refreshButton.tooltip = "Refresh custom tag drop-down list";
+            refreshButton.tooltip = Translations.Translate("FIF_TAG_REFTP");
             refreshButton.relativePosition = new Vector3(tagDropDownMenu.relativePosition.x + tagDropDownMenu.width + 5, 5);
             refreshButton.eventClick += (c, p) => 
             {
@@ -73,9 +73,9 @@ namespace FindIt.GUI
             // rename button 
             renameButton = SamsamTS.UIUtils.CreateButton(this);
             renameButton.size = new Vector2(80, 25);
-            renameButton.text = "Rename";
+            renameButton.text = Translations.Translate("FIF_TAG_REN");
             renameButton.textScale = 0.8f;
-            renameButton.tooltip = "Rename this tag";
+            renameButton.tooltip = Translations.Translate("FIF_TAG_RENTP");
             renameButton.relativePosition = new Vector3(refreshButton.relativePosition.x + refreshButton.width + 5, 5);
             renameButton.eventClick += (c, p) =>
             {
@@ -92,9 +92,9 @@ namespace FindIt.GUI
             // combine button 
             combineButton = SamsamTS.UIUtils.CreateButton(this);
             combineButton.size = new Vector2(80, 25);
-            combineButton.text = "Combine";
+            combineButton.text = Translations.Translate("FIF_TAG_COM");
             combineButton.textScale = 0.8f;
-            combineButton.tooltip = "Combine this tag to another tag";
+            combineButton.tooltip = Translations.Translate("FIF_TAG_COMTP");
             combineButton.relativePosition = new Vector3(renameButton.relativePosition.x + renameButton.width + 5, 5);
             combineButton.eventClick += (c, p) =>
             {
@@ -111,9 +111,9 @@ namespace FindIt.GUI
             // delete button 
             deleteButton = SamsamTS.UIUtils.CreateButton(this);
             deleteButton.size = new Vector2(80, 25);
-            deleteButton.text = "Delete";
+            deleteButton.text = Translations.Translate("FIF_TAG_DEL");
             deleteButton.textScale = 0.8f;
-            deleteButton.tooltip = "Delete this tag";
+            deleteButton.tooltip = Translations.Translate("FIF_TAG_DELTP");
             deleteButton.relativePosition = new Vector3(combineButton.relativePosition.x + combineButton.width + 5, 5);
             deleteButton.eventClick += (c, p) =>
             {

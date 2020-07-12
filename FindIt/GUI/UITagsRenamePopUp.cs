@@ -33,19 +33,19 @@ namespace FindIt.GUI
             size = new Vector2(380, 210);
 
             UILabel title = AddUIComponent<UILabel>();
-            title.text = "Rename";
+            title.text = Translations.Translate("FIF_RE_TIT");
             title.textColor = new Color32(0, 0, 0, 255);
             title.relativePosition = new Vector3(spacing, spacing);
 
             UILabel message = AddUIComponent<UILabel>();
-            message.text = "\nType a new tag name then press Enter.\n ";
+            message.text = "\n" + Translations.Translate("FIF_RE_MSG") + "\n";
             message.textColor = new Color32(0, 0, 0, 255);
             message.relativePosition = new Vector3(spacing, spacing + title.height + spacing);
 
             newTagInput = SamsamTS.UIUtils.CreateTextField(this);
             newTagInput.size = new Vector2(width - 2 * spacing, 30);
             newTagInput.padding.top = 7;
-            newTagInput.tooltip = "Press enter to submit new tag name";
+            newTagInput.tooltip = Translations.Translate("FIF_RE_ITP");
             newTagInput.relativePosition = new Vector3(spacing, message.relativePosition.y + message.height + spacing);
             newTagInput.submitOnFocusLost = false;
             newTagInput.eventTextSubmitted += (c, t) =>
@@ -59,37 +59,44 @@ namespace FindIt.GUI
 
                 if (newTagName == "")
                 {
-                    newTagNameLabel.text = "Please enter a new tag name";
+                    newTagNameLabel.text = Translations.Translate("FIF_RE_ELBL");
                     newTagNameLabel.textColor = new Color32(255, 0, 0, 255);
                     return;
                 }
 
                 newTagNameLabel.textColor = new Color32(0, 0, 0, 255);
-                newTagNameLabel.text = "New Tag Name: " + newTagName;
+                newTagNameLabel.text = Translations.Translate("FIF_RE_NEWLBL") + newTagName;
             };
 
             // display new tag name for confirmation
             newTagNameLabel = AddUIComponent<UILabel>();
             newTagNameLabel.size = new Vector2(200, 50);
             newTagNameLabel.textColor = new Color32(0, 0, 0, 255);
-            newTagNameLabel.text = "New Tag Name: ";
+            newTagNameLabel.text = Translations.Translate("FIF_RE_NEWLBL");
             newTagNameLabel.relativePosition = new Vector3(spacing, newTagInput.relativePosition.y + newTagInput.height + spacing * 2);
 
             confirmButton = SamsamTS.UIUtils.CreateButton(this);
-            confirmButton.size = new Vector2(75, 40);
-            confirmButton.text = "Confirm";
+            confirmButton.size = new Vector2(100, 40);
+            confirmButton.text = Translations.Translate("FIF_POP_CON");
             confirmButton.relativePosition = new Vector3(spacing, newTagNameLabel.relativePosition.y + newTagNameLabel.height + spacing * 3);
             confirmButton.eventClick += (c, p) =>
             {
                 if (newTagName == "")
                 {
-                    newTagNameLabel.text = "Please enter a new tag name";
+                    newTagNameLabel.text = Translations.Translate("FIF_RE_ELBL");
+                    newTagNameLabel.textColor = new Color32(255, 0, 0, 255);
+                    return;
+                }
+
+                if (newTagName.Length == 1)
+                {
+                    newTagNameLabel.text = Translations.Translate("FIF_RE_SLBL");
                     newTagNameLabel.textColor = new Color32(255, 0, 0, 255);
                     return;
                 }
 
                 if (AssetTagList.instance.tagsCustomDictionary.ContainsKey(newTagName)){
-                    newTagNameLabel.text = "This tag already exists";
+                    newTagNameLabel.text = Translations.Translate("FIF_RE_AELBL");
                     newTagNameLabel.textColor = new Color32(255, 0, 0, 255);
                     return;
                 }
@@ -100,9 +107,9 @@ namespace FindIt.GUI
             };
 
             cancelButton = SamsamTS.UIUtils.CreateButton(this);
-            cancelButton.size = new Vector2(75, 40);
-            cancelButton.text = "Cancel";
-            cancelButton.relativePosition = new Vector3(confirmButton.relativePosition.x + confirmButton.width + spacing * 2, confirmButton.relativePosition.y);
+            cancelButton.size = new Vector2(100, 40);
+            cancelButton.text = Translations.Translate("FIF_POP_CAN");
+            cancelButton.relativePosition = new Vector3(confirmButton.relativePosition.x + confirmButton.width + spacing * 4, confirmButton.relativePosition.y);
             cancelButton.eventClick += (c, p) =>
             {
                 Close();

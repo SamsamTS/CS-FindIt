@@ -134,9 +134,13 @@
     <Content Include="packages\Lib.Harmony.2.0.1\lib\netcoreapp3.0\0Harmony.xml" />
     <Content Include="packages\Lib.Harmony.2.0.1\lib\netcoreapp3.1\0Harmony.dll" />
     <Content Include="packages\Lib.Harmony.2.0.1\lib\netcoreapp3.1\0Harmony.xml" />
+    <Content Include="Translations\de.xml" />
     <Content Include="Translations\en.xml" />
+    <Content Include="Translations\es.xml" />
+    <Content Include="Translations\fr.xml" />
     <Content Include="Translations\ja.xml" />
     <Content Include="Translations\ko.xml" />
+    <Content Include="Translations\pl.xml" />
     <Content Include="Translations\ru.xml" />
     <Content Include="Translations\zh-tw.xml" />
     <Content Include="Translations\zh.xml" />

@@ -110,7 +110,7 @@ namespace FindIt
                 group.AddSpace(10);
 
                 // Sort custom tag list alphabetically. Default = sort by number of assets in each tag
-                UICheckBox customTagListSort = (UICheckBox)group.AddCheckbox("Sort custom tag list alphabetically", false, (b) =>
+                UICheckBox customTagListSort = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_CTLS"), false, (b) =>
                 {
                     Settings.customTagListSort = b;
                     XMLUtils.SaveSettings();

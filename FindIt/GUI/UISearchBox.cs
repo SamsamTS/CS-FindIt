@@ -273,7 +273,7 @@ namespace FindIt.GUI
             tagToolCheckBox = SamsamTS.UIUtils.CreateCheckBox(panel);
             tagToolCheckBox.isChecked = false;
             tagToolCheckBox.width = 250;
-            tagToolCheckBox.label.text = "Show Custom Tag Panel";
+            tagToolCheckBox.label.text = Translations.Translate("FIF_SE_SCTP");
             tagToolCheckBox.label.textScale = 0.8f;
             tagToolCheckBox.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width+10, 15);
             tagToolCheckBox.eventCheckChanged += (c, i) =>

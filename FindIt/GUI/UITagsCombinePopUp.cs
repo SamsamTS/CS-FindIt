@@ -34,12 +34,12 @@ namespace FindIt.GUI
             size = new Vector2(380, 220);
 
             UILabel title = AddUIComponent<UILabel>();
-            title.text = "Combine";
+            title.text = Translations.Translate("FIF_CO_TIT");
             title.textColor = new Color32(0, 0, 0, 255);
             title.relativePosition = new Vector3(spacing, spacing);
 
             UILabel message = AddUIComponent<UILabel>();
-            message.text = "\nChoose an existing tag to combine with.\nThis cannot be undone.";
+            message.text = "\n" + Translations.Translate("FIF_CO_MSG") + "\n" + Translations.Translate("FIF_POP_NU");
             message.textColor = new Color32(0, 0, 0, 255);
             message.relativePosition = new Vector3(spacing, spacing + title.height + spacing);
 
@@ -47,7 +47,7 @@ namespace FindIt.GUI
             tagDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
             tagDropDownMenu.normalBgSprite = "TextFieldPanelHovered";
             tagDropDownMenu.size = new Vector2(width - 2 * spacing - 100, 30);
-            tagDropDownMenu.tooltip = "Use mouse wheel to scroll up/down";
+            tagDropDownMenu.tooltip = Translations.Translate("FIF_POP_SCR");
             tagDropDownMenu.listHeight = 210;
             tagDropDownMenu.itemHeight = 30;
             tagDropDownMenu.relativePosition = new Vector3(spacing, message.relativePosition.y + message.height + spacing * 2);
@@ -56,14 +56,14 @@ namespace FindIt.GUI
             // tag dropdown combine button
             tagDropDownAddButton = SamsamTS.UIUtils.CreateButton(this);
             tagDropDownAddButton.size = new Vector2(80, 30);
-            tagDropDownAddButton.text = "Choose";
+            tagDropDownAddButton.text = Translations.Translate("FIF_CO_CH");
             tagDropDownAddButton.textScale = 0.8f;
-            tagDropDownAddButton.tooltip = "Combine with this existing tag";
+            tagDropDownAddButton.tooltip = Translations.Translate("FIF_CO_CHTP");
             tagDropDownAddButton.relativePosition = new Vector3(spacing + tagDropDownMenu.width + 5, tagDropDownMenu.relativePosition.y);
             tagDropDownAddButton.eventClick += (c, p) =>
             {
                 newTagName = GetDropDownListKey();
-                newTagNameLabel.text = "Combine with: " + newTagName;
+                newTagNameLabel.text = Translations.Translate("FIF_CO_CHLBL") + newTagName;
                 newTagNameLabel.textColor = new Color32(0, 0, 0, 255);
             };
 
@@ -71,18 +71,18 @@ namespace FindIt.GUI
             newTagNameLabel = AddUIComponent<UILabel>();
             newTagNameLabel.size = new Vector2(200, 50);
             newTagNameLabel.textColor = new Color32(0, 0, 0, 255);
-            newTagNameLabel.text = "Combine with: " + newTagName;
+            newTagNameLabel.text = Translations.Translate("FIF_CO_CHLBL") + newTagName;
             newTagNameLabel.relativePosition = new Vector3(spacing, tagDropDownMenu.relativePosition.y + tagDropDownMenu.height + spacing * 2);
 
             confirmButton = SamsamTS.UIUtils.CreateButton(this);
-            confirmButton.size = new Vector2(75, 40);
-            confirmButton.text = "Confirm";
+            confirmButton.size = new Vector2(100, 40);
+            confirmButton.text = Translations.Translate("FIF_POP_CON");
             confirmButton.relativePosition = new Vector3(spacing, newTagNameLabel.relativePosition.y + newTagNameLabel.height + spacing * 3);
             confirmButton.eventClick += (c, p) =>
             {
                 if (newTagName == "")
                 {
-                    newTagNameLabel.text = "Please choose an existing tag";
+                    newTagNameLabel.text = Translations.Translate("FIF_CO_NELBL");
                     newTagNameLabel.textColor = new Color32(255, 0, 0, 255);
                     return;
                 }
@@ -92,9 +92,9 @@ namespace FindIt.GUI
             };
 
             cancelButton = SamsamTS.UIUtils.CreateButton(this);
-            cancelButton.size = new Vector2(75, 40);
-            cancelButton.text = "Cancel";
-            cancelButton.relativePosition = new Vector3(confirmButton.relativePosition.x + confirmButton.width + spacing * 2, confirmButton.relativePosition.y);
+            cancelButton.size = new Vector2(100, 40);
+            cancelButton.text = Translations.Translate("FIF_POP_CAN");
+            cancelButton.relativePosition = new Vector3(confirmButton.relativePosition.x + confirmButton.width + spacing * 4, confirmButton.relativePosition.y);
             cancelButton.eventClick += (c, p) =>
             {
                 Close();

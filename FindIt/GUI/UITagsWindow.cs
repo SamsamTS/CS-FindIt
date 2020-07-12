@@ -39,7 +39,7 @@ namespace FindIt.GUI
             size = new Vector2(320, 300);
 
             UILabel title = AddUIComponent<UILabel>();
-            title.text = "Custom Tags";
+            title.text = Translations.Translate("FIF_CT_TIT");
             title.textScale = 0.9f;
             title.textColor = new Color32(0, 0, 0, 255);
             title.relativePosition = new Vector3(spacing, spacing);
@@ -74,7 +74,7 @@ namespace FindIt.GUI
 
 
             tagDropDownMenuMessage = AddUIComponent<UILabel>();
-            tagDropDownMenuMessage.text = "Add an existing tag to this asset:";
+            tagDropDownMenuMessage.text = Translations.Translate("FIF_CT_DDMSG");
             tagDropDownMenuMessage.textScale = 0.9f;
             tagDropDownMenuMessage.textColor = new Color32(0, 0, 0, 255);
             tagDropDownMenuMessage.relativePosition = new Vector3(spacing, m_tagsPanel.relativePosition.y+m_tagsPanel.height + spacing * 6);
@@ -83,7 +83,7 @@ namespace FindIt.GUI
             tagDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
             tagDropDownMenu.normalBgSprite = "TextFieldPanelHovered";
             tagDropDownMenu.size = new Vector2(width - 2 * spacing - 50, 30);
-            tagDropDownMenu.tooltip = "Use mouse wheel to scroll up/down";
+            tagDropDownMenu.tooltip = Translations.Translate("FIF_POP_SCR");
             tagDropDownMenu.listHeight = 210;
             tagDropDownMenu.itemHeight = 30;
             tagDropDownMenu.relativePosition = new Vector3(spacing, tagDropDownMenuMessage.relativePosition.y + tagDropDownMenuMessage.height + spacing);
@@ -93,7 +93,7 @@ namespace FindIt.GUI
             tagDropDownAddButton = SamsamTS.UIUtils.CreateButton(this);
             tagDropDownAddButton.size = new Vector2(35, 30);
             tagDropDownAddButton.text = "+";
-            tagDropDownAddButton.tooltip = "Add an existing tag to this asset";
+            tagDropDownAddButton.tooltip = Translations.Translate("FIF_CT_DDTP");
             tagDropDownAddButton.relativePosition = new Vector3(spacing + tagDropDownMenu.width + 5, tagDropDownMenu.relativePosition.y);
             tagDropDownAddButton.eventClick += (c, p) =>
             {
@@ -107,7 +107,7 @@ namespace FindIt.GUI
             };
 
             inputMessage = AddUIComponent<UILabel>();
-            inputMessage.text = "Or\nType a new tag name and press Enter:";
+            inputMessage.text = Translations.Translate("FIF_CT_ILBL1") + "\n" + Translations.Translate("FIF_CT_ILBL2");
             inputMessage.textScale = 0.9f;
             inputMessage.textColor = new Color32(0, 0, 0, 255);
             inputMessage.relativePosition = new Vector3(spacing, tagDropDownMenu.relativePosition.y + tagDropDownMenu.height + spacing*2);
@@ -115,7 +115,7 @@ namespace FindIt.GUI
             input = SamsamTS.UIUtils.CreateTextField(this);
             input.size = new Vector2(width - 2 * spacing, 30);
             input.padding.top = 7;
-            input.tooltip = "Press enter to add new tag(s)";
+            input.tooltip = Translations.Translate("FIF_CT_ITP");
             input.relativePosition = new Vector3(spacing, inputMessage.relativePosition.y + inputMessage.height + spacing);
             input.submitOnFocusLost = false;
             input.eventTextSubmitted += (c, t) =>
