@@ -23,6 +23,8 @@ Implemented and planned be included in the next release:
 -- Rename tags  
 -- Combine tags  
 -- Delete tags  
+- Add Tree size filter tabs
+
 - Add language support: Deutsch, polski, español, Français. (not fully translated yet)
 
 - Add tooltip message to the workshop icon. Not a new feature, just a reminder. You can open an asset's workshop page by right-clicking the icon.
