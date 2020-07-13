@@ -27,6 +27,7 @@ namespace FindIt.GUI
         public UIFilterGrowable filterGrowable;
         public UIFilterPloppable filterPloppable;
         public UIFilterProp filterProp;
+        public UIFilterTree filterTree;
 
         public UICheckBox workshopFilter;
         public UICheckBox vanillaFilter;
@@ -304,6 +305,13 @@ namespace FindIt.GUI
 
             filterProp.eventFilteringChanged += (c, p) => Search();
 
+            // tree filter tabs
+            filterTree = panel.AddUIComponent<UIFilterTree>();
+            filterTree.isVisible = false;
+            filterTree.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
+
+            filterTree.eventFilteringChanged += (c, p) => Search();
+
             UpdateFilterPanels();
 
             size = Vector2.zero;
@@ -363,6 +371,7 @@ namespace FindIt.GUI
                     case DropDownOptions.Ploppable:
                         HideFilterPanel(filterGrowable);
                         HideFilterPanel(filterProp);
+                        HideFilterPanel(filterTree);
                         HideBuildingFilters();
                         tagToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterPloppable);
@@ -372,6 +381,7 @@ namespace FindIt.GUI
                         sizeFilterY.items = filterItemsRICO;
                         HideFilterPanel(filterPloppable);
                         HideFilterPanel(filterProp);
+                        HideFilterPanel(filterTree);
                         tagToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
@@ -381,6 +391,7 @@ namespace FindIt.GUI
                         sizeFilterY.items = filterItemsRICO;
                         HideFilterPanel(filterPloppable);
                         HideFilterPanel(filterProp);
+                        HideFilterPanel(filterTree);
                         tagToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
@@ -390,6 +401,7 @@ namespace FindIt.GUI
                         sizeFilterY.items = filterItemsGrowable;
                         HideFilterPanel(filterPloppable);
                         HideFilterPanel(filterProp);
+                        HideFilterPanel(filterTree);
                         tagToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
@@ -398,13 +410,23 @@ namespace FindIt.GUI
                         HideFilterPanel(filterGrowable);
                         HideFilterPanel(filterPloppable);
                         HideBuildingFilters();
+                        HideFilterPanel(filterTree);
                         tagToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterProp);
                         break;
-                    default: // All, Network, Tree
+                    case DropDownOptions.Tree:
+                        HideFilterPanel(filterGrowable);
+                        HideFilterPanel(filterPloppable);
+                        HideBuildingFilters();
+                        HideFilterPanel(filterProp);
+                        tagToolCheckBox.isVisible = false;
+                        ShowFilterPanel(filterTree);
+                        break;
+                    default: // All, Network
                         HideFilterPanel(filterPloppable);
                         HideFilterPanel(filterGrowable);
                         HideFilterPanel(filterProp);
+                        HideFilterPanel(filterTree);
                         HideBuildingFilters();
                         tagToolCheckBox.isVisible = true;
                         break;
