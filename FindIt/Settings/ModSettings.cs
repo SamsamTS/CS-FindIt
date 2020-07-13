@@ -70,6 +70,9 @@ namespace FindIt
         [XmlElement("FixBadProps")]
         public bool FixBadProps { get => Settings.fixBadProps; set => Settings.fixBadProps = value; }
 
+        [XmlElement("customTagListSort")]
+        public bool CustomTagListSort { get => Settings.customTagListSort; set => Settings.customTagListSort = value; }
+
         [XmlElement("SearchKey")]
         public KeyBinding SearchKey { get => Settings.searchKey; set => Settings.searchKey = value; }
 

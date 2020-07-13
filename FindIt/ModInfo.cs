@@ -13,7 +13,7 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "1.6.8-alpha3";
+        public const string version = "1.6.8-alpha4";
         
 
         public string Name
@@ -110,12 +110,11 @@ namespace FindIt
                 group.AddSpace(10);
 
                 // Sort custom tag list alphabetically. Default = sort by number of assets in each tag
-                UICheckBox customTagListSort = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_CTLS"), false, (b) =>
+                UICheckBox customTagListSort = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_CTLS"), Settings.customTagListSort, (b) =>
                 {
                     Settings.customTagListSort = b;
                     XMLUtils.SaveSettings();
                 });
-                fixProps.tooltip = Translations.Translate("FIF_SET_BPTP");
                 group.AddSpace(10);
 
                 // languate settings
