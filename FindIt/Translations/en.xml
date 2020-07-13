@@ -110,6 +110,9 @@
     <Translation ID="FIF_TAG_DEL" String="Delete" />
     <Translation ID="FIF_TAG_DELTP" String="Delete this tag" />
     <Translation ID="FIF_UIS_WS" String="Right click to view this asset on Steam Workshop" />
+    <Translation ID="FIF_TREE_SM" String="Small Trees" />
+    <Translation ID="FIF_TREE_MD" String="Medium Trees" />
+    <Translation ID="FIF_TREE_LG" String="Large Trees" />
 
   </Translations>
 </Language>
