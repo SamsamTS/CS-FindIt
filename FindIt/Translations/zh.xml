@@ -71,6 +71,48 @@
     <Translation ID="FIF_PROP_UNS" String="未分类" />
     <Translation ID="FIF_SET_KS" String="快捷键" />
     <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
+    <Translation ID="FIF_SET_CTFL" String="自定义标签文件位置（请定期备份此文件）" />
+    <Translation ID="FIF_SET_CTFOP" String="在文件夹中显示" />
+    <Translation ID="FIF_SE_SCTP" String="显示自定义标签面板" />
+    <Translation ID="FIF_POP_SCR" String="使用鼠标滚轮向上/向下滚动" />
+    <Translation ID="FIF_POP_CON" String="确认" />
+    <Translation ID="FIF_POP_CAN" String="取消" />
+    <Translation ID="FIF_POP_NU" String="此操作无法恢复" />
+    <Translation ID="FIF_CO_TIT" String="合并" />
+    <Translation ID="FIF_CO_MSG" String="选择一个现有标签进行合并" />
+    <Translation ID="FIF_CO_CH" String="选择" />
+    <Translation ID="FIF_CO_CHTP" String="合并至此现有标签" />
+    <Translation ID="FIF_CO_CHLBL" String="合并至:" />
+    <Translation ID="FIF_CO_NELBL" String="请选择一个现有标签" />
+    <Translation ID="FIF_DE_TIT" String="删除" />
+    <Translation ID="FIF_DE_MSG" String="确定要删除此标签吗?" />
+    <Translation ID="FIF_RE_TIT" String="改名" />
+    <Translation ID="FIF_RE_MSG" String="输入新的标签名称后按Enter。" />
+    <Translation ID="FIF_RE_ITP" String="按Enter提交新标签名称" />
+    <Translation ID="FIF_RE_ELBL" String="请输入新的标签名称" />
+    <Translation ID="FIF_RE_NEWLBL" String="新标签名称:" />
+    <Translation ID="FIF_RE_SLBL" String="该标签名称太短" />
+    <Translation ID="FIF_RE_AELBL" String="该标签名称已存在" />
+    <Translation ID="FIF_CT_TIT" String="自定义标签" />
+    <Translation ID="FIF_CT_DDMSG" String="将现有标签添加到此资产:" />
+    <Translation ID="FIF_CT_DDTP" String="将现有标签添加到此资产" />
+    <Translation ID="FIF_CT_ILBL1" String="或者" />
+    <Translation ID="FIF_CT_ILBL2" String="输入新的标签名称后按Enter:" />
+    <Translation ID="FIF_CT_ITP" String="按Enter添加新标签" />
+    <Translation ID="FIF_SET_CTLS" String="按字母顺序对自定义标签列表进行排序" />
+    <Translation ID="FIF_TAG_DDTP" String="仅显示带有此标签的资产" />
+    <Translation ID="FIF_TAG_REF" String="刷新" />
+    <Translation ID="FIF_TAG_REFTP" String="刷新自定义标签下拉列表" />
+    <Translation ID="FIF_TAG_REN" String="改名" />
+    <Translation ID="FIF_TAG_RENTP" String="重命名这个标签" />
+    <Translation ID="FIF_TAG_COM" String="合并" />
+    <Translation ID="FIF_TAG_COMTP" String="合并至一个现有标签" />
+    <Translation ID="FIF_TAG_DEL" String="删除" />
+    <Translation ID="FIF_TAG_DELTP" String="删除这个标签" />
+    <Translation ID="FIF_UIS_WS" String="右键单击以在Steam Workshop上查看此资产" />
+    <Translation ID="FIF_TREE_SM" String="小型树" />
+    <Translation ID="FIF_TREE_MD" String="中型树" />
+    <Translation ID="FIF_TREE_LG" String="大型树" />
 
   </Translations>
 </Language>

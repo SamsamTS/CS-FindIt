@@ -71,24 +71,32 @@
     <Translation ID="FIF_PROP_UNS" String="未分類" />
     <Translation ID="FIF_SET_KS" String="ホットキー" />
     <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
+    <Translation ID="FIF_SET_CTFL" String="フォルダを開く" />
     <Translation ID="FIF_SET_CTFOP" String="フォルダを表示" />
     <Translation ID="FIF_SE_SCTP" String="カスタムタグパネルを表示" />
+    <Translation ID="FIF_POP_SCR" String="マウスホイールを使用して上下にスクロール" />
     <Translation ID="FIF_POP_CON" String="確認" />
     <Translation ID="FIF_POP_CAN" String="キャンセル" />
-    <Translation ID="FIF_POP_NU" String="これは回復できません" />
+    <Translation ID="FIF_POP_NU" String="これは回復できません。" />
     <Translation ID="FIF_CO_TIT" String="マージ" />
+    <Translation ID="FIF_CO_MSG" String="マージする既存のタグを選択します。" />
+    <Translation ID="FIF_CO_CH" String="選択" />
+    <Translation ID="FIF_CO_CHTP" String="この既存のタグとマージします" />
+    <Translation ID="FIF_CO_NELBL" String="既存のタグを選択してください：" />
     <Translation ID="FIF_DE_TIT" String="削除" />
-    <Translation ID="FIF_RE_TIT" String="名前を変更" />
+    <Translation ID="FIF_DE_MSG" String="このタグを削除してもよろしいですか？" />
     <Translation ID="FIF_CT_TIT" String="カスタムタグ" />
+    <Translation ID="FIF_SET_CTLS" String="カスタムタグリストをアルファベット順に並べ替え" />
     <Translation ID="FIF_TAG_DDTP" String="このタグが付いているアセットのみを表示" />
     <Translation ID="FIF_TAG_REF" String="更新" />
-    <Translation ID="FIF_TAG_REFTP" String="カスタムタグのドロップダウンリストを更新します" />
-    <Translation ID="FIF_TAG_REN" String="変更" />
-    <Translation ID="FIF_TAG_RENTP" String="このタグの名前を変更" />
+    <Translation ID="FIF_TAG_REFTP" String="カスタムタグのドロップダウンリストを更新する" />
     <Translation ID="FIF_TAG_COM" String="マージ" />
-    <Translation ID="FIF_TAG_COMTP" String="このタグを別のタグにマージ" />
+    <Translation ID="FIF_TAG_COMTP" String="このタグを別のタグとマージします" />
     <Translation ID="FIF_TAG_DEL" String="削除" />
     <Translation ID="FIF_TAG_DELTP" String="このタグを削除" />
+    <Translation ID="FIF_TREE_SM" String="小さな木" />
+    <Translation ID="FIF_TREE_MD" String="中程度の木" />
+    <Translation ID="FIF_TREE_LG" String="大きな木" />
 
   </Translations>
 </Language>

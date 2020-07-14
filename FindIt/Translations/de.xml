@@ -58,7 +58,6 @@
     <Translation ID="FIF_SO_NETP" String="Neueste zuerst" />
     <Translation ID="FIF_SO_RE" String="Relevanz" />
     <Translation ID="FIF_SO_NE" String="Neueste" />
-    <Translation ID="TRN_CHOICE" String="Sprache einstellen" />
     <Translation ID="TRN_SYS" String="Systemsprache verwenden" />
     <Translation ID="FIF_PROP_IND" String="Industrie" />
     <Translation ID="FIF_PROP_PAR" String="Parks" />

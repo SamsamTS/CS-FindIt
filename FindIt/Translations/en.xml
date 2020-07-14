@@ -1,13 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Language UniqueName="en" ReadableName="English">
   <Translations>
     <Translation ID="FIF_DESC" String="Find and organize your assets" />
     <Translation ID="FIF_SET_DM" String="Disable debug messages logging" />
-    <Translation ID="FIF_SET_DMTP" String="If checked, debug messages won't be logged" />
+    <Translation ID="FIF_SET_DMTP" String="If checked, debug messages won't be logged." />
     <Translation ID="FIF_SET_CMT" String="Center the main toolbar" />
-    <Translation ID="FIF_SET_CMTTP" String="The main toolbar will be centered if it exceed a certain length" />
+    <Translation ID="FIF_SET_CMTTP" String="The main toolbar will be centered if it exceed a certain length." />
     <Translation ID="FIF_SET_UL" String="Unlock all" />
-    <Translation ID="FIF_SET_ULTP" String="Let you select and place items even when locked" />
+    <Translation ID="FIF_SET_ULTP" String="Let you select and place items even when locked." />
     <Translation ID="FIF_SET_BP" String="Fix bad props next loaded save" />
     <Translation ID="FIF_SET_BPTP" String="Remove all props causing issue. Check the option and load your save" />
     <Translation ID="FIF_SE_WF" String="Custom" />
@@ -28,7 +28,7 @@
     <Translation ID="FIF_PLOP_G" String="Garbage" />
     <Translation ID="FIF_PLOP_H" String="Healthcare" />
     <Translation ID="FIF_PLOP_F" String="Fire Department" />
-    <Translation ID="FIF_PLOP_P" String ="Police" />
+    <Translation ID="FIF_PLOP_P" String="Police" />
     <Translation ID="FIF_PLOP_ED" String="Education" />
     <Translation ID="FIF_PLOP_PT" String="Public Transportation" />
     <Translation ID="FIF_PLOP_PPW" String="Park/Plaza/Wildlife" />
@@ -40,7 +40,7 @@
     <Translation ID="FIF_PLOP_FI" String="Fishing" />
     <Translation ID="FIF_GR_LDR" String="Low Density Residential" />
     <Translation ID="FIF_GR_HDR" String="High Density Residential" />
-    <Translation ID="FIF_GR_LDRE" String="Low Density Residential ECO" />,
+    <Translation ID="FIF_GR_LDRE" String="Low Density Residential ECO" />
     <Translation ID="FIF_GR_HDRE" String="High Density Residential ECO" />
     <Translation ID="FIF_GR_LDC" String="Low Density Commercial" />
     <Translation ID="FIF_GR_HDC" String="High Density Commercial" />
@@ -78,11 +78,11 @@
     <Translation ID="FIF_POP_CON" String="Confirm" />
     <Translation ID="FIF_POP_CAN" String="Cancel" />
     <Translation ID="FIF_POP_NU" String="This cannot be undone." />
-    <Translation ID="FIF_CO_TIT" String="Combine" />
-    <Translation ID="FIF_CO_MSG" String="Choose an existing tag to combine with." />
+    <Translation ID="FIF_CO_TIT" String="Merge" />
+    <Translation ID="FIF_CO_MSG" String="Choose an existing tag to merge with." />
     <Translation ID="FIF_CO_CH" String="Choose" />
-    <Translation ID="FIF_CO_CHTP" String="Combine with this existing tag" />
-    <Translation ID="FIF_CO_CHLBL" String="Combine with: " />
+    <Translation ID="FIF_CO_CHTP" String="Merge with this existing tag" />
+    <Translation ID="FIF_CO_CHLBL" String="Merge with: " />
     <Translation ID="FIF_CO_NELBL" String="Please choose an existing tag" />
     <Translation ID="FIF_DE_TIT" String="Delete" />
     <Translation ID="FIF_DE_MSG" String="Are you sure you want to delete this tag?" />
@@ -105,8 +105,8 @@
     <Translation ID="FIF_TAG_REFTP" String="Refresh custom tag drop-down list" />
     <Translation ID="FIF_TAG_REN" String="Rename" />
     <Translation ID="FIF_TAG_RENTP" String="Rename this tag" />
-    <Translation ID="FIF_TAG_COM" String="Combine" />
-    <Translation ID="FIF_TAG_COMTP" String="Combine this tag to another tag" />
+    <Translation ID="FIF_TAG_COM" String="Merge" />
+    <Translation ID="FIF_TAG_COMTP" String="Merge this tag with another tag" />
     <Translation ID="FIF_TAG_DEL" String="Delete" />
     <Translation ID="FIF_TAG_DELTP" String="Delete this tag" />
     <Translation ID="FIF_UIS_WS" String="Right click to view this asset on Steam Workshop" />
