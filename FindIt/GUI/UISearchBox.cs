@@ -289,6 +289,7 @@ namespace FindIt.GUI
             pickerToolLabel.width = 350;
             pickerToolLabel.textScale = 0.8f;
             pickerToolLabel.text = Translations.Translate("FIF_SE_PT");
+            pickerToolLabel.tooltip = Translations.Translate("FIF_SE_PTTP");
             //pickerToolLabel.label.textScale = 0.8f;
             pickerToolLabel.relativePosition = new Vector3(tagToolCheckBox.relativePosition.x + tagToolCheckBox.width + 20, 18);
 

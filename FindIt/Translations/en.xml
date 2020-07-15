@@ -113,7 +113,8 @@
     <Translation ID="FIF_TREE_SM" String="Small Trees" />
     <Translation ID="FIF_TREE_MD" String="Medium Trees" />
     <Translation ID="FIF_TREE_LG" String="Large Trees" />
-    <Translation ID="FIF_SE_PT" String="Elektrix Net Picker 3.0 - Press N" />
+    <Translation ID="FIF_SE_PT" String="Elektrix Net Picker 3.0 - Press N to start" />
+    <Translation ID="FIF_SE_PTTP" String="Click on a placed asset to locate it in the selection panel" />
 
   </Translations>
 </Language>

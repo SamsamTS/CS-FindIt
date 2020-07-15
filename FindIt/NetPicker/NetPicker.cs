@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using ColossalFramework.UI;
-using FindIt.GUI;
 
 namespace FindIt
 {
@@ -159,51 +158,41 @@ namespace FindIt
         { 
             if (!(pInfo is BuildingInfo) && !(pInfo is TreeInfo))
             {
-                ShowInPanel(pInfo);
+                ShowInPanel(pInfo); // show in default game panel
                 return;
             }
 
             if (pInfo is BuildingInfo)
             {
                 BuildingInfo info = pInfo as BuildingInfo;
-                //BuildingInfo info = PrefabCollection<BuildingInfo>.FindLoaded("4x3_Beach Hotel3");
                 if (info != null && IsGrowableRico(info))
                 {
                     Debugging.Message("NetPicker - " + "Info " + info.name + " is a growable (or RICO).");
-                    bool Pass1 = false;
-
-                    // Try to locate in Find It!
-                    UIComponent SearchBoxPanel = UIView.Find("UISearchBox");
 
                     // Reset searchbox panel filters
-                    ((UISearchBox)SearchBoxPanel).ResetFilters();
+                    FindIt.instance.searchBox.ResetFilters();
 
-                    if (SearchBoxPanel != null && SearchBoxPanel.isVisible == false)
+                    if (FindIt.instance.searchBox != null && FindIt.instance.searchBox.isVisible == false)
                     {
                         UIButton FIButton = UIView.Find<UIButton>("FindItMainButton");
                         if (FIButton == null) return;
                         FIButton.SimulateClick();
                     }
-                    if (SearchBoxPanel == null) return;
+                    if (FindIt.instance.searchBox == null) return;
 
-                    UIDropDown FilterDropdown = SearchBoxPanel.Find<UIDropDown>("UIDropDown");
+                    UIDropDown FilterDropdown = FindIt.instance.searchBox.typeFilter;
                     FilterDropdown.selectedValue = Translations.Translate("FIF_SE_IG"); // growable
 
-                    UITextField TextField = SearchBoxPanel.Find<UITextField>("UITextField");
-                    TextField.text = "";
-
-                    UIComponent UIFilterGrowable = SearchBoxPanel.Find("UIFilterGrowable");
+                    UIComponent UIFilterGrowable = FindIt.instance.searchBox.filterGrowable;
                     UIFilterGrowable.GetComponentInChildren<UIButton>().SimulateClick();
 
                     // Reflect into the scroll panel, starting with the growable panel:
                     if (!ReflectIntoFindIt(info))
                     {
-
                         // And then if that fails, RICO:
                         FilterDropdown.selectedValue = Translations.Translate("FIF_SE_IR"); // RICO
                         if (!ReflectIntoFindIt(info))
                         {
-
                             // And then if that fails, give up and get a drink
                             Debugging.Message("NetPicker - " + "Could not be found in Growable or Rico menus.");
                         }
@@ -219,33 +208,25 @@ namespace FindIt
             else if (pInfo is TreeInfo)
             {
                 TreeInfo info = pInfo as TreeInfo;
-                //BuildingInfo info = PrefabCollection<BuildingInfo>.FindLoaded("4x3_Beach Hotel3");
                 if (info != null)
                 {
                     Debugging.Message("NetPicker - " + "Info " + info.name + " is a tree.");
-                    bool Pass1 = false;
-
-                    // Try to locate in Find It!
-                    UIComponent SearchBoxPanel = UIView.Find("UISearchBox");
 
                     // Reset searchbox panel filters
-                    ((UISearchBox)SearchBoxPanel).ResetFilters();
+                    FindIt.instance.searchBox.ResetFilters();
 
-                    if (SearchBoxPanel != null && SearchBoxPanel.isVisible == false)
+                    if (FindIt.instance.searchBox != null && FindIt.instance.searchBox.isVisible == false)
                     {
                         UIButton FIButton = UIView.Find<UIButton>("FindItMainButton");
                         if (FIButton == null) return;
                         FIButton.SimulateClick();
                     }
-                    if (SearchBoxPanel == null) return;
+                    if (FindIt.instance.searchBox == null) return;
 
-                    UIDropDown FilterDropdown = SearchBoxPanel.Find<UIDropDown>("UIDropDown");
+                    UIDropDown FilterDropdown = FindIt.instance.searchBox.typeFilter;
                     FilterDropdown.selectedValue = Translations.Translate("FIF_SE_IT"); // tree
 
-                    UITextField TextField = SearchBoxPanel.Find<UITextField>("UITextField");
-                    TextField.text = "";
-
-                    UIComponent UIFilterTree = SearchBoxPanel.Find("UIFilterTree");
+                    UIComponent UIFilterTree = FindIt.instance.searchBox.filterTree;
                     UIFilterTree.GetComponentInChildren<UIButton>().SimulateClick();
 
                     // Reflect into the scroll panel -> the tree panel:
@@ -263,6 +244,7 @@ namespace FindIt
             }
         }
 
+        // return false if the building is a ploppable
         private bool IsGrowableRico(BuildingInfo info)
         {
             if (info.m_class.m_subService == ItemClass.SubService.ResidentialLow) return true;
@@ -284,6 +266,7 @@ namespace FindIt
             return false;
         }
 
+        // show in default game panel
         private void ShowInPanel(PrefabInfo info)
         {
             UIButton button = FindComponentCached<UIButton>(info.name);
