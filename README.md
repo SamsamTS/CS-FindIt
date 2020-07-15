@@ -1,4 +1,4 @@
-# Find It! Fix  
+# Find It! 2 [TEST]  
 
 Forked from SamSamTS's original Find It! mod.  
 
@@ -14,15 +14,18 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 
 Implemented and planned be included in the next release:
 
-- New drop-down menu in custom tag pop-up window. Easier to add existing tags to an asset.
+New in v1.6.8:  
+- New drop-down menu in custom tag pop-up window. Easier to add existing tags to an asset.  
 
 - New custom tag panel:  
 -- Show a list of custom tags and number of assets in each tag.  
    By default the list is sorted by the number of assets in each tag. It can be changed to use alphabetical order in mod settings.  
 -- The drop-down list also can be used as a filter to see all assets with this tag  
 -- Rename tags  
--- Combine tags  
+-- Merge tags  
 -- Delete tags  
+- **Experimental:** Add built-in Elektrix Net Picker 3.0 (thanks Elektrix for sharing the source code)  
+
 - Add Tree size filter tabs
 
 - Add language support: Deutsch, polski, español, Français. (not fully translated yet)
