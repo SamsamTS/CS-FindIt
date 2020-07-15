@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using ColossalFramework.UI;
-using System.Reflection;
-using ColossalFramework.Globalization;
 using FindIt.GUI;
 
 namespace FindIt
@@ -116,17 +114,11 @@ namespace FindIt
 
         private bool ReflectIntoFindIt(PrefabInfo info)
         {
-            Type FindItType = Type.GetType("FindIt.FindIt, FindIt");
-            object FindItInstance = FindItType.GetField("instance").GetValue(null);
-            object UIScrollPanel = FindItType.GetField("scrollPanel").GetValue(FindItInstance);
             Type ScrollPanelType = Type.GetType("FindIt.GUI.UIScrollPanel, FindIt");
-            Debugging.Message("NetPicker - " + ScrollPanelType.ToString());
+            //Debugging.Message("NetPicker - " + ScrollPanelType.ToString());
 
             // Get all the item data...
-            PropertyInfo iData = ScrollPanelType.GetProperty("itemsData");
-            object itemsData = iData.GetValue(UIScrollPanel, null);
-            object[] itemDataBuffer = itemsData.GetType().GetMethod("ToArray").Invoke(itemsData, null) as object[];
-            Debugging.Message("NetPicker - " + itemDataBuffer.ToString());
+            object[] itemDataBuffer = FindIt.instance.scrollPanel.itemsData.ToArray();
 
             for (int i = 0; i < itemDataBuffer.Length; i++)
             {
@@ -137,17 +129,16 @@ namespace FindIt
                 Debugging.Message("NetPicker - " + UIScrollPanelItemData.ToString());
                 object itemData_currentData_asset = UIScrollPanelItemData.GetField("asset").GetValue(itemData);
                 PrefabInfo itemData_currentData_asset_info = itemData_currentData_asset.GetType().GetProperty("prefab").GetValue(itemData_currentData_asset, null) as PrefabInfo;
-                //string itemDataName = itemData_currentData_asset.GetType().GetField("name").GetValue(itemData_currentData_asset) as string;
 
                 // Display data at this position. Return.
                 if (itemData_currentData_asset_info != null && itemData_currentData_asset_info.name == info.name)
                 {
                     Debugging.Message("NetPicker - " + "Found data at position " + i + " in Find it ScrollablePanel");
-                    ScrollPanelType.GetMethod("DisplayAt").Invoke(UIScrollPanel, new object[] { i });
+                    ScrollPanelType.GetMethod("DisplayAt").Invoke(FindIt.instance.scrollPanel, new object[] { i });
 
                     string itemDataName = UIScrollPanelItemData.GetField("name").GetValue(itemData) as string;
                     Debugging.Message("NetPicker - " + itemDataName);
-                    UIComponent test = UIScrollPanel as UIComponent;
+                    UIComponent test = FindIt.instance.scrollPanel as UIComponent;
                     UIButton[] fYou = test.GetComponentsInChildren<UIButton>();
                     foreach (UIButton mhmBaby in fYou)
                     {
