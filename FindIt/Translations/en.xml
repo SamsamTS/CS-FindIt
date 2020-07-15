@@ -113,6 +113,7 @@
     <Translation ID="FIF_TREE_SM" String="Small Trees" />
     <Translation ID="FIF_TREE_MD" String="Medium Trees" />
     <Translation ID="FIF_TREE_LG" String="Large Trees" />
+    <Translation ID="FIF_SE_PT" String="Elektrix Net Picker 3.0 - Press N" />
 
   </Translations>
 </Language>
