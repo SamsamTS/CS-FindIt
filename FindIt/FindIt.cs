@@ -25,6 +25,7 @@ namespace FindIt
         public static UITextureAtlas atlas = LoadResources();
         public static bool inEditor = false;
         public static bool isRicoEnabled = false;
+        public static bool isNetPickerConflict = false;
 
         public static AssetTagList list;
 
@@ -42,6 +43,7 @@ namespace FindIt
             try
             {
                 isRicoEnabled = IsRicoEnabled();
+                isNetPickerConflict = CheckNetPickerConflict();
 
                 GameObject gameObject = GameObject.Find("FindItMainButton");
                 if (gameObject != null)
@@ -86,7 +88,6 @@ namespace FindIt
 
                 mainButton = tabstrip.AddTab("FindItMainButton", asGameObject, asGameObject2, new Type[] { typeof(UIGroupPanel) }) as UIButton;
                 mainButton.atlas = atlas;
-
 
                 
                 Locale locale = (Locale)typeof(LocaleManager).GetField("m_Locale", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(LocaleManager.instance);
@@ -178,6 +179,13 @@ namespace FindIt
                 mainButton.tooltip = "Find It! 2 " + ModInfo.version;
 
                 m_beautificationPanel = FindObjectOfType<BeautificationPanel>();
+
+                // show Net Picker Conflict Warning
+                if (isNetPickerConflict)
+                {
+                    string msg = "\nFind It 2 has built-in Elektrix Net Picker 3.0.\n\nPlease remove any stand-alone version of Net Picker\nto avoid conflict or incompatibility.\n\n";
+                    UIWarningWindow.ShowAt(scrollPanel, msg);
+                }
 
                 Debugging.Message("Initialized");
 
@@ -421,6 +429,23 @@ namespace FindIt
                 }
             }
 
+            return false;
+        }
+        
+        // return true is stand-alone version of Elecktrix Net Picker is found
+        public static bool CheckNetPickerConflict()
+        {
+            foreach (PluginManager.PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
+            {
+                foreach (Assembly assembly in plugin.GetAssemblies())
+                {
+                    if ((assembly.GetName().Name.ToLower() == "netpicker") || ((assembly.GetName().Name.ToLower() == "cs-netpicker3")))
+                    {
+                        Debugging.Message("stand-alone version of Elecktrix Net Picker found");
+                        return true;
+                    }
+                }
+            }
             return false;
         }
 
