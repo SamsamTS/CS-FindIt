@@ -13,12 +13,12 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "1.6.7";
+        public const string version = "1.6.8-alpha4";
         
 
         public string Name
         {
-            get { return "Find It! Fix [Test] " + version; }
+            get { return "Find It! 2 [Test] " + version; }
         }
 
         public string Description
@@ -109,23 +109,27 @@ namespace FindIt
                 fixProps.tooltip = Translations.Translate("FIF_SET_BPTP");
                 group.AddSpace(10);
 
-                // shortcut key
-                panel.gameObject.AddComponent<OptionsKeymapping>();
+                // Sort custom tag list alphabetically. Default = sort by number of assets in each tag
+                UICheckBox customTagListSort = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_CTLS"), Settings.customTagListSort, (b) =>
+                {
+                    Settings.customTagListSort = b;
+                    XMLUtils.SaveSettings();
+                });
                 group.AddSpace(10);
 
                 // languate settings
-                UIDropDown languageDropDown = (UIDropDown)group.AddDropdown(Translations.Translate("TRN_CHOICE"), Translations.LanguageList, Translations.Index,  (value) =>
-                { 
+                UIDropDown languageDropDown = (UIDropDown)group.AddDropdown(Translations.Translate("TRN_CHOICE"), Translations.LanguageList, Translations.Index, (value) =>
+                {
                     Translations.Index = value;
                     XMLUtils.SaveSettings();
                 });
-                
+
                 languageDropDown.width = 300;
                 group.AddSpace(10);
 
                 // show path to FindItCustomTags.xml
                 string path = Path.Combine(DataLocation.localApplicationData, "FindItCustomTags.xml");
-                UITextField customTagsFilePath = (UITextField)group.AddTextfield(Translations.Translate("FIF_SET_CTFL"), path, _ => { }, _ => { }); 
+                UITextField customTagsFilePath = (UITextField)group.AddTextfield(Translations.Translate("FIF_SET_CTFL"), path, _ => { }, _ => { });
                 customTagsFilePath.width = panel.width - 30;
 
                 // from aubergine10's AutoRepair
@@ -133,7 +137,11 @@ namespace FindIt
                 {
                     group.AddButton(Translations.Translate("FIF_SET_CTFOP"), () => System.Diagnostics.Process.Start("explorer.exe", "/select," + path));
                 }
+                group.AddSpace(10);
 
+                // shortcut key
+                panel.gameObject.AddComponent<OptionsKeymapping>();
+                group.AddSpace(10);
 
             }
             catch (Exception e)

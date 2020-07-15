@@ -14,6 +14,21 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 
 Implemented and planned be included in the next release:
 
+- New drop-down menu in custom tag pop-up window. Easier to add existing tags to an asset.
+
+- New custom tag panel:  
+-- Show a list of custom tags and number of assets in each tag.  
+   By default the list is sorted by the number of assets in each tag. It can be changed to use alphabetical order in mod settings.  
+-- The drop-down list also can be used as a filter to see all assets with this tag  
+-- Rename tags  
+-- Combine tags  
+-- Delete tags  
+- Add Tree size filter tabs
+
+- Add language support: Deutsch, polski, español, Français. (not fully translated yet)
+
+- Add tooltip message to the workshop icon. Not a new feature, just a reminder. You can open an asset's workshop page by right-clicking the icon.
+
 New in v1.6.7:
 - Add new Growable/RICO combined search option. You can select and place both types in one place.  
 - Show custom tags file path in mod settings  

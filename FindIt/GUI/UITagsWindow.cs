@@ -2,9 +2,9 @@
 // https://github.com/SamsamTS/CS-FindIt
 
 using UnityEngine;
-
 using ColossalFramework.UI;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace FindIt.GUI
 {
@@ -13,7 +13,6 @@ namespace FindIt.GUI
         public static UITagsWindow instance;
         
         public UITextField input;
-        private UIDragHandle m_dragHandle;
 
         private UIComponent m_tagSprite;
 
@@ -23,22 +22,27 @@ namespace FindIt.GUI
 
         private const float spacing = 5f;
 
+        private UIDropDown tagDropDownMenu;
+        private List<KeyValuePair<string, int>> customTagList;
+        private string[] customTagListStrArray;
+
+        private UIButton tagDropDownAddButton;
+
+        private UILabel tagDropDownMenuMessage;
+        private UILabel inputMessage;
+
         public override void Start()
         {
             name = "FindIt_TagsWindow";
             atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericPanelWhite";
-            size = new Vector2(300, 180);
+            size = new Vector2(320, 300);
 
             UILabel title = AddUIComponent<UILabel>();
-            title.text = "Custom Tags";
+            title.text = Translations.Translate("FIF_CT_TIT");
             title.textScale = 0.9f;
             title.textColor = new Color32(0, 0, 0, 255);
             title.relativePosition = new Vector3(spacing, spacing);
-
-            m_dragHandle = AddUIComponent<UIDragHandle>();
-            m_dragHandle.target = parent;
-            m_dragHandle.relativePosition = Vector3.zero;
 
             UIButton close = AddUIComponent<UIButton>();
             close.size = new Vector2(30f, 30f);
@@ -59,23 +63,61 @@ namespace FindIt.GUI
             };
 
             m_tagsPanel = AddUIComponent<UIPanel>();
-            m_tagsPanel.size = new Vector2(width - 2 * spacing, height - 50);
-
+            m_tagsPanel.size = new Vector2(width - 2 * spacing, height - 70);
             m_tagsPanel.autoFitChildrenVertically = true;
             m_tagsPanel.autoLayout = true;
             m_tagsPanel.autoLayoutDirection = LayoutDirection.Horizontal;
             m_tagsPanel.autoLayoutPadding = new RectOffset(0, 0, 0, 0);
             m_tagsPanel.autoLayoutStart = LayoutStart.TopLeft;
             m_tagsPanel.wrapLayout = true;
-
             m_tagsPanel.relativePosition = new Vector3(spacing, title.relativePosition.y + title.height + spacing);
+
+
+            tagDropDownMenuMessage = AddUIComponent<UILabel>();
+            tagDropDownMenuMessage.text = Translations.Translate("FIF_CT_DDMSG");
+            tagDropDownMenuMessage.textScale = 0.9f;
+            tagDropDownMenuMessage.textColor = new Color32(0, 0, 0, 255);
+            tagDropDownMenuMessage.relativePosition = new Vector3(spacing, m_tagsPanel.relativePosition.y+m_tagsPanel.height + spacing * 6);
+
+            // tag dropdown
+            tagDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
+            tagDropDownMenu.normalBgSprite = "TextFieldPanelHovered";
+            tagDropDownMenu.size = new Vector2(width - 2 * spacing - 50, 30);
+            tagDropDownMenu.tooltip = Translations.Translate("FIF_POP_SCR");
+            tagDropDownMenu.listHeight = 210;
+            tagDropDownMenu.itemHeight = 30;
+            tagDropDownMenu.relativePosition = new Vector3(spacing, tagDropDownMenuMessage.relativePosition.y + tagDropDownMenuMessage.height + spacing);
+            UpdateCustomTagList();
+           
+            // tag dropdown add button
+            tagDropDownAddButton = SamsamTS.UIUtils.CreateButton(this);
+            tagDropDownAddButton.size = new Vector2(35, 30);
+            tagDropDownAddButton.text = "+";
+            tagDropDownAddButton.tooltip = Translations.Translate("FIF_CT_DDTP");
+            tagDropDownAddButton.relativePosition = new Vector3(spacing + tagDropDownMenu.width + 5, tagDropDownMenu.relativePosition.y);
+            tagDropDownAddButton.eventClick += (c, p) =>
+            {
+                if (customTagListStrArray.Length == 0) return;
+                string newTag = GetDropDownListKey();
+                if (!m_asset.tagsCustom.Contains(newTag))
+                {
+                    AssetTagList.instance.AddCustomTags(m_asset, newTag);
+                }
+                Display(m_asset);
+            };
+
+            inputMessage = AddUIComponent<UILabel>();
+            inputMessage.text = Translations.Translate("FIF_CT_ILBL1") + "\n" + Translations.Translate("FIF_CT_ILBL2");
+            inputMessage.textScale = 0.9f;
+            inputMessage.textColor = new Color32(0, 0, 0, 255);
+            inputMessage.relativePosition = new Vector3(spacing, tagDropDownMenu.relativePosition.y + tagDropDownMenu.height + spacing*2);
 
             input = SamsamTS.UIUtils.CreateTextField(this);
             input.size = new Vector2(width - 2 * spacing, 30);
             input.padding.top = 7;
-            input.relativePosition = new Vector3(spacing, height - input.height - spacing);
+            input.tooltip = Translations.Translate("FIF_CT_ITP");
+            input.relativePosition = new Vector3(spacing, inputMessage.relativePosition.y + inputMessage.height + spacing);
             input.submitOnFocusLost = false;
-
             input.eventTextSubmitted += (c, t) =>
             {
                 AssetTagList.instance.AddCustomTags(m_asset, t);
@@ -85,7 +127,7 @@ namespace FindIt.GUI
             Display(m_asset);
         }
 
-        public static void Close()
+        private static void Close()
         {
             if (instance != null)
             {
@@ -130,7 +172,7 @@ namespace FindIt.GUI
             }
         }
 
-        public void Display(Asset asset)
+        private void Display(Asset asset)
         {
             if (asset == null) return;
 
@@ -177,9 +219,12 @@ namespace FindIt.GUI
                 m_tagSprite.isVisible = true;
             }
 
-            height = m_tagsPanel.relativePosition.y + m_tagsPanel.height + 2 * spacing + input.height + spacing;
-            m_dragHandle.size = size;
-            input.relativePosition = new Vector3(spacing, height - input.height - spacing);
+            height = m_tagsPanel.relativePosition.y + m_tagsPanel.height + 6 * spacing + tagDropDownMenuMessage.height + spacing + tagDropDownMenu.height + spacing*2 + inputMessage.height + spacing + input.height + spacing;
+            tagDropDownMenuMessage.relativePosition = new Vector3(spacing, m_tagsPanel.relativePosition.y + m_tagsPanel.height + spacing * 6);
+            tagDropDownMenu.relativePosition = new Vector3(spacing, tagDropDownMenuMessage.relativePosition.y + tagDropDownMenuMessage.height + spacing);
+            tagDropDownAddButton.relativePosition = new Vector3(spacing + tagDropDownMenu.width + 5, tagDropDownMenu.relativePosition.y);
+            inputMessage.relativePosition = new Vector3(spacing, tagDropDownMenu.relativePosition.y + tagDropDownMenu.height + spacing*2);
+            input.relativePosition = new Vector3(spacing, inputMessage.relativePosition.y + inputMessage.height + spacing);
 
             input.text = "";
             input.Focus();
@@ -202,6 +247,27 @@ namespace FindIt.GUI
                 input.text = "";
                 input.Unfocus();
             }
+        }
+
+        // Update custom tag list 
+        private void UpdateCustomTagList()
+        {
+            customTagList = AssetTagList.instance.GetCustomTagList();
+
+            List<string> list = new List<string>();
+
+            foreach (KeyValuePair<string, int> entry in customTagList)
+            {
+                list.Add(entry.Key.ToString() + " (" + entry.Value.ToString() + ")");
+            }
+
+            customTagListStrArray = list.ToArray();
+            tagDropDownMenu.items = customTagListStrArray;
+            tagDropDownMenu.selectedIndex = 0;
+        }
+        private string GetDropDownListKey()
+        {
+            return customTagList[tagDropDownMenu.selectedIndex].Key;
         }
     }
 }

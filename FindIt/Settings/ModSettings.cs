@@ -18,6 +18,10 @@ namespace FindIt
 
         internal static bool fixBadProps = false;
 
+        // false = sort by number of assets in each tag.
+        // true = sort alphabetically
+        internal static bool customTagListSort = false;
+
         internal static KeyBinding searchKey = new KeyBinding { keyCode = (int)KeyCode.F, control = true, shift = false, alt = false };
 
 
@@ -65,6 +69,9 @@ namespace FindIt
 
         [XmlElement("FixBadProps")]
         public bool FixBadProps { get => Settings.fixBadProps; set => Settings.fixBadProps = value; }
+
+        [XmlElement("customTagListSort")]
+        public bool CustomTagListSort { get => Settings.customTagListSort; set => Settings.customTagListSort = value; }
 
         [XmlElement("SearchKey")]
         public KeyBinding SearchKey { get => Settings.searchKey; set => Settings.searchKey = value; }

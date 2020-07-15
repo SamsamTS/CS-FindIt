@@ -58,6 +58,14 @@ namespace FindIt
             Hidden
         }
 
+        public enum TreeType
+        {
+            Invalid = -1,
+            SmallTree,
+            MediumTree,
+            LargeTree
+        }
+
         public string name;
         public string title;
         public bool isCCPBuilding = false;
@@ -101,7 +109,7 @@ namespace FindIt
                     if (propPrefab != null)
                     {
                         assetType = AssetType.Prop;
-                        propType = GetPropType(prefab.editorCategory);
+                        propType = SetPropType(prefab.editorCategory);
 
                         if (propPrefab.m_material != null)
                         {
@@ -124,6 +132,8 @@ namespace FindIt
                     else if (m_prefab is TreeInfo)
                     {
                         assetType = AssetType.Tree;
+                        TreeInfo info = m_prefab as TreeInfo;
+                        treeType = SetTreeType(info);
                     }
                 }
             }
@@ -155,6 +165,7 @@ namespace FindIt
         public float score;
         public ulong downloadTime;
         public PropType propType = PropType.Invalid;
+        public TreeType treeType = TreeType.Invalid;
 
         public delegate void OnButtonClicked(UIComponent comp);
         public OnButtonClicked onButtonClicked;
@@ -339,7 +350,7 @@ namespace FindIt
         }
 
         // check the type of a prop based on editor category
-        private Asset.PropType GetPropType(string propEditorCategory)
+        private Asset.PropType SetPropType(string propEditorCategory)
         {
             if (propEditorCategory.StartsWith("PropsIndustrial"))
             {
@@ -392,6 +403,19 @@ namespace FindIt
             }
 
             return Asset.PropType.Unsorted;
+        }
+
+        // check the size of a tree and decide its type. Same catergorization as the vanilla game
+        private Asset.TreeType SetTreeType(TreeInfo info)
+        {
+            if (info == null) return Asset.TreeType.Invalid;
+            
+            float size = info.m_generatedInfo.m_size.y * (info.m_minScale + info.m_maxScale);
+
+            if (size <= 16f) return Asset.TreeType.SmallTree;
+            if (size > 16f && size <= 30f) return Asset.TreeType.MediumTree;
+            //if (size > 30f) 
+            return Asset.TreeType.LargeTree;
         }
     }
 
@@ -462,11 +486,21 @@ namespace FindIt
 
                         else if (filter == UISearchBox.DropDownOptions.Prop)
                         {
-                            // filter by ploppable type
+                            // filter by prop type
                             if (!UIFilterProp.instance.IsAllSelected())
                             {
                                 UIFilterProp.Category category = UIFilterProp.GetCategory(asset.propType);
                                 if (category == UIFilterProp.Category.None || !UIFilterProp.instance.IsSelected(category)) continue;
+                            }
+                        }
+
+                        else if (filter == UISearchBox.DropDownOptions.Tree)
+                        {
+                            // filter by tree type
+                            if (!UIFilterTree.instance.IsAllSelected())
+                            {
+                                UIFilterTree.Category category = UIFilterTree.GetCategory(asset.treeType);
+                                if (category == UIFilterTree.Category.None || !UIFilterTree.instance.IsSelected(category)) continue;
                             }
                         }
 
@@ -582,11 +616,21 @@ namespace FindIt
                         }
                         else if (filter == UISearchBox.DropDownOptions.Prop)
                         {
-                            // filter by ploppable type
+                            // filter by prop type
                             if (!UIFilterProp.instance.IsAllSelected())
                             {
                                 UIFilterProp.Category category = UIFilterProp.GetCategory(asset.propType);
                                 if (category == UIFilterProp.Category.None || !UIFilterProp.instance.IsSelected(category)) continue;
+                            }
+                        }
+
+                        else if (filter == UISearchBox.DropDownOptions.Tree)
+                        {
+                            // filter by tree type
+                            if (!UIFilterTree.instance.IsAllSelected())
+                            {
+                                UIFilterTree.Category category = UIFilterTree.GetCategory(asset.treeType);
+                                if (category == UIFilterTree.Category.None || !UIFilterTree.instance.IsSelected(category)) continue;
                             }
                         }
 
@@ -907,6 +951,7 @@ namespace FindIt
 
         private HashSet<string> AddAssetTags(Asset asset, Dictionary<string, int> dico, string text)
         {
+            // break input text into multiple tags
             string[] tagsArr = Regex.Split(text, @"([^\w]|[_-]|\s)+", RegexOptions.IgnoreCase);
 
             HashSet<string> tags = new HashSet<string>();
@@ -991,6 +1036,24 @@ namespace FindIt
             }
 
             return id;
+        }
+
+        public List<KeyValuePair<string, int>> GetCustomTagList()
+        {
+            List<KeyValuePair<string, int>> list = tagsCustomDictionary.ToList();
+
+            // sort list by number of assets in each tag
+            if (!Settings.customTagListSort)
+            {
+                list = list.OrderByDescending(s => s.Value).ToList();
+            }
+            // sort list alphabetically
+            else
+            {
+                list = list.OrderBy(s => s.Key).ToList();
+            }
+
+            return list;
         }
     }
 }
