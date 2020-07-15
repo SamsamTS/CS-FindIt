@@ -186,15 +186,6 @@ namespace FindIt.GUI
                 prefab.m_Thumbnail == "thumb_Railway Crossing Very Long"
                 )
             {
-                
-                /*if(!ThumbnailManager.thumbnailsToGenerate.ContainsKey(prefab))
-                {
-                    ThumbnailManager.thumbnailsToGenerate.Add(prefab, button);
-                }
-                else if(button != null)
-                {
-                    ThumbnailManager.thumbnailsToGenerate[prefab] = button;
-                }*/
                 ThumbnailManager.QueueThumbnail(prefab, button);
 
                 return;
