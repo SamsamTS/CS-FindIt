@@ -84,7 +84,7 @@ namespace FindIt
         // Allow....?
         public bool np_allowSegments = true;
         public bool np_allowNodes = true;
-        public bool np_allowProps = false; // disable prop temporarily as it has some issues
+        public bool np_allowProps = true;
         public bool np_allowTrees = true;
         public bool np_allowBuildings = true;
 
@@ -156,12 +156,6 @@ namespace FindIt
 
         private void ShowInPanelResolve(PrefabInfo pInfo)
         { 
-            if (!(pInfo is BuildingInfo) && !(pInfo is TreeInfo))
-            {
-                ShowInPanel(pInfo); // show in default game panel
-                return;
-            }
-
             if (pInfo is BuildingInfo)
             {
                 BuildingInfo info = pInfo as BuildingInfo;
@@ -237,9 +231,43 @@ namespace FindIt
                     }
                 }
             }
+
+            else if (pInfo is PropInfo)
+            {
+                PropInfo info = pInfo as PropInfo;
+                if (info != null)
+                {
+                    Debugging.Message("NetPicker - " + "Info " + info.name + " is a prop.");
+
+                    // Reset searchbox panel filters
+                    FindIt.instance.searchBox.ResetFilters();
+
+                    if (FindIt.instance.searchBox != null && FindIt.instance.searchBox.isVisible == false)
+                    {
+                        UIButton FIButton = UIView.Find<UIButton>("FindItMainButton");
+                        if (FIButton == null) return;
+                        FIButton.SimulateClick();
+                    }
+                    if (FindIt.instance.searchBox == null) return;
+
+                    UIDropDown FilterDropdown = FindIt.instance.searchBox.typeFilter;
+                    FilterDropdown.selectedValue = Translations.Translate("FIF_SE_IPR"); // prop
+
+                    UIComponent UIFilterProp = FindIt.instance.searchBox.filterProp;
+                    UIFilterProp.GetComponentInChildren<UIButton>().SimulateClick();
+
+                    // Reflect into the scroll panel -> the tree panel:
+                    if (!ReflectIntoFindIt(info))
+                    {
+                        // if that fails
+                        Debugging.Message("NetPicker - " + "Could not be found in prop menu.");
+                    }
+                }
+            }
+
             else
             {
-                Debugging.Message("NetPicker - " + "Info " + pInfo.name + " is not growable/rico/tree.");
+                Debugging.Message("NetPicker - " + "Info " + pInfo.name + " is not growable/rico/tree/prop.");
                 ShowInPanel(pInfo);
             }
         }
@@ -378,7 +406,7 @@ namespace FindIt
                 if (output.m_netSegment != 0) np_stepOverBuffer.Add(new InstanceID() { NetSegment = output.m_netSegment });
                 if (output.m_netNode != 0) np_stepOverBuffer.Add(new InstanceID() { NetNode = output.m_netNode });
                 if (output.m_treeInstance != 0) np_stepOverBuffer.Add(new InstanceID() { Tree = output.m_treeInstance });
-                if (output.m_propInstance != 0) np_stepOverBuffer.Add(new InstanceID() { NetNode = output.m_propInstance });
+                if (output.m_propInstance != 0) np_stepOverBuffer.Add(new InstanceID() { Prop = output.m_propInstance });
                 if (output.m_building != 0) np_stepOverBuffer.Add(new InstanceID() { Building = output.m_building });
 
                 np_stepOverBuffer.Sort((a, b) => Vector3.Distance(a.Position(), np_mouseCurrentPosition).CompareTo(Vector3.Distance(b.Position(), np_mouseCurrentPosition)));
