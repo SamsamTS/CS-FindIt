@@ -112,7 +112,7 @@ namespace FindIt.GUI
                     string baseIconName = prefab.m_Thumbnail;
 
                     // Attempt to render the thumbnail.
-                    if (!ImageUtils.CreateThumbnailAtlas(name, prefab) && !baseIconName.IsNullOrWhiteSpace())
+                    if (!CreateThumbnail(name, prefab) && !baseIconName.IsNullOrWhiteSpace())
                     {
                         // If it failed, restore original icon name.
                         prefab.m_Thumbnail = baseIconName;
@@ -192,33 +192,201 @@ namespace FindIt.GUI
         /// <summary>
         /// Generates  thumbnail images (normal, focused, hovered, and pressed) for the given prefab.
         /// </summary>
+        /// <param name="name">FindIt asset name</param>
         /// <param name="prefab">The prefab to generate thumbnails for</param>
-        internal void CreateThumbnail(PrefabInfo prefab, UIButton button)
+        /// <returns></returns>
+        internal bool CreateThumbnail(string name, PrefabInfo prefab)
         {
-            // Don't do anything with null prefabs or prefabs without buttons.
-            if (prefab == null || button == null)
+            // Check for valid data.
+            if (prefab == null || name.IsNullOrWhiteSpace())
             {
-                return;
+                return false;
             }
 
-            // Name setups.
-            string thumbName = Asset.GetName(prefab);
-            string baseIconName = prefab.m_Thumbnail;
-
-            // Attempt to generate icon.
-            if (!ImageUtils.CreateThumbnailAtlas(thumbName, prefab) && !baseIconName.IsNullOrWhiteSpace())
+            // Don't need to do anything if the name already matches.
+            if (prefab.m_Thumbnail == name)
             {
-                // If it failed, use the default thumbnail icon.
-                prefab.m_Thumbnail = baseIconName;
+                return true;
             }
 
-            // Set button thumbnail images.
-            button.atlas = prefab.m_Atlas;
-            button.normalFgSprite = prefab.m_Thumbnail;
-            button.hoveredFgSprite = prefab.m_Thumbnail + "Hovered";
-            button.pressedFgSprite = prefab.m_Thumbnail + "Pressed";
-            button.disabledFgSprite = prefab.m_Thumbnail + "Disabled";
-            button.focusedFgSprite = null;
+            // Reset zoom.
+            renderer.Zoom = 4f;
+
+            // Success flag.
+            bool wasRendered = false;
+
+            if (prefab is BuildingInfo building)
+            {
+                wasRendered = BuildingThumbnail(building);
+            }
+            else if (prefab is PropInfo prop)
+            {
+
+
+                // Different treatment for props with blend or solid shaders.
+                if (prop.m_material.shader == Asset.shaderBlend || prop.m_material.shader == Asset.shaderSolid)
+                {
+                    Texture2D mainTexture = prop.m_material.GetTexture("_MainTex") as Texture2D;
+                    Texture2D aci = prop.m_material.GetTexture("_ACIMap") as Texture2D;
+
+                    Texture2D texture = new Texture2D(mainTexture.width, mainTexture.height);
+                    ResourceLoader.CopyTexture(mainTexture, texture);
+                    Color32[] colors = texture.GetPixels32();
+
+                    if (aci != null)
+                    {
+                        ResourceLoader.CopyTexture(aci, texture);
+                        Color32[] aciColors = texture.GetPixels32();
+
+                        for (int i = 0; i < colors.Length; i++)
+                        {
+                            colors[i].a -= aciColors[i].r;
+                        }
+
+                        texture.SetPixels32(0, 0, texture.width, texture.height, colors);
+                        texture.Apply();
+                    }
+
+                    ImageUtils.ScaleTexture2(texture, 109 - 10, 100 - 10);
+                    texture.name = name;
+
+                    prefab.m_Thumbnail = name;
+                    prefab.m_Atlas = ResourceLoader.CreateTextureAtlas("FindItThumbnails_" + name, new string[] { }, null);
+                    ResourceLoader.AddTexturesInAtlas(prefab.m_Atlas, ImageUtils.GenerateMissingThumbnailVariants(texture));
+
+                    Debugging.Message("Generated thumbnails for: " + name);
+
+                    return true;
+                }
+                
+                wasRendered = PropThumbnail(prop);
+            }
+            else if (prefab is TreeInfo tree)
+            {
+                wasRendered = TreeThumbnail(tree);
+            }
+
+            // See if we were succesful in rendering.
+            if (wasRendered)
+            {
+                // Back up game's current active texture.
+                Texture2D thumbnailTexture = ResourceLoader.ConvertRenderTexture(renderer.Texture);
+
+                // Set names.
+                thumbnailTexture.name = name;
+                prefab.m_Thumbnail = name;
+
+                // Create new texture atlas and add thumbnail variants.
+                prefab.m_Atlas = ResourceLoader.CreateTextureAtlas("FindItThumbnails_" + name, new string[] { }, null);
+                ResourceLoader.ResizeTexture(thumbnailTexture, 109, 100);
+                ResourceLoader.AddTexturesInAtlas(prefab.m_Atlas, ImageUtils.GenerateMissingThumbnailVariants(thumbnailTexture));
+
+                Debugging.Message("Generated thumbnails for: " + name);
+            }
+            else
+            {
+                // Rendering didn't occur - apply default thumbnail sprite name.
+                prefab.m_Thumbnail = "ThumbnailBuildingDefault";
+            }
+
+            return wasRendered;
+        }
+
+
+        /// <summary>
+        /// Generates a building thumbnail.
+        /// </summary>
+        /// <param name="building">BuildingInfo target</param>
+        /// <returns>True if rendering occured successfully, false otherwise</returns>
+        private bool BuildingThumbnail(BuildingInfo building)
+        {
+            // Safety first!
+            if (building?.m_mesh == null || building.m_material == null)
+            {
+                return false;
+            }
+
+            // Set mesh and material for render.
+            renderer.Mesh = building.m_mesh;
+            renderer.Material = building.m_material;
+
+            // If the selected building has colour variations, temporarily set the colour to the default for rendering.
+            if (building.m_useColorVariations)
+            {
+                Color originalColor = building.m_material.color;
+                building.m_material.color = building.m_color0;
+                renderer.Render();
+                building.m_material.color = originalColor;
+            }
+            else
+            {
+                // No temporary colour change needed.
+                renderer.Render();
+            }
+
+            // If we made it this far, all good.
+            return true;
+        }
+
+
+        /// <summary>
+        /// Generates a prop thumbnail.
+        /// </summary>
+        /// <param name="prop">PropInfo target</param>
+        /// <returns>True if rendering occured successfully, false otherwise</returns>
+        private bool PropThumbnail(PropInfo prop)
+        {
+            // Safety first!
+            if (prop?.m_mesh == null || prop.m_material == null)
+            {
+                return false;
+            }
+
+            // Set mesh and material for render.
+            renderer.Mesh = prop.m_mesh;
+            renderer.Material = prop.m_material;
+
+            // If the selected building has colour variations, temporarily set the colour to the default for rendering.
+            if (prop.m_useColorVariations)
+            {
+                Color originalColor = prop.m_material.color;
+                prop.m_material.color = prop.m_color0;
+                renderer.Render();
+                prop.m_material.color = originalColor;
+            }
+            else
+            {
+                // No temporary colour change needed.
+                renderer.Render();
+            }
+
+            // If we made it this far, all good.
+            return true;
+        }
+
+
+        /// <summary>
+        /// Generates a tree thumbnail.
+        /// </summary>
+        /// <param name="building">TreeInfo target</param>
+        /// <returns>True if rendering occured successfully, false otherwise</returns>
+        private bool TreeThumbnail(TreeInfo tree)
+        {
+            // Safety first!
+            if (tree?.m_mesh == null || tree.m_material == null)
+            {
+                return false;
+            }
+
+            // Set mesh and material for render.
+            renderer.Mesh = tree.m_mesh;
+            renderer.Material = tree.m_material;
+
+            // Render.
+            renderer.Render();
+
+            // If we made it this far, all good.
+            return true;
         }
 
 

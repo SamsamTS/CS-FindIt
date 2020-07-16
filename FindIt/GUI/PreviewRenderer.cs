@@ -10,8 +10,7 @@ namespace FindIt.GUI
     {
         private Camera renderCamera;
         private Mesh currentMesh;
-        private Bounds currentBounds;
-        private float currentRotation = 120f;
+        private float currentRotation = 210f;
         private float currentZoom = 4f;
         private Material _material;
 
@@ -33,6 +32,7 @@ namespace FindIt.GUI
             renderCamera.targetTexture = new RenderTexture(512, 512, 24, RenderTextureFormat.ARGB32);
             renderCamera.allowHDR = true;
             renderCamera.enabled = false;
+            renderCamera.clearFlags = CameraClearFlags.Color;
 
             // Basic defaults.
             renderCamera.pixelRect = new Rect(0f, 0f, 512, 512);
@@ -63,67 +63,13 @@ namespace FindIt.GUI
 
 
         /// <summary>
-        /// Sets mesh and material from a prefab.
-        /// </summary>
-        /// <param name="prefab">Prefab to render</param>
-        /// <returns>True if the target was valid (valid mesh and material)</returns>
-        public bool SetTarget(PrefabInfo prefab)
-        {
-            if (prefab is BuildingInfo buildingPrefab)
-            {
-                Mesh = buildingPrefab.m_mesh;
-                _material = buildingPrefab.m_material;
-            }
-            else if (prefab is PropInfo propPrefab)
-            {
-                Mesh = propPrefab.m_mesh;
-                _material = propPrefab.m_material;
-            }
-            else if (prefab is TreeInfo treePrefab)
-            {
-                Mesh = treePrefab.m_mesh;
-                _material = treePrefab.m_material;
-            }
-            else
-            {
-                Debugging.Message("invalid prefab type for " + prefab.name);
-                return false;
-            }
-
-            return Mesh != null && _material != null;
-        }
-
-
-        /// <summary>
         /// Currently rendered mesh.
         /// </summary>
         public Mesh Mesh
         {
             get => currentMesh;
 
-            set
-            {
-                if (currentMesh != value)
-                {
-                    // Update currently rendered mesh if changed.
-                    currentMesh = value;
-
-                    if (value != null)
-                    {
-                        // Reset the bounding box to be the smallest that can encapsulate all verticies of the new mesh.
-                        // That way the preview image is the largest size that fits cleanly inside the preview size.
-                        currentBounds = new Bounds(Vector3.zero, Vector3.zero);
-
-                        // Use separate verticies instance instead of accessing Mesh.vertices each time (which is slow).
-                        // >10x measured performance improvement by doing things this way instead.
-                        Vector3[] vertices = Mesh.vertices;
-                        for (int i = 0; i < vertices.Length; i++)
-                        {
-                            currentBounds.Encapsulate(vertices[i]);
-                        }
-                    }
-                }
-            }
+            set => currentMesh = value;
         }
 
 
@@ -164,14 +110,15 @@ namespace FindIt.GUI
         /// </summary>
         public void Render()
         {
+            // If no primary mesh and no other meshes, don't do anything here.
             if (currentMesh == null)
             {
                 return;
             }
 
-            // Set background - plain.
-            renderCamera.clearFlags = CameraClearFlags.Color;
-
+                // TODO: Remove - debugging.
+                    renderCamera.backgroundColor = new Color32(33, 151, 199, 255);
+            
             // Back up current game InfoManager mode.
             InfoManager infoManager = Singleton<InfoManager>.instance;
             InfoManager.InfoMode currentMode = infoManager.CurrentMode;
@@ -180,7 +127,7 @@ namespace FindIt.GUI
             // Set current game InfoManager to default (don't want to render with an overlay mode).
             infoManager.SetCurrentMode(InfoManager.InfoMode.None, InfoManager.SubInfoMode.Default);
             infoManager.UpdateInfoMode();
-
+            
             // Backup current exposure and sky tint.
             float gameExposure = DayNightProperties.instance.m_Exposure;
             Color gameSkyTint = DayNightProperties.instance.m_SkyTint;
@@ -193,21 +140,11 @@ namespace FindIt.GUI
             DayNightProperties.instance.m_SkyTint = new Color(0, 0, 0);
             DayNightProperties.instance.Refresh();
 
-            // Set zoom to encapsulate entire model.
-            float magnitude = currentBounds.extents.magnitude;
-            float num = magnitude + 16f;
-            float num2 = magnitude * currentZoom;
-
-            // Transforms and clip.
-            renderCamera.transform.position = -Vector3.forward * num2;
-            renderCamera.transform.rotation = Quaternion.identity;
-            renderCamera.nearClipPlane = Mathf.Max(num2 - num * 1.5f, 0.01f);
-            renderCamera.farClipPlane = num2 + num * 1.5f;
-
             // Set up our render lighting settings.
             Light renderLight = DayNightProperties.instance.sunLightSource;
 
             RenderManager.instance.MainLight = renderLight;
+
 
             // If game is currently in nighttime, enable sun and disable moon lighting.
             if (gameMainLight == DayNightProperties.instance.moonLightSource)
@@ -217,14 +154,26 @@ namespace FindIt.GUI
             }
 
             // Light settings.
+            renderLight.transform.eulerAngles = new Vector3(50, 210, 70);
             renderLight.intensity = 2f;
             renderLight.color = Color.white;
-            renderLight.transform.eulerAngles = new Vector3(55, 0, 0);
 
-            // Yay!  Matrix math, my favourite!
-            Quaternion quaternion = Quaternion.Euler(-20f, 0f, 0f) * Quaternion.Euler(0f, currentRotation, 0f);
-            Vector3 pos = quaternion * -currentBounds.center;
-            Matrix4x4 matrix = Matrix4x4.TRS(pos, quaternion, Vector3.one);
+            // Set zoom to encapsulate entire model.
+            float magnitude = currentMesh.bounds.extents.magnitude;
+            float clipExtent = (magnitude + 16f) * 1.5f;
+            float clipCenter = magnitude * currentZoom;
+
+            // Position and rotate camera.
+            renderCamera.transform.position = Vector3.forward * clipCenter;
+            renderCamera.transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
+
+            // Clip planes.
+            renderCamera.nearClipPlane = Mathf.Max(clipCenter - clipExtent, 0.01f);
+            renderCamera.farClipPlane = clipCenter + clipExtent;
+
+            Quaternion rotation = Quaternion.Euler(-40f, 180f, 0f) * Quaternion.Euler(0f, currentRotation, 0f);
+            Vector3 position = rotation * -currentMesh.bounds.center;
+            Matrix4x4 matrix = Matrix4x4.TRS(position, rotation, Vector3.one);
 
             // Render!
             Graphics.DrawMesh(currentMesh, matrix, _material, 0, renderCamera, 0, null, true, true);
