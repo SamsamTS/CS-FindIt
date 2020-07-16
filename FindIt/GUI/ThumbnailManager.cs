@@ -101,51 +101,47 @@ namespace FindIt.GUI
 
             try
             {
-                // TODO: Refactor and merge in RenderThumbnailAtlas
+                // See if there's anything queued.
                 if (renderQueue != null && renderQueue.Count > 0)
                 {
-                    List<PrefabInfo> prefabs;
-                    lock (renderQueue)
+                    // If so, grab the next key.
+                    PrefabInfo prefab = renderQueue.Keys.First();
+                    string name = Asset.GetName(prefab);
+
+                    // Back up original thumbnail icon name.
+                    string baseIconName = prefab.m_Thumbnail;
+
+                    // Attempt to render the thumbnail.
+                    if (!ImageUtils.CreateThumbnailAtlas(name, prefab) && !baseIconName.IsNullOrWhiteSpace())
                     {
-                        prefabs = new List<PrefabInfo>(renderQueue.Keys);
+                        // If it failed, restore original icon name.
+                        prefab.m_Thumbnail = baseIconName;
                     }
 
-                    int count = 0;
-                    foreach (PrefabInfo prefab in prefabs)
+                    // Update button sprites with thumbnail.
+                    UIButton button = renderQueue[prefab];
+                    if (button != null)
                     {
-                        string name = Asset.GetName(prefab);
-                        string baseIconName = prefab.m_Thumbnail;
-                        if (!ImageUtils.CreateThumbnailAtlas(name, prefab) && !baseIconName.IsNullOrWhiteSpace())
-                        {
-                            prefab.m_Thumbnail = baseIconName;
-                        }
-                        UIButton button = renderQueue[prefab];
-                        if (button != null)
-                        {
-                            button.atlas = prefab.m_Atlas;
+                        button.atlas = prefab.m_Atlas;
 
-                            button.normalFgSprite = prefab.m_Thumbnail;
-                            button.hoveredFgSprite = prefab.m_Thumbnail + "Hovered";
-                            button.pressedFgSprite = prefab.m_Thumbnail + "Pressed";
-                            button.disabledFgSprite = prefab.m_Thumbnail + "Disabled";
-                            button.focusedFgSprite = null;
-                        }
-
-                        lock (renderQueue)
-                        {
-                            renderQueue.Remove(prefab);
-                        }
-                        count++;
-
-                        // Generate 1 thumbnail max
-                        if (count > 1) break;
+                        button.normalFgSprite = prefab.m_Thumbnail;
+                        button.hoveredFgSprite = prefab.m_Thumbnail + "Hovered";
+                        button.pressedFgSprite = prefab.m_Thumbnail + "Pressed";
+                        button.disabledFgSprite = prefab.m_Thumbnail + "Disabled";
+                        button.focusedFgSprite = null;
                     }
 
-                    FindIt.instance.scrollPanel.Refresh();
+                    // Remove this entry from the queue.
+                    renderQueue.Remove(prefab);
                 }
+
+                // Refresh panel.
+                FindIt.instance.scrollPanel.Refresh();
+
             }
             catch (Exception e)
             {
+                // Don't let a single thumnbail exception stop UI processing.
                 Debugging.Message("thumbnail failed");
                 Debugging.LogException(e);
             }
