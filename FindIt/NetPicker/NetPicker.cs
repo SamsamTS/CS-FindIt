@@ -10,6 +10,7 @@ namespace FindIt
 {
     public static class Db
     {
+
         public static bool on = false;
 
         public static void l(object m)
@@ -84,7 +85,7 @@ namespace FindIt
         // Allow....?
         public bool np_allowSegments = true;
         public bool np_allowNodes = true;
-        public bool np_allowProps = true;
+        public bool np_allowProps = true; // also applies to decal
         public bool np_allowTrees = true;
         public bool np_allowBuildings = true;
 
@@ -111,10 +112,10 @@ namespace FindIt
             return component as T;
         }
 
+        // Reflection was removed but I keep the same method name
         private bool ReflectIntoFindIt(PrefabInfo info)
         {
             Type ScrollPanelType = Type.GetType("FindIt.GUI.UIScrollPanel, FindIt");
-            //Debugging.Message("NetPicker - " + ScrollPanelType.ToString());
 
             // Get all the item data...
             object[] itemDataBuffer = FindIt.instance.scrollPanel.itemsData.ToArray();
@@ -154,14 +155,20 @@ namespace FindIt
             return false;
         }
 
-        private void ShowInPanelResolve(PrefabInfo pInfo)
+        private bool ShowInPanelResolve(PrefabInfo pInfo)
         { 
+            if (pInfo == null)
+            {
+                Debugging.Message("NetPicker - Cannot pick up any prefab");
+                return false;
+            }
+
             if (pInfo is BuildingInfo)
             {
                 BuildingInfo info = pInfo as BuildingInfo;
                 if (info != null && IsGrowableRico(info))
                 {
-                    Debugging.Message("NetPicker - " + "Info " + info.name + " is a growable (or RICO).");
+                    Debugging.Message("NetPicker - " + "Info " + info.name + " is a growable (or RICO)");
 
                     // Reset searchbox panel filters
                     FindIt.instance.searchBox.ResetFilters();
@@ -169,10 +176,10 @@ namespace FindIt
                     if (FindIt.instance.searchBox != null && FindIt.instance.searchBox.isVisible == false)
                     {
                         UIButton FIButton = UIView.Find<UIButton>("FindItMainButton");
-                        if (FIButton == null) return;
+                        if (FIButton == null) return false;
                         FIButton.SimulateClick();
                     }
-                    if (FindIt.instance.searchBox == null) return;
+                    if (FindIt.instance.searchBox == null) return false;
 
                     UIDropDown FilterDropdown = FindIt.instance.searchBox.typeFilter;
                     FilterDropdown.selectedValue = Translations.Translate("FIF_SE_IG"); // growable
@@ -188,13 +195,13 @@ namespace FindIt
                         if (!ReflectIntoFindIt(info))
                         {
                             // And then if that fails, give up and get a drink
-                            Debugging.Message("NetPicker - " + "Could not be found in Growable or Rico menus.");
+                            Debugging.Message("NetPicker - " + "Could not be found in Growable or Rico menus");
                         }
                     }
                 }
                 else if (info != null)
                 {
-                    Debugging.Message("NetPicker - " + "Info " + pInfo.name + " is not growable/rico/tree.");
+                    Debugging.Message("NetPicker - " + "Info " + pInfo.name + " is a ploppable");
                     ShowInPanel(pInfo);
                 }
             }
@@ -204,7 +211,7 @@ namespace FindIt
                 TreeInfo info = pInfo as TreeInfo;
                 if (info != null)
                 {
-                    Debugging.Message("NetPicker - " + "Info " + info.name + " is a tree.");
+                    Debugging.Message("NetPicker - " + "Info " + info.name + " is a tree");
 
                     // Reset searchbox panel filters
                     FindIt.instance.searchBox.ResetFilters();
@@ -212,10 +219,10 @@ namespace FindIt
                     if (FindIt.instance.searchBox != null && FindIt.instance.searchBox.isVisible == false)
                     {
                         UIButton FIButton = UIView.Find<UIButton>("FindItMainButton");
-                        if (FIButton == null) return;
+                        if (FIButton == null) return false;
                         FIButton.SimulateClick();
                     }
-                    if (FindIt.instance.searchBox == null) return;
+                    if (FindIt.instance.searchBox == null) return false;
 
                     UIDropDown FilterDropdown = FindIt.instance.searchBox.typeFilter;
                     FilterDropdown.selectedValue = Translations.Translate("FIF_SE_IT"); // tree
@@ -227,17 +234,17 @@ namespace FindIt
                     if (!ReflectIntoFindIt(info))
                     {
                        // if that fails
-                       Debugging.Message("NetPicker - " + "Could not be found in tree menu.");
+                       Debugging.Message("NetPicker - " + "Could not be found in tree menu");
                     }
                 }
             }
 
+            // prop and decal
             else if (pInfo is PropInfo)
             {
                 PropInfo info = pInfo as PropInfo;
                 if (info != null)
                 {
-                    Debugging.Message("NetPicker - " + "Info " + info.name + " is a prop.");
 
                     // Reset searchbox panel filters
                     FindIt.instance.searchBox.ResetFilters();
@@ -245,31 +252,39 @@ namespace FindIt
                     if (FindIt.instance.searchBox != null && FindIt.instance.searchBox.isVisible == false)
                     {
                         UIButton FIButton = UIView.Find<UIButton>("FindItMainButton");
-                        if (FIButton == null) return;
+                        if (FIButton == null) return false;
                         FIButton.SimulateClick();
                     }
-                    if (FindIt.instance.searchBox == null) return;
+                    if (FindIt.instance.searchBox == null) return false;
 
                     UIDropDown FilterDropdown = FindIt.instance.searchBox.typeFilter;
-                    FilterDropdown.selectedValue = Translations.Translate("FIF_SE_IPR"); // prop
 
-                    UIComponent UIFilterProp = FindIt.instance.searchBox.filterProp;
-                    UIFilterProp.GetComponentInChildren<UIButton>().SimulateClick();
+                    if (!info.m_isDecal){
+                        Debugging.Message("NetPicker - " + "Info " + info.name + " is a prop.");
+                        FilterDropdown.selectedValue = Translations.Translate("FIF_SE_IPR"); // prop
+                        UIComponent UIFilterProp = FindIt.instance.searchBox.filterProp;
+                        UIFilterProp.GetComponentInChildren<UIButton>().SimulateClick();
+                    }
+                    else{
+                        Debugging.Message("NetPicker - " + "Info " + info.name + " is a decal");
+                        FilterDropdown.selectedValue = Translations.Translate("FIF_SE_ID"); // decal
+                    }
 
-                    // Reflect into the scroll panel -> the tree panel:
+                    // Reflect into the scroll panel -> the prop panel:
                     if (!ReflectIntoFindIt(info))
                     {
                         // if that fails
-                        Debugging.Message("NetPicker - " + "Could not be found in prop menu.");
+                        Debugging.Message("NetPicker - " + "Could not be found in prop menu");
                     }
                 }
             }
 
             else
             {
-                Debugging.Message("NetPicker - " + "Info " + pInfo.name + " is not growable/rico/tree/prop.");
+                Debugging.Message("NetPicker - " + "Info " + pInfo.name + " is not growable/rico/tree/prop/decal");
                 ShowInPanel(pInfo);
             }
+            return true;
         }
 
         // return false if the building is a ploppable
@@ -381,6 +396,7 @@ namespace FindIt
             // Set the world mouse position (useful for my implementation of StepOver)
             np_mouseCurrentPosition = output.m_hitPos;
 
+            /*
             // Step Over Block.
             if (Input.GetKeyDown(KeyCode.O)) // @TODO allow user to customize this.
             {
@@ -397,10 +413,11 @@ namespace FindIt
                 if (np_stepOverCounter >= np_stepOverBuffer.Count) np_stepOverCounter = 0;
                 np_hoveredObject = np_stepOverBuffer[np_stepOverCounter];
             }
+            */
 
             // This code is used when the step over function is not active. It will choose the closest of any given object and set it as the hovered object.
-            if (!np_hasSteppedOver)
-            {
+            //if (!np_hasSteppedOver)
+            //{
                 np_stepOverBuffer.Clear();
 
                 if (output.m_netSegment != 0) np_stepOverBuffer.Add(new InstanceID() { NetSegment = output.m_netSegment });
@@ -412,26 +429,31 @@ namespace FindIt
                 np_stepOverBuffer.Sort((a, b) => Vector3.Distance(a.Position(), np_mouseCurrentPosition).CompareTo(Vector3.Distance(b.Position(), np_mouseCurrentPosition)));
                 if (np_stepOverBuffer.Count > 0) np_hoveredObject = np_stepOverBuffer[0];
                 else np_hoveredObject = InstanceID.Empty;
-            }
-            else
-            {
-                // This function resets the step over function.
-                if (np_mouseCurrentPosition != np_stepOverPosition)
-                {
-                    np_hasSteppedOver = false;
-                }
-            }
+            //}
+            //else
+            //{
+            //    // This function resets the step over function.
+            //    if (np_mouseCurrentPosition != np_stepOverPosition)
+            //    {
+            //        np_hasSteppedOver = false;
+            //    }
+            //}
 
             // A prefab has been selected. Find it in the UI and enable it.
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetMouseButtonDown(0))
             {
-                ShowInPanelResolve(Default(np_hoveredObject.Info()));
+                // disable the checkbox if a prefab is picked
+                if (ShowInPanelResolve(Default(np_hoveredObject.Info())))
+                {
+                    FindIt.instance.searchBox.pickerToolCheckBox.isChecked = false;
+                }
             }
 
             // Escape key hit = disable the tool
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 enabled = false;
+                FindIt.instance.searchBox.pickerToolCheckBox.isChecked = false;
                 ToolsModifierControl.SetTool<DefaultTool>();
             }
         }
@@ -455,6 +477,12 @@ namespace FindIt
             {
                 Building hoveredBuilding = np_hoveredObject.Building.B();
                 BuildingTool.RenderOverlay(cameraInfo, ref hoveredBuilding, _hovc, _hovc);
+            
+                //while (hoveredBuilding.m_subBuilding > 0)
+                //{
+                //    hoveredBuilding = BuildingManager.instance.m_buildings.m_buffer[hoveredBuilding.m_subBuilding];
+                //    BuildingTool.RenderOverlay(cameraInfo, ref hoveredBuilding, _hovc, _hovc);
+                //}
             }
             else if (np_hoveredObject.Tree != 0)
             {
@@ -466,6 +494,22 @@ namespace FindIt
                 PropInstance hoveredTree = np_hoveredObject.Prop.P();
                 PropTool.RenderOverlay(cameraInfo, hoveredTree.Info, hoveredTree.Position, hoveredTree.Info.m_minScale, hoveredTree.Angle, _hovc);
             }
+        }
+
+        public void setPicker(bool enable)
+        {
+            if (enable)
+            {
+                Debugging.Message("NetPicker - enable picker");
+                NetPickerTool.instance.enabled = true;
+            }
+
+            else
+            {
+                Debugging.Message("NetPicker - disable picker");
+                NetPickerTool.instance.enabled = false;
+            }
+            ToolsModifierControl.SetTool<NetPickerTool>();
         }
     }
 }

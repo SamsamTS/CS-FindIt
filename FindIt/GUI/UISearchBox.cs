@@ -35,7 +35,7 @@ namespace FindIt.GUI
         public UICheckBox tagToolCheckBox;
         public UIFilterTag tagPanel;
 
-        public UILabel pickerToolLabel;
+        public UICheckBox pickerToolCheckBox;
 
         // true = sort by relevance
         // false = sort by most recently downloaded
@@ -277,21 +277,25 @@ namespace FindIt.GUI
             tagToolCheckBox.width = 200;
             tagToolCheckBox.label.text = Translations.Translate("FIF_SE_SCTP");
             tagToolCheckBox.label.textScale = 0.8f;
-            tagToolCheckBox.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width+10, 15);
+            tagToolCheckBox.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width + 10, 15);
             tagToolCheckBox.eventCheckChanged += (c, i) =>
             {
                 UpdateTagPanel();
             };
 
 
-            // Elektrix Net Picker 3.0 label
-            pickerToolLabel = panel.AddUIComponent<UILabel>();
-            pickerToolLabel.width = 350;
-            pickerToolLabel.textScale = 0.8f;
-            pickerToolLabel.text = Translations.Translate("FIF_SE_PT");
-            pickerToolLabel.tooltip = Translations.Translate("FIF_SE_PTTP");
-            //pickerToolLabel.label.textScale = 0.8f;
-            pickerToolLabel.relativePosition = new Vector3(tagToolCheckBox.relativePosition.x + tagToolCheckBox.width + 20, 18);
+            // Elektrix Net Picker 3 checkbox
+            pickerToolCheckBox = SamsamTS.UIUtils.CreateCheckBox(panel);
+            pickerToolCheckBox.isChecked = false;
+            pickerToolCheckBox.width = 300;
+            pickerToolCheckBox.label.text = Translations.Translate("FIF_SE_PT");
+            pickerToolCheckBox.label.textScale = 0.8f;
+            pickerToolCheckBox.tooltip = Translations.Translate("FIF_SE_PTTP");
+            pickerToolCheckBox.relativePosition = new Vector3(tagToolCheckBox.relativePosition.x + tagToolCheckBox.width + 10, 15);
+            pickerToolCheckBox.eventCheckChanged += (c, i) =>
+            {
+                NetPickerTool.instance.setPicker(pickerToolCheckBox.isChecked);
+            };
 
             // ploppable filter tabs
             filterPloppable = panel.AddUIComponent<UIFilterPloppable>();
@@ -385,7 +389,7 @@ namespace FindIt.GUI
                         HideFilterPanel(filterTree);
                         HideBuildingFilters();
                         tagToolCheckBox.isVisible = false;
-                        pickerToolLabel.isVisible = false;
+                        pickerToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterPloppable);
                         break;
                     case DropDownOptions.Rico:
@@ -395,7 +399,7 @@ namespace FindIt.GUI
                         HideFilterPanel(filterProp);
                         HideFilterPanel(filterTree);
                         tagToolCheckBox.isVisible = false;
-                        pickerToolLabel.isVisible = false;
+                        pickerToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
@@ -406,7 +410,7 @@ namespace FindIt.GUI
                         HideFilterPanel(filterProp);
                         HideFilterPanel(filterTree);
                         tagToolCheckBox.isVisible = false;
-                        pickerToolLabel.isVisible = false;
+                        pickerToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
@@ -417,7 +421,7 @@ namespace FindIt.GUI
                         HideFilterPanel(filterProp);
                         HideFilterPanel(filterTree);
                         tagToolCheckBox.isVisible = false;
-                        pickerToolLabel.isVisible = false;
+                        pickerToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
@@ -427,7 +431,7 @@ namespace FindIt.GUI
                         HideBuildingFilters();
                         HideFilterPanel(filterTree);
                         tagToolCheckBox.isVisible = false;
-                        pickerToolLabel.isVisible = false;
+                        pickerToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterProp);
                         break;
                     case DropDownOptions.Tree:
@@ -436,7 +440,7 @@ namespace FindIt.GUI
                         HideBuildingFilters();
                         HideFilterPanel(filterProp);
                         tagToolCheckBox.isVisible = false;
-                        pickerToolLabel.isVisible = false;
+                        pickerToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterTree);
                         break;
                     default: // All, Network
@@ -446,7 +450,7 @@ namespace FindIt.GUI
                         HideFilterPanel(filterTree);
                         HideBuildingFilters();
                         tagToolCheckBox.isVisible = true;
-                        pickerToolLabel.isVisible = true;
+                        pickerToolCheckBox.isVisible = true;
                         break;
                 }
             });

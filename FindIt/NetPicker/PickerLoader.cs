@@ -50,10 +50,23 @@ namespace FindIt
     {
         public override void OnUpdate(float realTimeDelta, float simulationTimeDelta)
         {
+
             if (Input.GetKeyDown(KeyCode.N))
             {
-               Debugging.Message("NetPicker - " + "Hotkey N pressed");
-                NetPickerTool.instance.enabled = !NetPickerTool.instance.enabled;
+               Debugging.Message("NetPicker - Hotkey N pressed");
+
+                if (NetPickerTool.instance.enabled)
+                {
+                    NetPickerTool.instance.enabled = false;
+                    FindIt.instance.searchBox.pickerToolCheckBox.isChecked = false;
+                    Debugging.Message("NetPicker - disabled");
+                }
+                else
+                {
+                    NetPickerTool.instance.enabled = true;
+                    FindIt.instance.searchBox.pickerToolCheckBox.isChecked = true;
+                    Debugging.Message("NetPicker - enabled");
+                }
                 ToolsModifierControl.SetTool<NetPickerTool>();
             }
         }

@@ -20,7 +20,7 @@ namespace FindIt
         internal static void Message(string message)
         {
             if (Settings.hideDebugMessages) return;
-            Debug.Log("Find It Fix: " + message + ".");
+            Debug.Log("Find It 2: " + message + ".");
         }
 
 
