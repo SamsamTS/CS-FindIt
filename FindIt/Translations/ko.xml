@@ -9,7 +9,7 @@
     <Translation ID="FIF_SET_UL" String="모두 잠금해제" />
     <Translation ID="FIF_SET_ULTP" String="잠긴 상태에서도 아이템을 선택하고 배치할수 있게 합니다." />
     <Translation ID="FIF_SET_BP" String="다음 불러올 때 잘못된 프롭 고치기" />
-    <Translation ID="FIF_SET_BPTP" String="문제를 유발하는 모든 프롭을 제거합니다\n옵션을 체크하고 세이브를 불러오세요" />
+    <Translation ID="FIF_SET_BPTP" String="문제를 유발하는 모든 프롭을 제거합니다. 옵션을 체크하고 세이브를 불러오세요" />
     <Translation ID="FIF_SE_WF" String="커스텀" />
     <Translation ID="FIF_SE_VF" String="바닐라" />
     <Translation ID="FIF_SE_IA" String="모두" />
@@ -58,6 +58,7 @@
     <Translation ID="FIF_SO_NETP" String="최근 다운로드 순으로 정렬" />
     <Translation ID="FIF_SO_RE" String="관련성" />
     <Translation ID="FIF_SO_NE" String="새 자산" />
+    <Translation ID="TRN_CHOICE" String="언어 선택 (다음부터 적용됨)" />
     <Translation ID="TRN_SYS" String="시스템 언어 사용" />
     <Translation ID="FIF_PROP_IND" String="산업소품" />
     <Translation ID="FIF_PROP_PAR" String="공원소품" />
@@ -68,7 +69,52 @@
     <Translation ID="FIF_PROP_LIG" String="조명" />
     <Translation ID="FIF_PROP_NAT" String="자연스러운" />
     <Translation ID="FIF_PROP_UNS" String="미분류소품" />
+    <Translation ID="FIF_SET_KS" String="단축키" />
     <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
+    <Translation ID="FIF_SET_CTFL" String="커스텀 태그 파일 위치(주기적으로 이 파일을 백업하십시오)" />
+    <Translation ID="FIF_SET_CTFOP" String="파일 탐색기에서 보기" />
+    <Translation ID="FIF_SE_SCTP" String="커스텀 태그 패널 표시" />
+    <Translation ID="FIF_POP_SCR" String="스크롤 업/다운에 마우스 휠 사용" />
+    <Translation ID="FIF_POP_CON" String="확인" />
+    <Translation ID="FIF_POP_CAN" String="취소" />
+    <Translation ID="FIF_POP_NU" String="이것은 되돌릴 수 없습니다." />
+    <Translation ID="FIF_CO_TIT" String="합치기" />
+    <Translation ID="FIF_CO_MSG" String="합칠 존재하는 태그를 선택하십시오." />
+    <Translation ID="FIF_CO_CH" String="선택" />
+    <Translation ID="FIF_CO_CHTP" String="이 기존 태그와 합치기" />
+    <Translation ID="FIF_CO_CHLBL" String="합치기:" />
+    <Translation ID="FIF_CO_NELBL" String="존재하는 태그를 선택해주세요." />
+    <Translation ID="FIF_DE_TIT" String="삭제" />
+    <Translation ID="FIF_DE_MSG" String="이 태그를 정말 삭제하시겠습니까?" />
+    <Translation ID="FIF_RE_TIT" String="변경" />
+    <Translation ID="FIF_RE_MSG" String="새 태그 이름을 입력하고 Enter를 누르십시오." />
+    <Translation ID="FIF_RE_ITP" String="Enter를 눌러 새 태그 이름 제출" />
+    <Translation ID="FIF_RE_ELBL" String="새 태그 이름을 입력해주세요." />
+    <Translation ID="FIF_RE_NEWLBL" String="새 태그 이름:" />
+    <Translation ID="FIF_RE_SLBL" String="태그 이름이 너무 짧음" />
+    <Translation ID="FIF_RE_AELBL" String="이미 존재하는 태그" />
+    <Translation ID="FIF_CT_TIT" String="커스텀 태그" />
+    <Translation ID="FIF_CT_DDMSG" String="이 에셋에 기존 태그 추가:" />
+    <Translation ID="FIF_CT_DDTP" String="이 에셋에 기존 태그 추가" />
+    <Translation ID="FIF_CT_ILBL1" String="또는" />
+    <Translation ID="FIF_CT_ILBL2" String="새 태그 이름을 입력하고 Enter를 누르십시오:" />
+    <Translation ID="FIF_CT_ITP" String="Enter를 눌러 새 태그 추가" />
+    <Translation ID="FIF_SET_CTLS" String="커스텀 태그 목록을 알파벳순으로 정렬" />
+    <Translation ID="FIF_TAG_DDTP" String="이 태그가 있는 에셋만 표시" />
+    <Translation ID="FIF_TAG_REF" String="새로고침" />
+    <Translation ID="FIF_TAG_REFTP" String="커스텀 태그 드롭다운 목록을 새로고침" />
+    <Translation ID="FIF_TAG_REN" String="변경" />
+    <Translation ID="FIF_TAG_RENTP" String="이 태그의 이름 변경" />
+    <Translation ID="FIF_TAG_COM" String="합치기" />
+    <Translation ID="FIF_TAG_COMTP" String="이 태그를 다른 태그와 합치기" />
+    <Translation ID="FIF_TAG_DEL" String="삭제" />
+    <Translation ID="FIF_TAG_DELTP" String="이 태그를 삭제" />
+    <Translation ID="FIF_UIS_WS" String="Steam 창작마당에서 에셋을 보려면 우클릭" />
+    <Translation ID="FIF_TREE_SM" String="작은 나무" />
+    <Translation ID="FIF_TREE_MD" String="중간 나무" />
+    <Translation ID="FIF_TREE_LG" String="큰 나무" />
+    <Translation ID="FIF_SE_PT" String="Elektrix Net Picker 3" />
+    <Translation ID="FIF_SE_PTTP" String="배치된 자산을 클릭하여 선택 패널에서 찾기" />
 
   </Translations>
 </Language>
