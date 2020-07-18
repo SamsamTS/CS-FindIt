@@ -15,11 +15,19 @@ namespace FindIt.GUI
         public UIDropDown tagDropDownMenu;
         private UIButton refreshButton;
         private UIButton renameButton;
-        private UIButton combineButton;
+        private UIButton mergeButton;
         private UIButton deleteButton;
+
+        private UIButton batchButton;
+        private UIButton batchAddButton;
+        private UIButton batchRemoveButton;
+        private UIButton batchClearButton;
+        public bool isBatchActionsEnabled = false;
 
         private List<KeyValuePair<string, int>> customTagList;
         public string[] customTagListStrArray;
+
+        public HashSet<Asset> batchAssetSet = new HashSet<Asset>();
 
         public override void Start()
         {
@@ -89,18 +97,18 @@ namespace FindIt.GUI
                 }
             };
 
-            // combine button 
-            combineButton = SamsamTS.UIUtils.CreateButton(this);
-            combineButton.size = new Vector2(80, 25);
-            combineButton.text = Translations.Translate("FIF_TAG_COM");
-            combineButton.textScale = 0.8f;
-            combineButton.tooltip = Translations.Translate("FIF_TAG_COMTP");
-            combineButton.relativePosition = new Vector3(renameButton.relativePosition.x + renameButton.width + 5, 5);
-            combineButton.eventClick += (c, p) =>
+            // merge button 
+            mergeButton = SamsamTS.UIUtils.CreateButton(this);
+            mergeButton.size = new Vector2(80, 25);
+            mergeButton.text = Translations.Translate("FIF_TAG_COM");
+            mergeButton.textScale = 0.8f;
+            mergeButton.tooltip = Translations.Translate("FIF_TAG_COMTP");
+            mergeButton.relativePosition = new Vector3(renameButton.relativePosition.x + renameButton.width + 5, 5);
+            mergeButton.eventClick += (c, p) =>
             {
                 if (customTagListStrArray.Length != 0)
                 {
-                    UITagsCombinePopUp.ShowAt(combineButton, GetDropDownListKey());
+                    UITagsMergePopUp.ShowAt(mergeButton, GetDropDownListKey());
                 }
                 else
                 {
@@ -114,7 +122,7 @@ namespace FindIt.GUI
             deleteButton.text = Translations.Translate("FIF_TAG_DEL");
             deleteButton.textScale = 0.8f;
             deleteButton.tooltip = Translations.Translate("FIF_TAG_DELTP");
-            deleteButton.relativePosition = new Vector3(combineButton.relativePosition.x + combineButton.width + 5, 5);
+            deleteButton.relativePosition = new Vector3(mergeButton.relativePosition.x + mergeButton.width + 5, 5);
             deleteButton.eventClick += (c, p) =>
             {
                 if (customTagListStrArray.Length != 0)
@@ -125,6 +133,73 @@ namespace FindIt.GUI
                 {
                     Debugging.Message("Custom tag delete button pressed, but no custom tag exists");
                 }
+            };
+
+            // batch button 
+            batchButton = SamsamTS.UIUtils.CreateButton(this);
+            batchButton.size = new Vector2(80, 25);
+            batchButton.text = Translations.Translate("FIF_TAG_BAT");
+            batchButton.textScale = 0.8f;
+            batchButton.relativePosition = new Vector3(deleteButton.relativePosition.x + deleteButton.width + 5, 5);
+            batchButton.eventClick += (c, p) =>
+            {
+                isBatchActionsEnabled = !isBatchActionsEnabled;
+                renameButton.isVisible = !isBatchActionsEnabled;
+                mergeButton.isVisible = !isBatchActionsEnabled;
+                deleteButton.isVisible = !isBatchActionsEnabled;
+                batchAddButton.isVisible = isBatchActionsEnabled;
+                batchRemoveButton.isVisible = isBatchActionsEnabled;
+                batchClearButton.isVisible = isBatchActionsEnabled;
+                if (isBatchActionsEnabled)
+                {
+                    batchAssetSet.Clear();
+                    batchButton.text = Translations.Translate("FIF_TAG_BAC");
+                }
+                else
+                {
+                    batchButton.text = Translations.Translate("FIF_TAG_BAT");
+                }
+                UISearchBox.instance.scrollPanel.Refresh();
+            };
+
+            // batch add button 
+            batchAddButton = SamsamTS.UIUtils.CreateButton(this);
+            batchAddButton.size = new Vector2(80, 25);
+            batchAddButton.text = Translations.Translate("FIF_TAG_ADD");
+            batchAddButton.textScale = 0.8f;
+            batchAddButton.isVisible = false;
+            batchAddButton.tooltip = Translations.Translate("FIF_TAG_ADDTP");
+            batchAddButton.relativePosition = new Vector3(refreshButton.relativePosition.x + refreshButton.width + 5, 5);
+            batchAddButton.eventClick += (c, p) =>
+            {
+                UITagsBatchAddPopUp.ShowAt(batchAddButton);
+            };
+
+            // batch remove button 
+            batchRemoveButton = SamsamTS.UIUtils.CreateButton(this);
+            batchRemoveButton.size = new Vector2(80, 25);
+            batchRemoveButton.text = Translations.Translate("FIF_TAG_REM");
+            batchRemoveButton.textScale = 0.8f;
+            batchRemoveButton.isVisible = false;
+            batchRemoveButton.tooltip = Translations.Translate("FIF_TAG_REMTP");
+            batchRemoveButton.relativePosition = new Vector3(batchAddButton.relativePosition.x + batchAddButton.width + 5, 5);
+            batchRemoveButton.eventClick += (c, p) =>
+            {
+                UITagsBatchRemovePopUp.ShowAt(batchRemoveButton);
+            };
+
+            // batch clear selection button 
+            batchClearButton = SamsamTS.UIUtils.CreateButton(this);
+            batchClearButton.size = new Vector2(80, 25);
+            batchClearButton.text = Translations.Translate("FIF_TAG_CLE");
+            batchClearButton.textScale = 0.8f;
+            batchClearButton.isVisible = false;
+            batchClearButton.tooltip = Translations.Translate("FIF_TAG_CLETP");
+            batchClearButton.relativePosition = new Vector3(batchRemoveButton.relativePosition.x + batchRemoveButton.width + 5, 5);
+            batchClearButton.eventClick += (c, p) =>
+            {
+                batchAssetSet.Clear();
+                UISearchBox.instance.scrollPanel.Refresh();
             };
         }
 

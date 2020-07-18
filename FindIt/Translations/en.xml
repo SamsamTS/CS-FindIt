@@ -115,6 +115,24 @@
     <Translation ID="FIF_TREE_LG" String="Large Trees" />
     <Translation ID="FIF_SE_PT" String="Elektrix Net Picker 3" />
     <Translation ID="FIF_SE_PTTP" String="Click on a placed asset to locate it in the selection panel" />
+    <Translation ID="FIF_TAG_BAT" String="Batch" />
+    <Translation ID="FIF_TAG_BAC" String="Back" />
+    <Translation ID="FIF_TAG_ADD" String="Add" />
+    <Translation ID="FIF_TAG_ADDTP" String="Add a tag to selected assets" />
+    <Translation ID="FIF_TAG_REM" String="Remove" />
+    <Translation ID="FIF_TAG_REMTP" String="Remove a tag from selected assets" />
+    <Translation ID="FIF_TAG_CLE" String="Clear" />
+    <Translation ID="FIF_TAG_CLETP" String="Clear selection" />
+    <Translation ID="FIF_ADD_TIT" String="Batch Add" />
+    <Translation ID="FIF_ADD_NUM" String="Number of selected assets:" />
+    <Translation ID="FIF_ADD_ADD" String="Add an existing tag to selected assets:" />
+    <Translation ID="FIF_ADD_CHTP" String="Add this existing tag" />
+    <Translation ID="FIF_ADD_TAG" String="Tag:" />
+    <Translation ID="FIF_ADD_ELBL" String="Enter a new tag or choose an existing tag" />
+    <Translation ID="FIF_REM_TIT" String="Batch Remove" />
+    <Translation ID="FIF_REM_REM" String="Remove a tag from selected assets:" />
+    <Translation ID="FIF_REM_CHTP" String="Remove this tag" />
+    <Translation ID="FIF_REM_ELBL" String="Choose a tag" />
 
   </Translations>
 </Language>

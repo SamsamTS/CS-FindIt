@@ -268,7 +268,7 @@ namespace FindIt.GUI
             tagPanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             tagPanel.backgroundSprite = "GenericTab";
             tagPanel.isVisible = false;
-            tagPanel.size = new Vector2(590, 35);
+            tagPanel.size = new Vector2(670, 35);
             tagPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height - 40 - 5);
 
             // custom tag panel visibility checkbox
