@@ -51,6 +51,8 @@ namespace FindIt
         public override void OnUpdate(float realTimeDelta, float simulationTimeDelta)
         {
 
+            /*
+
             if (Input.GetKeyDown(KeyCode.N))
             {
                Debugging.Message("NetPicker - Hotkey N pressed");
@@ -69,6 +71,8 @@ namespace FindIt
                 }
                 ToolsModifierControl.SetTool<NetPickerTool>();
             }
+
+            */
         }
     }
 }
