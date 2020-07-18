@@ -14,6 +14,16 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 
 Implemented and planned be included in the next release:
 
+- Custom tag batch actions:  
+-- Add a tag to multiple assets   
+-- Remove a tag from multiple assets  
+
+- Picker now can pick decal
+
+- New picker enable/disable checkbox.
+
+- Remove picker hotkey temporarily for upcoming hotkey framework re-write
+
 New in v1.6.8:  
 - New drop-down menu in custom tag pop-up window. Easier to add existing tags to an asset.  
 
