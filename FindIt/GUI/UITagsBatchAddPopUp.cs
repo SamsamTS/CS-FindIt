@@ -103,6 +103,7 @@ namespace FindIt.GUI
                     return;
                 }
 
+                newTagName = newTagName.ToLower().Trim();
                 newTagNameLabel.textColor = new Color32(0, 0, 0, 255);
                 newTagNameLabel.text = Translations.Translate("FIF_ADD_TAG") + " " + newTagName;
             };
