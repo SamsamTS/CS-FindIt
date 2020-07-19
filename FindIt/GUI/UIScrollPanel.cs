@@ -149,6 +149,8 @@ namespace FindIt.GUI
         private UISprite m_tagSprite;
         private UISprite m_steamSprite;
 
+        private UICheckBox m_batchCheckBox;
+
         private static UIComponent m_tooltipBox;
 
         public static HashSet<PrefabInfo> fixedFocusedTexture = new HashSet<PrefabInfo>();
@@ -218,6 +220,32 @@ namespace FindIt.GUI
                 p.Use();
 
                 UITagsWindow.ShowAt(currentData.asset, m_tagSprite);
+            };
+
+            
+
+            // batch action check box
+            m_batchCheckBox = SamsamTS.UIUtils.CreateCheckBox(component);
+            m_batchCheckBox.isChecked = false;
+            m_batchCheckBox.isVisible = false;
+            m_batchCheckBox.width = 20;
+            m_batchCheckBox.relativePosition = new Vector3(5, component.height - m_batchCheckBox.height - 5);
+            m_batchCheckBox.eventClicked += (c, i) =>
+            {
+                if (currentData != null && currentData.asset != null && m_batchCheckBox)
+                {
+                    if (m_batchCheckBox.isChecked)
+                    {
+                        UIFilterTag.instance.batchAssetSet.Add(currentData.asset);
+                        Debugging.Message("Batch - Add to batch set: " + currentData.asset.name);
+                    }
+                    else
+                    {
+                        UIFilterTag.instance.batchAssetSet.Remove(currentData.asset);
+                        Debugging.Message("Batch - Remove from batch set: " + currentData.asset.name);
+                    }
+                }
+                
             };
 
             component.eventMouseEnter += (c, p) =>
@@ -326,6 +354,21 @@ namespace FindIt.GUI
                     m_tagSprite.atlas = FindIt.atlas;
 
                     m_tagSprite.isVisible = currentData.asset != null && AssetTagList.instance.assets.ContainsValue(currentData.asset) && (component.containsMouse || currentData.asset.tagsCustom.Count > 0);
+                }
+
+                // batch action check box
+                if (m_batchCheckBox != null)
+                {
+                    if (UIFilterTag.instance.batchAssetSet.Contains(data.asset))
+                    {
+                        m_batchCheckBox.isChecked = true;
+                    }
+                    else
+                    {
+                        m_batchCheckBox.isChecked = false;
+                    }
+
+                    m_batchCheckBox.isVisible = UISearchBox.instance.tagPanel.isBatchActionsEnabled;
                 }
 
                 if (m_steamSprite != null)

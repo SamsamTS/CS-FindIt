@@ -8,19 +8,20 @@ using System.Text.RegularExpressions;
 
 namespace FindIt.GUI
 {
-    public class UITagsRenamePopUp : UIPanel
+    public class UITagsMergePopUp : UIPanel
     {
-        public static UITagsRenamePopUp instance;
+        public static UITagsMergePopUp instance;
         private UIComponent m_button;
 
         private const float spacing = 5f;
         private UIButton confirmButton;
         private UIButton cancelButton;
-        private UITextField newTagInput;
 
+        private UIDropDown tagDropDownMenu;
         private List<KeyValuePair<string, int>> customTagList;
         private string[] customTagListStrArray;
 
+        private UIButton tagDropDownAddButton;
         private UILabel newTagNameLabel;
         private string oldTagName;
         private string newTagName;
@@ -30,58 +31,48 @@ namespace FindIt.GUI
             name = "FindIt_TagsWindow";
             atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericPanelWhite";
-            size = new Vector2(380, 200);
+            size = new Vector2(380, 220);
 
             UILabel title = AddUIComponent<UILabel>();
-            title.text = Translations.Translate("FIF_RE_TIT");
+            title.text = Translations.Translate("FIF_CO_TIT");
             title.textColor = new Color32(0, 0, 0, 255);
             title.relativePosition = new Vector3(spacing, spacing);
 
             UILabel message = AddUIComponent<UILabel>();
-            message.text = "\n" + Translations.Translate("FIF_RE_MSG") + "\n";
+            message.text = "\n" + Translations.Translate("FIF_CO_MSG") + "\n" + Translations.Translate("FIF_POP_NU");
             message.textColor = new Color32(0, 0, 0, 255);
             message.relativePosition = new Vector3(spacing, spacing + title.height + spacing);
 
-            newTagInput = SamsamTS.UIUtils.CreateTextField(this);
-            newTagInput.size = new Vector2(width - 2 * spacing, 30);
-            newTagInput.padding.top = 7;
-            newTagInput.tooltip = Translations.Translate("FIF_RE_ITP");
-            newTagInput.relativePosition = new Vector3(spacing, message.relativePosition.y + message.height + spacing);
-            newTagInput.submitOnFocusLost = false;
-            newTagInput.eventTextSubmitted += (c, t) =>
+            // tag dropdown
+            tagDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
+            tagDropDownMenu.normalBgSprite = "TextFieldPanelHovered";
+            tagDropDownMenu.size = new Vector2(width - 2 * spacing - 100, 30);
+            tagDropDownMenu.tooltip = Translations.Translate("FIF_POP_SCR");
+            tagDropDownMenu.listHeight = 210;
+            tagDropDownMenu.itemHeight = 30;
+            tagDropDownMenu.relativePosition = new Vector3(spacing, message.relativePosition.y + message.height + spacing * 2);
+            UpdateCustomTagList();
+
+            // tag dropdown combine button
+            tagDropDownAddButton = SamsamTS.UIUtils.CreateButton(this);
+            tagDropDownAddButton.size = new Vector2(80, 30);
+            tagDropDownAddButton.text = Translations.Translate("FIF_CO_CH");
+            tagDropDownAddButton.textScale = 0.8f;
+            tagDropDownAddButton.tooltip = Translations.Translate("FIF_CO_CHTP");
+            tagDropDownAddButton.relativePosition = new Vector3(spacing + tagDropDownMenu.width + 5, tagDropDownMenu.relativePosition.y);
+            tagDropDownAddButton.eventClick += (c, p) =>
             {
-                // use the first string as the the tag name
-                string[] tagsArr = Regex.Split(t, @"([^\w]|[_-]|\s)+", RegexOptions.IgnoreCase);
-                if (tagsArr[0] != "")
-                {
-                    newTagName = tagsArr[0];
-                }
-
-                if (newTagName == "")
-                {
-                    newTagNameLabel.text = Translations.Translate("FIF_RE_ELBL");
-                    newTagNameLabel.textColor = new Color32(255, 0, 0, 255);
-                    return;
-                }
-
-                if (newTagName.Length == 1)
-                {
-                    newTagNameLabel.text = Translations.Translate("FIF_RE_SLBL");
-                    newTagNameLabel.textColor = new Color32(255, 0, 0, 255);
-                    return;
-                }
-
-                newTagName = newTagName.ToLower().Trim();
+                newTagName = GetDropDownListKey();
+                newTagNameLabel.text = Translations.Translate("FIF_CO_CHLBL") + newTagName;
                 newTagNameLabel.textColor = new Color32(0, 0, 0, 255);
-                newTagNameLabel.text = Translations.Translate("FIF_RE_NEWLBL") + newTagName;
             };
 
             // display new tag name for confirmation
             newTagNameLabel = AddUIComponent<UILabel>();
             newTagNameLabel.size = new Vector2(200, 50);
             newTagNameLabel.textColor = new Color32(0, 0, 0, 255);
-            newTagNameLabel.text = Translations.Translate("FIF_RE_NEWLBL");
-            newTagNameLabel.relativePosition = new Vector3(spacing, newTagInput.relativePosition.y + newTagInput.height + spacing * 2);
+            newTagNameLabel.text = Translations.Translate("FIF_CO_CHLBL") + newTagName;
+            newTagNameLabel.relativePosition = new Vector3(spacing, tagDropDownMenu.relativePosition.y + tagDropDownMenu.height + spacing * 2);
 
             confirmButton = SamsamTS.UIUtils.CreateButton(this);
             confirmButton.size = new Vector2(100, 40);
@@ -91,25 +82,11 @@ namespace FindIt.GUI
             {
                 if (newTagName == "")
                 {
-                    newTagNameLabel.text = Translations.Translate("FIF_RE_ELBL");
+                    newTagNameLabel.text = Translations.Translate("FIF_CO_NELBL");
                     newTagNameLabel.textColor = new Color32(255, 0, 0, 255);
                     return;
                 }
-
-                if (AssetTagList.instance.tagsCustomDictionary.ContainsKey(newTagName)){
-                    newTagNameLabel.text = Translations.Translate("FIF_RE_AELBL");
-                    newTagNameLabel.textColor = new Color32(255, 0, 0, 255);
-                    return;
-                }
-
-                if (newTagName.Length == 1)
-                {
-                    newTagNameLabel.text = Translations.Translate("FIF_RE_SLBL");
-                    newTagNameLabel.textColor = new Color32(255, 0, 0, 255);
-                    return;
-                }
-
-                RenameTag(oldTagName, newTagName);
+                CombineTag(oldTagName, newTagName);
                 ((UIFilterTag)m_button.parent).UpdateCustomTagList();
                 Close();
             };
@@ -152,7 +129,7 @@ namespace FindIt.GUI
         {
             if (instance == null)
             {
-                instance = UIView.GetAView().AddUIComponent(typeof(UITagsRenamePopUp)) as UITagsRenamePopUp;
+                instance = UIView.GetAView().AddUIComponent(typeof(UITagsMergePopUp)) as UITagsMergePopUp;
                 instance.m_button = component;
                 instance.Show(true);
                 UIView.PushModal(instance);
@@ -179,10 +156,16 @@ namespace FindIt.GUI
             }
 
             customTagListStrArray = list.ToArray();
+            tagDropDownMenu.items = customTagListStrArray;
+            tagDropDownMenu.selectedIndex = 0;
+        }
+        private string GetDropDownListKey()
+        {
+            return customTagList[tagDropDownMenu.selectedIndex].Key;
         }
 
         // rename or a tag or combine it with another tag
-        private void RenameTag(string oldTagName, string newTagName)
+        private void CombineTag(string oldTagName, string newTagName)
         {
             foreach (Asset asset in AssetTagList.instance.assets.Values)
             {
