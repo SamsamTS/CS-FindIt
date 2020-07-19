@@ -12,7 +12,7 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 
 ## Change Notes
 
-Implemented and planned be included in the next release:
+Implemented and planned to be included in the next release:
 
 New in v1.6.9:
 - Custom tag batch actions:  
@@ -20,10 +20,8 @@ New in v1.6.9:
 -- Remove a tag from multiple assets  
 
 - Picker now can pick decal
-
 - New picker enable/disable checkbox.
-
-- Remove picker hotkey temporarily for upcoming hotkey framework re-write
+- Remove picker hotkey temporarily for upcoming hotkey implementation rewrite
 
 New in v1.6.8:  
 - New drop-down menu in custom tag pop-up window. Easier to add existing tags to an asset.  
