@@ -14,6 +14,7 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 
 Implemented and planned be included in the next release:
 
+New in v1.6.9:
 - Custom tag batch actions:  
 -- Add a tag to multiple assets   
 -- Remove a tag from multiple assets  
