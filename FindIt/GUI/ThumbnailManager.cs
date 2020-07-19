@@ -14,7 +14,7 @@ namespace FindIt.GUI
     {
         // Instances.
         private static GameObject gameObject;
-        private static ThumbnailQueue _queue;
+        private static ThumbnailGenerator _generator;
         private static PreviewRenderer _renderer;
         internal static PreviewRenderer Renderer => _renderer;
 
@@ -24,15 +24,19 @@ namespace FindIt.GUI
         /// </summary>
         /// <param name="prefab">Prefab to queue</param>
         /// <param name="prefab">Button for thumbnail</param>
-        public static void QueueThumbnail(PrefabInfo prefab, UIButton button)
+        public static void MakeThumbnail(PrefabInfo prefab, UIButton button)
         {
-            // Create the render if there isn't one already.
-            if (gameObject == null)
+            // Safety first.
+            if (prefab != null)
             {
-                Create();
-            }
+                // Create the render if there isn't one already.
+                if (gameObject == null)
+                {
+                    Create();
+                }
 
-            _queue.QueueThumbnail(prefab, button);
+                _generator.MakeThumbnail(prefab, button);
+            }
         }
 
 
@@ -52,7 +56,7 @@ namespace FindIt.GUI
 
                     // Add our queue manager and renderer directly to the gameobject.
                     _renderer = gameObject.AddComponent<PreviewRenderer>();
-                    _queue = gameObject.AddComponent<ThumbnailQueue>();
+                    _generator = new ThumbnailGenerator();
 
                     Debugging.Message("thumbnail renderer created");
                 }
@@ -69,70 +73,61 @@ namespace FindIt.GUI
         /// </summary>
         internal static void Close()
         {
-            GameObject.Destroy(_queue);
             GameObject.Destroy(_renderer);
             GameObject.Destroy(gameObject);
 
             Debugging.Message("thumbnail renderer destroyed");
+
+            // Let the garbage collector cleanup.
+            _generator = null;
+            _renderer = null;
+            gameObject = null;
         }
     }
 
 
     /// <summary>
-    /// Manages a queue for rendering thumbnail images.
+    /// Creates thumbnail images.
     /// Inspired by Boogieman Sam's FindIt! UI.
     /// </summary>
-    public class ThumbnailQueue : UIComponent
+    public class ThumbnailGenerator
     {
         // Renderer for thumbnail images.
         private PreviewRenderer renderer;
-
-        // Render queue.
-        private Dictionary<PrefabInfo, UIButton> renderQueue;
 
 
         /// <summary>
         /// Update method - we render a new thumbnail every time this is called.
         /// Called by Unity every frame.
         /// </summary>
-        public override void Update()
+        public void MakeThumbnail(PrefabInfo prefab, UIButton button)
         {
-            base.Update();
-
             try
             {
-                // See if there's anything queued.
-                if (renderQueue != null && renderQueue.Count > 0)
+                // New thumbnail name.
+                string name = Asset.GetName(prefab);
+
+                // Back up original thumbnail icon name.
+                string baseIconName = prefab.m_Thumbnail;
+
+                // Attempt to render the thumbnail.
+                if (!CreateThumbnail(name, prefab) && !baseIconName.IsNullOrWhiteSpace())
                 {
-                    // If so, grab the next key.
-                    PrefabInfo prefab = renderQueue.Keys.First();
-                    string name = Asset.GetName(prefab);
+                    // If it failed, restore original icon name.
+                    prefab.m_Thumbnail = baseIconName;
+                }
 
-                    // Back up original thumbnail icon name.
-                    string baseIconName = prefab.m_Thumbnail;
+                // Update button sprites with thumbnail.
+                if (button != null)
+                {
+                    button.atlas = prefab.m_Atlas;
 
-                    // Attempt to render the thumbnail.
-                    if (!CreateThumbnail(name, prefab) && !baseIconName.IsNullOrWhiteSpace())
-                    {
-                        // If it failed, restore original icon name.
-                        prefab.m_Thumbnail = baseIconName;
-                    }
-
-                    // Update button sprites with thumbnail.
-                    UIButton button = renderQueue[prefab];
-                    if (button != null)
-                    {
-                        button.atlas = prefab.m_Atlas;
-
-                        button.normalFgSprite = prefab.m_Thumbnail;
-                        button.hoveredFgSprite = prefab.m_Thumbnail + "Hovered";
-                        button.pressedFgSprite = prefab.m_Thumbnail + "Pressed";
-                        button.disabledFgSprite = prefab.m_Thumbnail + "Disabled";
-                        button.focusedFgSprite = null;
-                    }
-
-                    // Remove this entry from the queue.
-                    renderQueue.Remove(prefab);
+                    // Variants.
+                    button.normalFgSprite = prefab.m_Thumbnail;
+                    button.hoveredFgSprite = prefab.m_Thumbnail + "Hovered";
+                    button.pressedFgSprite = prefab.m_Thumbnail + "Pressed";
+                    button.disabledFgSprite = prefab.m_Thumbnail + "Disabled";
+                    button.focusedFgSprite = null;
                 }
 
                 // Refresh panel.
@@ -151,9 +146,9 @@ namespace FindIt.GUI
         /// <summary>
         /// Constructor.
         /// </summary>
-        public ThumbnailQueue()
+        public ThumbnailGenerator()
         {
-            Debugging.Message("creating thumbnail queue");
+            Debugging.Message("creating thumbnail generator");
 
             // Get local reference from parent.
             renderer = ThumbnailManager.Renderer;
@@ -161,31 +156,6 @@ namespace FindIt.GUI
             // Size and setting for thumbnail images: 109 x 100, doubled for anti-aliasing.
             renderer.Size = new Vector2(109, 100) * 2f;
             renderer.CameraRotation = 325f;
-        }
-
-
-        /// <summary>
-        /// Adds a building to the render queue; assumes building button already created.
-        /// </summary>
-        /// <param name="building">Prefab data</param>
-        /// <param name="button">Button</param>
-        internal void QueueThumbnail(PrefabInfo prefab, UIButton button)
-        {
-            if (renderQueue == null)
-            {
-                // Initialise queue.
-                renderQueue = new Dictionary<PrefabInfo, UIButton>();
-            }
-            
-            // See if this prefab is already queued; if it is, update the button reference, otherwise add a new queue entry.
-            if (renderQueue.ContainsKey(prefab))
-            {
-                renderQueue[prefab] = button;
-            }
-            else
-            {
-                renderQueue.Add(prefab, button);
-            }
         }
 
 
@@ -221,8 +191,6 @@ namespace FindIt.GUI
             }
             else if (prefab is PropInfo prop)
             {
-
-
                 // Different treatment for props with blend or solid shaders.
                 if (prop.m_material.shader == Asset.shaderBlend || prop.m_material.shader == Asset.shaderSolid)
                 {

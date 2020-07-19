@@ -142,9 +142,28 @@ namespace FindIt.GUI
 
             // Set up our render lighting settings.
             Light renderLight = DayNightProperties.instance.sunLightSource;
-
             RenderManager.instance.MainLight = renderLight;
 
+            // Set model rotation and position.
+            Quaternion rotation = Quaternion.Euler(-40f, 180f, 0f) * Quaternion.Euler(0f, currentRotation, 0f);
+            Vector3 position = rotation * -currentMesh.bounds.center;
+            Matrix4x4 matrix = Matrix4x4.TRS(position, rotation, Vector3.one);
+
+            // Add mesh to scene.
+            Graphics.DrawMesh(currentMesh, matrix, _material, 0, renderCamera, 0, null, true, true);
+
+            // Set zoom to encapsulate entire model.
+            float magnitude = currentMesh.bounds.extents.magnitude;
+            float clipExtent = (magnitude + 16f) * 1.5f;
+            float clipCenter = magnitude * currentZoom;
+
+            // Clip planes.
+            renderCamera.nearClipPlane = Mathf.Max(clipCenter - clipExtent, 0.01f);
+            renderCamera.farClipPlane = clipCenter + clipExtent;
+
+            // Position and rotate camera.
+            renderCamera.transform.position = Vector3.forward * clipCenter;
+            renderCamera.transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
 
             // If game is currently in nighttime, enable sun and disable moon lighting.
             if (gameMainLight == DayNightProperties.instance.moonLightSource)
@@ -158,25 +177,7 @@ namespace FindIt.GUI
             renderLight.intensity = 2f;
             renderLight.color = Color.white;
 
-            // Set zoom to encapsulate entire model.
-            float magnitude = currentMesh.bounds.extents.magnitude;
-            float clipExtent = (magnitude + 16f) * 1.5f;
-            float clipCenter = magnitude * currentZoom;
-
-            // Position and rotate camera.
-            renderCamera.transform.position = Vector3.forward * clipCenter;
-            renderCamera.transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
-
-            // Clip planes.
-            renderCamera.nearClipPlane = Mathf.Max(clipCenter - clipExtent, 0.01f);
-            renderCamera.farClipPlane = clipCenter + clipExtent;
-
-            Quaternion rotation = Quaternion.Euler(-40f, 180f, 0f) * Quaternion.Euler(0f, currentRotation, 0f);
-            Vector3 position = rotation * -currentMesh.bounds.center;
-            Matrix4x4 matrix = Matrix4x4.TRS(position, rotation, Vector3.one);
-
             // Render!
-            Graphics.DrawMesh(currentMesh, matrix, _material, 0, renderCamera, 0, null, true, true);
             renderCamera.RenderWithShader(_material.shader, "");
 
             // Restore game lighting.

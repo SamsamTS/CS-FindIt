@@ -49,7 +49,7 @@ namespace FindIt.GUI
                 prefab.m_Thumbnail == "thumb_Railway Crossing Very Long"
                 )
             {
-                ThumbnailManager.QueueThumbnail(prefab, button);
+                ThumbnailManager.MakeThumbnail(prefab, button);
 
                 return;
             }
