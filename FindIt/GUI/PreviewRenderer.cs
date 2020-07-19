@@ -116,9 +116,6 @@ namespace FindIt.GUI
                 return;
             }
 
-                // TODO: Remove - debugging.
-                    renderCamera.backgroundColor = new Color32(33, 151, 199, 255);
-            
             // Back up current game InfoManager mode.
             InfoManager infoManager = Singleton<InfoManager>.instance;
             InfoManager.InfoMode currentMode = infoManager.CurrentMode;
