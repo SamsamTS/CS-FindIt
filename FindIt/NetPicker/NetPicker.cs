@@ -446,6 +446,7 @@ namespace FindIt
                 if (ShowInPanelResolve(Default(np_hoveredObject.Info())))
                 {
                     FindIt.instance.searchBox.pickerToolCheckBox.isChecked = false;
+                    enabled = false;
                 }
             }
 

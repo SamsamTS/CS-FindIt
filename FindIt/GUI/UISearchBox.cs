@@ -292,7 +292,7 @@ namespace FindIt.GUI
             pickerToolCheckBox.label.textScale = 0.8f;
             pickerToolCheckBox.tooltip = Translations.Translate("FIF_SE_PTTP");
             pickerToolCheckBox.relativePosition = new Vector3(tagToolCheckBox.relativePosition.x + tagToolCheckBox.width + 10, 15);
-            pickerToolCheckBox.eventCheckChanged += (c, i) =>
+            pickerToolCheckBox.eventClicked += (c, i) =>
             {
                 NetPickerTool.instance.setPicker(pickerToolCheckBox.isChecked);
             };
