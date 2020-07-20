@@ -289,7 +289,7 @@ namespace FindIt.GUI
                     Debugging.Message("Data null");
                 }
 
-                if (component == null || data == null) return;
+                if (component == null || data?.name == null) return;
 
                 currentData = data;
 
@@ -349,15 +349,16 @@ namespace FindIt.GUI
                     RefreshTooltipAltas(component);
                 }
 
-                if(m_tagSprite != null)
+                if (m_tagSprite != null)
                 {
                     m_tagSprite.atlas = FindIt.atlas;
 
                     m_tagSprite.isVisible = currentData.asset != null && AssetTagList.instance.assets.ContainsValue(currentData.asset) && (component.containsMouse || currentData.asset.tagsCustom.Count > 0);
                 }
 
+
                 // batch action check box
-                if (m_batchCheckBox != null)
+                if (m_batchCheckBox != null && data.asset != null && UIFilterTag.instance?.batchAssetSet != null)
                 {
                     if (UIFilterTag.instance.batchAssetSet.Contains(data.asset))
                     {

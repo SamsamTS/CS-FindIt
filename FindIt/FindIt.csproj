@@ -62,6 +62,7 @@
     <Compile Include="FindIt.cs" />
     <Compile Include="GUI\ImageUtils.cs" />
     <Compile Include="GUI\PreviewRenderer.cs" />
+    <Compile Include="GUI\ThumbnailManager.cs" />
     <Compile Include="GUI\UIFilterGrowable.cs" />
     <Compile Include="GUI\UIFilterProp.cs" />
     <Compile Include="GUI\UIFilterTag.cs" />
