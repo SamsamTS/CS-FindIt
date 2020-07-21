@@ -82,8 +82,6 @@
     <Compile Include="GUI\UIUtils.cs" />
     <Compile Include="GUI\UIWarningWindow.cs" />
     <Compile Include="ModInfo.cs" />
-    <Compile Include="NetPicker\NetPicker.cs" />
-    <Compile Include="NetPicker\PickerLoader.cs" />
     <Compile Include="OptionsKeymapping.cs" />
     <Compile Include="Patches\GeneratedScrollPanel.cs" />
     <Compile Include="Patches\Patcher.cs" />
