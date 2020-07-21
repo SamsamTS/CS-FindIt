@@ -328,38 +328,6 @@ namespace FindIt
             }
         }
 
-        public void OnGUI()
-        {
-            try
-            {
-                if (!UIView.HasModalInput() &&
-                    (!UIView.HasInputFocus() || (UIView.activeComponent != null && UIView.activeComponent.parent is UISearchBox)))
-                {
-                    //Event e = Event.current;
-
-                    // Checking key presses
-                    if (Settings.IsSearchPressed())
-                    {
-                        if (!searchBox.isVisible)
-                        {
-                            mainButton.SimulateClick();
-                        }
-                        searchBox.searchButton.SimulateClick();
-                    }
-                }
-
-                if (Input.GetKeyDown(KeyCode.Escape) && searchBox.isVisible)
-                {
-                    searchBox.input.Unfocus();
-                }
-            }
-            catch (Exception e)
-            {
-                Debugging.Message("OnGUI failed");
-                Debugging.LogException(e);
-            }
-        }
-
         public static bool IsRicoEnabled()
         {
             foreach(PluginManager.PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
