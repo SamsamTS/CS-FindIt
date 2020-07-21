@@ -180,11 +180,13 @@ namespace FindIt
 
 
 
+                /*
                 // show update notification
                 if (!Settings.disableUpdateNotification && Settings.lastUpdateNotificationVersion < ModInfo.versionFloat)
                 {
                     UIUpdatePopUp.ShowAt(scrollPanel, "Find It! 2 [Test] " + ModInfo.version + " Update", ModInfo.updateNotes);
                 }
+                */
 
                 Debugging.Message("Initialized");
 
