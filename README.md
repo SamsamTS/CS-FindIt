@@ -14,14 +14,18 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 
 Implemented and planned to be included in the next release:
 
-New in v1.7.0:
+v1.7.0-2 Update:
+
+- Attempt to fix searchbox input issues
+
+v1.7.0 Update:
 - Remove built-in Net Picker 3  
 
 Quboid's new Picker mod is the recommended replacement. It offers similar features with additional support for Move It.
 
 - Revise thumbnail generation for reduced memory usage and faster generation. Credit to algernon.  
 
-New in v1.6.9:
+v1.6.9 Update:
 - Custom tag batch actions:  
 -- Add a tag to multiple assets   
 -- Remove a tag from multiple assets  
@@ -30,7 +34,7 @@ New in v1.6.9:
 - New picker enable/disable checkbox.
 - Remove picker hotkey temporarily for upcoming hotkey implementation rewrite
 
-New in v1.6.8:  
+v1.6.8 Update:  
 - New drop-down menu in custom tag pop-up window. Easier to add existing tags to an asset.  
 
 - New custom tag panel:  
@@ -48,28 +52,28 @@ New in v1.6.8:
 
 - Add tooltip message to the workshop icon. Not a new feature, just a reminder. You can open an asset's workshop page by right-clicking the icon.
 
-New in v1.6.7:
+v1.6.7 Update:
 - Add new Growable/RICO combined search option. You can select and place both types in one place.  
 - Show custom tags file path in mod settings  
 
-New in v1.6.6:
+v1.6.6 Update:
 - Move from the deprecated detour library to Harmony 2, credit to algernon. boformer's [Cities Harmony mod](https://steamcommunity.com/workshop/filedetails/?id=2040656402) now is a required item.
 
-New in v1.6.5-2:
+v1.6.5-2 Update:
 - Fix some bugs
 - Add language support: 한국어, Русский
 - Custom language setting menu(needed for 繁體中文), credit to algernon.
 - New XML settings implementation, credit to algernon.
 - New keyboard shortcut implementation, credit to algernon.
 
-New in v1.6.5:
+v1.6.5 Update:
 - Add filter tabs for props. The categories of the props were decided by which asset editor import templates the asset creators chose, so many are not properly set up. Similar categorization as in More Beautification.
 
 - Three new building size filter options for RICO: 5-8, 9-12, 13+. Easier to find larger RICO buildings.
 
 - Modern Japan Content Creator Pack buildings are counted both as "custom" and "vanilla".
 
-New in v1.6.4:
+v1.6.4 Update:
 - **Experimental** Sort assets by most recently downloaded. A new button is added and you can toggle between the sorting methods.
 
 This will help you find your recent subscriptions unless you reinstall the game recently. This feature was tested on Windows and it worked as expected.
@@ -84,20 +88,20 @@ On Linux(Flatpak Steam) if an asset creator updates their asset, that asset woul
 
 - 简体中文：若游戏已默认设定显示简体中文, 则此模组会自动显示简体中文
 
-New in v1.6.3:
+v1.6.3 Update:
 - Multi-language support is added(thanks algernon for sharing the translation framework!) and translation is WIP. Volunteers for translation are need. You can use [this google sheet](https://docs.google.com/spreadsheets/d/16KPl6X8SZAJTKzXZtQn_Xnh0kelOF2b56tpS4ax8P2E/edit#gid=0) to help the translation.
 
 - Improve filter tab toggle behavior: Click a highlighted filter tab again will "select all" instead of doing nothing unless shift or crtl is pressed. I think this is more intuitive.
 
-New in v1.6.2:
+v1.6.2 Update:
 - New ploppable tabs & icon change. Some DLC buildings are moved to new tabs.
 
-New in v1.6.1:
+v1.6.1 Update:
 - New filter checkbox: choose to include/exclude vanilla assets and custom assets (from Steam workshop subscription or saved in local asset folder) in the search results.
 
 - More flexible search by growable size: You can search for sizes like 1xAll, 2xAll, 3xAll and 4xAll. Notice: CO named their assets inconsistently. For example a building was mistakenly named as 3x4 when it is actually 4x3. The search is based on the actual dimension not the name.
  
-New in v1.6(first release):
+v1.6(first release):
 - Fix some known minor issues in the original Find It.
 - New filter tabs for ECO growables.
 - Buildings added in the newer DLCs now are included and can be found under the filter tabs.
