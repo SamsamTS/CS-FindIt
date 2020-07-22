@@ -13,16 +13,8 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "1.7.0-1";
-        public const float versionFloat = 1.70f;
-
-        public const string updateNotes = "\n" +
-            "- Net Picker 3 has been removed from Find It 2.\n\n" +
-            "Quboid's new Picker mod is the recommended replacement.\n" +
-            "It offers similar features with additional support for Move It.\n\n" +
-            "- Revised thumbnail generation for reduced memory usage and faster generation.\n\n" +
-
-            "\nYou can disable future update notifications in mod settings.\n\n";
+        public const string version = "1.6.9";
+        
 
         public string Name
         {
@@ -121,15 +113,6 @@ namespace FindIt
                 UICheckBox customTagListSort = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_CTLS"), Settings.customTagListSort, (b) =>
                 {
                     Settings.customTagListSort = b;
-                    XMLUtils.SaveSettings();
-                });
-                group.AddSpace(10);
-
-
-                // Disable update notification
-                UICheckBox updateNotification = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DUN"), Settings.disableUpdateNotification, (b) =>
-                {
-                    Settings.disableUpdateNotification = b;
                     XMLUtils.SaveSettings();
                 });
                 group.AddSpace(10);

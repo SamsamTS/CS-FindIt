@@ -69,70 +69,9 @@
     <Translation ID="FIF_PROP_LIG" String="Lights" />
     <Translation ID="FIF_PROP_NAT" String="Natural" />
     <Translation ID="FIF_PROP_UNS" String="Unsorted" />
-    <Translation ID="FIF_SET_KS" String="Сочетание клавиш" />
     <Translation ID="FIF_SE_IGR" String="Grow.RICO" />
     <Translation ID="FIF_SET_CTFL" String="Распол. файла пользовательских тегов. Создавайте резервные копии файла!" />
     <Translation ID="FIF_SET_CTFOP" String="Показать в Проводнике" />
-    <Translation ID="FIF_SE_SCTP" String="Панель пользов. тегов" />
-    <Translation ID="FIF_POP_SCR" String="Используйте колесо мыши для прокрутки вверх/вниз" />
-    <Translation ID="FIF_POP_CON" String="Принять" />
-    <Translation ID="FIF_POP_CAN" String="Отмена" />
-    <Translation ID="FIF_POP_NU" String="Это не может быть отменено." />
-    <Translation ID="FIF_CO_TIT" String="Переместить" />
-    <Translation ID="FIF_CO_MSG" String="Выберите существ. тег для объединения." />
-    <Translation ID="FIF_CO_CH" String="Выбрать" />
-    <Translation ID="FIF_CO_CHTP" String="Переместить в этот тег" />
-    <Translation ID="FIF_CO_CHLBL" String="Переместить в: " />
-    <Translation ID="FIF_CO_NELBL" String="Пожалуйста, выберите существующий тег" />
-    <Translation ID="FIF_DE_TIT" String="Удалить" />
-    <Translation ID="FIF_DE_MSG" String="Вы уверены, что хотите удалить этот тег?" />
-    <Translation ID="FIF_RE_TIT" String="Переименовать" />
-    <Translation ID="FIF_RE_MSG" String="Введите имя нового тега и нажмите Enter." />
-    <Translation ID="FIF_RE_ITP" String="Нажмите Enter, чтобы изменить имя тега на новое" />
-    <Translation ID="FIF_RE_ELBL" String="Пожалуйста, введите новое имя тега" />
-    <Translation ID="FIF_RE_NEWLBL" String="Имя нового тега: " />
-    <Translation ID="FIF_RE_SLBL" String="Это имя тега слишком короткое" />
-    <Translation ID="FIF_RE_AELBL" String="Этот тег уже существует" />
-    <Translation ID="FIF_CT_TIT" String="Пользовательские теги" />
-    <Translation ID="FIF_CT_DDMSG" String="Добавить существ. тег в этот объект:" />
-    <Translation ID="FIF_CT_DDTP" String="Добавить существующий тег в этот объект" />
-    <Translation ID="FIF_CT_ILBL1" String="Или" />
-    <Translation ID="FIF_CT_ILBL2" String="Введите имя нов. тега и нажм. Enter:" />
-    <Translation ID="FIF_CT_ITP" String="Нажмите Enter, чтобы добавить новый тег(и)" />
-    <Translation ID="FIF_SET_CTLS" String="Сортировать список пользовательских тегов по алфавиту" />
-    <Translation ID="FIF_TAG_DDTP" String="Показывать объекты только с этим тегом" />
-    <Translation ID="FIF_TAG_REF" String="Refresh" />
-    <Translation ID="FIF_TAG_REFTP" String="Обновить выпадающий список пользовательских тегов" />
-    <Translation ID="FIF_TAG_REN" String="Rename" />
-    <Translation ID="FIF_TAG_RENTP" String="Переименовать этот тег" />
-    <Translation ID="FIF_TAG_COM" String="Merge" />
-    <Translation ID="FIF_TAG_COMTP" String="Переместить в существующий тег" />
-    <Translation ID="FIF_TAG_DEL" String="Delete" />
-    <Translation ID="FIF_TAG_DELTP" String="Удалить этот тег" />
-    <Translation ID="FIF_UIS_WS" String="Щелкните правой кнопкой мыши, чтобы просмотреть этот объект в Steam Workshop" />
-    <Translation ID="FIF_TREE_SM" String="Small Trees" />
-    <Translation ID="FIF_TREE_MD" String="Medium Trees" />
-    <Translation ID="FIF_TREE_LG" String="Large Trees" />
-    <Translation ID="FIF_SE_PT" String="Elektrix Net Picker 3" />
-    <Translation ID="FIF_SE_PTTP" String="Нажмите на размещённый объект, чтобы найти его на панели выбора." />
-    <Translation ID="FIF_TAG_BAT" String="Batch" />
-    <Translation ID="FIF_TAG_BAC" String="Назад" />
-    <Translation ID="FIF_TAG_ADD" String="Добавить" />
-    <Translation ID="FIF_TAG_ADDTP" String="Добавить тег выбранным объектам" />
-    <Translation ID="FIF_TAG_REM" String="Удалить" />
-    <Translation ID="FIF_TAG_REMTP" String="Удалить тег у выбранных объектов" />
-    <Translation ID="FIF_TAG_CLE" String="Очистить" />
-    <Translation ID="FIF_TAG_CLETP" String="Очистить выбранное" />
-    <Translation ID="FIF_ADD_TIT" String="Пакетное добавление" />
-    <Translation ID="FIF_ADD_NUM" String="Количество выбранных объектов:" />
-    <Translation ID="FIF_ADD_ADD" String="Добавить существ. тег выбран. объектам:" />
-    <Translation ID="FIF_ADD_CHTP" String="Добавить этот существующий тег" />
-    <Translation ID="FIF_ADD_TAG" String="Тег:" />
-    <Translation ID="FIF_ADD_ELBL" String="Введите нов. тег или выберите существ-ий" />
-    <Translation ID="FIF_REM_TIT" String="Пакетное удаление" />
-    <Translation ID="FIF_REM_REM" String="Удалить тег из выбранных объектов:" />
-    <Translation ID="FIF_REM_CHTP" String="Удалить этот тег" />
-    <Translation ID="FIF_REM_ELBL" String="Выберите тег" />
 
   </Translations>
 </Language>
