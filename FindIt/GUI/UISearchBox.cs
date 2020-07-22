@@ -35,8 +35,6 @@ namespace FindIt.GUI
         public UICheckBox tagToolCheckBox;
         public UIFilterTag tagPanel;
 
-        public UICheckBox pickerToolCheckBox;
-
         // true = sort by relevance
         // false = sort by most recently downloaded
         public bool sortButtonTextState = true;
@@ -283,20 +281,6 @@ namespace FindIt.GUI
                 UpdateTagPanel();
             };
 
-
-            // Elektrix Net Picker 3 checkbox
-            pickerToolCheckBox = SamsamTS.UIUtils.CreateCheckBox(panel);
-            pickerToolCheckBox.isChecked = false;
-            pickerToolCheckBox.width = 300;
-            pickerToolCheckBox.label.text = Translations.Translate("FIF_SE_PT");
-            pickerToolCheckBox.label.textScale = 0.8f;
-            pickerToolCheckBox.tooltip = Translations.Translate("FIF_SE_PTTP");
-            pickerToolCheckBox.relativePosition = new Vector3(tagToolCheckBox.relativePosition.x + tagToolCheckBox.width + 10, 15);
-            pickerToolCheckBox.eventClicked += (c, i) =>
-            {
-                NetPickerTool.instance.setPicker(pickerToolCheckBox.isChecked);
-            };
-
             // ploppable filter tabs
             filterPloppable = panel.AddUIComponent<UIFilterPloppable>();
             filterPloppable.isVisible = false;
@@ -389,7 +373,6 @@ namespace FindIt.GUI
                         HideFilterPanel(filterTree);
                         HideBuildingFilters();
                         tagToolCheckBox.isVisible = false;
-                        pickerToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterPloppable);
                         break;
                     case DropDownOptions.Rico:
@@ -399,7 +382,6 @@ namespace FindIt.GUI
                         HideFilterPanel(filterProp);
                         HideFilterPanel(filterTree);
                         tagToolCheckBox.isVisible = false;
-                        pickerToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
@@ -410,7 +392,6 @@ namespace FindIt.GUI
                         HideFilterPanel(filterProp);
                         HideFilterPanel(filterTree);
                         tagToolCheckBox.isVisible = false;
-                        pickerToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
@@ -421,7 +402,6 @@ namespace FindIt.GUI
                         HideFilterPanel(filterProp);
                         HideFilterPanel(filterTree);
                         tagToolCheckBox.isVisible = false;
-                        pickerToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
@@ -431,7 +411,6 @@ namespace FindIt.GUI
                         HideBuildingFilters();
                         HideFilterPanel(filterTree);
                         tagToolCheckBox.isVisible = false;
-                        pickerToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterProp);
                         break;
                     case DropDownOptions.Tree:
@@ -440,7 +419,6 @@ namespace FindIt.GUI
                         HideBuildingFilters();
                         HideFilterPanel(filterProp);
                         tagToolCheckBox.isVisible = false;
-                        pickerToolCheckBox.isVisible = false;
                         ShowFilterPanel(filterTree);
                         break;
                     default: // All, Network
@@ -450,7 +428,6 @@ namespace FindIt.GUI
                         HideFilterPanel(filterTree);
                         HideBuildingFilters();
                         tagToolCheckBox.isVisible = true;
-                        pickerToolCheckBox.isVisible = true;
                         break;
                 }
             });
@@ -485,7 +462,7 @@ namespace FindIt.GUI
             tagPanel.UpdateCustomTagList();
         }
         
-        // Reset filters. Needed for Net Picker
+        // Reset all filters
         public void ResetFilters()
         {
             vanillaFilter.isChecked = true;

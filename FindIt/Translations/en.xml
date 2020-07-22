@@ -133,6 +133,7 @@
     <Translation ID="FIF_REM_REM" String="Remove a tag from selected assets:" />
     <Translation ID="FIF_REM_CHTP" String="Remove this tag" />
     <Translation ID="FIF_REM_ELBL" String="Choose a tag" />
+    <Translation ID="FIF_SET_DUN" String="Disable update notification" />
 
   </Translations>
 </Language>

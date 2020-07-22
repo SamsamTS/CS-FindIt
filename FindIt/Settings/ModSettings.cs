@@ -24,6 +24,10 @@ namespace FindIt
 
         internal static KeyBinding searchKey = new KeyBinding { keyCode = (int)KeyCode.F, control = true, shift = false, alt = false };
 
+        internal static float lastUpdateNotificationVersion = 0;
+
+        internal static bool disableUpdateNotification = false;
+
 
         /// <summary>
         /// Checks to see if the search hotkey has been pressed.
@@ -88,6 +92,12 @@ namespace FindIt
                 Translations.Language = value;
             }
         }
+
+        [XmlElement("LastUpdateNotificationVersion")]
+        public float LastUpdateNotificationVersion { get => Settings.lastUpdateNotificationVersion; set => Settings.lastUpdateNotificationVersion = value; }
+
+        [XmlElement("DisableUpdateNotification")]
+        public bool DisableUpdateNotification { get => Settings.disableUpdateNotification; set => Settings.disableUpdateNotification = value; }
     }
 
 
