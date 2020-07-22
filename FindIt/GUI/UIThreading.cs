@@ -1,13 +1,15 @@
 ﻿using System;
 using UnityEngine;
 using ICities;
+using ColossalFramework.UI;
+using FindIt.GUI;
 
 
 namespace FindIt
 {
     public class UIThreading : ThreadingExtensionBase
     {
-        // Flags.
+        // Flag.
         private bool _processed = false;
 
 
@@ -38,17 +40,24 @@ namespace FindIt
                     _processed = true;
                     try
                     {
-                        // If the searchbox isn't visible, simulate a click on the main button.
-                        if (!FindIt.instance.searchBox.isVisible)
+                        if (!UIView.HasModalInput() &&
+                            (!UIView.HasInputFocus() || (UIView.activeComponent != null && UIView.activeComponent.parent is UISearchBox)))
                         {
-                            FindIt.instance.mainButton.SimulateClick();
+                            if (!FindIt.instance.searchBox.isVisible)
+                            {
+                                FindIt.instance.mainButton.SimulateClick();
+                            }
+                            FindIt.instance.searchBox.searchButton.SimulateClick();
                         }
 
-                        // Simulate click on searchbox to focus and select contents.
-                        FindIt.instance.searchBox.searchButton.SimulateClick();
+                        if (Input.GetKeyDown(KeyCode.Escape) && FindIt.instance.searchBox.isVisible)
+                        {
+                            FindIt.instance.searchBox.input.Unfocus();
+                        }
                     }
                     catch (Exception e)
                     {
+                        Debugging.Message("OnGUI failed");
                         Debugging.LogException(e);
                     }
                 }
@@ -62,12 +71,6 @@ namespace FindIt
             {
                 // Relevant keys aren't pressed anymore; this keystroke is over, so reset and continue.
                 _processed = false;
-            }
-
-            // Check for escape press.
-            if (Input.GetKeyDown(KeyCode.Escape) && FindIt.instance.searchBox.isVisible)
-            {
-                FindIt.instance.searchBox.input.Unfocus();
             }
         }
     }
