@@ -14,13 +14,6 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 
 Implemented and planned to be included in the next release:
 
-New in v1.7.0:
-- Remove built-in Net Picker 3  
-
-Quboid's new Picker mod is the recommended replacement. It offers similar features with additional support for Move It.
-
-- Revise thumbnail generation for reduced memory usage and faster generation. Credit to algernon.  
-
 New in v1.6.9:
 - Custom tag batch actions:  
 -- Add a tag to multiple assets   
