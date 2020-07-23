@@ -102,6 +102,14 @@ namespace FindIt.GUI
             return true;
         }
 
+        public void SelectAll()
+        {
+            for (int i = 0; i < (int)Category.All; i++)
+            {
+                toggles[i].isChecked = true;
+            }
+        }
+
         public event PropertyChangedEventHandler<int> eventFilteringChanged;
 
         public override void Start()

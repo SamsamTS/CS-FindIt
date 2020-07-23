@@ -467,9 +467,16 @@ namespace FindIt.GUI
         {
             vanillaFilter.isChecked = true;
             workshopFilter.isChecked = true;
-            UIFilterTag.instance.tagDropDownCheckBox.isChecked = false;
+            levelFilter.selectedIndex = 0;
             sizeFilterX.selectedIndex = 0;
             sizeFilterY.selectedIndex = 0;
+
+            UIFilterTag.instance.tagDropDownCheckBox.isChecked = false;
+
+            filterGrowable.SelectAll();
+            filterPloppable.SelectAll();
+            filterProp.SelectAll();
+            filterTree.SelectAll();
         }
 
         public void Search()
