@@ -1,12 +1,9 @@
 ﻿// Adapted from Ploppable RICO Revisited.  Inspired by work by SamsamTS (Boogieman Sam); all blame for everything wrong goes to algernon.
 
 using System;
-using System.Linq;
 using UnityEngine;
 using ColossalFramework;
 using ColossalFramework.UI;
-using System.Collections.Generic;
-using System.Net.NetworkInformation;
 
 namespace FindIt.GUI
 {
@@ -136,6 +133,7 @@ namespace FindIt.GUI
                     button.disabledFgSprite = prefab.m_Thumbnail + "Disabled";
                     button.focusedFgSprite = null;
 
+                    // Null check for atlas just in case.
                     if (button.atlas != null)
                     {
                         // Refresh panel.
