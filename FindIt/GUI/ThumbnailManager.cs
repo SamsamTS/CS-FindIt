@@ -6,7 +6,7 @@ using UnityEngine;
 using ColossalFramework;
 using ColossalFramework.UI;
 using System.Collections.Generic;
-
+using System.Net.NetworkInformation;
 
 namespace FindIt.GUI
 {
@@ -117,6 +117,13 @@ namespace FindIt.GUI
                     prefab.m_Thumbnail = baseIconName;
                 }
 
+                // Assign default 'no thumbnail' thumbnail to any assets without valid thumbnails at this point.
+                if (prefab.m_Atlas == null)
+                {
+                    prefab.m_Atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
+                    prefab.m_Thumbnail = "ToolbarIconProps";
+                }
+
                 // Update button sprites with thumbnail.
                 if (button != null)
                 {
@@ -128,11 +135,13 @@ namespace FindIt.GUI
                     button.pressedFgSprite = prefab.m_Thumbnail + "Pressed";
                     button.disabledFgSprite = prefab.m_Thumbnail + "Disabled";
                     button.focusedFgSprite = null;
+
+                    if (button.atlas != null)
+                    {
+                        // Refresh panel.
+                        FindIt.instance.scrollPanel.Refresh();
+                    }
                 }
-
-                // Refresh panel.
-                FindIt.instance.scrollPanel.Refresh();
-
             }
             catch (Exception e)
             {
