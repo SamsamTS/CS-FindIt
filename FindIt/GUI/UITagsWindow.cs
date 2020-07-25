@@ -224,7 +224,14 @@ namespace FindIt.GUI
             input.text = "";
             input.Focus();
 
-            absolutePosition = new Vector3(m_tagSprite.absolutePosition.x, m_tagSprite.absolutePosition.y - height);
+            if (m_tagSprite.absolutePosition.x + width > UIView.GetAView().fixedWidth)
+            {
+                absolutePosition = new Vector3(m_tagSprite.absolutePosition.x - width, m_tagSprite.absolutePosition.y - height);
+            }
+            else
+            {
+                absolutePosition = new Vector3(m_tagSprite.absolutePosition.x, m_tagSprite.absolutePosition.y - height);
+            }
         }
 
         protected override void OnVisibilityChanged()
