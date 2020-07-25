@@ -462,7 +462,8 @@ namespace FindIt.GUI
             tagPanel.UpdateCustomTagList();
         }
         
-        // Reset all filters
+        // Reset all filters. This mehtod will be used by Quboid's Picker mod through reflection.
+        // Don't remove this method. Update this method whenever a new filter is added.
         public void ResetFilters()
         {
             vanillaFilter.isChecked = true;

@@ -113,6 +113,24 @@
     <Translation ID="FIF_TREE_SM" String="小型樹木" />
     <Translation ID="FIF_TREE_MD" String="中型樹木" />
     <Translation ID="FIF_TREE_LG" String="大型樹木" />
+    <Translation ID="FIF_TAG_BAT" String="批次" />
+    <Translation ID="FIF_TAG_BAC" String="返回" />
+    <Translation ID="FIF_TAG_ADD" String="新增" />
+    <Translation ID="FIF_TAG_ADDTP" String="批次新增自定義標籤到選擇的素材" />
+    <Translation ID="FIF_TAG_REM" String="移除" />
+    <Translation ID="FIF_TAG_REMTP" String="從選擇的素材中批次移除自定義標籤" />
+    <Translation ID="FIF_TAG_CLE" String="重選" />
+    <Translation ID="FIF_TAG_CLETP" String="重新選擇" />
+    <Translation ID="FIF_ADD_TIT" String="批次新增" />
+    <Translation ID="FIF_ADD_NUM" String="已選擇的素材數量:" />
+    <Translation ID="FIF_ADD_ADD" String="新增現有標籤到選擇的素材:" />
+    <Translation ID="FIF_ADD_CHTP" String="新增此現有標籤" />
+    <Translation ID="FIF_ADD_TAG" String="標籤:" />
+    <Translation ID="FIF_ADD_ELBL" String="輸入新標籤或選擇現有標籤" />
+    <Translation ID="FIF_REM_TIT" String="批次移除" />
+    <Translation ID="FIF_REM_REM" String="從選擇的素材中移除標籤:" />
+    <Translation ID="FIF_REM_CHTP" String="移除此標籤" />
+    <Translation ID="FIF_REM_ELBL" String="選擇一個標籤" />
 
   </Translations>
 </Language>

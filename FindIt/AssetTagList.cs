@@ -352,55 +352,19 @@ namespace FindIt
         // check the type of a prop based on editor category
         private Asset.PropType SetPropType(string propEditorCategory)
         {
-            if (propEditorCategory.StartsWith("PropsIndustrial"))
-            {
-                return Asset.PropType.PropsIndustrial;
-            }
-
-            else if (propEditorCategory.StartsWith("PropsParks"))
-            {
-                return Asset.PropType.PropsParks;
-            }
+            if (propEditorCategory.StartsWith("PropsIndustrial")) return Asset.PropType.PropsIndustrial;
+            else if (propEditorCategory.StartsWith("PropsParks")) return Asset.PropType.PropsParks;
 
             else if (propEditorCategory.StartsWith("PropsCommonLights") || propEditorCategory.StartsWith("PropsCommonStreets"))
-            {
                 return Asset.PropType.PropsLights;
-            }
 
-            else if (propEditorCategory.StartsWith("PropsCommon"))
-            {
-                return Asset.PropType.PropsCommon;
-            }
-
-            else if (propEditorCategory.StartsWith("PropsResidential"))
-            {
-                return Asset.PropType.PropsResidential;
-            }
-
-            else if (propEditorCategory.StartsWith("PropsBillboards"))
-            {
-                return Asset.PropType.PropsBillboards;
-            }
-
-            else if (propEditorCategory.StartsWith("PropsSpecialBillboards"))
-            {
-                return Asset.PropType.PropsSpecialBillboards;
-            }
-
-            else if (propEditorCategory.StartsWith("PropsRocks"))
-            {
-                return Asset.PropType.Natural;
-            }
-
-            else if (propEditorCategory.StartsWith("Beautification"))
-            {
-                return Asset.PropType.Natural;
-            }
-
-            else if (propEditorCategory.StartsWith("PropsMarker"))
-            {
-                return Asset.PropType.Hidden;
-            }
+            else if (propEditorCategory.StartsWith("PropsCommon")) return Asset.PropType.PropsCommon;
+            else if (propEditorCategory.StartsWith("PropsResidential")) return Asset.PropType.PropsResidential;
+            else if (propEditorCategory.StartsWith("PropsBillboards"))  return Asset.PropType.PropsBillboards;
+            else if (propEditorCategory.StartsWith("PropsSpecialBillboards")) return Asset.PropType.PropsSpecialBillboards;
+            else if (propEditorCategory.StartsWith("PropsRocks")) return Asset.PropType.Natural;
+            else if (propEditorCategory.StartsWith("Beautification")) return Asset.PropType.Natural;
+            else if (propEditorCategory.StartsWith("PropsMarker")) return Asset.PropType.Hidden;
 
             return Asset.PropType.Unsorted;
         }
@@ -428,9 +392,7 @@ namespace FindIt
         public Dictionary<string, int> tagsCustomDictionary = new Dictionary<string, int>();
 
         public Dictionary<string, Asset> assets = new Dictionary<string, Asset>();
-
         public Dictionary<ulong, string> authors = new Dictionary<ulong, string>();
-
         public Dictionary<ulong, ulong> downloadTimes = new Dictionary<ulong, ulong>();
 
         public List<Asset> matches = new List<Asset>();

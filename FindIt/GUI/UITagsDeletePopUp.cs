@@ -29,6 +29,20 @@ namespace FindIt.GUI
             title.textColor = new Color32(0, 0, 0, 255);
             title.relativePosition = new Vector3(spacing, spacing);
 
+            UIButton close = AddUIComponent<UIButton>();
+            close.size = new Vector2(30f, 30f);
+            close.text = "X";
+            close.textScale = 0.9f;
+            close.textColor = new Color32(0, 0, 0, 255);
+            close.focusedTextColor = new Color32(0, 0, 0, 255);
+            close.hoveredTextColor = new Color32(109, 109, 109, 255);
+            close.pressedTextColor = new Color32(128, 128, 128, 102);
+            close.textPadding = new RectOffset(8, 8, 8, 8);
+            close.canFocus = false;
+            close.playAudioEvents = true;
+            close.relativePosition = new Vector3(width - close.width, 0);
+            close.eventClicked += (c, p) => Close();
+
             UILabel message = AddUIComponent<UILabel>();
             message.text = "\n" + Translations.Translate("FIF_DE_MSG") + "\n" + Translations.Translate("FIF_POP_NU");
             message.textColor = new Color32(0, 0, 0, 255);
@@ -49,10 +63,7 @@ namespace FindIt.GUI
             cancelButton.size = new Vector2(100, 40);
             cancelButton.text = Translations.Translate("FIF_POP_CAN");
             cancelButton.relativePosition = new Vector3(confirmButton.relativePosition.x + confirmButton.width + spacing*4, confirmButton.relativePosition.y);
-            cancelButton.eventClick += (c, p) =>
-            {
-                Close();
-            };
+            cancelButton.eventClick += (c, p) => Close();
         }
 
         private static void Close()

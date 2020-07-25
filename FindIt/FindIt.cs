@@ -6,9 +6,7 @@ using UnityEngine;
 
 using System;
 using System.Reflection;
-using System.Collections.Generic;
 
-using ColossalFramework;
 using ColossalFramework.UI;
 using ColossalFramework.Plugins;
 using ColossalFramework.Globalization;
@@ -177,16 +175,6 @@ namespace FindIt
                 mainButton.tooltip = "Find It! 2 " + ModInfo.version;
 
                 m_beautificationPanel = FindObjectOfType<BeautificationPanel>();
-
-
-
-                /*
-                // show update notification
-                if (!Settings.disableUpdateNotification && Settings.lastUpdateNotificationVersion < ModInfo.versionFloat)
-                {
-                    UIUpdatePopUp.ShowAt(scrollPanel, "Find It! 2 [Test] " + ModInfo.version + " Update", ModInfo.updateNotes);
-                }
-                */
 
                 Debugging.Message("Initialized");
 

@@ -56,11 +56,7 @@ namespace FindIt.GUI
             close.canFocus = false;
             close.playAudioEvents = true;
             close.relativePosition = new Vector3(width - close.width, 0);
-
-            close.eventClicked += (c, p) =>
-            {
-                Close();
-            };
+            close.eventClicked += (c, p) => Close();
 
             m_tagsPanel = AddUIComponent<UIPanel>();
             m_tagsPanel.size = new Vector2(width - 2 * spacing, height - 70);
@@ -71,7 +67,6 @@ namespace FindIt.GUI
             m_tagsPanel.autoLayoutStart = LayoutStart.TopLeft;
             m_tagsPanel.wrapLayout = true;
             m_tagsPanel.relativePosition = new Vector3(spacing, title.relativePosition.y + title.height + spacing);
-
 
             tagDropDownMenuMessage = AddUIComponent<UILabel>();
             tagDropDownMenuMessage.text = Translations.Translate("FIF_CT_DDMSG");
