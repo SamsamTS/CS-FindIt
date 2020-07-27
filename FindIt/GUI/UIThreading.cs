@@ -1,6 +1,8 @@
 ﻿using System;
 using UnityEngine;
 using ICities;
+using ColossalFramework.UI;
+using FindIt.GUI;
 
 
 namespace FindIt
@@ -18,38 +20,50 @@ namespace FindIt
         /// <param name="simulationTimeDelta"></param>
         public override void OnUpdate(float realTimeDelta, float simulationTimeDelta)
         {
-            // Local reference.
+            // Local references.
             KeyCode searchKey = (KeyCode)(Settings.searchKey.keyCode);
+            UIButton mainButton = FindIt.instance?.mainButton;
+            UISearchBox searchBox = FindIt.instance?.searchBox;
 
-            // Has hotkey been pressed?
-            if (searchKey != KeyCode.None && Input.GetKey(searchKey))
+            // Null checks for safety.
+            if (searchBox != null && mainButton != null)
             {
-                // Check modifier keys according to settings.
-                bool altPressed = Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt) || Input.GetKey(KeyCode.AltGr);
-                bool ctrlPressed = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
-                bool shiftPressed = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 
-                // Modifiers have to *exactly match* settings, e.g. "alt-F" should not trigger on "ctrl-alt-F".
-                if ((altPressed == Settings.searchKey.alt) && (ctrlPressed == Settings.searchKey.control) && (shiftPressed == Settings.searchKey.shift))
+                // Has hotkey been pressed?
+                if (searchKey != KeyCode.None && Input.GetKey(searchKey))
                 {
-                    // Cancel if key input is already queued for processing.
-                    if (_processed) return;
+                    // Check modifier keys according to settings.
+                    bool altPressed = Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt) || Input.GetKey(KeyCode.AltGr);
+                    bool ctrlPressed = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
+                    bool shiftPressed = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 
-                    _processed = true;
-                    try
+                    // Modifiers have to *exactly match* settings, e.g. "alt-F" should not trigger on "ctrl-alt-F".
+                    if ((altPressed == Settings.searchKey.alt) && (ctrlPressed == Settings.searchKey.control) && (shiftPressed == Settings.searchKey.shift))
                     {
-                        // If the searchbox isn't visible, simulate a click on the main button.
-                        if (!FindIt.instance.searchBox.isVisible)
+                        // Cancel if key input is already queued for processing.
+                        if (_processed) return;
+
+                        _processed = true;
+                        try
                         {
-                            FindIt.instance.mainButton.SimulateClick();
-                        }
+                            // If the searchbox isn't visible, simulate a click on the main button.
+                            if (!searchBox.isVisible)
+                            {
+                                mainButton.SimulateClick();
+                            }
 
-                        // Simulate click on searchbox to focus and select contents.
-                        FindIt.instance.searchBox.searchButton.SimulateClick();
+                            // Simulate click on searchbox to focus and select contents.
+                           searchBox.searchButton.SimulateClick();
+                        }
+                        catch (Exception e)
+                        {
+                            Debugging.LogException(e);
+                        }
                     }
-                    catch (Exception e)
+                    else
                     {
-                        Debugging.LogException(e);
+                        // Relevant keys aren't pressed anymore; this keystroke is over, so reset and continue.
+                        _processed = false;
                     }
                 }
                 else
@@ -57,19 +71,22 @@ namespace FindIt
                     // Relevant keys aren't pressed anymore; this keystroke is over, so reset and continue.
                     _processed = false;
                 }
-            }
-            else
-            {
-                // Relevant keys aren't pressed anymore; this keystroke is over, so reset and continue.
-                _processed = false;
-            }
 
-            // Check for escape press.
-            if (Input.GetKeyDown(KeyCode.Escape) && FindIt.instance.searchBox.isVisible)
-            {
-                FindIt.instance.searchBox.input.Unfocus();
+                // Check for escape press.
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    if (searchBox.hasFocus)
+                    {
+                        // If the search box is focussed, unfocus.
+                        searchBox.input.Unfocus();
+                    }
+                    else if (searchBox.isVisible)
+                    {
+                        // Otherwise, if the searchbox is visible, simulate a main button click to hide.
+                        mainButton.SimulateClick();
+                    }
+                }
             }
         }
     }
-
 }
