@@ -12,10 +12,19 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 
 ## Change Notes
 
-Implemented and planned to be included in the next release:
+Finished and planned to be included in the next release:
+
+V1.7.1 Update:
+- Reintroduce the new thumbnail generation approach after the freezing issue was solved. Reduced memory usage and faster generation. Credit to algernon
+
+- Add 'x" button to recently introduced custom tag pop-ups
+
+- Fix the issue where the custom tag pop-up may be shown out of screen(when Resize It makes the panel too wide)
+
+v1.7.0-3 Update:
+- Switch back to the original way of thumbnail generation temporarily to avoid the 'freezing' issue.
 
 v1.7.0-2 Update:
-
 - Attempt to fix searchbox input issues
 
 v1.7.0 Update:
