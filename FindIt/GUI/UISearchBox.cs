@@ -357,8 +357,8 @@ namespace FindIt.GUI
 
         public void UpdateFilterPanels()
         {
-            SimulationManager.instance.AddAction(() =>
-            {
+            //SimulationManager.instance.AddAction(() =>
+            //{
                 int index = typeFilter.selectedIndex;
                 if (!FindIt.isRicoEnabled && index >= (int)DropDownOptions.Rico)
                 {
@@ -430,7 +430,7 @@ namespace FindIt.GUI
                         tagToolCheckBox.isVisible = true;
                         break;
                 }
-            });
+           // });
         }
 
         public void ShowFilterPanel(UIPanel panel)
