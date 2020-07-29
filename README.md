@@ -14,6 +14,15 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 
 Finished and planned to be included in the next release:
 
+V1.7.2 Update:
+- UI Changes. New panel for extra filters    
+
+- Extra filters:  
+-- a list of asset creators and number of assets made by each asset creator  
+-- building height  
+
+- Adjust thumbnail model rotation(algernon)
+
 V1.7.1 Update:
 - Reintroduce the new thumbnail generation approach after the freezing issue was solved. Reduced memory usage and faster generation. Credit to algernon
 
