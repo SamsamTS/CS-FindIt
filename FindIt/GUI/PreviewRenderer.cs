@@ -142,7 +142,7 @@ namespace FindIt.GUI
             RenderManager.instance.MainLight = renderLight;
 
             // Set model rotation and position.
-            Quaternion rotation = Quaternion.Euler(-40f, 180f, 0f) * Quaternion.Euler(0f, currentRotation, 0f);
+            Quaternion rotation = Quaternion.Euler(-30f, 180f, 0f) * Quaternion.Euler(0f, currentRotation, 0f);
             Vector3 position = rotation * -currentMesh.bounds.center;
             Matrix4x4 matrix = Matrix4x4.TRS(position, rotation, Vector3.one);
 
@@ -170,7 +170,7 @@ namespace FindIt.GUI
             }
 
             // Light settings.
-            renderLight.transform.eulerAngles = new Vector3(50, 210, 70);
+            renderLight.transform.eulerAngles = new Vector3(40, 210, 70);
             renderLight.intensity = 2f;
             renderLight.color = Color.white;
 
