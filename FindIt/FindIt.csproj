@@ -64,6 +64,7 @@
     <Compile Include="GUI\ImageUtils.cs" />
     <Compile Include="GUI\PreviewRenderer.cs" />
     <Compile Include="GUI\ThumbnailManager.cs" />
+    <Compile Include="GUI\UIFilterExtra.cs" />
     <Compile Include="GUI\UIFilterGrowable.cs" />
     <Compile Include="GUI\UIFilterProp.cs" />
     <Compile Include="GUI\UIFilterTag.cs" />
@@ -125,6 +126,7 @@
     <EmbeddedResource Include="Icons\ToolbarIconPropsBillboardsDisabled.png" />
     <EmbeddedResource Include="Icons\ToolbarIconPropsSpecialBillboards.png" />
     <EmbeddedResource Include="Icons\ToolbarIconPropsSpecialBillboardsDisabled.png" />
+    <EmbeddedResource Include="Icons\ExtraFilters.png" />
     <Content Include="Translations\de.xml" />
     <Content Include="Translations\en.xml" />
     <Content Include="Translations\es.xml" />

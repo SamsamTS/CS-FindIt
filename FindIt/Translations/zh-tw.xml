@@ -131,6 +131,11 @@
     <Translation ID="FIF_REM_REM" String="從選擇的素材中移除標籤:" />
     <Translation ID="FIF_REM_CHTP" String="移除此標籤" />
     <Translation ID="FIF_REM_ELBL" String="選擇一個標籤" />
+    <Translation ID="FIF_SE_EFI" String="顯示額外搜尋選項面板" />
+    <Translation ID="FIF_EF_AC" String="素材作者" />
+    <Translation ID="FIF_EF_BH" String="建築物高度" />
+    <Translation ID="FIF_EF_MET" String="公尺" />
+    <Translation ID="FIF_EF_FEE" String="英尺" />
 
   </Translations>
 </Language>

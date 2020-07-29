@@ -133,6 +133,11 @@
     <Translation ID="FIF_REM_REM" String="Remove a tag from selected assets:" />
     <Translation ID="FIF_REM_CHTP" String="Remove this tag" />
     <Translation ID="FIF_REM_ELBL" String="Choose a tag" />
+    <Translation ID="FIF_SE_EFI" String="Show extra filters panel" />
+    <Translation ID="FIF_EF_AC" String="Asset Creator" />
+    <Translation ID="FIF_EF_BH" String="Building Height" />
+    <Translation ID="FIF_EF_MET" String="meters" />
+    <Translation ID="FIF_EF_FEE" String="feet" />
 
   </Translations>
 </Language>
