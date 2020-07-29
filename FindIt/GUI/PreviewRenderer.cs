@@ -163,16 +163,23 @@ namespace FindIt.GUI
                 Matrix4x4 matrix = Matrix4x4.TRS(modelPosition, modelRotation, Vector3.one);
                 Graphics.DrawMesh(currentMesh, matrix, _material, 0, renderCamera, 0, null, true, true);
 
-                // Use separate verticies instance instead of accessing Mesh.vertices each time (which is slow).
-                // >10x measured performance improvement by doing things this way instead.
-                vertices = currentMesh.vertices;
-                for (int i = 0; i < vertices.Length; i++)
+                if (currentMesh.isReadable)
                 {
-                    // Exclude vertices with large negative Y values (underground) from our bounds (e.g. SoCal Laguna houses), otherwise the result doesn't look very good.
-                    if (vertices[i].y > -2)
+                    // Use separate verticies instance instead of accessing Mesh.vertices each time (which is slow).
+                    // >10x measured performance improvement by doing things this way instead.
+                    vertices = currentMesh.vertices;
+                    for (int i = 0; i < vertices.Length; i++)
                     {
-                        currentBounds.Encapsulate(vertices[i]);
+                        // Exclude vertices with large negative Y values (underground) from our bounds (e.g. SoCal Laguna houses), otherwise the result doesn't look very good.
+                        if (vertices[i].y > -2)
+                        {
+                            currentBounds.Encapsulate(vertices[i]);
+                        }
                     }
+                }
+                else
+                {
+                    currentBounds = currentMesh.bounds;
                 }
             }
 
