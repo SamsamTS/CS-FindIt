@@ -381,7 +381,8 @@ namespace FindIt.GUI
                         m_steamSprite.isVisible = data.asset.steamID != 0;
                         if (!data.asset.author.IsNullOrWhiteSpace())
                         {
-                            m_steamSprite.tooltip = "By " + data.asset.author + "\n" + Translations.Translate("FIF_UIS_WS");
+                            if (data.asset.steamID != 0)
+                                m_steamSprite.tooltip = "By " + data.asset.author + "\n" + Translations.Translate("FIF_UIS_WS");
                         }
                     }
 

@@ -789,6 +789,19 @@ namespace FindIt
 
                         // if steamID == 0, non-workshop, download time = 0
                         asset.downloadTime = 0;
+
+                        if (asset.isCCPBuilding)
+                        {
+                            asset.author = "Ryuichi Kaminogi";
+                            if (!assetCreatorDictionary.ContainsKey("Ryuichi Kaminogi"))
+                            {
+                                assetCreatorDictionary.Add("Ryuichi Kaminogi", 1);
+                            }
+                            else
+                            {
+                                assetCreatorDictionary["Ryuichi Kaminogi"] += 1;
+                            }
+                        }
                     }
                     else
                     {
