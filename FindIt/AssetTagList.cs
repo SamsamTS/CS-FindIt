@@ -68,7 +68,6 @@ namespace FindIt
 
         public string name;
         public string title;
-        public bool isCCPBuilding = false;
 
         public PrefabInfo prefab
         {
@@ -101,6 +100,13 @@ namespace FindIt
                         }
 
                         size = new Vector2(buildingPrefab.m_cellWidth, buildingPrefab.m_cellLength);
+                        if(buildingPrefab.m_generatedInfo!= null && buildingPrefab.m_generatedInfo.m_heights != null)
+                        {
+                            if (buildingPrefab.m_generatedInfo.m_heights.Length != 0)
+                            {
+                                buildingHeight = buildingPrefab.m_generatedInfo.m_heights.Max();
+                            }
+                        }
 
                         return;
                     }
@@ -117,10 +123,6 @@ namespace FindIt
                             {
                                 assetType = AssetType.Decal;
                             }
-                            /*else if (propPrefab.m_material.shader == shaderFence)
-                            {
-                                assetType = AssetType.Fence;
-                            }*/
                         }
 
                         return;
@@ -164,6 +166,8 @@ namespace FindIt
         public string author;
         public float score;
         public ulong downloadTime;
+        public bool isCCPBuilding = false;
+        public float buildingHeight = 0;
         public PropType propType = PropType.Invalid;
         public TreeType treeType = TreeType.Invalid;
 
@@ -392,8 +396,21 @@ namespace FindIt
         public Dictionary<string, int> tagsCustomDictionary = new Dictionary<string, int>();
 
         public Dictionary<string, Asset> assets = new Dictionary<string, Asset>();
+
+        /// <summary>
+        /// key = asset steam id, value = author name
+        /// </summary>
         public Dictionary<ulong, string> authors = new Dictionary<ulong, string>();
+
+        /// <summary>
+        /// key = asset steam ID, value = asset download timestamp
+        /// </summary>
         public Dictionary<ulong, ulong> downloadTimes = new Dictionary<ulong, ulong>();
+
+        /// <summary>
+        /// key = asset creator name, value = number of assets made by this creator
+        /// </summary>
+        public Dictionary<string, int> assetCreatorDictionary = new Dictionary<string, int>();
 
         public List<Asset> matches = new List<Asset>();
 
@@ -742,6 +759,7 @@ namespace FindIt
             tagsTitleDictionary.Clear();
             tagsDescDictionary.Clear();
             tagsCustomDictionary.Clear();
+            assetCreatorDictionary.Clear();
 
             GetPrefabs<BuildingInfo>();
             GetPrefabs<NetInfo>();
@@ -777,6 +795,18 @@ namespace FindIt
                         if (downloadTimes.ContainsKey(asset.steamID))
                         {
                             asset.downloadTime = downloadTimes[asset.steamID];
+
+                            if (authors.ContainsKey(asset.steamID))
+                            {
+                                if (!assetCreatorDictionary.ContainsKey(authors[asset.steamID]))
+                                {
+                                    assetCreatorDictionary.Add(authors[asset.steamID], 1);
+                                }
+                                else
+                                {
+                                    assetCreatorDictionary[authors[asset.steamID]] += 1;
+                                }
+                            }
                         }
                         else
                         {
@@ -1005,6 +1035,24 @@ namespace FindIt
             List<KeyValuePair<string, int>> list = tagsCustomDictionary.ToList();
 
             // sort list by number of assets in each tag
+            if (!Settings.customTagListSort)
+            {
+                list = list.OrderByDescending(s => s.Value).ToList();
+            }
+            // sort list alphabetically
+            else
+            {
+                list = list.OrderBy(s => s.Key).ToList();
+            }
+
+            return list;
+        }
+
+        public List<KeyValuePair<string, int>> GetAssetCreatorList()
+        {
+            List<KeyValuePair<string, int>> list = assetCreatorDictionary.ToList();
+
+            // sort list by number of assets by each asset creator
             if (!Settings.customTagListSort)
             {
                 list = list.OrderByDescending(s => s.Value).ToList();
