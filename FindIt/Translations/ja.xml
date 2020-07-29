@@ -79,10 +79,10 @@
     <Translation ID="FIF_POP_CAN" String="キャンセル" />
     <Translation ID="FIF_POP_NU" String="これは回復できません。" />
     <Translation ID="FIF_CO_TIT" String="マージ" />
-    <Translation ID="FIF_CO_MSG" String="マージする既存のタグを選択します。" />
+    <Translation ID="FIF_CO_MSG" String="マージする既存のタグを選択します" />
     <Translation ID="FIF_CO_CH" String="選択" />
     <Translation ID="FIF_CO_CHTP" String="この既存のタグとマージします" />
-    <Translation ID="FIF_CO_NELBL" String="既存のタグを選択してください：" />
+    <Translation ID="FIF_CO_NELBL" String="既存のタグを選択してください" />
     <Translation ID="FIF_DE_TIT" String="削除" />
     <Translation ID="FIF_DE_MSG" String="このタグを削除してもよろしいですか？" />
     <Translation ID="FIF_CT_TIT" String="カスタムタグ" />
@@ -90,13 +90,27 @@
     <Translation ID="FIF_TAG_DDTP" String="このタグが付いているアセットのみを表示" />
     <Translation ID="FIF_TAG_REF" String="更新" />
     <Translation ID="FIF_TAG_REFTP" String="カスタムタグのドロップダウンリストを更新する" />
+    <Translation ID="FIF_TAG_REN" String="リネーム" />
+    <Translation ID="FIF_TAG_RENTP" String="このタグの名前を変更" />
     <Translation ID="FIF_TAG_COM" String="マージ" />
     <Translation ID="FIF_TAG_COMTP" String="このタグを別のタグとマージします" />
     <Translation ID="FIF_TAG_DEL" String="削除" />
     <Translation ID="FIF_TAG_DELTP" String="このタグを削除" />
+    <Translation ID="FIF_UIS_WS" String="右クリックして、Steam Workshopでこのアセットを表示します" />
     <Translation ID="FIF_TREE_SM" String="小さな木" />
     <Translation ID="FIF_TREE_MD" String="中程度の木" />
     <Translation ID="FIF_TREE_LG" String="大きな木" />
+    <Translation ID="FIF_TAG_BAT" String="バッチ" />
+    <Translation ID="FIF_ADD_TAG" String="タグ:" />
+    <Translation ID="FIF_REM_TIT" String="バッチ削除" />
+    <Translation ID="FIF_REM_REM" String="選択したアセットからタグを削除します" />
+    <Translation ID="FIF_REM_CHTP" String="このタグを削除" />
+    <Translation ID="FIF_REM_ELBL" String="タグを選択してください" />
+    <Translation ID="FIF_SE_EFI" String="追加のフィルターパネルを表示" />
+    <Translation ID="FIF_EF_AC" String="アセット作成者" />
+    <Translation ID="FIF_EF_BH" String="建物の高さ" />
+    <Translation ID="FIF_EF_MET" String="メートル" />
+    <Translation ID="FIF_EF_FEE" String="フィート" />
 
   </Translations>
 </Language>

@@ -10,10 +10,12 @@ using System.Linq;
 
 namespace FindIt.GUI
 {
+    // Don't change the accessibility of some data members to private or it may break Picker mod's current reflection code
+    // I've added a simple interface and sent Picker mod a pull request, but it hasn't beed accepted yet
     public class UISearchBox : UIPanel
     {
         public static UISearchBox instance;
-
+        
         public UIPanel inputPanel;
         public UITextField input;
         public UIScrollPanel scrollPanel;
@@ -32,8 +34,14 @@ namespace FindIt.GUI
         public UICheckBox workshopFilter;
         public UICheckBox vanillaFilter;
         public UIButton sortButton;
-        public UICheckBox tagToolCheckBox;
+
+        public UIPanel toolIconPanel;
+        
+        public UISprite tagToolIcon;
         public UIFilterTag tagPanel;
+
+        public UISprite extraFiltersIcon;
+        public UIFilterExtra extraFiltersPanel;
 
         // true = sort by relevance
         // false = sort by most recently downloaded
@@ -145,6 +153,7 @@ namespace FindIt.GUI
             // asset type filter
             typeFilter = SamsamTS.UIUtils.CreateDropDown(filterPanel);
             typeFilter.size = new Vector2(100, 25);
+            typeFilter.tooltip = Translations.Translate("FIF_POP_SCR");
             typeFilter.relativePosition = new Vector3(vanillaFilter.relativePosition.x + vanillaFilter.width, 5);
 
             if (FindIt.isRicoEnabled)
@@ -226,9 +235,57 @@ namespace FindIt.GUI
             sizeFilterY.items = filterItemsGrowable;
             sizeFilterY.selectedIndex = 0;
             sizeFilterY.relativePosition = new Vector3(sizeFilterX.relativePosition.x + sizeFilterX.width + 10, 5);
+            buildingFilters.width = sizeFilterY.relativePosition.x + sizeFilterY.width;
 
             sizeFilterX.eventSelectedIndexChanged += (c, i) => Search();
             sizeFilterY.eventSelectedIndexChanged += (c, i) => Search();
+
+            // tool icon panel
+            toolIconPanel = filterPanel.AddUIComponent<UIPanel>();
+            toolIconPanel.size = new Vector2(95, 35);
+            toolIconPanel.relativePosition = new Vector3(typeFilter.relativePosition.x + typeFilter.width, 0);
+
+            // change custom tag panel visibility
+            tagToolIcon = toolIconPanel.AddUIComponent<UISprite>();
+            tagToolIcon.size = new Vector2(26, 21);
+            tagToolIcon.atlas = FindIt.atlas;
+            tagToolIcon.spriteName = "Tag";
+            tagToolIcon.tooltip = Translations.Translate("FIF_SE_SCTP");
+            tagToolIcon.opacity = 0.5f;
+            tagToolIcon.relativePosition = new Vector3(7, 7);
+            tagToolIcon.eventClicked += (c, p) =>
+            {
+                UpdateTagPanel();
+                if (tagPanel.isVisible)
+                {
+                    tagToolIcon.opacity = 1.0f;
+                }
+                else
+                {
+                    tagToolIcon.opacity = 0.5f;
+                }
+            };
+
+            // change extra filters panel visibility
+            extraFiltersIcon = toolIconPanel.AddUIComponent<UISprite>();
+            extraFiltersIcon.size = new Vector2(26, 23);
+            extraFiltersIcon.atlas = FindIt.atlas;
+            extraFiltersIcon.spriteName = "ExtraFilters";
+            extraFiltersIcon.tooltip = Translations.Translate("FIF_SE_EFI");
+            extraFiltersIcon.opacity = 0.5f;
+            extraFiltersIcon.relativePosition = new Vector3(tagToolIcon.relativePosition.x + tagToolIcon.width + 5, 6);
+            extraFiltersIcon.eventClicked += (c, p) =>
+            {
+                UpdateExtraFiltersPanel();
+                if (extraFiltersPanel.isVisible)
+                {
+                    extraFiltersIcon.opacity = 1.0f;
+                }
+                else
+                {
+                    extraFiltersIcon.opacity = 0.5f;
+                }
+            };
 
             // panel of sort button and filter toggle tabs
             UIPanel panel = AddUIComponent<UIPanel>();
@@ -269,46 +326,36 @@ namespace FindIt.GUI
             tagPanel.size = new Vector2(670, 35);
             tagPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height - 40 - 5);
 
-            // custom tag panel visibility checkbox
-            tagToolCheckBox = SamsamTS.UIUtils.CreateCheckBox(panel);
-            tagToolCheckBox.isChecked = false;
-            tagToolCheckBox.width = 200;
-            tagToolCheckBox.label.text = Translations.Translate("FIF_SE_SCTP");
-            tagToolCheckBox.label.textScale = 0.8f;
-            tagToolCheckBox.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width + 10, 15);
-            tagToolCheckBox.eventCheckChanged += (c, i) =>
-            {
-                UpdateTagPanel();
-            };
+            // panel of extra filters
+            extraFiltersPanel = AddUIComponent<UIFilterExtra>();
+            extraFiltersPanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
+            extraFiltersPanel.backgroundSprite = "GenericTab";
+            extraFiltersPanel.isVisible = false;
+            extraFiltersPanel.size = new Vector2(670, 35);
+            extraFiltersPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height - 40 - 5);
 
             // ploppable filter tabs
             filterPloppable = panel.AddUIComponent<UIFilterPloppable>();
             filterPloppable.isVisible = false;
             filterPloppable.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
-            //filterPloppable.relativePosition = new Vector3(0, 0);
-
             filterPloppable.eventFilteringChanged += (c,p) => Search();
 
             // growable filter tabs
             filterGrowable = panel.AddUIComponent<UIFilterGrowable>();
             filterGrowable.isVisible = false;
             filterGrowable.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
-            //filterGrowable.relativePosition = new Vector3(0, 0);
-
             filterGrowable.eventFilteringChanged += (c, p) => Search();
 
             // prop filter tabs
             filterProp = panel.AddUIComponent<UIFilterProp>();
             filterProp.isVisible = false;
             filterProp.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
-
             filterProp.eventFilteringChanged += (c, p) => Search();
 
             // tree filter tabs
             filterTree = panel.AddUIComponent<UIFilterTree>();
             filterTree.isVisible = false;
             filterTree.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
-
             filterTree.eventFilteringChanged += (c, p) => Search();
 
             UpdateFilterPanels();
@@ -326,26 +373,21 @@ namespace FindIt.GUI
             }
         }
 
+        /// <summary>
+        /// Change the visibility of building level and size filters.
+        /// Also change filterPanel width
+        /// </summary>
         public void UpdateBuildingFilters()
         {
             try
             {
                 if (buildingFilters.isVisible)
                 {
-                    if (sizeFilterY.isVisible)
-                    {
-                        buildingFilters.width = sizeFilterY.relativePosition.x + sizeFilterY.width;
-                    }
-                    else
-                    {
-                        buildingFilters.width = sizeFilterX.relativePosition.x + sizeFilterX.width;
-                    }
-
                     filterPanel.width = buildingFilters.relativePosition.x + buildingFilters.width + 5;
                 }
                 else
                 {
-                    filterPanel.width = typeFilter.relativePosition.x + typeFilter.width + 5;
+                    filterPanel.width = toolIconPanel.relativePosition.x + toolIconPanel.width + 5;
                 }
             }
             catch(Exception e)
@@ -355,6 +397,9 @@ namespace FindIt.GUI
             }
         }
 
+        /// <summary>
+        /// Change the visibility of filter tabs and some other UI components in searchbox
+        /// </summary>
         public void UpdateFilterPanels()
         {
             //SimulationManager.instance.AddAction(() =>
@@ -372,7 +417,7 @@ namespace FindIt.GUI
                         HideFilterPanel(filterProp);
                         HideFilterPanel(filterTree);
                         HideBuildingFilters();
-                        tagToolCheckBox.isVisible = false;
+                        toolIconPanel.isVisible = true;
                         ShowFilterPanel(filterPloppable);
                         break;
                     case DropDownOptions.Rico:
@@ -381,7 +426,7 @@ namespace FindIt.GUI
                         HideFilterPanel(filterPloppable);
                         HideFilterPanel(filterProp);
                         HideFilterPanel(filterTree);
-                        tagToolCheckBox.isVisible = false;
+                        toolIconPanel.isVisible = false;
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
@@ -391,7 +436,7 @@ namespace FindIt.GUI
                         HideFilterPanel(filterPloppable);
                         HideFilterPanel(filterProp);
                         HideFilterPanel(filterTree);
-                        tagToolCheckBox.isVisible = false;
+                        toolIconPanel.isVisible = false;
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
@@ -401,7 +446,7 @@ namespace FindIt.GUI
                         HideFilterPanel(filterPloppable);
                         HideFilterPanel(filterProp);
                         HideFilterPanel(filterTree);
-                        tagToolCheckBox.isVisible = false;
+                        toolIconPanel.isVisible = false;
                         ShowFilterPanel(filterGrowable);
                         ShowBuildingFilters();
                         break;
@@ -410,7 +455,7 @@ namespace FindIt.GUI
                         HideFilterPanel(filterPloppable);
                         HideBuildingFilters();
                         HideFilterPanel(filterTree);
-                        tagToolCheckBox.isVisible = false;
+                        toolIconPanel.isVisible = true;
                         ShowFilterPanel(filterProp);
                         break;
                     case DropDownOptions.Tree:
@@ -418,7 +463,7 @@ namespace FindIt.GUI
                         HideFilterPanel(filterPloppable);
                         HideBuildingFilters();
                         HideFilterPanel(filterProp);
-                        tagToolCheckBox.isVisible = false;
+                        toolIconPanel.isVisible = true;
                         ShowFilterPanel(filterTree);
                         break;
                     default: // All, Network
@@ -427,7 +472,7 @@ namespace FindIt.GUI
                         HideFilterPanel(filterProp);
                         HideFilterPanel(filterTree);
                         HideBuildingFilters();
-                        tagToolCheckBox.isVisible = true;
+                        toolIconPanel.isVisible = true;
                         break;
                 }
            // });
@@ -459,11 +504,38 @@ namespace FindIt.GUI
         {
             tagPanel.isVisible = !tagPanel.isVisible;
             if(!tagPanel.isVisible) tagPanel.tagDropDownCheckBox.isChecked = false;
+            UpdateTopPanelsPosition();
             tagPanel.UpdateCustomTagList();
         }
-        
-        // Reset all filters. This mehtod will be used by Quboid's Picker mod through reflection.
-        // Don't remove this method. Update this method whenever a new filter is added.
+
+        public void UpdateExtraFiltersPanel()
+        {
+            extraFiltersPanel.isVisible = !extraFiltersPanel.isVisible;
+            if (!extraFiltersPanel.isVisible) extraFiltersPanel.optionDropDownCheckBox.isChecked = false;
+            UpdateTopPanelsPosition();
+        }
+
+        public void UpdateTopPanelsPosition()
+        {
+            if(extraFiltersPanel.isVisible && tagPanel.isVisible)
+            {
+                tagPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height - 40 - 5);
+                extraFiltersPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height*2 - 40 - 5*2);
+            }
+            else if (extraFiltersPanel.isVisible && !tagPanel.isVisible)
+            {
+                extraFiltersPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height - 40 - 5);
+            }
+            else if (!extraFiltersPanel.isVisible && tagPanel.isVisible)
+            {
+                tagPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height - 40 - 5);
+            }
+        }
+
+        /// <summary>
+        /// Reset all filters. This mehtod will be used by Quboid's Picker mod through reflection.
+        /// Don't remove this method. Update this method whenever a new filter is added.
+        /// </summary>
         public void ResetFilters()
         {
             vanillaFilter.isChecked = true;
@@ -473,6 +545,7 @@ namespace FindIt.GUI
             sizeFilterY.selectedIndex = 0;
 
             UIFilterTag.instance.tagDropDownCheckBox.isChecked = false;
+            UIFilterExtra.instance.optionDropDownCheckBox.isChecked = false;
 
             filterGrowable.SelectAll();
             filterPloppable.SelectAll();
@@ -541,6 +614,29 @@ namespace FindIt.GUI
                         if (tagPanel.tagDropDownCheckBox.isChecked && tagPanel.customTagListStrArray.Length > 0)
                         {
                             if (!asset.tagsCustom.Contains(tagPanel.GetDropDownListKey())) continue;
+                        }
+
+                        // extra filters check
+                        if (extraFiltersPanel.optionDropDownCheckBox.isChecked)
+                        {
+                            // filter asset by asset creator
+                            if (extraFiltersPanel.optionDropDownMenu.selectedIndex == 0)
+                            {
+                                if (asset.author != extraFiltersPanel.GetAssetCreatorDropDownListKey()) continue;
+                            }
+                            // filter asset by building height
+                            else
+                            {
+                                if (asset.assetType == Asset.AssetType.Ploppable || asset.assetType == Asset.AssetType.Rico || asset.assetType == Asset.AssetType.Growable)
+                                {
+                                    if (asset.buildingHeight > extraFiltersPanel.maxBuildingHeight) continue;
+                                    if (asset.buildingHeight < extraFiltersPanel.minBuildingHeight) continue;
+                                }
+                                else
+                                {
+                                    continue;
+                                }
+                            }
                         }
                     }
 
