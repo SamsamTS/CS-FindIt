@@ -162,7 +162,7 @@ namespace FindIt.GUI
 
             // Size and setting for thumbnail images: 109 x 100, doubled for anti-aliasing.
             renderer.Size = new Vector2(109, 100) * 2f;
-            renderer.CameraRotation = 215f;
+            renderer.CameraRotation = 35f;
         }
 
 

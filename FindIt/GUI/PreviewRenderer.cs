@@ -10,7 +10,7 @@ namespace FindIt.GUI
     {
         private Camera renderCamera;
         private Mesh currentMesh;
-        private float currentRotation = 210f;
+        private float currentRotation = 35f;
         private float currentZoom = 4f;
         private Material _material;
 
@@ -141,16 +141,43 @@ namespace FindIt.GUI
             Light renderLight = DayNightProperties.instance.sunLightSource;
             RenderManager.instance.MainLight = renderLight;
 
-            // Set model rotation and position.
-            Quaternion rotation = Quaternion.Euler(-30f, 180f, 0f) * Quaternion.Euler(0f, currentRotation, 0f);
-            Vector3 position = rotation * -currentMesh.bounds.center;
-            Matrix4x4 matrix = Matrix4x4.TRS(position, rotation, Vector3.one);
+            // Set model position.
+            // We render at -100 Y to avoid garbage left at 0,0 by certain shaders and renderers (and we only rotate around the Y axis so will never see the origin).
+            Vector3 modelPosition = new Vector3(0f, -100f, 0f);
 
-            // Add mesh to scene.
-            Graphics.DrawMesh(currentMesh, matrix, _material, 0, renderCamera, 0, null, true, true);
+            // Reset the bounding box to be the smallest that can encapsulate all verticies of the new mesh.
+            // That way the preview image is the largest size that fits cleanly inside the preview size.
+            Bounds currentBounds = new Bounds(Vector3.zero, Vector3.zero);
+            Vector3[] vertices;
+
+            // Set our model rotation parameters, so we look at it obliquely.
+            const float xRotation = 20f;
+
+            // Apply model rotation with our camnera rotation into a quaternion.
+            Quaternion modelRotation = Quaternion.Euler(xRotation, 0f, 0f) * Quaternion.Euler(0f, currentRotation, 0f);
+
+            // Add our main mesh, if any (some are null, because they only 'appear' through subbuildings - e.g. Boston Residence Garage).
+            if (currentMesh != null && _material != null)
+            {
+                // Calculate rendering matrix and add mesh to scene.
+                Matrix4x4 matrix = Matrix4x4.TRS(modelPosition, modelRotation, Vector3.one);
+                Graphics.DrawMesh(currentMesh, matrix, _material, 0, renderCamera, 0, null, true, true);
+
+                // Use separate verticies instance instead of accessing Mesh.vertices each time (which is slow).
+                // >10x measured performance improvement by doing things this way instead.
+                vertices = currentMesh.vertices;
+                for (int i = 0; i < vertices.Length; i++)
+                {
+                    // Exclude vertices with large negative Y values (underground) from our bounds (e.g. SoCal Laguna houses), otherwise the result doesn't look very good.
+                    if (vertices[i].y > -2)
+                    {
+                        currentBounds.Encapsulate(vertices[i]);
+                    }
+                }
+            }
 
             // Set zoom to encapsulate entire model.
-            float magnitude = currentMesh.bounds.extents.magnitude;
+            float magnitude = currentBounds.extents.magnitude;
             float clipExtent = (magnitude + 16f) * 1.5f;
             float clipCenter = magnitude * currentZoom;
 
@@ -158,9 +185,14 @@ namespace FindIt.GUI
             renderCamera.nearClipPlane = Mathf.Max(clipCenter - clipExtent, 0.01f);
             renderCamera.farClipPlane = clipCenter + clipExtent;
 
-            // Position and rotate camera.
-            renderCamera.transform.position = Vector3.forward * clipCenter;
-            renderCamera.transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
+            // Rotate our camera around the model according to our current rotation.
+            renderCamera.transform.position = modelPosition + (Vector3.forward * clipCenter);
+
+            // Aim camera at middle of bounds.
+            renderCamera.transform.LookAt(currentBounds.center + modelPosition);
+
+            // If game is currently in nighttime, enable sun and disable moon lighting.
+            if (gameMainLight == DayNightProperties.instance.moonLightSource)
 
             // If game is currently in nighttime, enable sun and disable moon lighting.
             if (gameMainLight == DayNightProperties.instance.moonLightSource)
