@@ -432,6 +432,7 @@ namespace FindIt
                     {
                         if (!CheckAssetFilter(asset, filter)) continue;
 
+                        // Calculate relevance score. Algorithm decided by Sam. Unchanged.
                         foreach (string keyword in keywords)
                         {
                             if (!keyword.IsNullOrWhiteSpace())
@@ -490,10 +491,7 @@ namespace FindIt
                             }
                         }
                        
-                        if (asset.score > 0)
-                        {
-                            matches.Add(asset);
-                        }
+                        if (asset.score > 0) matches.Add(asset);
                     }
                 }
             }
@@ -569,7 +567,6 @@ namespace FindIt
                     if (category == UIFilterProp.Category.None || !UIFilterProp.instance.IsSelected(category)) return false;
                 }
             }
-
             else if (filter == UISearchBox.DropDownOptions.Tree)
             {
                 // filter by tree type
@@ -732,6 +729,7 @@ namespace FindIt
                         // if steamID == 0, non-workshop, download time = 0
                         asset.downloadTime = 0;
 
+                        // make Kaminogi's Modern Japan builldings included in the asset creator filter
                         if (asset.isCCPBuilding)
                         {
                             asset.author = "Ryuichi Kaminogi";

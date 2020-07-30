@@ -51,31 +51,6 @@ namespace FindIt
 
                 UITabstrip tabstrip = ToolsModifierControl.mainToolbar.component as UITabstrip;
 
-
-                // TODO: temporary
-                /*tabstrip.eventComponentAdded += (c, p) =>
-                {
-                    foreach (UIComponent tab in tabstrip.tabPages.components)
-                    {
-                        DebugUtils.Log(tab.name);
-
-                        if(tab.name == "LandscapingPanel")
-                        {
-                            tab.components[0].relativePosition = new Vector3(0, -134);
-                            tab.components[1].relativePosition = new Vector3(0, -109);
-                            tab.components[1].height = 218;
-                            foreach(UIScrollablePanel panel in tab.components[1].GetComponentsInChildren<UIScrollablePanel>())
-                            {
-                                panel.autoLayoutStart = LayoutStart.TopLeft;
-                                panel.scrollWheelDirection = UIOrientation.Vertical;
-                                panel.scrollWheelAmount = 104;
-                                panel.wrapLayout = true;
-                                panel.width = 764;
-                            }
-                        }
-                    }
-                };*/
-
                 m_defaultXPos = tabstrip.relativePosition.x;
                 UpdateMainToolbar();
 
@@ -85,7 +60,6 @@ namespace FindIt
                 mainButton = tabstrip.AddTab("FindItMainButton", asGameObject, asGameObject2, new Type[] { typeof(UIGroupPanel) }) as UIButton;
                 mainButton.atlas = atlas;
 
-                
                 Locale locale = (Locale)typeof(LocaleManager).GetField("m_Locale", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(LocaleManager.instance);
                 Locale.Key key = new Locale.Key
                 {
@@ -205,7 +179,6 @@ namespace FindIt
             {
                 tabstrip.relativePosition = new Vector3(m_defaultXPos, tabstrip.relativePosition.y);
             }
-
         }
 
         private void UpdatePosition(UIComponent c, UIComponent p)
@@ -221,7 +194,6 @@ namespace FindIt
             float newXPos = (tabstrip.parent.width - width) / 2;
             tabstrip.relativePosition = new Vector3(Mathf.Min(m_defaultXPos, newXPos), tabstrip.relativePosition.y);
         }
-
 
         public void HideAllOptionPanels()
         {
@@ -464,18 +436,15 @@ namespace FindIt
 
                 ToolsModifierControl.toolController.eventEditPrefabChanged += (p) =>
                 {
-                    //SimulationManager.instance.AddAction(() =>
-                    //{
-                        if (FindIt.instance == null)
-                        {
-                            // Creating the instance
-                            FindIt.instance = new GameObject("FindIt").AddComponent<FindIt>();
-                        }
-                        else
-                        {
-                            FindIt.instance.Start();
-                        }
-                    //});
+                    if (FindIt.instance == null)
+                    {
+                        // Creating the instance
+                        FindIt.instance = new GameObject("FindIt").AddComponent<FindIt>();
+                    }
+                    else
+                    {
+                        FindIt.instance.Start();
+                    }
                 };
             }
         }

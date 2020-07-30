@@ -177,6 +177,7 @@ namespace FindIt.GUI
                         }
                     }
                 }
+                // some vanilla assets have locked meshes. Their vertices are not readable
                 else
                 {
                     currentBounds = currentMesh.bounds;
