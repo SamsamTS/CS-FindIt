@@ -428,60 +428,9 @@ namespace FindIt
                 foreach (Asset asset in assets.Values)
                 {
                     asset.RefreshRico();
-                    if (asset.prefab != null && (CheckAssetTypeFilter(asset.assetType, filter)))
+                    if (asset.prefab != null)
                     {
-                        if (filter == UISearchBox.DropDownOptions.Growable || filter == UISearchBox.DropDownOptions.Rico || filter == UISearchBox.DropDownOptions.GrwbRico)
-                        {
-                            BuildingInfo buildingInfo = asset.prefab as BuildingInfo;
-
-                            // Distinguish growable and rico
-                            if ((filter == UISearchBox.DropDownOptions.Growable) && (asset.assetType == Asset.AssetType.Rico)) continue;
-                            if ((filter == UISearchBox.DropDownOptions.Rico) && (asset.assetType == Asset.AssetType.Growable)) continue;
-
-                            // Level
-                            ItemClass.Level level = UISearchBox.instance.buildingLevel;
-                            if (level != ItemClass.Level.None && buildingInfo.m_class.m_level != level) continue;
-
-                            // filter by size
-                            if (!CheckBuildingSize(asset.size, UISearchBox.instance.buildingSizeFilterIndex)) continue;
-
-                            // zone
-                            if (!UIFilterGrowable.instance.IsAllSelected())
-                            {
-                                UIFilterGrowable.Category category = UIFilterGrowable.GetCategory(buildingInfo.m_class);
-                                if (category == UIFilterGrowable.Category.None || !UIFilterGrowable.instance.IsSelected(category)) continue;
-                            }
-                        }
-                        else if (filter == UISearchBox.DropDownOptions.Ploppable)
-                        {
-                            BuildingInfo buildingInfo = asset.prefab as BuildingInfo;
-
-                            if (!UIFilterPloppable.instance.IsAllSelected())
-                            {
-                                UIFilterPloppable.Category category = UIFilterPloppable.GetCategory(buildingInfo.m_class);
-                                if (category == UIFilterPloppable.Category.None || !UIFilterPloppable.instance.IsSelected(category)) continue;
-                            }
-                        }
-
-                        else if (filter == UISearchBox.DropDownOptions.Prop)
-                        {
-                            // filter by prop type
-                            if (!UIFilterProp.instance.IsAllSelected())
-                            {
-                                UIFilterProp.Category category = UIFilterProp.GetCategory(asset.propType);
-                                if (category == UIFilterProp.Category.None || !UIFilterProp.instance.IsSelected(category)) continue;
-                            }
-                        }
-
-                        else if (filter == UISearchBox.DropDownOptions.Tree)
-                        {
-                            // filter by tree type
-                            if (!UIFilterTree.instance.IsAllSelected())
-                            {
-                                UIFilterTree.Category category = UIFilterTree.GetCategory(asset.treeType);
-                                if (category == UIFilterTree.Category.None || !UIFilterTree.instance.IsSelected(category)) continue;
-                            }
-                        }
+                        if (!CheckAssetFilter(asset, filter)) continue;
 
                         foreach (string keyword in keywords)
                         {
@@ -547,9 +496,6 @@ namespace FindIt
                         }
                     }
                 }
-            
-                 matches = matches.OrderByDescending(s => s.score).ToList();
-                
             }
 
             // if there isn't anything in the search input box
@@ -558,87 +504,83 @@ namespace FindIt
                 foreach (Asset asset in assets.Values)
                 {
                     asset.RefreshRico();
-                    if (asset.prefab != null && (CheckAssetTypeFilter(asset.assetType, filter)))
+                    if (asset.prefab != null)
                     {
-                        if (filter == UISearchBox.DropDownOptions.Growable || filter == UISearchBox.DropDownOptions.Rico || filter == UISearchBox.DropDownOptions.GrwbRico)
-                        {
-                            BuildingInfo buildingInfo = asset.prefab as BuildingInfo;
-
-                            // Distinguish growable and rico
-                            if ((filter == UISearchBox.DropDownOptions.Growable) && (asset.assetType == Asset.AssetType.Rico)) continue;
-                            if ((filter == UISearchBox.DropDownOptions.Rico) && (asset.assetType == Asset.AssetType.Growable)) continue;
-
-                            // filter by Level
-                            ItemClass.Level level = UISearchBox.instance.buildingLevel;
-                            if (level != ItemClass.Level.None && buildingInfo.m_class.m_level != level) continue;
-
-                            // filter by size
-                            if (!CheckBuildingSize(asset.size, UISearchBox.instance.buildingSizeFilterIndex)) continue;
-
-                            // filter by growable type
-                            if (!UIFilterGrowable.instance.IsAllSelected())
-                            {
-                                UIFilterGrowable.Category category = UIFilterGrowable.GetCategory(buildingInfo.m_class);
-                                if (category == UIFilterGrowable.Category.None || !UIFilterGrowable.instance.IsSelected(category)) continue;
-                            }
-                        }
-                        else if (filter == UISearchBox.DropDownOptions.Ploppable)
-                        {
-                            BuildingInfo buildingInfo = asset.prefab as BuildingInfo;
-
-                            // filter by ploppable type
-                            if (!UIFilterPloppable.instance.IsAllSelected())
-                            {
-                                UIFilterPloppable.Category category = UIFilterPloppable.GetCategory(buildingInfo.m_class);
-                                if (category == UIFilterPloppable.Category.None || !UIFilterPloppable.instance.IsSelected(category)) continue;
-                            }
-                        }
-                        else if (filter == UISearchBox.DropDownOptions.Prop)
-                        {
-                            // filter by prop type
-                            if (!UIFilterProp.instance.IsAllSelected())
-                            {
-                                UIFilterProp.Category category = UIFilterProp.GetCategory(asset.propType);
-                                if (category == UIFilterProp.Category.None || !UIFilterProp.instance.IsSelected(category)) continue;
-                            }
-                        }
-
-                        else if (filter == UISearchBox.DropDownOptions.Tree)
-                        {
-                            // filter by tree type
-                            if (!UIFilterTree.instance.IsAllSelected())
-                            {
-                                UIFilterTree.Category category = UIFilterTree.GetCategory(asset.treeType);
-                                if (category == UIFilterTree.Category.None || !UIFilterTree.instance.IsSelected(category)) continue;
-                            }
-                        }
-
+                        if (!CheckAssetFilter(asset, filter)) continue;
                         matches.Add(asset);
                     }
                 }
-
-                    matches = matches.OrderBy(s => s.title).ToList();
             }
            
             return matches;
         }
 
-
-        // return true if the asset type matchs the UISearchbox tyle filter dropdown options
-
-        private bool CheckAssetTypeFilter(Asset.AssetType assetType, UISearchBox.DropDownOptions dropDownOption)
+        // return true if the asset type matches UISearchbox filter dropdown options
+        private bool CheckAssetFilter(Asset asset, UISearchBox.DropDownOptions filter)
         {
-            if (dropDownOption == UISearchBox.DropDownOptions.All) return true;
-            if (assetType == Asset.AssetType.Road && dropDownOption == UISearchBox.DropDownOptions.Network) return true;
-            if (assetType == Asset.AssetType.Prop && dropDownOption == UISearchBox.DropDownOptions.Prop) return true;
-            if (assetType == Asset.AssetType.Rico && dropDownOption == UISearchBox.DropDownOptions.Rico) return true;
-            if (assetType == Asset.AssetType.Ploppable && dropDownOption == UISearchBox.DropDownOptions.Ploppable) return true;
-            if (assetType == Asset.AssetType.Growable && dropDownOption == UISearchBox.DropDownOptions.Growable) return true;
-            if (assetType == Asset.AssetType.Tree && dropDownOption == UISearchBox.DropDownOptions.Tree) return true;
-            if (assetType == Asset.AssetType.Decal && dropDownOption == UISearchBox.DropDownOptions.Decal) return true;
-            if ((assetType == Asset.AssetType.Rico || assetType == Asset.AssetType.Growable) && dropDownOption == UISearchBox.DropDownOptions.GrwbRico) return true;
+            if (asset.assetType != Asset.AssetType.Road && filter == UISearchBox.DropDownOptions.Network) return false;
+            if (asset.assetType != Asset.AssetType.Prop && filter == UISearchBox.DropDownOptions.Prop) return false;
+            if (asset.assetType != Asset.AssetType.Rico && filter == UISearchBox.DropDownOptions.Rico) return false;
+            if (asset.assetType != Asset.AssetType.Ploppable && filter == UISearchBox.DropDownOptions.Ploppable) return false;
+            if (asset.assetType != Asset.AssetType.Growable && filter == UISearchBox.DropDownOptions.Growable) return false;
+            if (asset.assetType != Asset.AssetType.Tree && filter == UISearchBox.DropDownOptions.Tree) return false;
+            if (asset.assetType != Asset.AssetType.Decal && filter == UISearchBox.DropDownOptions.Decal) return false;
+            if ((asset.assetType != Asset.AssetType.Rico && asset.assetType != Asset.AssetType.Growable) && filter == UISearchBox.DropDownOptions.GrwbRico) return false;
 
-            return false;
+            if (filter == UISearchBox.DropDownOptions.Growable || filter == UISearchBox.DropDownOptions.Rico || filter == UISearchBox.DropDownOptions.GrwbRico)
+            {
+                BuildingInfo buildingInfo = asset.prefab as BuildingInfo;
+
+                // Distinguish growable and rico
+                if ((filter == UISearchBox.DropDownOptions.Growable) && (asset.assetType == Asset.AssetType.Rico)) return false;
+                if ((filter == UISearchBox.DropDownOptions.Rico) && (asset.assetType == Asset.AssetType.Growable)) return false;
+
+                // filter by Level
+                ItemClass.Level level = UISearchBox.instance.buildingLevel;
+                if (level != ItemClass.Level.None && buildingInfo.m_class.m_level != level) return false;
+
+                // filter by size
+                if (!CheckBuildingSize(asset.size, UISearchBox.instance.buildingSizeFilterIndex)) return false;
+
+                // filter by growable type
+                if (!UIFilterGrowable.instance.IsAllSelected())
+                {
+                    UIFilterGrowable.Category category = UIFilterGrowable.GetCategory(buildingInfo.m_class);
+                    if (category == UIFilterGrowable.Category.None || !UIFilterGrowable.instance.IsSelected(category)) return false;
+                }
+            }
+            else if (filter == UISearchBox.DropDownOptions.Ploppable)
+            {
+                BuildingInfo buildingInfo = asset.prefab as BuildingInfo;
+
+                // filter by ploppable type
+                if (!UIFilterPloppable.instance.IsAllSelected())
+                {
+                    UIFilterPloppable.Category category = UIFilterPloppable.GetCategory(buildingInfo.m_class);
+                    if (category == UIFilterPloppable.Category.None || !UIFilterPloppable.instance.IsSelected(category)) return false;
+                }
+            }
+            else if (filter == UISearchBox.DropDownOptions.Prop)
+            {
+                // filter by prop type
+                if (!UIFilterProp.instance.IsAllSelected())
+                {
+                    UIFilterProp.Category category = UIFilterProp.GetCategory(asset.propType);
+                    if (category == UIFilterProp.Category.None || !UIFilterProp.instance.IsSelected(category)) return false;
+                }
+            }
+
+            else if (filter == UISearchBox.DropDownOptions.Tree)
+            {
+                // filter by tree type
+                if (!UIFilterTree.instance.IsAllSelected())
+                {
+                    UIFilterTree.Category category = UIFilterTree.GetCategory(asset.treeType);
+                    if (category == UIFilterTree.Category.None || !UIFilterTree.instance.IsSelected(category)) return false;
+                }
+            }
+
+            return true;
         }
 
         // return true if the asset size matches the building size filter options

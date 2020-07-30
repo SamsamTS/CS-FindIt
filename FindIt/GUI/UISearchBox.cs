@@ -2,6 +2,7 @@
 // https://github.com/SamsamTS/CS-FindIt
 
 using UnityEngine;
+using ColossalFramework;
 using ColossalFramework.DataBinding;
 using ColossalFramework.UI;
 using System;
@@ -583,15 +584,21 @@ namespace FindIt.GUI
                 if (UISearchBox.instance.buildingSizeFilterIndex.x > 4) UISearchBox.instance.sizeFilterX.selectedIndex = 0;
                 if (UISearchBox.instance.buildingSizeFilterIndex.y > 4) UISearchBox.instance.sizeFilterY.selectedIndex = 0;
             }
-
             List<Asset> matches = AssetTagList.instance.Find(text, type);
 
-            // sort again by most recently downloaded
-            // I tried to do this directly in Find so the list isn't being sorted twice
-            // however I got some UI glitches and was not able to solve it
+            // sort by most recently downloaded
             if (sortButtonTextState == false)
             {
                 matches = matches.OrderByDescending(s => s.downloadTime).ToList();
+            }
+            // sort by relevance, same as original Find It
+            else
+            {
+                text = text.ToLower().Trim();
+                // if search input box is not empty, sort by score
+                if (!text.IsNullOrWhiteSpace()) matches = matches.OrderByDescending(s => s.score).ToList();
+                // if seach input box is empty, sort by asset title
+                else matches = matches.OrderBy(s => s.title).ToList();
             }
 
             scrollPanel.Clear();
@@ -599,10 +606,9 @@ namespace FindIt.GUI
             {
                 if (asset.prefab != null)
                 {
-                    // filter custom/vanilla assets based on user choice
-                    // I tried to do this directly in Find
+                    // I tried to do this directly in AssetTagList.Find()
                     // however I got some UI glitches and was not able to solve it
-                    if (workshopFilter != null && vanillaFilter != null)
+                    if (workshopFilter != null && vanillaFilter != null && tagPanel != null && extraFiltersPanel != null)
                     {
                         // filter out custom asset
                         if (asset.prefab.m_isCustomContent && !workshopFilter.isChecked) continue;
@@ -632,10 +638,7 @@ namespace FindIt.GUI
                                     if (asset.buildingHeight > extraFiltersPanel.maxBuildingHeight) continue;
                                     if (asset.buildingHeight < extraFiltersPanel.minBuildingHeight) continue;
                                 }
-                                else
-                                {
-                                    continue;
-                                }
+                                else continue;
                             }
                         }
                     }
