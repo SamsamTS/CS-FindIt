@@ -201,9 +201,6 @@ namespace FindIt.GUI
 
             // If game is currently in nighttime, enable sun and disable moon lighting.
             if (gameMainLight == DayNightProperties.instance.moonLightSource)
-
-            // If game is currently in nighttime, enable sun and disable moon lighting.
-            if (gameMainLight == DayNightProperties.instance.moonLightSource)
             {
                 DayNightProperties.instance.sunLightSource.enabled = true;
                 DayNightProperties.instance.moonLightSource.enabled = false;
@@ -230,6 +227,7 @@ namespace FindIt.GUI
             // Restore game exposure and sky tint.
             DayNightProperties.instance.m_Exposure = gameExposure;
             DayNightProperties.instance.m_SkyTint = gameSkyTint;
+            DayNightProperties.instance.Refresh();
 
             // Restore game InfoManager mode.
             infoManager.SetCurrentMode(currentMode, currentSubMode);
