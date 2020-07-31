@@ -11,8 +11,7 @@ using System.Linq;
 
 namespace FindIt.GUI
 {
-    // Don't change the accessibility of some data members to private or it may break Picker mod's current reflection code
-    // I've added a simple interface and sent Picker mod a pull request, but it hasn't been accepted yet
+    // Check Picker mod's code before changing the accessibility of some data members to private, or it may break Picker mod's current reflection code
     public class UISearchBox : UIPanel
     {
         public static UISearchBox instance;
@@ -34,19 +33,19 @@ namespace FindIt.GUI
 
         public UICheckBox workshopFilter;
         public UICheckBox vanillaFilter;
-        public UIButton sortButton;
+        private UIButton sortButton;
 
         public UIPanel toolIconPanel;
         
-        public UISprite tagToolIcon;
+        private UISprite tagToolIcon;
         public UIFilterTag tagPanel;
 
-        public UISprite extraFiltersIcon;
+        private UISprite extraFiltersIcon;
         public UIFilterExtra extraFiltersPanel;
 
         // true = sort by relevance
         // false = sort by most recently downloaded
-        public bool sortButtonTextState = true;
+        private bool sortButtonTextState = true;
 
         public HashSet<string> searchResultSet = new HashSet<string>();
 
@@ -64,8 +63,8 @@ namespace FindIt.GUI
         }
 
         // building filter sizes
-        public string[] filterItemsGrowable = { Translations.Translate("FIF_SE_IA"), "1", "2", "3", "4"};
-        public string[] filterItemsRICO = { Translations.Translate("FIF_SE_IA"), "1", "2", "3", "4", "5-8", "9-12", "13+"};
+        private string[] filterItemsGrowable = { Translations.Translate("FIF_SE_IA"), "1", "2", "3", "4"};
+        private string[] filterItemsRICO = { Translations.Translate("FIF_SE_IA"), "1", "2", "3", "4", "5-8", "9-12", "13+"};
 
         public ItemClass.Level buildingLevel
         {
@@ -380,7 +379,7 @@ namespace FindIt.GUI
         /// Change the visibility of building level and size filters.
         /// Also change filterPanel width
         /// </summary>
-        public void UpdateBuildingFilters()
+        private void UpdateBuildingFilters()
         {
             try
             {
@@ -403,7 +402,7 @@ namespace FindIt.GUI
         /// <summary>
         /// Change the visibility of filter tabs and some other UI components in searchbox
         /// </summary>
-        public void UpdateFilterPanels()
+        private void UpdateFilterPanels()
         {
             //SimulationManager.instance.AddAction(() =>
             //{
@@ -481,29 +480,29 @@ namespace FindIt.GUI
            // });
         }
 
-        public void ShowFilterPanel(UIPanel panel)
+        private void ShowFilterPanel(UIPanel panel)
         {
             panel.isVisible = true;
         }
 
-        public void HideFilterPanel(UIPanel panel)
+        private void HideFilterPanel(UIPanel panel)
         {
             panel.isVisible = false;
         }
 
-        public void ShowBuildingFilters()
+        private void ShowBuildingFilters()
         {
             buildingFilters.isVisible = true;
             UpdateBuildingFilters();
         }
 
-        public void HideBuildingFilters()
+        private void HideBuildingFilters()
         {
             buildingFilters.isVisible = false;
             UpdateBuildingFilters();
         }
 
-        public void UpdateTagPanel()
+        private void UpdateTagPanel()
         {
             tagPanel.isVisible = !tagPanel.isVisible;
             if(!tagPanel.isVisible) tagPanel.tagDropDownCheckBox.isChecked = false;
@@ -511,14 +510,14 @@ namespace FindIt.GUI
             tagPanel.UpdateCustomTagList();
         }
 
-        public void UpdateExtraFiltersPanel()
+        private void UpdateExtraFiltersPanel()
         {
             extraFiltersPanel.isVisible = !extraFiltersPanel.isVisible;
             if (!extraFiltersPanel.isVisible) extraFiltersPanel.optionDropDownCheckBox.isChecked = false;
             UpdateTopPanelsPosition();
         }
 
-        public void UpdateTopPanelsPosition()
+        private void UpdateTopPanelsPosition()
         {
             if(extraFiltersPanel.isVisible && tagPanel.isVisible)
             {
@@ -541,6 +540,8 @@ namespace FindIt.GUI
         /// </summary>
         public void ResetFilters()
         {
+            input.text = "";
+
             vanillaFilter.isChecked = true;
             workshopFilter.isChecked = true;
             levelFilter.selectedIndex = 0;
