@@ -73,7 +73,7 @@
     <Translation ID="FIF_SE_IGR" String="Grow.RICO" />
     <Translation ID="FIF_SET_CTFL" String="Распол. файла пользовательских тегов. Создавайте резервные копии файла!" />
     <Translation ID="FIF_SET_CTFOP" String="Показать в Проводнике" />
-    <Translation ID="FIF_SE_SCTP" String="Показать панель пользов. тегов" />
+    <Translation ID="FIF_SE_SCTP" String="Показать панель пользоват. тегов" />
     <Translation ID="FIF_POP_SCR" String="Используйте колесо мыши для прокрутки вверх/вниз" />
     <Translation ID="FIF_POP_CON" String="Принять" />
     <Translation ID="FIF_POP_CAN" String="Отмена" />
@@ -133,10 +133,12 @@
     <Translation ID="FIF_REM_CHTP" String="Удалить этот тег" />
     <Translation ID="FIF_REM_ELBL" String="Выберите тег" />
     <Translation ID="FIF_SE_EFI" String="Показать панель доп. фильтров" />
-    <Translation ID="FIF_EF_AC" String="Автор Объекта" />
+    <Translation ID="FIF_EF_AC" String="Автор объекта" />
     <Translation ID="FIF_EF_BH" String="Высота здания" />
     <Translation ID="FIF_EF_MET" String="метров" />
     <Translation ID="FIF_EF_FEE" String="футов" />
+    <Translation ID="FIF_SET_ACLS" String="Сортировать список создателей активов по алфавиту" />
+    <Translation ID="FIF_GR_RAN" String="Случайный выбор" />
 
   </Translations>
 </Language>
