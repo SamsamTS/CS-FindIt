@@ -114,8 +114,11 @@ namespace FindIt
                 {
                     Settings.customTagListSort = b;
                     XMLUtils.SaveSettings();
-                    UIFilterTag.instance.UpdateCustomTagList();
-                    UISearchBox.instance.Search();
+                    if (FindIt.instance != null && UISearchBox.instance != null && UIFilterTag.instance != null)
+                    {
+                        UIFilterTag.instance.UpdateCustomTagList();
+                        UISearchBox.instance.Search();
+                    }
                 });
                 group.AddSpace(10);
 
@@ -124,8 +127,11 @@ namespace FindIt
                 {
                     Settings.assetCreatorListSort = b;
                     XMLUtils.SaveSettings();
-                    UIFilterExtra.instance.UpdateAssetCreatorList();
-                    UISearchBox.instance.Search();
+                    if (FindIt.instance != null && UISearchBox.instance != null && UIFilterExtra.instance != null)
+                    {
+                        UIFilterExtra.instance.UpdateAssetCreatorList();
+                        UISearchBox.instance.Search();
+                    }
                 });
                 group.AddSpace(10);
 
