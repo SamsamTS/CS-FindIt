@@ -47,7 +47,7 @@ namespace FindIt.GUI
         // false = sort by most recently downloaded
         private bool sortButtonTextState = true;
 
-        public HashSet<string> searchResultSet = new HashSet<string>();
+        public List<string> searchResultList = new List<string>();
 
         public enum DropDownOptions
         {
@@ -588,7 +588,6 @@ namespace FindIt.GUI
                 if (UISearchBox.instance.buildingSizeFilterIndex.y > 4) UISearchBox.instance.sizeFilterY.selectedIndex = 0;
             }
             List<Asset> matches = AssetTagList.instance.Find(text, type);
-            searchResultSet.Clear();
             // sort by most recently downloaded
             if (sortButtonTextState == false)
             {
@@ -605,6 +604,7 @@ namespace FindIt.GUI
             }
 
             scrollPanel.Clear();
+            searchResultList.Clear();
             foreach (Asset asset in matches)
             {
                 if (asset.prefab != null)
@@ -654,7 +654,7 @@ namespace FindIt.GUI
                     data.asset = asset;
 
                     scrollPanel.itemsData.Add(data);
-                    searchResultSet.Add(data.name);
+                    searchResultList.Add(data.name);
                     if (asset.prefab == current)
                     {
                         selected = data;
@@ -667,7 +667,6 @@ namespace FindIt.GUI
 
             if (scrollPanel.selectedItem != null)
             {
-
                 FindIt.SelectPrefab(scrollPanel.selectedItem.asset.prefab);
             }
             else

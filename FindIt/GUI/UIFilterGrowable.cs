@@ -99,7 +99,6 @@ namespace FindIt.GUI
         public UICheckBox[] toggles;
         public UIButton all;
         public UICheckBox randomIcon;
-        private string lastRandomName;
 
         public static Category GetCategory(ItemClass itemClass)
         {
@@ -227,7 +226,6 @@ namespace FindIt.GUI
             randomIcon.isChecked = true;
             randomIcon.readOnly = true;
             randomIcon.checkedBoxObject.isInteractive = false;
-            lastRandomName = "";
             Random.InitState(System.Environment.TickCount);
             randomIcon.eventClicked += (c, p) =>
             {
@@ -256,22 +254,13 @@ namespace FindIt.GUI
         /// </summary>
         public void PickRandom()
         {
-            int index;
-            string name;
-            while (true)
-            {
-                index = Random.Range(0, UISearchBox.instance.searchResultSet.Count);
-                name = UISearchBox.instance.searchResultSet.ElementAt(index);
-
-                if (name != lastRandomName) break;
-            }
+            int index = Random.Range(0, UISearchBox.instance.searchResultList.Count);
+            string name = UISearchBox.instance.searchResultList.ElementAt(index);
             FindIt.instance.scrollPanel.DisplayAt(index);
-            UIButton[] buttons = FindIt.instance.scrollPanel.GetComponentsInChildren<UIButton>();
-            foreach (UIButton button in buttons)
+            foreach (UIButton button in FindIt.instance.scrollPanel.GetComponentsInChildren<UIButton>())
             {
                 if (button.name == name)
                 {
-                    lastRandomName = name;
                     button.SimulateClick();
                     break;
                 }
