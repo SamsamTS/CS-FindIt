@@ -138,6 +138,8 @@
     <Translation ID="FIF_EF_BH" String="Building Height" />
     <Translation ID="FIF_EF_MET" String="meters" />
     <Translation ID="FIF_EF_FEE" String="feet" />
+    <Translation ID="FIF_SET_ACLS" String="Sort asset creator list alphabetically" />
+    <Translation ID="FIF_GR_RAN" String="Random Selection" />
 
   </Translations>
 </Language>

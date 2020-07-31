@@ -50,7 +50,6 @@ namespace FindIt.GUI
             // tag dropdown
             optionDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
             optionDropDownMenu.size = new Vector2(200, 25);
-            optionDropDownMenu.tooltip = Translations.Translate("FIF_POP_SCR");
             optionDropDownMenu.listHeight = 210;
             optionDropDownMenu.itemHeight = 30;
             optionDropDownMenu.items = options;
@@ -60,7 +59,6 @@ namespace FindIt.GUI
             {
                 if(optionDropDownMenu.selectedIndex == 0)
                 {
-                    UpdateAssetCreatorList();
                     UpdateAssetCreatorOptionVisibility(true);
                     UpdateBuildingHeightOptionVisibility(false);
                 }
@@ -80,7 +78,7 @@ namespace FindIt.GUI
             assetCreatorDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
             assetCreatorDropDownMenu.size = new Vector2(270, 25);
             assetCreatorDropDownMenu.tooltip = Translations.Translate("FIF_POP_SCR");
-            assetCreatorDropDownMenu.listHeight = 210;
+            assetCreatorDropDownMenu.listHeight = 300;
             assetCreatorDropDownMenu.itemHeight = 30;
             UpdateAssetCreatorList();
             assetCreatorDropDownMenu.isVisible = true;
@@ -97,7 +95,7 @@ namespace FindIt.GUI
             minLabel = this.AddUIComponent<UILabel>();
             minLabel.textScale = 0.8f;
             minLabel.padding = new RectOffset(0, 0, 8, 0);
-            minLabel.text = Translations.Translate("Min:");
+            minLabel.text = "Min:";
             minLabel.isVisible = false;
             minLabel.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 50, 5);
 
@@ -130,7 +128,7 @@ namespace FindIt.GUI
             maxLabel = this.AddUIComponent<UILabel>();
             maxLabel.textScale = 0.8f;
             maxLabel.padding = new RectOffset(0, 0, 8, 0);
-            maxLabel.text = Translations.Translate("Max:");
+            maxLabel.text = "Max:";
             maxLabel.isVisible = false;
             maxLabel.relativePosition = new Vector3(minInput.relativePosition.x + minInput.width + 20, 5);
 
@@ -163,7 +161,6 @@ namespace FindIt.GUI
             // building height unit
             builingHeightUnit = SamsamTS.UIUtils.CreateDropDown(this);
             builingHeightUnit.size = new Vector2(80, 25);
-            builingHeightUnit.tooltip = Translations.Translate("FIF_POP_SCR");
             builingHeightUnit.listHeight = 210;
             builingHeightUnit.itemHeight = 30;
             builingHeightUnit.AddItem(Translations.Translate("FIF_EF_MET"));

@@ -8,6 +8,7 @@ using CitiesHarmony.API;
 using System.IO;
 using ColossalFramework.IO;
 using UnityEngine;
+using FindIt.GUI;
 
 namespace FindIt
 {
@@ -113,6 +114,18 @@ namespace FindIt
                 {
                     Settings.customTagListSort = b;
                     XMLUtils.SaveSettings();
+                    UIFilterTag.instance.UpdateCustomTagList();
+                    UISearchBox.instance.Search();
+                });
+                group.AddSpace(10);
+
+                // Sort asset creator list alphabetically. Default = sort by number of assets in each tag
+                UICheckBox assetCreatorListSort = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_ACLS"), Settings.assetCreatorListSort, (b) =>
+                {
+                    Settings.assetCreatorListSort = b;
+                    XMLUtils.SaveSettings();
+                    UIFilterExtra.instance.UpdateAssetCreatorList();
+                    UISearchBox.instance.Search();
                 });
                 group.AddSpace(10);
 

@@ -79,7 +79,7 @@ namespace FindIt.GUI
             tagDropDownMenu.normalBgSprite = "TextFieldPanelHovered";
             tagDropDownMenu.size = new Vector2(width - 2 * spacing - 50, 30);
             tagDropDownMenu.tooltip = Translations.Translate("FIF_POP_SCR");
-            tagDropDownMenu.listHeight = 210;
+            tagDropDownMenu.listHeight = 300;
             tagDropDownMenu.itemHeight = 30;
             tagDropDownMenu.relativePosition = new Vector3(spacing, tagDropDownMenuMessage.relativePosition.y + tagDropDownMenuMessage.height + spacing);
             UpdateCustomTagList();
