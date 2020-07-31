@@ -103,7 +103,7 @@
     <Translation ID="FIF_TAG_BAT" String="バッチ" />
     <Translation ID="FIF_ADD_TAG" String="タグ:" />
     <Translation ID="FIF_REM_TIT" String="バッチ削除" />
-    <Translation ID="FIF_REM_REM" String="選択したアセットからタグを削除します" />
+    <Translation ID="FIF_REM_REM" String="選択したアセットからタグを削除します:" />
     <Translation ID="FIF_REM_CHTP" String="このタグを削除" />
     <Translation ID="FIF_REM_ELBL" String="タグを選択してください" />
     <Translation ID="FIF_SE_EFI" String="追加のフィルターパネルを表示" />
@@ -111,6 +111,8 @@
     <Translation ID="FIF_EF_BH" String="建物の高さ" />
     <Translation ID="FIF_EF_MET" String="メートル" />
     <Translation ID="FIF_EF_FEE" String="フィート" />
+    <Translation ID="FIF_SET_ACLS" String="アセット作成者リストをアルファベット順に並べ替え" />
+    <Translation ID="FIF_GR_RAN" String="ランダム選択" />
 
   </Translations>
 </Language>

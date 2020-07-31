@@ -99,7 +99,7 @@
     <Translation ID="FIF_CT_ILBL1" String="或者" />
     <Translation ID="FIF_CT_ILBL2" String="輸入新標籤名稱後按Enter" />
     <Translation ID="FIF_CT_ITP" String="按Enter以增加新標籤" />
-    <Translation ID="FIF_SET_CTLS" String="以字母順序排列自訂標籤下拉清單" />
+    <Translation ID="FIF_SET_CTLS" String="以字母順序排列自訂標籤清單" />
     <Translation ID="FIF_TAG_DDTP" String="只顯示含有此標籤的素材" />
     <Translation ID="FIF_TAG_REF" String="重整" />
     <Translation ID="FIF_TAG_REFTP" String="重整自訂標籤下拉清單" />
@@ -136,6 +136,8 @@
     <Translation ID="FIF_EF_BH" String="建築物高度" />
     <Translation ID="FIF_EF_MET" String="公尺" />
     <Translation ID="FIF_EF_FEE" String="英尺" />
+    <Translation ID="FIF_SET_ACLS" String="以字母順序排列素材作者清單" />
+    <Translation ID="FIF_GR_RAN" String="隨機選擇" />
 
   </Translations>
 </Language>

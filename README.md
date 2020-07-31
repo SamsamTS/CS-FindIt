@@ -13,6 +13,8 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 ## Change Notes
 
 Finished and planned to be included in the next release:
+
+V1.7.3 Update:
 - Option to sort asset creator list alphabetically
 
 - Random selection button for growable and RICO
