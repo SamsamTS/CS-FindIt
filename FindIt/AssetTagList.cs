@@ -1006,7 +1006,7 @@ namespace FindIt
             List<KeyValuePair<string, int>> list = assetCreatorDictionary.ToList();
 
             // sort list by number of assets by each asset creator
-            if (!Settings.customTagListSort)
+            if (!Settings.assetCreatorListSort)
             {
                 list = list.OrderByDescending(s => s.Value).ToList();
             }

@@ -127,6 +127,7 @@
     <EmbeddedResource Include="Icons\ToolbarIconPropsSpecialBillboards.png" />
     <EmbeddedResource Include="Icons\ToolbarIconPropsSpecialBillboardsDisabled.png" />
     <EmbeddedResource Include="Icons\ExtraFilters.png" />
+    <EmbeddedResource Include="Icons\Dice.png" />
     <Content Include="Translations\de.xml" />
     <Content Include="Translations\en.xml" />
     <Content Include="Translations\es.xml" />

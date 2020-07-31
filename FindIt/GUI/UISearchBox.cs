@@ -12,7 +12,7 @@ using System.Linq;
 namespace FindIt.GUI
 {
     // Don't change the accessibility of some data members to private or it may break Picker mod's current reflection code
-    // I've added a simple interface and sent Picker mod a pull request, but it hasn't beed accepted yet
+    // I've added a simple interface and sent Picker mod a pull request, but it hasn't been accepted yet
     public class UISearchBox : UIPanel
     {
         public static UISearchBox instance;
@@ -47,6 +47,8 @@ namespace FindIt.GUI
         // true = sort by relevance
         // false = sort by most recently downloaded
         public bool sortButtonTextState = true;
+
+        public HashSet<string> searchResultSet = new HashSet<string>();
 
         public enum DropDownOptions
         {
@@ -534,7 +536,7 @@ namespace FindIt.GUI
         }
 
         /// <summary>
-        /// Reset all filters. This mehtod will be used by Quboid's Picker mod through reflection.
+        /// Reset all filters. This method will be used by Quboid's Picker mod through reflection.
         /// Don't remove this method. Update this method whenever a new filter is added.
         /// </summary>
         public void ResetFilters()
@@ -585,7 +587,7 @@ namespace FindIt.GUI
                 if (UISearchBox.instance.buildingSizeFilterIndex.y > 4) UISearchBox.instance.sizeFilterY.selectedIndex = 0;
             }
             List<Asset> matches = AssetTagList.instance.Find(text, type);
-
+            searchResultSet.Clear();
             // sort by most recently downloaded
             if (sortButtonTextState == false)
             {
@@ -651,7 +653,7 @@ namespace FindIt.GUI
                     data.asset = asset;
 
                     scrollPanel.itemsData.Add(data);
-
+                    searchResultSet.Add(data.name);
                     if (asset.prefab == current)
                     {
                         selected = data;
