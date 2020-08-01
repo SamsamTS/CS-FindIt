@@ -555,6 +555,7 @@ namespace FindIt.GUI
             filterPloppable.SelectAll();
             filterProp.SelectAll();
             filterTree.SelectAll();
+            Search();
         }
 
         public void Search()
