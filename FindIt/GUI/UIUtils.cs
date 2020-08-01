@@ -148,6 +148,18 @@ namespace SamsamTS
             panel.size = checkBox.size;
             panel.relativePosition = Vector3.zero;
 
+            UISprite sprite = panel.AddUIComponent<UISprite>();
+            sprite.atlas = GetAtlas(atlas);
+            sprite.spriteName = uncheckedSprite;
+            sprite.size = checkBox.size;
+            sprite.relativePosition = Vector3.zero;
+
+            checkBox.checkedBoxObject = sprite.AddUIComponent<UISprite>();
+            ((UISprite)checkBox.checkedBoxObject).atlas = sprite.atlas;
+            ((UISprite)checkBox.checkedBoxObject).spriteName = checkedSprite;
+            checkBox.checkedBoxObject.size = checkBox.size;
+            checkBox.checkedBoxObject.relativePosition = Vector3.zero;
+
             checkBox.eventCheckChanged += (c, b) =>
             {
                 if (checkBox.isChecked)
@@ -160,6 +172,7 @@ namespace SamsamTS
             checkBox.eventMouseEnter += (c, p) =>
             {
                 panel.backgroundSprite = "IconPolicyBaseRectHovered";
+                sprite.spriteName = checkedSprite;
             };
 
             checkBox.eventMouseLeave += (c, p) =>
@@ -167,20 +180,11 @@ namespace SamsamTS
                 if (checkBox.isChecked)
                     panel.backgroundSprite = "IconPolicyBaseRect";
                 else
+                {
                     panel.backgroundSprite = "IconPolicyBaseRectDisabled";
+                }
+                sprite.spriteName = uncheckedSprite;
             };
-
-            UISprite sprite = panel.AddUIComponent<UISprite>();
-            sprite.atlas = GetAtlas(atlas);
-            sprite.spriteName = uncheckedSprite;
-            sprite.size = checkBox.size;
-            sprite.relativePosition = Vector3.zero;
-
-            checkBox.checkedBoxObject = sprite.AddUIComponent<UISprite>();
-            ((UISprite)checkBox.checkedBoxObject).atlas = sprite.atlas;
-            ((UISprite)checkBox.checkedBoxObject).spriteName = checkedSprite;
-            checkBox.checkedBoxObject.size = checkBox.size;
-            checkBox.checkedBoxObject.relativePosition = Vector3.zero;
 
             return checkBox;
         }
