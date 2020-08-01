@@ -128,6 +128,12 @@
     <EmbeddedResource Include="Icons\ToolbarIconPropsSpecialBillboardsDisabled.png" />
     <EmbeddedResource Include="Icons\ExtraFilters.png" />
     <EmbeddedResource Include="Icons\Dice.png" />
+    <EmbeddedResource Include="Icons\TreeLg.png" />
+    <EmbeddedResource Include="Icons\TreeLgDisabled.png" />
+    <EmbeddedResource Include="Icons\TreeMd.png" />
+    <EmbeddedResource Include="Icons\TreeMdDisabled.png" />
+    <EmbeddedResource Include="Icons\TreeSm.png" />
+    <EmbeddedResource Include="Icons\TreeSmDisabled.png" />
     <Content Include="Translations\de.xml" />
     <Content Include="Translations\en.xml" />
     <Content Include="Translations\es.xml" />

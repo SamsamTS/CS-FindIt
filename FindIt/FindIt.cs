@@ -366,7 +366,13 @@ namespace FindIt
                     "ToolbarIconPropsBillboardsDisabled",
                     "ToolbarIconPropsSpecialBillboardsDisabled",
                     "ExtraFilters",
-                    "Dice"
+                    "Dice",
+                    "TreeLg",
+                    "TreeMd",
+                    "TreeSm",
+                    "TreeLgDisabled",
+                    "TreeMdDisabled",
+                    "TreeSmDisabled"
                 };
 
                 atlas = ResourceLoader.CreateTextureAtlas("FindItAtlas", spriteNames, "FindIt.Icons.");

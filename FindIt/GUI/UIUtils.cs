@@ -185,57 +185,6 @@ namespace SamsamTS
             return checkBox;
         }
 
-        public static UICheckBox CreateTreeIconToggle(UIComponent parent, string atlas, string checkedSprite, string uncheckedSprite)
-        {
-            UICheckBox checkBox = parent.AddUIComponent<UICheckBox>();
-
-            checkBox.width = 35f;
-            checkBox.height = 35f;
-            checkBox.clipChildren = true;
-
-            UIPanel panel = checkBox.AddUIComponent<UIPanel>();
-            panel.atlas = GetAtlas("Ingame");
-            panel.backgroundSprite = "GenericTabDisabled";
-            panel.size = checkBox.size;
-            panel.relativePosition = Vector3.zero;
-
-            checkBox.eventCheckChanged += (c, b) =>
-            {
-                if (checkBox.isChecked)
-                    panel.backgroundSprite = "GenericTabDisabled";
-                else
-                    panel.backgroundSprite = "GenericTabDisabled";
-                panel.Invalidate();
-            };
-
-            checkBox.eventMouseEnter += (c, p) =>
-            {
-                panel.backgroundSprite = "GenericTabHovered";
-            };
-
-            checkBox.eventMouseLeave += (c, p) =>
-            {
-                if (checkBox.isChecked)
-                    panel.backgroundSprite = "GenericTabDisabled";
-                else
-                    panel.backgroundSprite = "GenericTabDisabled";
-            };
-
-            UISprite sprite = panel.AddUIComponent<UISprite>();
-            sprite.atlas = GetAtlas(atlas);
-            sprite.spriteName = uncheckedSprite;
-            sprite.size = checkBox.size;
-            sprite.relativePosition = Vector3.zero;
-
-            checkBox.checkedBoxObject = sprite.AddUIComponent<UISprite>();
-            ((UISprite)checkBox.checkedBoxObject).atlas = sprite.atlas;
-            ((UISprite)checkBox.checkedBoxObject).spriteName = checkedSprite;
-            checkBox.checkedBoxObject.size = checkBox.size;
-            checkBox.checkedBoxObject.relativePosition = Vector3.zero;
-
-            return checkBox;
-        }
-
         private static UIColorField _colorFIeldTemplate;
 
         public static UIColorField CreateColorField(UIComponent parent)
