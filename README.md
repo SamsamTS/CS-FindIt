@@ -14,6 +14,9 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 
 Finished and planned to be included in the next release:
 
+V1.7.3-1 Update:
+- Change tree filter tab icons  
+
 V1.7.3 Update:
 - Option to sort asset creator list alphabetically
 
