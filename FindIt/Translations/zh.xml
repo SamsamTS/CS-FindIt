@@ -87,7 +87,7 @@
     <Translation ID="FIF_DE_TIT" String="删除" />
     <Translation ID="FIF_DE_MSG" String="确定要删除此标签吗?" />
     <Translation ID="FIF_RE_TIT" String="改名" />
-    <Translation ID="FIF_RE_MSG" String="输入新的标签名称后按Enter。" />
+    <Translation ID="FIF_RE_MSG" String="输入新的标签名称后按Enter" />
     <Translation ID="FIF_RE_ITP" String="按Enter提交新标签名称" />
     <Translation ID="FIF_RE_ELBL" String="请输入新的标签名称" />
     <Translation ID="FIF_RE_NEWLBL" String="新标签名称:" />
@@ -110,9 +110,34 @@
     <Translation ID="FIF_TAG_DEL" String="删除" />
     <Translation ID="FIF_TAG_DELTP" String="删除这个标签" />
     <Translation ID="FIF_UIS_WS" String="右键单击以在Steam Workshop上查看此资产" />
-    <Translation ID="FIF_TREE_SM" String="小型树" />
-    <Translation ID="FIF_TREE_MD" String="中型树" />
-    <Translation ID="FIF_TREE_LG" String="大型树" />
+    <Translation ID="FIF_TREE_SM" String="小型树木" />
+    <Translation ID="FIF_TREE_MD" String="中型树木" />
+    <Translation ID="FIF_TREE_LG" String="大型树木" />
+    <Translation ID="FIF_TAG_BAT" String="批量" />
+    <Translation ID="FIF_TAG_BAC" String="返回" />
+    <Translation ID="FIF_TAG_ADD" String="添加" />
+    <Translation ID="FIF_TAG_ADDTP" String="将标签批量添加到所选资产" />
+    <Translation ID="FIF_TAG_REM" String="移除" />
+    <Translation ID="FIF_TAG_REMTP" String="从所选资产中批量移除标签" />
+    <Translation ID="FIF_TAG_CLE" String="重选" />
+    <Translation ID="FIF_TAG_CLETP" String="重新选择" />
+    <Translation ID="FIF_ADD_TIT" String="批量添加" />
+    <Translation ID="FIF_ADD_NUM" String="所选资产数量:" />
+    <Translation ID="FIF_ADD_ADD" String="将现有标签添加到所选资产:" />
+    <Translation ID="FIF_ADD_CHTP" String="添加此现有标签" />
+    <Translation ID="FIF_ADD_TAG" String="标签:" />
+    <Translation ID="FIF_ADD_ELBL" String="输入新标签或选择现有标签" />
+    <Translation ID="FIF_REM_TIT" String="批量移除" />
+    <Translation ID="FIF_REM_REM" String="从所选资产中批量移除标签:" />
+    <Translation ID="FIF_REM_CHTP" String="移除此标签" />
+    <Translation ID="FIF_REM_ELBL" String="选择一个标签" />
+    <Translation ID="FIF_SE_EFI" String="显示额外的过滤器面板" />
+    <Translation ID="FIF_EF_AC" String="资产作者" />
+    <Translation ID="FIF_EF_BH" String="建筑高度" />
+    <Translation ID="FIF_EF_MET" String="米" />
+    <Translation ID="FIF_EF_FEE" String="英尺" />
+    <Translation ID="FIF_SET_ACLS" String="按字母顺序对资产作者列表进行排序" />
+    <Translation ID="FIF_GR_RAN" String="随机选择" />
 
   </Translations>
 </Language>

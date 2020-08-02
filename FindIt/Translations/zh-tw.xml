@@ -135,7 +135,7 @@
     <Translation ID="FIF_EF_AC" String="素材作者" />
     <Translation ID="FIF_EF_BH" String="建築物高度" />
     <Translation ID="FIF_EF_MET" String="公尺" />
-    <Translation ID="FIF_EF_FEE" String="英尺" />
+    <Translation ID="FIF_EF_FEE" String="英呎" />
     <Translation ID="FIF_SET_ACLS" String="以字母順序排列素材作者清單" />
     <Translation ID="FIF_GR_RAN" String="隨機選擇" />
 
