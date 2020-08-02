@@ -14,6 +14,10 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 
 Finished and planned to be included in the next release:
 
+v2.0.0 Update:  
+- No major changes in this update.  
+Just that the version number jumps from v1.7.3-3 to v2.0.0 to match the name of this mod, and the [TEST] label is removed.
+
 v1.7.3-2 Update:
 - Unchecked filter tab will show its normal sprite when it is hovered
 

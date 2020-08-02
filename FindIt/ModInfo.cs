@@ -14,11 +14,11 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "1.7.3-3";
+        public const string version = "2.0.0";
 
         public string Name
         {
-            get { return "Find It! 2 [Test] " + version; }
+            get { return "Find It! 2 " + version; }
         }
 
         public string Description

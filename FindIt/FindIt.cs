@@ -77,7 +77,7 @@ namespace FindIt
                 };
                 if (!locale.Exists(key))
                 {
-                    locale.AddLocalizedString(key, "Thanks for subscribing to Find It! 2 [Test].\n\nStart typing some keywords into the input field to find the desired asset.\n\nThis mod is still under developing/testing.\n\nCheck the workshop page occasionally for new features or bug reports.");
+                    locale.AddLocalizedString(key, "Thanks for subscribing to Find It! 2.\n\nStart typing some keywords into the input field to find the desired asset.\n\nThis mod is still under developing/testing.\n\nCheck the workshop page occasionally for new features or bug reports.");
                 }
 
                 FieldInfo m_ObjectIndex = typeof(MainToolbar).GetField("m_ObjectIndex", BindingFlags.Instance | BindingFlags.NonPublic);
