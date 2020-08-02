@@ -98,7 +98,7 @@ namespace FindIt.GUI
 
         public UICheckBox[] toggles;
         public UIButton all;
-        public UICheckBox randomIcon;
+        private UICheckBox randomIcon;
 
         public static Category GetCategory(ItemClass itemClass)
         {
@@ -252,7 +252,7 @@ namespace FindIt.GUI
         /// <summary>
         /// Pick a random growable or RICO building from the search result
         /// </summary>
-        public void PickRandom()
+        private void PickRandom()
         {
             int index = Random.Range(0, UISearchBox.instance.searchResultList.Count);
             string name = UISearchBox.instance.searchResultList.ElementAt(index);

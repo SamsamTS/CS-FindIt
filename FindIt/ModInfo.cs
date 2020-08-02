@@ -14,7 +14,7 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "1.7.3-2";
+        public const string version = "1.7.3-3";
 
         public string Name
         {

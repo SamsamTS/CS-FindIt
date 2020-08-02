@@ -19,14 +19,14 @@ namespace FindIt.GUI
         // building height
         private UILabel minLabel;
         private UILabel maxLabel;
-        public UITextField minInput;
-        public UITextField maxInput;
-        public UIDropDown builingHeightUnit;
+        private UITextField minInput;
+        private UITextField maxInput;
+        private UIDropDown builingHeightUnit;
         public float minBuildingHeight = float.MinValue;
         public float maxBuildingHeight = float.MaxValue;
 
         private List<KeyValuePair<string, int>> assetCreatorList;
-        public string[] assetCreatorListStrArray;
+        private string[] assetCreatorListStrArray;
 
         string[] options = {
                     Translations.Translate("FIF_EF_AC"), // Asset creator
@@ -37,7 +37,7 @@ namespace FindIt.GUI
         {
             instance = this;
 
-            // tag dropdown filter checkbox
+            // extra filter checkbox
             optionDropDownCheckBox = SamsamTS.UIUtils.CreateCheckBox(this);
             optionDropDownCheckBox.isChecked = false;
             optionDropDownCheckBox.width = 20;
@@ -47,7 +47,7 @@ namespace FindIt.GUI
                 ((UISearchBox)parent).Search();
             };
 
-            // tag dropdown
+            // extra filter dropdown
             optionDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
             optionDropDownMenu.size = new Vector2(200, 25);
             optionDropDownMenu.listHeight = 210;
@@ -207,12 +207,12 @@ namespace FindIt.GUI
             return assetCreatorList[assetCreatorDropDownMenu.selectedIndex].Key;
         }
 
-        public void UpdateAssetCreatorOptionVisibility(bool visibility)
+        private void UpdateAssetCreatorOptionVisibility(bool visibility)
         {
             assetCreatorDropDownMenu.isVisible = visibility;
         }
 
-        public void UpdateBuildingHeightOptionVisibility(bool visibility)
+        private void UpdateBuildingHeightOptionVisibility(bool visibility)
         {
             minLabel.isVisible = visibility;
             minInput.isVisible = visibility;
