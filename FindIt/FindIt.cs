@@ -127,6 +127,11 @@ namespace FindIt
                     searchBox = scrollPanel.parent.AddUIComponent<UISearchBox>();
                     searchBox.scrollPanel = scrollPanel;
                     searchBox.relativePosition = new Vector3(0, 0);
+                    searchBox.input.eventKeyDown += (component, eventParam) =>
+			        {
+				        if (eventParam.keycode != KeyCode.DownArrow && eventParam.keycode != KeyCode.UpArrow) return;
+				        searchBox.typeFilter.selectedIndex = Mathf.Clamp(searchBox.typeFilter.selectedIndex + (eventParam.keycode == KeyCode.DownArrow ? 1 : -1), 0, searchBox.typeFilter.items.Length);
+		        	};
                     searchBox.Search();
                 }
                 else
