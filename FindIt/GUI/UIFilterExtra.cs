@@ -14,7 +14,7 @@ namespace FindIt.GUI
         public UICheckBox optionDropDownCheckBox;
         public UIDropDown optionDropDownMenu;
 
-        public UIDropDown assetCreatorDropDownMenu;
+        private UIDropDown assetCreatorDropDownMenu;
 
         // building height
         private UILabel minLabel;
@@ -57,7 +57,7 @@ namespace FindIt.GUI
             optionDropDownMenu.relativePosition = new Vector3(optionDropDownCheckBox.relativePosition.x + optionDropDownCheckBox.width + 5, 5);
             optionDropDownMenu.eventSelectedIndexChanged += (c, p) =>
             {
-                if(optionDropDownMenu.selectedIndex == 0)
+                if (optionDropDownMenu.selectedIndex == 0)
                 {
                     UpdateAssetCreatorOptionVisibility(true);
                     UpdateBuildingHeightOptionVisibility(false);

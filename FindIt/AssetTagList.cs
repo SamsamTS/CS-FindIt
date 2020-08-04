@@ -100,7 +100,7 @@ namespace FindIt
                         }
 
                         size = new Vector2(buildingPrefab.m_cellWidth, buildingPrefab.m_cellLength);
-                        if(buildingPrefab.m_generatedInfo!= null && buildingPrefab.m_generatedInfo.m_heights != null)
+                        if (buildingPrefab.m_generatedInfo != null && buildingPrefab.m_generatedInfo.m_heights != null)
                         {
                             if (buildingPrefab.m_generatedInfo.m_heights.Length != 0)
                             {
@@ -307,32 +307,32 @@ namespace FindIt
             MilestoneInfo unlockMilestone = prefab.GetUnlockMilestone();
 
             string text = TooltipHelper.Format(new string[]
-	        {
-		        LocaleFormatter.Title,
-		        title,
-		        LocaleFormatter.Sprite,
-		        (!string.IsNullOrEmpty(prefab.m_InfoTooltipThumbnail)) ? prefab.m_InfoTooltipThumbnail : prefab.name,
-		        LocaleFormatter.Text,
-		        Asset.GetLocalizedDescription(prefab),
-		        LocaleFormatter.Locked,
-		        (!ToolsModifierControl.IsUnlocked(unlockMilestone)).ToString()
-	        });
+            {
+                LocaleFormatter.Title,
+                title,
+                LocaleFormatter.Sprite,
+                (!string.IsNullOrEmpty(prefab.m_InfoTooltipThumbnail)) ? prefab.m_InfoTooltipThumbnail : prefab.name,
+                LocaleFormatter.Text,
+                Asset.GetLocalizedDescription(prefab),
+                LocaleFormatter.Locked,
+                (!ToolsModifierControl.IsUnlocked(unlockMilestone)).ToString()
+            });
 
             ToolsModifierControl.GetUnlockingInfo(unlockMilestone, out string unlockDesc, out string currentValue, out string targetValue, out string progress, out string locked);
 
             string addTooltip = TooltipHelper.Format(new string[]
-	        {
-		        LocaleFormatter.LockedInfo,
-		        locked,
-		        LocaleFormatter.UnlockDesc,
-		        unlockDesc,
-		        LocaleFormatter.UnlockPopulationProgressText,
-		        progress,
-		        LocaleFormatter.UnlockPopulationTarget,
-		        targetValue,
-		        LocaleFormatter.UnlockPopulationCurrent,
-		        currentValue
-	        });
+            {
+                LocaleFormatter.LockedInfo,
+                locked,
+                LocaleFormatter.UnlockDesc,
+                unlockDesc,
+                LocaleFormatter.UnlockPopulationProgressText,
+                progress,
+                LocaleFormatter.UnlockPopulationTarget,
+                targetValue,
+                LocaleFormatter.UnlockPopulationCurrent,
+                currentValue
+            });
 
             text = TooltipHelper.Append(text, addTooltip);
             PrefabAI aI = prefab.GetAI();
@@ -344,10 +344,10 @@ namespace FindIt
             if (prefab is PropInfo || prefab is TreeInfo)
             {
                 text = TooltipHelper.Append(text, TooltipHelper.Format(new string[]
-	            {
-		            LocaleFormatter.Cost,
-		            LocaleFormatter.FormatCost(prefab.GetConstructionCost(), false)
-	            }));
+                {
+                    LocaleFormatter.Cost,
+                    LocaleFormatter.FormatCost(prefab.GetConstructionCost(), false)
+                }));
             }
 
             return text;
@@ -364,7 +364,7 @@ namespace FindIt
 
             else if (propEditorCategory.StartsWith("PropsCommon")) return Asset.PropType.PropsCommon;
             else if (propEditorCategory.StartsWith("PropsResidential")) return Asset.PropType.PropsResidential;
-            else if (propEditorCategory.StartsWith("PropsBillboards"))  return Asset.PropType.PropsBillboards;
+            else if (propEditorCategory.StartsWith("PropsBillboards")) return Asset.PropType.PropsBillboards;
             else if (propEditorCategory.StartsWith("PropsSpecialBillboards")) return Asset.PropType.PropsSpecialBillboards;
             else if (propEditorCategory.StartsWith("PropsRocks")) return Asset.PropType.Natural;
             else if (propEditorCategory.StartsWith("Beautification")) return Asset.PropType.Natural;
@@ -377,7 +377,7 @@ namespace FindIt
         private Asset.TreeType SetTreeType(TreeInfo info)
         {
             if (info == null) return Asset.TreeType.Invalid;
-            
+
             float size = info.m_generatedInfo.m_size.y * (info.m_minScale + info.m_maxScale);
 
             if (size <= 16f) return Asset.TreeType.SmallTree;
@@ -448,7 +448,7 @@ namespace FindIt
                                 {
                                     score += 10 * GetScore(keyword, asset.assetType.ToString().ToLower(), null);
                                 }
-                                
+
                                 if (asset.service != ItemClass.Service.None)
                                 {
                                     score += 10 * GetScore(keyword, asset.service.ToString().ToLower(), null);
@@ -490,7 +490,7 @@ namespace FindIt
                                 }
                             }
                         }
-                       
+
                         if (asset.score > 0) matches.Add(asset);
                     }
                 }
@@ -509,7 +509,7 @@ namespace FindIt
                     }
                 }
             }
-           
+
             return matches;
         }
 
@@ -577,6 +577,48 @@ namespace FindIt
                 }
             }
 
+            try
+            {
+                if (UISearchBox.instance?.workshopFilter != null && UISearchBox.instance?.vanillaFilter != null && UISearchBox.instance?.tagPanel != null && UISearchBox.instance?.extraFiltersPanel != null)
+                {
+                    // filter out custom asset
+                    if (asset.prefab.m_isCustomContent && !UISearchBox.instance.workshopFilter.isChecked) return false;
+
+                    // filter out vanilla asset. will not filter out content creater pack assets
+                    if (!asset.prefab.m_isCustomContent && !UISearchBox.instance.vanillaFilter.isChecked && !asset.isCCPBuilding) return false;
+
+                    // filter out assets without matching custom tag
+                    if (UISearchBox.instance.tagPanel.tagDropDownCheckBox.isChecked && UISearchBox.instance.tagPanel.customTagListStrArray.Length > 0)
+                    {
+                        if (!asset.tagsCustom.Contains(UISearchBox.instance.tagPanel.GetDropDownListKey())) return false;
+                    }
+
+                    // extra filters check
+                    if (UISearchBox.instance.extraFiltersPanel.optionDropDownCheckBox.isChecked)
+                    {
+                        // filter asset by asset creator
+                        if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == 0)
+                        {
+                            if (asset.author != UISearchBox.instance.extraFiltersPanel.GetAssetCreatorDropDownListKey()) return false;
+                        }
+                        // filter asset by building height
+                        else
+                        {
+                            if (asset.assetType == Asset.AssetType.Ploppable || asset.assetType == Asset.AssetType.Rico || asset.assetType == Asset.AssetType.Growable)
+                            {
+                                if (asset.buildingHeight > UISearchBox.instance.extraFiltersPanel.maxBuildingHeight) return false;
+                                if (asset.buildingHeight < UISearchBox.instance.extraFiltersPanel.minBuildingHeight) return false;
+                            }
+                            else return false;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debugging.LogException(e);
+            }
+
             return true;
         }
 
@@ -613,7 +655,7 @@ namespace FindIt
                 if (assetSizeXY == buildingSizeFilterIndex) return true;
                 else return false;
             }
-            if (buildingSizeFilterIndex == 5.0f ) // size 5 - 8
+            if (buildingSizeFilterIndex == 5.0f) // size 5 - 8
             {
                 if (assetSizeXY <= 8.0f && assetSizeXY >= 5.0f) return true;
                 else return false;
@@ -716,7 +758,7 @@ namespace FindIt
                 {
                     asset.title = Asset.GetLocalizedTitle(asset.prefab);
                     asset.tagsTitle = AddAssetTags(asset, tagsTitleDictionary, asset.title);
-                   
+
 
                     if (asset.steamID == 0)
                     {
@@ -803,10 +845,10 @@ namespace FindIt
 
             string name = Asset.GetName(asset.prefab);
 
-            if(tagsCustomDictionary.ContainsKey(tag))
+            if (tagsCustomDictionary.ContainsKey(tag))
             {
                 tagsCustomDictionary[tag]--;
-                if(tagsCustomDictionary[tag] == 0)
+                if (tagsCustomDictionary[tag] == 0)
                 {
                     tagsCustomDictionary.Remove(tag);
                 }
@@ -887,7 +929,7 @@ namespace FindIt
                 }
             }
 
-            if(!filtered.IsNullOrWhiteSpace())
+            if (!filtered.IsNullOrWhiteSpace())
             {
                 filtered = filtered.Remove(filtered.Length - 2);
                 Debugging.Message("Filtered " + typeof(T) + ": " + filtered);

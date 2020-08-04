@@ -54,7 +54,7 @@ namespace FindIt.GUI
                 "FindItAtlas",
                 "FindItAtlas"
             };
-            
+
             public static readonly string[] spriteNames =
             {
                 "ZoningResidentialLow",

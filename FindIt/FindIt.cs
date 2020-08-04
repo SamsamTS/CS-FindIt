@@ -146,7 +146,7 @@ namespace FindIt
                 mainButton.pressedFgSprite = "FindItPressed";
                 mainButton.disabledFgSprite = "FindItDisabled";
 
-                mainButton.tooltip = "Find It! 2 " + ModInfo.version;
+                mainButton.tooltip = "Find It! 2 " + (ModInfo.isBeta ? "[BETA] " : "") + ModInfo.version;
 
                 m_beautificationPanel = FindObjectOfType<BeautificationPanel>();
 
@@ -199,13 +199,13 @@ namespace FindIt
         {
             OptionPanelBase[] panels = ToolsModifierControl.mainToolbar.m_OptionsBar.GetComponentsInChildren<OptionPanelBase>();
 
-            foreach(OptionPanelBase panel in panels)
+            foreach (OptionPanelBase panel in panels)
             {
                 panel.Hide();
             }
 
             UIComponent brushPanel = ToolsModifierControl.mainToolbar.m_OptionsBar.Find("BrushPanel");
-            if(brushPanel != null)
+            if (brushPanel != null)
             {
                 brushPanel.isVisible = false;
             }
@@ -247,7 +247,7 @@ namespace FindIt
             {
                 BuildingTool buildingTool = ToolsModifierControl.SetTool<BuildingTool>();
                 if (buildingTool != null)
-                {                    
+                {
                     buildingTool.m_prefab = buildingInfo;
                     buildingTool.m_relocate = 0;
                 }
@@ -291,11 +291,11 @@ namespace FindIt
 
         public static bool IsRicoEnabled()
         {
-            foreach(PluginManager.PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
+            foreach (PluginManager.PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
             {
-                foreach(Assembly assembly in plugin.GetAssemblies())
+                foreach (Assembly assembly in plugin.GetAssemblies())
                 {
-                    if(assembly.GetName().Name.ToLower() == "ploppablerico")
+                    if (assembly.GetName().Name.ToLower() == "ploppablerico")
                     {
                         Debugging.Message("Rico found");
                         return plugin.isEnabled;
@@ -321,7 +321,7 @@ namespace FindIt
                     {
                         PropInfo info = buffer[i].Info;
 
-                        if(info == null) continue;
+                        if (info == null) continue;
 
                         if (info.m_requireWaterMap && info.m_lodWaterHeightMap == null)
                         {
@@ -333,8 +333,8 @@ namespace FindIt
                 catch
                 { }
             }
-            
-            if(log != "") Debugging.Message(log);
+
+            if (log != "") Debugging.Message(log);
         }
 
         public static UITextureAtlas LoadResources()
@@ -342,12 +342,12 @@ namespace FindIt
             if (atlas == null)
             {
                 string[] spriteNames = new string[]
-			    {
-				    "FindIt",
-				    "FindItDisabled",
-				    "FindItFocused",
-				    "FindItHovered",
-				    "FindItPressed",
+                {
+                    "FindIt",
+                    "FindItDisabled",
+                    "FindItFocused",
+                    "FindItHovered",
+                    "FindItPressed",
                     "Tag",
                     "ZoningCommercialEco",
                     "ZoningCommercialEcoDisabled",
@@ -415,7 +415,7 @@ namespace FindIt
         {
             AssetTagList.instance.Init();
 
-            if(Settings.fixBadProps)
+            if (Settings.fixBadProps)
             {
                 Debugging.Message("Fixing bad props");
                 FindIt.FixBadProps();

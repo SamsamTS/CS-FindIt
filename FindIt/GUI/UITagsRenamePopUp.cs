@@ -27,7 +27,7 @@ namespace FindIt.GUI
 
         public override void Start()
         {
-            name = "FindIt_TagsWindow";
+            name = "FindIt_TagsRenamePopUp";
             atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericPanelWhite";
             size = new Vector2(380, 200);
@@ -110,7 +110,8 @@ namespace FindIt.GUI
                     return;
                 }
 
-                if (AssetTagList.instance.tagsCustomDictionary.ContainsKey(newTagName)){
+                if (AssetTagList.instance.tagsCustomDictionary.ContainsKey(newTagName))
+                {
                     newTagNameLabel.text = Translations.Translate("FIF_RE_AELBL");
                     newTagNameLabel.textColor = new Color32(255, 0, 0, 255);
                     return;

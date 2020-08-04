@@ -26,7 +26,7 @@ namespace FindIt.GUI
 
         public override void Start()
         {
-            name = "FindIt_TagsWindow";
+            name = "FindIt_BatchRemovePopUp";
             atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericPanelWhite";
             size = new Vector2(380, 240);

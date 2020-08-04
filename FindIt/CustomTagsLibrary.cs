@@ -39,10 +39,10 @@ namespace FindIt
                     return;
                 }
 
-                TagEntry[] tagsEntries =  new TagEntry[assetTags.Count];
+                TagEntry[] tagsEntries = new TagEntry[assetTags.Count];
 
                 int i = 0;
-                foreach(string key in assetTags.Keys)
+                foreach (string key in assetTags.Keys)
                 {
                     tagsEntries[i].key = key;
                     tagsEntries[i].value = assetTags[key];
@@ -56,7 +56,7 @@ namespace FindIt
                     xmlSerializer.Serialize(stream, tagsEntries);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debugging.Message("Couldn't serialize custom tags");
                 Debugging.LogException(e);
@@ -72,7 +72,7 @@ namespace FindIt
                 string path = Path.Combine(DataLocation.localApplicationData, filename);
 
                 if (!File.Exists(path)) return;
-                
+
                 TagEntry[] tagsEntries;
 
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(TagEntry[]));
@@ -81,7 +81,7 @@ namespace FindIt
                     tagsEntries = (TagEntry[])xmlSerializer.Deserialize(stream);
                 }
 
-                for(int i=0; i< tagsEntries.Length; i++)
+                for (int i = 0; i < tagsEntries.Length; i++)
                 {
                     Debugging.Message(tagsEntries[i].key + " " + tagsEntries[i].value);
                     assetTags[tagsEntries[i].key] = tagsEntries[i].value;

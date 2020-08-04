@@ -124,7 +124,7 @@ namespace FindIt.GUI
             // Set current game InfoManager to default (don't want to render with an overlay mode).
             infoManager.SetCurrentMode(InfoManager.InfoMode.None, InfoManager.SubInfoMode.Default);
             infoManager.UpdateInfoMode();
-            
+
             // Backup current exposure and sky tint.
             float gameExposure = DayNightProperties.instance.m_Exposure;
             Color gameSkyTint = DayNightProperties.instance.m_SkyTint;

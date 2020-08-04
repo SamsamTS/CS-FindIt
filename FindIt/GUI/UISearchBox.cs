@@ -15,28 +15,34 @@ namespace FindIt.GUI
     public class UISearchBox : UIPanel
     {
         public static UISearchBox instance;
-        
+
         public UIPanel inputPanel;
         public UITextField input;
         public UIScrollPanel scrollPanel;
         public UIButton searchButton;
         public UIPanel filterPanel;
+
+        /// <summary>
+        /// Also manupulated by the Picker mod. Don't change its accessibility.
+        /// Need to notify Quboid if a new dropdown item is added, or the item order is changed
+        /// </summary>
         public UIDropDown typeFilter;
-        public UIPanel buildingFilters;
-        public UIDropDown levelFilter;
-        public UIDropDown sizeFilterX;
-        public UIDropDown sizeFilterY;
-        public UIFilterGrowable filterGrowable;
-        public UIFilterPloppable filterPloppable;
-        public UIFilterProp filterProp;
-        public UIFilterTree filterTree;
+        
+        private UIPanel buildingFilters;
+        private UIDropDown levelFilter;
+        private UIDropDown sizeFilterX;
+        private UIDropDown sizeFilterY;
+        private UIFilterGrowable filterGrowable;
+        private UIFilterPloppable filterPloppable;
+        private UIFilterProp filterProp;
+        private UIFilterTree filterTree;
 
         public UICheckBox workshopFilter;
         public UICheckBox vanillaFilter;
         private UIButton sortButton;
 
         public UIPanel toolIconPanel;
-        
+
         private UISprite tagToolIcon;
         public UIFilterTag tagPanel;
 
@@ -63,8 +69,8 @@ namespace FindIt.GUI
         }
 
         // building filter sizes
-        private string[] filterItemsGrowable = { Translations.Translate("FIF_SE_IA"), "1", "2", "3", "4"};
-        private string[] filterItemsRICO = { Translations.Translate("FIF_SE_IA"), "1", "2", "3", "4", "5-8", "9-12", "13+"};
+        private string[] filterItemsGrowable = { Translations.Translate("FIF_SE_IA"), "1", "2", "3", "4" };
+        private string[] filterItemsRICO = { Translations.Translate("FIF_SE_IA"), "1", "2", "3", "4", "5-8", "9-12", "13+" };
 
         public ItemClass.Level buildingLevel
         {
@@ -152,7 +158,8 @@ namespace FindIt.GUI
             vanillaFilter.relativePosition = new Vector3(workshopFilter.relativePosition.x + workshopFilter.width, 10);
             vanillaFilter.eventCheckChanged += (c, i) => Search();
 
-            // asset type filter
+            // asset type filter. Also Manipulated by the Picker mod through reflection.
+            // Need to notify Quboid if a new dropdown item is added, or the item order is changed
             typeFilter = SamsamTS.UIUtils.CreateDropDown(filterPanel);
             typeFilter.size = new Vector2(100, 25);
             typeFilter.tooltip = Translations.Translate("FIF_POP_SCR");
@@ -193,7 +200,7 @@ namespace FindIt.GUI
                 UpdateFilterPanels();
                 Search();
             };
-            
+
             // building filters panel
             buildingFilters = filterPanel.AddUIComponent<UIPanel>();
             buildingFilters.size = new Vector2(90, 35);
@@ -340,7 +347,7 @@ namespace FindIt.GUI
             filterPloppable = panel.AddUIComponent<UIFilterPloppable>();
             filterPloppable.isVisible = false;
             filterPloppable.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
-            filterPloppable.eventFilteringChanged += (c,p) => Search();
+            filterPloppable.eventFilteringChanged += (c, p) => Search();
 
             // growable filter tabs
             filterGrowable = panel.AddUIComponent<UIFilterGrowable>();
@@ -392,7 +399,7 @@ namespace FindIt.GUI
                     filterPanel.width = toolIconPanel.relativePosition.x + toolIconPanel.width + 5;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debugging.Message("UpdateBuildingFilters exception");
                 Debugging.LogException(e);
@@ -406,78 +413,78 @@ namespace FindIt.GUI
         {
             //SimulationManager.instance.AddAction(() =>
             //{
-                int index = typeFilter.selectedIndex;
-                if (!FindIt.isRicoEnabled && index >= (int)DropDownOptions.Rico)
-                {
-                    index+=2;
-                }
+            int index = typeFilter.selectedIndex;
+            if (!FindIt.isRicoEnabled && index >= (int)DropDownOptions.Rico)
+            {
+                index += 2;
+            }
 
-                switch ((DropDownOptions)index)
-                {
-                    case DropDownOptions.Ploppable:
-                        HideFilterPanel(filterGrowable);
-                        HideFilterPanel(filterProp);
-                        HideFilterPanel(filterTree);
-                        HideBuildingFilters();
-                        toolIconPanel.isVisible = true;
-                        ShowFilterPanel(filterPloppable);
-                        break;
-                    case DropDownOptions.Rico:
-                        sizeFilterX.items = filterItemsRICO;
-                        sizeFilterY.items = filterItemsRICO;
-                        HideFilterPanel(filterPloppable);
-                        HideFilterPanel(filterProp);
-                        HideFilterPanel(filterTree);
-                        toolIconPanel.isVisible = false;
-                        ShowFilterPanel(filterGrowable);
-                        ShowBuildingFilters();
-                        break;
-                    case DropDownOptions.GrwbRico:
-                        sizeFilterX.items = filterItemsRICO;
-                        sizeFilterY.items = filterItemsRICO;
-                        HideFilterPanel(filterPloppable);
-                        HideFilterPanel(filterProp);
-                        HideFilterPanel(filterTree);
-                        toolIconPanel.isVisible = false;
-                        ShowFilterPanel(filterGrowable);
-                        ShowBuildingFilters();
-                        break;
-                    case DropDownOptions.Growable:
-                        sizeFilterX.items = filterItemsGrowable;
-                        sizeFilterY.items = filterItemsGrowable;
-                        HideFilterPanel(filterPloppable);
-                        HideFilterPanel(filterProp);
-                        HideFilterPanel(filterTree);
-                        toolIconPanel.isVisible = false;
-                        ShowFilterPanel(filterGrowable);
-                        ShowBuildingFilters();
-                        break;
-                    case DropDownOptions.Prop:
-                        HideFilterPanel(filterGrowable);
-                        HideFilterPanel(filterPloppable);
-                        HideBuildingFilters();
-                        HideFilterPanel(filterTree);
-                        toolIconPanel.isVisible = true;
-                        ShowFilterPanel(filterProp);
-                        break;
-                    case DropDownOptions.Tree:
-                        HideFilterPanel(filterGrowable);
-                        HideFilterPanel(filterPloppable);
-                        HideBuildingFilters();
-                        HideFilterPanel(filterProp);
-                        toolIconPanel.isVisible = true;
-                        ShowFilterPanel(filterTree);
-                        break;
-                    default: // All, Network
-                        HideFilterPanel(filterPloppable);
-                        HideFilterPanel(filterGrowable);
-                        HideFilterPanel(filterProp);
-                        HideFilterPanel(filterTree);
-                        HideBuildingFilters();
-                        toolIconPanel.isVisible = true;
-                        break;
-                }
-           // });
+            switch ((DropDownOptions)index)
+            {
+                case DropDownOptions.Ploppable:
+                    HideFilterPanel(filterGrowable);
+                    HideFilterPanel(filterProp);
+                    HideFilterPanel(filterTree);
+                    HideBuildingFilters();
+                    toolIconPanel.isVisible = true;
+                    ShowFilterPanel(filterPloppable);
+                    break;
+                case DropDownOptions.Rico:
+                    sizeFilterX.items = filterItemsRICO;
+                    sizeFilterY.items = filterItemsRICO;
+                    HideFilterPanel(filterPloppable);
+                    HideFilterPanel(filterProp);
+                    HideFilterPanel(filterTree);
+                    toolIconPanel.isVisible = false;
+                    ShowFilterPanel(filterGrowable);
+                    ShowBuildingFilters();
+                    break;
+                case DropDownOptions.GrwbRico:
+                    sizeFilterX.items = filterItemsRICO;
+                    sizeFilterY.items = filterItemsRICO;
+                    HideFilterPanel(filterPloppable);
+                    HideFilterPanel(filterProp);
+                    HideFilterPanel(filterTree);
+                    toolIconPanel.isVisible = false;
+                    ShowFilterPanel(filterGrowable);
+                    ShowBuildingFilters();
+                    break;
+                case DropDownOptions.Growable:
+                    sizeFilterX.items = filterItemsGrowable;
+                    sizeFilterY.items = filterItemsGrowable;
+                    HideFilterPanel(filterPloppable);
+                    HideFilterPanel(filterProp);
+                    HideFilterPanel(filterTree);
+                    toolIconPanel.isVisible = false;
+                    ShowFilterPanel(filterGrowable);
+                    ShowBuildingFilters();
+                    break;
+                case DropDownOptions.Prop:
+                    HideFilterPanel(filterGrowable);
+                    HideFilterPanel(filterPloppable);
+                    HideBuildingFilters();
+                    HideFilterPanel(filterTree);
+                    toolIconPanel.isVisible = true;
+                    ShowFilterPanel(filterProp);
+                    break;
+                case DropDownOptions.Tree:
+                    HideFilterPanel(filterGrowable);
+                    HideFilterPanel(filterPloppable);
+                    HideBuildingFilters();
+                    HideFilterPanel(filterProp);
+                    toolIconPanel.isVisible = true;
+                    ShowFilterPanel(filterTree);
+                    break;
+                default: // All, Network
+                    HideFilterPanel(filterPloppable);
+                    HideFilterPanel(filterGrowable);
+                    HideFilterPanel(filterProp);
+                    HideFilterPanel(filterTree);
+                    HideBuildingFilters();
+                    toolIconPanel.isVisible = true;
+                    break;
+            }
+            // });
         }
 
         private void ShowFilterPanel(UIPanel panel)
@@ -505,7 +512,7 @@ namespace FindIt.GUI
         private void UpdateTagPanel()
         {
             tagPanel.isVisible = !tagPanel.isVisible;
-            if(!tagPanel.isVisible) tagPanel.tagDropDownCheckBox.isChecked = false;
+            if (!tagPanel.isVisible) tagPanel.tagDropDownCheckBox.isChecked = false;
             UpdateTopPanelsPosition();
             tagPanel.UpdateCustomTagList();
         }
@@ -519,10 +526,10 @@ namespace FindIt.GUI
 
         private void UpdateTopPanelsPosition()
         {
-            if(extraFiltersPanel.isVisible && tagPanel.isVisible)
+            if (extraFiltersPanel.isVisible && tagPanel.isVisible)
             {
                 tagPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height - 40 - 5);
-                extraFiltersPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height*2 - 40 - 5*2);
+                extraFiltersPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height * 2 - 40 - 5 * 2);
             }
             else if (extraFiltersPanel.isVisible && !tagPanel.isVisible)
             {
@@ -535,7 +542,7 @@ namespace FindIt.GUI
         }
 
         /// <summary>
-        /// Reset all filters. This method will be used by Quboid's Picker mod through reflection.
+        /// Reset all filters. This method is used by Quboid's Picker mod through reflection.
         /// Don't remove this method. Update this method whenever a new filter is added.
         /// </summary>
         public void ResetFilters()
@@ -577,7 +584,7 @@ namespace FindIt.GUI
 
                 if (!FindIt.isRicoEnabled && type >= DropDownOptions.Rico)
                 {
-                    type+=2;
+                    type += 2;
                 }
             }
 
@@ -610,43 +617,6 @@ namespace FindIt.GUI
             {
                 if (asset.prefab != null)
                 {
-                    // I tried to do this directly in AssetTagList.Find()
-                    // however I got some UI glitches and was not able to solve it
-                    if (workshopFilter != null && vanillaFilter != null && tagPanel != null && extraFiltersPanel != null)
-                    {
-                        // filter out custom asset
-                        if (asset.prefab.m_isCustomContent && !workshopFilter.isChecked) continue;
-
-                        // filter out vanilla asset. will not filter out content creater pack assets
-                        if (!asset.prefab.m_isCustomContent && !vanillaFilter.isChecked && !asset.isCCPBuilding) continue;
-
-                        // filter out assets without matching custom tag
-                        if (tagPanel.tagDropDownCheckBox.isChecked && tagPanel.customTagListStrArray.Length > 0)
-                        {
-                            if (!asset.tagsCustom.Contains(tagPanel.GetDropDownListKey())) continue;
-                        }
-
-                        // extra filters check
-                        if (extraFiltersPanel.optionDropDownCheckBox.isChecked)
-                        {
-                            // filter asset by asset creator
-                            if (extraFiltersPanel.optionDropDownMenu.selectedIndex == 0)
-                            {
-                                if (asset.author != extraFiltersPanel.GetAssetCreatorDropDownListKey()) continue;
-                            }
-                            // filter asset by building height
-                            else
-                            {
-                                if (asset.assetType == Asset.AssetType.Ploppable || asset.assetType == Asset.AssetType.Rico || asset.assetType == Asset.AssetType.Growable)
-                                {
-                                    if (asset.buildingHeight > extraFiltersPanel.maxBuildingHeight) continue;
-                                    if (asset.buildingHeight < extraFiltersPanel.minBuildingHeight) continue;
-                                }
-                                else continue;
-                            }
-                        }
-                    }
-
                     UIScrollPanelItem.ItemData data = new UIScrollPanelItem.ItemData();
                     data.name = asset.title;// + "___" + asset.prefab.editorCategory;
                     data.tooltip = Asset.GetLocalizedTooltip(asset.prefab, data.name);

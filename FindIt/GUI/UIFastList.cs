@@ -621,7 +621,7 @@ namespace FindIt.GUI
                     int selectedIndex = i + Mathf.FloorToInt(m_pos);
                     selectedItem = m_itemsData[selectedIndex];
 
-                    if(m_selectedId >= 0)
+                    if (m_selectedId >= 0)
                     {
                         m_items.m_buffer[m_selectedId].Deselect(selectedIndex);
                     }

@@ -19,7 +19,7 @@ namespace FindIt.GUI
 
         public override void Start()
         {
-            name = "FindIt_TagsWindow";
+            name = "FindIt_TagsDeletePopUp";
             atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericPanelWhite";
             size = new Vector2(400, 145);
@@ -62,7 +62,7 @@ namespace FindIt.GUI
             cancelButton = SamsamTS.UIUtils.CreateButton(this);
             cancelButton.size = new Vector2(100, 40);
             cancelButton.text = Translations.Translate("FIF_POP_CAN");
-            cancelButton.relativePosition = new Vector3(confirmButton.relativePosition.x + confirmButton.width + spacing*4, confirmButton.relativePosition.y);
+            cancelButton.relativePosition = new Vector3(confirmButton.relativePosition.x + confirmButton.width + spacing * 4, confirmButton.relativePosition.y);
             cancelButton.eventClick += (c, p) => Close();
         }
 

@@ -30,7 +30,7 @@ namespace FindIt.GUI
 
         public override void Start()
         {
-            name = "FindIt_TagsWindow";
+            name = "FindIt_BatchAddPopUp";
             atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericPanelWhite";
             size = new Vector2(380, 320);
@@ -224,7 +224,7 @@ namespace FindIt.GUI
 
         private void BatchAddTag(string newTagName)
         {
-            foreach(Asset asset in UIFilterTag.instance.batchAssetSet)
+            foreach (Asset asset in UIFilterTag.instance.batchAssetSet)
             {
                 if (!asset.tagsCustom.Contains(newTagName))
                 {

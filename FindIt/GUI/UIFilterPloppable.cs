@@ -128,7 +128,7 @@ namespace FindIt.GUI
         {
             for (int i = 0; i < (int)Category.All; i++)
             {
-                if(!toggles[i].isChecked)
+                if (!toggles[i].isChecked)
                 {
                     return false;
                 }
@@ -149,7 +149,7 @@ namespace FindIt.GUI
         public override void Start()
         {
             instance = this;
-            
+
             /*atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericTabHovered";*/
             size = new Vector2(605, 45);

@@ -15,15 +15,16 @@ namespace FindIt
     public class ModInfo : IUserMod
     {
         public const string version = "2.0.0";
+        public const bool isBeta = true;
 
         public string Name
         {
-            get { return "Find It! 2 " + version; }
+            get { return "Find It! 2 " + (isBeta ? "[BETA] " : "") + version; }
         }
 
         public string Description
         {
-            get { return Translations.Translate("FIF_DESC");  }
+            get { return Translations.Translate("FIF_DESC"); }
         }
 
         /// <summary>
@@ -68,11 +69,11 @@ namespace FindIt
                 UIPanel panel = group.self as UIPanel;
 
                 // Disable debug messages logging
-                 UICheckBox checkBox = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DM"), Settings.hideDebugMessages, (b) =>
-                {
-                    Settings.hideDebugMessages = b;
-                    XMLUtils.SaveSettings();
-                });
+                UICheckBox checkBox = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DM"), Settings.hideDebugMessages, (b) =>
+               {
+                   Settings.hideDebugMessages = b;
+                   XMLUtils.SaveSettings();
+               });
                 checkBox.tooltip = Translations.Translate("FIF_SET_DMTP");
                 group.AddSpace(10);
 

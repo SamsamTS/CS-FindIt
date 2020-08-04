@@ -83,7 +83,7 @@ namespace FindIt.GUI
                     scrollPanel.size = new Vector2((int)((p.x - 40f) / scrollPanel.itemWidth) * scrollPanel.itemWidth, (int)(p.y / scrollPanel.itemHeight) * scrollPanel.itemHeight);
                     scrollPanel.relativePosition = new Vector3(scrollPanel.relativePosition.x, Mathf.Floor((p.y - scrollPanel.height) / 2));
 
-                    if(scrollPanel.rightArrow != null)
+                    if (scrollPanel.rightArrow != null)
                     {
                         scrollPanel.rightArrow.relativePosition = new Vector3(scrollPanel.relativePosition.x + scrollPanel.width, 0);
                     }
@@ -222,7 +222,7 @@ namespace FindIt.GUI
                 UITagsWindow.ShowAt(currentData.asset, m_tagSprite);
             };
 
-            
+
 
             // batch action check box
             m_batchCheckBox = SamsamTS.UIUtils.CreateCheckBox(component);
@@ -245,7 +245,7 @@ namespace FindIt.GUI
                         Debugging.Message("Batch - Remove from batch set: " + currentData.asset.name);
                     }
                 }
-                
+
             };
 
             component.eventMouseEnter += (c, p) =>
@@ -274,7 +274,7 @@ namespace FindIt.GUI
             m_steamSprite.relativePosition = new Vector3(component.width - m_steamSprite.width - 5, component.height - m_steamSprite.height - 5);
             m_steamSprite.isVisible = false;
 
-            if(PlatformService.IsOverlayEnabled())
+            if (PlatformService.IsOverlayEnabled())
             {
                 m_steamSprite.eventMouseUp += OnTooltipClicked;
             }

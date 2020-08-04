@@ -158,7 +158,7 @@ namespace FindIt.GUI
 
                 foreach (Color32 pixel in pixels)
                 {
-                    if (pixel.a > 127 && (pixel.r + pixel.g + pixel.b) > 0 )
+                    if (pixel.a > 127 && (pixel.r + pixel.g + pixel.b) > 0)
                     {
                         Color.RGBToHSV(pixel, out float h, out float s, out float v);
 
@@ -167,7 +167,7 @@ namespace FindIt.GUI
                             return false;
                         }
 
-                        if(++count > 32)
+                        if (++count > 32)
                         {
                             break;
                         }

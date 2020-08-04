@@ -233,7 +233,7 @@ namespace FindIt.GUI
 
                     return true;
                 }
-                
+
                 wasRendered = PropThumbnail(prop);
             }
             else if (prefab is TreeInfo tree)

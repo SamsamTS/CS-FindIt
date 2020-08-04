@@ -12,7 +12,7 @@ namespace FindIt
     {
         internal static bool hideDebugMessages = true;
 
-        internal static bool unlockAll =false;
+        internal static bool unlockAll = false;
 
         internal static bool centerToolbar = true;
 

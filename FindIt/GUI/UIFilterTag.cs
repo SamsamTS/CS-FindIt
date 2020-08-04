@@ -41,7 +41,7 @@ namespace FindIt.GUI
             tagDropDownCheckBox.relativePosition = new Vector3(10, 10);
             tagDropDownCheckBox.eventCheckChanged += (c, i) =>
             {
-                if(customTagListStrArray.Length == 0)
+                if (customTagListStrArray.Length == 0)
                 {
                     tagDropDownCheckBox.isChecked = false;
                 }
@@ -73,7 +73,7 @@ namespace FindIt.GUI
             refreshButton.textPadding = new RectOffset(0, 0, 5, 0);
             refreshButton.tooltip = Translations.Translate("FIF_TAG_REFTP");
             refreshButton.relativePosition = new Vector3(tagDropDownMenu.relativePosition.x + tagDropDownMenu.width + 5, 5);
-            refreshButton.eventClick += (c, p) => 
+            refreshButton.eventClick += (c, p) =>
             {
                 UpdateCustomTagList();
                 ((UISearchBox)parent).Search();
@@ -237,6 +237,6 @@ namespace FindIt.GUI
         {
             return customTagList[tagDropDownMenu.selectedIndex].Key;
         }
-        
+
     }
 }

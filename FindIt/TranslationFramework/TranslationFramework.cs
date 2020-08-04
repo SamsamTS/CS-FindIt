@@ -169,8 +169,8 @@ namespace FindIt
         public string Translate(string key)
         {
             Language currentLanguage;
-            
-            
+
+
             // Check to see if we're using system settings.
             if (currentIndex < 0)
             {
@@ -185,7 +185,7 @@ namespace FindIt
             else
             {
                 currentLanguage = languages.Values[currentIndex];
-            }    
+            }
 
             // Check that a valid current language is set.
             if (currentLanguage != null)

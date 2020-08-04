@@ -53,7 +53,7 @@ namespace FindIt
                             }
 
                             // Simulate click on searchbox to focus and select contents.
-                           searchBox.searchButton.SimulateClick();
+                            searchBox.searchButton.SimulateClick();
                         }
                         catch (Exception e)
                         {
