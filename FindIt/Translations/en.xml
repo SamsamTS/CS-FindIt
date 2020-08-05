@@ -140,6 +140,14 @@
     <Translation ID="FIF_EF_FEE" String="feet" />
     <Translation ID="FIF_SET_ACLS" String="Sort asset creator list alphabetically" />
     <Translation ID="FIF_GR_RAN" String="Random Selection" />
-
+    <Translation ID="FIF_NET_SMR" String="Small Roads" />
+    <Translation ID="FIF_NET_MDR" String="Medium Roads" />
+    <Translation ID="FIF_NET_LGR" String="Large Roads" />
+    <Translation ID="FIF_NET_HGHW" String="Highways" />
+    <Translation ID="FIF_NET_PATH" String="Paths" />
+    <Translation ID="FIF_NET_WALL" String="Wall and Fences" />
+    <Translation ID="FIF_NET_WAT" String="Water Structures" />
+    <Translation ID="FIF_NET_UNS" String="Unsorted" />
+    
   </Translations>
 </Language>

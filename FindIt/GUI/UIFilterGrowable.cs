@@ -83,7 +83,7 @@ namespace FindIt.GUI
                 Translations.Translate("FIF_GR_HDRE"), // high density residential eco
                 Translations.Translate("FIF_GR_LDC"), // low density commercial
                 Translations.Translate("FIF_GR_HDC"), // high density commercial
-                Translations.Translate("FIF_GR_CE"), // commercial rco
+                Translations.Translate("FIF_GR_CE"), // commercial eco
                 Translations.Translate("FIF_GR_O"), // office
                 Translations.Translate("FIF_GR_ITC"), // IT cluster
                 Translations.Translate("FIF_GR_GI"), // industrial

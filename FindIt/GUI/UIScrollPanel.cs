@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
 using ColossalFramework;
 using ColossalFramework.PlatformServices;
 using ColossalFramework.UI;

@@ -4,7 +4,6 @@ using ICities;
 using ColossalFramework.UI;
 using FindIt.GUI;
 
-
 namespace FindIt
 {
     public class UIThreading : ThreadingExtensionBase

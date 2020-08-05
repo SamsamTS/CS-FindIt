@@ -3,14 +3,11 @@
 
 using ICities;
 using UnityEngine;
-
 using System;
 using System.Reflection;
-
 using ColossalFramework.UI;
 using ColossalFramework.Plugins;
 using ColossalFramework.Globalization;
-
 using FindIt.GUI;
 
 namespace FindIt
@@ -127,7 +124,6 @@ namespace FindIt
                     searchBox = scrollPanel.parent.AddUIComponent<UISearchBox>();
                     searchBox.scrollPanel = scrollPanel;
                     searchBox.relativePosition = new Vector3(0, 0);
-                    
                     searchBox.Search();
                 }
                 else

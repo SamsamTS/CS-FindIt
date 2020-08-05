@@ -5,7 +5,6 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-
 using ColossalFramework.IO;
 
 namespace FindIt
