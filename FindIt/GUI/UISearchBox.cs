@@ -115,6 +115,15 @@ namespace FindIt.GUI
                 input.text = search;
             };
 
+            input.eventKeyDown += (component, eventParam) =>
+            {
+                if (eventParam.keycode != KeyCode.DownArrow && eventParam.keycode != KeyCode.UpArrow) return;
+                if (typeFilter != null)
+                {
+                    typeFilter.selectedIndex = Mathf.Clamp(typeFilter.selectedIndex + (eventParam.keycode == KeyCode.DownArrow ? 1 : -1), 0, typeFilter.items.Length);
+                }
+            };
+
             // search button
             searchButton = inputPanel.AddUIComponent<UIButton>();
             searchButton.size = new Vector2(43, 49);
