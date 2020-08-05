@@ -7,7 +7,6 @@ using ColossalFramework.PlatformServices;
 using HarmonyLib;
 using FindIt.GUI;
 
-
 namespace FindIt
 {
     [HarmonyPatch(typeof(GeneratedScrollPanel))]

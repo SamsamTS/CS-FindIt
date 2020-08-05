@@ -3,44 +3,40 @@
 
 using UnityEngine;
 using ColossalFramework.UI;
-using System.Linq;
 
 namespace FindIt.GUI
 {
-    public class UIFilterProp : UIPanel
+    public class UIFilterNetwork : UIPanel
     {
-        public static UIFilterProp instance;
+        public static UIFilterNetwork instance;
 
         public enum Category
         {
             None = -1,
-            PropsIndustrial = 0,
-            PropsParks,
-            PropsCommon,
-            PropsResidential,
-            PropsBillboards,
-            PropsSpecialBillboards,
-            PropsLights,
-            Natural,
+            SmallRoads = 0,
+            MediumRoads,
+            LargeRoads,
+            Highway,
+            Path,
+            Fence,
+            WaterStructures,
             Unsorted,
             All
         }
 
         public UICheckBox[] toggles;
         public UIButton all;
-        private UICheckBox randomIcon;
 
-        public static Category GetCategory(Asset.PropType propType)
+        public static Category GetCategory(Asset.NetworkType networkType)
         {
-            if (propType == Asset.PropType.PropsIndustrial) return Category.PropsIndustrial;
-            if (propType == Asset.PropType.PropsParks) return Category.PropsParks;
-            if (propType == Asset.PropType.PropsCommon) return Category.PropsCommon;
-            if (propType == Asset.PropType.PropsResidential) return Category.PropsResidential;
-            if (propType == Asset.PropType.PropsBillboards) return Category.PropsBillboards;
-            if (propType == Asset.PropType.PropsSpecialBillboards) return Category.PropsSpecialBillboards;
-            if (propType == Asset.PropType.PropsLights) return Category.PropsLights;
-            if (propType == Asset.PropType.Natural) return Category.Natural;
-            if (propType == Asset.PropType.Unsorted) return Category.Unsorted;
+            if (networkType == Asset.NetworkType.SmallRoads) return Category.SmallRoads;
+            if (networkType == Asset.NetworkType.MediumRoads) return Category.MediumRoads;
+            if (networkType == Asset.NetworkType.LargeRoads) return Category.LargeRoads;
+            if (networkType == Asset.NetworkType.Highway) return Category.Highway;
+            if (networkType == Asset.NetworkType.Path) return Category.Path;
+            if (networkType == Asset.NetworkType.Fence) return Category.Fence;
+            if (networkType == Asset.NetworkType.WaterStructures) return Category.WaterStructures;
+            if (networkType == Asset.NetworkType.Unsorted) return Category.Unsorted;
 
             return Category.None;
         }
@@ -49,12 +45,11 @@ namespace FindIt.GUI
         {
             public static readonly string[] atlases =
             {
-                "Thumbnails",
                 "Ingame",
                 "Ingame",
-                "Thumbnails",
-                "FindItAtlas",
-                "FindItAtlas",
+                "Ingame",
+                "Ingame",
+                "Ingame",
                 "Ingame",
                 "Ingame",
                 "Ingame"
@@ -62,28 +57,26 @@ namespace FindIt.GUI
 
             public static readonly string[] spriteNames =
             {
-                "ZoningIndustrial",
-                "ToolbarIconBeautification",
-                "ToolbarIconProps",
-                "ZoningResidentialLow",
-                "ToolbarIconPropsBillboards",
-                "ToolbarIconPropsSpecialBillboards",
-                "SubBarPropsCommonLights",
-                "IconPolicyForest",
+                "SubBarRoadsSmall",
+                "SubBarRoadsMedium",
+                "SubBarRoadsLarge",
+                "SubBarRoadsHighway",
+                "SubBarLandscapingPaths",
+                "SubBarLandscapingFences",
+                "SubBarLandscapingWaterStructures",
                 "ToolbarIconProps"
             };
 
             public static readonly string[] tooltips =
             {
-                Translations.Translate("FIF_PROP_IND"), // Industrial
-                Translations.Translate("FIF_PROP_PAR"), // Parks
-                Translations.Translate("FIF_PROP_COM"), // Common
-                Translations.Translate("FIF_PROP_RES"), // Residential
-                Translations.Translate("FIF_PROP_BIL"), // Billboards
-                Translations.Translate("FIF_PROP_SPE"), // Special Billboards
-                Translations.Translate("FIF_PROP_LIG"), // Lights
-                Translations.Translate("FIF_PROP_NAT"), // Natural
-                Translations.Translate("FIF_PROP_UNS") // Unsorted
+                Translations.Translate("FIF_NET_SMR"), // Small Roads
+                Translations.Translate("FIF_NET_MDR"), // Medium Roads
+                Translations.Translate("FIF_NET_LGR"), // Large Roads
+                Translations.Translate("FIF_NET_HGHW"), // Highway
+                Translations.Translate("FIF_NET_PATH"), // Path
+                Translations.Translate("FIF_NET_WALL"), // Fence & Wall
+                Translations.Translate("FIF_NET_WAT"), // Water Structures
+                Translations.Translate("FIF_NET_UNS") // Unsorted
             };
         }
 
@@ -185,22 +178,10 @@ namespace FindIt.GUI
 
             UICheckBox last = toggles[toggles.Length - 1];
 
-            randomIcon = SamsamTS.UIUtils.CreateIconToggle(this, "FindItAtlas", "Dice", "Dice");
-            randomIcon.relativePosition = new Vector3(last.relativePosition.x + last.width + 5, 5);
-            randomIcon.tooltip = Translations.Translate("FIF_GR_RAN");
-            randomIcon.isChecked = true;
-            randomIcon.readOnly = true;
-            randomIcon.checkedBoxObject.isInteractive = false;
-            Random.InitState(System.Environment.TickCount);
-            randomIcon.eventClicked += (c, p) =>
-            {
-                PickRandom();
-            };
-
             all = SamsamTS.UIUtils.CreateButton(this);
             all.size = new Vector2(55, 35);
             all.text = Translations.Translate("FIF_SE_IA");
-            all.relativePosition = new Vector3(randomIcon.relativePosition.x + randomIcon.width + 5, 5);
+            all.relativePosition = new Vector3(last.relativePosition.x + last.width + 5, 5);
 
             all.eventClick += (c, p) =>
             {
@@ -212,24 +193,6 @@ namespace FindIt.GUI
             };
 
             width = parent.width;
-        }
-
-        /// <summary>
-        /// Pick a random growable or RICO building from the search result
-        /// </summary>
-        private void PickRandom()
-        {
-            int index = Random.Range(0, UISearchBox.instance.searchResultList.Count);
-            string name = UISearchBox.instance.searchResultList.ElementAt(index);
-            FindIt.instance.scrollPanel.DisplayAt(index);
-            foreach (UIButton button in FindIt.instance.scrollPanel.GetComponentsInChildren<UIButton>())
-            {
-                if (button.name == name)
-                {
-                    button.SimulateClick();
-                    break;
-                }
-            }
         }
     }
 }

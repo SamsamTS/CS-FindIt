@@ -4,7 +4,6 @@ using ColossalFramework;
 using ColossalFramework.UI;
 using UnityEngine;
 
-
 namespace FindIt
 {
     public class OptionsKeymapping : UICustomControl

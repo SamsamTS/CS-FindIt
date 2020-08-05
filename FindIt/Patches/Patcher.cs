@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
 using CitiesHarmony.API;
 
-
 namespace FindIt
 {
     /// <summary>

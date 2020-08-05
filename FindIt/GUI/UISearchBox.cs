@@ -23,11 +23,11 @@ namespace FindIt.GUI
         public UIPanel filterPanel;
 
         /// <summary>
-        /// Also manupulated by the Picker mod. Don't change its accessibility.
+        /// Also manipulated by the Picker mod. Don't change its accessibility.
         /// Need to notify Quboid if a new dropdown item is added, or the item order is changed
         /// </summary>
         public UIDropDown typeFilter;
-        
+
         private UIPanel buildingFilters;
         private UIDropDown levelFilter;
         private UIDropDown sizeFilterX;
@@ -36,6 +36,7 @@ namespace FindIt.GUI
         private UIFilterPloppable filterPloppable;
         private UIFilterProp filterProp;
         private UIFilterTree filterTree;
+        private UIFilterNetwork filterNetwork;
 
         public UICheckBox workshopFilter;
         public UICheckBox vanillaFilter;
@@ -376,6 +377,12 @@ namespace FindIt.GUI
             filterTree.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
             filterTree.eventFilteringChanged += (c, p) => Search();
 
+            // network filter tabs
+            filterNetwork = panel.AddUIComponent<UIFilterNetwork>();
+            filterNetwork.isVisible = false;
+            filterNetwork.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
+            filterNetwork.eventFilteringChanged += (c, p) => Search();
+
             UpdateFilterPanels();
 
             size = Vector2.zero;
@@ -434,6 +441,7 @@ namespace FindIt.GUI
                     HideFilterPanel(filterGrowable);
                     HideFilterPanel(filterProp);
                     HideFilterPanel(filterTree);
+                    HideFilterPanel(filterNetwork);
                     HideBuildingFilters();
                     toolIconPanel.isVisible = true;
                     ShowFilterPanel(filterPloppable);
@@ -444,6 +452,7 @@ namespace FindIt.GUI
                     HideFilterPanel(filterPloppable);
                     HideFilterPanel(filterProp);
                     HideFilterPanel(filterTree);
+                    HideFilterPanel(filterNetwork);
                     toolIconPanel.isVisible = false;
                     ShowFilterPanel(filterGrowable);
                     ShowBuildingFilters();
@@ -454,6 +463,7 @@ namespace FindIt.GUI
                     HideFilterPanel(filterPloppable);
                     HideFilterPanel(filterProp);
                     HideFilterPanel(filterTree);
+                    HideFilterPanel(filterNetwork);
                     toolIconPanel.isVisible = false;
                     ShowFilterPanel(filterGrowable);
                     ShowBuildingFilters();
@@ -464,6 +474,7 @@ namespace FindIt.GUI
                     HideFilterPanel(filterPloppable);
                     HideFilterPanel(filterProp);
                     HideFilterPanel(filterTree);
+                    HideFilterPanel(filterNetwork);
                     toolIconPanel.isVisible = false;
                     ShowFilterPanel(filterGrowable);
                     ShowBuildingFilters();
@@ -473,6 +484,7 @@ namespace FindIt.GUI
                     HideFilterPanel(filterPloppable);
                     HideBuildingFilters();
                     HideFilterPanel(filterTree);
+                    HideFilterPanel(filterNetwork);
                     toolIconPanel.isVisible = true;
                     ShowFilterPanel(filterProp);
                     break;
@@ -481,14 +493,25 @@ namespace FindIt.GUI
                     HideFilterPanel(filterPloppable);
                     HideBuildingFilters();
                     HideFilterPanel(filterProp);
+                    HideFilterPanel(filterNetwork);
                     toolIconPanel.isVisible = true;
                     ShowFilterPanel(filterTree);
                     break;
-                default: // All, Network
+                case DropDownOptions.Network:
+                    HideFilterPanel(filterGrowable);
+                    HideFilterPanel(filterPloppable);
+                    HideBuildingFilters();
+                    HideFilterPanel(filterProp);
+                    HideFilterPanel(filterTree);
+                    toolIconPanel.isVisible = true;
+                    ShowFilterPanel(filterNetwork);
+                    break;
+                default: // All, Decal
                     HideFilterPanel(filterPloppable);
                     HideFilterPanel(filterGrowable);
                     HideFilterPanel(filterProp);
                     HideFilterPanel(filterTree);
+                    HideFilterPanel(filterNetwork);
                     HideBuildingFilters();
                     toolIconPanel.isVisible = true;
                     break;
@@ -571,6 +594,7 @@ namespace FindIt.GUI
             filterPloppable.SelectAll();
             filterProp.SelectAll();
             filterTree.SelectAll();
+            filterNetwork.SelectAll();
             Search();
         }
 
@@ -628,8 +652,7 @@ namespace FindIt.GUI
                 {
                     UIScrollPanelItem.ItemData data = new UIScrollPanelItem.ItemData();
                     data.name = asset.title;// + "___" + asset.prefab.editorCategory;
-                    data.tooltip = Asset.GetLocalizedTooltip(asset.prefab, data.name);
-
+                    data.tooltip = Asset.GetLocalizedTooltip(asset, asset.prefab, data.name);
                     data.tooltipBox = GeneratedPanel.GetTooltipBox(TooltipHelper.GetHashCode(data.tooltip));
                     data.asset = asset;
 

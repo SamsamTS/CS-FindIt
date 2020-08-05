@@ -2,7 +2,6 @@
 // https://github.com/SamsamTS/CS-FindIt
 
 using System.Collections.Generic;
-
 using UnityEngine;
 using ColossalFramework.UI;
 

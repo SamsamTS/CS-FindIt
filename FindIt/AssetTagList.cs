@@ -4,389 +4,16 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Globalization;
 using System.Collections.Generic;
 using System.IO;
-
 using UnityEngine;
-
 using ColossalFramework;
-using ColossalFramework.UI;
-using ColossalFramework.DataBinding;
-using ColossalFramework.Globalization;
 using ColossalFramework.PlatformServices;
 using ColossalFramework.Packaging;
-
 using FindIt.GUI;
 
 namespace FindIt
 {
-    public class Asset
-    {
-        private PrefabInfo m_prefab;
-
-        public static Shader shaderDefault = Shader.Find("Custom/Props/Decal/Default");
-        public static Shader shaderBlend = Shader.Find("Custom/Props/Decal/Blend");
-        public static Shader shaderSolid = Shader.Find("Custom/Props/Decal/Solid");
-        public static Shader shaderFence = Shader.Find("Custom/Props/Decal/Fence");
-
-        public enum AssetType
-        {
-            Invalid = -1,
-            All,
-            Road,
-            Ploppable,
-            Growable,
-            Rico,
-            Prop,
-            Decal,
-            Tree
-        }
-
-        public enum PropType
-        {
-            Invalid = -1,
-            PropsIndustrial,
-            PropsParks,
-            PropsCommon,
-            PropsResidential,
-            PropsBillboards,
-            PropsSpecialBillboards,
-            PropsLights,
-            Natural,
-            Unsorted,
-            Hidden
-        }
-
-        public enum TreeType
-        {
-            Invalid = -1,
-            SmallTree,
-            MediumTree,
-            LargeTree
-        }
-
-        public string name;
-        public string title;
-
-        public PrefabInfo prefab
-        {
-            get { return m_prefab; }
-            set
-            {
-                m_prefab = value;
-
-                if (m_prefab != null)
-                {
-                    service = m_prefab.GetService();
-                    subService = m_prefab.GetSubService();
-
-                    BuildingInfo buildingPrefab = m_prefab as BuildingInfo;
-                    if (buildingPrefab != null)
-                    {
-                        if (buildingPrefab.m_placementStyle != ItemClass.Placement.Manual)
-                        {
-                            assetType = AssetType.Growable;
-                        }
-                        else
-                        {
-                            assetType = AssetType.Ploppable;
-                        }
-
-                        // check if a building is from a content creator pack. Only works for Modern Japan CCP
-                        if (buildingPrefab.editorCategory.EndsWith("ModderPack") && buildingPrefab.name.StartsWith("PDX"))
-                        {
-                            isCCPBuilding = true;
-                        }
-
-                        size = new Vector2(buildingPrefab.m_cellWidth, buildingPrefab.m_cellLength);
-                        if (buildingPrefab.m_generatedInfo != null && buildingPrefab.m_generatedInfo.m_heights != null)
-                        {
-                            if (buildingPrefab.m_generatedInfo.m_heights.Length != 0)
-                            {
-                                buildingHeight = buildingPrefab.m_generatedInfo.m_heights.Max();
-                            }
-                        }
-
-                        return;
-                    }
-
-                    PropInfo propPrefab = m_prefab as PropInfo;
-                    if (propPrefab != null)
-                    {
-                        assetType = AssetType.Prop;
-                        propType = SetPropType(prefab.editorCategory);
-
-                        if (propPrefab.m_material != null)
-                        {
-                            if (propPrefab.m_material.shader == shaderBlend || propPrefab.m_material.shader == shaderSolid)
-                            {
-                                assetType = AssetType.Decal;
-                            }
-                        }
-
-                        return;
-                    }
-                    else if (m_prefab is NetInfo)
-                    {
-                        assetType = AssetType.Road;
-                    }
-                    else if (m_prefab is TreeInfo)
-                    {
-                        assetType = AssetType.Tree;
-                        TreeInfo info = m_prefab as TreeInfo;
-                        treeType = SetTreeType(info);
-                    }
-                }
-            }
-        }
-
-        public void RefreshRico()
-        {
-            if (FindIt.isRicoEnabled && m_prefab != null && assetType == AssetType.Ploppable)
-            {
-                service = m_prefab.GetService();
-                subService = m_prefab.GetSubService();
-
-                if (service == ItemClass.Service.Residential ||
-                   service == ItemClass.Service.Industrial ||
-                   service == ItemClass.Service.Commercial ||
-                   service == ItemClass.Service.Office)
-                {
-                    assetType = AssetType.Rico;
-                }
-            }
-        }
-
-        public AssetType assetType = AssetType.Invalid;
-        public ItemClass.Service service = ItemClass.Service.None;
-        public ItemClass.SubService subService = ItemClass.SubService.None;
-        public Vector2 size;
-        public ulong steamID;
-        public string author;
-        public float score;
-        public ulong downloadTime;
-        public bool isCCPBuilding = false;
-        public float buildingHeight = 0;
-        public PropType propType = PropType.Invalid;
-        public TreeType treeType = TreeType.Invalid;
-
-        public delegate void OnButtonClicked(UIComponent comp);
-        public OnButtonClicked onButtonClicked;
-
-        public HashSet<string> tagsTitle = new HashSet<string>();
-        public HashSet<string> tagsDesc = new HashSet<string>();
-        public HashSet<string> tagsCustom = new HashSet<string>();
-
-        public static string GetName(PrefabInfo prefab)
-        {
-            string name = prefab.name;
-            if (name.EndsWith("_Data"))
-            {
-                name = name.Substring(0, name.LastIndexOf("_Data"));
-            }
-            return name;
-        }
-
-        public static string GetLocalizedTitle(PrefabInfo prefab)
-        {
-            string name = prefab.name;
-
-            if (prefab is BuildingInfo)
-            {
-                if (!Locale.GetUnchecked("BUILDING_TITLE", prefab.name, out name))
-                {
-                    name = prefab.name;
-                }
-                else
-                {
-                    name = name.Replace(".", "");
-                }
-            }
-            else if (prefab is PropInfo)
-            {
-                if (!Locale.GetUnchecked("PROPS_TITLE", prefab.name, out name))
-                {
-                    name = prefab.name;
-                }
-                else
-                {
-                    name = name.Replace(".", "");
-                }
-            }
-            else if (prefab is TreeInfo)
-            {
-                if (!Locale.GetUnchecked("TREE_TITLE", prefab.name, out name))
-                {
-                    name = prefab.name;
-                }
-                else
-                {
-                    name = name.Replace(".", "");
-                }
-            }
-            else if (prefab is NetInfo)
-            {
-                if (!Locale.GetUnchecked("NET_TITLE", prefab.name, out name))
-                {
-                    name = prefab.name;
-                }
-                else
-                {
-                    name = name.Replace(".", "");
-                }
-            }
-
-            int index = name.IndexOf('.');
-            if (index >= 0)
-            {
-                name = name.Substring(index + 1);
-            }
-
-            if (name.IsNullOrWhiteSpace())
-            {
-                name = prefab.name;
-            }
-
-            index = name.LastIndexOf("_Data");
-            if (index >= 0)
-            {
-                name = name.Substring(0, index);
-            }
-
-            name = Regex.Replace(name, @"[_-]+", " ");
-            name = Regex.Replace(name, @"([A-Z][a-z]+)", " $1");
-            name = Regex.Replace(name, @"([^\d])(\d+)", "$1 $2");
-            name = Regex.Replace(name, @"\b(.) (\d+)", " $1$2 ");
-            name = Regex.Replace(name, @"(\d+) ?x (\d+)", " $1x$2 ");
-            name = Regex.Replace(name, @"\s+", " ");
-
-            name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name).Trim();
-
-            return name;
-        }
-
-        public static string GetLocalizedDescription(PrefabInfo prefab)
-        {
-            string result;
-
-            if (prefab is BuildingInfo)
-            {
-                if (Locale.GetUnchecked("BUILDING_DESC", prefab.name, out result))
-                {
-                    return result;
-                }
-            }
-            else if (prefab is PropInfo)
-            {
-                if (Locale.GetUnchecked("PROPS_DESC", prefab.name, out result))
-                {
-                    return result;
-                }
-            }
-            else if (prefab is TreeInfo)
-            {
-                if (Locale.GetUnchecked("TREE_DESC", prefab.name, out result))
-                {
-                    return result;
-                }
-            }
-            else if (prefab is NetInfo)
-            {
-                if (Locale.GetUnchecked("NET_DESC", prefab.name, out result))
-                {
-                    return result;
-                }
-            }
-
-            return "";
-        }
-
-        public static string GetLocalizedTooltip(PrefabInfo prefab, string title)
-        {
-            MilestoneInfo unlockMilestone = prefab.GetUnlockMilestone();
-
-            string text = TooltipHelper.Format(new string[]
-            {
-                LocaleFormatter.Title,
-                title,
-                LocaleFormatter.Sprite,
-                (!string.IsNullOrEmpty(prefab.m_InfoTooltipThumbnail)) ? prefab.m_InfoTooltipThumbnail : prefab.name,
-                LocaleFormatter.Text,
-                Asset.GetLocalizedDescription(prefab),
-                LocaleFormatter.Locked,
-                (!ToolsModifierControl.IsUnlocked(unlockMilestone)).ToString()
-            });
-
-            ToolsModifierControl.GetUnlockingInfo(unlockMilestone, out string unlockDesc, out string currentValue, out string targetValue, out string progress, out string locked);
-
-            string addTooltip = TooltipHelper.Format(new string[]
-            {
-                LocaleFormatter.LockedInfo,
-                locked,
-                LocaleFormatter.UnlockDesc,
-                unlockDesc,
-                LocaleFormatter.UnlockPopulationProgressText,
-                progress,
-                LocaleFormatter.UnlockPopulationTarget,
-                targetValue,
-                LocaleFormatter.UnlockPopulationCurrent,
-                currentValue
-            });
-
-            text = TooltipHelper.Append(text, addTooltip);
-            PrefabAI aI = prefab.GetAI();
-            if (aI != null)
-            {
-                text = TooltipHelper.Append(text, aI.GetLocalizedTooltip());
-            }
-
-            if (prefab is PropInfo || prefab is TreeInfo)
-            {
-                text = TooltipHelper.Append(text, TooltipHelper.Format(new string[]
-                {
-                    LocaleFormatter.Cost,
-                    LocaleFormatter.FormatCost(prefab.GetConstructionCost(), false)
-                }));
-            }
-
-            return text;
-        }
-
-        // check the type of a prop based on editor category
-        private Asset.PropType SetPropType(string propEditorCategory)
-        {
-            if (propEditorCategory.StartsWith("PropsIndustrial")) return Asset.PropType.PropsIndustrial;
-            else if (propEditorCategory.StartsWith("PropsParks")) return Asset.PropType.PropsParks;
-
-            else if (propEditorCategory.StartsWith("PropsCommonLights") || propEditorCategory.StartsWith("PropsCommonStreets"))
-                return Asset.PropType.PropsLights;
-
-            else if (propEditorCategory.StartsWith("PropsCommon")) return Asset.PropType.PropsCommon;
-            else if (propEditorCategory.StartsWith("PropsResidential")) return Asset.PropType.PropsResidential;
-            else if (propEditorCategory.StartsWith("PropsBillboards")) return Asset.PropType.PropsBillboards;
-            else if (propEditorCategory.StartsWith("PropsSpecialBillboards")) return Asset.PropType.PropsSpecialBillboards;
-            else if (propEditorCategory.StartsWith("PropsRocks")) return Asset.PropType.Natural;
-            else if (propEditorCategory.StartsWith("Beautification")) return Asset.PropType.Natural;
-            else if (propEditorCategory.StartsWith("PropsMarker")) return Asset.PropType.Hidden;
-
-            return Asset.PropType.Unsorted;
-        }
-
-        // check the size of a tree and decide its type. Same catergorization as the vanilla game
-        private Asset.TreeType SetTreeType(TreeInfo info)
-        {
-            if (info == null) return Asset.TreeType.Invalid;
-
-            float size = info.m_generatedInfo.m_size.y * (info.m_minScale + info.m_maxScale);
-
-            if (size <= 16f) return Asset.TreeType.SmallTree;
-            if (size > 16f && size <= 30f) return Asset.TreeType.MediumTree;
-            //if (size > 30f) 
-            return Asset.TreeType.LargeTree;
-        }
-    }
-
     public class AssetTagList
     {
         public static AssetTagList instance;
@@ -516,7 +143,7 @@ namespace FindIt
         // return true if the asset type matches UISearchbox filter dropdown options
         private bool CheckAssetFilter(Asset asset, UISearchBox.DropDownOptions filter)
         {
-            if (asset.assetType != Asset.AssetType.Road && filter == UISearchBox.DropDownOptions.Network) return false;
+            if (asset.assetType != Asset.AssetType.Network && filter == UISearchBox.DropDownOptions.Network) return false;
             if (asset.assetType != Asset.AssetType.Prop && filter == UISearchBox.DropDownOptions.Prop) return false;
             if (asset.assetType != Asset.AssetType.Rico && filter == UISearchBox.DropDownOptions.Rico) return false;
             if (asset.assetType != Asset.AssetType.Ploppable && filter == UISearchBox.DropDownOptions.Ploppable) return false;
@@ -574,6 +201,15 @@ namespace FindIt
                 {
                     UIFilterTree.Category category = UIFilterTree.GetCategory(asset.treeType);
                     if (category == UIFilterTree.Category.None || !UIFilterTree.instance.IsSelected(category)) return false;
+                }
+            }
+            else if (filter == UISearchBox.DropDownOptions.Network)
+            {
+                // filter by network type
+                if (!UIFilterNetwork.instance.IsAllSelected())
+                {
+                    UIFilterNetwork.Category category = UIFilterNetwork.GetCategory(asset.networkType);
+                    if (category == UIFilterNetwork.Category.None || !UIFilterNetwork.instance.IsSelected(category)) return false;
                 }
             }
 
@@ -716,7 +352,7 @@ namespace FindIt
                                 string author = new Friend(new UserID(authorID)).personaName;
                                 authors.Add(steamid, author);
 
-                                // Get the downloaded time of an asset by checking the creation time of its parent folder
+                                // Get the downloaded time of an asset by checking the creation time of its package folder
                                 // store this info and use it for sorting
                                 string path = current.package.packagePath;
                                 string parentPath = Directory.GetParent(path).FullName;

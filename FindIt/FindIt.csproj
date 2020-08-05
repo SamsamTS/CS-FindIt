@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Asset.cs" />
     <Compile Include="AssetTagList.cs" />
     <Compile Include="CustomTagsLibrary.cs" />
     <Compile Include="Debugging.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="GUI\ThumbnailManager.cs" />
     <Compile Include="GUI\UIFilterExtra.cs" />
     <Compile Include="GUI\UIFilterGrowable.cs" />
+    <Compile Include="GUI\UIFilterNetwork.cs" />
     <Compile Include="GUI\UIFilterProp.cs" />
     <Compile Include="GUI\UIFilterTag.cs" />
     <Compile Include="GUI\UIFilterTree.cs" />
