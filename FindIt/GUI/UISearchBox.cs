@@ -37,6 +37,7 @@ namespace FindIt.GUI
         private UIFilterProp filterProp;
         private UIFilterTree filterTree;
         private UIFilterNetwork filterNetwork;
+        private UIFilterDecal filterDecal;
 
         public UICheckBox workshopFilter;
         public UICheckBox vanillaFilter;
@@ -90,6 +91,7 @@ namespace FindIt.GUI
         public override void Start()
         {
             instance = this;
+            UnityEngine.Random.InitState(System.Environment.TickCount);
 
             // panel for search input box, type filter and building filters
             inputPanel = AddUIComponent<UIPanel>();
@@ -383,6 +385,12 @@ namespace FindIt.GUI
             filterNetwork.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
             filterNetwork.eventFilteringChanged += (c, p) => Search();
 
+            // decal filter tabs
+            filterDecal = panel.AddUIComponent<UIFilterDecal>();
+            filterDecal.isVisible = false;
+            filterDecal.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
+            filterDecal.eventFilteringChanged += (c, p) => Search();
+
             UpdateFilterPanels();
 
             size = Vector2.zero;
@@ -442,6 +450,7 @@ namespace FindIt.GUI
                     HideFilterPanel(filterProp);
                     HideFilterPanel(filterTree);
                     HideFilterPanel(filterNetwork);
+                    HideFilterPanel(filterDecal);
                     HideBuildingFilters();
                     toolIconPanel.isVisible = true;
                     ShowFilterPanel(filterPloppable);
@@ -453,6 +462,7 @@ namespace FindIt.GUI
                     HideFilterPanel(filterProp);
                     HideFilterPanel(filterTree);
                     HideFilterPanel(filterNetwork);
+                    HideFilterPanel(filterDecal);
                     toolIconPanel.isVisible = false;
                     ShowFilterPanel(filterGrowable);
                     ShowBuildingFilters();
@@ -464,6 +474,7 @@ namespace FindIt.GUI
                     HideFilterPanel(filterProp);
                     HideFilterPanel(filterTree);
                     HideFilterPanel(filterNetwork);
+                    HideFilterPanel(filterDecal);
                     toolIconPanel.isVisible = false;
                     ShowFilterPanel(filterGrowable);
                     ShowBuildingFilters();
@@ -475,6 +486,7 @@ namespace FindIt.GUI
                     HideFilterPanel(filterProp);
                     HideFilterPanel(filterTree);
                     HideFilterPanel(filterNetwork);
+                    HideFilterPanel(filterDecal);
                     toolIconPanel.isVisible = false;
                     ShowFilterPanel(filterGrowable);
                     ShowBuildingFilters();
@@ -485,6 +497,7 @@ namespace FindIt.GUI
                     HideBuildingFilters();
                     HideFilterPanel(filterTree);
                     HideFilterPanel(filterNetwork);
+                    HideFilterPanel(filterDecal);
                     toolIconPanel.isVisible = true;
                     ShowFilterPanel(filterProp);
                     break;
@@ -494,6 +507,7 @@ namespace FindIt.GUI
                     HideBuildingFilters();
                     HideFilterPanel(filterProp);
                     HideFilterPanel(filterNetwork);
+                    HideFilterPanel(filterDecal);
                     toolIconPanel.isVisible = true;
                     ShowFilterPanel(filterTree);
                     break;
@@ -503,15 +517,27 @@ namespace FindIt.GUI
                     HideBuildingFilters();
                     HideFilterPanel(filterProp);
                     HideFilterPanel(filterTree);
+                    HideFilterPanel(filterDecal);
                     toolIconPanel.isVisible = true;
                     ShowFilterPanel(filterNetwork);
                     break;
-                default: // All, Decal
+                case DropDownOptions.Decal:
+                    HideFilterPanel(filterGrowable);
+                    HideFilterPanel(filterPloppable);
+                    HideBuildingFilters();
+                    HideFilterPanel(filterProp);
+                    HideFilterPanel(filterTree);
+                    HideFilterPanel(filterNetwork);
+                    toolIconPanel.isVisible = true;
+                    ShowFilterPanel(filterDecal);
+                    break;
+                default: // All
                     HideFilterPanel(filterPloppable);
                     HideFilterPanel(filterGrowable);
                     HideFilterPanel(filterProp);
                     HideFilterPanel(filterTree);
                     HideFilterPanel(filterNetwork);
+                    HideFilterPanel(filterDecal);
                     HideBuildingFilters();
                     toolIconPanel.isVisible = true;
                     break;
@@ -675,6 +701,24 @@ namespace FindIt.GUI
             else
             {
                 ToolsModifierControl.SetTool<DefaultTool>();
+            }
+        }
+
+        /// <summary>
+        /// Pick a random asset from recent search result
+        /// </summary>
+        public void PickRandom()
+        {
+            int index = UnityEngine.Random.Range(0, searchResultList.Count);
+            string name = searchResultList.ElementAt(index);
+            FindIt.instance.scrollPanel.DisplayAt(index);
+            foreach (UIButton button in FindIt.instance.scrollPanel.GetComponentsInChildren<UIButton>())
+            {
+                if (button.name == name)
+                {
+                    button.SimulateClick();
+                    break;
+                }
             }
         }
     }
