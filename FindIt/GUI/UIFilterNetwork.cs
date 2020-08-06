@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using ColossalFramework.UI;
+using System.Linq;
 
 namespace FindIt.GUI
 {
@@ -26,6 +27,7 @@ namespace FindIt.GUI
 
         public UICheckBox[] toggles;
         public UIButton all;
+        private UICheckBox randomIcon;
 
         public static Category GetCategory(Asset.NetworkType networkType)
         {
@@ -178,6 +180,18 @@ namespace FindIt.GUI
 
             UICheckBox last = toggles[toggles.Length - 1];
 
+            randomIcon = SamsamTS.UIUtils.CreateIconToggle(this, "FindItAtlas", "Dice", "Dice");
+            randomIcon.relativePosition = new Vector3(last.relativePosition.x + last.width + 5, 5);
+            randomIcon.tooltip = Translations.Translate("FIF_GR_RAN");
+            randomIcon.isChecked = true;
+            randomIcon.readOnly = true;
+            randomIcon.checkedBoxObject.isInteractive = false;
+            Random.InitState(System.Environment.TickCount);
+            randomIcon.eventClicked += (c, p) =>
+            {
+                PickRandom();
+            };
+
             all = SamsamTS.UIUtils.CreateButton(this);
             all.size = new Vector2(55, 35);
             all.text = Translations.Translate("FIF_SE_IA");
@@ -193,6 +207,24 @@ namespace FindIt.GUI
             };
 
             width = parent.width;
+        }
+
+        /// <summary>
+        /// Pick a random growable or RICO building from the search result
+        /// </summary>
+        private void PickRandom()
+        {
+            int index = Random.Range(0, UISearchBox.instance.searchResultList.Count);
+            string name = UISearchBox.instance.searchResultList.ElementAt(index);
+            FindIt.instance.scrollPanel.DisplayAt(index);
+            foreach (UIButton button in FindIt.instance.scrollPanel.GetComponentsInChildren<UIButton>())
+            {
+                if (button.name == name)
+                {
+                    button.SimulateClick();
+                    break;
+                }
+            }
         }
     }
 }
