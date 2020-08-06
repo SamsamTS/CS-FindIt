@@ -422,6 +422,7 @@ namespace FindIt
 
             if ((ToolManager.instance.m_properties.m_mode & ItemClass.Availability.GameAndMap) != ItemClass.Availability.None)
             {
+                
                 FindIt.inEditor = false;
 
                 if (FindIt.instance == null)

@@ -213,6 +213,9 @@ namespace FindIt
                 }
             }
 
+            // filter out marker prop if not in editor mode
+            if (!FindIt.inEditor && (asset.propType == Asset.PropType.PropsMarker)) return false;
+
             try
             {
                 if (UISearchBox.instance?.workshopFilter != null && UISearchBox.instance?.vanillaFilter != null && UISearchBox.instance?.tagPanel != null && UISearchBox.instance?.extraFiltersPanel != null)

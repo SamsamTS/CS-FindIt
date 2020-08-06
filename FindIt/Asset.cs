@@ -47,7 +47,7 @@ namespace FindIt
             PropsLights,
             Natural,
             Unsorted,
-            Hidden
+            PropsMarker
         }
 
         public enum TreeType
@@ -382,7 +382,7 @@ namespace FindIt
             else if (propEditorCategory.StartsWith("PropsSpecialBillboards")) return Asset.PropType.PropsSpecialBillboards;
             else if (propEditorCategory.StartsWith("PropsRocks")) return Asset.PropType.Natural;
             else if (propEditorCategory.StartsWith("Beautification")) return Asset.PropType.Natural;
-            else if (propEditorCategory.StartsWith("PropsMarker")) return Asset.PropType.Hidden;
+            else if (propEditorCategory.StartsWith("PropsMarker")) return Asset.PropType.PropsMarker;
 
             return Asset.PropType.Unsorted;
         }

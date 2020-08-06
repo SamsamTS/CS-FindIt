@@ -23,6 +23,7 @@ namespace FindIt.GUI
             PropsLights,
             Natural,
             Unsorted,
+            Marker,
             All
         }
 
@@ -41,6 +42,7 @@ namespace FindIt.GUI
             if (propType == Asset.PropType.PropsLights) return Category.PropsLights;
             if (propType == Asset.PropType.Natural) return Category.Natural;
             if (propType == Asset.PropType.Unsorted) return Category.Unsorted;
+            if (propType == Asset.PropType.PropsMarker) return Category.Marker;
 
             return Category.None;
         }
@@ -57,6 +59,7 @@ namespace FindIt.GUI
                 "FindItAtlas",
                 "Ingame",
                 "Ingame",
+                "Ingame",
                 "Ingame"
             };
 
@@ -70,7 +73,8 @@ namespace FindIt.GUI
                 "ToolbarIconPropsSpecialBillboards",
                 "SubBarPropsCommonLights",
                 "IconPolicyForest",
-                "ToolbarIconProps"
+                "ToolbarIconProps",
+                "RoadOptionUpgrade"
             };
 
             public static readonly string[] tooltips =
@@ -83,7 +87,8 @@ namespace FindIt.GUI
                 Translations.Translate("FIF_PROP_SPE"), // Special Billboards
                 Translations.Translate("FIF_PROP_LIG"), // Lights
                 Translations.Translate("FIF_PROP_NAT"), // Natural
-                Translations.Translate("FIF_PROP_UNS") // Unsorted
+                Translations.Translate("FIF_PROP_UNS"), // Unsorted
+                Translations.Translate("FIF_PROP_MAR") // Marker
             };
         }
 
@@ -197,6 +202,8 @@ namespace FindIt.GUI
                 PickRandom();
             };
 
+            UpdateMarkerToggleVisibility();
+
             all = SamsamTS.UIUtils.CreateButton(this);
             all.size = new Vector2(55, 35);
             all.text = Translations.Translate("FIF_SE_IA");
@@ -230,6 +237,18 @@ namespace FindIt.GUI
                     break;
                 }
             }
+        }
+
+        /// <summary>
+        /// Hide marder toggle checkbox if not in asset editor
+        /// </summary>
+        private void UpdateMarkerToggleVisibility()
+        {
+            if (FindIt.inEditor) return;
+            UICheckBox last = toggles[toggles.Length - 1];
+            last.isVisible = false;
+            UICheckBox secondLast = toggles[toggles.Length - 2];
+            randomIcon.relativePosition = new Vector3(secondLast.relativePosition.x + secondLast.width + 5, 5);
         }
     }
 }
