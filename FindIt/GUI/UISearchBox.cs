@@ -389,7 +389,6 @@ namespace FindIt.GUI
             filterDecal = panel.AddUIComponent<UIFilterDecal>();
             filterDecal.isVisible = false;
             filterDecal.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
-            filterDecal.eventFilteringChanged += (c, p) => Search();
 
             UpdateFilterPanels();
 
@@ -446,14 +445,16 @@ namespace FindIt.GUI
             switch ((DropDownOptions)index)
             {
                 case DropDownOptions.Ploppable:
+                    sizeFilterX.items = filterItemsRICO;
+                    sizeFilterY.items = filterItemsRICO;
                     HideFilterPanel(filterGrowable);
                     HideFilterPanel(filterProp);
                     HideFilterPanel(filterTree);
                     HideFilterPanel(filterNetwork);
                     HideFilterPanel(filterDecal);
-                    HideBuildingFilters();
-                    toolIconPanel.isVisible = true;
+                    toolIconPanel.isVisible = false;
                     ShowFilterPanel(filterPloppable);
+                    ShowBuildingFilters();
                     break;
                 case DropDownOptions.Rico:
                     sizeFilterX.items = filterItemsRICO;
@@ -663,11 +664,18 @@ namespace FindIt.GUI
             // sort by relevance, same as original Find It
             else
             {
-                text = text.ToLower().Trim();
-                // if search input box is not empty, sort by score
-                if (!text.IsNullOrWhiteSpace()) matches = matches.OrderByDescending(s => s.score).ToList();
-                // if seach input box is empty, sort by asset title
-                else matches = matches.OrderBy(s => s.title).ToList();
+                if (UISearchBox.instance?.typeFilter.selectedIndex == 1)
+                {
+                    matches = matches.OrderBy(s => s.uiPriority).ToList();
+                }
+                else
+                {
+                    text = text.ToLower().Trim();
+                    // if search input box is not empty, sort by score
+                    if (!text.IsNullOrWhiteSpace()) matches = matches.OrderByDescending(s => s.score).ToList();
+                    // if seach input box is empty, sort by asset title
+                    else matches = matches.OrderBy(s => s.title).ToList();
+                }
             }
 
             scrollPanel.Clear();
@@ -677,7 +685,7 @@ namespace FindIt.GUI
                 if (asset.prefab != null)
                 {
                     UIScrollPanelItem.ItemData data = new UIScrollPanelItem.ItemData();
-                    data.name = asset.title;// + "___" + asset.prefab.editorCategory;
+                    data.name = asset.title; // + "_" + asset.uiPriority;
                     data.tooltip = Asset.GetLocalizedTooltip(asset, asset.prefab, data.name);
                     data.tooltipBox = GeneratedPanel.GetTooltipBox(TooltipHelper.GetHashCode(data.tooltip));
                     data.asset = asset;

@@ -28,7 +28,7 @@ namespace FindIt.GUI
             PlayerEducation,
             VarsitySports,
             Fishing,
-            //Wonders,
+            Unsorted,
             All
         }
 
@@ -55,6 +55,8 @@ namespace FindIt.GUI
             if (itemClass.m_service == ItemClass.Service.Tourism) return Category.PublicTransport;
             if (itemClass.m_service == ItemClass.Service.Beautification) return Category.Beautification;
             if (itemClass.m_service == ItemClass.Service.Monument) return Category.Monuments;
+
+            return Category.Unsorted;
             //if (itemClass.m_service == ItemClass.Service.Wonders) return Category.Wonders; ???????
 
             return Category.None;
@@ -64,6 +66,7 @@ namespace FindIt.GUI
         {
             public static readonly string[] atlases =
             {
+                "Ingame",
                 "Ingame",
                 "Ingame",
                 "Ingame",
@@ -97,7 +100,8 @@ namespace FindIt.GUI
                 "SubBarFireDepartmentDisaster",
                 "SubBarCampusAreaUniversity",
                 "SubBarCampusAreaVarsitySports",
-                "SubBarIndustryFishing"
+                "SubBarIndustryFishing",
+                "ToolbarIconProps"
             };
 
             public static readonly string[] tooltips =
@@ -116,7 +120,8 @@ namespace FindIt.GUI
                 Translations.Translate("FIF_PLOP_D"), // disaster
                 Translations.Translate("FIF_PLOP_C"), // campus
                 Translations.Translate("FIF_PLOP_V"), // varsity sports
-                Translations.Translate("FIF_PLOP_FI") // fishing
+                Translations.Translate("FIF_PLOP_FI"), // fishing
+                Translations.Translate("FIF_PROP_UNS") // unsorted
             };
         }
 

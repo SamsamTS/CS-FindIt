@@ -14,12 +14,12 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.0.1-beta1";
+        public const string version = "2.0.1-beta2";
         public const bool isBeta = true;
 
         public string Name
         {
-            get { return "Find It! 2 " + (isBeta ? "[BETA] " : "") + version; }
+            get { return "Find It! " + (isBeta ? "[BETA] " : "") + version; }
         }
 
         public string Description

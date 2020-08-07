@@ -178,6 +178,9 @@ namespace FindIt
             {
                 BuildingInfo buildingInfo = asset.prefab as BuildingInfo;
 
+                // filter by size
+                if (!CheckBuildingSize(asset.size, UISearchBox.instance.buildingSizeFilterIndex)) return false;
+
                 // filter by ploppable type
                 if (!UIFilterPloppable.instance.IsAllSelected())
                 {

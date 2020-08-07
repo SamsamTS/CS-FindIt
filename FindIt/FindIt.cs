@@ -65,7 +65,7 @@ namespace FindIt
                 };
                 if (!locale.Exists(key))
                 {
-                    locale.AddLocalizedString(key, "Find It! 2 " + ModInfo.version);
+                    locale.AddLocalizedString(key, "Find It! " + ModInfo.version);
                 }
                 key = new Locale.Key
                 {
@@ -143,7 +143,7 @@ namespace FindIt
                 mainButton.pressedFgSprite = "FindItPressed";
                 mainButton.disabledFgSprite = "FindItDisabled";
 
-                mainButton.tooltip = "Find It! 2 " + (ModInfo.isBeta ? "[BETA] " : "") + ModInfo.version;
+                mainButton.tooltip = "Find It! " + (ModInfo.isBeta ? "[BETA] " : "") + ModInfo.version;
 
                 m_beautificationPanel = FindObjectOfType<BeautificationPanel>();
 
@@ -369,7 +369,9 @@ namespace FindIt
                     "TreeSm",
                     "TreeLgDisabled",
                     "TreeMdDisabled",
-                    "TreeSmDisabled"
+                    "TreeSmDisabled",
+                    "TinyRoads",
+                    "TinyRoadsDisabled"
                 };
 
                 atlas = ResourceLoader.CreateTextureAtlas("FindItAtlas", spriteNames, "FindIt.Icons.");

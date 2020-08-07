@@ -223,7 +223,6 @@ namespace FindIt.GUI
             randomIcon.isChecked = true;
             randomIcon.readOnly = true;
             randomIcon.checkedBoxObject.isInteractive = false;
-            Random.InitState(System.Environment.TickCount);
             randomIcon.eventClicked += (c, p) =>
             {
                 UISearchBox.instance.PickRandom();

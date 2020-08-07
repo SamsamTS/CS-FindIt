@@ -13,13 +13,16 @@ namespace FindIt.GUI
         public enum Category
         {
             None = -1,
-            SmallRoads = 0,
+            TinyRoads = 0,
+            SmallRoads,
             MediumRoads,
             LargeRoads,
             Highway,
             Path,
             Fence,
             WaterStructures,
+            Utility,
+            Train,
             Unsorted,
             All
         }
@@ -30,6 +33,7 @@ namespace FindIt.GUI
 
         public static Category GetCategory(Asset.NetworkType networkType)
         {
+            if (networkType == Asset.NetworkType.TinyRoads) return Category.TinyRoads;
             if (networkType == Asset.NetworkType.SmallRoads) return Category.SmallRoads;
             if (networkType == Asset.NetworkType.MediumRoads) return Category.MediumRoads;
             if (networkType == Asset.NetworkType.LargeRoads) return Category.LargeRoads;
@@ -37,6 +41,8 @@ namespace FindIt.GUI
             if (networkType == Asset.NetworkType.Path) return Category.Path;
             if (networkType == Asset.NetworkType.Fence) return Category.Fence;
             if (networkType == Asset.NetworkType.WaterStructures) return Category.WaterStructures;
+            if (networkType == Asset.NetworkType.Utility) return Category.Utility;
+            if (networkType == Asset.NetworkType.Train) return Category.Train;
             if (networkType == Asset.NetworkType.Unsorted) return Category.Unsorted;
 
             return Category.None;
@@ -46,6 +52,9 @@ namespace FindIt.GUI
         {
             public static readonly string[] atlases =
             {
+                "FindItAtlas",
+                "Ingame",
+                "Ingame",
                 "Ingame",
                 "Ingame",
                 "Ingame",
@@ -58,6 +67,7 @@ namespace FindIt.GUI
 
             public static readonly string[] spriteNames =
             {
+                "TinyRoads",
                 "SubBarRoadsSmall",
                 "SubBarRoadsMedium",
                 "SubBarRoadsLarge",
@@ -65,11 +75,14 @@ namespace FindIt.GUI
                 "SubBarLandscapingPaths",
                 "SubBarLandscapingFences",
                 "SubBarLandscapingWaterStructures",
+                "ToolbarIconElectricity",
+                "SubBarPublicTransportTrain",
                 "ToolbarIconProps"
             };
 
             public static readonly string[] tooltips =
             {
+                Translations.Translate("FIF_NET_TNR"), // Tiny Roads
                 Translations.Translate("FIF_NET_SMR"), // Small Roads
                 Translations.Translate("FIF_NET_MDR"), // Medium Roads
                 Translations.Translate("FIF_NET_LGR"), // Large Roads
@@ -77,7 +90,9 @@ namespace FindIt.GUI
                 Translations.Translate("FIF_NET_PATH"), // Path
                 Translations.Translate("FIF_NET_WALL"), // Fence & Wall
                 Translations.Translate("FIF_NET_WAT"), // Water Structures
-                Translations.Translate("FIF_NET_UNS") // Unsorted
+                Translations.Translate("FIF_NET_UTI"), // Utility
+                Translations.Translate("FIF_NET_TRA"), // Train
+                Translations.Translate("FIF_PROP_UNS") // Unsorted
             };
         }
 

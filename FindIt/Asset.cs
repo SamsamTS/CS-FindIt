@@ -61,6 +61,7 @@ namespace FindIt
         public enum NetworkType
         {
             Invalid = -1,
+            TinyRoads,
             SmallRoads,
             MediumRoads,
             LargeRoads,
@@ -68,6 +69,8 @@ namespace FindIt
             Path,
             Fence,
             WaterStructures,
+            Utility,
+            Train,
             Unsorted
         }
 
@@ -144,6 +147,7 @@ namespace FindIt
                     {
                         assetType = AssetType.Network;
                         NetInfo info = m_prefab as NetInfo;
+                        uiPriority = m_prefab.m_UIPriority;
                         networkType = SetNetworkType(info);
                     }
 
@@ -184,6 +188,7 @@ namespace FindIt
         public TreeType treeType = TreeType.Invalid;
         public NetworkType networkType = NetworkType.Invalid;
         public string findIt2Description;
+        public int uiPriority = int.MaxValue;
 
         public delegate void OnButtonClicked(UIComponent comp);
         public OnButtonClicked onButtonClicked;
@@ -400,22 +405,39 @@ namespace FindIt
             return Asset.TreeType.LargeTree;
         }
 
-        // check the type of network assets. A big ugly and messy but I don't know a better way to do the categorization.
+        // check the type of network assets. A bit ugly and messy but I don't know a better way to do the categorization.
+        // Network Extension 2 adds its own types
         private Asset.NetworkType SetNetworkType(NetInfo info)
         {
             if (info == null) return Asset.NetworkType.Invalid;
 
-            if (info.category.StartsWith("RoadsSmall")) return Asset.NetworkType.SmallRoads;
-            else if (info.category.StartsWith("RoadsTiny")) return Asset.NetworkType.SmallRoads;
+            else if (info.category.StartsWith("RoadsTiny")) return Asset.NetworkType.TinyRoads;
+
+            else if (info.category.StartsWith("RoadsSmall")) return Asset.NetworkType.SmallRoads;
+            else if (info.m_class.name.StartsWith("Small Road")) return Asset.NetworkType.SmallRoads;
+            else if (info.category.StartsWith("RoadsSmallHV")) return Asset.NetworkType.SmallRoads;
+
             else if (info.category.StartsWith("RoadsMedium")) return Asset.NetworkType.MediumRoads;
-            else if (info.category.StartsWith("RoadsSmallHV")) return Asset.NetworkType.MediumRoads;
+            else if (info.m_class.name.StartsWith("Medium Road")) return Asset.NetworkType.MediumRoads;
+
             else if (info.category.StartsWith("RoadsLarge")) return Asset.NetworkType.LargeRoads;
+            else if (info.m_class.name.StartsWith("Large Road")) return Asset.NetworkType.LargeRoads;
+
             else if (info.category.StartsWith("RoadsHighway")) return Asset.NetworkType.Highway;
+
             else if (info.m_class.name.StartsWith("Pedestrian")) return Asset.NetworkType.Path;
+            else if (info.category.StartsWith("RoadsPedestrians")) return Asset.NetworkType.Path;
+
             else if (info.editorCategory.StartsWith("LandscapingWaterStructures")) return Asset.NetworkType.WaterStructures;
+
             else if (info.editorCategory.StartsWith("LandscapingFences")) return Asset.NetworkType.Fence;
             else if (info.m_class.name.StartsWith("Beautification")) return Asset.NetworkType.Fence;
             else if (info.m_class.name.StartsWith("Landscaping Quay")) return Asset.NetworkType.Fence;
+
+            else if (info.m_class.m_service == ItemClass.Service.Electricity) return Asset.NetworkType.Utility;
+            else if (info.m_class.m_service == ItemClass.Service.Water) return Asset.NetworkType.Utility;
+
+            else if (info.m_class.m_subService == ItemClass.SubService.PublicTransportTrain) return Asset.NetworkType.Train;
 
             return NetworkType.Unsorted;
         }
@@ -433,6 +455,7 @@ namespace FindIt
             {
                 findIt2Description = $"{Translations.Translate("FIF_SE_IN")}, ";
 
+                if (networkType == Asset.NetworkType.TinyRoads) findIt2Description += Translations.Translate("FIF_NET_TNR");
                 if (networkType == Asset.NetworkType.SmallRoads) findIt2Description += Translations.Translate("FIF_NET_SMR");
                 if (networkType == Asset.NetworkType.MediumRoads) findIt2Description += Translations.Translate("FIF_NET_MDR");
                 if (networkType == Asset.NetworkType.LargeRoads) findIt2Description += Translations.Translate("FIF_NET_LGR");
@@ -440,7 +463,9 @@ namespace FindIt
                 if (networkType == Asset.NetworkType.Path) findIt2Description += Translations.Translate("FIF_NET_PATH");
                 if (networkType == Asset.NetworkType.Fence) findIt2Description += Translations.Translate("FIF_NET_WALL");
                 if (networkType == Asset.NetworkType.WaterStructures) findIt2Description += Translations.Translate("FIF_NET_WAT");
-                if (networkType == Asset.NetworkType.Unsorted) findIt2Description += Translations.Translate("FIF_NET_UNS");
+                if (networkType == Asset.NetworkType.Utility) findIt2Description += Translations.Translate("FIF_NET_UTI");
+                if (networkType == Asset.NetworkType.Train) findIt2Description += Translations.Translate("FIF_NET_TRA");
+                if (networkType == Asset.NetworkType.Unsorted) findIt2Description += Translations.Translate("FIF_PROP_UNS");
             }
             else if (assetType == AssetType.Growable || assetType == AssetType.Rico)
             {
@@ -453,21 +478,22 @@ namespace FindIt
                     findIt2Description = $"{Translations.Translate("FIF_SE_IG")}, ";
                 }
                 if (subService == ItemClass.SubService.ResidentialLow) findIt2Description += Translations.Translate("FIF_GR_LDR");
-                if (subService == ItemClass.SubService.ResidentialHigh) findIt2Description += Translations.Translate("FIF_GR_HDR");
-                if (subService == ItemClass.SubService.ResidentialLowEco) findIt2Description += Translations.Translate("FIF_GR_LDRE");
-                if (subService == ItemClass.SubService.ResidentialHighEco) findIt2Description += Translations.Translate("FIF_GR_HDRE");
-                if (subService == ItemClass.SubService.CommercialLow) findIt2Description += Translations.Translate("FIF_GR_LDC");
-                if (subService == ItemClass.SubService.CommercialHigh) findIt2Description += Translations.Translate("FIF_GR_HDC");
-                if (subService == ItemClass.SubService.CommercialEco) findIt2Description += Translations.Translate("FIF_GR_CE");
-                if (subService == ItemClass.SubService.CommercialLeisure) findIt2Description += Translations.Translate("FIF_GR_LC");
-                if (subService == ItemClass.SubService.CommercialTourist) findIt2Description += Translations.Translate("FIF_GR_TC");
-                if (subService == ItemClass.SubService.IndustrialGeneric) findIt2Description += Translations.Translate("FIF_GR_GI");
-                if (subService == ItemClass.SubService.IndustrialFarming) findIt2Description += Translations.Translate("FIF_GR_FAI");
-                if (subService == ItemClass.SubService.IndustrialForestry) findIt2Description += Translations.Translate("FIF_GR_FOI");
-                if (subService == ItemClass.SubService.IndustrialOil) findIt2Description += Translations.Translate("FIF_GR_OII");
-                if (subService == ItemClass.SubService.IndustrialOre) findIt2Description += Translations.Translate("FIF_GR_ORI");
-                if (subService == ItemClass.SubService.OfficeGeneric) findIt2Description += Translations.Translate("FIF_GR_O");
-                if (subService == ItemClass.SubService.OfficeHightech) findIt2Description += Translations.Translate("FIF_GR_ITC");
+                else if (subService == ItemClass.SubService.ResidentialHigh) findIt2Description += Translations.Translate("FIF_GR_HDR");
+                else if (subService == ItemClass.SubService.ResidentialLowEco) findIt2Description += Translations.Translate("FIF_GR_LDRE");
+                else if (subService == ItemClass.SubService.ResidentialHighEco) findIt2Description += Translations.Translate("FIF_GR_HDRE");
+                else if (subService == ItemClass.SubService.CommercialLow) findIt2Description += Translations.Translate("FIF_GR_LDC");
+                else if (subService == ItemClass.SubService.CommercialHigh) findIt2Description += Translations.Translate("FIF_GR_HDC");
+                else if (subService == ItemClass.SubService.CommercialEco) findIt2Description += Translations.Translate("FIF_GR_CE");
+                else if (subService == ItemClass.SubService.CommercialLeisure) findIt2Description += Translations.Translate("FIF_GR_LC");
+                else if (subService == ItemClass.SubService.CommercialTourist) findIt2Description += Translations.Translate("FIF_GR_TC");
+                else if (subService == ItemClass.SubService.IndustrialGeneric) findIt2Description += Translations.Translate("FIF_GR_GI");
+                else if (subService == ItemClass.SubService.IndustrialFarming) findIt2Description += Translations.Translate("FIF_GR_FAI");
+                else if (subService == ItemClass.SubService.IndustrialForestry) findIt2Description += Translations.Translate("FIF_GR_FOI");
+                else if (subService == ItemClass.SubService.IndustrialOil) findIt2Description += Translations.Translate("FIF_GR_OII");
+                else if (subService == ItemClass.SubService.IndustrialOre) findIt2Description += Translations.Translate("FIF_GR_ORI");
+                else if (subService == ItemClass.SubService.OfficeGeneric) findIt2Description += Translations.Translate("FIF_GR_O");
+                else if (subService == ItemClass.SubService.OfficeHightech) findIt2Description += Translations.Translate("FIF_GR_ITC");
+                else findIt2Description += Translations.Translate("FIF_PROP_UNS");
 
                 findIt2Description += $", {size.x}x{size.y}, {(int)buildingHeight} {Translations.Translate("FIF_EF_MET")} ({(int)(buildingHeight * 3.28084f)} {Translations.Translate("FIF_EF_FEE")})";
             }
@@ -496,22 +522,23 @@ namespace FindIt
                 findIt2Description = $"{Translations.Translate("FIF_SE_IP")}, ";
 
                 if (service == ItemClass.Service.Electricity) findIt2Description += Translations.Translate("FIF_PLOP_E");
-                if (service == ItemClass.Service.Water) findIt2Description += Translations.Translate("FIF_PLOP_W");
-                if (service == ItemClass.Service.Garbage) findIt2Description += Translations.Translate("FIF_PLOP_G");
-                if (service == ItemClass.Service.PlayerIndustry) findIt2Description += Translations.Translate("FIF_PLOP_I");
-                if (service == ItemClass.Service.Fishing) findIt2Description += Translations.Translate("FIF_PLOP_FI");
-                if (service == ItemClass.Service.HealthCare) findIt2Description += Translations.Translate("FIF_PLOP_H");
-                if (service == ItemClass.Service.FireDepartment) findIt2Description += Translations.Translate("FIF_PLOP_F");
-                if (service == ItemClass.Service.Disaster) findIt2Description += Translations.Translate("FIF_PLOP_D");
-                if (service == ItemClass.Service.PoliceDepartment) findIt2Description += Translations.Translate("FIF_PLOP_P");
-                if (service == ItemClass.Service.Education) findIt2Description += Translations.Translate("FIF_PLOP_ED");
-                if (service == ItemClass.Service.PlayerEducation) findIt2Description += Translations.Translate("FIF_PLOP_C");
-                if (service == ItemClass.Service.Museums) findIt2Description += Translations.Translate("FIF_PLOP_C");
-                if (service == ItemClass.Service.VarsitySports) findIt2Description += Translations.Translate("FIF_PLOP_V");
-                if (service == ItemClass.Service.PublicTransport) findIt2Description += Translations.Translate("FIF_PLOP_PT");
-                if (service == ItemClass.Service.Tourism) findIt2Description += Translations.Translate("FIF_PLOP_PT");
-                if (service == ItemClass.Service.Beautification) findIt2Description += Translations.Translate("FIF_PLOP_PPW");
-                if (service == ItemClass.Service.Monument) findIt2Description += Translations.Translate("FIF_PLOP_U");
+                else if(service == ItemClass.Service.Water) findIt2Description += Translations.Translate("FIF_PLOP_W");
+                else if (service == ItemClass.Service.Garbage) findIt2Description += Translations.Translate("FIF_PLOP_G");
+                else if (service == ItemClass.Service.PlayerIndustry) findIt2Description += Translations.Translate("FIF_PLOP_I");
+                else if (service == ItemClass.Service.Fishing) findIt2Description += Translations.Translate("FIF_PLOP_FI");
+                else if (service == ItemClass.Service.HealthCare) findIt2Description += Translations.Translate("FIF_PLOP_H");
+                else if (service == ItemClass.Service.FireDepartment) findIt2Description += Translations.Translate("FIF_PLOP_F");
+                else if (service == ItemClass.Service.Disaster) findIt2Description += Translations.Translate("FIF_PLOP_D");
+                else if (service == ItemClass.Service.PoliceDepartment) findIt2Description += Translations.Translate("FIF_PLOP_P");
+                else if (service == ItemClass.Service.Education) findIt2Description += Translations.Translate("FIF_PLOP_ED");
+                else if (service == ItemClass.Service.PlayerEducation) findIt2Description += Translations.Translate("FIF_PLOP_C");
+                else if (service == ItemClass.Service.Museums) findIt2Description += Translations.Translate("FIF_PLOP_C");
+                else if (service == ItemClass.Service.VarsitySports) findIt2Description += Translations.Translate("FIF_PLOP_V");
+                else if (service == ItemClass.Service.PublicTransport) findIt2Description += Translations.Translate("FIF_PLOP_PT");
+                else if (service == ItemClass.Service.Tourism) findIt2Description += Translations.Translate("FIF_PLOP_PT");
+                else if (service == ItemClass.Service.Beautification) findIt2Description += Translations.Translate("FIF_PLOP_PPW");
+                else if (service == ItemClass.Service.Monument) findIt2Description += Translations.Translate("FIF_PLOP_U");
+                else findIt2Description += Translations.Translate("FIF_PROP_UNS");
 
                 findIt2Description += $", {size.x}x{size.y}, {(int)buildingHeight} {Translations.Translate("FIF_EF_MET")} ({(int)(buildingHeight * 3.28084f)} {Translations.Translate("FIF_EF_FEE")})";
             }

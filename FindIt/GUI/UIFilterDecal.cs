@@ -12,8 +12,6 @@ namespace FindIt.GUI
 
         private UICheckBox randomIcon;
 
-        public event PropertyChangedEventHandler<int> eventFilteringChanged;
-
         public override void Start()
         {
             instance = this;

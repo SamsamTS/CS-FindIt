@@ -147,8 +147,10 @@
     <Translation ID="FIF_NET_PATH" String="Paths" />
     <Translation ID="FIF_NET_WALL" String="Wall and Fences" />
     <Translation ID="FIF_NET_WAT" String="Water Structures" />
-    <Translation ID="FIF_NET_UNS" String="Unsorted" />
     <Translation ID="FIF_PROP_MAR" String="Editor Markers" />
+    <Translation ID="FIF_NET_TNR" String="Tiny Roads" />
+    <Translation ID="FIF_NET_UTI" String="Utility" />
+    <Translation ID="FIF_NET_TRA" String="Train" />
     
   </Translations>
 </Language>

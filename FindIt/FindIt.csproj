@@ -137,6 +137,8 @@
     <EmbeddedResource Include="Icons\TreeMdDisabled.png" />
     <EmbeddedResource Include="Icons\TreeSm.png" />
     <EmbeddedResource Include="Icons\TreeSmDisabled.png" />
+    <EmbeddedResource Include="Icons\TinyRoads.png" />
+    <EmbeddedResource Include="Icons\TinyRoadsDisabled.png" />
     <Content Include="Translations\de.xml" />
     <Content Include="Translations\en.xml" />
     <Content Include="Translations\es.xml" />
