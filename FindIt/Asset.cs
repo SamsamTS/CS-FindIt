@@ -509,6 +509,7 @@ namespace FindIt
                 if (propType == Asset.PropType.PropsLights) findIt2Description += Translations.Translate("FIF_PROP_LIG");
                 if (propType == Asset.PropType.Natural) findIt2Description += Translations.Translate("FIF_PROP_NAT");
                 if (propType == Asset.PropType.Unsorted) findIt2Description += Translations.Translate("FIF_PROP_UNS");
+                if (propType == Asset.PropType.PropsMarker) findIt2Description += Translations.Translate("FIF_PROP_MAR");
             }
             else if (assetType == AssetType.Tree)
             {
