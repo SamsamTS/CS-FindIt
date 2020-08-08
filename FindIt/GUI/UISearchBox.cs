@@ -717,6 +717,8 @@ namespace FindIt.GUI
         /// </summary>
         public void PickRandom()
         {
+            if (searchResultList.Count == 0) return;
+
             int index = UnityEngine.Random.Range(0, searchResultList.Count);
             string name = searchResultList.ElementAt(index);
             FindIt.instance.scrollPanel.DisplayAt(index);
