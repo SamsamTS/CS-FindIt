@@ -138,6 +138,17 @@
     <Translation ID="FIF_EF_FEE" String="英呎" />
     <Translation ID="FIF_SET_ACLS" String="以字母順序排列素材作者清單" />
     <Translation ID="FIF_GR_RAN" String="隨機選擇" />
+    <Translation ID="FIF_NET_SMR" String="小型道路" />
+    <Translation ID="FIF_NET_MDR" String="中型道路" />
+    <Translation ID="FIF_NET_LGR" String="大型道路" />
+    <Translation ID="FIF_NET_HGHW" String="高速公路" />
+    <Translation ID="FIF_NET_PATH" String="行人步道" />
+    <Translation ID="FIF_NET_WALL" String="圍欄和牆" />
+    <Translation ID="FIF_NET_WAT" String="水利設施" />
+    <Translation ID="FIF_PROP_MAR" String="標輯器標記" />
+    <Translation ID="FIF_NET_TNR" String="迷你道路" />
+    <Translation ID="FIF_NET_UTI" String="電線、水道管" />
+    <Translation ID="FIF_NET_TRA" String="鐵路" />
 
   </Translations>
 </Language>
