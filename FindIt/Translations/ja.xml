@@ -119,7 +119,6 @@
     <Translation ID="FIF_NET_HGHW" String="高速道路" />
     <Translation ID="FIF_NET_PATH" String="歩道" />
     <Translation ID="FIF_NET_WALL" String="壁とフェンス" />
-    <Translation ID="FIF_NET_WAT" String="水の構造" />
     <Translation ID="FIF_PROP_MAR" String="エディターマーカー" />
     <Translation ID="FIF_NET_TNR" String="小さな道路" />
     <Translation ID="FIF_NET_UTI" String="電線、水道管" />
