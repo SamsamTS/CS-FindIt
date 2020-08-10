@@ -35,9 +35,10 @@ namespace FindIt
             // Apply Harmony patches via Cities Harmony.
             // Called here instead of OnCreated to allow the auto-downloader to do its work prior to launch.
             HarmonyHelper.DoOnHarmonyReady(() => Patcher.PatchAll());
-
+            Debugging.Message("Harmony patches applied");
             // Load settings here.
             XMLUtils.LoadSettings();
+            Debugging.Message("XML Settings loaded");
         }
 
         /// <summary>
@@ -49,6 +50,7 @@ namespace FindIt
             if (HarmonyHelper.IsHarmonyInstalled)
             {
                 Patcher.UnpatchAll();
+                Debugging.Message("Harmony patches reverted");
             }
         }
 

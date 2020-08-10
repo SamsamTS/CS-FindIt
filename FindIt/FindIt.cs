@@ -424,8 +424,9 @@ namespace FindIt
 
             if ((ToolManager.instance.m_properties.m_mode & ItemClass.Availability.GameAndMap) != ItemClass.Availability.None)
             {
-                
-                FindIt.inEditor = false;
+
+                if (mode == LoadMode.LoadMap || mode == LoadMode.NewMap) FindIt.inEditor = true;
+                else FindIt.inEditor = false;
 
                 if (FindIt.instance == null)
                 {
