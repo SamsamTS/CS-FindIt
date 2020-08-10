@@ -12,7 +12,7 @@ namespace FindIt.GUI
 {
     public class UIScrollPanel : UIFastList<UIScrollPanelItem.ItemData, UIScrollPanelItem, UIButton>
     {
-        public FastList<UIScrollPanelItem.ItemData> savedItems;
+        //public FastList<UIScrollPanelItem.ItemData> savedItems;
 
         protected override void OnSizeChanged()
         {

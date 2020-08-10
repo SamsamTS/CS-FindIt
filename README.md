@@ -1,4 +1,4 @@
-# Find It! 2 [TEST]  
+# Find It! 2
 
 Forked from SamSamTS's original Find It! mod.  
 
@@ -12,7 +12,24 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 
 ## Change Notes
 
-Finished and planned to be included in the next release:
+Finished and planned to be included in the next release:  
+
+v2.0.1 Update:  
+- Add random selection button to all asset types (user requested)
+
+- Add building size filter to Ploppable
+
+- Add 'Unsorted' filter tab to Ploppable
+
+- Add filter tabs for network assets
+
+- Show extra asset info in thumbnail pop-up(asset type & sub-type, building size, building height, etc.) 
+
+- Add 'Prop Marker' filter tab to Prop. It will only appear in 'editor' mode
+
+- 'Prop Marker' type props will no longer appear in 'game' mode. They only work in 'editor' mode and you couldn't bulldoze them easily in 'game' mode, so they will be hidden unless you're in the asset or map editor.
+
+- It is now possible to move around the asset type drop-down menu using the  ↑ ↓ arrow keys when you're typing in the search input box (added by [Brot](https://github.com/gregorsimpson))
 
 v2.0.0 Update:  
 - No major changes in this update.  

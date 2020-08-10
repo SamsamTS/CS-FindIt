@@ -54,13 +54,10 @@ namespace FindIt
 
                 //GameObject asGameObject = UITemplateManager.GetAsGameObject("MainToolbarButtonTemplate");
                 //GameObject asGameObject2 = UITemplateManager.GetAsGameObject("ScrollableSubPanelTemplate");
-                Debugging.Message("point 0");
 
                 //mainButton = tabstrip.AddTab("FindItMainButton", asGameObject, asGameObject2, new Type[] { typeof(UIGroupPanel) }) as UIButton;
                 mainButton = UIView.GetAView().FindUIComponent<UITabstrip>("MainToolstrip").AddUIComponent<UIButton>();
                 mainButton.atlas = atlas;
-
-                Debugging.Message("point 1");
 
                 Locale locale = (Locale)typeof(LocaleManager).GetField("m_Locale", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(LocaleManager.instance);
                 Locale.Key key = new Locale.Key
@@ -68,44 +65,39 @@ namespace FindIt
                     m_Identifier = "TUTORIAL_ADVISER_TITLE",
                     m_Key = mainButton.name
                 };
-                Debugging.Message("point 2");
 
                 if (!locale.Exists(key))
                 {
                     locale.AddLocalizedString(key, "Find It! " + ModInfo.version);
                 }
-                Debugging.Message("point 3");
 
                 key = new Locale.Key
                 {
                     m_Identifier = "TUTORIAL_ADVISER",
                     m_Key = mainButton.name
                 };
-                Debugging.Message("point 4");
 
                 if (!locale.Exists(key))
                 {
                     locale.AddLocalizedString(key, "Thanks for subscribing to Find It! 2.\n\nStart typing some keywords into the input field to find the desired asset.\n\nThis mod is still under developing/testing.\n\nCheck the workshop page occasionally for new features or bug reports.");
                 }
-                Debugging.Message("point 5");
 
                 FieldInfo m_ObjectIndex = typeof(MainToolbar).GetField("m_ObjectIndex", BindingFlags.Instance | BindingFlags.NonPublic);
                 m_ObjectIndex.SetValue(ToolsModifierControl.mainToolbar, (int)m_ObjectIndex.GetValue(ToolsModifierControl.mainToolbar) + 1);
-                Debugging.Message("point 6");
 
                 //mainButton.gameObject.GetComponent<TutorialUITag>().tutorialTag = name;
                 //m_groupPanel = tabstrip.GetComponentInContainer(mainButton, typeof(UIGroupPanel)) as UIGroupPanel;
-                Debugging.Message("point 7");
 
                 m_groupPanel = UIView.GetAView().FindUIComponent("TSContainer").AddUIComponent<UIPanel>();
-                Debugging.Message("point 8");
                 if (m_groupPanel != null)
                 {
                     m_groupPanel.name = "FindItGroupPanel";
                     m_groupPanel.enabled = true;
+                    //m_groupPanel.backgroundSprite = "SubcategoriesPanel";
+
+                    m_groupPanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
                     m_groupPanel.backgroundSprite = "SubcategoriesPanel";
-                    
-                    !!!!!!!!!!!To-do: backgroundSprite not working in asset editor.
+                    m_groupPanel.isVisible = false;
 
                     /*
                     m_groupPanel.component.isInteractive = true;
@@ -116,12 +108,11 @@ namespace FindIt
                         m_groupPanel.RefreshPanel();
                     }
                     */
-                    Debugging.Message("point 9");
                     scrollPanel = UIScrollPanel.Create(m_groupPanel);
                     scrollPanel.eventClicked += OnButtonClicked;
                     scrollPanel.eventVisibilityChanged += (c, p) =>
                     {
-                        //HideAllOptionPanels();
+                        HideAllOptionPanels();
 
                         if (p && scrollPanel.selectedItem != null)
                         {
@@ -142,7 +133,6 @@ namespace FindIt
                     {
                         UIScrollPanelItem.RefreshTooltipAltas(p.source);
                     };
-                    Debugging.Message("point 10");
                     searchBox = scrollPanel.parent.AddUIComponent<UISearchBox>();
                     searchBox.scrollPanel = scrollPanel;
                     searchBox.relativePosition = new Vector3(0, 0);
@@ -152,7 +142,6 @@ namespace FindIt
                 {
                     Debugging.Message("GroupPanel not found");
                 }
-                Debugging.Message("point 11");
                 mainButton.normalBgSprite = "ToolbarIconGroup6Normal";
                 mainButton.focusedBgSprite = "ToolbarIconGroup6Focused";
                 mainButton.hoveredBgSprite = "ToolbarIconGroup6Hovered";
@@ -214,8 +203,6 @@ namespace FindIt
             tabstrip.relativePosition = new Vector3(Mathf.Min(m_defaultXPos, newXPos), tabstrip.relativePosition.y);
         }
 
-        /*
-
         public void HideAllOptionPanels()
         {
             OptionPanelBase[] panels = ToolsModifierControl.mainToolbar.m_OptionsBar.GetComponentsInChildren<OptionPanelBase>();
@@ -231,14 +218,13 @@ namespace FindIt
                 brushPanel.isVisible = false;
             }
         }
-        */
 
         public void OnButtonClicked(UIComponent c, UIMouseEventParameter p)
         {
             UIButton uIButton = p.source as UIButton;
             if (uIButton != null && uIButton.parent is UIScrollPanel)
             {
-                //HideAllOptionPanels();
+                HideAllOptionPanels();
 
                 PrefabInfo prefab = uIButton.objectUserData as PrefabInfo;
 
