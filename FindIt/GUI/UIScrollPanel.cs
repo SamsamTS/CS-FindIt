@@ -60,10 +60,11 @@ namespace FindIt.GUI
             }
         }
 
-        public static UIScrollPanel Create(UIScrollablePanel oldPanel)
+        //public static UIScrollPanel Create(UIScrollablePanel oldPanel)
+        public static UIScrollPanel Create(UIPanel parent)
         {
-            UIScrollPanel scrollPanel = oldPanel.parent.AddUIComponent<UIScrollPanel>();
-            scrollPanel.name = oldPanel.name;
+            UIScrollPanel scrollPanel = parent.AddUIComponent<UIScrollPanel>();
+            scrollPanel.name = "FindItScrollPanel";
             scrollPanel.autoLayout = false;
             scrollPanel.autoReset = false;
             scrollPanel.autoSize = false;
@@ -73,7 +74,7 @@ namespace FindIt.GUI
             scrollPanel.canSelect = true;
             scrollPanel.size = new Vector2(763, 100);
             scrollPanel.relativePosition = new Vector3(48, 5);
-            scrollPanel.atlas = oldPanel.atlas;
+            //scrollPanel.atlas = oldPanel.atlas;
 
             scrollPanel.parent.parent.eventSizeChanged += (c, p) =>
             {
@@ -89,12 +90,12 @@ namespace FindIt.GUI
                 }
             };
 
-            int zOrder = oldPanel.zOrder;
+            //int zOrder = oldPanel.zOrder;
 
-            DestroyImmediate(oldPanel.gameObject);
-            DestroyScrollbars(scrollPanel.parent);
+            //DestroyImmediate(oldPanel.gameObject);
+            //DestroyScrollbars(scrollPanel.parent);
 
-            scrollPanel.zOrder = zOrder;
+            //scrollPanel.zOrder = zOrder;
 
             // Left / Right buttons
             UIButton button = scrollPanel.parent.AddUIComponent<UIButton>();

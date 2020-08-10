@@ -59,7 +59,7 @@ namespace FindIt.GUI
             return Category.Unsorted;
             //if (itemClass.m_service == ItemClass.Service.Wonders) return Category.Wonders; ???????
 
-            return Category.None;
+            //return Category.None;
         }
 
         public class CategoryIcons
