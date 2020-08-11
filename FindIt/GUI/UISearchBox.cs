@@ -655,7 +655,7 @@ namespace FindIt.GUI
                 if (UISearchBox.instance.buildingSizeFilterIndex.x > 4) UISearchBox.instance.sizeFilterX.selectedIndex = 0;
                 if (UISearchBox.instance.buildingSizeFilterIndex.y > 4) UISearchBox.instance.sizeFilterY.selectedIndex = 0;
             }
-            List<Asset> matches = AssetTagList.instance.Find(text, type);
+            List<Asset> matches = AssetTagList.instance.Find(text, type).ToList();
             // sort by most recently downloaded
             if (sortButtonTextState == false)
             {
@@ -677,7 +677,11 @@ namespace FindIt.GUI
                         float maxScore = 0;
                         foreach (Asset assetItr in matches)
                         {
-                            if (assetItr.score > maxScore) maxScore = assetItr.score;
+                            if (assetItr.score > 0)
+                            {
+                                maxScore = assetItr.score;
+                                break;
+                            }
                         }
                         if (maxScore > 0) matches = matches.OrderByDescending(s => s.score).ToList();
                         else matches = matches.OrderBy(s => s.title).ToList();
@@ -694,7 +698,7 @@ namespace FindIt.GUI
                 if (asset.prefab != null)
                 {
                     UIScrollPanelItem.ItemData data = new UIScrollPanelItem.ItemData();
-                    data.name = asset.title + "_" + asset.score;
+                    data.name = asset.title;// + "_" + asset.score;
                     data.tooltip = Asset.GetLocalizedTooltip(asset, asset.prefab, data.name);
                     data.tooltipBox = GeneratedPanel.GetTooltipBox(TooltipHelper.GetHashCode(data.tooltip));
                     data.asset = asset;

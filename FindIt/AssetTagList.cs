@@ -39,12 +39,11 @@ namespace FindIt
         /// </summary>
         public Dictionary<string, int> assetCreatorDictionary = new Dictionary<string, int>();
 
-        public List<Asset> matches = new List<Asset>();
+        public HashSet<Asset> matches = new HashSet<Asset>();
 
-        public List<Asset> Find(string text, UISearchBox.DropDownOptions filter)
+        public HashSet<Asset> Find(string text, UISearchBox.DropDownOptions filter)
         {
             matches.Clear();
-
             text = text.ToLower().Trim();
 
             // if there is something in the search input box
@@ -52,8 +51,6 @@ namespace FindIt
             {
                 string[] keywords = Regex.Split(text, @"([^\w!#]|[_-]|\s)+", RegexOptions.IgnoreCase);
 
-                HashSet<Asset> resultSet = new HashSet<Asset>();
-                HashSet<Asset> workingSet = new HashSet<Asset>();
                 foreach (Asset asset in assets.Values)
                 {
                     asset.RefreshRico();
@@ -61,68 +58,58 @@ namespace FindIt
                     {
                         if (!CheckAssetFilter(asset, filter)) continue;
                         asset.score = 0;
-                        resultSet.Add(asset);
-                        workingSet.Add(asset);
+                        matches.Add(asset);
                     }
                 }
-
-                string test = "";
-                foreach(string t in keywords)
-                {
-                    test += (t + ",");
-                }
-                Debugging.Message("test =" + test);
-
+                HashSet<Asset> workingSet;
                 foreach (string keyword in keywords)
                 {
                     if (!keyword.IsNullOrWhiteSpace())
                     {
                         if (keyword == "!" || keyword == "#") continue;
-                        //HashSet<Asset> keywordSet = new HashSet<Asset>(workingSet);
-
+                        workingSet = new HashSet<Asset>(matches);
+                        float score = 0;
                         foreach (Asset asset in workingSet)
                         {
                             if (keyword.StartsWith("!") && keyword.Length > 1)
                             {
-                                float excludeScore = GetOverallScore(asset, keyword.Substring(1), filter);
-                                if (excludeScore > 0)
+                                score = GetOverallScore(asset, keyword.Substring(1), filter);
+                                if (score > 0)
                                 {
-                                    resultSet.Remove(asset);
+                                    matches.Remove(asset);
                                     asset.score = 0;
                                 }
                             }
                             else if (keyword.StartsWith("#") && keyword.Length > 1)
                             {
-                                float customTagScore = 0;
+                                score = 0;
                                 foreach (string tag in asset.tagsCustom)
                                 {
-                                    customTagScore += 20 * GetScore(keyword.Substring(1), tag, tagsCustomDictionary);
+                                    score += 20 * GetScore(keyword.Substring(1), tag, tagsCustomDictionary);
                                 }
-                                if (customTagScore <= 0)
+                                if (score <= 0)
                                 {
-                                    resultSet.Remove(asset);
+                                    matches.Remove(asset);
                                     asset.score = 0;
                                 }
                             }
                             else if (keyword != "#" && keyword != "!")
                             {
                                 // Calculate relevance score. Algorithm decided by Sam. Unchanged.
-                                float normalScore = GetOverallScore(asset, keyword, filter);
-                                if (normalScore <= 0)
+                                score = GetOverallScore(asset, keyword, filter);
+                                if (score <= 0)
                                 {
-                                    resultSet.Remove(asset);
+                                    matches.Remove(asset);
                                     asset.score = 0;
                                 }
                                 else
                                 {
-                                    asset.score += normalScore;
+                                    asset.score += score;
                                 }
                             }
                         }
-                        //resultSet.Intersect<Asset>(keywordSet);
                     }
                 }
-                matches = resultSet.ToList<Asset>();
             }
 
             // if there isn't anything in the search input box
