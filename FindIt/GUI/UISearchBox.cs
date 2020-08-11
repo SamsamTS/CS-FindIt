@@ -672,7 +672,16 @@ namespace FindIt.GUI
                 {
                     text = text.ToLower().Trim();
                     // if search input box is not empty, sort by score
-                    if (!text.IsNullOrWhiteSpace()) matches = matches.OrderByDescending(s => s.score).ToList();
+                    if (!text.IsNullOrWhiteSpace())
+                    {
+                        float maxScore = 0;
+                        foreach (Asset assetItr in matches)
+                        {
+                            if (assetItr.score > maxScore) maxScore = assetItr.score;
+                        }
+                        if (maxScore > 0) matches = matches.OrderByDescending(s => s.score).ToList();
+                        else matches = matches.OrderBy(s => s.title).ToList();
+                    }
                     // if seach input box is empty, sort by asset title
                     else matches = matches.OrderBy(s => s.title).ToList();
                 }
@@ -685,7 +694,7 @@ namespace FindIt.GUI
                 if (asset.prefab != null)
                 {
                     UIScrollPanelItem.ItemData data = new UIScrollPanelItem.ItemData();
-                    data.name = asset.title; // + "_" + asset.uiPriority;
+                    data.name = asset.title + "_" + asset.score;
                     data.tooltip = Asset.GetLocalizedTooltip(asset, asset.prefab, data.name);
                     data.tooltipBox = GeneratedPanel.GetTooltipBox(TooltipHelper.GetHashCode(data.tooltip));
                     data.asset = asset;

@@ -50,77 +50,79 @@ namespace FindIt
             // if there is something in the search input box
             if (!text.IsNullOrWhiteSpace())
             {
-                string[] keywords = Regex.Split(text, @"([^\w]|[_-]|\s)+", RegexOptions.IgnoreCase);
+                string[] keywords = Regex.Split(text, @"([^\w!#]|[_-]|\s)+", RegexOptions.IgnoreCase);
 
+                HashSet<Asset> resultSet = new HashSet<Asset>();
+                HashSet<Asset> workingSet = new HashSet<Asset>();
                 foreach (Asset asset in assets.Values)
                 {
                     asset.RefreshRico();
                     if (asset.prefab != null)
                     {
                         if (!CheckAssetFilter(asset, filter)) continue;
+                        asset.score = 0;
+                        resultSet.Add(asset);
+                        workingSet.Add(asset);
+                    }
+                }
 
-                        // Calculate relevance score. Algorithm decided by Sam. Unchanged.
-                        foreach (string keyword in keywords)
+                string test = "";
+                foreach(string t in keywords)
+                {
+                    test += (t + ",");
+                }
+                Debugging.Message("test =" + test);
+
+                foreach (string keyword in keywords)
+                {
+                    if (!keyword.IsNullOrWhiteSpace())
+                    {
+                        if (keyword == "!" || keyword == "#") continue;
+                        //HashSet<Asset> keywordSet = new HashSet<Asset>(workingSet);
+
+                        foreach (Asset asset in workingSet)
                         {
-                            if (!keyword.IsNullOrWhiteSpace())
+                            if (keyword.StartsWith("!") && keyword.Length > 1)
                             {
-                                float score = 0;
-
-                                if (!asset.author.IsNullOrWhiteSpace())
+                                float excludeScore = GetOverallScore(asset, keyword.Substring(1), filter);
+                                if (excludeScore > 0)
                                 {
-                                    score += 10 * GetScore(keyword, asset.author.ToLower(), null);
+                                    resultSet.Remove(asset);
+                                    asset.score = 0;
                                 }
-
-                                if (filter == UISearchBox.DropDownOptions.All && asset.assetType != Asset.AssetType.Invalid)
-                                {
-                                    score += 10 * GetScore(keyword, asset.assetType.ToString().ToLower(), null);
-                                }
-
-                                if (asset.service != ItemClass.Service.None)
-                                {
-                                    score += 10 * GetScore(keyword, asset.service.ToString().ToLower(), null);
-                                }
-
-                                if (asset.subService != ItemClass.SubService.None)
-                                {
-                                    score += 10 * GetScore(keyword, asset.subService.ToString().ToLower(), null);
-                                }
-
-                                if (asset.size != Vector2.zero)
-                                {
-                                    score += 10 * GetScore(keyword, asset.size.x + "x" + asset.size.y, null);
-                                }
-
+                            }
+                            else if (keyword.StartsWith("#") && keyword.Length > 1)
+                            {
+                                float customTagScore = 0;
                                 foreach (string tag in asset.tagsCustom)
                                 {
-                                    score += 20 * GetScore(keyword, tag, tagsCustomDictionary);
+                                    customTagScore += 20 * GetScore(keyword.Substring(1), tag, tagsCustomDictionary);
                                 }
-
-                                foreach (string tag in asset.tagsTitle)
+                                if (customTagScore <= 0)
                                 {
-                                    score += 5 * GetScore(keyword, tag, tagsTitleDictionary);
+                                    resultSet.Remove(asset);
+                                    asset.score = 0;
                                 }
-
-                                foreach (string tag in asset.tagsDesc)
+                            }
+                            else if (keyword != "#" && keyword != "!")
+                            {
+                                // Calculate relevance score. Algorithm decided by Sam. Unchanged.
+                                float normalScore = GetOverallScore(asset, keyword, filter);
+                                if (normalScore <= 0)
                                 {
-                                    score += GetScore(keyword, tag, tagsDescDictionary);
-                                }
-
-                                if (score > 0)
-                                {
-                                    asset.score += score;
+                                    resultSet.Remove(asset);
+                                    asset.score = 0;
                                 }
                                 else
                                 {
-                                    asset.score = 0;
-                                    break;
+                                    asset.score += normalScore;
                                 }
                             }
                         }
-
-                        if (asset.score > 0) matches.Add(asset);
+                        //resultSet.Intersect<Asset>(keywordSet);
                     }
                 }
+                matches = resultSet.ToList<Asset>();
             }
 
             // if there isn't anything in the search input box
@@ -313,6 +315,53 @@ namespace FindIt
                 else return false;
             }
             return true;
+        }
+
+        private float GetOverallScore(Asset asset, string keyword, UISearchBox.DropDownOptions filter)
+        {
+            float score = 0;
+
+            if (!asset.author.IsNullOrWhiteSpace())
+            {
+                score += 10 * GetScore(keyword, asset.author.ToLower(), null);
+            }
+
+            if (filter == UISearchBox.DropDownOptions.All && asset.assetType != Asset.AssetType.Invalid)
+            {
+                score += 10 * GetScore(keyword, asset.assetType.ToString().ToLower(), null);
+            }
+
+            if (asset.service != ItemClass.Service.None)
+            {
+                score += 10 * GetScore(keyword, asset.service.ToString().ToLower(), null);
+            }
+
+            if (asset.subService != ItemClass.SubService.None)
+            {
+                score += 10 * GetScore(keyword, asset.subService.ToString().ToLower(), null);
+            }
+
+            if (asset.size != Vector2.zero)
+            {
+                score += 10 * GetScore(keyword, asset.size.x + "x" + asset.size.y, null);
+            }
+
+            foreach (string tag in asset.tagsCustom)
+            {
+                score += 20 * GetScore(keyword, tag, tagsCustomDictionary);
+            }
+
+            foreach (string tag in asset.tagsTitle)
+            {
+                score += 5 * GetScore(keyword, tag, tagsTitleDictionary);
+            }
+
+            foreach (string tag in asset.tagsDesc)
+            {
+                score += GetScore(keyword, tag, tagsDescDictionary);
+            }
+
+            return score;
         }
 
         private float GetScore(string keyword, string tag, Dictionary<string, int> dico)
