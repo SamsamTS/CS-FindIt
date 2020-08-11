@@ -151,6 +151,8 @@
     <Translation ID="FIF_NET_TNR" String="Tiny Roads" />
     <Translation ID="FIF_NET_UTI" String="Utility" />
     <Translation ID="FIF_NET_TRA" String="Train" />
+    <Translation ID="FIF_SET_PM" String="Show marker type props in game mode(restart needed)" />
+    <Translation ID="FIF_SET_PMTP" String="Most marker type props can only be removed by the Better Bulldozer mod in game mode. Use with caution" />
     
   </Translations>
 </Language>

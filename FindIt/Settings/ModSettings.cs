@@ -23,6 +23,8 @@ namespace FindIt
         internal static bool customTagListSort = false;
         internal static bool assetCreatorListSort = false;
 
+        internal static bool showPropMarker = false;
+
         internal static KeyBinding searchKey = new KeyBinding { keyCode = (int)KeyCode.F, control = true, shift = false, alt = false };
 
         /// <summary>
@@ -75,6 +77,9 @@ namespace FindIt
 
         [XmlElement("assetCreatorListSort")]
         public bool AssetCreatorListSort { get => Settings.assetCreatorListSort; set => Settings.assetCreatorListSort = value; }
+
+        [XmlElement("showPropMarker")]
+        public bool showPropMarker { get => Settings.showPropMarker; set => Settings.showPropMarker = value; }
 
         [XmlElement("SearchKey")]
         public KeyBinding SearchKey { get => Settings.searchKey; set => Settings.searchKey = value; }

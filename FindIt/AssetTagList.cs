@@ -217,7 +217,7 @@ namespace FindIt
             }
 
             // filter out marker prop if not in editor mode
-            if (!FindIt.inEditor && (asset.propType == Asset.PropType.PropsMarker)) return false;
+            if ((!FindIt.inEditor && !Settings.showPropMarker) && (asset.propType == Asset.PropType.PropsMarker)) return false;
 
             try
             {

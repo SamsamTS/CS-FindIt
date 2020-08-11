@@ -14,8 +14,8 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.0.2-beta1";
-        public const bool isBeta = true;
+        public const string version = "2.0.1-1";
+        public const bool isBeta = false;
 
         public string Name
         {
@@ -136,6 +136,15 @@ namespace FindIt
                         UISearchBox.instance.Search();
                     }
                 });
+                group.AddSpace(10);
+
+                // Show prop markers in 'game' mode
+                UICheckBox showPropMarker = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_PM"), Settings.showPropMarker, (b) =>
+                {
+                    Settings.showPropMarker = b;
+                    XMLUtils.SaveSettings();
+                });
+                showPropMarker.tooltip = Translations.Translate("FIF_SET_PMTP");
                 group.AddSpace(10);
 
                 // languate settings

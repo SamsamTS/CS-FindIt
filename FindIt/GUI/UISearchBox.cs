@@ -102,7 +102,6 @@ namespace FindIt.GUI
 
             // search input box
             input = SamsamTS.UIUtils.CreateTextField(inputPanel);
-            input.text = "";
             input.size = new Vector2(inputPanel.width - 45, 30);
             input.padding.top = 7;
             input.relativePosition = new Vector3(5, 5);
@@ -116,7 +115,7 @@ namespace FindIt.GUI
 
             input.eventTextCancelled += (c, p) =>
             {
-                input.text = search;
+                if (search != null) input.text = search;
             };
 
             input.eventKeyDown += (component, eventParam) =>

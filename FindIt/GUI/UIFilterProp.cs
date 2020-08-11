@@ -224,7 +224,7 @@ namespace FindIt.GUI
         /// </summary>
         private void UpdateMarkerToggleVisibility()
         {
-            if (FindIt.inEditor) return;
+            if (FindIt.inEditor || Settings.showPropMarker) return;
             UICheckBox last = toggles[toggles.Length - 1];
             last.isVisible = false;
             UICheckBox secondLast = toggles[toggles.Length - 2];
