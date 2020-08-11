@@ -145,10 +145,12 @@
     <Translation ID="FIF_NET_PATH" String="行人步道" />
     <Translation ID="FIF_NET_WALL" String="圍欄和牆" />
     <Translation ID="FIF_NET_WAT" String="水利設施" />
-    <Translation ID="FIF_PROP_MAR" String="標輯器標記" />
+    <Translation ID="FIF_PROP_MAR" String="編輯器標記" />
     <Translation ID="FIF_NET_TNR" String="迷你道路" />
     <Translation ID="FIF_NET_UTI" String="電線、水道管" />
     <Translation ID="FIF_NET_TRA" String="鐵路" />
+    <Translation ID="FIF_SET_PM" String="在遊戲模式中也顯示編輯器標記(須重啟遊戲)" />
+    <Translation ID="FIF_SET_PMTP" String="多數已放置的編輯器標記需要Better Bulldozer Mod 才能從遊戲模式中移除. 小心使用" />
 
   </Translations>
 </Language>
