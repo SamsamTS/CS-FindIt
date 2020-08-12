@@ -56,6 +56,7 @@ namespace FindIt.GUI
             {
                 DeleteTag(tagToDelete);
                 ((UIFilterTag)m_button.parent).UpdateCustomTagList();
+                UISearchBox.instance.scrollPanel.Refresh();
                 Close();
             };
 

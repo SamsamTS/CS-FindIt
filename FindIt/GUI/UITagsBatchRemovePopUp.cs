@@ -100,6 +100,7 @@ namespace FindIt.GUI
 
                 BatchRemoveTag(newTagName);
                 ((UIFilterTag)m_button.parent).UpdateCustomTagList();
+                UISearchBox.instance.scrollPanel.Refresh();
                 Close();
             };
 

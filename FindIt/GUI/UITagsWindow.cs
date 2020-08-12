@@ -200,6 +200,7 @@ namespace FindIt.GUI
             }
 
             Refresh(asset);
+            UISearchBox.instance.scrollPanel.Refresh();
         }
 
         public void Refresh(Asset asset)
