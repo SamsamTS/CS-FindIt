@@ -53,6 +53,7 @@ namespace FindIt
 
                 bool matched = true;
                 float score = 0;
+
                 foreach (Asset asset in assets.Values)
                 {
                     asset.RefreshRico();
@@ -61,6 +62,7 @@ namespace FindIt
                         if (!CheckAssetFilter(asset, filter)) continue;
                         matched = true;
                         asset.score = 0;
+                        score = 0;
                         foreach (string keyword in keywords)
                         {
                             if (!keyword.IsNullOrWhiteSpace())
