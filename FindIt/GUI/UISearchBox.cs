@@ -655,7 +655,7 @@ namespace FindIt.GUI
                 if (UISearchBox.instance.buildingSizeFilterIndex.x > 4) UISearchBox.instance.sizeFilterX.selectedIndex = 0;
                 if (UISearchBox.instance.buildingSizeFilterIndex.y > 4) UISearchBox.instance.sizeFilterY.selectedIndex = 0;
             }
-            List<Asset> matches = AssetTagList.instance.Find(text, type).ToList();
+            List<Asset> matches = AssetTagList.instance.Find(text, type);
             // sort by most recently downloaded
             if (sortButtonTextState == false)
             {

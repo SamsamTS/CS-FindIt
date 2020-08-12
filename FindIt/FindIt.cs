@@ -57,6 +57,20 @@ namespace FindIt
                 mainButton = tabstrip.AddTab("FindItMainButton", asGameObject, asGameObject2, new Type[] { typeof(UIGroupPanel) }) as UIButton;
                 mainButton.atlas = atlas;
 
+                mainButton.normalBgSprite = "ToolbarIconGroup6Normal";
+                mainButton.focusedBgSprite = "ToolbarIconGroup6Focused";
+                mainButton.hoveredBgSprite = "ToolbarIconGroup6Hovered";
+                mainButton.pressedBgSprite = "ToolbarIconGroup6ressed";
+                mainButton.disabledBgSprite = "ToolbarIconGroup6Disabled";
+
+                mainButton.normalFgSprite = "FindIt";
+                mainButton.focusedFgSprite = "FindItFocused";
+                mainButton.hoveredFgSprite = "FindItHovered";
+                mainButton.pressedFgSprite = "FindItPressed";
+                mainButton.disabledFgSprite = "FindItDisabled";
+
+                mainButton.tooltip = "Find It! " + (ModInfo.isBeta ? "[BETA] " : "") + ModInfo.version;
+
                 Locale locale = (Locale)typeof(LocaleManager).GetField("m_Locale", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(LocaleManager.instance);
                 Locale.Key key = new Locale.Key
                 {
@@ -130,20 +144,6 @@ namespace FindIt
                 {
                     Debugging.Message("GroupPanel not found");
                 }
-
-                mainButton.normalBgSprite = "ToolbarIconGroup6Normal";
-                mainButton.focusedBgSprite = "ToolbarIconGroup6Focused";
-                mainButton.hoveredBgSprite = "ToolbarIconGroup6Hovered";
-                mainButton.pressedBgSprite = "ToolbarIconGroup6ressed";
-                mainButton.disabledBgSprite = "ToolbarIconGroup6Disabled";
-
-                mainButton.normalFgSprite = "FindIt";
-                mainButton.focusedFgSprite = "FindItFocused";
-                mainButton.hoveredFgSprite = "FindItHovered";
-                mainButton.pressedFgSprite = "FindItPressed";
-                mainButton.disabledFgSprite = "FindItDisabled";
-
-                mainButton.tooltip = "Find It! " + (ModInfo.isBeta ? "[BETA] " : "") + ModInfo.version;
 
                 m_beautificationPanel = FindObjectOfType<BeautificationPanel>();
 

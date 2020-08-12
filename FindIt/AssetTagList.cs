@@ -39,9 +39,9 @@ namespace FindIt
         /// </summary>
         public Dictionary<string, int> assetCreatorDictionary = new Dictionary<string, int>();
 
-        public HashSet<Asset> matches = new HashSet<Asset>();
+        public List<Asset> matches = new List<Asset>();
 
-        public HashSet<Asset> Find(string text, UISearchBox.DropDownOptions filter)
+        public List<Asset> Find(string text, UISearchBox.DropDownOptions filter)
         {
             matches.Clear();
             text = text.ToLower().Trim();
@@ -51,63 +51,56 @@ namespace FindIt
             {
                 string[] keywords = Regex.Split(text, @"([^\w!#]|[_-]|\s)+", RegexOptions.IgnoreCase);
 
+                bool matched = true;
+                float score = 0;
                 foreach (Asset asset in assets.Values)
                 {
                     asset.RefreshRico();
                     if (asset.prefab != null)
                     {
                         if (!CheckAssetFilter(asset, filter)) continue;
+                        matched = true;
                         asset.score = 0;
-                        matches.Add(asset);
-                    }
-                }
-                HashSet<Asset> workingSet;
-                foreach (string keyword in keywords)
-                {
-                    if (!keyword.IsNullOrWhiteSpace())
-                    {
-                        if (keyword == "!" || keyword == "#") continue;
-                        workingSet = new HashSet<Asset>(matches);
-                        float score = 0;
-                        foreach (Asset asset in workingSet)
+                        foreach (string keyword in keywords)
                         {
-                            if (keyword.StartsWith("!") && keyword.Length > 1)
+                            if (!keyword.IsNullOrWhiteSpace())
                             {
-                                score = GetOverallScore(asset, keyword.Substring(1), filter);
-                                if (score > 0)
+                                if (keyword == "!" || keyword == "#") continue;
+                                if (keyword.StartsWith("!") && keyword.Length > 1)
                                 {
-                                    matches.Remove(asset);
-                                    asset.score = 0;
+                                    score = GetOverallScore(asset, keyword.Substring(1), filter);
+                                    if (score > 0)
+                                    {
+                                        matched = false;
+                                        break;
+                                    }
                                 }
-                            }
-                            else if (keyword.StartsWith("#") && keyword.Length > 1)
-                            {
-                                score = 0;
-                                foreach (string tag in asset.tagsCustom)
+                                else if (keyword.StartsWith("#") && keyword.Length > 1)
                                 {
-                                    score += 20 * GetScore(keyword.Substring(1), tag, tagsCustomDictionary);
+                                    foreach (string tag in asset.tagsCustom)
+                                    {
+                                        score = GetScore(keyword.Substring(1), tag, tagsCustomDictionary);
+                                    }
+                                    if (score <= 0)
+                                    {
+                                        matched = false;
+                                        break;
+                                    }
                                 }
-                                if (score <= 0)
+                                else if (keyword != "#" && keyword != "!")
                                 {
-                                    matches.Remove(asset);
-                                    asset.score = 0;
-                                }
-                            }
-                            else if (keyword != "#" && keyword != "!")
-                            {
-                                // Calculate relevance score. Algorithm decided by Sam. Unchanged.
-                                score = GetOverallScore(asset, keyword, filter);
-                                if (score <= 0)
-                                {
-                                    matches.Remove(asset);
-                                    asset.score = 0;
-                                }
-                                else
-                                {
-                                    asset.score += score;
+                                    // Calculate relevance score. Algorithm decided by Sam. Unchanged.
+                                    score = GetOverallScore(asset, keyword, filter);
+                                    if (score <= 0)
+                                    {
+                                        matched = false;
+                                        break;
+                                    }
+                                    else asset.score += score;
                                 }
                             }
                         }
+                        if (matched) matches.Add(asset);
                     }
                 }
             }
