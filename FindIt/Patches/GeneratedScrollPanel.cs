@@ -9,6 +9,7 @@ using FindIt.GUI;
 
 namespace FindIt
 {
+    // This patch adds some of Find It's own UI stuff (like the custom tag and steam sprites) to the game's default panels
     [HarmonyPatch(typeof(GeneratedScrollPanel))]
     [HarmonyPatch("CreateButton")]
     [HarmonyPatch(new Type[] { typeof(string), typeof(string), typeof(string), typeof(int), typeof(UITextureAtlas), typeof(UIComponent), typeof(bool) })]
@@ -131,7 +132,7 @@ namespace FindIt
 
                             if (!asset.author.IsNullOrWhiteSpace())
                             {
-                                steamSprite.tooltip = "By " + asset.author;
+                                steamSprite.tooltip = "By " + asset.author + "\n" + Translations.Translate("FIF_UIS_WS");
                             }
 
                             if (PlatformService.IsOverlayEnabled())
@@ -159,7 +160,6 @@ namespace FindIt
                 Debugging.LogException(e);
             }
         }
-
 
         private static void FixFocusedTexture(UIComponent component, UIMouseEventParameter p)
         {
