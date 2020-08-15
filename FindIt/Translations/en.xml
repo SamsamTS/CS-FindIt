@@ -151,8 +151,14 @@
     <Translation ID="FIF_NET_TNR" String="Tiny Roads" />
     <Translation ID="FIF_NET_UTI" String="Utility" />
     <Translation ID="FIF_NET_TRA" String="Train" />
-    <Translation ID="FIF_SET_PM" String="Show marker type props in game mode(restart needed)" />
+    <Translation ID="FIF_SET_PM" String="Show marker type props in game mode" />
     <Translation ID="FIF_SET_PMTP" String="Most marker type props can only be removed by the Better Bulldozer mod in game mode. Use with caution" />
+    <Translation ID="FIF_SET_IC" String="Show the number of existing instances of each asset" />
+    <Translation ID="FIF_EF_UN" String="Unused Assets" />
+    <Translation ID="FIF_QM_TIT" String="Quick Menu" />
+    <Translation ID="FIF_UIS_UN" String="Unused" />
+    <Translation ID="FIF_UIS_IN" String="In Use" />
+    <Translation ID="FIF_SET_ICTP" String="This option slightly slows down search speed. Disable it when it is not needed" />
     
   </Translations>
 </Language>

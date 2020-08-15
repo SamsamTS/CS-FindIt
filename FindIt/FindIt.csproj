@@ -74,6 +74,7 @@
     <Compile Include="GUI\UIFilterTree.cs" />
     <Compile Include="GUI\UIGroupPanel.cs" />
     <Compile Include="GUI\UIFilterPloppable.cs" />
+    <Compile Include="GUI\UIQuickMenuPopUp.cs" />
     <Compile Include="GUI\UIScrollPanel.cs" />
     <Compile Include="GUI\UIFastList.cs" />
     <Compile Include="GUI\UISearchBox.cs" />
@@ -139,6 +140,7 @@
     <EmbeddedResource Include="Icons\TreeSmDisabled.png" />
     <EmbeddedResource Include="Icons\TinyRoads.png" />
     <EmbeddedResource Include="Icons\TinyRoadsDisabled.png" />
+    <EmbeddedResource Include="Icons\QuickMenu.png" />
     <Content Include="Translations\de.xml" />
     <Content Include="Translations\en.xml" />
     <Content Include="Translations\es.xml" />

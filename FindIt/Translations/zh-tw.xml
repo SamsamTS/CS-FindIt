@@ -68,7 +68,7 @@
     <Translation ID="FIF_PROP_SPE" String="特殊廣告牌" />
     <Translation ID="FIF_PROP_LIG" String="燈光類物體" />
     <Translation ID="FIF_PROP_NAT" String="自然類物體" />
-    <Translation ID="FIF_PROP_UNS" String="未分類物體" />
+    <Translation ID="FIF_PROP_UNS" String="未分類" />
     <Translation ID="FIF_SET_KS" String="鍵盤快捷鍵" />
     <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
     <Translation ID="FIF_SET_CTFL" String="自訂標籤存檔路徑 (請定期備份此檔案)" />
@@ -149,8 +149,14 @@
     <Translation ID="FIF_NET_TNR" String="迷你道路" />
     <Translation ID="FIF_NET_UTI" String="電線、水道管" />
     <Translation ID="FIF_NET_TRA" String="鐵路" />
-    <Translation ID="FIF_SET_PM" String="在遊戲模式中也顯示編輯器標記(須重啟遊戲)" />
+    <Translation ID="FIF_SET_PM" String="在遊戲模式中也顯示編輯器標記" />
     <Translation ID="FIF_SET_PMTP" String="多數已放置的編輯器標記需要Better Bulldozer Mod 才能從遊戲模式中移除. 小心使用" />
+    <Translation ID="FIF_SET_IC" String="顯示各素材使用次數" />
+    <Translation ID="FIF_EF_UN" String="未使用的素材" />
+    <Translation ID="FIF_QM_TIT" String="快速選單" />
+    <Translation ID="FIF_UIS_UN" String="未使用" />
+    <Translation ID="FIF_UIS_IN" String="使用中" />
+    <Translation ID="FIF_SET_ICTP" String="此選項會略微增加搜尋時間. 不需要時請停用" />
 
   </Translations>
 </Language>

@@ -30,7 +30,8 @@ namespace FindIt.GUI
 
         string[] options = {
                     Translations.Translate("FIF_EF_AC"), // Asset creator
-                    Translations.Translate("FIF_EF_BH") // Building height
+                    Translations.Translate("FIF_EF_BH"), // Building height
+                    Translations.Translate("FIF_EF_UN") // Unused Asset
                 };
 
         public override void Start()
@@ -62,10 +63,16 @@ namespace FindIt.GUI
                     UpdateAssetCreatorOptionVisibility(true);
                     UpdateBuildingHeightOptionVisibility(false);
                 }
-                else
+                else if (optionDropDownMenu.selectedIndex == 1)
                 {
                     UpdateAssetCreatorOptionVisibility(false);
                     UpdateBuildingHeightOptionVisibility(true);
+                }
+
+                else if (optionDropDownMenu.selectedIndex == 2)
+                {
+                    UpdateAssetCreatorOptionVisibility(false);
+                    UpdateBuildingHeightOptionVisibility(false);
                 }
 
                 if (optionDropDownCheckBox.isChecked)

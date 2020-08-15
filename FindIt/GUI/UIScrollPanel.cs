@@ -149,6 +149,7 @@ namespace FindIt.GUI
         private UISprite m_steamSprite;
 
         private UICheckBox m_batchCheckBox;
+        private UILabel m_instanceCountLabel;
 
         private static UIComponent m_tooltipBox;
 
@@ -246,6 +247,13 @@ namespace FindIt.GUI
                 }
 
             };
+
+            m_instanceCountLabel = component.AddUIComponent<UILabel>();
+            m_instanceCountLabel.textScale = 0.8f;
+            //m_instanceCountLabel.padding = new RectOffset(0, 0, 8, 0);
+            m_instanceCountLabel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
+            m_instanceCountLabel.backgroundSprite = "GenericTab";
+            m_instanceCountLabel.relativePosition = new Vector3(5, 5);
 
             component.eventMouseEnter += (c, p) =>
             {
@@ -369,6 +377,33 @@ namespace FindIt.GUI
                     }
 
                     m_batchCheckBox.isVisible = UISearchBox.instance.tagPanel.isBatchActionsEnabled;
+                }
+
+                if (m_instanceCountLabel != null && data.asset?.prefab != null)
+                {
+                    if (Settings.showInstancesCounter)
+                    {
+                        m_instanceCountLabel.isVisible = true;
+                        //if (data.asset.prefab is TreeInfo) m_instanceCountLabel.isVisible = false;
+                        //else
+                        //{
+                        //    m_instanceCountLabel.isVisible = true;
+
+                        uint count = 0;
+                        if (AssetTagList.instance.prefabInstanceCountDictionary.ContainsKey(data.asset.prefab)){
+                            count = AssetTagList.instance.prefabInstanceCountDictionary[data.asset.prefab];
+                        }
+                            if (data.asset.prefab is NetInfo)
+                            {
+                                m_instanceCountLabel.text = (count == 0) ? Translations.Translate("FIF_UIS_UN") : Translations.Translate("FIF_UIS_IN");
+                            }
+                            else
+                            {
+                                m_instanceCountLabel.text = (count == 0) ? Translations.Translate("FIF_UIS_UN") : count.ToString();
+                            }
+                        //}
+                    }
+                    else m_instanceCountLabel.isVisible = false;
                 }
 
                 if (m_steamSprite != null)
@@ -501,5 +536,8 @@ namespace FindIt.GUI
                 }
             }
         }
+
+        
+
     }
 }

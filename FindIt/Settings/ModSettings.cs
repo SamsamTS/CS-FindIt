@@ -25,6 +25,8 @@ namespace FindIt
 
         internal static bool showPropMarker = false;
 
+        internal static bool showInstancesCounter = false;
+
         internal static KeyBinding searchKey = new KeyBinding { keyCode = (int)KeyCode.F, control = true, shift = false, alt = false };
 
         /// <summary>
@@ -80,6 +82,9 @@ namespace FindIt
 
         [XmlElement("showPropMarker")]
         public bool showPropMarker { get => Settings.showPropMarker; set => Settings.showPropMarker = value; }
+
+        [XmlElement("showInstancesCounter")]
+        public bool showInstancesCounter { get => Settings.showInstancesCounter; set => Settings.showInstancesCounter = value; }
 
         [XmlElement("SearchKey")]
         public KeyBinding SearchKey { get => Settings.searchKey; set => Settings.searchKey = value; }

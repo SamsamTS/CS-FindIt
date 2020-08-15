@@ -200,8 +200,6 @@ namespace FindIt.GUI
                 UISearchBox.instance.PickRandom();
             };
 
-            UpdateMarkerToggleVisibility();
-
             all = SamsamTS.UIUtils.CreateButton(this);
             all.size = new Vector2(55, 35);
             all.text = Translations.Translate("FIF_SE_IA");
@@ -216,19 +214,30 @@ namespace FindIt.GUI
                 eventFilteringChanged(this, 0);
             };
 
+            UpdateMarkerToggleVisibility();
+
             width = parent.width;
         }
 
         /// <summary>
         /// Hide marder toggle checkbox if not in asset editor
         /// </summary>
-        private void UpdateMarkerToggleVisibility()
+        public void UpdateMarkerToggleVisibility()
         {
-            if (FindIt.inEditor || Settings.showPropMarker) return;
             UICheckBox last = toggles[toggles.Length - 1];
-            last.isVisible = false;
-            UICheckBox secondLast = toggles[toggles.Length - 2];
-            randomIcon.relativePosition = new Vector3(secondLast.relativePosition.x + secondLast.width + 5, 5);
+
+            if (FindIt.inEditor || Settings.showPropMarker)
+            {
+                last.isVisible = true;
+                randomIcon.relativePosition = new Vector3(last.relativePosition.x + last.width + 5, 5);
+            }
+            else
+            {
+                last.isVisible = false;
+                UICheckBox secondLast = toggles[toggles.Length - 2];
+                randomIcon.relativePosition = new Vector3(secondLast.relativePosition.x + secondLast.width + 5, 5);
+            }
+            all.relativePosition = new Vector3(randomIcon.relativePosition.x + randomIcon.width + 5, 5);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.0.2-beta4";
+        public const string version = "2.0.2-beta5";
         public const bool isBeta = true;
 
         public string Name
@@ -112,6 +112,8 @@ namespace FindIt
                 fixProps.tooltip = Translations.Translate("FIF_SET_BPTP");
                 group.AddSpace(10);
 
+                /*
+
                 // Sort custom tag list alphabetically. Default = sort by number of assets in each tag
                 UICheckBox customTagListSort = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_CTLS"), Settings.customTagListSort, (b) =>
                 {
@@ -143,9 +145,32 @@ namespace FindIt
                 {
                     Settings.showPropMarker = b;
                     XMLUtils.SaveSettings();
+
+                    if (FindIt.instance?.searchBox != null && UIFilterProp.instance != null)
+                    {
+                        UIFilterProp.instance.UpdateMarkerToggleVisibility();
+                    }
                 });
                 showPropMarker.tooltip = Translations.Translate("FIF_SET_PMTP");
                 group.AddSpace(10);
+
+                // Show the number of existing instances of each asset
+                UICheckBox showInstancesCounter = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_IC"), Settings.showInstancesCounter, (b) =>
+                {
+                    Settings.showInstancesCounter = b;
+                    XMLUtils.SaveSettings();
+                    if (FindIt.instance?.scrollPanel != null)
+                    {
+                        if (Settings.showInstancesCounter && AssetTagList.instance?.prefabInstanceCountDictionary != null)
+                        {
+                            AssetTagList.instance.UpdatePrefabInstanceCount();
+                        }
+                        FindIt.instance.scrollPanel.Refresh();
+                    }
+                });
+                group.AddSpace(10);
+
+                */
 
                 // languate settings
                 UIDropDown languageDropDown = (UIDropDown)group.AddDropdown(Translations.Translate("TRN_CHOICE"), Translations.LanguageList, Translations.Index, (value) =>

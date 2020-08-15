@@ -39,12 +39,25 @@ namespace FindIt
         /// </summary>
         public Dictionary<string, int> assetCreatorDictionary = new Dictionary<string, int>();
 
+        /// <summary>
+        /// key = asset, value = numbers of active instances of each asset
+        /// </summary>
+        public Dictionary<PrefabInfo, uint> prefabInstanceCountDictionary = new Dictionary<PrefabInfo, uint>();
+
         public List<Asset> matches = new List<Asset>();
 
         public List<Asset> Find(string text, UISearchBox.DropDownOptions filter)
         {
             matches.Clear();
             text = text.ToLower().Trim();
+
+            if (UISearchBox.instance?.extraFiltersPanel?.optionDropDownMenu != null)
+            {
+                if (Settings.showInstancesCounter || UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == 2)
+                {
+                    UpdatePrefabInstanceCount();
+                }
+            }
 
             // if there is something in the search input box
             if (!text.IsNullOrWhiteSpace())
@@ -228,7 +241,7 @@ namespace FindIt
                             if (asset.author != UISearchBox.instance.extraFiltersPanel.GetAssetCreatorDropDownListKey()) return false;
                         }
                         // filter asset by building height
-                        else
+                        else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == 1)
                         {
                             if (asset.assetType == Asset.AssetType.Ploppable || asset.assetType == Asset.AssetType.Rico || asset.assetType == Asset.AssetType.Growable)
                             {
@@ -236,6 +249,15 @@ namespace FindIt
                                 if (asset.buildingHeight < UISearchBox.instance.extraFiltersPanel.minBuildingHeight) return false;
                             }
                             else return false;
+                        }
+                        
+                        // only show unused assets
+                        else
+                        {
+                            if (prefabInstanceCountDictionary.ContainsKey(asset.prefab))
+                            {
+                                if (prefabInstanceCountDictionary[asset.prefab] > 0) return false;
+                            }
                         }
                     }
                 }
@@ -732,6 +754,83 @@ namespace FindIt
             }
 
             return list;
+        }
+
+        public void UpdatePrefabInstanceCount()
+        {
+            prefabInstanceCountDictionary.Clear();
+
+            if (BuildingManager.exists)
+            {
+                foreach (Building building in BuildingManager.instance.m_buildings.m_buffer)
+                {
+                    if (building.m_flags != Building.Flags.None && building.m_flags != Building.Flags.Deleted)
+                    {
+                        if (prefabInstanceCountDictionary.ContainsKey(building.Info))
+                        {
+                            prefabInstanceCountDictionary[building.Info] += 1;
+                        }
+                        else
+                        {
+                            prefabInstanceCountDictionary.Add(building.Info, 1);
+                        }
+                    }
+                }
+            }
+
+            if (PropManager.exists)
+            {
+                foreach (PropInstance prop in PropManager.instance.m_props.m_buffer)
+                {
+                    if ((PropInstance.Flags)prop.m_flags != PropInstance.Flags.None && (PropInstance.Flags)prop.m_flags != PropInstance.Flags.Deleted)
+                    {
+                        if (prefabInstanceCountDictionary.ContainsKey(prop.Info))
+                        {
+                            prefabInstanceCountDictionary[prop.Info] += 1;
+                        }
+                        else
+                        {
+                            prefabInstanceCountDictionary.Add(prop.Info, 1);
+                        }
+                    }
+                }
+            }
+
+            if (TreeManager.exists)
+            {
+                foreach (TreeInstance tree in TreeManager.instance.m_trees.m_buffer)
+                {
+                    if ((TreeInstance.Flags)tree.m_flags != TreeInstance.Flags.None && (TreeInstance.Flags)tree.m_flags != TreeInstance.Flags.Deleted)
+                    {
+                        if (prefabInstanceCountDictionary.ContainsKey(tree.Info))
+                        {
+                            prefabInstanceCountDictionary[tree.Info] += 1;
+                        }
+                        else
+                        {
+                            prefabInstanceCountDictionary.Add(tree.Info, 1);
+                        }
+                    }
+                }
+            }
+
+            if (NetManager.exists)
+            {
+                foreach (NetSegment segment in NetManager.instance.m_segments.m_buffer)
+                {
+                    if (segment.m_flags != NetSegment.Flags.None && segment.m_flags != NetSegment.Flags.Deleted)
+                    {
+                        if (prefabInstanceCountDictionary.ContainsKey(segment.Info))
+                        {
+                            prefabInstanceCountDictionary[segment.Info] += 1;
+                        }
+                        else
+                        {
+                            prefabInstanceCountDictionary.Add(segment.Info, 1);
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -51,6 +51,8 @@ namespace FindIt.GUI
         private UISprite extraFiltersIcon;
         public UIFilterExtra extraFiltersPanel;
 
+        private UISprite quickMenuIcon;
+
         // true = sort by relevance
         // false = sort by most recently downloaded
         private bool sortButtonTextState = true;
@@ -307,6 +309,19 @@ namespace FindIt.GUI
                     extraFiltersIcon.opacity = 0.5f;
                 }
             };
+
+            quickMenuIcon = toolIconPanel.AddUIComponent<UISprite>();
+            quickMenuIcon.size = new Vector2(26, 23);
+            quickMenuIcon.atlas = FindIt.atlas;
+            quickMenuIcon.spriteName = "QuickMenu";
+            quickMenuIcon.tooltip = Translations.Translate("FIF_QM_TIT");
+            quickMenuIcon.opacity = 0.5f;
+            quickMenuIcon.relativePosition = new Vector3(extraFiltersIcon.relativePosition.x + extraFiltersIcon.width + 5, 6);
+            quickMenuIcon.eventClicked += (c, p) =>
+            {
+                UIQuickMenuPopUp.ShowAt(quickMenuIcon);
+            };
+
 
             // panel of sort button and filter toggle tabs
             UIPanel panel = AddUIComponent<UIPanel>();

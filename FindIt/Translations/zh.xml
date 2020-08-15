@@ -138,6 +138,25 @@
     <Translation ID="FIF_EF_FEE" String="英尺" />
     <Translation ID="FIF_SET_ACLS" String="按字母顺序对资产作者列表进行排序" />
     <Translation ID="FIF_GR_RAN" String="随机选择" />
+    <Translation ID="FIF_NET_SMR" String="小宽度道路" />
+    <Translation ID="FIF_NET_MDR" String="中宽度道路" />
+    <Translation ID="FIF_NET_LGR" String="大宽度道路" />
+    <Translation ID="FIF_NET_HGHW" String="高速公路" />
+    <Translation ID="FIF_NET_PATH" String="行人路" />
+    <Translation ID="FIF_NET_WALL" String="墙和栅栏" />
+    <Translation ID="FIF_NET_WAT" String="水利设施" />
+    <Translation ID="FIF_PROP_MAR" String="编辑器标记" />
+    <Translation ID="FIF_NET_TNR" String="小路" />
+    <Translation ID="FIF_NET_UTI" String="电线和水管" />
+    <Translation ID="FIF_NET_TRA" String="铁路" />
+    <Translation ID="FIF_SET_PM" String="在游戏模式下显示编辑器标记类型的道具" />
+    <Translation ID="FIF_SET_PMTP" String="多数编辑器标记类型的道具在游戏模式下只能由Better Bulldozer mod移除。谨慎使用" />
+    <Translation ID="FIF_SET_IC" String="显示每个资产的使用数" />
+    <Translation ID="FIF_EF_UN" String="未使用资产" />
+    <Translation ID="FIF_QM_TIT" String="快速选单" />
+    <Translation ID="FIF_UIS_UN" String="未使用" />
+    <Translation ID="FIF_UIS_IN" String="使用中" />
+    <Translation ID="FIF_SET_ICTP" String="此选项会稍微降低搜索速度。不需要时请禁用" />
 
   </Translations>
 </Language>
