@@ -139,6 +139,25 @@
     <Translation ID="FIF_EF_FEE" String="футов" />
     <Translation ID="FIF_SET_ACLS" String="Сортировать список создателей активов по алфавиту" />
     <Translation ID="FIF_GR_RAN" String="Случайный выбор" />
+    <Translation ID="FIF_NET_SMR" String="Small Roads" />
+    <Translation ID="FIF_NET_MDR" String="Medium Roads" />
+    <Translation ID="FIF_NET_LGR" String="Large Roads" />
+    <Translation ID="FIF_NET_HGHW" String="Highways" />
+    <Translation ID="FIF_NET_PATH" String="Paths" />
+    <Translation ID="FIF_NET_WALL" String="Wall and Fences" />
+    <Translation ID="FIF_NET_WAT" String="Water Structures" />
+    <Translation ID="FIF_PROP_MAR" String="Editor Markers" />
+    <Translation ID="FIF_NET_TNR" String="Tiny Roads" />
+    <Translation ID="FIF_NET_UTI" String="Utility" />
+    <Translation ID="FIF_NET_TRA" String="Train" />
+    <Translation ID="FIF_SET_PM" String="Show marker type props in game mode(restart needed)" />
+    <Translation ID="FIF_SET_PMTP" String="Most marker type props can only be removed by the Better Bulldozer mod in game mode. Use with caution" />
+    <Translation ID="FIF_SET_IC" String="Показать кол-во размещённых экземпляров объекта" />
+    <Translation ID="FIF_EF_UN" String="Неиспользуемые активы" />
+    <Translation ID="FIF_QM_TIT" String="Дополнительные настройки" />
+    <Translation ID="FIF_UIS_UN" String="Unused" />
+    <Translation ID="FIF_UIS_IN" String="In Use" />
+    <Translation ID="FIF_SET_ICTP" String="Эта опция немного замедляет скорость поиска. Отключите её, когда она не нужна" />
 
   </Translations>
 </Language>
