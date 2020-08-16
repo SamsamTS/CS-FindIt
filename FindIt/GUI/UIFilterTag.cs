@@ -72,7 +72,7 @@ namespace FindIt.GUI
             refreshButton.textScale = 0.8f;
             refreshButton.textPadding = new RectOffset(0, 0, 5, 0);
             refreshButton.tooltip = Translations.Translate("FIF_TAG_REFTP");
-            refreshButton.relativePosition = new Vector3(tagDropDownMenu.relativePosition.x + tagDropDownMenu.width + 5, 5);
+            refreshButton.relativePosition = new Vector3(tagDropDownMenu.relativePosition.x + tagDropDownMenu.width + 15, 5);
             refreshButton.eventClick += (c, p) =>
             {
                 UpdateCustomTagList();

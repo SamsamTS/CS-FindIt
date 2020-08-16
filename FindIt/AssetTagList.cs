@@ -157,9 +157,7 @@ namespace FindIt
                 if ((filter == UISearchBox.DropDownOptions.Growable) && (asset.assetType == Asset.AssetType.Rico)) return false;
                 if ((filter == UISearchBox.DropDownOptions.Rico) && (asset.assetType == Asset.AssetType.Growable)) return false;
 
-                // filter by Level
-                ItemClass.Level level = UISearchBox.instance.buildingLevel;
-                if (level != ItemClass.Level.None && buildingInfo.m_class.m_level != level) return false;
+                
 
                 // filter by size
                 if (!CheckBuildingSize(asset.size, UISearchBox.instance.buildingSizeFilterIndex)) return false;
@@ -236,12 +234,12 @@ namespace FindIt
                     if (UISearchBox.instance.extraFiltersPanel.optionDropDownCheckBox.isChecked)
                     {
                         // filter asset by asset creator
-                        if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == 0)
+                        if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.AssetCreator)
                         {
                             if (asset.author != UISearchBox.instance.extraFiltersPanel.GetAssetCreatorDropDownListKey()) return false;
                         }
                         // filter asset by building height
-                        else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == 1)
+                        else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.BuildingHeight)
                         {
                             if (asset.assetType == Asset.AssetType.Ploppable || asset.assetType == Asset.AssetType.Rico || asset.assetType == Asset.AssetType.Growable)
                             {
@@ -250,9 +248,18 @@ namespace FindIt
                             }
                             else return false;
                         }
-                        
+
+                        // filter asset by building level
+                        else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.BuildingLevel)
+                        {
+                            if (!(asset.prefab is BuildingInfo)) return false;
+                            BuildingInfo info = asset.prefab as BuildingInfo;
+                            ItemClass.Level level = (ItemClass.Level)UISearchBox.instance.extraFiltersPanel.buildingLevelDropDownMenu.selectedIndex;
+                            if (info.m_class.m_level != level)  return false;
+                        }
+
                         // only show unused assets
-                        else
+                        else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.UnusedAssets)
                         {
                             if (prefabInstanceCountDictionary.ContainsKey(asset.prefab))
                             {

@@ -25,12 +25,24 @@ namespace FindIt.GUI
         public float minBuildingHeight = float.MinValue;
         public float maxBuildingHeight = float.MaxValue;
 
+        // building level
+        public UIDropDown buildingLevelDropDownMenu;
+
         private List<KeyValuePair<string, int>> assetCreatorList;
         private string[] assetCreatorListStrArray;
 
+        public enum DropDownOptions
+        {
+            AssetCreator = 0,
+            BuildingHeight,
+            BuildingLevel,
+            UnusedAssets
+        }
+
         string[] options = {
-                    Translations.Translate("FIF_EF_AC"), // Asset creator
-                    Translations.Translate("FIF_EF_BH"), // Building height
+                    Translations.Translate("FIF_EF_AC"), // Asset Creator
+                    Translations.Translate("FIF_EF_BH"), // Building Height
+                    Translations.Translate("FIF_SE_LV"), // Building Level
                     Translations.Translate("FIF_EF_UN") // Unused Asset
                 };
 
@@ -58,21 +70,20 @@ namespace FindIt.GUI
             optionDropDownMenu.relativePosition = new Vector3(optionDropDownCheckBox.relativePosition.x + optionDropDownCheckBox.width + 5, 5);
             optionDropDownMenu.eventSelectedIndexChanged += (c, p) =>
             {
-                if (optionDropDownMenu.selectedIndex == 0)
+                HideAll();
+
+                if (optionDropDownMenu.selectedIndex == (int)DropDownOptions.AssetCreator)
                 {
                     UpdateAssetCreatorOptionVisibility(true);
-                    UpdateBuildingHeightOptionVisibility(false);
                 }
-                else if (optionDropDownMenu.selectedIndex == 1)
+                else if (optionDropDownMenu.selectedIndex == (int)DropDownOptions.BuildingHeight)
                 {
-                    UpdateAssetCreatorOptionVisibility(false);
                     UpdateBuildingHeightOptionVisibility(true);
                 }
 
-                else if (optionDropDownMenu.selectedIndex == 2)
+                else if (optionDropDownMenu.selectedIndex == (int)DropDownOptions.BuildingLevel)
                 {
-                    UpdateAssetCreatorOptionVisibility(false);
-                    UpdateBuildingHeightOptionVisibility(false);
+                    UpdateBuildingLevelOptionVisibility(true);
                 }
 
                 if (optionDropDownCheckBox.isChecked)
@@ -190,6 +201,28 @@ namespace FindIt.GUI
                 if (maxInput.text == "") maxBuildingHeight = float.MaxValue;
                 ((UISearchBox)parent).Search();
             };
+
+            // building level dropdown
+            buildingLevelDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
+            buildingLevelDropDownMenu.size = new Vector2(80, 25);
+            buildingLevelDropDownMenu.listHeight = 300;
+            buildingLevelDropDownMenu.itemHeight = 30;
+            buildingLevelDropDownMenu.AddItem("1");
+            buildingLevelDropDownMenu.AddItem("2");
+            buildingLevelDropDownMenu.AddItem("3");
+            buildingLevelDropDownMenu.AddItem("4");
+            buildingLevelDropDownMenu.AddItem("5");
+            buildingLevelDropDownMenu.isVisible = false;
+            buildingLevelDropDownMenu.selectedIndex = 0;
+            buildingLevelDropDownMenu.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 50, 5);
+            buildingLevelDropDownMenu.eventSelectedIndexChanged += (c, p) =>
+            {
+                if (optionDropDownCheckBox.isChecked)
+                {
+                    ((UISearchBox)parent).Search();
+                }
+            };
+
         }
 
         // Update asset creator list 
@@ -226,6 +259,18 @@ namespace FindIt.GUI
             maxLabel.isVisible = visibility;
             maxInput.isVisible = visibility;
             builingHeightUnit.isVisible = visibility;
+        }
+
+        private void UpdateBuildingLevelOptionVisibility(bool visibility)
+        {
+            buildingLevelDropDownMenu.isVisible = visibility;
+        }
+
+        private void HideAll()
+        {
+            UpdateAssetCreatorOptionVisibility(false);
+            UpdateBuildingHeightOptionVisibility(false);
+            UpdateBuildingLevelOptionVisibility(false);
         }
     }
 }

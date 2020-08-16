@@ -20,7 +20,7 @@
     <Translation ID="FIF_SE_IPR" String="Prop" />
     <Translation ID="FIF_SE_ID" String="Decal" />
     <Translation ID="FIF_SE_IT" String="Tree" />
-    <Translation ID="FIF_SE_LV" String="Level: " />
+    <Translation ID="FIF_SE_LV" String="Building Level" />
     <Translation ID="FIF_SE_SZ" String="Size: " />
     <Translation ID="FIF_SE_SC" String="Зажмите SHIFT или CTRL чтобы выбрать несколько категорий" />
     <Translation ID="FIF_PLOP_E" String="Electricity" />

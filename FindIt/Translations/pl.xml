@@ -9,7 +9,7 @@
     <Translation ID="FIF_SET_UL" String="Odblokuj wszystkie" />
     <Translation ID="FIF_SET_ULTP" String="Wybierz i umieść także zablokowane elementy." />
     <Translation ID="FIF_SET_BP" String="Napraw uszkodzone przy kolejnym wczytaniu zapisu" />
-    <Translation ID="FIF_SET_BPTP" String="Usuwa wszystkie elementy prop z błędami\nZaznacz i wczytaj zapisaną grę." />
+    <Translation ID="FIF_SET_BPTP" String="Usuwa wszystkie elementy prop z błędami. Zaznacz i wczytaj zapisaną grę." />
     <Translation ID="FIF_SE_WF" String="Custom" />
     <Translation ID="FIF_SE_VF" String="Vanilla" />
     <Translation ID="FIF_SE_IA" String="All" />
@@ -20,7 +20,7 @@
     <Translation ID="FIF_SE_IPR" String="Prop" />
     <Translation ID="FIF_SE_ID" String="Decal" />
     <Translation ID="FIF_SE_IT" String="Drzewo" />
-    <Translation ID="FIF_SE_LV" String="Level:" />
+    <Translation ID="FIF_SE_LV" String="Building Level" />
     <Translation ID="FIF_SE_SZ" String="Size:" />
     <Translation ID="FIF_SE_SC" String="Przytrzymaj SHIFT lub CTRL, aby wybrać wiele kategorii" />
     <Translation ID="FIF_PLOP_E" String="Elektryczność" />

@@ -20,7 +20,7 @@
     <Translation ID="FIF_SE_IPR" String="프롭" />
     <Translation ID="FIF_SE_ID" String="데칼" />
     <Translation ID="FIF_SE_IT" String="나무" />
-    <Translation ID="FIF_SE_LV" String="레벨: " />
+    <Translation ID="FIF_SE_LV" String="건물 레벨" />
     <Translation ID="FIF_SE_SZ" String="크기: " />
     <Translation ID="FIF_SE_SC" String="SHIFT 또는 CTRL을 누른 상태로 카테고리 중복 선택" />
     <Translation ID="FIF_PLOP_E" String="전기" />

@@ -20,7 +20,7 @@
     <Translation ID="FIF_SE_IPR" String="Requisiten" />
     <Translation ID="FIF_SE_ID" String="Decal" />
     <Translation ID="FIF_SE_IT" String="Bäume" />
-    <Translation ID="FIF_SE_LV" String="Level" />
+    <Translation ID="FIF_SE_LV" String="Building Level" />
     <Translation ID="FIF_SE_SZ" String="Größe" />
     <Translation ID="FIF_SE_SC" String="SHIFT oder STRG drücken für Mehrfachauswahl" />
     <Translation ID="FIF_PLOP_E" String="Strom" />
@@ -58,6 +58,7 @@
     <Translation ID="FIF_SO_NETP" String="Neueste zuerst" />
     <Translation ID="FIF_SO_RE" String="Relevanz" />
     <Translation ID="FIF_SO_NE" String="Neueste" />
+    <Translation ID="TRN_CHOICE" String="Sprache wählen (Wird beim nächsten Start aktiviert)" />
     <Translation ID="TRN_SYS" String="Systemsprache verwenden" />
     <Translation ID="FIF_PROP_IND" String="Industrie" />
     <Translation ID="FIF_PROP_PAR" String="Parks" />

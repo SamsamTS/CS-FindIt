@@ -9,7 +9,7 @@
     <Translation ID="FIF_SET_UL" String="Desbloquear todo" />
     <Translation ID="FIF_SET_ULTP" String="Permite seleccionar y colocar elementos aún cuando estén bloqueados" />
     <Translation ID="FIF_SET_BP" String="Reparar props dañados en la próxima partida" />
-    <Translation ID="FIF_SET_BPTP" String="Eliminar todos los props problemáticos\nActiva esta opción y carga tu partida" />
+    <Translation ID="FIF_SET_BPTP" String="Eliminar todos los props problemáticos. Activa esta opción y carga tu partida" />
     <Translation ID="FIF_SE_WF" String="Custom" />
     <Translation ID="FIF_SE_VF" String="Vanilla" />
     <Translation ID="FIF_SE_IA" String="Todo" />
@@ -20,7 +20,7 @@
     <Translation ID="FIF_SE_IPR" String="Prop" />
     <Translation ID="FIF_SE_ID" String="Decal" />
     <Translation ID="FIF_SE_IT" String="Árboles" />
-    <Translation ID="FIF_SE_LV" String="Nivel:" />
+    <Translation ID="FIF_SE_LV" String="Building Level" />
     <Translation ID="FIF_SE_SZ" String="Size:" />
     <Translation ID="FIF_SE_SC" String="Mantén SHIFT o CTRL para seleccionar múltiples categorías" />
     <Translation ID="FIF_PLOP_E" String="Electricidad" />

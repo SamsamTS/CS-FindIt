@@ -9,7 +9,7 @@
     <Translation ID="FIF_SET_UL" String="Débloquer tout" />
     <Translation ID="FIF_SET_ULTP" String="Vous permet de sélectionner et de placer des éléments même lorsqu'ils sont verrouillés." />
     <Translation ID="FIF_SET_BP" String="Correction des mauvais accessoires lors de la prochaine sauvegarde" />
-    <Translation ID="FIF_SET_BPTP" String="Supprimez tous les accessoires à l'origine du problème \  Cochez l'option et chargez votre sauvegarde" />
+    <Translation ID="FIF_SET_BPTP" String="Supprimez tous les accessoires à l'origine du problème. Cochez l'option et chargez votre sauvegarde" />
     <Translation ID="FIF_SE_WF" String="Custom" />
     <Translation ID="FIF_SE_VF" String="Vanilla" />
     <Translation ID="FIF_SE_IA" String="Tout" />
@@ -20,7 +20,7 @@
     <Translation ID="FIF_SE_IPR" String="Objet" />
     <Translation ID="FIF_SE_ID" String="Decal" />
     <Translation ID="FIF_SE_IT" String="Arbre" />
-    <Translation ID="FIF_SE_LV" String="Level:" />
+    <Translation ID="FIF_SE_LV" String="Building Level" />
     <Translation ID="FIF_SE_SZ" String="Size:" />
     <Translation ID="FIF_SE_SC" String="Maintenez SHIFT ou CTRL pour sélectionner plusieurs catégories" />
     <Translation ID="FIF_PLOP_E" String="Électricité" />

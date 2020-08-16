@@ -116,7 +116,8 @@ namespace FindIt.GUI
             if (instance != null)
             {
                 UIView.PopModal();
-
+                UISearchBox.instance.quickMenuVisible = false;
+                UISearchBox.instance.quickMenuIcon.opacity = 0.5f;
                 instance.isVisible = false;
                 Destroy(instance.gameObject);
                 instance = null;

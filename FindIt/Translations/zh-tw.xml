@@ -20,7 +20,7 @@
     <Translation ID="FIF_SE_IPR" String="物體" />
     <Translation ID="FIF_SE_ID" String="貼花" />
     <Translation ID="FIF_SE_IT" String="樹木" />
-    <Translation ID="FIF_SE_LV" String="等級: " />
+    <Translation ID="FIF_SE_LV" String="建築等級 " />
     <Translation ID="FIF_SE_SZ" String="尺吋: " />
     <Translation ID="FIF_SE_SC" String="按住SHIFT或CTRL鍵可以選擇多個類別" />
     <Translation ID="FIF_PLOP_E" String="電力系統" />
