@@ -285,6 +285,7 @@ namespace FindIt.GUI
             // asset type filter. Also Manipulated by the Picker mod through reflection.
             // Need to notify Quboid if a new dropdown item is added, or the item order is changed
             typeFilter = SamsamTS.UIUtils.CreateDropDown(inputPanel);
+            typeFilter.name = "FindIt_AssetTypeFilter";
             typeFilter.size = new Vector2(105, 25);
             typeFilter.tooltip = Translations.Translate("FIF_POP_SCR");
             typeFilter.relativePosition = new Vector3(vanillaFilter.relativePosition.x + vanillaFilter.width + 5, 5);
