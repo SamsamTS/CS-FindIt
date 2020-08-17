@@ -19,6 +19,7 @@ namespace FindIt.GUI
         public UIPanel inputPanel;
         public UITextField input;
         public UIScrollPanel scrollPanel;
+        UIPanel panel;
         public UIButton searchButton;
         //public UIPanel filterPanel;
 
@@ -380,7 +381,7 @@ namespace FindIt.GUI
 
 
             // panel of sort button and filter toggle tabs
-            UIPanel panel = AddUIComponent<UIPanel>();
+            panel = AddUIComponent<UIPanel>();
             panel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             panel.backgroundSprite = "GenericTabHovered";
             panel.size = new Vector2(parent.width, 45);
@@ -471,7 +472,7 @@ namespace FindIt.GUI
         protected override void OnVisibilityChanged()
         {
             base.OnVisibilityChanged();
-
+            panel.width = parent.width;
             if (input != null && !isVisible)
             {
                 input.Unfocus();
@@ -578,7 +579,7 @@ namespace FindIt.GUI
             sizeFilterX.isVisible = true;
             sizeFilterY.isVisible = true;
             sizeLabel.isVisible = true;
-            inputPanel.width = parent.width;
+            inputPanel.width = 859.0f;
         }
 
         private void HideBuildingFilters()
