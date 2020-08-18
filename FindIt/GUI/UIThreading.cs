@@ -79,11 +79,13 @@ namespace FindIt
                         // If the search box is focussed, unfocus.
                         searchBox.input.Unfocus();
                     }
+                    /*
                     else if (searchBox.isVisible)
                     {
                         // Otherwise, if the searchbox is visible, simulate a main button click to hide.
                         mainButton.SimulateClick();
                     }
+                    */
                 }
             }
         }

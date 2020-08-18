@@ -109,6 +109,8 @@ namespace FindIt.GUI
                 }
                 FindIt.instance.scrollPanel.Refresh();
             };
+
+            customTagListSort.Focus();
         }
 
         private static void Close()

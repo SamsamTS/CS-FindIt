@@ -109,6 +109,8 @@ namespace FindIt.GUI
             cancelButton.text = Translations.Translate("FIF_POP_CAN");
             cancelButton.relativePosition = new Vector3(confirmButton.relativePosition.x + confirmButton.width + spacing * 4, confirmButton.relativePosition.y);
             cancelButton.eventClick += (c, p) => Close();
+
+            cancelButton.Focus();
         }
 
         private static void Close()

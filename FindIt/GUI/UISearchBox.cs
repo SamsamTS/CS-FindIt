@@ -472,7 +472,11 @@ namespace FindIt.GUI
         protected override void OnVisibilityChanged()
         {
             base.OnVisibilityChanged();
-            panel.width = parent.width;
+            
+            if (panel != null)
+            {
+                panel.width = parent.width;
+            }
             if (input != null && !isVisible)
             {
                 input.Unfocus();
