@@ -682,8 +682,16 @@ namespace FindIt.GUI
                 if (UISearchBox.instance.buildingSizeFilterIndex.y > 4) UISearchBox.instance.sizeFilterY.selectedIndex = 0;
             }
             List<Asset> matches = AssetTagList.instance.Find(text, type);
+
+            // sort by used/unused instance count
+            if (Settings.showInstancesCounter && Settings.instanceCounterSort != 0)
+            {
+                if (Settings.instanceCounterSort == 1) matches = matches.OrderByDescending(s => s.instanceCount).ToList();
+                else matches = matches.OrderBy(s => s.instanceCount).ToList();
+            }
+
             // sort by most recently downloaded
-            if (sortButtonTextState == false)
+            else if (sortButtonTextState == false)
             {
                 matches = matches.OrderByDescending(s => s.downloadTime).ToList();
             }

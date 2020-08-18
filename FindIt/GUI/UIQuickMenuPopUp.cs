@@ -3,8 +3,6 @@
 
 using UnityEngine;
 using ColossalFramework.UI;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 namespace FindIt.GUI
 {
@@ -15,12 +13,14 @@ namespace FindIt.GUI
 
         private const float spacing = 5f;
 
+        private UIDropDown instanceCounterSort;
+
         public override void Start()
         {
             name = "FindIt_UIQuickMenuPopUp";
             atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericPanelWhite";
-            size = new Vector2(480, 200);
+            size = new Vector2(480, 220);
 
             UILabel title = AddUIComponent<UILabel>();
             title.text = Translations.Translate("FIF_QM_TIT");
@@ -102,12 +102,34 @@ namespace FindIt.GUI
             showInstancesCounter.eventCheckChanged += (c, i) =>
             {
                 Settings.showInstancesCounter = showInstancesCounter.isChecked;
+                instanceCounterSort.isVisible = showInstancesCounter.isChecked;
                 XMLUtils.SaveSettings();
                 if (Settings.showInstancesCounter && AssetTagList.instance?.prefabInstanceCountDictionary != null)
                 {
                     AssetTagList.instance.UpdatePrefabInstanceCount();
                 }
-                FindIt.instance.scrollPanel.Refresh();
+                UISearchBox.instance.Search();
+                //FindIt.instance.scrollPanel.Refresh();
+            };
+
+            instanceCounterSort = SamsamTS.UIUtils.CreateDropDown(this);
+            instanceCounterSort.normalBgSprite = "TextFieldPanelHovered";
+            instanceCounterSort.size = new Vector2(300, 30);
+            instanceCounterSort.listHeight = 300;
+            instanceCounterSort.itemHeight = 30;
+            instanceCounterSort.AddItem(Translations.Translate("FIF_SET_ICO"));
+            instanceCounterSort.AddItem(Translations.Translate("FIF_SET_ICUS"));
+            instanceCounterSort.AddItem(Translations.Translate("FIF_SET_ICUN"));
+            instanceCounterSort.selectedIndex = Settings.instanceCounterSort;
+            instanceCounterSort.isVisible = Settings.showInstancesCounter;
+            instanceCounterSort.relativePosition = new Vector3(showInstancesCounter.relativePosition.x + 30, showInstancesCounter.relativePosition.y + showInstancesCounter.height + 10);
+            instanceCounterSort.eventSelectedIndexChanged += (c, p) =>
+            {
+                Settings.instanceCounterSort = instanceCounterSort.selectedIndex;
+                if (Settings.showInstancesCounter)
+                {
+                    UISearchBox.instance.Search();
+                }
             };
 
             customTagListSort.Focus();
@@ -142,16 +164,11 @@ namespace FindIt.GUI
             if (instance == null)
             {
                 instance = UIView.GetAView().AddUIComponent(typeof(UIQuickMenuPopUp)) as UIQuickMenuPopUp;
-                instance.m_button = component;
-                instance.Show(true);
+                
                 UIView.PushModal(instance);
             }
-            else
-            {
-                instance.m_button = component;
-                instance.Show(true);
-            }
-
+            instance.m_button = component;
+            instance.Show(true);
         }
 
     }

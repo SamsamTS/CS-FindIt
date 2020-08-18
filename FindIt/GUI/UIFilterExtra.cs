@@ -28,6 +28,8 @@ namespace FindIt.GUI
         // building level
         public UIDropDown buildingLevelDropDownMenu;
 
+        private UILabel unusedLabel;
+
         private List<KeyValuePair<string, int>> assetCreatorList;
         private string[] assetCreatorListStrArray;
 
@@ -84,6 +86,11 @@ namespace FindIt.GUI
                 else if (optionDropDownMenu.selectedIndex == (int)DropDownOptions.BuildingLevel)
                 {
                     UpdateBuildingLevelOptionVisibility(true);
+                }
+                
+                else if (optionDropDownMenu.selectedIndex == (int)DropDownOptions.UnusedAssets)
+                {
+                    unusedLabel.isVisible = true;
                 }
 
                 if (optionDropDownCheckBox.isChecked)
@@ -223,6 +230,13 @@ namespace FindIt.GUI
                 }
             };
 
+            unusedLabel = AddUIComponent<UILabel>();
+            unusedLabel.textScale = 0.8f;
+            unusedLabel.padding = new RectOffset(0, 0, 8, 0);
+            unusedLabel.isVisible = false;
+            unusedLabel.text = Translations.Translate("FIF_EF_UNPO");
+            unusedLabel.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 50, 5);
+
         }
 
         // Update asset creator list 
@@ -271,6 +285,7 @@ namespace FindIt.GUI
             UpdateAssetCreatorOptionVisibility(false);
             UpdateBuildingHeightOptionVisibility(false);
             UpdateBuildingLevelOptionVisibility(false);
+            unusedLabel.isVisible =false;
         }
     }
 }

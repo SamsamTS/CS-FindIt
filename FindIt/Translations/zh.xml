@@ -157,6 +157,10 @@
     <Translation ID="FIF_UIS_UN" String="未使用" />
     <Translation ID="FIF_UIS_IN" String="使用中" />
     <Translation ID="FIF_SET_ICTP" String="此选项会稍微降低搜索速度。不需要时请禁用" />
+    <Translation ID="FIF_EF_UNPO" String="（此结果不考虑Procedural Objects）" />
+    <Translation ID="FIF_SET_ICO" String="使用原始排序选项" />
+    <Translation ID="FIF_SET_ICUS" String="优先显示使用中的资产" />
+    <Translation ID="FIF_SET_ICUN" String="优先显示未使用的资产" />
 
   </Translations>
 </Language>

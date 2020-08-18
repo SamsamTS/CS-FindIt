@@ -56,6 +56,8 @@ namespace FindIt
                 if (Settings.showInstancesCounter || UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == 2)
                 {
                     UpdatePrefabInstanceCount();
+
+                    if (Settings.instanceCounterSort != 0) UpdateAssetInstanceCount();
                 }
             }
 
@@ -157,8 +159,6 @@ namespace FindIt
                 if ((filter == UISearchBox.DropDownOptions.Growable) && (asset.assetType == Asset.AssetType.Rico)) return false;
                 if ((filter == UISearchBox.DropDownOptions.Rico) && (asset.assetType == Asset.AssetType.Growable)) return false;
 
-                
-
                 // filter by size
                 if (!CheckBuildingSize(asset.size, UISearchBox.instance.buildingSizeFilterIndex)) return false;
 
@@ -255,7 +255,7 @@ namespace FindIt
                             if (!(asset.prefab is BuildingInfo)) return false;
                             BuildingInfo info = asset.prefab as BuildingInfo;
                             ItemClass.Level level = (ItemClass.Level)UISearchBox.instance.extraFiltersPanel.buildingLevelDropDownMenu.selectedIndex;
-                            if (info.m_class.m_level != level)  return false;
+                            if (info.m_class.m_level != level) return false;
                         }
 
                         // only show unused assets
@@ -837,6 +837,15 @@ namespace FindIt
                         }
                     }
                 }
+            }
+        }
+
+        private void UpdateAssetInstanceCount()
+        {
+            foreach (Asset asset in assets.Values)
+            {
+                if (!prefabInstanceCountDictionary.ContainsKey(asset.prefab)) asset.instanceCount = 0;
+                else asset.instanceCount = prefabInstanceCountDictionary[asset.prefab];
             }
         }
     }

@@ -132,6 +132,8 @@
     <Translation ID="FIF_UIS_UN" String="未使用" />
     <Translation ID="FIF_UIS_IN" String="使用中" />
     <Translation ID="FIF_SET_ICTP" String="検索速度が少し遅くなります。不要な場合は無効にしてください" />
+    <Translation ID="FIF_EF_UNPO" String="(この結果はProcedural Objectsを考慮しません)" />
+    <Translation ID="FIF_SET_ICO" String="通常の並べ替えオプション" />
 
   </Translations>
 </Language>

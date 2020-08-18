@@ -157,6 +157,10 @@
     <Translation ID="FIF_UIS_UN" String="未使用" />
     <Translation ID="FIF_UIS_IN" String="使用中" />
     <Translation ID="FIF_SET_ICTP" String="此選項會略微增加搜尋時間. 不需要時請停用" />
+    <Translation ID="FIF_EF_UNPO" String="(使用情況並無包括Procedural Objects)" />
+    <Translation ID="FIF_SET_ICO" String="使用預設排序方式" />
+    <Translation ID="FIF_SET_ICUS" String="優先顯示使用中的素材" />
+    <Translation ID="FIF_SET_ICUN" String="優先顯示未使用的素材" />
 
   </Translations>
 </Language>

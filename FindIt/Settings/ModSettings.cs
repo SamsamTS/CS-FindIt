@@ -27,6 +27,8 @@ namespace FindIt
 
         internal static bool showInstancesCounter = false;
 
+        internal static int instanceCounterSort = 0;
+
         internal static KeyBinding searchKey = new KeyBinding { keyCode = (int)KeyCode.F, control = true, shift = false, alt = false };
 
         /// <summary>
@@ -85,6 +87,9 @@ namespace FindIt
 
         [XmlElement("showInstancesCounter")]
         public bool showInstancesCounter { get => Settings.showInstancesCounter; set => Settings.showInstancesCounter = value; }
+
+        [XmlElement("instanceCounterSort")]
+        public int instanceCounterSort { get => Settings.instanceCounterSort; set => Settings.instanceCounterSort = value; }
 
         [XmlElement("SearchKey")]
         public KeyBinding SearchKey { get => Settings.searchKey; set => Settings.searchKey = value; }
