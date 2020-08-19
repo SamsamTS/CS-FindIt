@@ -222,7 +222,7 @@ namespace FindIt.GUI
             UICheckBox last = toggles[toggles.Length - 1];
 
             randomIcon = SamsamTS.UIUtils.CreateIconToggle(this, "FindItAtlas", "Dice", "Dice");
-            randomIcon.relativePosition = new Vector3(last.relativePosition.x + last.width + 5, 5);
+            randomIcon.relativePosition = new Vector3(last.relativePosition.x + last.width + 3, 5);
             randomIcon.tooltip = Translations.Translate("FIF_GR_RAN");
             randomIcon.isChecked = true;
             randomIcon.readOnly = true;
