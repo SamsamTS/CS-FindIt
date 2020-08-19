@@ -15,7 +15,6 @@ namespace FindIt.GUI
         private static PreviewRenderer _renderer;
         internal static PreviewRenderer Renderer => _renderer;
 
-
         /// <summary>
         /// Queues a prefab for rendering.
         /// </summary>

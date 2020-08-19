@@ -54,7 +54,6 @@ namespace FindIt
             }
         }
 
-
         /// <summary>
         /// Called by the game when the mod options panel is setup.
         /// </summary>
@@ -111,66 +110,6 @@ namespace FindIt
                 });
                 fixProps.tooltip = Translations.Translate("FIF_SET_BPTP");
                 group.AddSpace(10);
-
-                /*
-
-                // Sort custom tag list alphabetically. Default = sort by number of assets in each tag
-                UICheckBox customTagListSort = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_CTLS"), Settings.customTagListSort, (b) =>
-                {
-                    Settings.customTagListSort = b;
-                    XMLUtils.SaveSettings();
-                    if (FindIt.instance != null && UISearchBox.instance != null && UIFilterTag.instance != null)
-                    {
-                        UIFilterTag.instance.UpdateCustomTagList();
-                        UISearchBox.instance.Search();
-                    }
-                });
-                group.AddSpace(10);
-
-                // Sort asset creator list alphabetically. Default = sort by number of assets in each tag
-                UICheckBox assetCreatorListSort = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_ACLS"), Settings.assetCreatorListSort, (b) =>
-                {
-                    Settings.assetCreatorListSort = b;
-                    XMLUtils.SaveSettings();
-                    if (FindIt.instance != null && UISearchBox.instance != null && UIFilterExtra.instance != null)
-                    {
-                        UIFilterExtra.instance.UpdateAssetCreatorList();
-                        UISearchBox.instance.Search();
-                    }
-                });
-                group.AddSpace(10);
-
-                // Show prop markers in 'game' mode
-                UICheckBox showPropMarker = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_PM"), Settings.showPropMarker, (b) =>
-                {
-                    Settings.showPropMarker = b;
-                    XMLUtils.SaveSettings();
-
-                    if (FindIt.instance?.searchBox != null && UIFilterProp.instance != null)
-                    {
-                        UIFilterProp.instance.UpdateMarkerToggleVisibility();
-                    }
-                });
-                showPropMarker.tooltip = Translations.Translate("FIF_SET_PMTP");
-                group.AddSpace(10);
-
-                // Show the number of existing instances of each asset
-                UICheckBox showInstancesCounter = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_IC"), Settings.showInstancesCounter, (b) =>
-                {
-                    Settings.showInstancesCounter = b;
-                    XMLUtils.SaveSettings();
-                    if (FindIt.instance?.scrollPanel != null)
-                    {
-                        if (Settings.showInstancesCounter && AssetTagList.instance?.prefabInstanceCountDictionary != null)
-                        {
-                            AssetTagList.instance.UpdatePrefabInstanceCount();
-                        }
-                        FindIt.instance.scrollPanel.Refresh();
-                    }
-                });
-                group.AddSpace(10);
-
-                */
 
                 // languate settings
                 UIDropDown languageDropDown = (UIDropDown)group.AddDropdown(Translations.Translate("TRN_CHOICE"), Translations.LanguageList, Translations.Index, (value) =>

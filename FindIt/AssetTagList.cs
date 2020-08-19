@@ -139,7 +139,9 @@ namespace FindIt
             return matches;
         }
 
-        // return true if the asset type matches UISearchbox filter dropdown options
+        /// <summary>
+        /// return true if the asset type matches UISearchbox filter dropdown options
+        /// </summary>
         private bool CheckAssetFilter(Asset asset, UISearchBox.DropDownOptions filter)
         {
             if (asset.assetType != Asset.AssetType.Network && filter == UISearchBox.DropDownOptions.Network) return false;
@@ -328,6 +330,9 @@ namespace FindIt
             return true;
         }
 
+        /// <summary>
+        /// Get relevance score. Metrics decided by SamsamTS. Unchanged in Find It 2
+        /// </summary>
         private float GetOverallScore(Asset asset, string keyword, UISearchBox.DropDownOptions filter)
         {
             float score = 0;
@@ -406,7 +411,6 @@ namespace FindIt
 
         public AssetTagList()
         {
-
             foreach (Package.Asset current in PackageManager.FilterAssets(new Package.AssetType[] { UserAssetType.CustomAssetMetaData }))
             {
                 //PublishedFileId id = current.package.GetPublishedFileID();
