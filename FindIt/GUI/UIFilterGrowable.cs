@@ -29,6 +29,7 @@ namespace FindIt.GUI
             Ore,
             CommercialLeisure,
             CommercialTourism,
+            Unsorted,
             All
         }
 
@@ -51,7 +52,8 @@ namespace FindIt.GUI
                 "Ingame",
                 "Ingame",
                 "FindItAtlas",
-                "FindItAtlas"
+                "FindItAtlas",
+                "Ingame"
             };
 
             public static readonly string[] spriteNames =
@@ -71,7 +73,8 @@ namespace FindIt.GUI
                 "IconPolicyOil",
                 "IconPolicyOre",
                 "ZoningCommercialLeisure",
-                "ZoningCommercialTourist"
+                "ZoningCommercialTourist",
+                "ToolbarIconProps"
             };
 
             public static readonly string[] tooltips =
@@ -91,7 +94,8 @@ namespace FindIt.GUI
                 Translations.Translate("FIF_GR_OII"), // oil
                 Translations.Translate("FIF_GR_ORI"), // ore
                 Translations.Translate("FIF_GR_LC"), // leisure commercial
-                Translations.Translate("FIF_GR_TC") // tourist commercial
+                Translations.Translate("FIF_GR_TC"), // tourist commercial
+                Translations.Translate("FIF_PROP_UNS") // Unsorted
             };
         }
 
@@ -118,7 +122,7 @@ namespace FindIt.GUI
             if (itemClass.m_subService == ItemClass.SubService.OfficeGeneric) return Category.OfficeGeneric;
             if (itemClass.m_subService == ItemClass.SubService.OfficeHightech) return Category.OfficeHightech;
 
-            return Category.None;
+            return Category.Unsorted;
         }
 
         public bool IsSelected(Category category)
@@ -160,7 +164,7 @@ namespace FindIt.GUI
             {
                 toggles[i] = SamsamTS.UIUtils.CreateIconToggle(this, CategoryIcons.atlases[i], CategoryIcons.spriteNames[i], CategoryIcons.spriteNames[i] + "Disabled");
                 toggles[i].tooltip = CategoryIcons.tooltips[i] + "\n" + Translations.Translate("FIF_SE_SC");
-                toggles[i].relativePosition = new Vector3(5 + 40 * i, 5);
+                toggles[i].relativePosition = new Vector3(5 + 38 * i, 5);
                 toggles[i].isChecked = true;
                 toggles[i].readOnly = true;
                 toggles[i].checkedBoxObject.isInteractive = false;
