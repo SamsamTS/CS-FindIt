@@ -154,10 +154,14 @@
     <Translation ID="FIF_SET_PMTP" String="Most marker type props can only be removed by the Better Bulldozer mod in game mode. Use with caution" />
     <Translation ID="FIF_SET_IC" String="Показать кол-во размещённых экземпляров объекта" />
     <Translation ID="FIF_EF_UN" String="Неиспользуемые активы" />
-    <Translation ID="FIF_QM_TIT" String="Дополнительные настройки" />
+    <Translation ID="FIF_QM_TIT" String="Дополнительные фильтры сортировки" />
     <Translation ID="FIF_UIS_UN" String="Unused" />
     <Translation ID="FIF_UIS_IN" String="In Use" />
     <Translation ID="FIF_SET_ICTP" String="Эта опция немного замедляет скорость поиска. Отключите её, когда она не нужна" />
+    <Translation ID="FIF_EF_UNPO" String="(Не учитываются Procedural Objects)" />
+    <Translation ID="FIF_SET_ICO" String="Использовать исходный вариант сортировки" />
+    <Translation ID="FIF_SET_ICUS" String="Показывать используемые объекты первыми" />
+    <Translation ID="FIF_SET_ICUN" String="Показывать неиспользуемые объекты первыми" />
 
   </Translations>
 </Language>
