@@ -137,6 +137,68 @@ namespace FindIt.GUI
                 input.SelectAll();
             };
 
+            // asset type filter. Also Manipulated by the Picker mod through reflection.
+            // Need to notify Quboid if a new dropdown item is added, or the item order is changed
+            typeFilter = SamsamTS.UIUtils.CreateDropDown(inputPanel);
+            typeFilter.name = "FindIt_AssetTypeFilter";
+            typeFilter.size = new Vector2(105, 25);
+            typeFilter.tooltip = Translations.Translate("FIF_POP_SCR");
+            typeFilter.relativePosition = new Vector3(searchButton.relativePosition.x + searchButton.width + 5, 5);
+
+            if (FindIt.isRicoEnabled)
+            {
+                string[] items = {
+                    Translations.Translate("FIF_SE_IA"), // All
+                    Translations.Translate("FIF_SE_IN"), // Network
+                    Translations.Translate("FIF_SE_IP"), // Ploppable
+                    Translations.Translate("FIF_SE_IG"), // Growable
+                    Translations.Translate("FIF_SE_IR"), // RICO
+                    Translations.Translate("FIF_SE_IGR"), // Growable/RICO
+                    Translations.Translate("FIF_SE_IPR"), // Prop
+                    Translations.Translate("FIF_SE_ID"), // Decal
+                    Translations.Translate("FIF_SE_IT") // Tree
+                };
+                typeFilter.items = items;
+            }
+            else
+            {
+                string[] items = {
+                    Translations.Translate("FIF_SE_IA"), // All
+                    Translations.Translate("FIF_SE_IN"), // Network
+                    Translations.Translate("FIF_SE_IP"), // Ploppable
+                    Translations.Translate("FIF_SE_IG"), // Growable
+                    Translations.Translate("FIF_SE_IPR"), // Prop
+                    Translations.Translate("FIF_SE_ID"), // Decal
+                    Translations.Translate("FIF_SE_IT") // Tree
+                };
+                typeFilter.items = items;
+            }
+            typeFilter.selectedIndex = 0;
+
+            typeFilter.eventSelectedIndexChanged += (c, p) =>
+            {
+                UpdateFilterPanels();
+                Search();
+            };
+
+            // workshop filter checkbox (custom assets saved in local asset folder are also included)
+            workshopFilter = SamsamTS.UIUtils.CreateCheckBox(inputPanel);
+            workshopFilter.isChecked = true;
+            workshopFilter.width = 80;
+            workshopFilter.label.text = Translations.Translate("FIF_SE_WF");
+            workshopFilter.label.textScale = 0.8f;
+            workshopFilter.relativePosition = new Vector3(typeFilter.relativePosition.x + typeFilter.width + 12, 10);
+            workshopFilter.eventCheckChanged += (c, i) => Search();
+
+            // vanilla filter checkbox
+            vanillaFilter = SamsamTS.UIUtils.CreateCheckBox(inputPanel);
+            vanillaFilter.isChecked = true;
+            vanillaFilter.width = 80;
+            vanillaFilter.label.text = Translations.Translate("FIF_SE_VF");
+            vanillaFilter.label.textScale = 0.8f;
+            vanillaFilter.relativePosition = new Vector3(workshopFilter.relativePosition.x + workshopFilter.width, 10);
+            vanillaFilter.eventCheckChanged += (c, i) => Search();
+
             // change custom tag panel visibility
             tagToolIcon = inputPanel.AddUIComponent<UISprite>();
             tagToolIcon.size = new Vector2(26, 21);
@@ -144,7 +206,7 @@ namespace FindIt.GUI
             tagToolIcon.spriteName = "Tag";
             tagToolIcon.tooltip = Translations.Translate("FIF_SE_SCTP");
             tagToolIcon.opacity = 0.5f;
-            tagToolIcon.relativePosition = new Vector3(searchButton.relativePosition.x + searchButton.width + 7, 7);
+            tagToolIcon.relativePosition = new Vector3(vanillaFilter.relativePosition.x + vanillaFilter.width + 5, 7);
             tagToolIcon.eventClicked += (c, p) =>
             {
                 UpdateTagPanel();
@@ -241,74 +303,12 @@ namespace FindIt.GUI
                 }
             };
 
-            // workshop filter checkbox (custom assets saved in local asset folder are also included)
-            workshopFilter = SamsamTS.UIUtils.CreateCheckBox(inputPanel);
-            workshopFilter.isChecked = true;
-            workshopFilter.width = 80;
-            workshopFilter.label.text = Translations.Translate("FIF_SE_WF");
-            workshopFilter.label.textScale = 0.8f;
-            workshopFilter.relativePosition = new Vector3(quickMenuIcon.relativePosition.x + quickMenuIcon.width + 10, 10);
-            workshopFilter.eventCheckChanged += (c, i) => Search();
-
-            // vanilla filter checkbox
-            vanillaFilter = SamsamTS.UIUtils.CreateCheckBox(inputPanel);
-            vanillaFilter.isChecked = true;
-            vanillaFilter.width = 80;
-            vanillaFilter.label.text = Translations.Translate("FIF_SE_VF");
-            vanillaFilter.label.textScale = 0.8f;
-            vanillaFilter.relativePosition = new Vector3(workshopFilter.relativePosition.x + workshopFilter.width, 10);
-            vanillaFilter.eventCheckChanged += (c, i) => Search();
-
-            // asset type filter. Also Manipulated by the Picker mod through reflection.
-            // Need to notify Quboid if a new dropdown item is added, or the item order is changed
-            typeFilter = SamsamTS.UIUtils.CreateDropDown(inputPanel);
-            typeFilter.name = "FindIt_AssetTypeFilter";
-            typeFilter.size = new Vector2(105, 25);
-            typeFilter.tooltip = Translations.Translate("FIF_POP_SCR");
-            typeFilter.relativePosition = new Vector3(vanillaFilter.relativePosition.x + vanillaFilter.width + 5, 5);
-
-            if (FindIt.isRicoEnabled)
-            {
-                string[] items = {
-                    Translations.Translate("FIF_SE_IA"), // All
-                    Translations.Translate("FIF_SE_IN"), // Network
-                    Translations.Translate("FIF_SE_IP"), // Ploppable
-                    Translations.Translate("FIF_SE_IG"), // Growable
-                    Translations.Translate("FIF_SE_IR"), // RICO
-                    Translations.Translate("FIF_SE_IGR"), // Growable/RICO
-                    Translations.Translate("FIF_SE_IPR"), // Prop
-                    Translations.Translate("FIF_SE_ID"), // Decal
-                    Translations.Translate("FIF_SE_IT") // Tree
-                };
-                typeFilter.items = items;
-            }
-            else
-            {
-                string[] items = {
-                    Translations.Translate("FIF_SE_IA"), // All
-                    Translations.Translate("FIF_SE_IN"), // Network
-                    Translations.Translate("FIF_SE_IP"), // Ploppable
-                    Translations.Translate("FIF_SE_IG"), // Growable
-                    Translations.Translate("FIF_SE_IPR"), // Prop
-                    Translations.Translate("FIF_SE_ID"), // Decal
-                    Translations.Translate("FIF_SE_IT") // Tree
-                };
-                typeFilter.items = items;
-            }
-            typeFilter.selectedIndex = 0;
-
-            typeFilter.eventSelectedIndexChanged += (c, p) =>
-            {
-                UpdateFilterPanels();
-                Search();
-            };
-
             // building size filter
             sizeLabel = inputPanel.AddUIComponent<UILabel>();
             sizeLabel.textScale = 0.8f;
             sizeLabel.padding = new RectOffset(0, 0, 8, 0);
             sizeLabel.text = Translations.Translate("FIF_SE_SZ");
-            sizeLabel.relativePosition = new Vector3(typeFilter.relativePosition.x + typeFilter.width + 10, 5);
+            sizeLabel.relativePosition = new Vector3(quickMenuIcon.relativePosition.x + quickMenuIcon.width + 10, 5);
 
             sizeFilterX = SamsamTS.UIUtils.CreateDropDown(inputPanel);
             sizeFilterX.size = new Vector2(55, 25);
