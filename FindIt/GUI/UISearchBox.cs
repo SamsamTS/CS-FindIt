@@ -21,17 +21,13 @@ namespace FindIt.GUI
         public UIScrollPanel scrollPanel;
         UIPanel panel;
         public UIButton searchButton;
-        //public UIPanel filterPanel;
 
         /// <summary>
         /// Also manipulated by the Picker mod. Don't change its accessibility. 
-        /// Don't put any other UIDropDown before this
         /// Need to notify Quboid if a new dropdown item is added, or the item order is changed
         /// </summary>
         public UIDropDown typeFilter;
 
-        //private UIPanel buildingFilters;
-        //private UIDropDown levelFilter;
         private UILabel sizeLabel;
         private UIDropDown sizeFilterX;
         private UIDropDown sizeFilterY;
@@ -45,8 +41,6 @@ namespace FindIt.GUI
         public UICheckBox workshopFilter;
         public UICheckBox vanillaFilter;
         private UIButton sortButton;
-
-        //public UIPanel toolIconPanel;
 
         private UISprite tagToolIcon;
         public UIFilterTag tagPanel;
@@ -77,13 +71,6 @@ namespace FindIt.GUI
         // building filter sizes
         private string[] filterItemsGrowable = { Translations.Translate("FIF_SE_IA"), "1", "2", "3", "4" };
         private string[] filterItemsRICO = { Translations.Translate("FIF_SE_IA"), "1", "2", "3", "4", "5-8", "9-12", "13+" };
-
-        /*
-        public ItemClass.Level buildingLevel
-        {
-            get { return (ItemClass.Level)(levelFilter.selectedIndex - 1); }
-        }
-        */
 
         public Vector2 buildingSizeFilterIndex
         {
@@ -149,17 +136,6 @@ namespace FindIt.GUI
                 input.Focus();
                 input.SelectAll();
             };
-
-            /*
-            // panel for type filters and building filters
-            filterPanel = AddUIComponent<UIPanel>();
-            filterPanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
-            filterPanel.backgroundSprite = "GenericTab";
-            filterPanel.color = new Color32(196, 200, 206, 255);
-            filterPanel.size = new Vector2(parent.width - inputPanel.width, 35);
-            //filterPanel.SendToBack();
-            filterPanel.relativePosition = new Vector3(inputPanel.relativePosition.x + inputPanel.width, -filterPanel.height - 40);
-            */
 
             // change custom tag panel visibility
             tagToolIcon = inputPanel.AddUIComponent<UISprite>();
@@ -327,36 +303,6 @@ namespace FindIt.GUI
                 Search();
             };
 
-
-            /*
-            // building filters panel
-            buildingFilters = filterPanel.AddUIComponent<UIPanel>();
-            buildingFilters.size = new Vector2(90, 35);
-            buildingFilters.relativePosition = new Vector3(filterPanel.relativePosition.x + filterPanel.width, 0);
-            */
-
-            /*
-            // building level filter
-            UILabel levelLabel = buildingFilters.AddUIComponent<UILabel>();
-            levelLabel.textScale = 0.8f;
-            levelLabel.padding = new RectOffset(0, 0, 8, 0);
-            levelLabel.text = Translations.Translate("FIF_SE_LV");
-            levelLabel.relativePosition = new Vector3(10, 5);
-
-            levelFilter = SamsamTS.UIUtils.CreateDropDown(buildingFilters);
-            levelFilter.size = new Vector2(55, 25);
-            levelFilter.AddItem(Translations.Translate("FIF_SE_IA"));
-            levelFilter.AddItem("1");
-            levelFilter.AddItem("2");
-            levelFilter.AddItem("3");
-            levelFilter.AddItem("4");
-            levelFilter.AddItem("5");
-            levelFilter.selectedIndex = 0;
-            levelFilter.relativePosition = new Vector3(levelLabel.relativePosition.x + levelLabel.width + 5, 5);
-
-            levelFilter.eventSelectedIndexChanged += (c, i) => Search();
-            */
-
             // building size filter
             sizeLabel = inputPanel.AddUIComponent<UILabel>();
             sizeLabel.textScale = 0.8f;
@@ -378,7 +324,6 @@ namespace FindIt.GUI
 
             sizeFilterX.eventSelectedIndexChanged += (c, i) => Search();
             sizeFilterY.eventSelectedIndexChanged += (c, i) => Search();
-
 
             // panel of sort button and filter toggle tabs
             panel = AddUIComponent<UIPanel>();
@@ -472,7 +417,7 @@ namespace FindIt.GUI
         protected override void OnVisibilityChanged()
         {
             base.OnVisibilityChanged();
-            
+
             if (panel != null)
             {
                 panel.width = parent.width;
@@ -483,39 +428,11 @@ namespace FindIt.GUI
             }
         }
 
-        /*
-        /// <summary>
-        /// Change the visibility of building level and size filters.
-        /// Also change filterPanel width
-        /// </summary>
-        private void UpdateBuildingFilters()
-        {
-            try
-            {
-                if (buildingFilters.isVisible)
-                {
-                    filterPanel.width = buildingFilters.relativePosition.x + buildingFilters.width + 5;
-                }
-                else
-                {
-                    filterPanel.width = toolIconPanel.relativePosition.x + toolIconPanel.width + 5;
-                }
-            }
-            catch (Exception e)
-            {
-                Debugging.Message("UpdateBuildingFilters exception");
-                Debugging.LogException(e);
-            }
-        }
-        */
-
         /// <summary>
         /// Change the visibility of filter tabs and some other UI components in searchbox
         /// </summary>
         private void UpdateFilterPanels()
         {
-            //SimulationManager.instance.AddAction(() =>
-            //{
             int index = typeFilter.selectedIndex;
             if (!FindIt.isRicoEnabled && index >= (int)DropDownOptions.Rico)
             {
@@ -565,7 +482,6 @@ namespace FindIt.GUI
                 default: // All
                     break;
             }
-            // });
         }
 
         private void ShowFilterPanel(UIPanel panel)
@@ -636,7 +552,6 @@ namespace FindIt.GUI
 
             vanillaFilter.isChecked = true;
             workshopFilter.isChecked = true;
-            //levelFilter.selectedIndex = 0;
             sizeFilterX.selectedIndex = 0;
             sizeFilterY.selectedIndex = 0;
 

@@ -294,7 +294,7 @@ namespace FindIt
                 {
                     if (assembly.GetName().Name.ToLower() == "ploppablerico")
                     {
-                        Debugging.Message("Rico found");
+                        Debugging.Message("Rico mod found");
                         return plugin.isEnabled;
                     }
                 }

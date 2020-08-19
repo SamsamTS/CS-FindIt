@@ -229,7 +229,7 @@ namespace FindIt.GUI
                     prefab.m_Atlas = ResourceLoader.CreateTextureAtlas("FindItThumbnails_" + name, new string[] { }, null);
                     ResourceLoader.AddTexturesInAtlas(prefab.m_Atlas, ImageUtils.GenerateMissingThumbnailVariants(texture));
 
-                    Debugging.Message("Generated thumbnails for: " + name);
+                    if (ModInfo.showExtraDebuggingMessage) Debugging.Message("Generated thumbnails for: " + name);
 
                     return true;
                 }
@@ -256,12 +256,12 @@ namespace FindIt.GUI
                 ResourceLoader.ResizeTexture(thumbnailTexture, 109, 100);
                 ResourceLoader.AddTexturesInAtlas(prefab.m_Atlas, ImageUtils.GenerateMissingThumbnailVariants(thumbnailTexture));
 
-                Debugging.Message("Generated thumbnails for: " + name);
+                if (ModInfo.showExtraDebuggingMessage) Debugging.Message("Generated thumbnails for: " + name);
             }
             else
             {
                 // Rendering didn't occur - apply default thumbnail sprite name.
-                prefab.m_Thumbnail = "ThumbnailBuildingDefault";
+                if (ModInfo.showExtraDebuggingMessage) prefab.m_Thumbnail = "ThumbnailBuildingDefault";
             }
 
             return wasRendered;

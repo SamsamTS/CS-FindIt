@@ -392,7 +392,11 @@ namespace FindIt
                 }
                 else
                 {
-                    if (dico != null) Debugging.Message("Tag not found in dico: " + tag);
+                    if (dico != null)
+                    {
+                        if (ModInfo.showExtraDebuggingMessage)
+                            Debugging.Message("Tag not found in dico: " + tag);
+                    }
                     return scoreMultiplier * ((tag.Length - index) / (float)tag.Length) * (keyword.Length / (float)tag.Length);
                 }
             }

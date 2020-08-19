@@ -10,8 +10,6 @@ namespace FindIt.GUI
     public class ImageUtils
     {
         private static Texture2D focusedFilterTexture;
-
-
         public static void AddThumbnailVariantsInAtlas(PrefabInfo prefab)
         {
             Texture2D texture = prefab.m_Atlas[prefab.m_Thumbnail].texture;
@@ -19,7 +17,7 @@ namespace FindIt.GUI
 
             ResourceLoader.AddTexturesInAtlas(prefab.m_Atlas, GenerateMissingThumbnailVariants(texture));
 
-            Debugging.Message("Generated thumbnails variants for: " + prefab.name);
+            if (ModInfo.showExtraDebuggingMessage) Debugging.Message("Generated thumbnails variants for: " + prefab.name);
         }
 
         public static void FixThumbnails(PrefabInfo prefab, UIButton button)

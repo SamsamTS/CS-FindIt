@@ -16,6 +16,7 @@ namespace FindIt
     {
         public const string version = "2.0.2-rc1";
         public const bool isBeta = true;
+        public const bool showExtraDebuggingMessage = false;
 
         public string Name
         {
@@ -50,7 +51,6 @@ namespace FindIt
             if (HarmonyHelper.IsHarmonyInstalled)
             {
                 Patcher.UnpatchAll();
-                Debugging.Message("Harmony patches reverted");
             }
         }
 

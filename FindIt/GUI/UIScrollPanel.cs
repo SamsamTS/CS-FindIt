@@ -237,12 +237,12 @@ namespace FindIt.GUI
                     if (m_batchCheckBox.isChecked)
                     {
                         UIFilterTag.instance.batchAssetSet.Add(currentData.asset);
-                        Debugging.Message("Batch - Add to batch set: " + currentData.asset.name);
+                        if (ModInfo.showExtraDebuggingMessage) Debugging.Message("Batch - Add to batch set: " + currentData.asset.name);
                     }
                     else
                     {
                         UIFilterTag.instance.batchAssetSet.Remove(currentData.asset);
-                        Debugging.Message("Batch - Remove from batch set: " + currentData.asset.name);
+                        if (ModInfo.showExtraDebuggingMessage) Debugging.Message("Batch - Remove from batch set: " + currentData.asset.name);
                     }
                 }
 
@@ -390,17 +390,18 @@ namespace FindIt.GUI
                         //    m_instanceCountLabel.isVisible = true;
 
                         uint count = 0;
-                        if (AssetTagList.instance.prefabInstanceCountDictionary.ContainsKey(data.asset.prefab)){
+                        if (AssetTagList.instance.prefabInstanceCountDictionary.ContainsKey(data.asset.prefab))
+                        {
                             count = AssetTagList.instance.prefabInstanceCountDictionary[data.asset.prefab];
                         }
-                            if (data.asset.prefab is NetInfo)
-                            {
-                                m_instanceCountLabel.text = (count == 0) ? Translations.Translate("FIF_UIS_UN") : Translations.Translate("FIF_UIS_IN");
-                            }
-                            else
-                            {
-                                m_instanceCountLabel.text = (count == 0) ? Translations.Translate("FIF_UIS_UN") : count.ToString();
-                            }
+                        if (data.asset.prefab is NetInfo)
+                        {
+                            m_instanceCountLabel.text = (count == 0) ? Translations.Translate("FIF_UIS_UN") : Translations.Translate("FIF_UIS_IN");
+                        }
+                        else
+                        {
+                            m_instanceCountLabel.text = (count == 0) ? Translations.Translate("FIF_UIS_UN") : count.ToString();
+                        }
                         //}
                     }
                     else m_instanceCountLabel.isVisible = false;
@@ -456,7 +457,7 @@ namespace FindIt.GUI
                 {
                     if (ImageUtils.FixFocusedTexture(currentData.asset.prefab))
                     {
-                        Debugging.Message("Fixed focused texture: " + currentData.asset.prefab.name);
+                        if (ModInfo.showExtraDebuggingMessage) Debugging.Message("Fixed focused texture: " + currentData.asset.prefab.name);
                     }
                     fixedFocusedTexture.Add(currentData.asset.prefab);
                 }
@@ -536,8 +537,5 @@ namespace FindIt.GUI
                 }
             }
         }
-
-        
-
     }
 }

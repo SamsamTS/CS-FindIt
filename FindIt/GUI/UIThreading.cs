@@ -11,7 +11,6 @@ namespace FindIt
         // Flags.
         private bool _processed = false;
 
-
         /// <summary>
         /// Look for keypress to open GUI.
         /// </summary>
@@ -79,13 +78,6 @@ namespace FindIt
                         // If the search box is focussed, unfocus.
                         searchBox.input.Unfocus();
                     }
-                    /*
-                    else if (searchBox.isVisible)
-                    {
-                        // Otherwise, if the searchbox is visible, simulate a main button click to hide.
-                        mainButton.SimulateClick();
-                    }
-                    */
                 }
             }
         }

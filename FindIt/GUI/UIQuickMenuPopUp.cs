@@ -25,7 +25,7 @@ namespace FindIt.GUI
             UILabel title = AddUIComponent<UILabel>();
             title.text = Translations.Translate("FIF_QM_TIT");
             title.textColor = new Color32(0, 0, 0, 255);
-            title.relativePosition = new Vector3(spacing*3, spacing*3);
+            title.relativePosition = new Vector3(spacing * 3, spacing * 3);
 
             UIButton close = AddUIComponent<UIButton>();
             close.size = new Vector2(30f, 30f);
@@ -164,7 +164,7 @@ namespace FindIt.GUI
             if (instance == null)
             {
                 instance = UIView.GetAView().AddUIComponent(typeof(UIQuickMenuPopUp)) as UIQuickMenuPopUp;
-                
+
                 UIView.PushModal(instance);
             }
             instance.m_button = component;

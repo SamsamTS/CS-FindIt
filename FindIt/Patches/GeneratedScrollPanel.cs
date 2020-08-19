@@ -171,7 +171,7 @@ namespace FindIt
                 {
                     if (ImageUtils.FixFocusedTexture(prefab))
                     {
-                        Debugging.Message("Fixed focused texture: " + prefab.name);
+                        if (ModInfo.showExtraDebuggingMessage) Debugging.Message("Fixed focused texture: " + prefab.name);
                     }
                     UIScrollPanelItem.fixedFocusedTexture.Add(prefab);
                 }

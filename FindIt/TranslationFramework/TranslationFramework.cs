@@ -198,7 +198,7 @@ namespace FindIt
                 }
                 else
                 {
-                    Debugging.Message("no translation for language " + currentLanguage.uniqueName + " found for key " + key);
+                    if (ModInfo.showExtraDebuggingMessage) Debugging.Message("no translation for language " + currentLanguage.uniqueName + " found for key " + key);
 
                     // Attempt fallack translation.
                     return FallbackTranslation(currentLanguage.uniqueName, key);
@@ -206,7 +206,7 @@ namespace FindIt
             }
             else
             {
-                Debugging.Message("no current language when translating key " + key);
+                if (ModInfo.showExtraDebuggingMessage) Debugging.Message("no current language when translating key " + key);
             }
 
             // If we've made it this far, something went wrong; just return the key.
@@ -429,7 +429,7 @@ namespace FindIt
 
             // If we got here, then we didn't find the assembly.
             Debugging.Message("assembly path not found");
-            throw new FileNotFoundException("Find It Fix: assembly path not found!");
+            throw new FileNotFoundException("Find It 2: assembly path not found!");
         }
     }
 }

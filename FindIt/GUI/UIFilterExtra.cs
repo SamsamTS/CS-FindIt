@@ -87,7 +87,7 @@ namespace FindIt.GUI
                 {
                     UpdateBuildingLevelOptionVisibility(true);
                 }
-                
+
                 else if (optionDropDownMenu.selectedIndex == (int)DropDownOptions.UnusedAssets)
                 {
                     unusedLabel.isVisible = true;
@@ -285,7 +285,7 @@ namespace FindIt.GUI
             UpdateAssetCreatorOptionVisibility(false);
             UpdateBuildingHeightOptionVisibility(false);
             UpdateBuildingLevelOptionVisibility(false);
-            unusedLabel.isVisible =false;
+            unusedLabel.isVisible = false;
         }
     }
 }
