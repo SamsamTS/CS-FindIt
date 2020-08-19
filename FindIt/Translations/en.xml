@@ -152,7 +152,7 @@
     <Translation ID="FIF_NET_UTI" String="Utility" />
     <Translation ID="FIF_NET_TRA" String="Train" />
     <Translation ID="FIF_SET_PM" String="Show marker type props in game mode" />
-    <Translation ID="FIF_SET_PMTP" String="Most marker type props can only be removed by the Better Bulldozer mod in game mode. Use with caution" />
+    <Translation ID="FIF_SET_PMTP" String="Marker type props are invisible and most don't work in game mode. Use Move It to delete them." />
     <Translation ID="FIF_SET_IC" String="Show the number of existing instances of each asset" />
     <Translation ID="FIF_EF_UN" String="Unused Assets" />
     <Translation ID="FIF_QM_TIT" String="Quick Menu" />

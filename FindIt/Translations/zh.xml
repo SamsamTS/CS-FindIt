@@ -150,7 +150,7 @@
     <Translation ID="FIF_NET_UTI" String="电线和水管" />
     <Translation ID="FIF_NET_TRA" String="铁路" />
     <Translation ID="FIF_SET_PM" String="在游戏模式下显示编辑器标记类型的道具" />
-    <Translation ID="FIF_SET_PMTP" String="多数编辑器标记类型的道具在游戏模式下只能由Better Bulldozer mod移除。谨慎使用" />
+    <Translation ID="FIF_SET_PMTP" String="编辑器标记外观透明，只有少数能在游戏模式中作用. 需使用 Move It 才能删除" />
     <Translation ID="FIF_SET_IC" String="显示每个资产的使用数" />
     <Translation ID="FIF_EF_UN" String="未使用资产" />
     <Translation ID="FIF_QM_TIT" String="快速选单" />

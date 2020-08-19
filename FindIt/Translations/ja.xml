@@ -125,7 +125,7 @@
     <Translation ID="FIF_NET_UTI" String="電線、水道管" />
     <Translation ID="FIF_NET_TRA" String="鉄道" />
     <Translation ID="FIF_SET_PM" String="ゲームモードでエディターマーカーのプロップを表示" />
-    <Translation ID="FIF_SET_PMTP" String="大半はゲームモードのBetter Bulldozer modによってのみ削除できます。注意してください" />
+    <Translation ID="FIF_SET_PMTP" String="これらのプロップは目に見えず、ほとんどのゲームモードでは動作しません。削除するには、Move It を使用します" />
     <Translation ID="FIF_SET_IC" String="各アセットの既存のインスタンスの数を表示します" />
     <Translation ID="FIF_EF_UN" String="未使用アセット" />
     <Translation ID="FIF_QM_TIT" String="クイックメニュー" />

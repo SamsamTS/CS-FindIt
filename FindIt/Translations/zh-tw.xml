@@ -150,7 +150,7 @@
     <Translation ID="FIF_NET_UTI" String="電線、水道管" />
     <Translation ID="FIF_NET_TRA" String="鐵路" />
     <Translation ID="FIF_SET_PM" String="在遊戲模式中也顯示編輯器標記" />
-    <Translation ID="FIF_SET_PMTP" String="多數已放置的編輯器標記需要Better Bulldozer Mod 才能從遊戲模式中移除. 小心使用" />
+    <Translation ID="FIF_SET_PMTP" String="編輯器標記外觀透明, 只有少數能在遊戲模式中作用. 需要用 Move It 才能刪除" />
     <Translation ID="FIF_SET_IC" String="顯示各素材使用次數" />
     <Translation ID="FIF_EF_UN" String="未使用的素材" />
     <Translation ID="FIF_QM_TIT" String="快速選單" />
