@@ -82,10 +82,23 @@
     <Translation ID="FIF_CO_MSG" String="マージする既存のタグを選択します" />
     <Translation ID="FIF_CO_CH" String="選択" />
     <Translation ID="FIF_CO_CHTP" String="この既存のタグとマージします" />
+    <Translation ID="FIF_CO_CHLBL" String="マージターゲット:" />
     <Translation ID="FIF_CO_NELBL" String="既存のタグを選択してください" />
     <Translation ID="FIF_DE_TIT" String="削除" />
     <Translation ID="FIF_DE_MSG" String="このタグを削除してもよろしいですか？" />
+    <Translation ID="FIF_RE_TIT" String="リネーム" />
+    <Translation ID="FIF_RE_MSG" String="新しいタグ名を入力して Enter を押します" />
+    <Translation ID="FIF_RE_ITP" String="Enter を押して新しいタグ名を提出します" />
+    <Translation ID="FIF_RE_ELBL" String="新しいタグ名を入力してください" />
+    <Translation ID="FIF_RE_NEWLBL" String="新しいタグ名:" />
+    <Translation ID="FIF_RE_SLBL" String="このタグ名は短すぎます" />
+    <Translation ID="FIF_RE_AELBL" String="このタグは既に存在します" />
     <Translation ID="FIF_CT_TIT" String="カスタムタグ" />
+    <Translation ID="FIF_CT_DDMSG" String="このアセットに既存のタグを追加します:" />
+    <Translation ID="FIF_CT_DDTP" String="このアセットに既存のタグを追加します" />
+    <Translation ID="FIF_CT_ILBL1" String="または" />
+    <Translation ID="FIF_CT_ILBL2" String="新しいタグ名を入力し、Enter を押します" />
+    <Translation ID="FIF_CT_ITP" String="Enter を押して新しいタグを追加します" />
     <Translation ID="FIF_SET_CTLS" String="カスタムタグリストをアルファベット順に並べ替え" />
     <Translation ID="FIF_TAG_DDTP" String="このタグが付いているアセットのみを表示" />
     <Translation ID="FIF_TAG_REF" String="更新" />
@@ -101,7 +114,19 @@
     <Translation ID="FIF_TREE_MD" String="中程度の木" />
     <Translation ID="FIF_TREE_LG" String="大きな木" />
     <Translation ID="FIF_TAG_BAT" String="バッチ" />
+    <Translation ID="FIF_TAG_BAC" String="戻る" />
+    <Translation ID="FIF_TAG_ADD" String="追加" />
+    <Translation ID="FIF_TAG_ADDTP" String="選択したアセットにタグを追加する" />
+    <Translation ID="FIF_TAG_REM" String="削除" />
+    <Translation ID="FIF_TAG_REMTP" String="選択したアセットからタグを削除する" />
+    <Translation ID="FIF_TAG_CLE" String="クリア" />
+    <Translation ID="FIF_TAG_CLETP" String="選択をクリアする" />
+    <Translation ID="FIF_ADD_TIT" String="バッチ追加" />
+    <Translation ID="FIF_ADD_NUM" String="選択したアセットの数:" />
+    <Translation ID="FIF_ADD_ADD" String="選択したアセットに既存のタグを追加します:" />
+    <Translation ID="FIF_ADD_CHTP" String="この既存のタグを追加する" />
     <Translation ID="FIF_ADD_TAG" String="タグ:" />
+    <Translation ID="FIF_ADD_ELBL" String="新しいタグを入力するか、既存のタグを選択してください" />
     <Translation ID="FIF_REM_TIT" String="バッチ削除" />
     <Translation ID="FIF_REM_REM" String="選択したアセットからタグを削除します:" />
     <Translation ID="FIF_REM_CHTP" String="このタグを削除" />
@@ -119,13 +144,13 @@
     <Translation ID="FIF_NET_HGHW" String="高速道路" />
     <Translation ID="FIF_NET_PATH" String="歩道" />
     <Translation ID="FIF_NET_WALL" String="壁とフェンス" />
-    <Translation ID="FIF_NET_WAT" String="上下水道設備" />
+    <Translation ID="FIF_NET_WAT" String="水関連施設" />
     <Translation ID="FIF_PROP_MAR" String="エディターマーカー" />
     <Translation ID="FIF_NET_TNR" String="狭い道路" />
     <Translation ID="FIF_NET_UTI" String="電線、水道管" />
     <Translation ID="FIF_NET_TRA" String="鉄道" />
     <Translation ID="FIF_SET_PM" String="ゲームモードでエディターマーカーのプロップを表示" />
-    <Translation ID="FIF_SET_PMTP" String="これらのプロップは目に見えず、ほとんどのゲームモードでは動作しません。削除するには、Move It を使用します" />
+    <Translation ID="FIF_SET_PMTP" String="これらのプロップは目に見えず、ほとんどのゲームモードでは動作しません。削除するには、Move It を使用します。" />
     <Translation ID="FIF_SET_IC" String="各アセットの既存のインスタンスの数を表示します" />
     <Translation ID="FIF_EF_UN" String="未使用アセット" />
     <Translation ID="FIF_QM_TIT" String="クイックメニュー" />
@@ -134,6 +159,8 @@
     <Translation ID="FIF_SET_ICTP" String="検索速度が少し遅くなります。不要な場合は無効にしてください" />
     <Translation ID="FIF_EF_UNPO" String="(この結果はProcedural Objectsを考慮しません)" />
     <Translation ID="FIF_SET_ICO" String="通常の並べ替えオプション" />
+    <Translation ID="FIF_SET_ICUS" String="使用中アセットを優先表示します" />
+    <Translation ID="FIF_SET_ICUN" String="未使用アセットを優先表示します" />
 
   </Translations>
 </Language>
