@@ -18,7 +18,27 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 
 ## Change Notes
 
-Finished and planned to be included in the next release:  
+
+v2.0.2 Update:
+- New 'Unused Assets' filter in the extra filters panel.
+
+- New 'Show asset instance count' and sorting options in the quick menu.
+
+- Add 'Quick Menu' button
+
+- Add 'Unsorted' filter tab for growable
+
+- Fix Esc key bug
+
+- When Resize It changes the scroll panel width, the filter tab panel will adjust itself to match the width
+
+- Move 'Building Level' filter to the extra filters panel
+
+- UI changes
+
+- Changing the visibility of marker type props in game mode doesn't require a restart anymore.
+
+- Expand search functionality. Can use prefix ! to exclude a word, and use prefix # to search for custom tag only.
 
 v2.0.1 Update:  
 - Add random selection button to all asset types (user requested)
