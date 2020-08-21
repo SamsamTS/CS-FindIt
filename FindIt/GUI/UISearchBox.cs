@@ -354,6 +354,11 @@ namespace FindIt.GUI
                     sortButton.tooltip = Translations.Translate("FIF_SO_RETP");
                 }
                 Search();
+
+                if (FindIt.isPOEnabled)
+                {
+                    FindIt.instance.POTool.UpdatePOInfoList();
+                }
             };
 
             // panel of custom tags
@@ -601,8 +606,28 @@ namespace FindIt.GUI
             // sort by used/unused instance count
             if (Settings.showInstancesCounter && Settings.instanceCounterSort != 0)
             {
-                if (Settings.instanceCounterSort == 1) matches = matches.OrderByDescending(s => s.instanceCount).ToList();
-                else matches = matches.OrderBy(s => s.instanceCount).ToList();
+                if (Settings.instanceCounterSort == 1)
+                {
+                    if (Settings.includePOinstances)
+                    {
+                        matches = matches.OrderByDescending(s => (s.instanceCount + s.poInstanceCount)).ToList();
+                    }
+                    else
+                    {
+                        matches = matches.OrderByDescending(s => s.instanceCount).ToList();
+                    }
+                }
+                else
+                {
+                    if (Settings.includePOinstances)
+                    {
+                        matches = matches.OrderBy(s => (s.instanceCount + s.poInstanceCount)).ToList();
+                    }
+                    else
+                    {
+                        matches = matches.OrderBy(s => s.instanceCount).ToList();
+                    }
+                }
             }
 
             // sort by most recently downloaded
@@ -693,7 +718,6 @@ namespace FindIt.GUI
                 }
             }
         }
-
         public void HideAllFilterTabs()
         {
             HideFilterPanel(filterGrowable);

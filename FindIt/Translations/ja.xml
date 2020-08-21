@@ -156,8 +156,8 @@
     <Translation ID="FIF_QM_TIT" String="クイックメニュー" />
     <Translation ID="FIF_UIS_UN" String="未使用" />
     <Translation ID="FIF_UIS_IN" String="使用中" />
-    <Translation ID="FIF_SET_ICTP" String="検索速度が少し遅くなります。不要な場合は無効にしてください" />
-    <Translation ID="FIF_EF_UNPO" String="(この結果はProcedural Objectsを考慮しません)" />
+    <Translation ID="FIF_SET_ICTP" String="このオプションは検索を遅くします。不要な場合は無効にしてください" />
+    <Translation ID="FIF_SET_PO" String="Procedural Objects を含む" />
     <Translation ID="FIF_SET_ICO" String="通常の並べ替えオプション" />
     <Translation ID="FIF_SET_ICUS" String="使用中アセットを優先表示します" />
     <Translation ID="FIF_SET_ICUN" String="未使用アセットを優先表示します" />

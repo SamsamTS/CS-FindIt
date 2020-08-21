@@ -51,11 +51,17 @@ namespace FindIt
             matches.Clear();
             text = text.ToLower().Trim();
 
+            // if showing instance counts, refresh
             if (UISearchBox.instance?.extraFiltersPanel?.optionDropDownMenu != null)
             {
                 if (Settings.showInstancesCounter || UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == 2)
                 {
                     UpdatePrefabInstanceCount();
+
+                    if (FindIt.isPOEnabled && Settings.includePOinstances)
+                    {
+                        FindIt.instance.POTool.UpdatePOInfoList();
+                    }
 
                     if (Settings.instanceCounterSort != 0) UpdateAssetInstanceCount();
                 }
@@ -266,6 +272,10 @@ namespace FindIt
                             if (prefabInstanceCountDictionary.ContainsKey(asset.prefab))
                             {
                                 if (prefabInstanceCountDictionary[asset.prefab] > 0) return false;
+                            }
+                            if (FindIt.isPOEnabled && Settings.includePOinstances)
+                            {
+                                if (FindIt.instance.POTool.GetPrefabInstanceCount(asset.prefab) > 0) return false;
                             }
                         }
                     }
@@ -854,6 +864,11 @@ namespace FindIt
             {
                 if (!prefabInstanceCountDictionary.ContainsKey(asset.prefab)) asset.instanceCount = 0;
                 else asset.instanceCount = prefabInstanceCountDictionary[asset.prefab];
+
+                if (Settings.includePOinstances && FindIt.isPOEnabled)
+                {
+                    asset.poInstanceCount = FindIt.instance.POTool.GetPrefabInstanceCount(asset.prefab);
+                }
             }
         }
     }

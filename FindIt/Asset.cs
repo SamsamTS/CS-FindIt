@@ -190,6 +190,7 @@ namespace FindIt
         public string findIt2Description;
         public int uiPriority = int.MaxValue;
         public uint instanceCount = 0;
+        public uint poInstanceCount = 0;
 
         public delegate void OnButtonClicked(UIComponent comp);
         public OnButtonClicked onButtonClicked;

@@ -20,6 +20,9 @@ namespace FindIt
         public static UITextureAtlas atlas = LoadResources();
         public static bool inEditor = false;
         public static bool isRicoEnabled = false;
+        public static bool isPOEnabled = false;
+        public ProceduralObjectsTool POTool;
+        public static Assembly poAssembly;
 
         public static AssetTagList list;
 
@@ -37,6 +40,11 @@ namespace FindIt
             try
             {
                 isRicoEnabled = IsRicoEnabled();
+                isPOEnabled = IsPOEnabled();
+                if (isPOEnabled)
+                {
+                    POTool = new ProceduralObjectsTool();
+                }
 
                 GameObject gameObject = GameObject.Find("FindItMainButton");
                 if (gameObject != null)
@@ -286,7 +294,7 @@ namespace FindIt
             }
         }
 
-        public static bool IsRicoEnabled()
+        private static bool IsRicoEnabled()
         {
             foreach (PluginManager.PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
             {
@@ -294,12 +302,28 @@ namespace FindIt
                 {
                     if (assembly.GetName().Name.ToLower() == "ploppablerico")
                     {
-                        Debugging.Message("Rico mod found");
+                        Debugging.Message($"Found enabled RICO mod? {plugin.isEnabled}");
                         return plugin.isEnabled;
                     }
                 }
             }
+            return false;
+        }
 
+        private static bool IsPOEnabled()
+        {
+            foreach (PluginManager.PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
+            {
+                foreach (Assembly assembly in plugin.GetAssemblies())
+                {
+                    if (assembly.GetName().Name.ToLower() == "proceduralobjects")
+                    {
+                        Debugging.Message($"Found enabled Procedural Objects mod? {plugin.isEnabled}");
+                        poAssembly = assembly;
+                        return plugin.isEnabled;
+                    }
+                }
+            }
             return false;
         }
 

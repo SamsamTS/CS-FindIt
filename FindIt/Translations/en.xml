@@ -158,11 +158,12 @@
     <Translation ID="FIF_QM_TIT" String="Quick Menu" />
     <Translation ID="FIF_UIS_UN" String="Unused" />
     <Translation ID="FIF_UIS_IN" String="In Use" />
-    <Translation ID="FIF_SET_ICTP" String="This option slightly slows down search speed. Disable it when it is not needed" />
+    <Translation ID="FIF_SET_ICTP" String="This option slows down search speed. Disable it when it is not needed" />
     <Translation ID="FIF_EF_UNPO" String="(This result doesn't consider Procedural Objects)" />
     <Translation ID="FIF_SET_ICO" String="Use original sorting option" />
     <Translation ID="FIF_SET_ICUS" String="Show used assets on top" />
     <Translation ID="FIF_SET_ICUN" String="Show unused assets on top" />
+    <Translation ID="FIF_SET_PO" String="Include Procedural Objects" />
     
   </Translations>
 </Language>

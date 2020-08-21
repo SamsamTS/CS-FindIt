@@ -14,13 +14,14 @@ namespace FindIt.GUI
         private const float spacing = 5f;
 
         private UIDropDown instanceCounterSort;
+        private UICheckBox includePOinstances;
 
         public override void Start()
         {
             name = "FindIt_UIQuickMenuPopUp";
             atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericPanelWhite";
-            size = new Vector2(480, 220);
+            size = new Vector2(480, 250);
 
             UILabel title = AddUIComponent<UILabel>();
             title.text = Translations.Translate("FIF_QM_TIT");
@@ -73,7 +74,6 @@ namespace FindIt.GUI
                 UISearchBox.instance.Search();
             };
 
-
             // Show prop markers in 'game' mode
             UICheckBox showPropMarker = SamsamTS.UIUtils.CreateCheckBox(this);
             showPropMarker.isChecked = Settings.showPropMarker;
@@ -103,13 +103,33 @@ namespace FindIt.GUI
             {
                 Settings.showInstancesCounter = showInstancesCounter.isChecked;
                 instanceCounterSort.isVisible = showInstancesCounter.isChecked;
+                includePOinstances.isVisible = showInstancesCounter.isChecked;
                 XMLUtils.SaveSettings();
                 if (Settings.showInstancesCounter && AssetTagList.instance?.prefabInstanceCountDictionary != null)
                 {
                     AssetTagList.instance.UpdatePrefabInstanceCount();
                 }
                 UISearchBox.instance.Search();
-                //FindIt.instance.scrollPanel.Refresh();
+            };
+
+            // include PO instances
+            includePOinstances = SamsamTS.UIUtils.CreateCheckBox(this);
+            includePOinstances.isChecked = Settings.includePOinstances;
+            includePOinstances.label.text = Translations.Translate("FIF_SET_PO");
+            includePOinstances.label.textScale = 0.8f;
+            includePOinstances.width = size.x;
+            includePOinstances.tooltip = Translations.Translate("FIF_SET_ICTP");
+            includePOinstances.isVisible = Settings.showInstancesCounter;
+            includePOinstances.label.textColor = new Color32(0, 0, 0, 255);
+            includePOinstances.relativePosition = new Vector3(showInstancesCounter.relativePosition.x, showInstancesCounter.relativePosition.y + showInstancesCounter.height + 10);
+            includePOinstances.eventCheckChanged += (c, i) =>
+            {
+                Settings.includePOinstances = includePOinstances.isChecked;
+                XMLUtils.SaveSettings();
+                if (Settings.showInstancesCounter)
+                {
+                    UISearchBox.instance.Search();
+                }
             };
 
             instanceCounterSort = SamsamTS.UIUtils.CreateDropDown(this);
@@ -122,10 +142,11 @@ namespace FindIt.GUI
             instanceCounterSort.AddItem(Translations.Translate("FIF_SET_ICUN"));
             instanceCounterSort.selectedIndex = Settings.instanceCounterSort;
             instanceCounterSort.isVisible = Settings.showInstancesCounter;
-            instanceCounterSort.relativePosition = new Vector3(showInstancesCounter.relativePosition.x + 30, showInstancesCounter.relativePosition.y + showInstancesCounter.height + 10);
+            instanceCounterSort.relativePosition = new Vector3(includePOinstances.relativePosition.x + 30, includePOinstances.relativePosition.y + includePOinstances.height + 10);
             instanceCounterSort.eventSelectedIndexChanged += (c, p) =>
             {
                 Settings.instanceCounterSort = instanceCounterSort.selectedIndex;
+                XMLUtils.SaveSettings();
                 if (Settings.showInstancesCounter)
                 {
                     UISearchBox.instance.Search();

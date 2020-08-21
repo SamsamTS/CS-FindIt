@@ -384,25 +384,38 @@ namespace FindIt.GUI
                     if (Settings.showInstancesCounter)
                     {
                         m_instanceCountLabel.isVisible = true;
-                        //if (data.asset.prefab is TreeInfo) m_instanceCountLabel.isVisible = false;
-                        //else
-                        //{
-                        //    m_instanceCountLabel.isVisible = true;
 
                         uint count = 0;
                         if (AssetTagList.instance.prefabInstanceCountDictionary.ContainsKey(data.asset.prefab))
                         {
                             count = AssetTagList.instance.prefabInstanceCountDictionary[data.asset.prefab];
                         }
+                        
                         if (data.asset.prefab is NetInfo)
                         {
                             m_instanceCountLabel.text = (count == 0) ? Translations.Translate("FIF_UIS_UN") : Translations.Translate("FIF_UIS_IN");
                         }
                         else
                         {
-                            m_instanceCountLabel.text = (count == 0) ? Translations.Translate("FIF_UIS_UN") : count.ToString();
+                            if (data.asset.prefab is TreeInfo)
+                            {
+                                m_instanceCountLabel.text = (count == 0) ? Translations.Translate("FIF_UIS_UN") : count.ToString();
+                            }
+                            else
+                            {
+                                if (Settings.includePOinstances && FindIt.isPOEnabled)
+                                {
+                                    uint poCount = 0;
+                                    poCount = FindIt.instance.POTool.GetPrefabInstanceCount(data.asset.prefab);
+                                    m_instanceCountLabel.text = (count == 0 && poCount == 0) ? Translations.Translate("FIF_UIS_UN") : (count.ToString() + " + " + poCount.ToString() + " PO");
+                                }
+                                else
+                                {
+                                    m_instanceCountLabel.text = (count == 0) ? Translations.Translate("FIF_UIS_UN") : count.ToString();
+                                }
+                            }
+
                         }
-                        //}
                     }
                     else m_instanceCountLabel.isVisible = false;
                 }
