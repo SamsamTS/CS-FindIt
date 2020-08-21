@@ -252,7 +252,7 @@ namespace FindIt.GUI
             m_instanceCountLabel.textScale = 0.8f;
             //m_instanceCountLabel.padding = new RectOffset(0, 0, 8, 0);
             m_instanceCountLabel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
-            m_instanceCountLabel.backgroundSprite = "GenericTab";
+            m_instanceCountLabel.backgroundSprite = "GenericTabDisabled";
             m_instanceCountLabel.relativePosition = new Vector3(5, 5);
 
             component.eventMouseEnter += (c, p) =>
