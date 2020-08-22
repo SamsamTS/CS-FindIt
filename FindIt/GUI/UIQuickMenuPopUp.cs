@@ -101,6 +101,15 @@ namespace FindIt.GUI
             showInstancesCounter.relativePosition = new Vector3(title.relativePosition.x, showPropMarker.relativePosition.y + showPropMarker.height + 10);
             showInstancesCounter.eventCheckChanged += (c, i) =>
             {
+                if (showInstancesCounter.isChecked)
+                {
+                    height = instanceCounterSort.relativePosition.y + instanceCounterSort.height + 30;
+                }
+                else
+                {
+                    height = showInstancesCounter.relativePosition.y + showInstancesCounter.height + 30;
+                }
+
                 Settings.showInstancesCounter = showInstancesCounter.isChecked;
                 instanceCounterSort.isVisible = showInstancesCounter.isChecked;
                 includePOinstances.isVisible = showInstancesCounter.isChecked;
@@ -121,7 +130,7 @@ namespace FindIt.GUI
             includePOinstances.tooltip = Translations.Translate("FIF_SET_ICTP");
             includePOinstances.isVisible = Settings.showInstancesCounter;
             includePOinstances.label.textColor = new Color32(0, 0, 0, 255);
-            includePOinstances.relativePosition = new Vector3(showInstancesCounter.relativePosition.x, showInstancesCounter.relativePosition.y + showInstancesCounter.height + 10);
+            includePOinstances.relativePosition = new Vector3(showInstancesCounter.relativePosition.x + 30, showInstancesCounter.relativePosition.y + showInstancesCounter.height + 10);
             includePOinstances.eventCheckChanged += (c, i) =>
             {
                 Settings.includePOinstances = includePOinstances.isChecked;
@@ -142,7 +151,7 @@ namespace FindIt.GUI
             instanceCounterSort.AddItem(Translations.Translate("FIF_SET_ICUN"));
             instanceCounterSort.selectedIndex = Settings.instanceCounterSort;
             instanceCounterSort.isVisible = Settings.showInstancesCounter;
-            instanceCounterSort.relativePosition = new Vector3(includePOinstances.relativePosition.x + 30, includePOinstances.relativePosition.y + includePOinstances.height + 10);
+            instanceCounterSort.relativePosition = new Vector3(showInstancesCounter.relativePosition.x + 30, includePOinstances.relativePosition.y + includePOinstances.height + 10);
             instanceCounterSort.eventSelectedIndexChanged += (c, p) =>
             {
                 Settings.instanceCounterSort = instanceCounterSort.selectedIndex;
@@ -153,6 +162,14 @@ namespace FindIt.GUI
                 }
             };
 
+            if (showInstancesCounter.isChecked)
+            {
+                height = instanceCounterSort.relativePosition.y + instanceCounterSort.height + 30;
+            }
+            else
+            {
+                height = showInstancesCounter.relativePosition.y + showInstancesCounter.height + 30;
+            }
             customTagListSort.Focus();
         }
 

@@ -143,6 +143,7 @@ namespace FindIt.GUI
             batchButton = SamsamTS.UIUtils.CreateButton(this);
             batchButton.size = new Vector2(80, 25);
             batchButton.text = Translations.Translate("FIF_TAG_BAT");
+            batchButton.tooltip = Translations.Translate("FIF_TAG_BATTP");
             batchButton.textScale = 0.8f;
             batchButton.textPadding = new RectOffset(0, 0, 5, 0);
             batchButton.relativePosition = new Vector3(deleteButton.relativePosition.x + deleteButton.width + 5, 5);

@@ -164,6 +164,7 @@
     <Translation ID="FIF_SET_ICUS" String="Show used assets on top" />
     <Translation ID="FIF_SET_ICUN" String="Show unused assets on top" />
     <Translation ID="FIF_SET_PO" String="Include Procedural Objects" />
+    <Translation ID="FIF_TAG_BATTP" String="Batch Editing" />
     
   </Translations>
 </Language>

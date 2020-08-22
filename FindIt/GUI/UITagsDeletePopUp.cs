@@ -27,7 +27,7 @@ namespace FindIt.GUI
             UILabel title = AddUIComponent<UILabel>();
             title.text = Translations.Translate("FIF_DE_TIT");
             title.textColor = new Color32(0, 0, 0, 255);
-            title.relativePosition = new Vector3(spacing, spacing);
+            title.relativePosition = new Vector3(spacing * 2, spacing * 2);
 
             UIButton close = AddUIComponent<UIButton>();
             close.size = new Vector2(30f, 30f);
@@ -46,12 +46,12 @@ namespace FindIt.GUI
             UILabel message = AddUIComponent<UILabel>();
             message.text = "\n" + Translations.Translate("FIF_DE_MSG") + "\n" + Translations.Translate("FIF_POP_NU");
             message.textColor = new Color32(0, 0, 0, 255);
-            message.relativePosition = new Vector3(spacing, spacing + title.height + spacing);
+            message.relativePosition = new Vector3(spacing * 2, spacing + title.height + spacing);
 
             confirmButton = SamsamTS.UIUtils.CreateButton(this);
             confirmButton.size = new Vector2(100, 40);
             confirmButton.text = Translations.Translate("FIF_POP_CON");
-            confirmButton.relativePosition = new Vector3(spacing, message.relativePosition.y + message.height + spacing * 2);
+            confirmButton.relativePosition = new Vector3(spacing * 2, message.relativePosition.y + message.height + spacing * 2);
             confirmButton.eventClick += (c, p) =>
             {
                 DeleteTag(tagToDelete);
@@ -66,6 +66,7 @@ namespace FindIt.GUI
             cancelButton.relativePosition = new Vector3(confirmButton.relativePosition.x + confirmButton.width + spacing * 4, confirmButton.relativePosition.y);
             cancelButton.eventClick += (c, p) => Close();
 
+            height = cancelButton.relativePosition.y + cancelButton.height + 10;
             cancelButton.Focus();
         }
 

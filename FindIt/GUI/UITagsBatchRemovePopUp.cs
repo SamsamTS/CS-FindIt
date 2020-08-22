@@ -34,7 +34,7 @@ namespace FindIt.GUI
             UILabel title = AddUIComponent<UILabel>();
             title.text = Translations.Translate("FIF_REM_TIT");
             title.textColor = new Color32(0, 0, 0, 255);
-            title.relativePosition = new Vector3(spacing, spacing);
+            title.relativePosition = new Vector3(spacing * 2, spacing * 2);
 
             UIButton close = AddUIComponent<UIButton>();
             close.size = new Vector2(30f, 30f);
@@ -53,7 +53,7 @@ namespace FindIt.GUI
             UILabel message = AddUIComponent<UILabel>();
             message.text = "\n" + Translations.Translate("FIF_ADD_NUM") + " " + UIFilterTag.instance.batchAssetSet.Count + "\n\n" + Translations.Translate("FIF_REM_REM");
             message.textColor = new Color32(0, 0, 0, 255);
-            message.relativePosition = new Vector3(spacing, spacing + title.height + spacing);
+            message.relativePosition = new Vector3(spacing * 2, spacing + title.height + spacing);
 
             tagDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
             tagDropDownMenu.normalBgSprite = "TextFieldPanelHovered";
@@ -61,7 +61,7 @@ namespace FindIt.GUI
             tagDropDownMenu.tooltip = Translations.Translate("FIF_POP_SCR");
             tagDropDownMenu.listHeight = 300;
             tagDropDownMenu.itemHeight = 30;
-            tagDropDownMenu.relativePosition = new Vector3(spacing, message.relativePosition.y + message.height + spacing * 2);
+            tagDropDownMenu.relativePosition = new Vector3(spacing * 2, message.relativePosition.y + message.height + spacing * 2);
             UpdateCustomTagList();
 
             tagDropDownButton = SamsamTS.UIUtils.CreateButton(this);
@@ -69,7 +69,7 @@ namespace FindIt.GUI
             tagDropDownButton.text = Translations.Translate("FIF_CO_CH");
             tagDropDownButton.textScale = 0.8f;
             tagDropDownButton.tooltip = Translations.Translate("FIF_REM_CHTP");
-            tagDropDownButton.relativePosition = new Vector3(spacing + tagDropDownMenu.width + 5, tagDropDownMenu.relativePosition.y);
+            tagDropDownButton.relativePosition = new Vector3(tagDropDownMenu.relativePosition.x + tagDropDownMenu.width + 5, tagDropDownMenu.relativePosition.y);
             tagDropDownButton.eventClick += (c, p) =>
             {
                 if (customTagListStrArray.Length == 0) return;
@@ -83,12 +83,12 @@ namespace FindIt.GUI
             newTagNameLabel.size = new Vector2(200, 50);
             newTagNameLabel.textColor = new Color32(0, 0, 0, 255);
             newTagNameLabel.text = Translations.Translate("FIF_ADD_TAG") + " " + newTagName;
-            newTagNameLabel.relativePosition = new Vector3(spacing, tagDropDownMenu.relativePosition.y + tagDropDownMenu.height + spacing * 2);
+            newTagNameLabel.relativePosition = new Vector3(spacing * 2, tagDropDownMenu.relativePosition.y + tagDropDownMenu.height + spacing * 2);
 
             confirmButton = SamsamTS.UIUtils.CreateButton(this);
             confirmButton.size = new Vector2(100, 40);
             confirmButton.text = Translations.Translate("FIF_POP_CON");
-            confirmButton.relativePosition = new Vector3(spacing, newTagNameLabel.relativePosition.y + newTagNameLabel.height + spacing * 3);
+            confirmButton.relativePosition = new Vector3(spacing * 2, newTagNameLabel.relativePosition.y + newTagNameLabel.height + spacing * 3);
             confirmButton.eventClick += (c, p) =>
             {
                 if (newTagName == "")
@@ -110,6 +110,7 @@ namespace FindIt.GUI
             cancelButton.relativePosition = new Vector3(confirmButton.relativePosition.x + confirmButton.width + spacing * 4, confirmButton.relativePosition.y);
             cancelButton.eventClick += (c, p) => Close();
 
+            height = cancelButton.relativePosition.y + cancelButton.height + 10;
             cancelButton.Focus();
         }
 

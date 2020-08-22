@@ -35,7 +35,7 @@ namespace FindIt.GUI
             UILabel title = AddUIComponent<UILabel>();
             title.text = Translations.Translate("FIF_RE_TIT");
             title.textColor = new Color32(0, 0, 0, 255);
-            title.relativePosition = new Vector3(spacing, spacing);
+            title.relativePosition = new Vector3(spacing * 2, spacing * 2);
 
             UIButton close = AddUIComponent<UIButton>();
             close.size = new Vector2(30f, 30f);
@@ -54,13 +54,13 @@ namespace FindIt.GUI
             UILabel message = AddUIComponent<UILabel>();
             message.text = "\n" + Translations.Translate("FIF_RE_MSG") + "\n";
             message.textColor = new Color32(0, 0, 0, 255);
-            message.relativePosition = new Vector3(spacing, spacing + title.height + spacing);
+            message.relativePosition = new Vector3(spacing * 2, spacing + title.height + spacing);
 
             newTagInput = SamsamTS.UIUtils.CreateTextField(this);
-            newTagInput.size = new Vector2(width - 2 * spacing, 30);
+            newTagInput.size = new Vector2(width - spacing * 4, 30);
             newTagInput.padding.top = 7;
             newTagInput.tooltip = Translations.Translate("FIF_RE_ITP");
-            newTagInput.relativePosition = new Vector3(spacing, message.relativePosition.y + message.height + spacing);
+            newTagInput.relativePosition = new Vector3(spacing * 2, message.relativePosition.y + message.height + spacing);
             newTagInput.submitOnFocusLost = false;
             newTagInput.eventTextSubmitted += (c, t) =>
             {
@@ -95,12 +95,12 @@ namespace FindIt.GUI
             newTagNameLabel.size = new Vector2(200, 50);
             newTagNameLabel.textColor = new Color32(0, 0, 0, 255);
             newTagNameLabel.text = Translations.Translate("FIF_RE_NEWLBL");
-            newTagNameLabel.relativePosition = new Vector3(spacing, newTagInput.relativePosition.y + newTagInput.height + spacing * 2);
+            newTagNameLabel.relativePosition = new Vector3(spacing * 2, newTagInput.relativePosition.y + newTagInput.height + spacing * 2);
 
             confirmButton = SamsamTS.UIUtils.CreateButton(this);
             confirmButton.size = new Vector2(100, 40);
             confirmButton.text = Translations.Translate("FIF_POP_CON");
-            confirmButton.relativePosition = new Vector3(spacing, newTagNameLabel.relativePosition.y + newTagNameLabel.height + spacing * 3);
+            confirmButton.relativePosition = new Vector3(spacing * 2, newTagNameLabel.relativePosition.y + newTagNameLabel.height + spacing * 3);
             confirmButton.eventClick += (c, p) =>
             {
                 if (newTagName == "")
@@ -135,6 +135,7 @@ namespace FindIt.GUI
             cancelButton.relativePosition = new Vector3(confirmButton.relativePosition.x + confirmButton.width + spacing * 4, confirmButton.relativePosition.y);
             cancelButton.eventClick += (c, p) => Close();
 
+            height = cancelButton.relativePosition.y + cancelButton.height + 10;
             cancelButton.Focus();
         }
 

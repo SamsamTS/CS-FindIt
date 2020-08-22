@@ -159,9 +159,11 @@
     <Translation ID="FIF_UIS_IN" String="In Use" />
     <Translation ID="FIF_SET_ICTP" String="Эта опция немного замедляет скорость поиска. Отключите её, когда она не нужна" />
     <Translation ID="FIF_EF_UNPO" String="(Не учитываются Procedural Objects)" />
-    <Translation ID="FIF_SET_ICO" String="Использовать исходный вариант сортировки" />
-    <Translation ID="FIF_SET_ICUS" String="Показывать используемые объекты первыми" />
-    <Translation ID="FIF_SET_ICUN" String="Показывать неиспользуемые объекты первыми" />
+    <Translation ID="FIF_SET_ICO" String="Исходный вариант сортировки" />
+    <Translation ID="FIF_SET_ICUS" String="Сначала используемые объекты" />
+    <Translation ID="FIF_SET_ICUN" String="Сначала неиспользуемые объекты" />
+    <Translation ID="FIF_SET_PO" String="Учитывать Procedural Objects" />
+    <Translation ID="FIF_TAG_BATTP" String="Пакетное редактирование" />
 
   </Translations>
 </Language>

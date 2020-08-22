@@ -229,6 +229,7 @@ namespace FindIt.GUI
             m_batchCheckBox.isChecked = false;
             m_batchCheckBox.isVisible = false;
             m_batchCheckBox.width = 20;
+            m_batchCheckBox.transform.localScale = new Vector3(1.2f, 1.2f, 1.0f);
             m_batchCheckBox.relativePosition = new Vector3(5, component.height - m_batchCheckBox.height - 5);
             m_batchCheckBox.eventClicked += (c, i) =>
             {
@@ -245,7 +246,6 @@ namespace FindIt.GUI
                         if (ModInfo.showExtraDebuggingMessage) Debugging.Message("Batch - Remove from batch set: " + currentData.asset.name);
                     }
                 }
-
             };
 
             m_instanceCountLabel = component.AddUIComponent<UILabel>();
@@ -407,7 +407,20 @@ namespace FindIt.GUI
                                 {
                                     uint poCount = 0;
                                     poCount = FindIt.instance.POTool.GetPrefabInstanceCount(data.asset.prefab);
-                                    m_instanceCountLabel.text = (count == 0 && poCount == 0) ? Translations.Translate("FIF_UIS_UN") : (count.ToString() + " + " + poCount.ToString() + " PO");
+                                    m_instanceCountLabel.text = "";
+                                    if (count == 0 && poCount == 0)
+                                    {
+                                        m_instanceCountLabel.text = Translations.Translate("FIF_UIS_UN");
+                                    }
+                                    if (count != 0)
+                                    {
+                                        m_instanceCountLabel.text += (count.ToString());
+                                        if (poCount != 0) m_instanceCountLabel.text += (" + ");
+                                    }
+                                    if (poCount != 0)
+                                    {
+                                        m_instanceCountLabel.text += (poCount.ToString() + " PO");
+                                    }
                                 }
                                 else
                                 {
