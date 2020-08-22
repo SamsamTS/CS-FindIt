@@ -89,6 +89,12 @@ namespace FindIt
                     service = m_prefab.GetService();
                     subService = m_prefab.GetSubService();
 
+                    // check if an asset is from a content creator pack
+                    if (CheckCCP(m_prefab.m_dlcRequired))
+                    {
+                        isCCP = true;
+                    }
+
                     BuildingInfo buildingPrefab = m_prefab as BuildingInfo;
                     if (buildingPrefab != null)
                     {
@@ -99,12 +105,6 @@ namespace FindIt
                         else
                         {
                             assetType = AssetType.Ploppable;
-                        }
-
-                        // check if a building is from a content creator pack. Only works for Modern Japan CCP
-                        if (buildingPrefab.editorCategory.EndsWith("ModderPack") && buildingPrefab.name.StartsWith("PDX"))
-                        {
-                            isCCPBuilding = true;
                         }
 
                         size = new Vector2(buildingPrefab.m_cellWidth, buildingPrefab.m_cellLength);
@@ -182,7 +182,7 @@ namespace FindIt
         public string author;
         public float score;
         public ulong downloadTime;
-        public bool isCCPBuilding = false;
+        public bool isCCP = false;
         public float buildingHeight = 0;
         public PropType propType = PropType.Invalid;
         public TreeType treeType = TreeType.Invalid;
@@ -525,7 +525,7 @@ namespace FindIt
                 findIt2Description = $"{Translations.Translate("FIF_SE_IP")}, ";
 
                 if (service == ItemClass.Service.Electricity) findIt2Description += Translations.Translate("FIF_PLOP_E");
-                else if(service == ItemClass.Service.Water) findIt2Description += Translations.Translate("FIF_PLOP_W");
+                else if (service == ItemClass.Service.Water) findIt2Description += Translations.Translate("FIF_PLOP_W");
                 else if (service == ItemClass.Service.Garbage) findIt2Description += Translations.Translate("FIF_PLOP_G");
                 else if (service == ItemClass.Service.PlayerIndustry) findIt2Description += Translations.Translate("FIF_PLOP_I");
                 else if (service == ItemClass.Service.Fishing) findIt2Description += Translations.Translate("FIF_PLOP_FI");
@@ -547,6 +547,18 @@ namespace FindIt
             }
 
             findIt2Description += "\n";
+        }
+
+        private bool CheckCCP(SteamHelper.DLC_BitMask dlc)
+        {
+            if (dlc == SteamHelper.DLC_BitMask.ModderPack1) return true;
+            if (dlc == SteamHelper.DLC_BitMask.ModderPack2) return true;
+            if (dlc == SteamHelper.DLC_BitMask.ModderPack3) return true;
+            if (dlc == SteamHelper.DLC_BitMask.ModderPack4) return true;
+            if (dlc == SteamHelper.DLC_BitMask.ModderPack5) return true;
+            if (dlc == SteamHelper.DLC_BitMask.ModderPack6) return true;
+
+            return false;
         }
     }
 }

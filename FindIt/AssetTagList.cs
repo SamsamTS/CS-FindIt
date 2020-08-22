@@ -230,7 +230,7 @@ namespace FindIt
                     if (asset.prefab.m_isCustomContent && !UISearchBox.instance.workshopFilter.isChecked) return false;
 
                     // filter out vanilla asset. will not filter out content creater pack assets
-                    if (!asset.prefab.m_isCustomContent && !UISearchBox.instance.vanillaFilter.isChecked && !asset.isCCPBuilding) return false;
+                    if (!asset.prefab.m_isCustomContent && !UISearchBox.instance.vanillaFilter.isChecked && !asset.isCCP) return false;
 
                     // filter out assets without matching custom tag
                     if (UISearchBox.instance.tagPanel.tagDropDownCheckBox.isChecked && UISearchBox.instance.tagPanel.customTagListStrArray.Length > 0)
@@ -492,17 +492,17 @@ namespace FindIt
                         asset.downloadTime = 0;
 
                         // make Kaminogi's Modern Japan builldings included in the asset creator filter
-                        if (asset.isCCPBuilding)
+                        if (asset.isCCP)
                         {
-                            asset.author = "Ryuichi Kaminogi";
-                            if (!assetCreatorDictionary.ContainsKey("Ryuichi Kaminogi"))
-                            {
-                                assetCreatorDictionary.Add("Ryuichi Kaminogi", 1);
-                            }
-                            else
-                            {
-                                assetCreatorDictionary["Ryuichi Kaminogi"] += 1;
-                            }
+                            if (asset.prefab.m_dlcRequired == SteamHelper.DLC_BitMask.ModderPack1) asset.author = "Shroomblaze";
+                            if (asset.prefab.m_dlcRequired == SteamHelper.DLC_BitMask.ModderPack2) asset.author = "GCVos";
+                            if (asset.prefab.m_dlcRequired == SteamHelper.DLC_BitMask.ModderPack3) asset.author = "Avanya";
+                            if (asset.prefab.m_dlcRequired == SteamHelper.DLC_BitMask.ModderPack4) asset.author = "KingLeno";
+                            if (asset.prefab.m_dlcRequired == SteamHelper.DLC_BitMask.ModderPack5) asset.author = "AmiPolizeiFunk";
+                            if (asset.prefab.m_dlcRequired == SteamHelper.DLC_BitMask.ModderPack6) asset.author = "Ryuichi Kaminogi";
+
+                            if (!assetCreatorDictionary.ContainsKey(asset.author)) assetCreatorDictionary.Add(asset.author, 1);
+                            else assetCreatorDictionary[asset.author] += 1;
                         }
                     }
                     else
