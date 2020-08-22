@@ -22,7 +22,6 @@ namespace FindIt
         public static bool isRicoEnabled = false;
         public static bool isPOEnabled = false;
         public ProceduralObjectsTool POTool;
-        public static Assembly poAssembly;
 
         public static AssetTagList list;
 
@@ -31,7 +30,7 @@ namespace FindIt
         public UIScrollPanel scrollPanel;
 
         private UIGroupPanel m_groupPanel;
-        private BeautificationPanel m_beautificationPanel;
+        private RoadsPanel m_roadsPanel;
 
         private float m_defaultXPos;
 
@@ -153,7 +152,7 @@ namespace FindIt
                     Debugging.Message("GroupPanel not found");
                 }
 
-                m_beautificationPanel = FindObjectOfType<BeautificationPanel>();
+                m_roadsPanel = FindObjectOfType<RoadsPanel>();
 
                 Debugging.Message("Initialized");
 
@@ -214,6 +213,7 @@ namespace FindIt
             {
                 brushPanel.isVisible = false;
             }
+
         }
 
         public void OnButtonClicked(UIComponent c, UIMouseEventParameter p)
@@ -230,9 +230,10 @@ namespace FindIt
                 {
                     AssetTagList.instance.assets[key].onButtonClicked(uIButton);
                 }
-                else if (m_beautificationPanel != null)
+                else if (m_roadsPanel != null)
                 {
-                    typeof(BeautificationPanel).GetMethod("OnButtonClicked", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(m_beautificationPanel, new object[] { uIButton });
+                    typeof(RoadsPanel).GetMethod("OnButtonClicked", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(m_roadsPanel, new object[] { uIButton });
+
                 }
                 else
                 {
@@ -319,7 +320,6 @@ namespace FindIt
                     if (assembly.GetName().Name.ToLower() == "proceduralobjects")
                     {
                         Debugging.Message($"Found enabled Procedural Objects mod? {plugin.isEnabled}");
-                        poAssembly = assembly;
                         return plugin.isEnabled;
                     }
                 }
