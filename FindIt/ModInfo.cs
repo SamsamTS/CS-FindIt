@@ -131,10 +131,19 @@ namespace FindIt
                 {
                     group.AddButton(Translations.Translate("FIF_SET_CTFOP"), () => System.Diagnostics.Process.Start("explorer.exe", "/select," + path));
                 }
-                group.AddSpace(10);
 
-                // shortcut key
-                panel.gameObject.AddComponent<OptionsKeymapping>();
+                // shortcut keys
+                panel.gameObject.AddComponent<MainButtonKeyMapping>();
+                panel.gameObject.AddComponent<AllKeyMapping>();
+                panel.gameObject.AddComponent<NetworkKeyMapping>();
+                panel.gameObject.AddComponent<PloppableKeyMapping>();
+                panel.gameObject.AddComponent<GrowableKeyMapping>();
+                panel.gameObject.AddComponent<RicoKeyMapping>();
+                panel.gameObject.AddComponent<GrwbRicoKeyMapping>();
+                panel.gameObject.AddComponent<PropKeyMapping>();
+                panel.gameObject.AddComponent<DecalMapping>();
+                panel.gameObject.AddComponent<TreeKeyMapping>();
+                panel.gameObject.AddComponent<RandomSelectionKeyMapping>();
                 group.AddSpace(10);
 
             }

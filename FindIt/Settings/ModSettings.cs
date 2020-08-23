@@ -33,6 +33,27 @@ namespace FindIt
 
         internal static KeyBinding searchKey = new KeyBinding { keyCode = (int)KeyCode.F, control = true, shift = false, alt = false };
 
+        internal static KeyBinding allKey = new KeyBinding { keyCode = (int)KeyCode.Alpha1, control = false, shift = false, alt = true };
+
+        internal static KeyBinding networkKey = new KeyBinding { keyCode = (int)KeyCode.Alpha2, control = false, shift = false, alt = true };
+
+        internal static KeyBinding ploppableKey = new KeyBinding { keyCode = (int)KeyCode.Alpha3, control = false, shift = false, alt = true };
+
+        internal static KeyBinding growableKey = new KeyBinding { keyCode = (int)KeyCode.Alpha4, control = false, shift = false, alt = true };
+
+        internal static KeyBinding ricoKey = new KeyBinding { keyCode = (int)KeyCode.Alpha5, control = false, shift = false, alt = true };
+
+        internal static KeyBinding grwbRicoKey = new KeyBinding { keyCode = (int)KeyCode.Alpha6, control = false, shift = false, alt = true };
+
+        internal static KeyBinding propKey = new KeyBinding { keyCode = (int)KeyCode.Alpha7, control = false, shift = false, alt = true };
+
+        internal static KeyBinding decalKey = new KeyBinding { keyCode = (int)KeyCode.Alpha8, control = false, shift = false, alt = true };
+
+        internal static KeyBinding treeKey = new KeyBinding { keyCode = (int)KeyCode.Alpha9, control = false, shift = false, alt = true };
+
+        internal static KeyBinding randomSelectionKey = new KeyBinding { keyCode = (int)KeyCode.R, control = false, shift = false, alt = true };
+
+        /*
         /// <summary>
         /// Checks to see if the search hotkey has been pressed.
         /// </summary>
@@ -57,6 +78,7 @@ namespace FindIt
             }
             else return false;
         }
+        */
     }
 
 
@@ -85,19 +107,49 @@ namespace FindIt
         public bool AssetCreatorListSort { get => Settings.assetCreatorListSort; set => Settings.assetCreatorListSort = value; }
 
         [XmlElement("showPropMarker")]
-        public bool showPropMarker { get => Settings.showPropMarker; set => Settings.showPropMarker = value; }
+        public bool ShowPropMarker { get => Settings.showPropMarker; set => Settings.showPropMarker = value; }
 
         [XmlElement("showInstancesCounter")]
-        public bool showInstancesCounter { get => Settings.showInstancesCounter; set => Settings.showInstancesCounter = value; }
+        public bool ShowInstancesCounter { get => Settings.showInstancesCounter; set => Settings.showInstancesCounter = value; }
 
         [XmlElement("instanceCounterSort")]
-        public int instanceCounterSort { get => Settings.instanceCounterSort; set => Settings.instanceCounterSort = value; }
+        public int InstanceCounterSort { get => Settings.instanceCounterSort; set => Settings.instanceCounterSort = value; }
 
         [XmlElement("includePOinstances")]
-        public bool includePOinstances { get => Settings.includePOinstances; set => Settings.includePOinstances = value; }
+        public bool IncludePOinstances { get => Settings.includePOinstances; set => Settings.includePOinstances = value; }
 
         [XmlElement("SearchKey")]
         public KeyBinding SearchKey { get => Settings.searchKey; set => Settings.searchKey = value; }
+
+        [XmlElement("AllKey")]
+        public KeyBinding AllKey { get => Settings.allKey; set => Settings.allKey = value; }
+
+        [XmlElement("NetworkKey")]
+        public KeyBinding NetworkKey { get => Settings.networkKey; set => Settings.networkKey = value; }
+
+        [XmlElement("PloppableKey")]
+        public KeyBinding PloppableKey { get => Settings.ploppableKey; set => Settings.ploppableKey = value; }
+
+        [XmlElement("GrowableKey")]
+        public KeyBinding GrowableKey { get => Settings.growableKey; set => Settings.growableKey = value; }
+
+        [XmlElement("RicoKey")]
+        public KeyBinding RicoKey { get => Settings.ricoKey; set => Settings.ricoKey = value; }
+
+        [XmlElement("GrwbRicoKey")]
+        public KeyBinding GrwbRicoKey { get => Settings.grwbRicoKey; set => Settings.grwbRicoKey = value; }
+
+        [XmlElement("PropKey")]
+        public KeyBinding PropKey { get => Settings.propKey; set => Settings.propKey = value; }
+
+        [XmlElement("DecalKey")]
+        public KeyBinding DecalKey { get => Settings.decalKey; set => Settings.decalKey = value; }
+
+        [XmlElement("TreeKey")]
+        public KeyBinding TreeKey { get => Settings.treeKey; set => Settings.treeKey = value; }
+
+        [XmlElement("RandomSelectionKey")]
+        public KeyBinding RandomSelectionKey { get => Settings.randomSelectionKey; set => Settings.randomSelectionKey = value; }
 
         [XmlElement("Language")]
         public string Language

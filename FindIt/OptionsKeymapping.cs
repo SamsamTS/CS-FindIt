@@ -15,6 +15,9 @@ namespace FindIt
         // State flag.
         private bool isPrimed = false;
 
+        protected KeyBinding keyBinding;
+        protected string labelString;
+
 
         /// <summary>
         /// The current hotkey settings as ColossalFramework InputKey
@@ -22,14 +25,14 @@ namespace FindIt
         /// </summary>
         private InputKey CurrentHotkey
         {
-            get => SavedInputKey.Encode((KeyCode)Settings.searchKey.keyCode, Settings.searchKey.control, Settings.searchKey.shift, Settings.searchKey.alt);
+            get => SavedInputKey.Encode((KeyCode)keyBinding.keyCode, keyBinding.control, keyBinding.shift, keyBinding.alt);
 
             set
             {
-                Settings.searchKey.keyCode = (int)(value & 0xFFFFFFF);
-                Settings.searchKey.control = (value & 0x40000000) != 0;
-                Settings.searchKey.shift = (value & 0x20000000) != 0;
-                Settings.searchKey.alt = (value & 0x10000000) != 0;
+                keyBinding.keyCode = (int)(value & 0xFFFFFFF);
+                keyBinding.control = (value & 0x40000000) != 0;
+                keyBinding.shift = (value & 0x20000000) != 0;
+                keyBinding.alt = (value & 0x10000000) != 0;
             }
         }
 
@@ -52,7 +55,7 @@ namespace FindIt
             button.eventMouseDown += (control, mouseEvent) => OnMouseDown(mouseEvent);
 
             // Set label and button text.
-            label.text = Translations.Translate("FIF_SET_KS");
+            label.text = labelString;
             button.text = SavedInputKey.ToLocalizedString("KEYNAME", CurrentHotkey);
         }
 
@@ -147,7 +150,7 @@ namespace FindIt
             {
                 // We weren't already primed - set our text and focus the button.
                 button.buttonsMask = (UIMouseButton.Left | UIMouseButton.Right | UIMouseButton.Middle | UIMouseButton.Special0 | UIMouseButton.Special1 | UIMouseButton.Special2 | UIMouseButton.Special3);
-                button.text = Translations.Translate("FIF_SET_KS");
+                button.text = "?";
                 button.Focus();
 
                 // Prime for new keybinding entry.
@@ -156,6 +159,7 @@ namespace FindIt
             }
         }
 
+        public virtual void UpdateSettingKeyBinding() { }
 
         /// <summary>
         /// Applies a valid key to our settings.
@@ -165,6 +169,7 @@ namespace FindIt
         {
             // Apply key to current settings and save.
             CurrentHotkey = key;
+            UpdateSettingKeyBinding();
             XMLUtils.SaveSettings();
 
             // Set the label for the new hotkey.
@@ -217,4 +222,148 @@ namespace FindIt
             return Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt) || Input.GetKey(KeyCode.AltGr);
         }
     }
+
+    public class MainButtonKeyMapping : OptionsKeymapping
+    {
+        MainButtonKeyMapping()
+        {
+            keyBinding = Settings.searchKey;
+            labelString = Translations.Translate("FIF_SET_KS");
+        }
+        public override void UpdateSettingKeyBinding()
+        {
+            Settings.searchKey = keyBinding;
+        }
+    }
+
+    public class AllKeyMapping : OptionsKeymapping
+    {
+        AllKeyMapping()
+        {
+            keyBinding = Settings.allKey;
+            labelString = Translations.Translate("FIF_SE_IA");
+        }
+        public override void UpdateSettingKeyBinding()
+        {
+            Settings.allKey = keyBinding;
+        }
+    }
+
+    public class NetworkKeyMapping : OptionsKeymapping
+    {
+        NetworkKeyMapping()
+        {
+            keyBinding = Settings.networkKey;
+            labelString = Translations.Translate("FIF_SE_IN");
+        }
+        public override void UpdateSettingKeyBinding()
+        {
+            Settings.networkKey = keyBinding;
+        }
+    }
+
+    public class PloppableKeyMapping : OptionsKeymapping
+    {
+        PloppableKeyMapping()
+        {
+            keyBinding = Settings.ploppableKey;
+            labelString = Translations.Translate("FIF_SE_IP");
+        }
+        public override void UpdateSettingKeyBinding()
+        {
+            Settings.ploppableKey = keyBinding;
+        }
+    }
+
+    public class GrowableKeyMapping : OptionsKeymapping
+    {
+        GrowableKeyMapping()
+        {
+            keyBinding = Settings.growableKey;
+            labelString = Translations.Translate("FIF_SE_IG");
+        }
+        public override void UpdateSettingKeyBinding()
+        {
+            Settings.growableKey = keyBinding;
+        }
+    }
+
+    public class RicoKeyMapping : OptionsKeymapping
+    {
+        RicoKeyMapping()
+        {
+            keyBinding = Settings.ricoKey;
+            labelString = Translations.Translate("FIF_SE_IR");
+        }
+        public override void UpdateSettingKeyBinding()
+        {
+            Settings.ricoKey = keyBinding;
+        }
+    }
+
+    public class GrwbRicoKeyMapping : OptionsKeymapping
+    {
+        GrwbRicoKeyMapping()
+        {
+            keyBinding = Settings.grwbRicoKey;
+            labelString = Translations.Translate("FIF_SE_IGR");
+        }
+        public override void UpdateSettingKeyBinding()
+        {
+            Settings.grwbRicoKey = keyBinding;
+        }
+    }
+
+    public class PropKeyMapping : OptionsKeymapping
+    {
+        PropKeyMapping()
+        {
+            keyBinding = Settings.propKey;
+            labelString = Translations.Translate("FIF_SE_IPR");
+        }
+        public override void UpdateSettingKeyBinding()
+        {
+            Settings.propKey = keyBinding;
+        }
+    }
+
+    public class DecalMapping : OptionsKeymapping
+    {
+        DecalMapping()
+        {
+            keyBinding = Settings.decalKey;
+            labelString = Translations.Translate("FIF_SE_ID");
+        }
+        public override void UpdateSettingKeyBinding()
+        {
+            Settings.decalKey = keyBinding;
+        }
+    }
+
+    public class TreeKeyMapping : OptionsKeymapping
+    {
+        TreeKeyMapping()
+        {
+            keyBinding = Settings.treeKey;
+            labelString = Translations.Translate("FIF_SE_IT");
+        }
+        public override void UpdateSettingKeyBinding()
+        {
+            Settings.treeKey = keyBinding;
+        }
+    }
+
+    public class RandomSelectionKeyMapping : OptionsKeymapping
+    {
+        RandomSelectionKeyMapping()
+        {
+            keyBinding = Settings.randomSelectionKey;
+            labelString = Translations.Translate("FIF_GR_RAN");
+        }
+        public override void UpdateSettingKeyBinding()
+        {
+            Settings.randomSelectionKey = keyBinding;
+        }
+    }
+
 }
