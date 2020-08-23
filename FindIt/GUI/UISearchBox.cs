@@ -130,12 +130,15 @@ namespace FindIt.GUI
             searchButton.hoveredFgSprite = "FindItFocused";
             searchButton.pressedFgSprite = "FindItPressed";
             searchButton.relativePosition = new Vector3(input.relativePosition.x + input.width, -5);
+            searchButton.tooltip = Translations.Translate("FIF_SE_SEBTP");
+            searchButton.eventMouseUp += OnTooltipClicked;
 
             searchButton.eventClick += (c, p) =>
             {
                 input.Focus();
                 input.SelectAll();
             };
+
 
             // asset type filter. Also Manipulated by the Picker mod through reflection.
             // Need to notify Quboid if a new dropdown item is added, or the item order is changed
@@ -727,6 +730,14 @@ namespace FindIt.GUI
             HideFilterPanel(filterTree);
             HideFilterPanel(filterNetwork);
             HideFilterPanel(filterDecal);
+        }
+
+        private void OnTooltipClicked(UIComponent c, UIMouseEventParameter p)
+        {
+            if (!p.used && p.buttons == UIMouseButton.Right)
+            {
+                input.text = "";
+            }
         }
     }
 }

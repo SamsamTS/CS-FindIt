@@ -165,6 +165,7 @@
     <Translation ID="FIF_SET_ICUN" String="Show unused assets on top" />
     <Translation ID="FIF_SET_PO" String="Include Procedural Objects" />
     <Translation ID="FIF_TAG_BATTP" String="Batch Editing" />
-    
+    <Translation ID="FIF_SE_SEBTP" String="Right click to clear the search box" />
+
   </Translations>
 </Language>
