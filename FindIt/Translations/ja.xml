@@ -161,6 +161,8 @@
     <Translation ID="FIF_SET_ICO" String="通常の並べ替えオプション" />
     <Translation ID="FIF_SET_ICUS" String="使用中アセットを優先表示します" />
     <Translation ID="FIF_SET_ICUN" String="未使用アセットを優先表示します" />
+    <Translation ID="FIF_TAG_BATTP" String="バッチ編集" />
+    <Translation ID="FIF_SE_SEBTP" String="右クリックして検索ボックスをクリアします" />
 
   </Translations>
 </Language>

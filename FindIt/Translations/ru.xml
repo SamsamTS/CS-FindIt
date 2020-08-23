@@ -20,7 +20,7 @@
     <Translation ID="FIF_SE_IPR" String="Prop" />
     <Translation ID="FIF_SE_ID" String="Decal" />
     <Translation ID="FIF_SE_IT" String="Tree" />
-    <Translation ID="FIF_SE_LV" String="Building Level" />
+    <Translation ID="FIF_SE_LV" String="Уровень здания" />
     <Translation ID="FIF_SE_SZ" String="Size: " />
     <Translation ID="FIF_SE_SC" String="Зажмите SHIFT или CTRL чтобы выбрать несколько категорий" />
     <Translation ID="FIF_PLOP_E" String="Electricity" />
@@ -153,7 +153,7 @@
     <Translation ID="FIF_SET_PM" String="Show marker type props in game mode(restart needed)" />
     <Translation ID="FIF_SET_PMTP" String="Most marker type props can only be removed by the Better Bulldozer mod in game mode. Use with caution" />
     <Translation ID="FIF_SET_IC" String="Показать кол-во размещённых экземпляров объекта" />
-    <Translation ID="FIF_EF_UN" String="Неиспользуемые активы" />
+    <Translation ID="FIF_EF_UN" String="Неиспользуем. объекты" />
     <Translation ID="FIF_QM_TIT" String="Дополнительные фильтры сортировки" />
     <Translation ID="FIF_UIS_UN" String="Unused" />
     <Translation ID="FIF_UIS_IN" String="In Use" />
