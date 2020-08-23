@@ -51,7 +51,7 @@ namespace FindIt
 
         internal static KeyBinding treeKey = new KeyBinding { keyCode = (int)KeyCode.Alpha9, control = false, shift = false, alt = true };
 
-        internal static KeyBinding randomSelectionKey = new KeyBinding { keyCode = (int)KeyCode.R, control = false, shift = false, alt = true };
+        internal static KeyBinding randomSelectionKey = new KeyBinding { keyCode = (int)KeyCode.V, control = false, shift = false, alt = true };
 
         /*
         /// <summary>
@@ -100,22 +100,22 @@ namespace FindIt
         [XmlElement("FixBadProps")]
         public bool FixBadProps { get => Settings.fixBadProps; set => Settings.fixBadProps = value; }
 
-        [XmlElement("customTagListSort")]
+        [XmlElement("CustomTagListSort")]
         public bool CustomTagListSort { get => Settings.customTagListSort; set => Settings.customTagListSort = value; }
 
-        [XmlElement("assetCreatorListSort")]
+        [XmlElement("AssetCreatorListSort")]
         public bool AssetCreatorListSort { get => Settings.assetCreatorListSort; set => Settings.assetCreatorListSort = value; }
 
-        [XmlElement("showPropMarker")]
+        [XmlElement("ShowPropMarker")]
         public bool ShowPropMarker { get => Settings.showPropMarker; set => Settings.showPropMarker = value; }
 
-        [XmlElement("showInstancesCounter")]
+        [XmlElement("ShowInstancesCounter")]
         public bool ShowInstancesCounter { get => Settings.showInstancesCounter; set => Settings.showInstancesCounter = value; }
 
-        [XmlElement("instanceCounterSort")]
+        [XmlElement("InstanceCounterSort")]
         public int InstanceCounterSort { get => Settings.instanceCounterSort; set => Settings.instanceCounterSort = value; }
 
-        [XmlElement("includePOinstances")]
+        [XmlElement("IncludePOinstances")]
         public bool IncludePOinstances { get => Settings.includePOinstances; set => Settings.includePOinstances = value; }
 
         [XmlElement("SearchKey")]

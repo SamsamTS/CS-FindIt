@@ -106,7 +106,6 @@ namespace FindIt
                     FindIt.instance.searchBox.typeFilter.selectedIndex = index;
                 }
 
-
                 // If the searchbox isn't visible, simulate a click on the main button.
                 if (!FindIt.instance.searchBox.isVisible)
                 {
