@@ -230,7 +230,7 @@ namespace FindIt
                 {
                     AssetTagList.instance.assets[key].onButtonClicked(uIButton);
                 }
-                else if (m_roadsPanel != null)
+                else if (m_roadsPanel != null && prefab is NetInfo)
                 {
                     typeof(RoadsPanel).GetMethod("OnButtonClicked", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(m_roadsPanel, new object[] { uIButton });
 
