@@ -162,7 +162,7 @@
     <Translation ID="FIF_SET_ICUS" String="優先顯示使用中的素材" />
     <Translation ID="FIF_SET_ICUN" String="優先顯示未使用的素材" />
     <Translation ID="FIF_TAG_BATTP" String="批次編輯" />
-    <Translation ID="FIF_SE_SEBTP" String="滑鼠右鍵點擊可清除搜尋欄" />
+    <Translation ID="FIF_SE_SEBTP" String="滑鼠點擊以清除搜尋欄內容" />
 
   </Translations>
 </Language>

@@ -396,7 +396,8 @@ namespace FindIt
                     "TreeSmDisabled",
                     "TinyRoads",
                     "TinyRoadsDisabled",
-                    "QuickMenu"
+                    "QuickMenu",
+                    "Clear"
                 };
 
                 atlas = ResourceLoader.CreateTextureAtlas("FindItAtlas", spriteNames, "FindIt.Icons.");

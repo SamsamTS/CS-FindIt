@@ -142,6 +142,7 @@
     <EmbeddedResource Include="Icons\TinyRoads.png" />
     <EmbeddedResource Include="Icons\TinyRoadsDisabled.png" />
     <EmbeddedResource Include="Icons\QuickMenu.png" />
+    <EmbeddedResource Include="Icons\Clear.png" />
     <Content Include="Translations\de.xml" />
     <Content Include="Translations\en.xml" />
     <Content Include="Translations\es.xml" />

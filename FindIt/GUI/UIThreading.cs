@@ -118,8 +118,10 @@ namespace FindIt
                 }
                 else
                 {
-                    // Simulate click on searchbox to focus and select contents.
-                    FindIt.instance.searchBox.searchButton.SimulateClick();
+                    // Simulate a search
+                    FindIt.instance.searchBox.Search();
+                    FindIt.instance.searchBox.input.Focus();
+                    FindIt.instance.searchBox.input.SelectAll();
                 }
             }
             catch (Exception e)

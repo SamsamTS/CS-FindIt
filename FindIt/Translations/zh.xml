@@ -162,7 +162,7 @@
     <Translation ID="FIF_SET_ICUS" String="优先显示使用中的资产" />
     <Translation ID="FIF_SET_ICUN" String="优先显示未使用的资产" />
     <Translation ID="FIF_TAG_BATTP" String="批量编辑" />
-    <Translation ID="FIF_SE_SEBTP" String="右键单击以清除搜索框" />
+    <Translation ID="FIF_SE_SEBTP" String="单击以清除搜索框" />
 
   </Translations>
 </Language>

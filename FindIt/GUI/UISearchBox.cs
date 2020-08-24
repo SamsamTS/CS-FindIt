@@ -20,7 +20,7 @@ namespace FindIt.GUI
         public UITextField input;
         public UIScrollPanel scrollPanel;
         UIPanel panel;
-        public UIButton searchButton;
+        public UISprite clearButton;
 
         /// <summary>
         /// Also manipulated by the Picker mod. Don't change its accessibility. 
@@ -96,7 +96,7 @@ namespace FindIt.GUI
 
             // search input box
             input = SamsamTS.UIUtils.CreateTextField(inputPanel);
-            input.size = new Vector2(254, 28);
+            input.size = new Vector2(250, 28);
             input.padding.top = 6;
             input.relativePosition = new Vector3(5, 4);
 
@@ -121,24 +121,27 @@ namespace FindIt.GUI
                 }
             };
 
-            // search button
-            searchButton = inputPanel.AddUIComponent<UIButton>();
-            searchButton.size = new Vector2(41, 47);
-            searchButton.atlas = FindIt.instance.mainButton.atlas;
-            searchButton.playAudioEvents = true;
-            searchButton.normalFgSprite = "FindIt";
-            searchButton.hoveredFgSprite = "FindItFocused";
-            searchButton.pressedFgSprite = "FindItPressed";
-            searchButton.relativePosition = new Vector3(input.relativePosition.x + input.width, -5);
-            searchButton.tooltip = Translations.Translate("FIF_SE_SEBTP");
-            searchButton.eventMouseUp += OnTooltipClicked;
-
-            searchButton.eventClick += (c, p) =>
+            // change custom tag panel visibility
+            clearButton = inputPanel.AddUIComponent<UISprite>();
+            clearButton.size = new Vector2(30, 30);
+            clearButton.atlas = FindIt.atlas;
+            clearButton.spriteName = "Clear";
+            clearButton.tooltip = Translations.Translate("FIF_SE_SEBTP");
+            clearButton.opacity = 0.5f;
+            clearButton.relativePosition = new Vector3(input.relativePosition.x + input.width + 5, 2.5f);
+            clearButton.eventClicked += (c, p) =>
             {
-                input.Focus();
-                input.SelectAll();
+                input.text = "";
+            };
+            clearButton.eventMouseEnter += (c, p) =>
+            {
+                clearButton.opacity = 1.0f;
             };
 
+            clearButton.eventMouseLeave += (c, p) =>
+            {
+                clearButton.opacity = 0.5f;
+            };
 
             // asset type filter. Also Manipulated by the Picker mod through reflection.
             // Need to notify Quboid if a new dropdown item is added, or the item order is changed
@@ -146,7 +149,7 @@ namespace FindIt.GUI
             typeFilter.name = "FindIt_AssetTypeFilter";
             typeFilter.size = new Vector2(105, 25);
             typeFilter.tooltip = Translations.Translate("FIF_POP_SCR");
-            typeFilter.relativePosition = new Vector3(searchButton.relativePosition.x + searchButton.width + 5, 5);
+            typeFilter.relativePosition = new Vector3(clearButton.relativePosition.x + clearButton.width + 15, 5);
 
             if (FindIt.isRicoEnabled)
             {
