@@ -67,6 +67,7 @@ namespace FindIt.GUI
             tagDropDownMenu.itemHeight = 30;
             tagDropDownMenu.relativePosition = new Vector3(spacing * 2, message.relativePosition.y + message.height + spacing * 2);
             UpdateCustomTagList();
+            SamsamTS.UIUtils.CreateDropDownScrollBar(tagDropDownMenu);
 
             tagDropDownButton = SamsamTS.UIUtils.CreateButton(this);
             tagDropDownButton.size = new Vector2(80, 30);

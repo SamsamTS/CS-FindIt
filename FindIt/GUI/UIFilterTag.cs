@@ -54,9 +54,8 @@ namespace FindIt.GUI
             tagDropDownMenu.tooltip = Translations.Translate("FIF_POP_SCR");
             tagDropDownMenu.listHeight = 300;
             tagDropDownMenu.itemHeight = 30;
-            UpdateCustomTagList();
-            tagDropDownMenu.items = customTagListStrArray;
             tagDropDownMenu.relativePosition = new Vector3(tagDropDownCheckBox.relativePosition.x + tagDropDownCheckBox.width + 5, 5);
+            UpdateCustomTagList();
             tagDropDownMenu.eventSelectedIndexChanged += (c, p) =>
             {
                 if (tagDropDownCheckBox.isChecked)
@@ -232,6 +231,11 @@ namespace FindIt.GUI
             {
                 tagDropDownCheckBox.isChecked = false;
             }
+
+            tagDropDownMenu.items = customTagListStrArray;
+
+            SamsamTS.UIUtils.DestroyDropDownScrollBar(tagDropDownMenu);
+            SamsamTS.UIUtils.CreateDropDownScrollBar(tagDropDownMenu);
         }
 
         public string GetDropDownListKey()

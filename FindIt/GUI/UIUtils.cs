@@ -9,10 +9,10 @@ namespace SamsamTS
 {
     public class UIUtils
     {
+        // From SamsamTS: 
         // Figuring all this was a pain (no documentation whatsoever)
         // So if your are using it for your mod consider thanking me (SamsamTS)
         // Extended Public Transport UI's code helped me a lot so thanks a lot AcidFire
-
         public static UIButton CreateButton(UIComponent parent)
         {
             UIButton button = (UIButton)parent.AddUIComponent<UIButton>();
@@ -108,6 +108,7 @@ namespace SamsamTS
             dropDown.selectedIndex = 0;
             dropDown.textFieldPadding = new RectOffset(8, 0, 8, 0);
             dropDown.itemPadding = new RectOffset(14, 0, 8, 0);
+            dropDown.builtinKeyNavigation = true;
 
             UIButton button = dropDown.AddUIComponent<UIButton>();
             dropDown.triggerButton = button;
@@ -131,6 +132,56 @@ namespace SamsamTS
             });
 
             return dropDown;
+        }
+
+        public static void CreateDropDownScrollBar(UIDropDown dropDown)
+        {
+            // Scrollbar
+            dropDown.listScrollbar = dropDown.AddUIComponent<UIScrollbar>();
+            dropDown.listScrollbar.width = 20f;
+            dropDown.listScrollbar.height = dropDown.listHeight;
+            dropDown.listScrollbar.orientation = UIOrientation.Vertical;
+            dropDown.listScrollbar.pivot = UIPivotPoint.TopRight;
+            dropDown.listScrollbar.thumbPadding = new RectOffset(0, 0, 5, 5);
+            dropDown.listScrollbar.minValue = 0;
+            dropDown.listScrollbar.value = 0;
+            dropDown.listScrollbar.incrementAmount = 50;
+            dropDown.listScrollbar.AlignTo(dropDown, UIAlignAnchor.TopRight);
+            dropDown.listScrollbar.autoHide = false;
+
+            // the game automatically creates 2 scrollbar clones: one for the drowdown itself and one for the dropdown popup list box
+            // we only need the one inside the dropdown popup which will automatically be placed inside the popup
+            // move the other one off screen to hide it(we can't set it to invisible or both would become invisible)
+            Vector3 newPosition = FindIt.FindIt.instance.mainButton.relativePosition;
+            newPosition.x += 10000;
+            newPosition.y += 10000;
+            dropDown.listScrollbar.relativePosition = newPosition;
+
+            UISlicedSprite tracSprite = dropDown.listScrollbar.AddUIComponent<UISlicedSprite>();
+            tracSprite.relativePosition = Vector2.zero;
+            tracSprite.autoSize = true;
+            tracSprite.size = tracSprite.parent.size;
+            tracSprite.fillDirection = UIFillDirection.Vertical;
+            tracSprite.spriteName = "ScrollbarTrack";
+
+            dropDown.listScrollbar.trackObject = tracSprite;
+
+            UISlicedSprite thumbSprite = tracSprite.AddUIComponent<UISlicedSprite>();
+            thumbSprite.relativePosition = Vector2.zero;
+            thumbSprite.fillDirection = UIFillDirection.Vertical;
+            thumbSprite.autoSize = true;
+            thumbSprite.width = thumbSprite.parent.width - 8;
+            thumbSprite.spriteName = "ScrollbarThumb";
+            dropDown.listScrollbar.thumbObject = thumbSprite;
+        }
+
+        public static void DestroyDropDownScrollBar(UIDropDown dropDown)
+        {
+            UIScrollbar[] scrollbars = dropDown.GetComponentsInChildren<UIScrollbar>();
+            foreach (UIScrollbar scrollbar in scrollbars)
+            {
+                UnityEngine.GameObject.DestroyImmediate(scrollbar.gameObject);
+            }
         }
 
         public static UICheckBox CreateIconToggle(UIComponent parent, string atlas, string checkedSprite, string uncheckedSprite)
