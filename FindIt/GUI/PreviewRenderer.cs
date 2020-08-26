@@ -2,7 +2,6 @@
 // https://github.com/SamsamTS/CS-FindIt
 
 using ColossalFramework;
-using System.Xml.Schema;
 using UnityEngine;
 
 namespace FindIt.GUI
