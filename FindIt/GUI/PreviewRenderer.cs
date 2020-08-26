@@ -13,7 +13,8 @@ namespace FindIt.GUI
         private float currentRotation = 35f;
         private float currentZoom = 4f;
         private Material _material;
-        private bool isDestroyedPile = false;
+        public Shader propFenceShader = Shader.Find("Custom/Props/Prop/Fence");
+        private bool isPropFenceShader = false;
 
         /// <summary>
         /// Sets material to render.
@@ -105,12 +106,12 @@ namespace FindIt.GUI
         }
 
         /// <summary>
-        /// Destroyed pile props need to be handled differently or they are not viewable
+        /// props with prop fence shader need to be handled differently or they are not viewable
         /// </summary>
-        public bool IsDestroyedPile
+        public bool IsPropFenceShader
         {
-            get { return isDestroyedPile; }
-            set { isDestroyedPile = value; }
+            get { return isPropFenceShader; }
+            set { isPropFenceShader = value; }
         }
 
 
@@ -165,10 +166,10 @@ namespace FindIt.GUI
             // Apply model rotation with our camnera rotation into a quaternion.
             Quaternion modelRotation = Quaternion.Euler(xRotation, 0f, 0f) * Quaternion.Euler(0f, currentRotation, 0f);
 
-            // destroyed pile props need to be handled differently or they are not viewable
-            if (IsDestroyedPile)
+            // props with prop fence shader need to be handled differently or they are not viewable
+            if (IsPropFenceShader)
             {
-                modelRotation = Quaternion.Euler(-90f, 180f, 0f) * Quaternion.Euler(0f, currentRotation, 0f);
+                modelRotation = Quaternion.Euler(-60f, 180f, 0f) * Quaternion.Euler(0f, currentRotation, 0f);
                 modelPosition = modelRotation * -currentMesh.bounds.center;
             }
 

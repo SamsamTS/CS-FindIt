@@ -283,7 +283,7 @@ namespace FindIt.GUI
             // Set mesh and material for render.
             renderer.Mesh = building.m_mesh;
             renderer.Material = building.m_material;
-            renderer.IsDestroyedPile = false;
+            renderer.IsPropFenceShader = false;
 
             // If the selected building has colour variations, temporarily set the colour to the default for rendering.
             if (building.m_useColorVariations)
@@ -321,14 +321,14 @@ namespace FindIt.GUI
             renderer.Mesh = prop.m_mesh;
             renderer.Material = prop.m_material;
 
-            // destroyed pile props need to be handled differently or they are not viewable
-            if (prop.m_class.name == "Destroyed Pile")
+            // props with prop fence shader need to be handled differently or they are not viewable
+            renderer.IsPropFenceShader = false;
+            if (!prop.m_isCustomContent)
             {
-                renderer.IsDestroyedPile = true;
-            }
-            else
-            {
-                renderer.IsDestroyedPile = false;
+                if (prop.m_material.shader == renderer.propFenceShader)
+                {
+                    renderer.IsPropFenceShader = true;
+                }
             }
 
             // If the selected prop has colour variations, temporarily set the colour to the default for rendering.
@@ -366,7 +366,7 @@ namespace FindIt.GUI
             // Set mesh and material for render.
             renderer.Mesh = tree.m_mesh;
             renderer.Material = tree.m_material;
-            renderer.IsDestroyedPile = false;
+            renderer.IsPropFenceShader = false;
 
             // Render.
             renderer.Render();
