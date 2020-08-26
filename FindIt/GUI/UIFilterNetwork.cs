@@ -190,6 +190,15 @@ namespace FindIt.GUI
                 };
             }
 
+            // hide "Tiny Roads" tab if the category is empty
+            if (!AssetTagList.instance.tinyRoadsExist)
+            {
+                for (int i = 1; i < (int)Category.All; i++)
+                {
+                    toggles[i].relativePosition = new Vector3(5 + 40 * (i - 1), 5);
+                }
+            }
+
             UICheckBox last = toggles[toggles.Length - 1];
 
             randomIcon = SamsamTS.UIUtils.CreateIconToggle(this, "FindItAtlas", "Dice", "Dice");

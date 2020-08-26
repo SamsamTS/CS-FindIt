@@ -164,7 +164,7 @@
     <Translation ID="FIF_SET_ICUN" String="Сначала неиспользуемые объекты" />
     <Translation ID="FIF_SET_PO" String="Учитывать Procedural Objects" />
     <Translation ID="FIF_TAG_BATTP" String="Пакетное редактирование" />
-    <Translation ID="FIF_SE_SEBTP" String="Щёлкните правой кнопкой мыши, чтобы очистить поле поиска" />
+    <Translation ID="FIF_SE_SEBTP" String="Очистить поле поиска" />
 
   </Translations>
 </Language>

@@ -413,7 +413,11 @@ namespace FindIt
         {
             if (info == null) return Asset.NetworkType.Invalid;
 
-            else if (info.category.StartsWith("RoadsTiny")) return Asset.NetworkType.TinyRoads;
+            else if (info.category.StartsWith("RoadsTiny"))
+            {
+                AssetTagList.instance.tinyRoadsExist = true;
+                return Asset.NetworkType.TinyRoads;
+            }
 
             else if (info.category.StartsWith("RoadsSmall")) return Asset.NetworkType.SmallRoads;
             else if (info.m_class.name.StartsWith("Small Road")) return Asset.NetworkType.SmallRoads;

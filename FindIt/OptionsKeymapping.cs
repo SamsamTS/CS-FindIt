@@ -1,5 +1,5 @@
 ﻿// By algernon via Realistic Population Revisited, based on analysis and refactoring of game code by Colossal Order.
-// Furthur modified by sway. If there is any thing wrong blame it on me.
+// Further modified by sway. If there is anything wrong blame it on me.
 
 using ColossalFramework;
 using ColossalFramework.UI;
@@ -36,7 +36,6 @@ namespace FindIt
                 keyBinding.alt = (value & 0x10000000) != 0;
             }
         }
-
 
         /// <summary>
         /// Setup this control

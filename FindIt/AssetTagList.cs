@@ -18,6 +18,12 @@ namespace FindIt
     {
         public static AssetTagList instance;
 
+        /// <summary>
+        /// Tiny Roads is a network category created by Next2. Doesn't exist in vanilla game
+        /// Some asset creators used modtools to self-assign their roads as tiny roads
+        /// </summary>
+        public bool tinyRoadsExist = false;
+
         public Dictionary<string, int> tagsTitleDictionary = new Dictionary<string, int>();
         public Dictionary<string, int> tagsDescDictionary = new Dictionary<string, int>();
         public Dictionary<string, int> tagsCustomDictionary = new Dictionary<string, int>();
