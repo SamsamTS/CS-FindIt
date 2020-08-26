@@ -2,6 +2,7 @@
 // https://github.com/SamsamTS/CS-FindIt
 
 using ColossalFramework;
+using System.Xml.Schema;
 using UnityEngine;
 
 namespace FindIt.GUI
@@ -13,7 +14,7 @@ namespace FindIt.GUI
         private float currentRotation = 35f;
         private float currentZoom = 4f;
         private Material _material;
-
+        private bool isDestroyedPile = false;
 
         /// <summary>
         /// Sets material to render.
@@ -104,6 +105,15 @@ namespace FindIt.GUI
             }
         }
 
+        /// <summary>
+        /// Destroyed pile props need to be handled differently or they are not viewable
+        /// </summary>
+        public bool IsDestroyedPile
+        {
+            get { return isDestroyedPile; }
+            set { isDestroyedPile = value; }
+        }
+
 
         /// <summary>
         /// Render the current mesh.
@@ -155,6 +165,13 @@ namespace FindIt.GUI
 
             // Apply model rotation with our camnera rotation into a quaternion.
             Quaternion modelRotation = Quaternion.Euler(xRotation, 0f, 0f) * Quaternion.Euler(0f, currentRotation, 0f);
+
+            // destroyed pile props need to be handled differently or they are not viewable
+            if (IsDestroyedPile)
+            {
+                modelRotation = Quaternion.Euler(-90f, 180f, 0f) * Quaternion.Euler(0f, currentRotation, 0f);
+                modelPosition = modelRotation * -currentMesh.bounds.center;
+            }
 
             // Add our main mesh, if any (some are null, because they only 'appear' through subbuildings - e.g. Boston Residence Garage).
             if (currentMesh != null && _material != null)

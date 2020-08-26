@@ -283,6 +283,7 @@ namespace FindIt.GUI
             // Set mesh and material for render.
             renderer.Mesh = building.m_mesh;
             renderer.Material = building.m_material;
+            renderer.IsDestroyedPile = false;
 
             // If the selected building has colour variations, temporarily set the colour to the default for rendering.
             if (building.m_useColorVariations)
@@ -320,7 +321,17 @@ namespace FindIt.GUI
             renderer.Mesh = prop.m_mesh;
             renderer.Material = prop.m_material;
 
-            // If the selected building has colour variations, temporarily set the colour to the default for rendering.
+            // destroyed pile props need to be handled differently or they are not viewable
+            if (prop.m_class.name == "Destroyed Pile")
+            {
+                renderer.IsDestroyedPile = true;
+            }
+            else
+            {
+                renderer.IsDestroyedPile = false;
+            }
+
+            // If the selected prop has colour variations, temporarily set the colour to the default for rendering.
             if (prop.m_useColorVariations)
             {
                 Color originalColor = prop.m_material.color;
@@ -355,6 +366,7 @@ namespace FindIt.GUI
             // Set mesh and material for render.
             renderer.Mesh = tree.m_mesh;
             renderer.Material = tree.m_material;
+            renderer.IsDestroyedPile = false;
 
             // Render.
             renderer.Render();

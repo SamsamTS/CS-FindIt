@@ -327,9 +327,9 @@ namespace FindIt
         }
     }
 
-    public class DecalMapping : OptionsKeymapping
+    public class DecalKeyMapping : OptionsKeymapping
     {
-        DecalMapping()
+        DecalKeyMapping()
         {
             keyBinding = Settings.decalKey;
             labelString = Translations.Translate("FIF_SE_ID");

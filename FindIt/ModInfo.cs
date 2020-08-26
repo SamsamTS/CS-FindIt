@@ -14,7 +14,7 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.0.3-beta7";
+        public const string version = "2.0.3-beta8";
         public const bool isBeta = true;
         public const bool showExtraDebuggingMessage = false;
 
@@ -141,7 +141,7 @@ namespace FindIt
                 panel.gameObject.AddComponent<RicoKeyMapping>();
                 panel.gameObject.AddComponent<GrwbRicoKeyMapping>();
                 panel.gameObject.AddComponent<PropKeyMapping>();
-                panel.gameObject.AddComponent<DecalMapping>();
+                panel.gameObject.AddComponent<DecalKeyMapping>();
                 panel.gameObject.AddComponent<TreeKeyMapping>();
                 panel.gameObject.AddComponent<RandomSelectionKeyMapping>();
                 group.AddSpace(10);
