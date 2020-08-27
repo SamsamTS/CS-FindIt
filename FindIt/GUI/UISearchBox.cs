@@ -20,6 +20,7 @@ namespace FindIt.GUI
         public UITextField input;
         public UIScrollPanel scrollPanel;
         UIPanel panel;
+        public UISprite searchIcon;
         public UISprite clearButton;
 
         /// <summary>
@@ -120,6 +121,13 @@ namespace FindIt.GUI
                     typeFilter.selectedIndex = Mathf.Clamp(typeFilter.selectedIndex + (eventParam.keycode == KeyCode.DownArrow ? 1 : -1), 0, typeFilter.items.Length);
                 }
             };
+
+            // search icon
+            searchIcon = inputPanel.AddUIComponent<UISprite>();
+            searchIcon.size = new Vector2(25, 30);
+            searchIcon.atlas = FindIt.atlas;
+            searchIcon.spriteName = "FindItDisabled";
+            searchIcon.relativePosition = new Vector3(5, 4);
 
             // change custom tag panel visibility
             clearButton = inputPanel.AddUIComponent<UISprite>();
@@ -429,10 +437,6 @@ namespace FindIt.GUI
         {
             base.OnVisibilityChanged();
 
-            if (panel != null)
-            {
-                panel.width = parent.width;
-            }
             if (input != null && !isVisible)
             {
                 input.Unfocus();

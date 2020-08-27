@@ -153,8 +153,8 @@ namespace SamsamTS
             // we only need the one inside the dropdown popup which will automatically be placed inside the popup
             // move the other one off screen to hide it(we can't set it to invisible or both would become invisible)
             Vector3 newPosition = FindIt.FindIt.instance.mainButton.relativePosition;
-            newPosition.x += 10000;
-            newPosition.y += 10000;
+            newPosition.x += 50000;
+            newPosition.y += 50000;
             dropDown.listScrollbar.relativePosition = newPosition;
 
             UISlicedSprite tracSprite = dropDown.listScrollbar.AddUIComponent<UISlicedSprite>();
