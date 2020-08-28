@@ -18,6 +18,30 @@ You can use Github's issues tab or via Steam. This repo is not under my main Git
 
 ## Change Notes
 
+v2.0.3 Update:
+- Add 'Include Procedural Objects' option in quick menu for 'Show asset instance count'  
+
+- Minor UI changes
+
+- Fix [this and other inherited bugs](https://www.youtube.com/watch?v=-G6lxpwON4Q) related to the road options panel  
+
+- Assets from all 6 content creator packs are considered as both 'vanilla' and 'custom'. The asset creator filter now associates these assets with the creators' Steam profile names, along with their other workshop assets.  
+Content Creator Pack: Art Deco by "Shroomblaze"  
+Content Creator Pack: High-Tech Buildings by "GCVos"  
+Content Creator Pack: European Suburbia by "Avanya"  
+Content Creator Pack: University City by "KingLeno"  
+Content Creator Pack: Modern City Center by "AmiPolizeiFunk"  
+Content Creator Pack: Modern Japan by "Ryuichi Kaminogi"  
+
+- Add more keyboard shortcuts (the bulldoze tool issue is still unsolved)  
+
+- Change the search button to a "clear search box" button  
+
+- Add scrollbars to custom tag drop-downs  
+
+- When a drop-down menu is clicked and focused, you can also use the ↑ ↓ arrow keys to move around  
+
+- Fix the thumbnail issue related to vanilla props with "prop fence" shader  
 
 v2.0.2 Update:
 - New 'Unused Assets' filter in the extra filters panel.
