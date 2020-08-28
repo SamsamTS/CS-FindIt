@@ -764,6 +764,12 @@ namespace FindIt.GUI
             }
             if (targetAsset == null) return false;
 
+            if (targetAsset.assetType != Asset.AssetType.Rico && targetAsset.assetType != Asset.AssetType.Growable 
+                &&  targetAsset.assetType != Asset.AssetType.Prop && targetAsset.assetType != Asset.AssetType.Decal)
+            {
+                return false;
+            }
+
             input.text = "";
             UIFilterTag.instance.tagDropDownCheckBox.isChecked = false;
             UIFilterExtra.instance.optionDropDownCheckBox.isChecked = false;
@@ -773,18 +779,26 @@ namespace FindIt.GUI
 
             if (targetAsset.assetType == Asset.AssetType.Rico || targetAsset.assetType == Asset.AssetType.Growable)
             {
+                /*
                 // set type drop-down
                 if (targetAsset.assetType == Asset.AssetType.Growable) typeFilter.selectedIndex = (int)DropDownOptions.Growable;
                 else typeFilter.selectedIndex = (int)DropDownOptions.Rico;
+                */
 
                 // set building size filter
-                if (!AssetTagList.instance.CheckBuildingSizeXY(targetAsset.size.x, buildingSizeFilterIndex.x))
+                if (sizeFilterX.selectedIndex != 0) // if not 'all'
                 {
-                    sizeFilterX.selectedIndex = 0;
+                    if (!AssetTagList.instance.CheckBuildingSizeXY(targetAsset.size.x, buildingSizeFilterIndex.x)) // if wrong size option
+                    {
+                        sizeFilterX.selectedIndex = 0;
+                    }
                 }
-                if (!AssetTagList.instance.CheckBuildingSizeXY(targetAsset.size.y, buildingSizeFilterIndex.y))
+                if (sizeFilterY.selectedIndex != 0) // if not 'all'
                 {
-                    sizeFilterY.selectedIndex = 0;
+                    if (!AssetTagList.instance.CheckBuildingSizeXY(targetAsset.size.y, buildingSizeFilterIndex.y)) // if wrong size option
+                    {
+                        sizeFilterY.selectedIndex = 0;
+                    }
                 }
 
                 // select filter tab
@@ -797,10 +811,12 @@ namespace FindIt.GUI
                 }
             }
 
-            if (targetAsset.assetType == Asset.AssetType.Prop)
+            else if (targetAsset.assetType == Asset.AssetType.Prop)
             {
+                /*
                 // set type drop-down
-                typeFilter.selectedIndex = (int)DropDownOptions.Prop - (FindIt.isRicoEnabled? 0 : 2);
+                typeFilter.selectedIndex = (int)DropDownOptions.Prop - (FindIt.isRicoEnabled ? 0 : 2);
+                */
 
                 // select filter tab
                 if (!UIFilterProp.instance.IsSelected(UIFilterProp.GetCategory(targetAsset.propType)))
@@ -808,13 +824,22 @@ namespace FindIt.GUI
                     UIFilterProp.instance.SelectAll();
                 }
             }
-            if (targetAsset.assetType == Asset.AssetType.Decal)
+            else if (targetAsset.assetType == Asset.AssetType.Decal)
             {
+                /*
                 // set type drop-down
                 typeFilter.selectedIndex = (int)DropDownOptions.Decal - (FindIt.isRicoEnabled ? 0 : 2);
+                */
+            }
+            else
+            {
+                return false;
             }
 
+            Search();
             bool found = false;
+
+            // try to locate in the most recent search result
             for (int i = 0; i < searchResultList.Count; i++)
             {
                 if (targetAsset.title == searchResultList.ElementAt(i))
@@ -826,6 +851,7 @@ namespace FindIt.GUI
             }
             if (!found) return false;
 
+            // try to locate in the display buttons
             found = false;
             foreach (UIButton button in FindIt.instance.scrollPanel.GetComponentsInChildren<UIButton>())
             {
