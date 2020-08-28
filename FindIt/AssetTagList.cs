@@ -320,7 +320,7 @@ namespace FindIt
             return true;
         }
 
-        private bool CheckBuildingSizeXY(float assetSizeXY, float buildingSizeFilterIndex)
+        public bool CheckBuildingSizeXY(float assetSizeXY, float buildingSizeFilterIndex)
         {
             if (buildingSizeFilterIndex == 0.0f) return true; // all
             if (buildingSizeFilterIndex < 5.0f) // size of 1 - 4

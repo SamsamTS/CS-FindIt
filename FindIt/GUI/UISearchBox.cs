@@ -5,7 +5,6 @@ using UnityEngine;
 using ColossalFramework;
 using ColossalFramework.DataBinding;
 using ColossalFramework.UI;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -745,6 +744,101 @@ namespace FindIt.GUI
             {
                 input.text = "";
             }
+        }
+
+        /// <summary>
+        /// Used by Quboid's Picker mod. Reset necessary filters and try to locate the asset.
+        /// Return false if the asset can't be found
+        /// </summary>
+        public bool Picker(PrefabInfo info)
+        {
+            // check if the prefab exists in Find It's asset list
+            Asset targetAsset = null;
+            foreach (Asset asset in AssetTagList.instance.assets.Values)
+            {
+                if (asset.prefab == info)
+                {
+                    targetAsset = asset;
+                    break;
+                }
+            }
+            if (targetAsset == null) return false;
+
+            input.text = "";
+            UIFilterTag.instance.tagDropDownCheckBox.isChecked = false;
+            UIFilterExtra.instance.optionDropDownCheckBox.isChecked = false;
+
+            if (targetAsset.prefab.m_isCustomContent) workshopFilter.isChecked = true;
+            else vanillaFilter.isChecked = true;
+
+            if (targetAsset.assetType == Asset.AssetType.Rico || targetAsset.assetType == Asset.AssetType.Growable)
+            {
+                // set type drop-down
+                if (targetAsset.assetType == Asset.AssetType.Growable) typeFilter.selectedIndex = (int)DropDownOptions.Growable;
+                else typeFilter.selectedIndex = (int)DropDownOptions.Rico;
+
+                // set building size filter
+                if (!AssetTagList.instance.CheckBuildingSizeXY(targetAsset.size.x, buildingSizeFilterIndex.x))
+                {
+                    sizeFilterX.selectedIndex = 0;
+                }
+                if (!AssetTagList.instance.CheckBuildingSizeXY(targetAsset.size.y, buildingSizeFilterIndex.y))
+                {
+                    sizeFilterY.selectedIndex = 0;
+                }
+
+                // select filter tab
+                BuildingInfo buildingInfo = targetAsset.prefab as BuildingInfo;
+                if (buildingInfo == null) return false;
+
+                if (!UIFilterGrowable.instance.IsSelected(UIFilterGrowable.GetCategory(buildingInfo.m_class)))
+                {
+                    UIFilterGrowable.instance.SelectAll();
+                }
+            }
+
+            if (targetAsset.assetType == Asset.AssetType.Prop)
+            {
+                // set type drop-down
+                typeFilter.selectedIndex = (int)DropDownOptions.Prop - (FindIt.isRicoEnabled? 0 : 2);
+
+                // select filter tab
+                if (!UIFilterProp.instance.IsSelected(UIFilterProp.GetCategory(targetAsset.propType)))
+                {
+                    UIFilterProp.instance.SelectAll();
+                }
+            }
+            if (targetAsset.assetType == Asset.AssetType.Decal)
+            {
+                // set type drop-down
+                typeFilter.selectedIndex = (int)DropDownOptions.Decal - (FindIt.isRicoEnabled ? 0 : 2);
+            }
+
+            bool found = false;
+            for (int i = 0; i < searchResultList.Count; i++)
+            {
+                if (targetAsset.title == searchResultList.ElementAt(i))
+                {
+                    FindIt.instance.scrollPanel.DisplayAt(i);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) return false;
+
+            found = false;
+            foreach (UIButton button in FindIt.instance.scrollPanel.GetComponentsInChildren<UIButton>())
+            {
+                if (button.name == targetAsset.title)
+                {
+                    found = true;
+                    button.SimulateClick();
+                    break;
+                }
+            }
+            if (!found) return false;
+
+            return true;
         }
     }
 }
