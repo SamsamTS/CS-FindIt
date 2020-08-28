@@ -139,6 +139,7 @@ namespace FindIt.GUI
             clearButton.eventClicked += (c, p) =>
             {
                 input.text = "";
+                //PickerRandomTest();
             };
             clearButton.eventMouseEnter += (c, p) =>
             {
@@ -762,20 +763,11 @@ namespace FindIt.GUI
                     break;
                 }
             }
-            if (targetAsset == null) return false;
-
-            if (targetAsset.assetType != Asset.AssetType.Rico && targetAsset.assetType != Asset.AssetType.Growable 
-                &&  targetAsset.assetType != Asset.AssetType.Prop && targetAsset.assetType != Asset.AssetType.Decal)
+            if (targetAsset == null)
             {
+                Debugging.Message("Picker - target doesn't exist in Find It 2's catalog");
                 return false;
             }
-
-            input.text = "";
-            UIFilterTag.instance.tagDropDownCheckBox.isChecked = false;
-            UIFilterExtra.instance.optionDropDownCheckBox.isChecked = false;
-
-            if (targetAsset.prefab.m_isCustomContent) workshopFilter.isChecked = true;
-            else vanillaFilter.isChecked = true;
 
             if (targetAsset.assetType == Asset.AssetType.Rico || targetAsset.assetType == Asset.AssetType.Growable)
             {
@@ -833,13 +825,21 @@ namespace FindIt.GUI
             }
             else
             {
+                Debugging.Message("Picker - wrong asset type");
                 return false;
             }
 
+            input.text = "";
+            UIFilterTag.instance.tagDropDownCheckBox.isChecked = false;
+            UIFilterExtra.instance.optionDropDownCheckBox.isChecked = false;
+
+            if (targetAsset.prefab.m_isCustomContent) workshopFilter.isChecked = true;
+            else vanillaFilter.isChecked = true;
+
             Search();
-            bool found = false;
 
             // try to locate in the most recent search result
+            bool found = false;
             for (int i = 0; i < searchResultList.Count; i++)
             {
                 if (targetAsset.title == searchResultList.ElementAt(i))
@@ -849,9 +849,13 @@ namespace FindIt.GUI
                     break;
                 }
             }
-            if (!found) return false;
+            if (!found)
+            {
+                Debugging.Message("Picker - not found in the most recent search result");
+                return false;
+            }
 
-            // try to locate in the display buttons
+            // try to locate in the displayed buttons
             found = false;
             foreach (UIButton button in FindIt.instance.scrollPanel.GetComponentsInChildren<UIButton>())
             {
@@ -862,9 +866,22 @@ namespace FindIt.GUI
                     break;
                 }
             }
-            if (!found) return false;
+            if (!found)
+            {
+                Debugging.Message("Picker - not found in the displayed buttons");
+                return false;
+            }
 
+            Debugging.Message("Picker - found");
             return true;
+        }
+
+        private void PickerRandomTest()
+        {
+            int index = UnityEngine.Random.Range(0, AssetTagList.instance.assets.Count);
+            Asset testTarget = AssetTagList.instance.assets.ElementAt(index).Value;
+            Debugging.Message($"Test target: {testTarget.title}");
+            Picker(testTarget.prefab);
         }
     }
 }
