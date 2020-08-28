@@ -5,7 +5,6 @@ using UnityEngine;
 using ColossalFramework;
 using ColossalFramework.DataBinding;
 using ColossalFramework.UI;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -140,6 +139,7 @@ namespace FindIt.GUI
             clearButton.eventClicked += (c, p) =>
             {
                 input.text = "";
+                //PickerRandomTest();
             };
             clearButton.eventMouseEnter += (c, p) =>
             {
@@ -745,6 +745,143 @@ namespace FindIt.GUI
             {
                 input.text = "";
             }
+        }
+
+        /// <summary>
+        /// Used by Quboid's Picker mod. Reset necessary filters and try to locate the asset.
+        /// Return false if the asset can't be found
+        /// </summary>
+        public bool Picker(PrefabInfo info)
+        {
+            // check if the prefab exists in Find It's asset list
+            Asset targetAsset = null;
+            foreach (Asset asset in AssetTagList.instance.assets.Values)
+            {
+                if (asset.prefab == info)
+                {
+                    targetAsset = asset;
+                    break;
+                }
+            }
+            if (targetAsset == null)
+            {
+                Debugging.Message("Picker - target doesn't exist in Find It 2's catalog");
+                return false;
+            }
+
+            if (targetAsset.assetType == Asset.AssetType.Rico || targetAsset.assetType == Asset.AssetType.Growable)
+            {
+                /*
+                // set type drop-down
+                if (targetAsset.assetType == Asset.AssetType.Growable) typeFilter.selectedIndex = (int)DropDownOptions.Growable;
+                else typeFilter.selectedIndex = (int)DropDownOptions.Rico;
+                */
+
+                // set building size filter
+                if (sizeFilterX.selectedIndex != 0) // if not 'all'
+                {
+                    if (!AssetTagList.instance.CheckBuildingSizeXY(targetAsset.size.x, buildingSizeFilterIndex.x)) // if wrong size option
+                    {
+                        sizeFilterX.selectedIndex = 0;
+                    }
+                }
+                if (sizeFilterY.selectedIndex != 0) // if not 'all'
+                {
+                    if (!AssetTagList.instance.CheckBuildingSizeXY(targetAsset.size.y, buildingSizeFilterIndex.y)) // if wrong size option
+                    {
+                        sizeFilterY.selectedIndex = 0;
+                    }
+                }
+
+                // select filter tab
+                BuildingInfo buildingInfo = targetAsset.prefab as BuildingInfo;
+                if (buildingInfo == null) return false;
+
+                if (!UIFilterGrowable.instance.IsSelected(UIFilterGrowable.GetCategory(buildingInfo.m_class)))
+                {
+                    UIFilterGrowable.instance.SelectAll();
+                }
+            }
+
+            else if (targetAsset.assetType == Asset.AssetType.Prop)
+            {
+                /*
+                // set type drop-down
+                typeFilter.selectedIndex = (int)DropDownOptions.Prop - (FindIt.isRicoEnabled ? 0 : 2);
+                */
+
+                // select filter tab
+                if (!UIFilterProp.instance.IsSelected(UIFilterProp.GetCategory(targetAsset.propType)))
+                {
+                    UIFilterProp.instance.SelectAll();
+                }
+            }
+            else if (targetAsset.assetType == Asset.AssetType.Decal)
+            {
+                /*
+                // set type drop-down
+                typeFilter.selectedIndex = (int)DropDownOptions.Decal - (FindIt.isRicoEnabled ? 0 : 2);
+                */
+            }
+            else
+            {
+                Debugging.Message("Picker - wrong asset type");
+                return false;
+            }
+
+            input.text = "";
+            UIFilterTag.instance.tagDropDownCheckBox.isChecked = false;
+            UIFilterExtra.instance.optionDropDownCheckBox.isChecked = false;
+
+            if (targetAsset.prefab.m_isCustomContent) workshopFilter.isChecked = true;
+            else vanillaFilter.isChecked = true;
+
+            Search();
+
+            // try to locate in the most recent search result
+            bool found = false;
+            for (int i = 0; i < searchResultList.Count; i++)
+            {
+                if (targetAsset.title == searchResultList.ElementAt(i))
+                {
+                    FindIt.instance.scrollPanel.DisplayAt(i);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+            {
+                Debugging.Message("Picker - not found in the most recent search result");
+                return false;
+            }
+
+            // try to locate in the displayed buttons
+            found = false;
+            foreach (UIButton button in FindIt.instance.scrollPanel.GetComponentsInChildren<UIButton>())
+            {
+                if (button.name == targetAsset.title)
+                {
+                    found = true;
+                    button.SimulateClick();
+                    break;
+                }
+            }
+            if (!found)
+            {
+                Debugging.Message("Picker - not found in the displayed buttons");
+                return false;
+            }
+
+            Debugging.Message("Picker - found");
+            return true;
+        }
+
+        private void PickerRandomTest()
+        {
+            int index = UnityEngine.Random.Range(0, AssetTagList.instance.assets.Count);
+            Asset testTarget = AssetTagList.instance.assets.ElementAt(index).Value;
+            Debugging.Message($"Test target: {testTarget.title}");
+            Picker(testTarget.prefab);
         }
     }
 }
