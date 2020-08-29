@@ -76,10 +76,12 @@ namespace FindIt
             // if there is something in the search input box
             if (!text.IsNullOrWhiteSpace())
             {
-                string[] keywords = Regex.Split(text, @"([^\w!#]|[_-]|\s)+", RegexOptions.IgnoreCase);
+                string[] keywords = Regex.Split(text, @"([^\w!#+]|[_-]|\s)+", RegexOptions.IgnoreCase);
 
                 bool matched = true;
                 float score = 0;
+                bool orSearch = false;
+                float orScore = 0;
 
                 foreach (Asset asset in assets.Values)
                 {
@@ -90,11 +92,13 @@ namespace FindIt
                         matched = true;
                         asset.score = 0;
                         score = 0;
+                        orSearch = false;
+                        orScore = 0;
                         foreach (string keyword in keywords)
                         {
                             if (!keyword.IsNullOrWhiteSpace())
                             {
-                                if (keyword == "!" || keyword == "#") continue;
+                                if (keyword == "!" || keyword == "#" || keyword == "+") continue;
                                 if (keyword.StartsWith("!") && keyword.Length > 1)
                                 {
                                     score = GetOverallScore(asset, keyword.Substring(1), filter);
@@ -116,7 +120,14 @@ namespace FindIt
                                         break;
                                     }
                                 }
-                                else if (keyword != "#" && keyword != "!")
+                                else if (keyword.StartsWith("+") && keyword.Length > 1)
+                                {
+                                    orSearch = true;
+                                    score = GetOverallScore(asset, keyword.Substring(1), filter);
+                                    orScore += score;
+                                    asset.score += score;
+                                }
+                                else
                                 {
                                     // Calculate relevance score. Algorithm decided by Sam. Unchanged.
                                     score = GetOverallScore(asset, keyword, filter);
@@ -129,6 +140,7 @@ namespace FindIt
                                 }
                             }
                         }
+                        if (orSearch && orScore <= 0) continue;
                         if (matched) matches.Add(asset);
                     }
                 }
