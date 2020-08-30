@@ -18,6 +18,8 @@ namespace FindIt
 
         internal static bool fixBadProps = false;
 
+        internal static bool useDefaultBrowser = false;
+
         // false = sort by number of assets
         // true = sort alphabetically
         internal static bool customTagListSort = false;
@@ -99,6 +101,9 @@ namespace FindIt
 
         [XmlElement("FixBadProps")]
         public bool FixBadProps { get => Settings.fixBadProps; set => Settings.fixBadProps = value; }
+
+        [XmlElement("UseDefaultBrowser")]
+        public bool UseDefaultBrowser { get => Settings.useDefaultBrowser; set => Settings.useDefaultBrowser = value; }
 
         [XmlElement("CustomTagListSort")]
         public bool CustomTagListSort { get => Settings.customTagListSort; set => Settings.customTagListSort = value; }

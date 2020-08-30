@@ -534,7 +534,14 @@ namespace FindIt.GUI
 
                 if (publishedFileId != PublishedFileId.invalid)
                 {
-                    PlatformService.ActivateGameOverlayToWorkshopItem(publishedFileId);
+                    if (!Settings.useDefaultBrowser)
+                    {
+                        PlatformService.ActivateGameOverlayToWorkshopItem(publishedFileId);
+                    }
+                    else
+                    {
+                        System.Diagnostics.Process.Start("https://steamcommunity.com/sharedfiles/filedetails/?id=" + publishedFileId);
+                    }
                     p.Use();
                 }
             }

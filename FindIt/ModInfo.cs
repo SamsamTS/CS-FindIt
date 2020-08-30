@@ -111,6 +111,15 @@ namespace FindIt
                 fixProps.tooltip = Translations.Translate("FIF_SET_BPTP");
                 group.AddSpace(10);
 
+                // Use system default browser instead of steam overlay
+                UICheckBox useDefaultBrowser = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DB"), Settings.useDefaultBrowser, (b) =>
+                {
+                    Settings.useDefaultBrowser = b;
+                    XMLUtils.SaveSettings();
+                });
+                useDefaultBrowser.tooltip = Translations.Translate("FIF_SET_DBTP");
+                group.AddSpace(10);
+
                 // languate settings
                 UIDropDown languageDropDown = (UIDropDown)group.AddDropdown(Translations.Translate("TRN_CHOICE"), Translations.LanguageList, Translations.Index, (value) =>
                 {

@@ -166,6 +166,8 @@
     <Translation ID="FIF_SET_PO" String="Include Procedural Objects" />
     <Translation ID="FIF_TAG_BATTP" String="Batch Editing" />
     <Translation ID="FIF_SE_SEBTP" String="Clear the search box" />
+    <Translation ID="FIF_SET_DB" String="Use system default browser instead of Steam overlay" />
+    <Translation ID="FIF_SET_DBTP" String="Right click the Steam icon on an asset thumbnail to view the asset on Steam workshop" />
 
   </Translations>
 </Language>
