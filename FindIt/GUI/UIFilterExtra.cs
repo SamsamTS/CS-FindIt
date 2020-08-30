@@ -224,6 +224,15 @@ namespace FindIt.GUI
             };
 
         }
+        public void Close()
+        {
+            if (instance != null)
+            {
+                instance.isVisible = false;
+                Destroy(instance.gameObject);
+                instance = null;
+            }
+        }
 
         // Update asset creator list 
         public void UpdateAssetCreatorList()

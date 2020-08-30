@@ -54,8 +54,11 @@ namespace FindIt.GUI
             {
                 Settings.customTagListSort = customTagListSort.isChecked;
                 XMLUtils.SaveSettings();
-                UIFilterTag.instance.UpdateCustomTagList();
-                UISearchBox.instance.Search();
+                if (UIFilterTag.instance != null)
+                {
+                    UIFilterTag.instance.UpdateCustomTagList();
+                    UISearchBox.instance.Search();
+                }
             };
 
             // Sort asset creator list alphabetically. Default = sort by number of assets in each tag
@@ -70,8 +73,11 @@ namespace FindIt.GUI
             {
                 Settings.assetCreatorListSort = assetCreatorListSort.isChecked;
                 XMLUtils.SaveSettings();
-                UIFilterExtra.instance.UpdateAssetCreatorList();
-                UISearchBox.instance.Search();
+                if (UIFilterExtra.instance != null)
+                {
+                    UIFilterExtra.instance.UpdateAssetCreatorList();
+                    UISearchBox.instance.Search();
+                }
             };
 
             // Show prop markers in 'game' mode

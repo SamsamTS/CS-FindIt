@@ -211,22 +211,29 @@ namespace FindIt.GUI
             };
         }
 
+        public void Close()
+        {
+            if (instance != null)
+            {
+                instance.isVisible = false;
+                Destroy(instance.gameObject);
+                instance = null;
+            }
+        }
+
         // Update custom tag list 
         public void UpdateCustomTagList()
         {
             customTagList = AssetTagList.instance.GetCustomTagList();
-
             List<string> list = new List<string>();
 
             foreach (KeyValuePair<string, int> entry in customTagList)
             {
                 list.Add(entry.Key.ToString() + " (" + entry.Value.ToString() + ")");
             }
-
             customTagListStrArray = list.ToArray();
             tagDropDownMenu.items = customTagListStrArray;
             tagDropDownMenu.selectedIndex = 0;
-
             if (customTagListStrArray.Length == 0)
             {
                 tagDropDownCheckBox.isChecked = false;
