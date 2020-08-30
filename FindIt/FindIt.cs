@@ -31,6 +31,7 @@ namespace FindIt
 
         private UIGroupPanel m_groupPanel;
         private RoadsPanel m_roadsPanel;
+        private BeautificationPanel m_beautificationPanel;
 
         private float m_defaultXPos;
 
@@ -153,6 +154,7 @@ namespace FindIt
                 }
 
                 m_roadsPanel = FindObjectOfType<RoadsPanel>();
+                m_beautificationPanel = FindObjectOfType<BeautificationPanel>();
 
                 Debugging.Message("Initialized");
 
@@ -234,6 +236,10 @@ namespace FindIt
                 {
                     typeof(RoadsPanel).GetMethod("OnButtonClicked", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(m_roadsPanel, new object[] { uIButton });
 
+                }
+                else if (m_beautificationPanel != null)
+                {
+                    typeof(BeautificationPanel).GetMethod("OnButtonClicked", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(m_beautificationPanel, new object[] { uIButton });
                 }
                 else
                 {
