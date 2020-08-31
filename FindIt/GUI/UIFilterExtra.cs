@@ -14,7 +14,12 @@ namespace FindIt.GUI
         public UICheckBox optionDropDownCheckBox;
         public UIDropDown optionDropDownMenu;
 
+        // asset creator
+        private UITextField assetCreatorInput;
+        private UISprite assetCreatorSearchIcon;
         private UIDropDown assetCreatorDropDownMenu;
+        private List<KeyValuePair<string, int>> assetCreatorList;
+        private string[] assetCreatorListStrArray;
 
         // building height
         private UILabel minLabel;
@@ -27,9 +32,6 @@ namespace FindIt.GUI
 
         // building level
         public UIDropDown buildingLevelDropDownMenu;
-
-        private List<KeyValuePair<string, int>> assetCreatorList;
-        private string[] assetCreatorListStrArray;
 
         public enum DropDownOptions
         {
@@ -92,15 +94,53 @@ namespace FindIt.GUI
                 }
             };
 
-            // asset creator dropdown
+            // asset creator
+            assetCreatorInput = SamsamTS.UIUtils.CreateTextField(this);
+            assetCreatorInput.size = new Vector2(120, 25);
+            assetCreatorInput.padding.top = 5;
+            assetCreatorInput.isVisible = true;
+            assetCreatorInput.text = "";
+            assetCreatorInput.textScale = 0.8f;
+            assetCreatorInput.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 30, 5);
+            assetCreatorInput.eventTextChanged += (c, p) =>
+            {
+                if (assetCreatorInput.text == "") return;
+
+                for (int i = 0; i < assetCreatorDropDownMenu.items.Length; ++i)
+                {
+                    if (assetCreatorDropDownMenu.items[i].ToLower().StartsWith(assetCreatorInput.text.ToLower()))
+                    {
+                        assetCreatorDropDownMenu.selectedIndex = i;
+                        return;
+                    }
+                }
+                for (int i = 0; i < assetCreatorDropDownMenu.items.Length; ++i)
+                {
+                    if (assetCreatorDropDownMenu.items[i].ToLower().Contains(assetCreatorInput.text.ToLower()))
+                    {
+                        assetCreatorDropDownMenu.selectedIndex = i;
+                        return;
+                    }
+                }
+            };
+
+            // search icon
+            assetCreatorSearchIcon = AddUIComponent<UISprite>();
+            assetCreatorSearchIcon.size = new Vector2(25, 30);
+            assetCreatorSearchIcon.atlas = FindIt.atlas;
+            assetCreatorSearchIcon.spriteName = "FindItDisabled";
+            assetCreatorSearchIcon.isVisible = true;
+            assetCreatorSearchIcon.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 30, 3);
+
             assetCreatorDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
             assetCreatorDropDownMenu.size = new Vector2(270, 25);
             assetCreatorDropDownMenu.tooltip = Translations.Translate("FIF_POP_SCR");
             assetCreatorDropDownMenu.listHeight = 300;
             assetCreatorDropDownMenu.itemHeight = 30;
             UpdateAssetCreatorList();
+            SamsamTS.UIUtils.CreateDropDownScrollBar(assetCreatorDropDownMenu);
             assetCreatorDropDownMenu.isVisible = true;
-            assetCreatorDropDownMenu.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 50, 5);
+            assetCreatorDropDownMenu.relativePosition = new Vector3(assetCreatorInput.relativePosition.x + assetCreatorInput.width + 10, 5);
             assetCreatorDropDownMenu.eventSelectedIndexChanged += (c, p) =>
             {
                 if (optionDropDownCheckBox.isChecked)
@@ -259,6 +299,8 @@ namespace FindIt.GUI
         private void UpdateAssetCreatorOptionVisibility(bool visibility)
         {
             assetCreatorDropDownMenu.isVisible = visibility;
+            assetCreatorInput.isVisible = visibility;
+            assetCreatorSearchIcon.isVisible = visibility;
         }
 
         private void UpdateBuildingHeightOptionVisibility(bool visibility)
