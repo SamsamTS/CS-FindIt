@@ -163,6 +163,8 @@
     <Translation ID="FIF_SET_ICUN" String="未使用アセットを優先表示します" />
     <Translation ID="FIF_TAG_BATTP" String="バッチ編集" />
     <Translation ID="FIF_SE_SEBTP" String="検索ボックスをクリアします" />
+    <Translation ID="FIF_SET_DB" String="Steam オーバーレイの代わりにシステムのデフォルトブラウザを使用する" />
+    <Translation ID="FIF_SET_DBTP" String="アセットのサムネイルにある Steam アイコンを右クリックすると、Steam ワークショップでアセットを表示できます。" />
 
   </Translations>
 </Language>

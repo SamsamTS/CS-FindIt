@@ -163,6 +163,8 @@
     <Translation ID="FIF_SET_ICUN" String="优先显示未使用的资产" />
     <Translation ID="FIF_TAG_BATTP" String="批量编辑" />
     <Translation ID="FIF_SE_SEBTP" String="单击以清除搜索框" />
+    <Translation ID="FIF_SET_DB" String="使用系统默认浏览器代替 Steam Overlay" />
+    <Translation ID="FIF_SET_DBTP" String="右键单击资产缩略图上的 Steam 图标以在 Steam Workshop 上查看资产" />
 
   </Translations>
 </Language>

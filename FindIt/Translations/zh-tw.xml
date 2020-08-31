@@ -163,6 +163,8 @@
     <Translation ID="FIF_SET_ICUN" String="優先顯示未使用的素材" />
     <Translation ID="FIF_TAG_BATTP" String="批次編輯" />
     <Translation ID="FIF_SE_SEBTP" String="滑鼠點擊以清除搜尋欄內容" />
+    <Translation ID="FIF_SET_DB" String="使用預設瀏覽器取代 Steam Overlay" />
+    <Translation ID="FIF_SET_DBTP" String="右鍵單擊素材縮略圖上的 Steam 圖示以在 Steam 工作坊查看此素材" />
 
   </Translations>
 </Language>
