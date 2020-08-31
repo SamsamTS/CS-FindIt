@@ -119,7 +119,7 @@ namespace FindIt
                 else
                 {
                     // Simulate a search
-                    FindIt.instance.searchBox.Search();
+                    //FindIt.instance.searchBox.Search();
                     FindIt.instance.searchBox.input.Focus();
                     FindIt.instance.searchBox.input.SelectAll();
                 }
