@@ -100,7 +100,7 @@ namespace FindIt.GUI
             assetCreatorInput.padding.top = 5;
             assetCreatorInput.isVisible = true;
             assetCreatorInput.text = "";
-            assetCreatorInput.textScale = 0.8f;
+            assetCreatorInput.textScale = 0.9f;
             assetCreatorInput.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 30, 5);
             assetCreatorInput.eventTextChanged += (c, p) =>
             {
