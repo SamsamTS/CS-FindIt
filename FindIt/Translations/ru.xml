@@ -165,6 +165,8 @@
     <Translation ID="FIF_SET_PO" String="Учитывать Procedural Objects" />
     <Translation ID="FIF_TAG_BATTP" String="Пакетное редактирование" />
     <Translation ID="FIF_SE_SEBTP" String="Очистить поле поиска" />
+    <Translation ID="FIF_SET_DB" String="Использовать системный браузер по умолчанию вместо оверлея Steam" />
+    <Translation ID="FIF_SET_DBTP" String="Щелкните правой кнопкой мыши значок Steam на миниатюре актива, чтобы просмотреть актив в мастерской Steam." />
 
   </Translations>
 </Language>
