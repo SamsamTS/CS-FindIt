@@ -165,6 +165,9 @@
     <Translation ID="FIF_SE_SEBTP" String="検索ボックスをクリアします" />
     <Translation ID="FIF_SET_DB" String="Steam オーバーレイの代わりにシステムのデフォルトブラウザを使用する" />
     <Translation ID="FIF_SET_DBTP" String="アセットのサムネイルにある Steam アイコンを右クリックすると、Steam ワークショップでアセットを表示できます。" />
+    <Translation ID="FIF_NET_ONE" String="一方通行" />
+    <Translation ID="FIF_NET_PAR" String="路上駐車を許可する" />
+    <Translation ID="FIF_NET_NOP" String="路上駐車禁止" />
 
   </Translations>
 </Language>

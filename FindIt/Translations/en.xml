@@ -166,8 +166,8 @@
     <Translation ID="FIF_SET_DB" String="Use system default browser instead of Steam overlay" />
     <Translation ID="FIF_SET_DBTP" String="Right click the Steam icon on an asset thumbnail to view the asset on Steam workshop" />
     <Translation ID="FIF_NET_ONE" String="One-way Roads" />
-    <Translation ID="FIF_NET_PAR" String="Has Parking Spaces" />
-    <Translation ID="FIF_NET_NOP" String="No Parking Spaces" />
+    <Translation ID="FIF_NET_PAR" String="Allow Street Parking" />
+    <Translation ID="FIF_NET_NOP" String="No Street Parking" />
 
   </Translations>
 </Language>
