@@ -10,6 +10,8 @@ using ColossalFramework;
 using ColossalFramework.UI;
 using ColossalFramework.DataBinding;
 using ColossalFramework.Globalization;
+using FindIt.GUI;
+using System.Diagnostics.Eventing.Reader;
 
 namespace FindIt
 {
@@ -413,6 +415,8 @@ namespace FindIt
         {
             if (info == null) return Asset.NetworkType.Invalid;
 
+            
+
             else if (info.category.StartsWith("RoadsTiny"))
             {
                 AssetTagList.instance.tinyRoadsExist = true;
@@ -472,6 +476,15 @@ namespace FindIt
                 if (networkType == Asset.NetworkType.Utility) findIt2Description += Translations.Translate("FIF_NET_UTI");
                 if (networkType == Asset.NetworkType.Train) findIt2Description += Translations.Translate("FIF_NET_TRA");
                 if (networkType == Asset.NetworkType.Unsorted) findIt2Description += Translations.Translate("FIF_PROP_UNS");
+
+                if (UIFilterNetwork.IsNormalRoads(networkType))
+                {
+                    NetInfo info = prefab as NetInfo;
+                    if (UIFilterNetwork.IsOneWay(info)) findIt2Description += ($", {Translations.Translate("FIF_NET_ONE")}");
+
+                    if (UIFilterNetwork.HasParking(info)) findIt2Description += ($", {Translations.Translate("FIF_NET_PAR")}");
+                    else findIt2Description += ($", {Translations.Translate("FIF_NET_NOP")}");
+                }
             }
             else if (assetType == AssetType.Growable || assetType == AssetType.Rico)
             {

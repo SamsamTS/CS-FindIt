@@ -41,15 +41,16 @@ namespace FindIt
             {
                 isRicoEnabled = IsRicoEnabled();
                 isPOEnabled = IsPOEnabled();
-                if (isPOEnabled)
-                {
-                    POTool = new ProceduralObjectsTool();
-                }
 
                 GameObject gameObject = GameObject.Find("FindItMainButton");
                 if (gameObject != null)
                 {
                     return;
+                }
+
+                if (isPOEnabled)
+                {
+                    POTool = new ProceduralObjectsTool();
                 }
 
                 list = AssetTagList.instance;
@@ -403,7 +404,13 @@ namespace FindIt
                     "TinyRoads",
                     "TinyRoadsDisabled",
                     "QuickMenu",
-                    "Clear"
+                    "Clear",
+                    "Oneway",
+                    "OnewayDisabled",
+                    "Parking",
+                    "ParkingDisabled",
+                    "NoParking",
+                    "NoParkingDisabled"
                 };
 
                 atlas = ResourceLoader.CreateTextureAtlas("FindItAtlas", spriteNames, "FindIt.Icons.");

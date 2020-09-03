@@ -143,6 +143,12 @@
     <EmbeddedResource Include="Icons\TinyRoadsDisabled.png" />
     <EmbeddedResource Include="Icons\QuickMenu.png" />
     <EmbeddedResource Include="Icons\Clear.png" />
+    <EmbeddedResource Include="Icons\Oneway.png" />
+    <EmbeddedResource Include="Icons\OnewayDisabled.png" />
+    <EmbeddedResource Include="Icons\Parking.png" />
+    <EmbeddedResource Include="Icons\ParkingDisabled.png" />
+    <EmbeddedResource Include="Icons\NoParking.png" />
+    <EmbeddedResource Include="Icons\NoParkingDisabled.png" />
     <Content Include="Translations\de.xml" />
     <Content Include="Translations\en.xml" />
     <Content Include="Translations\es.xml" />

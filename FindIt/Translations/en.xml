@@ -113,8 +113,6 @@
     <Translation ID="FIF_TREE_SM" String="Small Trees" />
     <Translation ID="FIF_TREE_MD" String="Medium Trees" />
     <Translation ID="FIF_TREE_LG" String="Large Trees" />
-    <Translation ID="FIF_SE_PT" String="Elektrix Net Picker 3" />
-    <Translation ID="FIF_SE_PTTP" String="Click on a placed asset to locate it in the selection panel" />
     <Translation ID="FIF_TAG_BAT" String="Batch" />
     <Translation ID="FIF_TAG_BAC" String="Back" />
     <Translation ID="FIF_TAG_ADD" String="Add" />
@@ -159,7 +157,6 @@
     <Translation ID="FIF_UIS_UN" String="Unused" />
     <Translation ID="FIF_UIS_IN" String="In Use" />
     <Translation ID="FIF_SET_ICTP" String="This option slows down search speed. Disable it when it is not needed" />
-    <Translation ID="FIF_EF_UNPO" String="(This result doesn't consider Procedural Objects)" />
     <Translation ID="FIF_SET_ICO" String="Use original sorting option" />
     <Translation ID="FIF_SET_ICUS" String="Show used assets on top" />
     <Translation ID="FIF_SET_ICUN" String="Show unused assets on top" />
@@ -168,6 +165,9 @@
     <Translation ID="FIF_SE_SEBTP" String="Clear the search box" />
     <Translation ID="FIF_SET_DB" String="Use system default browser instead of Steam overlay" />
     <Translation ID="FIF_SET_DBTP" String="Right click the Steam icon on an asset thumbnail to view the asset on Steam workshop" />
+    <Translation ID="FIF_NET_ONE" String="One-way Roads" />
+    <Translation ID="FIF_NET_PAR" String="Has Parking Spaces" />
+    <Translation ID="FIF_NET_NOP" String="No Parking Spaces" />
 
   </Translations>
 </Language>

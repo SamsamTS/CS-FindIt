@@ -237,7 +237,29 @@ namespace FindIt
                 if (!UIFilterNetwork.instance.IsAllSelected())
                 {
                     UIFilterNetwork.Category category = UIFilterNetwork.GetCategory(asset.networkType);
-                    if (category == UIFilterNetwork.Category.None || !UIFilterNetwork.instance.IsSelected(category)) return false;
+                    NetInfo info = asset.prefab as NetInfo;
+                    if (info == null) return false;
+
+                    // not mutually exclusive with other categories. Handle them differently.
+                    if (UIFilterNetwork.instance.IsOnlySelected(UIFilterNetwork.Category.OneWay))
+                    {
+                        if (!UIFilterNetwork.IsNormalRoads(asset.networkType)) return false;
+                        if (!UIFilterNetwork.IsOneWay(info)) return false;
+                    }
+                    else if (UIFilterNetwork.instance.IsOnlySelected(UIFilterNetwork.Category.Parking))
+                    {
+                        if (!UIFilterNetwork.IsNormalRoads(asset.networkType)) return false;
+                        if (!UIFilterNetwork.HasParking(info)) return false;
+                    }
+                    else if (UIFilterNetwork.instance.IsOnlySelected(UIFilterNetwork.Category.NoParking))
+                    {
+                        if (!UIFilterNetwork.IsNormalRoads(asset.networkType)) return false;
+                        if (UIFilterNetwork.HasParking(info)) return false;
+                    }
+                    else
+                    {
+                        if (category == UIFilterNetwork.Category.None || !UIFilterNetwork.instance.IsSelected(category)) return false;
+                    }
                 }
             }
 
@@ -519,7 +541,6 @@ namespace FindIt
                         // if steamID == 0, non-workshop, download time = 0
                         asset.downloadTime = 0;
 
-                        // make Kaminogi's Modern Japan builldings included in the asset creator filter
                         if (asset.isCCP)
                         {
                             if (asset.prefab.m_dlcRequired == SteamHelper.DLC_BitMask.ModderPack1) asset.author = "Shroomblaze";

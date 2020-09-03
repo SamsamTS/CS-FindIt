@@ -23,6 +23,9 @@ namespace FindIt.GUI
             WaterStructures,
             Utility,
             Train,
+            OneWay,
+            Parking,
+            NoParking,
             Unsorted,
             All
         }
@@ -48,6 +51,17 @@ namespace FindIt.GUI
             return Category.None;
         }
 
+        public static bool IsOneWay(NetInfo info)
+        {
+            if (info.m_hasBackwardVehicleLanes != info.m_hasForwardVehicleLanes) return true;
+            return false;
+        }
+
+        public static bool HasParking(NetInfo info)
+        {
+            return info.m_hasParkingSpaces;
+        }
+
         public class CategoryIcons
         {
             public static readonly string[] atlases =
@@ -62,6 +76,9 @@ namespace FindIt.GUI
                 "Ingame",
                 "Ingame",
                 "Ingame",
+                "FindItAtlas",
+                "FindItAtlas",
+                "FindItAtlas",
                 "Ingame"
             };
 
@@ -77,6 +94,9 @@ namespace FindIt.GUI
                 "SubBarLandscapingWaterStructures",
                 "ToolbarIconElectricity",
                 "SubBarPublicTransportTrain",
+                "Oneway",
+                "Parking",
+                "NoParking",
                 "ToolbarIconProps"
             };
 
@@ -92,6 +112,9 @@ namespace FindIt.GUI
                 Translations.Translate("FIF_NET_WAT"), // Water Structures
                 Translations.Translate("FIF_NET_UTI"), // Utility
                 Translations.Translate("FIF_NET_TRA"), // Train
+                Translations.Translate("FIF_NET_ONE"), // One-way Roads
+                Translations.Translate("FIF_NET_PAR"), // Roads with parking spaces
+                Translations.Translate("FIF_NET_NOP"), // Roads without parking spaces
                 Translations.Translate("FIF_PROP_UNS") // Unsorted
             };
         }
@@ -99,6 +122,17 @@ namespace FindIt.GUI
         public bool IsSelected(Category category)
         {
             return toggles[(int)category].isChecked;
+        }
+
+        public bool IsOnlySelected(Category category)
+        {
+            int selected = 0;
+            for (int i = 0; i < (int)Category.All; i++)
+            {
+                if (toggles[i].isChecked) selected += 1;
+            }
+            if (selected == 1 && IsSelected(category)) return true;
+            return false;
         }
 
         public bool IsAllSelected()
@@ -119,6 +153,13 @@ namespace FindIt.GUI
             {
                 toggles[i].isChecked = true;
             }
+        }
+
+        public static bool IsNormalRoads(Asset.NetworkType type)
+        {
+            if (type != Asset.NetworkType.TinyRoads && type != Asset.NetworkType.SmallRoads &&
+                type != Asset.NetworkType.MediumRoads && type != Asset.NetworkType.LargeRoads) return false;
+            return true;
         }
 
         public event PropertyChangedEventHandler<int> eventFilteringChanged;
