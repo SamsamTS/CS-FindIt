@@ -113,7 +113,6 @@
     <Translation ID="FIF_TREE_SM" String="Small Trees" />
     <Translation ID="FIF_TREE_MD" String="Medium Trees" />
     <Translation ID="FIF_TREE_LG" String="Large Trees" />
-    <Translation ID="FIF_SE_PTTP" String="Нажмите на размещённый объект, чтобы найти его на панели выбора." />
     <Translation ID="FIF_TAG_BAT" String="Batch" />
     <Translation ID="FIF_TAG_BAC" String="Назад" />
     <Translation ID="FIF_TAG_ADD" String="Добавить" />
@@ -158,7 +157,6 @@
     <Translation ID="FIF_UIS_UN" String="Unused" />
     <Translation ID="FIF_UIS_IN" String="In Use" />
     <Translation ID="FIF_SET_ICTP" String="Эта опция немного замедляет скорость поиска. Отключите её, когда она не нужна" />
-    <Translation ID="FIF_EF_UNPO" String="(Не учитываются Procedural Objects)" />
     <Translation ID="FIF_SET_ICO" String="Исходный вариант сортировки" />
     <Translation ID="FIF_SET_ICUS" String="Сначала используемые объекты" />
     <Translation ID="FIF_SET_ICUN" String="Сначала неиспользуемые объекты" />
@@ -167,6 +165,9 @@
     <Translation ID="FIF_SE_SEBTP" String="Очистить поле поиска" />
     <Translation ID="FIF_SET_DB" String="Использовать системный браузер по умолчанию вместо оверлея Steam" />
     <Translation ID="FIF_SET_DBTP" String="Щелкните правой кнопкой мыши значок Steam на миниатюре актива, чтобы просмотреть актив в мастерской Steam." />
+    <Translation ID="FIF_NET_ONE" String="Дороги с односторонним движением" />
+    <Translation ID="FIF_NET_PAR" String="Парковка разрешена" />
+    <Translation ID="FIF_NET_NOP" String="Парковка запрещена" />
 
   </Translations>
 </Language>

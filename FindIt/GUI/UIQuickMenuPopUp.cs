@@ -118,7 +118,10 @@ namespace FindIt.GUI
 
                 Settings.showInstancesCounter = showInstancesCounter.isChecked;
                 instanceCounterSort.isVisible = showInstancesCounter.isChecked;
-                includePOinstances.isVisible = showInstancesCounter.isChecked;
+                if (FindIt.isPOEnabled)
+                {
+                    includePOinstances.isVisible = showInstancesCounter.isChecked;
+                }
                 XMLUtils.SaveSettings();
                 if (Settings.showInstancesCounter && AssetTagList.instance?.prefabInstanceCountDictionary != null)
                 {
@@ -168,6 +171,12 @@ namespace FindIt.GUI
                 }
             };
 
+            if (!FindIt.isPOEnabled)
+            {
+                includePOinstances.isVisible = false;
+                instanceCounterSort.relativePosition = new Vector3(showInstancesCounter.relativePosition.x + 30, showInstancesCounter.relativePosition.y + showInstancesCounter.height + 10);
+            }
+
             if (showInstancesCounter.isChecked)
             {
                 height = instanceCounterSort.relativePosition.y + instanceCounterSort.height + 30;
@@ -176,6 +185,7 @@ namespace FindIt.GUI
             {
                 height = showInstancesCounter.relativePosition.y + showInstancesCounter.height + 30;
             }
+
             customTagListSort.Focus();
         }
 
