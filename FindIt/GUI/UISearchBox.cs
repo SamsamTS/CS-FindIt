@@ -847,8 +847,8 @@ namespace FindIt.GUI
             }
 
             input.text = "";
-            UIFilterTag.instance.tagDropDownCheckBox.isChecked = false;
-            UIFilterExtra.instance.optionDropDownCheckBox.isChecked = false;
+            if (UIFilterTag.instance?.tagDropDownCheckBox != null) UIFilterTag.instance.tagDropDownCheckBox.isChecked = false;
+            if (UIFilterExtra.instance?.optionDropDownCheckBox != null) UIFilterExtra.instance.optionDropDownCheckBox.isChecked = false;
 
             if (targetAsset.prefab.m_isCustomContent) workshopFilter.isChecked = true;
             else vanillaFilter.isChecked = true;
