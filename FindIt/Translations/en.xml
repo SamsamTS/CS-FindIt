@@ -168,6 +168,9 @@
     <Translation ID="FIF_NET_ONE" String="One-way Roads" />
     <Translation ID="FIF_NET_PAR" String="Allow Street Parking" />
     <Translation ID="FIF_NET_NOP" String="No Street Parking" />
+    <Translation ID="FIF_EF_UNEXP" String="Export" />
+    <Translation ID="FIF_EF_UNEXPTP" String="Export the list of unused assets into an HTML file with workshop links" />
+    <Translation ID="FIF_UNEXP_CLO" String="Close" />
 
   </Translations>
 </Language>
