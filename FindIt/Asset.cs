@@ -49,7 +49,9 @@ namespace FindIt
             PropsLights,
             Natural,
             Unsorted,
-            PropsMarker
+            PropsMarker,
+            PropsTree,
+            PropsVehicle
         }
 
         public enum TreeType
@@ -455,7 +457,7 @@ namespace FindIt
         /// <summary>
         /// Add Find It 2 description: asset type, sub-type, size, height
         /// </summary>
-        private void SetFindIt2Description()
+        public void SetFindIt2Description()
         {
             if (assetType == AssetType.Decal)
             {
@@ -529,6 +531,9 @@ namespace FindIt
                 if (propType == Asset.PropType.Natural) findIt2Description += Translations.Translate("FIF_PROP_NAT");
                 if (propType == Asset.PropType.Unsorted) findIt2Description += Translations.Translate("FIF_PROP_UNS");
                 if (propType == Asset.PropType.PropsMarker) findIt2Description += Translations.Translate("FIF_PROP_MAR");
+                if (propType == Asset.PropType.PropsVehicle) findIt2Description += Translations.Translate("FIF_PROP_VEH");
+                if (propType == Asset.PropType.PropsTree) findIt2Description += Translations.Translate("FIF_PROP_TRE");
+
             }
             else if (assetType == AssetType.Tree)
             {

@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace FindIt
 {
-    public  class ProceduralObjectsTool
+    public class ProceduralObjectsTool
     {
         private Dictionary<string, uint> poInstanceCount = new Dictionary<string, uint>();
 

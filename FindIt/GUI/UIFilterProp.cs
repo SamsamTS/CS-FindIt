@@ -13,7 +13,9 @@ namespace FindIt.GUI
         public enum Category
         {
             None = -1,
-            PropsIndustrial = 0,
+            PropsVehicle = 0, // Vehicle (from Tree & Vehicle Props mod)
+            PropsTree, // Tree (from Tree & Vehicle Props mod)
+            PropsIndustrial,
             PropsParks,
             PropsCommon,
             PropsResidential,
@@ -42,6 +44,8 @@ namespace FindIt.GUI
             if (propType == Asset.PropType.Natural) return Category.Natural;
             if (propType == Asset.PropType.Unsorted) return Category.Unsorted;
             if (propType == Asset.PropType.PropsMarker) return Category.Marker;
+            if (propType == Asset.PropType.PropsVehicle) return Category.PropsVehicle;
+            if (propType == Asset.PropType.PropsTree) return Category.PropsTree;
 
             return Category.None;
         }
@@ -50,6 +54,8 @@ namespace FindIt.GUI
         {
             public static readonly string[] atlases =
             {
+                "Ingame",
+                "Ingame",
                 "Thumbnails",
                 "Ingame",
                 "Ingame",
@@ -64,6 +70,8 @@ namespace FindIt.GUI
 
             public static readonly string[] spriteNames =
             {
+                "ToolbarIconPublicTransport",
+                "IconPolicyForest",
                 "ZoningIndustrial",
                 "ToolbarIconBeautification",
                 "ToolbarIconProps",
@@ -71,13 +79,15 @@ namespace FindIt.GUI
                 "ToolbarIconPropsBillboards",
                 "ToolbarIconPropsSpecialBillboards",
                 "SubBarPropsCommonLights",
-                "IconPolicyForest",
+                "InfoIconResources",
                 "ToolbarIconProps",
                 "RoadOptionUpgrade"
             };
 
             public static readonly string[] tooltips =
             {
+                Translations.Translate("FIF_PROP_VEH"), // Vehicle (from Tree & Vehicle Props mod)
+                Translations.Translate("FIF_PROP_TRE"), // Tree (from Tree & Vehicle Props mod)
                 Translations.Translate("FIF_PROP_IND"), // Industrial
                 Translations.Translate("FIF_PROP_PAR"), // Parks
                 Translations.Translate("FIF_PROP_COM"), // Common
@@ -185,6 +195,17 @@ namespace FindIt.GUI
                         }
                     }
                 };
+            }
+
+            // Hide first two tabs if Tree & Vehicle Props Patch mod is not enabled
+            if (!FindIt.isTVPPatchEnabled)
+            {
+                toggles[0].isVisible = false;
+                toggles[1].isVisible = false;
+                for (int i = 2; i < (int)Category.All; i++)
+                {
+                    toggles[i].relativePosition = new Vector3(5 + 40 * (i-2), 5);
+                }
             }
 
             UICheckBox last = toggles[toggles.Length - 1];

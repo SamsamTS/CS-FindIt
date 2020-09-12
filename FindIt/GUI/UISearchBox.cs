@@ -476,6 +476,7 @@ namespace FindIt.GUI
                     break;
                 case DropDownOptions.Prop:
                     ShowFilterPanel(filterProp);
+                    AssetTagList.instance.GetTVPProps();
                     break;
                 case DropDownOptions.Tree:
                     ShowFilterPanel(filterTree);

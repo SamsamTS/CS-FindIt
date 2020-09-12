@@ -168,6 +168,8 @@
     <Translation ID="FIF_NET_ONE" String="單行道" />
     <Translation ID="FIF_NET_PAR" String="允許路邊停車" />
     <Translation ID="FIF_NET_NOP" String="禁止路邊停車" />
+    <Translation ID="FIF_PROP_VEH" String="載具 (由Tree and Vehicle Props mod 生成)" />
+    <Translation ID="FIF_PROP_TRE" String="樹木 (由Tree and Vehicle Props mod 生成)" />
 
   </Translations>
 </Language>

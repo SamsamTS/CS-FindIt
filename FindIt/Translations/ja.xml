@@ -168,6 +168,8 @@
     <Translation ID="FIF_NET_ONE" String="一方通行" />
     <Translation ID="FIF_NET_PAR" String="路上駐車を許可する" />
     <Translation ID="FIF_NET_NOP" String="路上駐車禁止" />
+    <Translation ID="FIF_PROP_VEH" String="乗り物 (Tree and Vehicle Props によって生成される)" />
+    <Translation ID="FIF_PROP_TRE" String="木 (Tree and Vehicle Props によって生成される)" />
 
   </Translations>
 </Language>

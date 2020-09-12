@@ -19,8 +19,18 @@ namespace FindIt
         public static FindIt instance;
         public static UITextureAtlas atlas = LoadResources();
         public static bool inEditor = false;
+        /// <summary>
+        /// Ploppable RICO (Revisited) mod enabled?
+        /// </summary>
         public static bool isRicoEnabled = false;
+        /// <summary>
+        /// Procedural Object mod enabled?
+        /// </summary>
         public static bool isPOEnabled = false;
+        /// <summary>
+        /// Tree & Vehicle Props Patch mod enabled?
+        /// </summary>
+        public static bool isTVPPatchEnabled = false;
         public ProceduralObjectsTool POTool;
 
         public static AssetTagList list;
@@ -41,6 +51,7 @@ namespace FindIt
             {
                 isRicoEnabled = IsRicoEnabled();
                 isPOEnabled = IsPOEnabled();
+                isTVPPatchEnabled = IsTVPPatchEnabled();
 
                 GameObject gameObject = GameObject.Find("FindItMainButton");
                 if (gameObject != null)
@@ -304,29 +315,29 @@ namespace FindIt
 
         private static bool IsRicoEnabled()
         {
-            foreach (PluginManager.PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
-            {
-                foreach (Assembly assembly in plugin.GetAssemblies())
-                {
-                    if (assembly.GetName().Name.ToLower() == "ploppablerico")
-                    {
-                        Debugging.Message($"Found enabled RICO mod? {plugin.isEnabled}");
-                        return plugin.isEnabled;
-                    }
-                }
-            }
-            return false;
+            return IsAssemblyEnabled("ploppablerico"); ;
         }
 
         private static bool IsPOEnabled()
         {
+            return IsAssemblyEnabled("proceduralobjects");
+        }
+
+        private static bool IsTVPPatchEnabled()
+        {
+            return IsAssemblyEnabled("tvproppatch");
+        }
+
+        private static bool IsAssemblyEnabled(string assemblyName)
+        {
+
             foreach (PluginManager.PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
             {
                 foreach (Assembly assembly in plugin.GetAssemblies())
                 {
-                    if (assembly.GetName().Name.ToLower() == "proceduralobjects")
+                    if (assembly.GetName().Name.ToLower() == assemblyName)
                     {
-                        Debugging.Message($"Found enabled Procedural Objects mod? {plugin.isEnabled}");
+                        Debugging.Message($"Found enabled mod: {assemblyName}. Find It 2 integration will be applied.");
                         return plugin.isEnabled;
                     }
                 }
