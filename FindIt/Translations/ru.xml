@@ -168,6 +168,8 @@
     <Translation ID="FIF_NET_ONE" String="Дороги с односторонним движением" />
     <Translation ID="FIF_NET_PAR" String="Парковка разрешена" />
     <Translation ID="FIF_NET_NOP" String="Парковка запрещена" />
+    <Translation ID="FIF_PROP_VEH" String="Транспорт (сгенерированный Tree and Vehicle Props)" />
+    <Translation ID="FIF_PROP_TRE" String="Растительность (сгенерированная Tree and Vehicle Props)" />
 
   </Translations>
 </Language>
