@@ -33,6 +33,8 @@ namespace FindIt
         public static bool isTVPPatchEnabled = false;
         public ProceduralObjectsTool POTool;
 
+        public bool isUpdateNoticeShown = false;
+
         public static AssetTagList list;
 
         public UIButton mainButton;
@@ -42,6 +44,10 @@ namespace FindIt
         private UIGroupPanel m_groupPanel;
         private RoadsPanel m_roadsPanel;
         private BeautificationPanel m_beautificationPanel;
+
+        private UIPanel defaultPanel;
+        private UITextureAtlas defaultPanelAtlas;
+        private string defaultPanelBackgroundSprite;
 
         private float m_defaultXPos;
 
@@ -167,6 +173,11 @@ namespace FindIt
 
                 m_roadsPanel = FindObjectOfType<RoadsPanel>();
                 m_beautificationPanel = FindObjectOfType<BeautificationPanel>();
+
+                defaultPanel = GameObject.Find("FindItDefaultPanel").GetComponent<UIPanel>();
+                defaultPanelAtlas = defaultPanel.atlas;
+                defaultPanelBackgroundSprite = defaultPanel.backgroundSprite;
+                UpdateDefaultPanelBackground();
 
                 Debugging.Message("Initialized");
 
@@ -439,6 +450,22 @@ namespace FindIt
             }
 
             return atlas;
+        }
+
+        public void UpdateDefaultPanelBackground()
+        {
+            if (!Settings.useLightBackground)
+            {
+                defaultPanel.atlas = defaultPanelAtlas;
+                defaultPanel.backgroundSprite = defaultPanelBackgroundSprite;
+                UISearchBox.instance.panel.backgroundSprite = "GenericTabHovered";
+            }
+            else
+            {
+                defaultPanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
+                defaultPanel.backgroundSprite = "GenericTabHovered";
+                UISearchBox.instance.panel.backgroundSprite = "GenericTab";
+            }
         }
     }
 
