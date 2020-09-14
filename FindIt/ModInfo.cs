@@ -14,16 +14,19 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.0.5-beta2";
+        public const string version = "2.0.5-beta3";
         public const bool isBeta = true;
         public const bool showExtraDebuggingMessage = false;
 
-        public const float updateNoticeDate = 20200913;
+        public const float updateNoticeDate = 20200914.0f;
         public const string updateNotice =
+            "- Add more vehicle prop filter tabs. Need both the Tree & Vehicle Props\n" +
+            " Patch [BETA] mod and Elektrix's Tree and Vehicle Props mod(TVP).\n\n" +
+            "2.0.5-beta2: \n" +
             "- Add update notice pop-up(this thing). You can disable future update\n" +
             " notice in mod settings.\n\n" +
             "- (In Quick Menu) Optionally use light background color for the main\n" +
-            " panel. This make it easier to see some darker assets like ruin decals\n" +
+            " panel. This makes it easier to see some darker assets like ruin decals\n" +
             " and street light poles, but harder to see brighter assets.\n\n" +
             "- If you're also using the Tree & Vehicle Props Patch [BETA] mod,\n" +
             " Find It 2 will create 2 new prop filter tabs \"Vehicle\" and \"Tree\" for\n" + 

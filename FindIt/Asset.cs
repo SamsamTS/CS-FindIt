@@ -11,6 +11,7 @@ using ColossalFramework.UI;
 using ColossalFramework.DataBinding;
 using ColossalFramework.Globalization;
 using FindIt.GUI;
+using System;
 using System.Diagnostics.Eventing.Reader;
 
 namespace FindIt
@@ -51,7 +52,11 @@ namespace FindIt
             Unsorted,
             PropsMarker,
             PropsTree,
-            PropsVehicle
+            PropsMoterVehicle,
+            PropsRailwayVehicle,
+            PropsAircraft,
+            PropsWaterCraft,
+            PropsUnsortedVehicle
         }
 
         public enum TreeType
@@ -468,16 +473,16 @@ namespace FindIt
                 findIt2Description = $"{Translations.Translate("FIF_SE_IN")}, ";
 
                 if (networkType == Asset.NetworkType.TinyRoads) findIt2Description += Translations.Translate("FIF_NET_TNR");
-                if (networkType == Asset.NetworkType.SmallRoads) findIt2Description += Translations.Translate("FIF_NET_SMR");
-                if (networkType == Asset.NetworkType.MediumRoads) findIt2Description += Translations.Translate("FIF_NET_MDR");
-                if (networkType == Asset.NetworkType.LargeRoads) findIt2Description += Translations.Translate("FIF_NET_LGR");
-                if (networkType == Asset.NetworkType.Highway) findIt2Description += Translations.Translate("FIF_NET_HGHW");
-                if (networkType == Asset.NetworkType.Path) findIt2Description += Translations.Translate("FIF_NET_PATH");
-                if (networkType == Asset.NetworkType.Fence) findIt2Description += Translations.Translate("FIF_NET_WALL");
-                if (networkType == Asset.NetworkType.WaterStructures) findIt2Description += Translations.Translate("FIF_NET_WAT");
-                if (networkType == Asset.NetworkType.Utility) findIt2Description += Translations.Translate("FIF_NET_UTI");
-                if (networkType == Asset.NetworkType.Train) findIt2Description += Translations.Translate("FIF_NET_TRA");
-                if (networkType == Asset.NetworkType.Unsorted) findIt2Description += Translations.Translate("FIF_PROP_UNS");
+                else if (networkType == Asset.NetworkType.SmallRoads) findIt2Description += Translations.Translate("FIF_NET_SMR");
+                else if (networkType == Asset.NetworkType.MediumRoads) findIt2Description += Translations.Translate("FIF_NET_MDR");
+                else if (networkType == Asset.NetworkType.LargeRoads) findIt2Description += Translations.Translate("FIF_NET_LGR");
+                else if (networkType == Asset.NetworkType.Highway) findIt2Description += Translations.Translate("FIF_NET_HGHW");
+                else if (networkType == Asset.NetworkType.Path) findIt2Description += Translations.Translate("FIF_NET_PATH");
+                else if (networkType == Asset.NetworkType.Fence) findIt2Description += Translations.Translate("FIF_NET_WALL");
+                else if (networkType == Asset.NetworkType.WaterStructures) findIt2Description += Translations.Translate("FIF_NET_WAT");
+                else if (networkType == Asset.NetworkType.Utility) findIt2Description += Translations.Translate("FIF_NET_UTI");
+                else if (networkType == Asset.NetworkType.Train) findIt2Description += Translations.Translate("FIF_NET_TRA");
+                else if (networkType == Asset.NetworkType.Unsorted) findIt2Description += Translations.Translate("FIF_PROP_UNS");
 
                 if (UIFilterNetwork.IsNormalRoads(networkType))
                 {
@@ -522,25 +527,29 @@ namespace FindIt
             {
                 findIt2Description = $"{Translations.Translate("FIF_SE_IPR")}, ";
                 if (propType == Asset.PropType.PropsIndustrial) findIt2Description += Translations.Translate("FIF_PROP_IND");
-                if (propType == Asset.PropType.PropsParks) findIt2Description += Translations.Translate("FIF_PROP_PAR");
-                if (propType == Asset.PropType.PropsCommon) findIt2Description += Translations.Translate("FIF_PROP_COM");
-                if (propType == Asset.PropType.PropsResidential) findIt2Description += Translations.Translate("FIF_PROP_RES");
-                if (propType == Asset.PropType.PropsBillboards) findIt2Description += Translations.Translate("FIF_PROP_BIL");
-                if (propType == Asset.PropType.PropsSpecialBillboards) findIt2Description += Translations.Translate("FIF_PROP_SPE");
-                if (propType == Asset.PropType.PropsLights) findIt2Description += Translations.Translate("FIF_PROP_LIG");
-                if (propType == Asset.PropType.Natural) findIt2Description += Translations.Translate("FIF_PROP_NAT");
-                if (propType == Asset.PropType.Unsorted) findIt2Description += Translations.Translate("FIF_PROP_UNS");
-                if (propType == Asset.PropType.PropsMarker) findIt2Description += Translations.Translate("FIF_PROP_MAR");
-                if (propType == Asset.PropType.PropsVehicle) findIt2Description += Translations.Translate("FIF_PROP_VEH");
-                if (propType == Asset.PropType.PropsTree) findIt2Description += Translations.Translate("FIF_PROP_TRE");
+                else if (propType == Asset.PropType.PropsParks) findIt2Description += Translations.Translate("FIF_PROP_PAR");
+                else if (propType == Asset.PropType.PropsCommon) findIt2Description += Translations.Translate("FIF_PROP_COM");
+                else if (propType == Asset.PropType.PropsResidential) findIt2Description += Translations.Translate("FIF_PROP_RES");
+                else if (propType == Asset.PropType.PropsBillboards) findIt2Description += Translations.Translate("FIF_PROP_BIL");
+                else if (propType == Asset.PropType.PropsSpecialBillboards) findIt2Description += Translations.Translate("FIF_PROP_SPE");
+                else if (propType == Asset.PropType.PropsLights) findIt2Description += Translations.Translate("FIF_PROP_LIG");
+                else if (propType == Asset.PropType.Natural) findIt2Description += Translations.Translate("FIF_PROP_NAT");
+                else if (propType == Asset.PropType.Unsorted) findIt2Description += Translations.Translate("FIF_PROP_UNS");
+                else if (propType == Asset.PropType.PropsMarker) findIt2Description += Translations.Translate("FIF_PROP_MAR");
+                else if (propType == Asset.PropType.PropsUnsortedVehicle) findIt2Description += Translations.Translate("FIF_PROP_VEH");
+                else if (propType == Asset.PropType.PropsTree) findIt2Description += Translations.Translate("FIF_PROP_TRE");
+                else if (propType == Asset.PropType.PropsMoterVehicle) findIt2Description += Translations.Translate("FIF_PROP_MOT");
+                else if (propType == Asset.PropType.PropsRailwayVehicle) findIt2Description += Translations.Translate("FIF_PROP_RAI");
+                else if (propType == Asset.PropType.PropsAircraft) findIt2Description += Translations.Translate("FIF_PROP_AIR");
+                else if (propType == Asset.PropType.PropsWaterCraft) findIt2Description += Translations.Translate("FIF_PROP_WAT");
 
             }
             else if (assetType == AssetType.Tree)
             {
                 findIt2Description = $"{Translations.Translate("FIF_SE_IT")}, ";
                 if (treeType == Asset.TreeType.SmallTree) findIt2Description += Translations.Translate("FIF_TREE_SM");
-                if (treeType == Asset.TreeType.MediumTree) findIt2Description += Translations.Translate("FIF_TREE_MD");
-                if (treeType == Asset.TreeType.LargeTree) findIt2Description += Translations.Translate("FIF_TREE_LG");
+                else if (treeType == Asset.TreeType.MediumTree) findIt2Description += Translations.Translate("FIF_TREE_MD");
+                else if (treeType == Asset.TreeType.LargeTree) findIt2Description += Translations.Translate("FIF_TREE_LG");
             }
             else if (assetType == AssetType.Ploppable)
             {
@@ -580,6 +589,61 @@ namespace FindIt
             if (dlc == SteamHelper.DLC_BitMask.ModderPack5) return true;
             if (dlc == SteamHelper.DLC_BitMask.ModderPack6) return true;
 
+            return false;
+        }
+
+        public void SetVehiclePropType(Dictionary<PropInfo, VehicleInfo> propVehicleInfoTable, PropInfo info)
+        {
+            propType = Asset.PropType.PropsUnsortedVehicle;
+            if (!propVehicleInfoTable.ContainsKey(info)) return;
+            PrefabAI ai = propVehicleInfoTable[info].GetAI();
+            if (ai == null) return;
+            Type aiType = ai.GetType();
+
+            // motor vehicles
+            if (IsMotorVehicle(aiType)) propType = Asset.PropType.PropsMoterVehicle;
+
+            // railway vehicle
+            else if (IsRailwayVehicle(aiType)) propType = Asset.PropType.PropsRailwayVehicle;
+
+            // aircraft
+            else if (IsAircraft(aiType)) propType = Asset.PropType.PropsAircraft;
+
+            // watercraft
+            else if (IsWatercraft(aiType)) propType = Asset.PropType.PropsWaterCraft;
+        }
+
+        public bool IsMotorVehicle(Type type)
+        {
+            if (type.IsSubclassOf(typeof(CarAI))) return true;
+            return false;
+        }
+
+        public bool IsRailwayVehicle(Type type)
+        {
+            if (type.IsSubclassOf(typeof(TrainAI))) return true;
+            if (type.IsSubclassOf(typeof(TramBaseAI))) return true;
+            return false;
+        }
+
+        public bool IsAircraft(Type type)
+        {
+            if (type.IsSubclassOf(typeof(AircraftAI))) return true;
+            if (type.IsSubclassOf(typeof(HelicopterAI))) return true;
+            if (type.IsSubclassOf(typeof(BlimpAI))) return true;
+            if (type == (typeof(PassengerHelicopterAI))) return true;
+            if (type == (typeof(PassengerPlaneAI))) return true;
+            if (type == (typeof(PrivatePlaneAI))) return true;
+            if (type == (typeof(BalloonAI))) return true;
+            if (type == (typeof(CargoPlaneAI))) return true;
+            if (type == (typeof(RocketAI))) return true;
+            return false;
+        }
+
+        public bool IsWatercraft(Type type)
+        {
+            if (type.IsSubclassOf(typeof(FerryAI))) return true;
+            if (type.IsSubclassOf(typeof(ShipAI))) return true;
             return false;
         }
     }

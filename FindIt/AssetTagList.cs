@@ -941,6 +941,7 @@ namespace FindIt
                 Type TVPropPatchModType = Type.GetType("TVPropPatch.Mod");
                 HashSet<PropInfo> generatedVehicleProp = (HashSet<PropInfo>)TVPropPatchModType.GetField("generatedVehicleProp").GetValue(null);
                 HashSet<PropInfo> generatedTreeProp = (HashSet<PropInfo>)TVPropPatchModType.GetField("generatedTreeProp").GetValue(null);
+                Dictionary<PropInfo, VehicleInfo> propVehicleInfoTable = (Dictionary<PropInfo, VehicleInfo>)TVPropPatchModType.GetField("propVehicleInfoTable").GetValue(null);
 
                 foreach (Asset asset in assets.Values)
                 {
@@ -948,7 +949,7 @@ namespace FindIt
                     if (propInfo == null) continue;
 
                     if (generatedTreeProp.Contains(propInfo)) asset.propType = Asset.PropType.PropsTree;
-                    if (generatedVehicleProp.Contains(propInfo)) asset.propType = Asset.PropType.PropsVehicle;
+                    if (generatedVehicleProp.Contains(propInfo)) asset.SetVehiclePropType(propVehicleInfoTable, propInfo);
                     asset.SetFindIt2Description();
                 }
                 tvppatchModProcessed = true;
@@ -960,5 +961,6 @@ namespace FindIt
 
             return true;
         }
+
     }
 }

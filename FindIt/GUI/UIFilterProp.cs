@@ -13,7 +13,11 @@ namespace FindIt.GUI
         public enum Category
         {
             None = -1,
-            PropsVehicle = 0, // Vehicle (from Tree & Vehicle Props mod)
+            PropsMoterVehicle = 0, // Vehicles (from Tree & Vehicle Props mod)
+            PropsRailwayVehicle,
+            PropsAircraft,
+            PropsWaterCraft,
+            PropsUnsortedVehicle,
             PropsTree, // Tree (from Tree & Vehicle Props mod)
             PropsIndustrial,
             PropsParks,
@@ -44,7 +48,11 @@ namespace FindIt.GUI
             if (propType == Asset.PropType.Natural) return Category.Natural;
             if (propType == Asset.PropType.Unsorted) return Category.Unsorted;
             if (propType == Asset.PropType.PropsMarker) return Category.Marker;
-            if (propType == Asset.PropType.PropsVehicle) return Category.PropsVehicle;
+            if (propType == Asset.PropType.PropsMoterVehicle) return Category.PropsMoterVehicle;
+            if (propType == Asset.PropType.PropsRailwayVehicle) return Category.PropsRailwayVehicle;
+            if (propType == Asset.PropType.PropsAircraft) return Category.PropsAircraft;
+            if (propType == Asset.PropType.PropsWaterCraft) return Category.PropsWaterCraft;
+            if (propType == Asset.PropType.PropsUnsortedVehicle) return Category.PropsUnsortedVehicle;
             if (propType == Asset.PropType.PropsTree) return Category.PropsTree;
 
             return Category.None;
@@ -54,6 +62,10 @@ namespace FindIt.GUI
         {
             public static readonly string[] atlases =
             {
+                "Ingame",
+                "Ingame",
+                "Ingame",
+                "Ingame",
                 "Ingame",
                 "Ingame",
                 "Thumbnails",
@@ -71,6 +83,10 @@ namespace FindIt.GUI
             public static readonly string[] spriteNames =
             {
                 "ToolbarIconPublicTransport",
+                "SubBarPublicTransportTrain",
+                "SubBarPublicTransportPlane",
+                "SubBarPublicTransportShip",
+                "IconPolicyEncourageBiking",
                 "IconPolicyForest",
                 "ZoningIndustrial",
                 "ToolbarIconBeautification",
@@ -86,7 +102,11 @@ namespace FindIt.GUI
 
             public static readonly string[] tooltips =
             {
-                Translations.Translate("FIF_PROP_VEH"), // Vehicle (from Tree & Vehicle Props mod)
+                Translations.Translate("FIF_PROP_MOT"), // Motor Vehicle (from Tree & Vehicle Props mod)
+                Translations.Translate("FIF_PROP_RAI"), // Railway Vehicle (from Tree & Vehicle Props mod)
+                Translations.Translate("FIF_PROP_AIR"), // Aircraft (from Tree & Vehicle Props mod)
+                Translations.Translate("FIF_PROP_WAT"), // Watercraft (from Tree & Vehicle Props mod)
+                Translations.Translate("FIF_PROP_VEH"), // Unsorted Vehicle (from Tree & Vehicle Props mod)
                 Translations.Translate("FIF_PROP_TRE"), // Tree (from Tree & Vehicle Props mod)
                 Translations.Translate("FIF_PROP_IND"), // Industrial
                 Translations.Translate("FIF_PROP_PAR"), // Parks
@@ -197,14 +217,16 @@ namespace FindIt.GUI
                 };
             }
 
-            // Hide first two tabs if Tree & Vehicle Props Patch mod is not enabled
+            // Hide vehicle and tree tabs if the Tree & Vehicle Props Patch mod is not enabled
             if (!FindIt.isTVPPatchEnabled)
             {
-                toggles[0].isVisible = false;
-                toggles[1].isVisible = false;
-                for (int i = 2; i < (int)Category.All; i++)
+                for (int i = 0; i < 6; i++)
                 {
-                    toggles[i].relativePosition = new Vector3(5 + 40 * (i-2), 5);
+                    toggles[i].isVisible = false;
+                }
+                for (int i = 6; i < (int)Category.All; i++)
+                {
+                    toggles[i].relativePosition = new Vector3(5 + 40 * (i - 6), 5);
                 }
             }
 

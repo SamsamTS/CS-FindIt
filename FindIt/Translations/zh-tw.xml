@@ -168,8 +168,15 @@
     <Translation ID="FIF_NET_ONE" String="單行道" />
     <Translation ID="FIF_NET_PAR" String="允許路邊停車" />
     <Translation ID="FIF_NET_NOP" String="禁止路邊停車" />
-    <Translation ID="FIF_PROP_VEH" String="載具 (由Tree and Vehicle Props mod 生成)" />
+    <Translation ID="FIF_PROP_VEH" String="未分類載具 (由Tree and Vehicle Props mod 生成)" />
     <Translation ID="FIF_PROP_TRE" String="樹木 (由Tree and Vehicle Props mod 生成)" />
+    <Translation ID="FIF_SET_BACK" String="對主面板使用淺色背景顏色" />
+    <Translation ID="FIF_SET_BACKTP" String="更易於查看較暗的素材, 但更難查看較明亮的素材" />
+    <Translation ID="FIF_SET_DUN" String="隱藏未來的更新通知" />
+    <Translation ID="FIF_PROP_MOT" String="機動車輛 (由Tree and Vehicle Props mod 生成)" />
+    <Translation ID="FIF_PROP_RAI" String="軌道車輛 (由Tree and Vehicle Props mod 生成)" />
+    <Translation ID="FIF_PROP_AIR" String="航空器 (由Tree and Vehicle Props mod 生成)" />
+    <Translation ID="FIF_PROP_WAT" String="船 (由Tree and Vehicle Props mod 生成)" />
 
   </Translations>
 </Language>
