@@ -177,6 +177,7 @@
     <Translation ID="FIF_PROP_RAI" String="軌道車輛 (由Tree and Vehicle Props mod 生成)" />
     <Translation ID="FIF_PROP_AIR" String="航空器 (由Tree and Vehicle Props mod 生成)" />
     <Translation ID="FIF_PROP_WAT" String="船 (由Tree and Vehicle Props mod 生成)" />
+    <Translation ID="FIF_EF_SB" String="子建築" />
 
   </Translations>
 </Language>
