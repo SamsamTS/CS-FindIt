@@ -100,7 +100,13 @@ namespace FindIt
                     BuildingInfo buildingPrefab = m_prefab as BuildingInfo;
                     if (buildingPrefab != null)
                     {
-                        if (buildingPrefab.m_placementStyle != ItemClass.Placement.Manual)
+                        // check sub-buildings
+                        if (buildingPrefab.m_placementStyle == ItemClass.Placement.Procedural && buildingPrefab.m_buildingAI.GetType() != typeof(BuildingAI))
+                        {
+                            isSubBuilding = true;
+                        }
+
+                        else if (buildingPrefab.m_placementStyle != ItemClass.Placement.Manual)
                         {
                             assetType = AssetType.Growable;
                         }
@@ -185,6 +191,7 @@ namespace FindIt
         public float score;
         public ulong downloadTime;
         public bool isCCP = false;
+        public bool isSubBuilding = false;
         public float buildingHeight = 0;
         public PropType propType = PropType.Invalid;
         public TreeType treeType = TreeType.Invalid;

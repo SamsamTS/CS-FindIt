@@ -168,6 +168,7 @@
     <Translation ID="FIF_NET_ONE" String="One-way Roads" />
     <Translation ID="FIF_NET_PAR" String="Allow Street Parking" />
     <Translation ID="FIF_NET_NOP" String="No Street Parking" />
+    <Translation ID="FIF_EF_SB" String="Sub-buildings" />
 
   </Translations>
 </Language>
