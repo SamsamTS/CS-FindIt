@@ -315,6 +315,13 @@ namespace FindIt
                                 if (info.m_class.m_level != level) return false;
                             }
 
+                            // only show sub-buildings
+                            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.SubBuildings)
+                            {
+                                if (!asset.isSubBuilding) return false;
+                                if (asset.assetType != Asset.AssetType.Invalid) return false;
+                            }
+
                             // only show unused assets
                             else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.UnusedAssets)
                             {
@@ -651,8 +658,8 @@ namespace FindIt
                     {
                         if (buildingPrefab.m_placementStyle == ItemClass.Placement.Procedural && buildingPrefab.m_buildingAI.GetType() != typeof(BuildingAI))
                         {
-                            filtered += prefab.name + ", ";
-                            continue;
+                            //filtered += prefab.name + ", ";
+                            //continue;
                         }
                     }
 

@@ -38,6 +38,7 @@ namespace FindIt.GUI
             AssetCreator = 0,
             BuildingHeight,
             BuildingLevel,
+            SubBuildings,
             UnusedAssets
         }
 
@@ -45,6 +46,7 @@ namespace FindIt.GUI
                     Translations.Translate("FIF_EF_AC"), // Asset Creator
                     Translations.Translate("FIF_EF_BH"), // Building Height
                     Translations.Translate("FIF_SE_LV"), // Building Level
+                    Translations.Translate("FIF_EF_SB"), // Sub-building
                     Translations.Translate("FIF_EF_UN") // Unused Asset
                 };
 
