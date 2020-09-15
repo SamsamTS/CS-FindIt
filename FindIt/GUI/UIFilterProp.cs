@@ -13,7 +13,13 @@ namespace FindIt.GUI
         public enum Category
         {
             None = -1,
-            PropsIndustrial = 0,
+            PropsMoterVehicle = 0, // Vehicles (from Tree & Vehicle Props mod)
+            PropsRailwayVehicle,
+            PropsAircraft,
+            PropsWaterCraft,
+            PropsUnsortedVehicle,
+            PropsTree, // Tree (from Tree & Vehicle Props mod)
+            PropsIndustrial,
             PropsParks,
             PropsCommon,
             PropsResidential,
@@ -42,6 +48,12 @@ namespace FindIt.GUI
             if (propType == Asset.PropType.Natural) return Category.Natural;
             if (propType == Asset.PropType.Unsorted) return Category.Unsorted;
             if (propType == Asset.PropType.PropsMarker) return Category.Marker;
+            if (propType == Asset.PropType.PropsMoterVehicle) return Category.PropsMoterVehicle;
+            if (propType == Asset.PropType.PropsRailwayVehicle) return Category.PropsRailwayVehicle;
+            if (propType == Asset.PropType.PropsAircraft) return Category.PropsAircraft;
+            if (propType == Asset.PropType.PropsWaterCraft) return Category.PropsWaterCraft;
+            if (propType == Asset.PropType.PropsUnsortedVehicle) return Category.PropsUnsortedVehicle;
+            if (propType == Asset.PropType.PropsTree) return Category.PropsTree;
 
             return Category.None;
         }
@@ -50,6 +62,12 @@ namespace FindIt.GUI
         {
             public static readonly string[] atlases =
             {
+                "Ingame",
+                "Ingame",
+                "Ingame",
+                "Ingame",
+                "Ingame",
+                "Ingame",
                 "Thumbnails",
                 "Ingame",
                 "Ingame",
@@ -64,6 +82,12 @@ namespace FindIt.GUI
 
             public static readonly string[] spriteNames =
             {
+                "ToolbarIconPublicTransport",
+                "SubBarPublicTransportTrain",
+                "SubBarPublicTransportPlane",
+                "SubBarPublicTransportShip",
+                "IconPolicyEncourageBiking",
+                "IconPolicyForest",
                 "ZoningIndustrial",
                 "ToolbarIconBeautification",
                 "ToolbarIconProps",
@@ -71,13 +95,19 @@ namespace FindIt.GUI
                 "ToolbarIconPropsBillboards",
                 "ToolbarIconPropsSpecialBillboards",
                 "SubBarPropsCommonLights",
-                "IconPolicyForest",
+                "InfoIconResources",
                 "ToolbarIconProps",
                 "RoadOptionUpgrade"
             };
 
             public static readonly string[] tooltips =
             {
+                Translations.Translate("FIF_PROP_MOT"), // Motor Vehicle (from Tree & Vehicle Props mod)
+                Translations.Translate("FIF_PROP_RAI"), // Railway Vehicle (from Tree & Vehicle Props mod)
+                Translations.Translate("FIF_PROP_AIR"), // Aircraft (from Tree & Vehicle Props mod)
+                Translations.Translate("FIF_PROP_WAT"), // Watercraft (from Tree & Vehicle Props mod)
+                Translations.Translate("FIF_PROP_VEH"), // Unsorted Vehicle (from Tree & Vehicle Props mod)
+                Translations.Translate("FIF_PROP_TRE"), // Tree (from Tree & Vehicle Props mod)
                 Translations.Translate("FIF_PROP_IND"), // Industrial
                 Translations.Translate("FIF_PROP_PAR"), // Parks
                 Translations.Translate("FIF_PROP_COM"), // Common
@@ -185,6 +215,19 @@ namespace FindIt.GUI
                         }
                     }
                 };
+            }
+
+            // Hide vehicle and tree tabs if the Tree & Vehicle Props Patch mod is not enabled
+            if (!FindIt.isTVPPatchEnabled)
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    toggles[i].isVisible = false;
+                }
+                for (int i = 6; i < (int)Category.All; i++)
+                {
+                    toggles[i].relativePosition = new Vector3(5 + 40 * (i - 6), 5);
+                }
             }
 
             UICheckBox last = toggles[toggles.Length - 1];

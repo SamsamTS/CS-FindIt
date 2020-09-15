@@ -18,7 +18,7 @@ namespace FindIt.GUI
         public UIPanel inputPanel;
         public UITextField input;
         public UIScrollPanel scrollPanel;
-        UIPanel panel;
+        public UIPanel panel;
         public UISprite searchIcon;
         public UISprite clearButton;
 
@@ -352,7 +352,8 @@ namespace FindIt.GUI
             // panel of sort button and filter toggle tabs
             panel = AddUIComponent<UIPanel>();
             panel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
-            panel.backgroundSprite = "GenericTabHovered";
+            if (!Settings.useLightBackground) panel.backgroundSprite = "GenericTabHovered";
+            else panel.backgroundSprite = "GenericTab";
             panel.size = new Vector2(parent.width, 45);
             panel.relativePosition = new Vector3(0, -panel.height + 5);
 
@@ -433,6 +434,14 @@ namespace FindIt.GUI
             {
                 input.Unfocus();
             }
+
+            if (isVisible && !Settings.disableUpdateNotice && !FindIt.instance.isUpdateNoticeShown && ModInfo.updateNoticeDate > Settings.lastUpdateNotice)
+            {
+                UIUpdateNoticePopUp.ShowAt();
+                FindIt.instance.isUpdateNoticeShown = true;
+                Settings.lastUpdateNotice = ModInfo.updateNoticeDate;
+                XMLUtils.SaveSettings();
+            }
         }
 
         /// <summary>
@@ -476,6 +485,7 @@ namespace FindIt.GUI
                     break;
                 case DropDownOptions.Prop:
                     ShowFilterPanel(filterProp);
+                    AssetTagList.instance.GetTVPProps();
                     break;
                 case DropDownOptions.Tree:
                     ShowFilterPanel(filterTree);

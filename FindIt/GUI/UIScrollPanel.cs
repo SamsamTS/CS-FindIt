@@ -222,8 +222,6 @@ namespace FindIt.GUI
                 UITagsWindow.ShowAt(currentData.asset, m_tagSprite);
             };
 
-
-
             // batch action check box
             m_batchCheckBox = SamsamTS.UIUtils.CreateCheckBox(component);
             m_batchCheckBox.isChecked = false;
@@ -390,7 +388,7 @@ namespace FindIt.GUI
                         {
                             count = AssetTagList.instance.prefabInstanceCountDictionary[data.asset.prefab];
                         }
-                        
+
                         if (data.asset.prefab is NetInfo)
                         {
                             m_instanceCountLabel.text = (count == 0) ? Translations.Translate("FIF_UIS_UN") : Translations.Translate("FIF_UIS_IN");

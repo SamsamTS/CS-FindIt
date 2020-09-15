@@ -168,6 +168,11 @@
     <Translation ID="FIF_NET_ONE" String="Дороги с односторонним движением" />
     <Translation ID="FIF_NET_PAR" String="Парковка разрешена" />
     <Translation ID="FIF_NET_NOP" String="Парковка запрещена" />
-
+    <Translation ID="FIF_PROP_VEH" String="Транспорт (сгенерированный Tree and Vehicle Props)" />
+    <Translation ID="FIF_PROP_TRE" String="Растительность (сгенерированная Tree and Vehicle Props)" />
+    <Translation ID="FIF_SET_BACK" String="Использовать светлый цвет фона для основной панели" />
+    <Translation ID="FIF_SET_BACKTP" String="Легче увидеть более темные объекты, но труднее увидеть более яркие" />
+    <Translation ID="FIF_SET_DUN" String="Отключить уведомление об обновлении" />
+ 
   </Translations>
 </Language>

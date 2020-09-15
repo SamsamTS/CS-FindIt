@@ -85,6 +85,7 @@
     <Compile Include="GUI\UITagsDeletePopUp.cs" />
     <Compile Include="GUI\UITagsWindow.cs" />
     <Compile Include="GUI\UIThreading.cs" />
+    <Compile Include="GUI\UIUpdateNoticePopUp.cs" />
     <Compile Include="GUI\UIUtils.cs" />
     <Compile Include="ModInfo.cs" />
     <Compile Include="OptionsKeymapping.cs" />

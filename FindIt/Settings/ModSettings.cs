@@ -33,6 +33,12 @@ namespace FindIt
 
         internal static bool includePOinstances = false;
 
+        internal static bool useLightBackground = false;
+
+        internal static bool disableUpdateNotice = false;
+
+        internal static float lastUpdateNotice = 0.0f;
+
         internal static KeyBinding searchKey = new KeyBinding { keyCode = (int)KeyCode.F, control = true, shift = false, alt = false };
 
         internal static KeyBinding allKey = new KeyBinding { keyCode = (int)KeyCode.Alpha1, control = false, shift = false, alt = true };
@@ -122,6 +128,15 @@ namespace FindIt
 
         [XmlElement("IncludePOinstances")]
         public bool IncludePOinstances { get => Settings.includePOinstances; set => Settings.includePOinstances = value; }
+
+        [XmlElement("UseLightBackground")]
+        public bool UseLightBackground { get => Settings.useLightBackground; set => Settings.useLightBackground = value; }
+
+        [XmlElement("DisableUpdateNotice")]
+        public bool DisableUpdateNotice { get => Settings.disableUpdateNotice; set => Settings.disableUpdateNotice = value; }
+
+        [XmlElement("LastUpdateNotice")]
+        public float LastUpdateNotice { get => Settings.lastUpdateNotice; set => Settings.lastUpdateNotice = value; }
 
         [XmlElement("SearchKey")]
         public KeyBinding SearchKey { get => Settings.searchKey; set => Settings.searchKey = value; }

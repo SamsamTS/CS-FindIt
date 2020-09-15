@@ -96,6 +96,22 @@ namespace FindIt.GUI
                 UIFilterProp.instance.UpdateMarkerToggleVisibility();
             };
 
+            // Use light background theme
+            UICheckBox useLightBackground = SamsamTS.UIUtils.CreateCheckBox(this);
+            useLightBackground.isChecked = Settings.useLightBackground;
+            useLightBackground.label.text = Translations.Translate("FIF_SET_BACK");
+            useLightBackground.label.textScale = 0.8f;
+            useLightBackground.width = size.x;
+            useLightBackground.label.textColor = new Color32(0, 0, 0, 255);
+            useLightBackground.tooltip = Translations.Translate("FIF_SET_BACKTP");
+            useLightBackground.relativePosition = new Vector3(title.relativePosition.x, showPropMarker.relativePosition.y + showPropMarker.height + 10);
+            useLightBackground.eventCheckChanged += (c, i) =>
+            {
+                Settings.useLightBackground = useLightBackground.isChecked;
+                XMLUtils.SaveSettings();
+                FindIt.instance.UpdateDefaultPanelBackground();
+            };
+
             // Show the number of existing instances of each asset
             UICheckBox showInstancesCounter = SamsamTS.UIUtils.CreateCheckBox(this);
             showInstancesCounter.isChecked = Settings.showInstancesCounter;
@@ -104,7 +120,7 @@ namespace FindIt.GUI
             showInstancesCounter.width = size.x;
             showInstancesCounter.tooltip = Translations.Translate("FIF_SET_ICTP");
             showInstancesCounter.label.textColor = new Color32(0, 0, 0, 255);
-            showInstancesCounter.relativePosition = new Vector3(title.relativePosition.x, showPropMarker.relativePosition.y + showPropMarker.height + 10);
+            showInstancesCounter.relativePosition = new Vector3(title.relativePosition.x, useLightBackground.relativePosition.y + useLightBackground.height + 10);
             showInstancesCounter.eventCheckChanged += (c, i) =>
             {
                 if (showInstancesCounter.isChecked)

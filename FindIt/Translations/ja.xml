@@ -168,6 +168,15 @@
     <Translation ID="FIF_NET_ONE" String="一方通行" />
     <Translation ID="FIF_NET_PAR" String="路上駐車を許可する" />
     <Translation ID="FIF_NET_NOP" String="路上駐車禁止" />
+    <Translation ID="FIF_PROP_VEH" String="未分類乗り物 (Tree and Vehicle Props によって生成される)" />
+    <Translation ID="FIF_PROP_TRE" String="木 (Tree and Vehicle Props によって生成される)" />
+    <Translation ID="FIF_SET_BACK" String="メイン パネルに明るい背景色を使用する" />
+    <Translation ID="FIF_SET_BACKTP" String="より暗いアセットを見やすくするが、より明るい資産を見るのが難しい" />
+    <Translation ID="FIF_SET_DUN" String="今後の更新通知を非表示にする" />
+    <Translation ID="FIF_PROP_MOT" String="自動車 (Tree and Vehicle Props によって生成される)" />
+    <Translation ID="FIF_PROP_RAI" String="鉄道車両 (Tree and Vehicle Props によって生成される)" />
+    <Translation ID="FIF_PROP_AIR" String="航空機 (Tree and Vehicle Props によって生成される)" />
+    <Translation ID="FIF_PROP_WAT" String="船 (Tree and Vehicle Props によって生成される)" />
 
   </Translations>
 </Language>
