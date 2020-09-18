@@ -301,6 +301,7 @@ namespace FindIt
                             if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.AssetCreator)
                             {
                                 if (asset.author != UISearchBox.instance.extraFiltersPanel.GetAssetCreatorDropDownListKey()) return false;
+                                if (asset.isSubBuilding) return false;
                             }
                             // filter asset by building height
                             else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.BuildingHeight)
@@ -320,6 +321,7 @@ namespace FindIt
                                 BuildingInfo info = asset.prefab as BuildingInfo;
                                 ItemClass.Level level = (ItemClass.Level)UISearchBox.instance.extraFiltersPanel.buildingLevelDropDownMenu.selectedIndex;
                                 if (info.m_class.m_level != level) return false;
+                                if (asset.isSubBuilding) return false;
                             }
 
                             // only show sub-buildings
@@ -332,6 +334,7 @@ namespace FindIt
                             // only show unused assets
                             else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.UnusedAssets)
                             {
+                                if (asset.isSubBuilding) return false;
                                 if (prefabInstanceCountDictionary.ContainsKey(asset.prefab))
                                 {
                                     if (prefabInstanceCountDictionary[asset.prefab] > 0) return false;
@@ -342,6 +345,15 @@ namespace FindIt
                                 }
                             }
                         }
+                        else
+                        {
+                            if (asset.isSubBuilding) return false;
+                        }
+                    }
+                    // skip sub-buildings if not using the extra filters panel
+                    else
+                    {
+                        if (asset.isSubBuilding) return false;
                     }
                 }
             }
