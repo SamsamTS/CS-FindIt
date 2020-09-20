@@ -458,13 +458,15 @@ namespace FindIt
             {
                 defaultPanel.atlas = defaultPanelAtlas;
                 defaultPanel.backgroundSprite = defaultPanelBackgroundSprite;
-                UISearchBox.instance.panel.backgroundSprite = "GenericTabHovered";
+                if (UISearchBox.instance?.panel != null)
+                    UISearchBox.instance.panel.backgroundSprite = "GenericTabHovered";
             }
             else
             {
                 defaultPanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
                 defaultPanel.backgroundSprite = "GenericTabHovered";
-                UISearchBox.instance.panel.backgroundSprite = "GenericTab";
+                if (UISearchBox.instance?.panel != null)
+                    UISearchBox.instance.panel.backgroundSprite = "GenericTab";
             }
         }
     }
