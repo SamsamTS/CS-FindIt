@@ -67,7 +67,7 @@ namespace FindIt
             // if showing instance counts, refresh
             try
             {
-                if ((Settings.showInstancesCounter) || (UISearchBox.instance?.extraFiltersPanel != null && UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == 2))
+                if ((Settings.showInstancesCounter) || (UISearchBox.instance?.extraFiltersPanel != null && UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.UnusedAssets))
                 {
                     UpdatePrefabInstanceCount();
 
