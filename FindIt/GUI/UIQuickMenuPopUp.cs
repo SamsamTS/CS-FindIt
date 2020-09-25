@@ -9,10 +9,7 @@ namespace FindIt.GUI
     public class UIQuickMenuPopUp : UIPanel
     {
         public static UIQuickMenuPopUp instance;
-        private UIComponent m_button;
-
         private const float spacing = 5f;
-
         private UIDropDown instanceCounterSort;
         private UICheckBox includePOinstances;
 
@@ -112,6 +109,23 @@ namespace FindIt.GUI
                 FindIt.instance.UpdateDefaultPanelBackground();
             };
 
+            // Show asset type panel
+            UICheckBox showAssetTypePanel = SamsamTS.UIUtils.CreateCheckBox(this);
+            showAssetTypePanel.isChecked = Settings.showAssetTypePanel;
+            showAssetTypePanel.label.text = Translations.Translate("FIF_SET_ATP");
+            showAssetTypePanel.label.textScale = 0.8f;
+            showAssetTypePanel.width = size.x;
+            showAssetTypePanel.label.textColor = new Color32(0, 0, 0, 255);
+            showAssetTypePanel.tooltip = Translations.Translate("FIF_ATP_TP");
+            showAssetTypePanel.relativePosition = new Vector3(title.relativePosition.x, useLightBackground.relativePosition.y + useLightBackground.height + 10);
+            showAssetTypePanel.eventCheckChanged += (c, i) =>
+            {
+                Settings.showAssetTypePanel = showAssetTypePanel.isChecked;
+                XMLUtils.SaveSettings();
+                if (Settings.showAssetTypePanel) UISearchBox.instance.CreateAssetTypePanel();
+                else UISearchBox.instance.DestroyAssetTypePanel();
+            };
+
             // Show the number of existing instances of each asset
             UICheckBox showInstancesCounter = SamsamTS.UIUtils.CreateCheckBox(this);
             showInstancesCounter.isChecked = Settings.showInstancesCounter;
@@ -120,7 +134,7 @@ namespace FindIt.GUI
             showInstancesCounter.width = size.x;
             showInstancesCounter.tooltip = Translations.Translate("FIF_SET_ICTP");
             showInstancesCounter.label.textColor = new Color32(0, 0, 0, 255);
-            showInstancesCounter.relativePosition = new Vector3(title.relativePosition.x, useLightBackground.relativePosition.y + useLightBackground.height + 10);
+            showInstancesCounter.relativePosition = new Vector3(title.relativePosition.x, showAssetTypePanel.relativePosition.y + showAssetTypePanel.height + 10);
             showInstancesCounter.eventCheckChanged += (c, i) =>
             {
                 if (showInstancesCounter.isChecked)
@@ -237,7 +251,6 @@ namespace FindIt.GUI
 
                 UIView.PushModal(instance);
             }
-            instance.m_button = component;
             instance.Show(true);
         }
 

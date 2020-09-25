@@ -9,9 +9,7 @@ namespace FindIt.GUI
     public class UIUpdateNoticePopUp : UIPanel
     {
         public static UIUpdateNoticePopUp instance;
-
         private const float spacing = 5f;
-
         private UIButton closeButton;
 
         public override void Start()
@@ -19,7 +17,7 @@ namespace FindIt.GUI
             name = "FindIt_UpdateNoticePopUp";
             atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericPanelWhite";
-            size = new Vector2(620, 145);
+            size = new Vector2(650, 145);
 
             UILabel title = AddUIComponent<UILabel>();
             title.text = "Find It! " + (ModInfo.isBeta ? "[BETA] " : "") + ModInfo.version + " Update";

@@ -178,6 +178,10 @@
     <Translation ID="FIF_PROP_AIR" String="航空器 (由Tree and Vehicle Props mod 生成)" />
     <Translation ID="FIF_PROP_WAT" String="船 (由Tree and Vehicle Props mod 生成)" />
     <Translation ID="FIF_EF_SB" String="子建築" />
+    <Translation ID="FIF_ATP_TP" String="點擊選項卡之間的間隙並拖曳以移動此面板" />
+    <Translation ID="FIF_SET_ATP" String="顯示素材類型面板" />
+    <Translation ID="FIF_EF_CT" String="含有自定義標籤" />
+    <Translation ID="FIF_EF_NCT" String="不含自定義標籤" />
 
   </Translations>
 </Language>

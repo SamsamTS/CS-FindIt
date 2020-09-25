@@ -12,7 +12,6 @@ using ColossalFramework.DataBinding;
 using ColossalFramework.Globalization;
 using FindIt.GUI;
 using System;
-using System.Diagnostics.Eventing.Reader;
 
 namespace FindIt
 {

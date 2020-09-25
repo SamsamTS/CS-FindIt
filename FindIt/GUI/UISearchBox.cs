@@ -49,6 +49,8 @@ namespace FindIt.GUI
         public UISprite quickMenuIcon;
         public bool quickMenuVisible;
 
+        public UIAssetTypePanel assetTypePanel;
+
         // true = sort by relevance
         // false = sort by most recently downloaded
         private bool sortButtonTextState = true;
@@ -422,6 +424,7 @@ namespace FindIt.GUI
             filterDecal.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
 
             UpdateFilterPanels();
+            if (Settings.showAssetTypePanel) CreateAssetTypePanel();
 
             size = Vector2.zero;
         }
@@ -456,6 +459,10 @@ namespace FindIt.GUI
             }
 
             HideAllFilterTabs();
+            if (UIAssetTypePanel.instance != null)
+            {
+                UIAssetTypePanel.instance.SetSelectedTab((DropDownOptions)index);
+            }
 
             switch ((DropDownOptions)index)
             {
@@ -565,6 +572,30 @@ namespace FindIt.GUI
             tagPanel.Close();
             RemoveUIComponent(tagPanel);
             tagPanel = null;
+        }
+
+        public void CreateAssetTypePanel()
+        {
+            if (assetTypePanel != null) return;
+            assetTypePanel = AddUIComponent<UIAssetTypePanel>();
+            assetTypePanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
+            assetTypePanel.backgroundSprite = "GenericTab";
+            assetTypePanel.color = new Color32(196, 200, 206, 255);
+            assetTypePanel.isVisible = true;
+            assetTypePanel.size = new Vector2(75, 145);
+            assetTypePanel.relativePosition = new Vector2(Settings.assetTypePanelX, Settings.assetTypePanelY);
+        }
+
+        public void DestroyAssetTypePanel()
+        {
+            if (assetTypePanel == null) return;
+            assetTypePanel.Close();
+            RemoveUIComponent(assetTypePanel);
+            assetTypePanel = null;
+
+            Settings.assetTypePanelX = -80.0f;
+            Settings.assetTypePanelY = -75.0f;
+            XMLUtils.SaveSettings();
         }
 
         private void UpdateTopPanelsPosition()

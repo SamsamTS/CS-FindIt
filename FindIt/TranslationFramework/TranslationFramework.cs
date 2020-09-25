@@ -8,7 +8,6 @@ using ColossalFramework;
 using ColossalFramework.Plugins;
 using ColossalFramework.Globalization;
 
-
 namespace FindIt
 {
     /// <summary>

@@ -1,7 +1,6 @@
 ﻿using System.Xml.Serialization;
 using UnityEngine;
 
-
 namespace FindIt
 {
     /// <summary>
@@ -39,6 +38,12 @@ namespace FindIt
 
         internal static float lastUpdateNotice = 0.0f;
 
+        internal static bool showAssetTypePanel = true;
+
+        internal static float assetTypePanelX = -80.0f;
+
+        internal static float assetTypePanelY = -75.0f;
+
         internal static KeyBinding searchKey = new KeyBinding { keyCode = (int)KeyCode.F, control = true, shift = false, alt = false };
 
         internal static KeyBinding allKey = new KeyBinding { keyCode = (int)KeyCode.Alpha1, control = false, shift = false, alt = true };
@@ -61,34 +66,7 @@ namespace FindIt
 
         internal static KeyBinding randomSelectionKey = new KeyBinding { keyCode = (int)KeyCode.V, control = false, shift = false, alt = true };
 
-        /*
-        /// <summary>
-        /// Checks to see if the search hotkey has been pressed.
-        /// </summary>
-        /// <returns>True if pressed, false otherwise</returns>
-        public static bool IsSearchPressed()
-        {
-            // Don't do anything if a keycode hasn't been set, or if the key isn't pressed.
-            if (searchKey.keyCode == (int)KeyCode.None || !Input.GetKey((KeyCode)searchKey.keyCode))
-            {
-                return false;
-            }
-
-            // get the states of the modifier keys
-            bool inputControlState = (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl));
-            bool inputShiftState = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
-            bool inputAltState = (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt) || Input.GetKey(KeyCode.AltGr));
-
-            // check if the states match
-            if ((searchKey.control == inputControlState) && (searchKey.shift == inputShiftState) && (searchKey.alt == inputAltState))
-            {
-                return true;
-            }
-            else return false;
-        }
-        */
     }
-
 
     /// <summary>
     /// Defines the XML settings file.
@@ -137,6 +115,15 @@ namespace FindIt
 
         [XmlElement("LastUpdateNotice")]
         public float LastUpdateNotice { get => Settings.lastUpdateNotice; set => Settings.lastUpdateNotice = value; }
+
+        [XmlElement("ShowAssetTypePanel")]
+        public bool ShowAssetTypePanel { get => Settings.showAssetTypePanel; set => Settings.showAssetTypePanel = value; }
+
+        [XmlElement("AssetTypePanelX")]
+        public float AssetTypePanelX { get => Settings.assetTypePanelX; set => Settings.assetTypePanelX = value; }
+
+        [XmlElement("AssetTypePanelY")]
+        public float AssetTypePanelY { get => Settings.assetTypePanelY; set => Settings.assetTypePanelY = value; }
 
         [XmlElement("SearchKey")]
         public KeyBinding SearchKey { get => Settings.searchKey; set => Settings.searchKey = value; }
