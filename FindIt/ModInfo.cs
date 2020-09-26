@@ -13,7 +13,7 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.0.6-beta1";
+        public const string version = "2.0.6-beta2";
         public const bool isBeta = true;
         public const bool showExtraDebuggingMessage = false;
 

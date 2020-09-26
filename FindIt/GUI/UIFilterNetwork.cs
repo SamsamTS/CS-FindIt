@@ -174,7 +174,7 @@ namespace FindIt.GUI
             toggles = new UICheckBox[(int)Category.All];
             for (int i = 0; i < (int)Category.All; i++)
             {
-                toggles[i] = SamsamTS.UIUtils.CreateIconToggle(this, CategoryIcons.atlases[i], CategoryIcons.spriteNames[i], CategoryIcons.spriteNames[i] + "Disabled");
+                toggles[i] = SamsamTS.UIUtils.CreateIconToggle(this, CategoryIcons.atlases[i], CategoryIcons.spriteNames[i], CategoryIcons.spriteNames[i], 0.4f);
                 toggles[i].tooltip = CategoryIcons.tooltips[i] + "\n" + Translations.Translate("FIF_SE_SC");
                 toggles[i].relativePosition = new Vector3(5 + 40 * i, 5);
                 toggles[i].isChecked = true;

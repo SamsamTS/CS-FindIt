@@ -184,7 +184,7 @@ namespace SamsamTS
             }
         }
 
-        public static UICheckBox CreateIconToggle(UIComponent parent, string atlas, string checkedSprite, string uncheckedSprite, float tabSize = 35f, bool fromAssetTypePanel = false)
+        public static UICheckBox CreateIconToggle(UIComponent parent, string atlas, string checkedSprite, string uncheckedSprite, float disabledSpriteOpacity = 1.0f, float tabSize = 35f)
         {
             UICheckBox checkBox = parent.AddUIComponent<UICheckBox>();
 
@@ -216,12 +216,12 @@ namespace SamsamTS
                 if (checkBox.isChecked)
                 {
                     panel.backgroundSprite = "IconPolicyBaseRect";
-                    if (fromAssetTypePanel) sprite.opacity = 1.0f;
+                    sprite.opacity = 1.0f;
                 }
                 else
                 {
                     panel.backgroundSprite = "IconPolicyBaseRectDisabled";
-                    if (fromAssetTypePanel) sprite.opacity = 0.5f;
+                    sprite.opacity = disabledSpriteOpacity;
                 }
                 panel.Invalidate();
             };
@@ -230,7 +230,7 @@ namespace SamsamTS
             {
                 panel.backgroundSprite = "IconPolicyBaseRectHovered";
                 sprite.spriteName = checkedSprite;
-                if (fromAssetTypePanel) sprite.opacity = 1.0f;
+                sprite.opacity = 1.0f;
             };
 
             checkBox.eventMouseLeave += (c, p) =>
@@ -238,12 +238,12 @@ namespace SamsamTS
                 if (checkBox.isChecked)
                 {
                     panel.backgroundSprite = "IconPolicyBaseRect";
-                    if (fromAssetTypePanel) sprite.opacity = 1.0f;
+                    sprite.opacity = 1.0f;
                 }
                 else
                 {
                     panel.backgroundSprite = "IconPolicyBaseRectDisabled";
-                    if (fromAssetTypePanel) sprite.opacity = 0.5f;
+                    sprite.opacity = disabledSpriteOpacity;
                 }
                 sprite.spriteName = uncheckedSprite;
             };

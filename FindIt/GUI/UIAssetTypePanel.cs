@@ -85,7 +85,7 @@ namespace FindIt.GUI
             toggles = new UICheckBox[8];
             for (int i = 0; i < 8; i++)
             {
-                toggles[i] = SamsamTS.UIUtils.CreateIconToggle(this, CategoryIcons.atlases[i], CategoryIcons.spriteNames[i], CategoryIcons.spriteNames[i], 30f, true);
+                toggles[i] = SamsamTS.UIUtils.CreateIconToggle(this, CategoryIcons.atlases[i], CategoryIcons.spriteNames[i], CategoryIcons.spriteNames[i], 0.5f, 30f);
                 toggles[i].tooltip = CategoryIcons.tooltips[i];
 
                 if (i < 4)

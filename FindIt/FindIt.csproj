@@ -116,41 +116,26 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icons\ZoningCommercialEco.png" />
-    <EmbeddedResource Include="Icons\ZoningCommercialEcoDisabled.png" />
     <EmbeddedResource Include="Icons\ZoningCommercialLeisure.png" />
-    <EmbeddedResource Include="Icons\ZoningCommercialLeisureDisabled.png" />
     <EmbeddedResource Include="Icons\ZoningCommercialTourist.png" />
-    <EmbeddedResource Include="Icons\ZoningCommercialTouristDisabled.png" />
     <EmbeddedResource Include="Icons\ZoningOfficeHightech.png" />
-    <EmbeddedResource Include="Icons\ZoningOfficeHightechDisabled.png" />
     <EmbeddedResource Include="Icons\ZoningResidentialHighEco.png" />
-    <EmbeddedResource Include="Icons\ZoningResidentialHighEcoDisabled.png" />
     <EmbeddedResource Include="Icons\ZoningResidentialLowEco.png" />
-    <EmbeddedResource Include="Icons\ZoningResidentialLowEcoDisabled.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icons\ToolbarIconPropsBillboards.png" />
-    <EmbeddedResource Include="Icons\ToolbarIconPropsBillboardsDisabled.png" />
     <EmbeddedResource Include="Icons\ToolbarIconPropsSpecialBillboards.png" />
-    <EmbeddedResource Include="Icons\ToolbarIconPropsSpecialBillboardsDisabled.png" />
     <EmbeddedResource Include="Icons\ExtraFilters.png" />
     <EmbeddedResource Include="Icons\Dice.png" />
     <EmbeddedResource Include="Icons\TreeLg.png" />
-    <EmbeddedResource Include="Icons\TreeLgDisabled.png" />
     <EmbeddedResource Include="Icons\TreeMd.png" />
-    <EmbeddedResource Include="Icons\TreeMdDisabled.png" />
     <EmbeddedResource Include="Icons\TreeSm.png" />
-    <EmbeddedResource Include="Icons\TreeSmDisabled.png" />
     <EmbeddedResource Include="Icons\TinyRoads.png" />
-    <EmbeddedResource Include="Icons\TinyRoadsDisabled.png" />
     <EmbeddedResource Include="Icons\QuickMenu.png" />
     <EmbeddedResource Include="Icons\Clear.png" />
     <EmbeddedResource Include="Icons\Oneway.png" />
-    <EmbeddedResource Include="Icons\OnewayDisabled.png" />
     <EmbeddedResource Include="Icons\Parking.png" />
-    <EmbeddedResource Include="Icons\ParkingDisabled.png" />
     <EmbeddedResource Include="Icons\NoParking.png" />
-    <EmbeddedResource Include="Icons\NoParkingDisabled.png" />
     <EmbeddedResource Include="Icons\GrwbRico.png" />
     <Content Include="Translations\de.xml" />
     <Content Include="Translations\en.xml" />
