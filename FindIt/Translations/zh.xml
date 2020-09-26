@@ -178,6 +178,10 @@
     <Translation ID="FIF_PROP_AIR" String="飞机（由 Tree and Vehicle Props 生成）" />
     <Translation ID="FIF_PROP_WAT" String="水船（由 Tree and Vehicle Props 生成）" />
     <Translation ID="FIF_EF_SB" String="子建筑" />
+    <Translation ID="FIF_ATP_TP" String="单击选项卡之间的间隙以拖动和移动此面板" />
+    <Translation ID="FIF_SET_ATP" String="显示资产类型面板" />
+    <Translation ID="FIF_EF_CT" String="有自定义标签" />
+    <Translation ID="FIF_EF_NCT" String="无自定义标签" />
 
   </Translations>
 </Language>
