@@ -178,6 +178,10 @@
     <Translation ID="FIF_PROP_AIR" String="航空機 (Tree and Vehicle Props によって生成される)" />
     <Translation ID="FIF_PROP_WAT" String="船 (Tree and Vehicle Props によって生成される)" />
     <Translation ID="FIF_EF_SB" String="サブビルディング" />
+    <Translation ID="FIF_ATP_TP" String="タブ間のギャップをクリックして、このパネルをドラッグして移動します" />
+    <Translation ID="FIF_SET_ATP" String="アセットタイプパネルを表示" />
+    <Translation ID="FIF_EF_CT" String="カスタム タグを使用する" />
+    <Translation ID="FIF_EF_NCT" String="カスタム タグなし" />
 
   </Translations>
 </Language>

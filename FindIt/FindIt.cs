@@ -55,15 +55,15 @@ namespace FindIt
         {
             try
             {
-                isRicoEnabled = IsRicoEnabled();
-                isPOEnabled = IsPOEnabled();
-                isTVPPatchEnabled = IsTVPPatchEnabled();
-
                 GameObject gameObject = GameObject.Find("FindItMainButton");
                 if (gameObject != null)
                 {
                     return;
                 }
+
+                isRicoEnabled = IsRicoEnabled();
+                isPOEnabled = IsPOEnabled();
+                isTVPPatchEnabled = IsTVPPatchEnabled();
 
                 if (isPOEnabled)
                 {
@@ -114,7 +114,7 @@ namespace FindIt
                 };
                 if (!locale.Exists(key))
                 {
-                    locale.AddLocalizedString(key, "Thanks for subscribing to Find It! 2.\n\nStart typing some keywords into the input field to find the desired asset.\n\nThis mod is still under developing/testing.\n\nCheck the workshop page occasionally for new features or bug reports.");
+                    locale.AddLocalizedString(key, "Thanks for subscribing to Find It! 2.\n\nStart typing some keywords into the input field to find the desired asset.\n\nCheck the workshop page occasionally for new features or bug reports.");
                 }
 
                 FieldInfo m_ObjectIndex = typeof(MainToolbar).GetField("m_ObjectIndex", BindingFlags.Instance | BindingFlags.NonPublic);
@@ -238,7 +238,6 @@ namespace FindIt
             {
                 brushPanel.isVisible = false;
             }
-
         }
 
         public void OnButtonClicked(UIComponent c, UIMouseEventParameter p)
@@ -432,7 +431,8 @@ namespace FindIt
                     "Parking",
                     "ParkingDisabled",
                     "NoParking",
-                    "NoParkingDisabled"
+                    "NoParkingDisabled",
+                    "GrwbRico"
                 };
 
                 atlas = ResourceLoader.CreateTextureAtlas("FindItAtlas", spriteNames, "FindIt.Icons.");

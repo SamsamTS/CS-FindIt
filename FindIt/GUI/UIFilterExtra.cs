@@ -39,7 +39,9 @@ namespace FindIt.GUI
             BuildingHeight,
             BuildingLevel,
             SubBuildings,
-            UnusedAssets
+            UnusedAssets,
+            WithCustomTag,
+            WithoutCustomTag
         }
 
         string[] options = {
@@ -47,7 +49,9 @@ namespace FindIt.GUI
                     Translations.Translate("FIF_EF_BH"), // Building Height
                     Translations.Translate("FIF_SE_LV"), // Building Level
                     Translations.Translate("FIF_EF_SB"), // Sub-building
-                    Translations.Translate("FIF_EF_UN") // Unused Asset
+                    Translations.Translate("FIF_EF_UN"), // Unused Asset
+                    Translations.Translate("FIF_EF_CT"), // With Custom Tag
+                    Translations.Translate("FIF_EF_NCT"), // Without Custom Tag
                 };
 
         public override void Start()

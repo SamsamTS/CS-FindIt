@@ -65,6 +65,7 @@
     <Compile Include="GUI\ImageUtils.cs" />
     <Compile Include="GUI\PreviewRenderer.cs" />
     <Compile Include="GUI\ThumbnailManager.cs" />
+    <Compile Include="GUI\UIAssetTypePanel.cs" />
     <Compile Include="GUI\UIFilterDecal.cs" />
     <Compile Include="GUI\UIFilterExtra.cs" />
     <Compile Include="GUI\UIFilterGrowable.cs" />
@@ -150,6 +151,7 @@
     <EmbeddedResource Include="Icons\ParkingDisabled.png" />
     <EmbeddedResource Include="Icons\NoParking.png" />
     <EmbeddedResource Include="Icons\NoParkingDisabled.png" />
+    <EmbeddedResource Include="Icons\GrwbRico.png" />
     <Content Include="Translations\de.xml" />
     <Content Include="Translations\en.xml" />
     <Content Include="Translations\es.xml" />

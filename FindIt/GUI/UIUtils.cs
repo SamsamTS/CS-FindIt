@@ -184,12 +184,12 @@ namespace SamsamTS
             }
         }
 
-        public static UICheckBox CreateIconToggle(UIComponent parent, string atlas, string checkedSprite, string uncheckedSprite)
+        public static UICheckBox CreateIconToggle(UIComponent parent, string atlas, string checkedSprite, string uncheckedSprite, float tabSize = 35f, bool fromAssetTypePanel = false)
         {
             UICheckBox checkBox = parent.AddUIComponent<UICheckBox>();
 
-            checkBox.width = 35f;
-            checkBox.height = 35f;
+            checkBox.width = tabSize;
+            checkBox.height = tabSize;
             checkBox.clipChildren = true;
 
             UIPanel panel = checkBox.AddUIComponent<UIPanel>();
@@ -200,6 +200,7 @@ namespace SamsamTS
 
             UISprite sprite = panel.AddUIComponent<UISprite>();
             sprite.atlas = GetAtlas(atlas);
+
             sprite.spriteName = uncheckedSprite;
             sprite.size = checkBox.size;
             sprite.relativePosition = Vector3.zero;
@@ -213,9 +214,15 @@ namespace SamsamTS
             checkBox.eventCheckChanged += (c, b) =>
             {
                 if (checkBox.isChecked)
+                {
                     panel.backgroundSprite = "IconPolicyBaseRect";
+                    if (fromAssetTypePanel) sprite.opacity = 1.0f;
+                }
                 else
+                {
                     panel.backgroundSprite = "IconPolicyBaseRectDisabled";
+                    if (fromAssetTypePanel) sprite.opacity = 0.5f;
+                }
                 panel.Invalidate();
             };
 
@@ -223,15 +230,20 @@ namespace SamsamTS
             {
                 panel.backgroundSprite = "IconPolicyBaseRectHovered";
                 sprite.spriteName = checkedSprite;
+                if (fromAssetTypePanel) sprite.opacity = 1.0f;
             };
 
             checkBox.eventMouseLeave += (c, p) =>
             {
                 if (checkBox.isChecked)
+                {
                     panel.backgroundSprite = "IconPolicyBaseRect";
+                    if (fromAssetTypePanel) sprite.opacity = 1.0f;
+                }
                 else
                 {
                     panel.backgroundSprite = "IconPolicyBaseRectDisabled";
+                    if (fromAssetTypePanel) sprite.opacity = 0.5f;
                 }
                 sprite.spriteName = uncheckedSprite;
             };

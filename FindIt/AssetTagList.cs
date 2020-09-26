@@ -11,19 +11,12 @@ using ColossalFramework;
 using ColossalFramework.PlatformServices;
 using ColossalFramework.Packaging;
 using FindIt.GUI;
-using System.Reflection;
 
 namespace FindIt
 {
     public class AssetTagList
     {
         public static AssetTagList instance;
-
-        /// <summary>
-        /// Tiny Roads is a network category created by Next2. Doesn't exist in vanilla game
-        /// Some asset creators used modtools to self-assign their roads as tiny roads
-        /// </summary>
-        public bool tinyRoadsExist = false;
 
         public Dictionary<string, int> tagsTitleDictionary = new Dictionary<string, int>();
         public Dictionary<string, int> tagsDescDictionary = new Dictionary<string, int>();
@@ -56,6 +49,12 @@ namespace FindIt
         /// Data is provided by TV Props Patch mod.
         /// </summary>
         public bool tvppatchModProcessed = false;
+
+        /// <summary>
+        /// Tiny Roads is a network category created by Next2. Doesn't exist in vanilla game
+        /// Some asset creators used modtools to self-assign their roads as tiny roads
+        /// </summary>
+        public bool tinyRoadsExist = false;
 
         public List<Asset> matches = new List<Asset>();
 
@@ -297,12 +296,15 @@ namespace FindIt
                     {
                         if (UISearchBox.instance.extraFiltersPanel.optionDropDownCheckBox.isChecked)
                         {
+                            // filter out sub-builsings if sub-building filter not enabled
+                            if (asset.isSubBuilding && UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex != (int)UIFilterExtra.DropDownOptions.SubBuildings) return false;
+
                             // filter asset by asset creator
                             if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.AssetCreator)
                             {
                                 if (asset.author != UISearchBox.instance.extraFiltersPanel.GetAssetCreatorDropDownListKey()) return false;
-                                if (asset.isSubBuilding) return false;
                             }
+
                             // filter asset by building height
                             else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.BuildingHeight)
                             {
@@ -321,7 +323,6 @@ namespace FindIt
                                 BuildingInfo info = asset.prefab as BuildingInfo;
                                 ItemClass.Level level = (ItemClass.Level)UISearchBox.instance.extraFiltersPanel.buildingLevelDropDownMenu.selectedIndex;
                                 if (info.m_class.m_level != level) return false;
-                                if (asset.isSubBuilding) return false;
                             }
 
                             // only show sub-buildings
@@ -334,7 +335,6 @@ namespace FindIt
                             // only show unused assets
                             else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.UnusedAssets)
                             {
-                                if (asset.isSubBuilding) return false;
                                 if (prefabInstanceCountDictionary.ContainsKey(asset.prefab))
                                 {
                                     if (prefabInstanceCountDictionary[asset.prefab] > 0) return false;
@@ -344,6 +344,19 @@ namespace FindIt
                                     if (FindIt.instance.POTool.GetPrefabInstanceCount(asset.prefab) > 0) return false;
                                 }
                             }
+
+                            // only show assets with custom tags
+                            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.WithCustomTag)
+                            {
+                                if (asset.tagsCustom.Count < 1) return false;
+                            }
+
+                            // only show assets without custom tags
+                            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.WithoutCustomTag)
+                            {
+                                if (asset.tagsCustom.Count > 0) return false;
+                            }
+
                         }
                         else
                         {
