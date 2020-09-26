@@ -190,6 +190,14 @@ namespace FindIt.GUI
                 m_tooltipBox = p.tooltip;
             };
 
+            component.eventMouseLeave += (c, p) =>
+            {
+                if (m_tooltipBox != null && m_tooltipBox.isVisible)
+                {
+                    m_tooltipBox.Hide();
+                }
+            };
+
             UIComponent uIComponent = (component.childCount <= 0) ? null : component.components[0];
             if (uIComponent != null)
             {
