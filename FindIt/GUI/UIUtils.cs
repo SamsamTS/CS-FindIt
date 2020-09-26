@@ -187,6 +187,7 @@ namespace SamsamTS
         public static UICheckBox CreateIconToggle(UIComponent parent, string atlas, string checkedSprite, string uncheckedSprite, float disabledSpriteOpacity = 1.0f, float tabSize = 35f)
         {
             UICheckBox checkBox = parent.AddUIComponent<UICheckBox>();
+            disabledSpriteOpacity = 0.3f;
 
             checkBox.width = tabSize;
             checkBox.height = tabSize;

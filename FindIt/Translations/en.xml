@@ -182,6 +182,7 @@
     <Translation ID="FIF_SET_ATP" String="Show asset type panel" />
     <Translation ID="FIF_EF_CT" String="With Custom Tag" />
     <Translation ID="FIF_EF_NCT" String="Without Custom Tag" />
+    <Translation ID="FIF_UPN_UP" String="Update" />
 
   </Translations>
 </Language>

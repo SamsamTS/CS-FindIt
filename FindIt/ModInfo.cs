@@ -17,8 +17,14 @@ namespace FindIt
         public const bool isBeta = true;
         public const bool showExtraDebuggingMessage = false;
 
-        public const float updateNoticeDate = 20200924.0f;
+        public const float updateNoticeDate = 20200926.0f;
         public const string updateNotice =
+
+            "- Trying to solve the inherited bug where thumbnail tooltip box doesn't\n" +
+            "  disappear after the cursor leaves\n" +  
+            "- UI changes to filter tab icons\n\n" +
+
+            "2.0.6-beta1:\n" + 
             "- Add a new \"asset type panel\". You can disable it in the quick menu.\n" +
             "  More intuitive to switch between asset types but it takes some extra space.\n\n" +
             "  Click the gap between the tabs to drag and move the panel.\n" +

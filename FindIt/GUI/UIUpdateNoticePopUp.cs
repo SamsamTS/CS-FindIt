@@ -20,7 +20,7 @@ namespace FindIt.GUI
             size = new Vector2(650, 145);
 
             UILabel title = AddUIComponent<UILabel>();
-            title.text = "Find It! " + (ModInfo.isBeta ? "[BETA] " : "") + ModInfo.version + " Update";
+            title.text = "Find It! " + (ModInfo.isBeta ? "[BETA] " : "") + ModInfo.version + " " + Translations.Translate("FIF_UPN_UP");
             title.textColor = new Color32(0, 0, 0, 255);
             title.relativePosition = new Vector3(spacing * 2, spacing * 2);
 
