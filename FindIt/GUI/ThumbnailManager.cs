@@ -114,7 +114,7 @@ namespace FindIt.GUI
                 }
 
                 // Assign default 'no thumbnail' thumbnail to any assets without valid thumbnails at this point.
-                if (prefab.m_Atlas == null)
+                if (prefab.m_Atlas == null || prefab.m_Thumbnail.IsNullOrWhiteSpace())
                 {
                     prefab.m_Atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
                     prefab.m_Thumbnail = "ToolbarIconProps";

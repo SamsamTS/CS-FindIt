@@ -13,15 +13,19 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.0.6-beta2";
+        public const string version = "2.0.6-beta3";
         public const bool isBeta = true;
         public const bool showExtraDebuggingMessage = false;
 
-        public const float updateNoticeDate = 20200926.0f;
+        public const float updateNoticeDate = 20200928.0f;
         public const string updateNotice =
 
+            "- It is now possible to use underscore _ in custom tags.\n" +
+            "Examples: res_low, prop_flower, office_high\n\n";
+        /*
+
             "- Trying to solve the inherited bug where thumbnail tooltip box doesn't\n" +
-            "  disappear after the cursor leaves\n" +  
+            "  disappear after the cursor leaves\n\n" +  
             "- UI changes to filter tab icons\n\n" +
 
             "2.0.6-beta1:\n" + 
@@ -33,6 +37,7 @@ namespace FindIt
             "  overlapping Resize It's control panel.\n\n" +
             "- Add two new filters in the extra filters panel:\n" +
             "  assets with custom tags, assets without custom tags\n\n";
+        */
 
         public string Name
         {

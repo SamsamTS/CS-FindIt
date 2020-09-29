@@ -178,10 +178,11 @@
     <Translation ID="FIF_PROP_AIR" String="Авиатранспорт (сгенерированный Tree and Vehicle Props)" />
     <Translation ID="FIF_PROP_WAT" String="Водный транспорт (сгенерированный Tree and Vehicle Props)" />
     <Translation ID="FIF_EF_SB" String="Sub-buildings" />
-    <Translation ID="FIF_ATP_TP" String="Щёлкните зазор между вкладками, чтобы перетащить и переместить эту панель" />
-    <Translation ID="FIF_SET_ATP" String="Показать панель типа объекта" />
+    <Translation ID="FIF_ATP_TP" String="Щёлкнув по зазору между вкладками вы можете перемещать эту панель" />
+    <Translation ID="FIF_SET_ATP" String="Показать панель типа объектов" />
     <Translation ID="FIF_EF_CT" String="С добавленным тегом" />
     <Translation ID="FIF_EF_NCT" String="Без добавленного тега" />
+    <Translation ID="FIF_UPN_UP" String="Update" />
  
   </Translations>
 </Language>

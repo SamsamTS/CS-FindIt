@@ -86,7 +86,7 @@ namespace FindIt
             // if there is something in the search input box
             if (!text.IsNullOrWhiteSpace())
             {
-                string[] keywords = Regex.Split(text, @"([^\w!#+]|[_-]|\s)+", RegexOptions.IgnoreCase);
+                string[] keywords = Regex.Split(text, @"([^\w!#+]|[-]|\s)+", RegexOptions.IgnoreCase);
 
                 bool matched = true;
                 float score = 0;
@@ -747,7 +747,7 @@ namespace FindIt
         private HashSet<string> AddAssetTags(Asset asset, Dictionary<string, int> dico, string text)
         {
             // break input text into multiple tags
-            string[] tagsArr = Regex.Split(text, @"([^\w]|[_-]|\s)+", RegexOptions.IgnoreCase);
+            string[] tagsArr = Regex.Split(text, @"([^\w]|[-]|\s)+", RegexOptions.IgnoreCase);
 
             HashSet<string> tags = new HashSet<string>();
 

@@ -98,7 +98,7 @@ namespace FindIt.GUI
             newTagInput.eventTextSubmitted += (c, t) =>
             {
                 // use the first string as the the tag name
-                string[] tagsArr = Regex.Split(t, @"([^\w]|[_-]|\s)+", RegexOptions.IgnoreCase);
+                string[] tagsArr = Regex.Split(t, @"([^\w]|[-]|\s)+", RegexOptions.IgnoreCase);
                 if (tagsArr[0] != "")
                 {
                     newTagName = tagsArr[0];
