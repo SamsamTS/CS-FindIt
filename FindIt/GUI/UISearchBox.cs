@@ -438,7 +438,7 @@ namespace FindIt.GUI
                 input.Unfocus();
             }
 
-            if (isVisible && !Settings.disableUpdateNotice && !FindIt.instance.isUpdateNoticeShown && ModInfo.updateNoticeDate > Settings.lastUpdateNotice)
+            if (isVisible && !Settings.disableUpdateNotice && ShowUpdateNotice())
             {
                 UIUpdateNoticePopUp.ShowAt();
                 FindIt.instance.isUpdateNoticeShown = true;
@@ -940,6 +940,15 @@ namespace FindIt.GUI
             Asset testTarget = AssetTagList.instance.assets.ElementAt(index).Value;
             Debugging.Message($"Test target: {testTarget.title}");
             Picker(testTarget.prefab);
+        }
+
+        private bool ShowUpdateNotice()
+        {
+            if (!FindIt.instance.isUpdateNoticeShown && ModInfo.updateNoticeDate > Settings.lastUpdateNotice)
+            {
+                return true;
+            }
+            else return false;
         }
     }
 }

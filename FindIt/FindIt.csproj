@@ -137,6 +137,16 @@
     <EmbeddedResource Include="Icons\Parking.png" />
     <EmbeddedResource Include="Icons\NoParking.png" />
     <EmbeddedResource Include="Icons\GrwbRico.png" />
+    <EmbeddedResource Include="Icons\Runway.png" />
+    <EmbeddedResource Include="Icons\RunwayDisabled.png" />
+    <EmbeddedResource Include="Icons\RunwayFocused.png" />
+    <EmbeddedResource Include="Icons\RunwayHovered.png" />
+    <EmbeddedResource Include="Icons\RunwayPressed.png" />
+    <EmbeddedResource Include="Icons\Taxiway.png" />
+    <EmbeddedResource Include="Icons\TaxiwayDisabled.png" />
+    <EmbeddedResource Include="Icons\TaxiwayFocused.png" />
+    <EmbeddedResource Include="Icons\TaxiwayHovered.png" />
+    <EmbeddedResource Include="Icons\TaxiwayPressed.png" />
     <Content Include="Translations\de.xml" />
     <Content Include="Translations\en.xml" />
     <Content Include="Translations\es.xml" />

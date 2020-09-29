@@ -36,7 +36,7 @@ namespace FindIt
 
         internal static bool disableUpdateNotice = false;
 
-        internal static float lastUpdateNotice = 0.0f;
+        internal static double lastUpdateNotice = 0.0;
 
         internal static bool showAssetTypePanel = true;
 
@@ -114,7 +114,7 @@ namespace FindIt
         public bool DisableUpdateNotice { get => Settings.disableUpdateNotice; set => Settings.disableUpdateNotice = value; }
 
         [XmlElement("LastUpdateNotice")]
-        public float LastUpdateNotice { get => Settings.lastUpdateNotice; set => Settings.lastUpdateNotice = value; }
+        public double LastUpdateNotice { get => Settings.lastUpdateNotice; set => Settings.lastUpdateNotice = value; }
 
         [XmlElement("ShowAssetTypePanel")]
         public bool ShowAssetTypePanel { get => Settings.showAssetTypePanel; set => Settings.showAssetTypePanel = value; }

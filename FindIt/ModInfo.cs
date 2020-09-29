@@ -13,15 +13,21 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.0.6-beta3";
+        public const string version = "2.0.6-beta4";
         public const bool isBeta = true;
         public const bool showExtraDebuggingMessage = false;
 
-        public const float updateNoticeDate = 20200928.0f;
+        public const double updateNoticeDate = 20200929;
         public const string updateNotice =
 
+            "- Add Airport roads buttons(in Network - Unsorted).\n\n" +
+            "  Find It 2 and the Airport Roads mod work independently to each other. If\n" +
+            "  you want to see airport roads in the game's original panel, you still need\n" +
+            "  that mod. Both mods only add buttons to allow access to airport roads.\n" +
+            "  They don't add any new AI or add any new road asset.\n\n" + 
+
             "- It is now possible to use underscore _ in custom tags.\n" +
-            "Examples: res_low, prop_flower, office_high\n\n";
+            "  Examples: res_low, prop_flower, office_high\n\n";
         /*
 
             "- Trying to solve the inherited bug where thumbnail tooltip box doesn't\n" +

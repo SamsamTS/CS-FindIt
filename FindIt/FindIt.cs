@@ -417,7 +417,17 @@ namespace FindIt
                     "Oneway",
                     "Parking",
                     "NoParking",
-                    "GrwbRico"
+                    "GrwbRico",
+                    "Runway",
+                    "RunwayDisabled",
+                    "RunwayFocused",
+                    "RunwayHovered",
+                    "RunwayPressed",
+                    "Taxiway",
+                    "TaxiwayDisabled",
+                    "TaxiwayFocused",
+                    "TaxiwayHovered",
+                    "TaxiwayPressed"
                 };
 
                 atlas = ResourceLoader.CreateTextureAtlas("FindItAtlas", spriteNames, "FindIt.Icons.");

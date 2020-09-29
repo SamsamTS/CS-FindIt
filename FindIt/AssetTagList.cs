@@ -11,6 +11,8 @@ using ColossalFramework;
 using ColossalFramework.PlatformServices;
 using ColossalFramework.Packaging;
 using FindIt.GUI;
+using System.Reflection;
+using ColossalFramework.Globalization;
 
 namespace FindIt
 {
@@ -709,9 +711,17 @@ namespace FindIt
                 NetInfo netPrefab = prefab as NetInfo;
                 if (netPrefab != null)
                 {
-                    if (netPrefab.category == PrefabInfo.kDefaultCategory || netPrefab.m_Thumbnail.IsNullOrWhiteSpace() ||
+                    if (netPrefab.name == "Airplane Runway" || netPrefab.name == "Airplane Taxiway")
+                    {
+                        SetAirplaneRoads(netPrefab);
+                    }
+
+                    else if (netPrefab.category == PrefabInfo.kDefaultCategory || netPrefab.m_Thumbnail.IsNullOrWhiteSpace() ||
                         (netPrefab.name != "Pedestrian Pavement" && netPrefab.m_Thumbnail == "ThumbnailBuildingBeautificationPedestrianPavement"))
                     {
+                        if (ModInfo.showExtraDebuggingMessage)
+                            filtered += prefab.name + ", ";
+
                         continue;
                     }
                 }
@@ -992,6 +1002,52 @@ namespace FindIt
             }
 
             return true;
+        }
+
+
+        // Set up access to airport roads. Modified from SamsamTS's Airport Roads mod
+        public void SetAirplaneRoads(PrefabInfo prefab)
+        {
+            int constructionCost = 0;
+            int maintenanceCost = 0;
+            string thumbnail = "";
+
+            if (prefab.name == "Airplane Runway")
+            {
+                constructionCost = 7000;
+                maintenanceCost = 600;
+                thumbnail = "Runway";
+            }
+            else if (prefab.name == "Airplane Taxiway")
+            {
+                constructionCost = 4000;
+                maintenanceCost = 200;
+                thumbnail = "Taxiway";
+            }
+
+            // Adding cost
+            NetInfo netInfo = prefab as NetInfo;
+            if (netInfo == null) return;
+            PlayerNetAI netAI = netInfo.m_netAI as PlayerNetAI;
+            netAI.m_constructionCost = constructionCost;
+            netAI.m_maintenanceCost = maintenanceCost;
+
+            // Making the prefab valid
+            netInfo.m_availableIn = ItemClass.Availability.All;
+            netInfo.m_placementStyle = ItemClass.Placement.Manual;
+            typeof(NetInfo).GetField("m_UICategory", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(netInfo, "PublicTransportPlane");
+
+            // Adding icons
+            netInfo.m_Atlas = SamsamTS.UIUtils.GetAtlas("FindItAtlas");
+            netInfo.m_Thumbnail = thumbnail;
+            netInfo.m_InfoTooltipAtlas = SamsamTS.UIUtils.GetAtlas("FindItAtlas");
+
+            // Adding missing locale
+            Locale locale = (Locale)typeof(LocaleManager).GetField("m_Locale", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(SingletonLite<LocaleManager>.instance);
+            Locale.Key key = new Locale.Key() { m_Identifier = "NET_TITLE", m_Key = prefab.name };
+            if (!locale.Exists(key)) locale.AddLocalizedString(key, prefab.name);
+            key = new Locale.Key() { m_Identifier = "NET_DESC", m_Key = prefab.name };
+            if (!locale.Exists(key)) locale.AddLocalizedString(key, thumbnail);
         }
 
     }
