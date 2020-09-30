@@ -711,7 +711,7 @@ namespace FindIt
                 NetInfo netPrefab = prefab as NetInfo;
                 if (netPrefab != null)
                 {
-                    if (netPrefab.name == "Airplane Runway" || netPrefab.name == "Airplane Taxiway")
+                    if (netPrefab.name == "Airplane Runway" || netPrefab.name == "Airplane Taxiway" || netPrefab.name == "Aviation Club Runway")
                     {
                         SetAirplaneRoads(netPrefab);
                     }
@@ -721,7 +721,6 @@ namespace FindIt
                     {
                         if (ModInfo.showExtraDebuggingMessage)
                             filtered += prefab.name + ", ";
-
                         continue;
                     }
                 }
@@ -1012,7 +1011,7 @@ namespace FindIt
             int maintenanceCost = 0;
             string thumbnail = "";
 
-            if (prefab.name == "Airplane Runway")
+            if (prefab.name == "Airplane Runway" || prefab.name == "Aviation Club Runway")
             {
                 constructionCost = 7000;
                 maintenanceCost = 600;
