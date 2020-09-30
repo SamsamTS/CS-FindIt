@@ -441,6 +441,7 @@ namespace FindIt.GUI
             if (isVisible && !Settings.disableUpdateNotice && ShowUpdateNotice())
             {
                 UIUpdateNoticePopUp.ShowAt();
+                UIUpdateNoticePopUp.instance.relativePosition += new Vector3(0, -300);
                 FindIt.instance.isUpdateNoticeShown = true;
                 Settings.lastUpdateNotice = ModInfo.updateNoticeDate;
                 XMLUtils.SaveSettings();

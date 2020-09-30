@@ -13,37 +13,34 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.0.6-beta4";
-        public const bool isBeta = true;
+        public const string version = "2.0.6";
+        public const bool isBeta = false;
         public const bool showExtraDebuggingMessage = false;
 
-        public const double updateNoticeDate = 20200929;
+        public const double updateNoticeDate = 20200930;
         public const string updateNotice =
 
-            "- Add Airport roads buttons(in Network - Unsorted).\n\n" +
-            "  Find It 2 and the Airport Roads mod work independently to each other. If\n" +
-            "  you want to see airport roads in the game's original panel, you still need\n" +
-            "  that mod. Both mods only add buttons to allow access to airport roads.\n" +
-            "  They don't add any new AI or add any new road asset.\n\n" + 
-
-            "- It is now possible to use underscore _ in custom tags.\n" +
-            "  Examples: res_low, prop_flower, office_high\n\n";
-        /*
-
-            "- Trying to solve the inherited bug where thumbnail tooltip box doesn't\n" +
-            "  disappear after the cursor leaves\n\n" +  
-            "- UI changes to filter tab icons\n\n" +
-
-            "2.0.6-beta1:\n" + 
             "- Add a new \"asset type panel\". You can disable it in the quick menu.\n" +
             "  More intuitive to switch between asset types but it takes some extra space.\n\n" +
             "  Click the gap between the tabs to drag and move the panel.\n" +
             "  Click a highlighted tab again to jump back to \"All\".\n\n" +
             "  May need to move the panel or adjust Resize It's settings to avoid\n" +
             "  overlapping Resize It's control panel.\n\n" +
+
+            "- Add Airport roads buttons(in Network - Unsorted).\n\n" +
+            "  Find It 2 and the Airport Roads mod work independently to each other. If\n" +
+            "  you want to see airport roads in the game's original panel, you still need\n" +
+            "  that mod. Both mods only add buttons to allow access to airport roads.\n\n" +
+
+            "- It is now possible to use underscore _ in custom tags.\n" +
+            "  Examples: res_low, prop_flower, office_high\n\n" + 
+
+            "- Fix the inherited bug where thumbnail tooltip box doesn't disappear\n" +
+            "  after the cursor leaves\n\n" +  
+            "- UI changes to filter tab icons\n\n" +
+
             "- Add two new filters in the extra filters panel:\n" +
             "  assets with custom tags, assets without custom tags\n\n";
-        */
 
         public string Name
         {
