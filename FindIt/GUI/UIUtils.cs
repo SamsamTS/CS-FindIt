@@ -147,15 +147,8 @@ namespace SamsamTS
             dropDown.listScrollbar.value = 0;
             dropDown.listScrollbar.incrementAmount = 50;
             dropDown.listScrollbar.AlignTo(dropDown, UIAlignAnchor.TopRight);
-            dropDown.listScrollbar.autoHide = false;
-
-            // the game automatically creates 2 scrollbar clones: one for the drowdown itself and one for the dropdown popup list box
-            // we only need the one inside the dropdown popup which will automatically be placed inside the popup
-            // move the other one off screen to hide it(we can't set it to invisible or both would become invisible)
-            Vector3 newPosition = FindIt.FindIt.instance.mainButton.relativePosition;
-            newPosition.x += 50000;
-            newPosition.y += 50000;
-            dropDown.listScrollbar.relativePosition = newPosition;
+            dropDown.listScrollbar.autoHide = true;
+            dropDown.listScrollbar.isVisible = false;
 
             UISlicedSprite tracSprite = dropDown.listScrollbar.AddUIComponent<UISlicedSprite>();
             tracSprite.relativePosition = Vector2.zero;
@@ -163,7 +156,6 @@ namespace SamsamTS
             tracSprite.size = tracSprite.parent.size;
             tracSprite.fillDirection = UIFillDirection.Vertical;
             tracSprite.spriteName = "ScrollbarTrack";
-
             dropDown.listScrollbar.trackObject = tracSprite;
 
             UISlicedSprite thumbSprite = tracSprite.AddUIComponent<UISlicedSprite>();
