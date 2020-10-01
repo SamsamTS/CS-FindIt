@@ -260,7 +260,7 @@ namespace FindIt.GUI
             else
             {
                 // Rendering didn't occur - apply default thumbnail sprite name.
-                if (ModInfo.showExtraDebuggingMessage) prefab.m_Thumbnail = "ThumbnailBuildingDefault";
+                prefab.m_Thumbnail = "ThumbnailBuildingDefault";
             }
 
             return wasRendered;
