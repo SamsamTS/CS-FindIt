@@ -57,7 +57,7 @@
     <Translation ID="FIF_SO_RETP" String="関連性で並べ替えます。オリジナルのFind Itと同じ" />
     <Translation ID="FIF_SO_NETP" String="最近ダウンロードしたもので並べ替え" />
     <Translation ID="FIF_SO_RE" String="関連性" />
-    <Translation ID="FIF_SO_NE" String="新アセット" />
+    <Translation ID="FIF_SO_NE" String="最近のDL" />
     <Translation ID="TRN_CHOICE" String="言語を設定する (次回から有効になります)" />
     <Translation ID="TRN_SYS" String="システム言語を使用する" />
     <Translation ID="FIF_PROP_IND" String="工業" />

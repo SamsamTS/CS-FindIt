@@ -57,7 +57,7 @@
     <Translation ID="FIF_SO_RETP" String="按關聯性排序。 與原始“Find It”相同" />
     <Translation ID="FIF_SO_NETP" String="按最近下載的素材排序" />
     <Translation ID="FIF_SO_RE" String="關聯性" />
-    <Translation ID="FIF_SO_NE" String="新素材" />
+    <Translation ID="FIF_SO_NE" String="最近下載" />
     <Translation ID="TRN_CHOICE" String="語言設置 (下次生效)" />
     <Translation ID="TRN_SYS" String="使用遊戲默認語言" />
     <Translation ID="FIF_PROP_IND" String="工業類物體" />

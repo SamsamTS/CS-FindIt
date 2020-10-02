@@ -57,7 +57,7 @@
     <Translation ID="FIF_SO_RETP" String="Sortuj wg dopasowania (jak w oryg. Find It)" />
     <Translation ID="FIF_SO_NETP" String="Sortuj wg ostatnio ściągniętych" />
     <Translation ID="FIF_SO_RE" String="Relevance" />
-    <Translation ID="FIF_SO_NE" String="New Assets" />
+    <Translation ID="FIF_SO_NE" String="Recent DLs" />
     <Translation ID="TRN_SYS" String="Użyj języka systemu" />
     <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
 

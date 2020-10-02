@@ -57,7 +57,7 @@
     <Translation ID="FIF_SO_RETP" String="按相关性排列。 与原“Find It”相同" />
     <Translation ID="FIF_SO_NETP" String="按下载时间排列" />
     <Translation ID="FIF_SO_RE" String="相关性" />
-    <Translation ID="FIF_SO_NE" String="新资产" />
+    <Translation ID="FIF_SO_NE" String="最近下载" />
     <Translation ID="TRN_CHOICE" String="语言设定 (下次生效)" />
     <Translation ID="TRN_SYS" String="使用游戏默认语言" />
     <Translation ID="FIF_PROP_IND" String="工业" />
