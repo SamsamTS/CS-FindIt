@@ -183,6 +183,8 @@
     <Translation ID="FIF_EF_CT" String="With Custom Tag" />
     <Translation ID="FIF_EF_NCT" String="Without Custom Tag" />
     <Translation ID="FIF_UPN_UP" String="Update" />
+    <Translation ID="FIF_PROP_TC" String="Terrain Conforming" />
+    <Translation ID="FIF_PROP_NTC" String="Non-Terrain Conforming" />
 
   </Translations>
 </Language>
