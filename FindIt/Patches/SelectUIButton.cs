@@ -4,7 +4,7 @@ using ColossalFramework.UI;
 
 namespace FindIt
 {
-    // workaround patch for the bulldoze tool hotkey conflict
+    // workaround patch for the bulldoze tool hotkey issue
     // I don't know if this will work. The issue is non-reproducible
     [HarmonyPatch(typeof(KeyShortcuts))]
     [HarmonyPatch("SelectUIButton")]
@@ -20,8 +20,8 @@ namespace FindIt
                 if (button != null)
                 {
                     button.SimulateClick();
+                    return false;
                 }
-                return false;
             }
             return true;
         }
