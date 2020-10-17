@@ -29,7 +29,7 @@ namespace FindIt.GUI
             name = "FindIt_BatchRemovePopUp";
             atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericPanelWhite";
-            size = new Vector2(380, 240);
+            size = new Vector2(400, 240);
 
             UILabel title = AddUIComponent<UILabel>();
             title.text = Translations.Translate("FIF_REM_TIT");

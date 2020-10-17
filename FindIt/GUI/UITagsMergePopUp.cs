@@ -30,7 +30,7 @@ namespace FindIt.GUI
             name = "FindIt_TagsMergePopUp";
             atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericPanelWhite";
-            size = new Vector2(380, 220);
+            size = new Vector2(400, 220);
 
             UILabel title = AddUIComponent<UILabel>();
             title.text = Translations.Translate("FIF_CO_TIT");

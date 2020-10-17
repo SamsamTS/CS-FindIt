@@ -33,7 +33,7 @@ namespace FindIt.GUI
             name = "FindIt_BatchAddPopUp";
             atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericPanelWhite";
-            size = new Vector2(380, 320);
+            size = new Vector2(400, 320);
 
             UILabel title = AddUIComponent<UILabel>();
             title.text = Translations.Translate("FIF_ADD_TIT");
