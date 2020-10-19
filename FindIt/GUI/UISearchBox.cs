@@ -107,9 +107,9 @@ namespace FindIt.GUI
             input.eventTextChanged += (c, p) =>
             {
                 search = p;
-				// store search query individually for each asset type
-				Debugging.Message($"store query for index '{this.typeFilter.selectedIndex}' (cast '{(DropDownOptions)this.typeFilter.selectedIndex}'): \"{p}\"");
-				this.storedQueries[(DropDownOptions)this.typeFilter.selectedIndex] = p;
+                // store search query individually for each asset type
+                Debugging.Message($"store query for index '{this.typeFilter.selectedIndex}' (cast '{(DropDownOptions)this.typeFilter.selectedIndex}'): \"{p}\"");
+                this.storedQueries[(DropDownOptions)this.typeFilter.selectedIndex] = p;
                 Search();
             };
 
@@ -198,6 +198,12 @@ namespace FindIt.GUI
             typeFilter.eventSelectedIndexChanged += (c, p) =>
             {
                 UpdateFilterPanels();
+                //restore stored search query individually for each asset type
+                if (this.storedQueries.TryGetValue((UISearchBox.DropDownOptions)p, out string storedQuery))
+                {
+                    Debugging.Message($"restore stored query for category {p} (cast: '{(UISearchBox.DropDownOptions)p}': \"{storedQuery}\"");
+                    this.input.text = storedQuery;
+                }
                 Search();
             };
 
@@ -241,7 +247,7 @@ namespace FindIt.GUI
                     Search();
                 }
                 UpdateTopPanelsPosition();
-                
+
             };
 
             tagToolIcon.eventMouseEnter += (c, p) =>
@@ -269,7 +275,7 @@ namespace FindIt.GUI
             extraFiltersIcon.tooltip = Translations.Translate("FIF_SE_EFI");
             extraFiltersIcon.opacity = 0.5f;
             extraFiltersIcon.relativePosition = new Vector3(tagToolIcon.relativePosition.x + tagToolIcon.width + 5, 6);
-            
+
             extraFiltersIcon.eventClicked += (c, p) =>
             {
                 if (extraFiltersPanel == null)

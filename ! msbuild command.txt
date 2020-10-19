@@ -1,1 +1,1 @@
-msbuild "E:\CSharp-Projekte\Github\CS-FindIt\FindIt\FindIt.sln" /p:Configuration=Debug;TargetFrameworkVersion=v3.5 /t:Rebuild
+cls&&msbuild "E:\CSharp-Projekte\Github\CS-FindIt\FindIt\FindIt.sln" /p:Configuration=Debug;TargetFrameworkVersion=v3.5 /t:Rebuild

@@ -104,14 +104,6 @@ namespace FindIt
                         index -= 2;
                     }
                     FindIt.instance.searchBox.typeFilter.selectedIndex = index;
-
-					//restore stored search query individually for each asset type
-					//this is only done when opening FindIt via one of the specific hotkeys
-					if (FindIt.instance.searchBox.storedQueries.TryGetValue((UISearchBox.DropDownOptions)index, out string storedQuery))
-					{
-						Debugging.Message($"restore stored query for category {index} (cast: '{(UISearchBox.DropDownOptions)index}': \"{storedQuery}\"");
-						FindIt.instance.searchBox.input.text = storedQuery;
-					}
                 }
 
                 // If the searchbox isn't visible, simulate a click on the main button.
@@ -127,9 +119,20 @@ namespace FindIt
                 else
                 {
                     // Simulate a search
-                    //FindIt.instance.searchBox.Search();
-                    FindIt.instance.searchBox.input.Focus();
-                    FindIt.instance.searchBox.input.SelectAll();
+                    // Select search box text only if FindIt was opened via the general hotkey; this is intended to make
+                    // overall behaviour more intuitive now that we're storing search queries separately for each
+                    // asset category. This way, when you open FindIt via one of the category-specific hotkeys, you'll
+                    // always get the last stored search query for that category in a "ready to use" fashion, without
+                    // having to press Return first to get rid of the text selection.
+                    if (index > -1)
+                    {
+                        FindIt.instance.searchBox.Search();
+                    }
+                    else
+                    {
+                        FindIt.instance.searchBox.input.Focus();
+                        FindIt.instance.searchBox.input.SelectAll();
+                    }
                 }
             }
             catch (Exception e)
@@ -137,6 +140,6 @@ namespace FindIt
                 Debugging.LogException(e);
             }
         }
-       
+
     }
 }
