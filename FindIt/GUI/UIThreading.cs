@@ -104,6 +104,14 @@ namespace FindIt
                         index -= 2;
                     }
                     FindIt.instance.searchBox.typeFilter.selectedIndex = index;
+
+					//restore stored search query individually for each asset type
+					//this is only done when opening FindIt via one of the specific hotkeys
+					Debugging.Message($"restore stored query for category {index} (cast: '{(UISearchBox.DropDownOptions)index}': \"{FindIt.instance.searchBox.storedQueries[(UISearchBox.DropDownOptions)index]}\"");
+                    if (FindIt.instance.searchBox.storedQueries.ContainsKey((UISearchBox.DropDownOptions)index))
+                    {
+                        FindIt.instance.searchBox.input.text = FindIt.instance.searchBox.storedQueries[(UISearchBox.DropDownOptions)index];
+                    }
                 }
 
                 // If the searchbox isn't visible, simulate a click on the main button.

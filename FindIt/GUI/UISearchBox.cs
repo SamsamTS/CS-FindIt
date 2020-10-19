@@ -56,6 +56,7 @@ namespace FindIt.GUI
         private bool sortButtonTextState = true;
 
         public List<string> searchResultList = new List<string>();
+        public Dictionary<DropDownOptions, string> storedQueries = new Dictionary<DropDownOptions, string>();
 
         public enum DropDownOptions
         {
@@ -106,6 +107,9 @@ namespace FindIt.GUI
             input.eventTextChanged += (c, p) =>
             {
                 search = p;
+				// store search query individually for each asset type
+				Debugging.Message($"store query for index '{this.typeFilter.selectedIndex}' (cast '{(DropDownOptions)this.typeFilter.selectedIndex}'): \"{p}\"");
+				this.storedQueries[(DropDownOptions)this.typeFilter.selectedIndex] = p;
                 Search();
             };
 
