@@ -51,7 +51,7 @@ namespace FindIt
             }
         }
 
-        public uint GetPrefabInstanceCount(PrefabInfo info)
+        public uint GetPrefabPOInstanceCount(PrefabInfo info)
         {
             if (!(info is PropInfo) && !(info is BuildingInfo)) return 0;
 

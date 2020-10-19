@@ -13,34 +13,20 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.0.6";
-        public const bool isBeta = false;
+        public const string version = "2.0.7-beta1";
+        public const bool isBeta = true;
         public const bool showExtraDebuggingMessage = false;
 
-        public const double updateNoticeDate = 20200930;
+        public const double updateNoticeDate = 20201016;
         public const string updateNotice =
 
-            "- Add a new \"asset type panel\". You can disable it in the quick menu.\n" +
-            "  More intuitive to switch between asset types but it takes some extra space.\n\n" +
-            "  Click the gap between the tabs to drag and move the panel.\n" +
-            "  Click a highlighted tab again to jump back to \"All\".\n\n" +
-            "  May need to move the panel or adjust Resize It's settings to avoid\n" +
-            "  overlapping Resize It's control panel.\n\n" +
+            "- Add a workaround patch for the inherited bulldoze tool hotkey issue\n\n" +
+            "  Not sure if the workaround patch will help or not.\n" +
+            "  This is a non-reproducible issue as it only happens to some players.\n\n" +
 
-            "- Add Airport roads buttons(in Network - Unsorted).\n\n" +
-            "  Find It 2 and the Airport Roads mod work independently to each other. If\n" +
-            "  you want to see airport roads in the game's original panel, you still need\n" +
-            "  that mod. Both mods only add buttons to allow access to airport roads.\n\n" +
+            "- Minor UI changes\n\n" +
 
-            "- It is now possible to use underscore _ in custom tags.\n" +
-            "  Examples: res_low, prop_flower, office_high\n\n" + 
-
-            "- Fix the inherited bug where thumbnail tooltip box doesn't disappear\n" +
-            "  after the cursor leaves\n\n" +  
-            "- UI changes to filter tab icons\n\n" +
-
-            "- Add two new filters in the extra filters panel:\n" +
-            "  assets with custom tags, assets without custom tags\n\n";
+            "- Code refactoring\n\n";
 
         public string Name
         {
