@@ -119,19 +119,20 @@ namespace FindIt
                 else
                 {
                     // Simulate a search
-                    // Select search box text only if FindIt was opened via the general hotkey; this is intended to make
-                    // overall behaviour more intuitive now that we're storing search queries separately for each
-                    // asset category. This way, when you open FindIt via one of the category-specific hotkeys, you'll
-                    // always get the last stored search query for that category in a "ready to use" fashion, without
-                    // having to press Return first to get rid of the text selection.
-                    if (index > -1)
-                    {
-                        FindIt.instance.searchBox.Search();
-                    }
-                    else
+                    // Select search box text only if FindIt was opened via a category-specific hotkey; this is intended
+                    // to make overall behaviour more intuitive now that we're storing search queries separately for
+                    // each asset category. This way, when you open FindIt directly to a specific category, you'll
+                    // be all set up for starting a new search, but when you open it using the general hotkey or
+                    // directly to the 'all' category, then you'll start out ready for placement of whatever asset was
+                    // last selected, without having to press Return first to get rid of the text selection.
+                    if (index > 0)
                     {
                         FindIt.instance.searchBox.input.Focus();
                         FindIt.instance.searchBox.input.SelectAll();
+                    }
+                    else
+                    {
+                        FindIt.instance.searchBox.Search();
                     }
                 }
             }
