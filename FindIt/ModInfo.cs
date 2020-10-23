@@ -139,6 +139,15 @@ namespace FindIt
                 useDefaultBrowser.tooltip = Translations.Translate("FIF_SET_DBTP");
                 group.AddSpace(10);
 
+                // Disable update notice
+                UICheckBox separateSearchKeyword = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_SSK"), Settings.separateSearchKeyword, (b) =>
+                {
+                    Settings.separateSearchKeyword = b;
+                    XMLUtils.SaveSettings();
+                });
+                separateSearchKeyword.tooltip = Translations.Translate("FIF_SET_SSKTP");
+                group.AddSpace(10);
+
                 // languate settings
                 UIDropDown languageDropDown = (UIDropDown)group.AddDropdown(Translations.Translate("TRN_CHOICE"), Translations.LanguageList, Translations.Index, (value) =>
                 {

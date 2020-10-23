@@ -198,11 +198,21 @@ namespace FindIt.GUI
             typeFilter.eventSelectedIndexChanged += (c, p) =>
             {
                 UpdateFilterPanels();
-                //restore stored search query individually for each asset type
-                if (this.storedQueries.TryGetValue((UISearchBox.DropDownOptions)p, out string storedQuery))
+
+                // restore stored search query individually for each asset type
+                // or hold SHIFT when switching asset type to share query keyword temporarily
+                Event e = Event.current;
+                if (Settings.separateSearchKeyword && !e.shift)
                 {
-                    Debugging.Message($"restore stored query for category {p} (cast: '{(UISearchBox.DropDownOptions)p}': \"{storedQuery}\"");
-                    this.input.text = storedQuery;
+                    if (this.storedQueries.TryGetValue((UISearchBox.DropDownOptions)p, out string storedQuery))
+                    {
+                        // Debugging.Message($"restore stored query for category {p} (cast: '{(UISearchBox.DropDownOptions)p}': \"{storedQuery}\"");
+                        this.input.text = storedQuery;
+                    }
+                    else
+                    {
+                        this.input.text = "";
+                    }
                 }
                 Search();
             };
