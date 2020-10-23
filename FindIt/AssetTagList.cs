@@ -70,7 +70,7 @@ namespace FindIt
             {
                 if ((Settings.showInstancesCounter) || (UISearchBox.instance?.extraFiltersPanel != null && UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.UnusedAssets))
                 {
-                    UpdatePrefabInstanceCount();
+                    UpdatePrefabInstanceCount(filter);
                     if (FindIt.isPOEnabled && Settings.includePOinstances) FindIt.instance.POTool.UpdatePOInfoList();
                 }
             }
@@ -872,11 +872,14 @@ namespace FindIt
             return list;
         }
 
-        public void UpdatePrefabInstanceCount()
+        public void UpdatePrefabInstanceCount(UISearchBox.DropDownOptions filter)
         {
             prefabInstanceCountDictionary.Clear();
 
-            if (BuildingManager.exists)
+            if (BuildingManager.exists && 
+                ((filter == UISearchBox.DropDownOptions.All) || (filter == UISearchBox.DropDownOptions.Growable) || 
+                (filter == UISearchBox.DropDownOptions.GrwbRico) || (filter == UISearchBox.DropDownOptions.Ploppable) 
+                || (filter == UISearchBox.DropDownOptions.Rico)))
             {
                 foreach (Building building in BuildingManager.instance.m_buildings.m_buffer)
                 {
@@ -894,7 +897,7 @@ namespace FindIt
                 }
             }
 
-            if (PropManager.exists)
+            if (PropManager.exists && ((filter == UISearchBox.DropDownOptions.All) || (filter == UISearchBox.DropDownOptions.Prop) || (filter == UISearchBox.DropDownOptions.Decal)))
             {
                 foreach (PropInstance prop in PropManager.instance.m_props.m_buffer)
                 {
@@ -912,7 +915,7 @@ namespace FindIt
                 }
             }
 
-            if (TreeManager.exists)
+            if (TreeManager.exists && ((filter == UISearchBox.DropDownOptions.All) || (filter == UISearchBox.DropDownOptions.Tree)))
             {
                 foreach (TreeInstance tree in TreeManager.instance.m_trees.m_buffer)
                 {
@@ -930,7 +933,7 @@ namespace FindIt
                 }
             }
 
-            if (NetManager.exists)
+            if (NetManager.exists && ((filter == UISearchBox.DropDownOptions.All) || (filter == UISearchBox.DropDownOptions.Network)))
             {
                 foreach (NetSegment segment in NetManager.instance.m_segments.m_buffer)
                 {
