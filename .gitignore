@@ -301,6 +301,3 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-FindIt/FindIt.sln
-FindIt/FindIt.csproj
-! msbuild command.txt
