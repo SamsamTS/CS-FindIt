@@ -13,13 +13,21 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.0.7-beta1";
+        public const string version = "2.0.7-beta3";
         public const bool isBeta = true;
         public const bool showExtraDebuggingMessage = false;
 
-        public const double updateNoticeDate = 20201016;
+        public const double updateNoticeDate = 20201025;
         public const string updateNotice =
 
+            "- (Optional. Disabled by Default. Can be enabled in mod settings)\n\n" +
+            "  Each asset type can have their own separate search query keyword, so\n" +
+            "  when you switch from one asset type to another type temporarily, you\n" +
+            "  won't lose the original search. Hold SHIFT when switching asset type\n" +
+            "  to temporarily share search keyword between different asset types\n\n" +
+            "  Added by Brot\n\n";
+
+        /*
             "- Add a workaround patch for the inherited bulldoze tool hotkey issue\n\n" +
             "  Not sure if the workaround patch will help or not.\n" +
             "  This is a non-reproducible issue as it only happens to some players.\n\n" +
@@ -27,6 +35,7 @@ namespace FindIt
             "- Minor UI changes\n\n" +
 
             "- Code refactoring\n\n";
+        */
 
         public string Name
         {

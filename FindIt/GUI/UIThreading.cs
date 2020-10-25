@@ -132,7 +132,9 @@ namespace FindIt
                     }
                     else
                     {
-                        FindIt.instance.searchBox.Search();
+                        FindIt.instance.searchBox.input.Focus(); // To-do. without the focus() the camera will move when F is pressed. need to avoid this.
+                        FindIt.instance.searchBox.input.SelectAll(); // To-do
+                        //FindIt.instance.searchBox.Search(); To-do
                     }
                 }
             }
