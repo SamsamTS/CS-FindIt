@@ -183,6 +183,10 @@
     <Translation ID="FIF_EF_CT" String="有自定义标签" />
     <Translation ID="FIF_EF_NCT" String="无自定义标签" />
     <Translation ID="FIF_UPN_UP" String="更新通知" />
+    <Translation ID="FIF_PROP_TC" String="根据地形变形" />
+    <Translation ID="FIF_PROP_NTC" String="不根据地形变形" />
+    <Translation ID="FIF_SET_SSK" String="每个资产类型使用独立的搜索字符串" />
+    <Translation ID="FIF_SET_SSKTP" String="切换资产类型时按住 SHIFT 以暂时共享搜索字符串" />
 
   </Translations>
 </Language>

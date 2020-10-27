@@ -148,6 +148,7 @@
     <EmbeddedResource Include="Icons\TaxiwayFocused.png" />
     <EmbeddedResource Include="Icons\TaxiwayHovered.png" />
     <EmbeddedResource Include="Icons\TaxiwayPressed.png" />
+    <Content Include="Translations\cz.xml" />
     <Content Include="Translations\de.xml" />
     <Content Include="Translations\en.xml" />
     <Content Include="Translations\es.xml" />
