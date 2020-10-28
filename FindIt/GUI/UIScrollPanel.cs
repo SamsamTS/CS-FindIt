@@ -147,6 +147,7 @@ namespace FindIt.GUI
         private ItemData currentData;
         private UISprite m_tagSprite;
         private UISprite m_steamSprite;
+        private UISprite m_dlcSprite;
 
         private UICheckBox m_batchCheckBox;
         private UILabel m_instanceCountLabel;
@@ -282,7 +283,7 @@ namespace FindIt.GUI
             m_steamSprite.size = new Vector2(26, 16);
             m_steamSprite.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             m_steamSprite.spriteName = "SteamWorkshop";
-            m_steamSprite.opacity = 0.05f;
+            m_steamSprite.opacity = 0.1f;
             m_steamSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
             m_steamSprite.relativePosition = new Vector3(component.width - m_steamSprite.width - 5, component.height - m_steamSprite.height - 5);
             m_steamSprite.isVisible = false;
@@ -291,6 +292,14 @@ namespace FindIt.GUI
             {
                 m_steamSprite.eventMouseUp += OnTooltipClicked;
             }
+
+            m_dlcSprite = component.AddUIComponent<UISprite>();
+            m_dlcSprite.size = new Vector2(18, 18);
+            m_dlcSprite.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
+            m_dlcSprite.opacity = 0.8f;
+            m_dlcSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
+            m_dlcSprite.relativePosition = new Vector3(component.width - m_dlcSprite.width - 5, component.height - m_dlcSprite.height - 5);
+            m_dlcSprite.isVisible = false;
         }
 
         public void Display(ItemData data, int index)
@@ -466,6 +475,17 @@ namespace FindIt.GUI
                         m_steamSprite.tooltipBox.isVisible = m_steamSprite.tooltip != null;
                     }
                 }
+
+                if (m_dlcSprite != null)
+                {
+                    m_dlcSprite.tooltip = null;
+                    m_dlcSprite.isVisible = false;
+
+                    if (data.asset != null && !data.asset.prefab.m_isCustomContent)
+                    {
+                        SetDLCSprite(m_dlcSprite, data.asset.prefab.m_dlcRequired);
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -576,5 +596,119 @@ namespace FindIt.GUI
                 }
             }
         }
+        
+        private void SetDLCSprite(UISprite sprite, SteamHelper.DLC_BitMask dlc)
+        {
+            if (dlc == SteamHelper.DLC_BitMask.None) return;
+
+            sprite.isVisible = true;
+
+            if (dlc == SteamHelper.DLC_BitMask.DeluxeDLC)
+            {
+                sprite.tooltip = "Deluxe Upgrade Pack";
+                sprite.spriteName = "DeluxeIcon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.AfterDarkDLC)
+            {
+                sprite.tooltip = "After Dark DLC";
+                sprite.spriteName = "ADIcon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.SnowFallDLC)
+            {
+                sprite.tooltip = "Snow Fall DLC";
+                sprite.spriteName = "WWIcon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.NaturalDisastersDLC)
+            {
+                sprite.tooltip = "Natural Disasters DLC";
+                sprite.spriteName = "NaturalDisastersIcon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.InMotionDLC)
+            {
+                sprite.tooltip = "Mass Transit DLC";
+                sprite.spriteName = "MassTransitIcon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.GreenCitiesDLC)
+            {
+                sprite.tooltip = "Green Cities DLC";
+                sprite.spriteName = "GreenCitiesIcon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.ParksDLC)
+            {
+                sprite.tooltip = "Parklife DLC";
+                sprite.spriteName = "ParkLifeIcon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.IndustryDLC)
+            {
+                sprite.tooltip = "Industries DLC";
+                sprite.spriteName = "IndustriesIcon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.CampusDLC)
+            {
+                sprite.tooltip = "Campus DLC";
+                sprite.spriteName = "CampusIcon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.UrbanDLC)
+            {
+                sprite.tooltip = "Sunset Harbor DLC";
+                sprite.spriteName = "DonutIcon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.Football)
+            {
+                sprite.tooltip = "Match Day DLC";
+                sprite.spriteName = "MDIcon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.Football2345)
+            {
+                sprite.tooltip = "Stadiums: European Club Pack DLC";
+                sprite.spriteName = "StadiumsDLCIcon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.OrientalBuildings)
+            {
+                sprite.tooltip = "Pearls from the East DLC";
+                sprite.spriteName = "ChineseBuildingsTagIcon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.MusicFestival)
+            {
+                sprite.tooltip = "Concerts DLC";
+                sprite.spriteName = "ConcertsIcon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack1)
+            {
+                sprite.tooltip = "Art Deco Content Creator Pack by Shroomblaze";
+                sprite.spriteName = "ArtDecoIcon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack2)
+            {
+                sprite.tooltip = "High-Tech Buildings Content Creator Pack by GCVos";
+                sprite.spriteName = "HighTechIcon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack3)
+            {
+                sprite.tooltip = "European Suburbias Content Creator Pack by Avanya";
+                sprite.spriteName = "Modderpack3Icon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack4)
+            {
+                sprite.tooltip = "University City Content Creator Pack by KingLeno";
+                sprite.spriteName = "Modderpack4Icon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack5)
+            {
+                sprite.tooltip = "Modern City Center Content Creator Pack by AmiPolizeiFunk";
+                sprite.spriteName = "Modderpack5Icon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack6)
+            {
+                sprite.tooltip = "Modern Japan Content Creator Pack by Ryuichi Kaminogi";
+                sprite.spriteName = "Modderpack6Icon";
+            }
+            else
+            {
+                sprite.tooltip = "Unknown DLC";
+                sprite.spriteName = "ToolbarIconHelp";
+            }
+        }
+        
     }
 }

@@ -17,14 +17,16 @@ namespace FindIt
         public const bool isBeta = true;
         public const bool showExtraDebuggingMessage = false;
 
-        public const double updateNoticeDate = 20201025;
+        public const double updateNoticeDate = 20201027;
         public const string updateNotice =
 
-            "- (Optional. Disabled by Default. Can be enabled in mod settings)\n\n" +
+            "- Vanilla assets will show which DLC or Content Creator Pack they are from\n\n" +
+
+            "- (Optional. Disabled by Default. Can be enabled in mod settings)\n" +
             "  Each asset type can have their own separate search query keyword, so\n" +
             "  when you switch from one asset type to another type temporarily, you\n" +
             "  won't lose the original search. Hold SHIFT when switching asset type\n" +
-            "  to temporarily share search keyword between different asset types\n\n" +
+            "  to temporarily share search keyword between different asset types\n" +
             "  Added by Brot\n\n";
 
         /*
