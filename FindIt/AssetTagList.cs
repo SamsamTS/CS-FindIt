@@ -698,6 +698,13 @@ namespace FindIt
                             filtered += prefab.name + ", ";
                             continue;
                         }
+
+                        // filter out vortex chirpy
+                        if (propPrefab.name.StartsWith("Vortex Chirpy"))
+                        {
+                            filtered += prefab.name + ", ";
+                            continue;
+                        }
                     }
                 }
 
