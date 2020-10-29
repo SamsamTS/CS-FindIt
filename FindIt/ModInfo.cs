@@ -13,31 +13,30 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.0.7-beta4";
-        public const bool isBeta = true;
+        public const string version = "2.0.7";
+        public const bool isBeta = false;
         public const bool showExtraDebuggingMessage = false;
 
-        public const double updateNoticeDate = 20201027;
+        public const double updateNoticeDate = 20201029;
         public const string updateNotice =
 
-            "- Vanilla assets will show which DLC or Content Creator Pack they are from\n\n" +
+            "- Add a workaround patch for the inherited bulldoze tool hotkey bug\n\n" +
 
-            "- (Optional. Disabled by Default. Can be enabled in mod settings)\n" +
-            "  Each asset type can have their own separate search query keyword, so\n" +
-            "  when you switch from one asset type to another type temporarily, you\n" +
-            "  won't lose the original search. Hold SHIFT when switching asset type\n" +
-            "  to temporarily share search keyword between different asset types\n" +
-            "  Added by Brot\n\n";
+            "    Not sure if the workaround patch will help or not.\n" +
+            "    This is a non-reproducible bug as it only happens to some players.\n\n" +
 
-        /*
-            "- Add a workaround patch for the inherited bulldoze tool hotkey issue\n\n" +
-            "  Not sure if the workaround patch will help or not.\n" +
-            "  This is a non-reproducible issue as it only happens to some players.\n\n" +
+            "- Vanilla assets will show which DLC or Content Creator Pack they belong to\n\n" +
 
-            "- Minor UI changes\n\n" +
+            "- (Optional. Disabled by default. Can be enabled in mod settings)\n" +
+            "  Each asset type can have their own separate search query keyword\n\n" +
 
-            "- Code refactoring\n\n";
-        */
+            "    When you switch from one asset type to another type temporarily, you\n" +
+            "    won't lose the original search. Hold SHIFT when switching asset type\n" +
+            "    to temporarily share search keyword between different asset types\n" +
+            "    Added by Brot\n\n" +
+
+            "- Minor UI changes\n" +
+            "- Miscellaneous backend changes\n\n";
 
         public string Name
         {
