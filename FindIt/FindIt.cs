@@ -33,7 +33,7 @@ namespace FindIt
         public static bool isTVPPatchEnabled = false;
         public ProceduralObjectsTool POTool;
 
-        public bool isUpdateNoticeShown = false;
+        public bool firstVisibleFlag = false;
 
         public static AssetTagList list;
 
@@ -347,7 +347,7 @@ namespace FindIt
                 {
                     if (assembly.GetName().Name.ToLower() == assemblyName)
                     {
-                        Debugging.Message($"Found enabled mod: {assemblyName}. Find It 2 integration will be applied.");
+                        Debugging.Message($"Found enabled mod: {assemblyName}. Find It 2 integration will be applied");
                         return plugin.isEnabled;
                     }
                 }

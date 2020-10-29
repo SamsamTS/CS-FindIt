@@ -38,6 +38,8 @@ namespace FindIt
 
         internal static double lastUpdateNotice = 0.0;
 
+        internal static bool separateSearchKeyword = false;
+
         internal static bool showAssetTypePanel = true;
 
         internal static float assetTypePanelX = -80.0f;
@@ -112,6 +114,9 @@ namespace FindIt
 
         [XmlElement("DisableUpdateNotice")]
         public bool DisableUpdateNotice { get => Settings.disableUpdateNotice; set => Settings.disableUpdateNotice = value; }
+
+        [XmlElement("SeparateSearchKeyword")]
+        public bool SeparateSearchKeyword { get => Settings.separateSearchKeyword; set => Settings.separateSearchKeyword = value; }
 
         [XmlElement("LastUpdateNotice")]
         public double LastUpdateNotice { get => Settings.lastUpdateNotice; set => Settings.lastUpdateNotice = value; }

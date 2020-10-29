@@ -155,7 +155,7 @@ namespace FindIt.GUI
                 XMLUtils.SaveSettings();
                 if (Settings.showInstancesCounter && AssetTagList.instance?.prefabInstanceCountDictionary != null)
                 {
-                    AssetTagList.instance.UpdatePrefabInstanceCount();
+                    AssetTagList.instance.UpdatePrefabInstanceCount(UISearchBox.DropDownOptions.All);
                 }
                 UISearchBox.instance.Search();
             };

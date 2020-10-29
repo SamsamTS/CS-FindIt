@@ -119,9 +119,23 @@ namespace FindIt
                 else
                 {
                     // Simulate a search
-                    //FindIt.instance.searchBox.Search();
-                    FindIt.instance.searchBox.input.Focus();
-                    FindIt.instance.searchBox.input.SelectAll();
+                    // Select search box text only if FindIt was opened via a category-specific hotkey or the "all"
+                    // hotkey. This is intended to make overall behaviour more intuitive now that we're storing search
+                    // queries separately for each asset category. This way, when you open FindIt directly to a specific
+                    // category, you'll be all set up for starting a new search, but when you open it using the general
+                    // hotkey, you'll start out ready for placement of whatever asset was last selected, without having
+                    // to press Return first to get rid of the text selection.
+                    if (index > -1)
+                    {
+                        FindIt.instance.searchBox.input.Focus();
+                        FindIt.instance.searchBox.input.SelectAll();
+                    }
+                    else
+                    {
+                        FindIt.instance.searchBox.input.Focus(); // To-do. without the focus() the camera will move when F is pressed. need to avoid this.
+                        FindIt.instance.searchBox.input.SelectAll(); // To-do
+                        //FindIt.instance.searchBox.Search(); To-do
+                    }
                 }
             }
             catch (Exception e)
@@ -129,6 +143,6 @@ namespace FindIt
                 Debugging.LogException(e);
             }
         }
-       
+
     }
 }

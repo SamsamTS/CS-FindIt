@@ -183,6 +183,9 @@
     <Translation ID="FIF_EF_CT" String="カスタム タグあり" />
     <Translation ID="FIF_EF_NCT" String="カスタム タグなし" />
     <Translation ID="FIF_UPN_UP" String="アップデート" />
+    <Translation ID="FIF_PROP_TC" String="地形に応じて変形" />
+    <Translation ID="FIF_PROP_NTC" String="地形に応じて変形しない" />
+    <Translation ID="FIF_SET_SSK" String="アセットタイプごとに別々の検索クエリキーワードを使用する" />
 
   </Translations>
 </Language>

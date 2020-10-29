@@ -185,6 +185,8 @@
     <Translation ID="FIF_UPN_UP" String="Update" />
     <Translation ID="FIF_PROP_TC" String="Terrain Conforming" />
     <Translation ID="FIF_PROP_NTC" String="Non-Terrain Conforming" />
+    <Translation ID="FIF_SET_SSK" String="Используйте отд. слова поискового запроса для каждого типа активов" />
+    <Translation ID="FIF_SET_SSKTP" String="Удерживайте SHIFT при переключении типа актива, чтобы временно использовать ключевое слово запроса" />
  
   </Translations>
 </Language>
