@@ -71,7 +71,11 @@ namespace FindIt
                 if ((Settings.showInstancesCounter) || (UISearchBox.instance?.extraFiltersPanel != null && UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.UnusedAssets))
                 {
                     UpdatePrefabInstanceCount(filter);
-                    if (FindIt.isPOEnabled && Settings.includePOinstances) FindIt.instance.POTool.UpdatePOInfoList();
+
+                    if ((filter != UISearchBox.DropDownOptions.Tree) && (filter != UISearchBox.DropDownOptions.Network))
+                    {
+                        if (FindIt.isPOEnabled && Settings.includePOinstances) FindIt.instance.POTool.UpdatePOInfoList();
+                    }
                 }
             }
             catch (Exception ex)
