@@ -393,6 +393,10 @@ namespace FindIt.GUI
 
                     m_batchCheckBox.isVisible = UISearchBox.instance.tagPanel.isBatchActionsEnabled;
                 }
+                else if (m_batchCheckBox != null)
+                {
+                    m_batchCheckBox.isVisible = false;
+                }
 
                 if (m_instanceCountLabel != null && data.asset?.prefab != null)
                 {

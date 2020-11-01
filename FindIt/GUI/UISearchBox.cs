@@ -604,6 +604,7 @@ namespace FindIt.GUI
             tagPanel.Close();
             RemoveUIComponent(tagPanel);
             tagPanel = null;
+            UISearchBox.instance.scrollPanel.Refresh();
         }
 
         public void CreateAssetTypePanel()
