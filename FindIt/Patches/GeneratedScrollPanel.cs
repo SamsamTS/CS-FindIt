@@ -126,7 +126,7 @@ namespace FindIt
                             steamSprite.size = new Vector2(26, 16);
                             steamSprite.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
                             steamSprite.spriteName = "SteamWorkshop";
-                            steamSprite.opacity = 0.05f;
+                            steamSprite.opacity = 0.1f;
                             steamSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
                             steamSprite.relativePosition = new Vector3(component.width - steamSprite.width - 5, component.height - steamSprite.height - 5);
 
