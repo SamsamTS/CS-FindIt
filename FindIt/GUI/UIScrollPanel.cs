@@ -601,7 +601,7 @@ namespace FindIt.GUI
             }
         }
         
-        public static void SetDLCSprite(UISprite sprite, SteamHelper.DLC_BitMask dlc)
+        private void SetDLCSprite(UISprite sprite, SteamHelper.DLC_BitMask dlc)
         {
             if (dlc == SteamHelper.DLC_BitMask.None) return;
 
