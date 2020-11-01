@@ -14,4 +14,4 @@ Pull requests are welcome. I write code in other languages at work but I only wr
 ### Contact
 Steam workshop [link](https://steamcommunity.com/sharedfiles/filedetails/?id=2133885971)
 
-You can use Github's issues tab or via Steam. This repo is not under my main Github account so you probably will get a faster response if you leave a comment on the workshop page. I'm open to collabration and suggestion. You can use the issues tab to report bug or provide suggesion, pull requests are also welcome. 
+You can use the issues tab to report bug or provide suggesion, pull requests are also welcome. 
