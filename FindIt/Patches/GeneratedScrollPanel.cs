@@ -154,15 +154,18 @@ namespace FindIt
                         }
 
                         // Adding DLC icon
-                        if (!asset.prefab.m_isCustomContent && asset.prefab.m_dlcRequired != SteamHelper.DLC_BitMask.None)
+                        if (!FindIt.inEditor)
                         {
-                            UISprite m_dlcSprite = component.AddUIComponent<UISprite>();
-                            m_dlcSprite.size = new Vector2(18, 18);
-                            m_dlcSprite.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
-                            m_dlcSprite.opacity = 0.8f;
-                            m_dlcSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
-                            m_dlcSprite.relativePosition = new Vector3(component.width - m_dlcSprite.width - 5, component.height - m_dlcSprite.height - 5);
-                            UIScrollPanelItem.SetDLCSprite(m_dlcSprite, asset.prefab.m_dlcRequired);
+                            if (!asset.prefab.m_isCustomContent && asset.prefab.m_dlcRequired != SteamHelper.DLC_BitMask.None)
+                            {
+                                UISprite m_dlcSprite = component.AddUIComponent<UISprite>();
+                                m_dlcSprite.size = new Vector2(18, 18);
+                                m_dlcSprite.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
+                                m_dlcSprite.opacity = 0.8f;
+                                m_dlcSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
+                                m_dlcSprite.relativePosition = new Vector3(component.width - m_dlcSprite.width - 5, component.height - m_dlcSprite.height - 5);
+                                UIScrollPanelItem.SetDLCSprite(m_dlcSprite, asset.prefab.m_dlcRequired);
+                            }
                         }
                     }
                 }
