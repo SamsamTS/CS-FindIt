@@ -715,7 +715,7 @@ namespace FindIt
                 NetInfo netPrefab = prefab as NetInfo;
                 if (netPrefab != null)
                 {
-                    if (netPrefab.name == "Airplane Runway" || netPrefab.name == "Airplane Taxiway" || netPrefab.name == "Aviation Club Runway")
+                    if ((!prefab.m_isCustomContent) && (netPrefab.name == "Airplane Runway" || netPrefab.name == "Airplane Taxiway" || netPrefab.name == "Aviation Club Runway"))
                     {
                         SetAirplaneRoads(netPrefab);
                     }
@@ -1014,11 +1014,18 @@ namespace FindIt
             int maintenanceCost = 0;
             string thumbnail = "";
 
-            if (prefab.name == "Airplane Runway" || prefab.name == "Aviation Club Runway")
+            if (prefab.name == "Airplane Runway" )
             {
                 constructionCost = 7000;
                 maintenanceCost = 600;
                 thumbnail = "Runway";
+            }
+            else if (prefab.name == "Aviation Club Runway")
+            {
+                constructionCost = 7000;
+                maintenanceCost = 600;
+                thumbnail = "Runway";
+                prefab.m_dlcRequired = SteamHelper.DLC_BitMask.UrbanDLC; // Sunset Harbor
             }
             else if (prefab.name == "Airplane Taxiway")
             {

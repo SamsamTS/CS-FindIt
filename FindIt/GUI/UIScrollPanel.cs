@@ -300,6 +300,10 @@ namespace FindIt.GUI
             m_dlcSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
             m_dlcSprite.relativePosition = new Vector3(component.width - m_dlcSprite.width - 5, component.height - m_dlcSprite.height - 5);
             m_dlcSprite.isVisible = false;
+            m_dlcSprite.eventMouseLeave += (c, p) =>
+            {
+                m_dlcSprite.tooltipBox.Hide();
+            };
         }
 
         public void Display(ItemData data, int index)

@@ -138,7 +138,10 @@ namespace FindIt
                         assetType = AssetType.Prop;
                         propType = SetPropType(prefab.editorCategory);
 
-                        if (propPrefab.m_material != null)
+                        // For whatever reason CO thinks kid paddle cars are props marker. We fix it here
+                        if (propType == Asset.PropType.PropsMarker && m_prefab.name.StartsWith("Paddle Car")) propType = Asset.PropType.Unsorted;
+
+                            if (propPrefab.m_material != null)
                         {
                             if (propPrefab.m_material.shader == shaderBlend || propPrefab.m_material.shader == shaderSolid)
                             {
