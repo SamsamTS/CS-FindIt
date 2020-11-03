@@ -129,6 +129,10 @@ namespace FindIt
                             steamSprite.opacity = 0.05f;
                             steamSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
                             steamSprite.relativePosition = new Vector3(component.width - steamSprite.width - 5, component.height - steamSprite.height - 5);
+                            steamSprite.eventMouseLeave += (c, p) =>
+                            {
+                                steamSprite.tooltipBox.Hide();
+                            };
 
                             if (!asset.author.IsNullOrWhiteSpace())
                             {

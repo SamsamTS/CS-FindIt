@@ -287,6 +287,10 @@ namespace FindIt.GUI
             m_steamSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
             m_steamSprite.relativePosition = new Vector3(component.width - m_steamSprite.width - 5, component.height - m_steamSprite.height - 5);
             m_steamSprite.isVisible = false;
+            m_steamSprite.eventMouseLeave += (c, p) =>
+            {
+                m_steamSprite.tooltipBox.Hide();
+            };
 
             if (PlatformService.IsOverlayEnabled())
             {

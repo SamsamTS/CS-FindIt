@@ -28,7 +28,7 @@ namespace FindIt.GUI
         /// </summary>
         public UIDropDown typeFilter;
 
-        private UILabel sizeLabel;
+        public UILabel sizeLabel;
         private UIDropDown sizeFilterX;
         private UIDropDown sizeFilterY;
         private UIFilterGrowable filterGrowable;
@@ -55,6 +55,7 @@ namespace FindIt.GUI
         // false = sort by most recently downloaded
         private bool sortButtonTextState = true;
 
+        public List<Asset> matches;
         public List<string> searchResultList = new List<string>();
         public Dictionary<DropDownOptions, string> storedQueries = new Dictionary<DropDownOptions, string>();
 
@@ -702,7 +703,8 @@ namespace FindIt.GUI
                 if (UISearchBox.instance.buildingSizeFilterIndex.x > 4) UISearchBox.instance.sizeFilterX.selectedIndex = 0;
                 if (UISearchBox.instance.buildingSizeFilterIndex.y > 4) UISearchBox.instance.sizeFilterY.selectedIndex = 0;
             }
-            List<Asset> matches = AssetTagList.instance.Find(text, type);
+            
+            matches = AssetTagList.instance.Find(text, type);
 
             // sort by used/unused instance count
             if (Settings.showInstancesCounter && Settings.instanceCounterSort != 0)

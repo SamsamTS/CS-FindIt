@@ -187,6 +187,8 @@
     <Translation ID="FIF_PROP_NTC" String="不依地勢變形" />
     <Translation ID="FIF_SET_SSK" String="各素材類型使用獨立搜尋字串" />
     <Translation ID="FIF_SET_SSKTP" String="切換素材類型時按住SHIFT以暫時共用搜尋字串" />
+    <Translation ID="FIF_TAG_SA" String="全選" />
+    <Translation ID="FIF_TAG_SATP" String="選擇全部顯示的素材" />
 
   </Translations>
 </Language>

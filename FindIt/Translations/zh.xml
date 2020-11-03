@@ -187,6 +187,8 @@
     <Translation ID="FIF_PROP_NTC" String="不根据地形变形" />
     <Translation ID="FIF_SET_SSK" String="每个资产类型使用独立的搜索字符串" />
     <Translation ID="FIF_SET_SSKTP" String="切换资产类型时按住 SHIFT 以暂时共享搜索字符串" />
+    <Translation ID="FIF_TAG_SA" String="全选" />
+    <Translation ID="FIF_TAG_SATP" String="选择全部显示的资产" />
 
   </Translations>
 </Language>

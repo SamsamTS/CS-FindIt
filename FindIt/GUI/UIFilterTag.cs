@@ -21,6 +21,7 @@ namespace FindIt.GUI
         private UIButton batchButton;
         private UIButton batchAddButton;
         private UIButton batchRemoveButton;
+        private UIButton batchSelectAllButton;
         private UIButton batchClearButton;
         public bool isBatchActionsEnabled = false;
 
@@ -138,35 +139,6 @@ namespace FindIt.GUI
                 }
             };
 
-            // batch button 
-            batchButton = SamsamTS.UIUtils.CreateButton(this);
-            batchButton.size = new Vector2(80, 25);
-            batchButton.text = Translations.Translate("FIF_TAG_BAT");
-            batchButton.tooltip = Translations.Translate("FIF_TAG_BATTP");
-            batchButton.textScale = 0.8f;
-            batchButton.textPadding = new RectOffset(0, 0, 5, 0);
-            batchButton.relativePosition = new Vector3(deleteButton.relativePosition.x + deleteButton.width + 5, 5);
-            batchButton.eventClick += (c, p) =>
-            {
-                isBatchActionsEnabled = !isBatchActionsEnabled;
-                renameButton.isVisible = !isBatchActionsEnabled;
-                mergeButton.isVisible = !isBatchActionsEnabled;
-                deleteButton.isVisible = !isBatchActionsEnabled;
-                batchAddButton.isVisible = isBatchActionsEnabled;
-                batchRemoveButton.isVisible = isBatchActionsEnabled;
-                batchClearButton.isVisible = isBatchActionsEnabled;
-                if (isBatchActionsEnabled)
-                {
-                    batchAssetSet.Clear();
-                    batchButton.text = Translations.Translate("FIF_TAG_BAC");
-                }
-                else
-                {
-                    batchButton.text = Translations.Translate("FIF_TAG_BAT");
-                }
-                UISearchBox.instance.scrollPanel.Refresh();
-            };
-
             // batch add button 
             batchAddButton = SamsamTS.UIUtils.CreateButton(this);
             batchAddButton.size = new Vector2(80, 25);
@@ -195,6 +167,27 @@ namespace FindIt.GUI
                 UITagsBatchRemovePopUp.ShowAt(batchRemoveButton);
             };
 
+            // batch select all button 
+            batchSelectAllButton = SamsamTS.UIUtils.CreateButton(this);
+            batchSelectAllButton.size = new Vector2(80, 25);
+            batchSelectAllButton.text = Translations.Translate("FIF_TAG_SA");
+            batchSelectAllButton.textScale = 0.8f;
+            batchSelectAllButton.textPadding = new RectOffset(0, 0, 5, 0);
+            batchSelectAllButton.isVisible = false;
+            batchSelectAllButton.tooltip = Translations.Translate("FIF_TAG_SATP");
+            batchSelectAllButton.relativePosition = new Vector3(batchRemoveButton.relativePosition.x + batchRemoveButton.width + 5, 5);
+            batchSelectAllButton.eventClick += (c, p) =>
+            {
+                if (UISearchBox.instance.matches != null)
+                {
+                    foreach (Asset asset in UISearchBox.instance.matches)
+                    {
+                        batchAssetSet.Add(asset);
+                    }
+                }
+                UISearchBox.instance.scrollPanel.Refresh();
+            };
+
             // batch clear selection button 
             batchClearButton = SamsamTS.UIUtils.CreateButton(this);
             batchClearButton.size = new Vector2(80, 25);
@@ -203,10 +196,44 @@ namespace FindIt.GUI
             batchClearButton.textPadding = new RectOffset(0, 0, 5, 0);
             batchClearButton.isVisible = false;
             batchClearButton.tooltip = Translations.Translate("FIF_TAG_CLETP");
-            batchClearButton.relativePosition = new Vector3(batchRemoveButton.relativePosition.x + batchRemoveButton.width + 5, 5);
+            batchClearButton.relativePosition = new Vector3(batchSelectAllButton.relativePosition.x + batchSelectAllButton.width + 5, 5);
             batchClearButton.eventClick += (c, p) =>
             {
                 batchAssetSet.Clear();
+                UISearchBox.instance.scrollPanel.Refresh();
+            };
+
+            // batch button 
+            batchButton = SamsamTS.UIUtils.CreateButton(this);
+            batchButton.size = new Vector2(80, 25);
+            batchButton.text = Translations.Translate("FIF_TAG_BAT");
+            batchButton.tooltip = Translations.Translate("FIF_TAG_BATTP");
+            batchButton.textScale = 0.8f;
+            batchButton.textPadding = new RectOffset(0, 0, 5, 0);
+            batchButton.relativePosition = new Vector3(deleteButton.relativePosition.x + deleteButton.width + 5, 5);
+            batchButton.eventClick += (c, p) =>
+            {
+                isBatchActionsEnabled = !isBatchActionsEnabled;
+                renameButton.isVisible = !isBatchActionsEnabled;
+                mergeButton.isVisible = !isBatchActionsEnabled;
+                deleteButton.isVisible = !isBatchActionsEnabled;
+                batchAddButton.isVisible = isBatchActionsEnabled;
+                batchRemoveButton.isVisible = isBatchActionsEnabled;
+                batchClearButton.isVisible = isBatchActionsEnabled;
+                batchSelectAllButton.isVisible = isBatchActionsEnabled;
+                if (isBatchActionsEnabled)
+                {
+                    batchAssetSet.Clear();
+                    batchButton.text = Translations.Translate("FIF_TAG_BAC");
+                    batchButton.relativePosition = new Vector3(batchClearButton.relativePosition.x + batchClearButton.width + 5, 5);
+                    width = UISearchBox.instance.sizeLabel.position.x + batchClearButton.width + 5;
+                }
+                else
+                {
+                    batchButton.text = Translations.Translate("FIF_TAG_BAT");
+                    batchButton.relativePosition = new Vector3(deleteButton.relativePosition.x + deleteButton.width + 5, 5);
+                    width = UISearchBox.instance.sizeLabel.position.x;
+                }
                 UISearchBox.instance.scrollPanel.Refresh();
             };
         }

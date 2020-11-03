@@ -186,6 +186,8 @@
     <Translation ID="FIF_PROP_TC" String="地形に応じて変形" />
     <Translation ID="FIF_PROP_NTC" String="地形に応じて変形しない" />
     <Translation ID="FIF_SET_SSK" String="アセットタイプごとに別々の検索クエリキーワードを使用する" />
+    <Translation ID="FIF_TAG_SA" String="すべて選択" />
+    <Translation ID="FIF_TAG_SATP" String="検索されたすべてのアセットを選択" />
 
   </Translations>
 </Language>

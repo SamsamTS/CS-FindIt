@@ -187,6 +187,8 @@
     <Translation ID="FIF_PROP_NTC" String="Non-Terrain Conforming" />
     <Translation ID="FIF_SET_SSK" String="Use separate search query keyword for each asset type" />
     <Translation ID="FIF_SET_SSKTP" String="Hold SHIFT when switching asset type to share query keyword temporarily" />
+    <Translation ID="FIF_TAG_SA" String="Select All" />
+    <Translation ID="FIF_TAG_SATP" String="Select all displayed items" />
 
   </Translations>
 </Language>
