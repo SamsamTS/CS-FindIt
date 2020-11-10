@@ -245,12 +245,12 @@ namespace FindIt.GUI
                     if (m_batchCheckBox.isChecked)
                     {
                         UIFilterTag.instance.batchAssetSet.Add(currentData.asset);
-                        if (ModInfo.showExtraDebuggingMessage) Debugging.Message("Batch - Add to batch set: " + currentData.asset.name);
+                        // Debugging.Message("Batch - Add to batch set: " + currentData.asset.name);
                     }
                     else
                     {
                         UIFilterTag.instance.batchAssetSet.Remove(currentData.asset);
-                        if (ModInfo.showExtraDebuggingMessage) Debugging.Message("Batch - Remove from batch set: " + currentData.asset.name);
+                        // Debugging.Message("Batch - Remove from batch set: " + currentData.asset.name);
                     }
                 }
             };
@@ -521,7 +521,7 @@ namespace FindIt.GUI
                 {
                     if (ImageUtils.FixFocusedTexture(currentData.asset.prefab))
                     {
-                        if (ModInfo.showExtraDebuggingMessage) Debugging.Message("Fixed focused texture: " + currentData.asset.prefab.name);
+                        // Debugging.Message("Fixed focused texture: " + currentData.asset.prefab.name);
                     }
                     fixedFocusedTexture.Add(currentData.asset.prefab);
                 }

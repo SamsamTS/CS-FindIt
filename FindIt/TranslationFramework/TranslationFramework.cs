@@ -197,7 +197,7 @@ namespace FindIt
                 }
                 else
                 {
-                    if (ModInfo.showExtraDebuggingMessage) Debugging.Message("no translation for language " + currentLanguage.uniqueName + " found for key " + key);
+                    // Debugging.Message("no translation for language " + currentLanguage.uniqueName + " found for key " + key);
 
                     // Attempt fallack translation.
                     return FallbackTranslation(currentLanguage.uniqueName, key);
@@ -205,7 +205,7 @@ namespace FindIt
             }
             else
             {
-                if (ModInfo.showExtraDebuggingMessage) Debugging.Message("no current language when translating key " + key);
+                // Debugging.Message("no current language when translating key " + key);
             }
 
             // If we've made it this far, something went wrong; just return the key.

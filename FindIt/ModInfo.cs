@@ -15,8 +15,6 @@ namespace FindIt
     {
         public const string version = "2.0.7";
         public const bool isBeta = false;
-        public const bool showExtraDebuggingMessage = false;
-
         public const double updateNoticeDate = 20201029;
         public const string updateNotice =
 

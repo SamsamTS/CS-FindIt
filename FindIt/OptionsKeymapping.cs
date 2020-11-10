@@ -66,7 +66,7 @@ namespace FindIt
         /// <param name="keyEvent">Keypress event parameter</param>
         public void OnKeyDown(UIKeyEventParameter keyEvent)
         {
-            if (ModInfo.showExtraDebuggingMessage) Debugging.Message("keydown " + isPrimed);
+            // Debugging.Message("keydown " + isPrimed);
 
             // Only do this if we're primed and the keypress isn't a modifier key.
             if (isPrimed && !IsModifierKey(keyEvent.keycode))
