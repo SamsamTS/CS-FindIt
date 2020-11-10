@@ -1,5 +1,6 @@
 ﻿// modified from SamsamTS's original Find It mod
 // https://github.com/SamsamTS/CS-FindIt
+// main backend class
 
 using System;
 using System.Linq;
@@ -60,6 +61,9 @@ namespace FindIt
 
         public List<Asset> matches = new List<Asset>();
 
+        /// <summary>
+        /// main backend search method. called by UISearchBox's search method
+        /// </summary>
         public List<Asset> Find(string text, UISearchBox.DropDownOptions filter)
         {
             matches.Clear();
@@ -95,7 +99,7 @@ namespace FindIt
                     asset.RefreshRico();
                     if (asset.prefab != null)
                     {
-                        if (!CheckAssetFilter(asset, filter)) continue;
+                        if (!CheckAssetFilters(asset, filter)) continue;
                         matched = true;
                         asset.score = 0;
                         score = 0;
@@ -106,7 +110,7 @@ namespace FindIt
                             if (!keyword.IsNullOrWhiteSpace())
                             {
                                 if (keyword == "!" || keyword == "#" || keyword == "+") continue;
-                                if (keyword.StartsWith("!") && keyword.Length > 1)
+                                if (keyword.StartsWith("!") && keyword.Length > 1) // exclude search
                                 {
                                     score = GetOverallScore(asset, keyword.Substring(1), filter);
                                     if (score > 0)
@@ -115,7 +119,7 @@ namespace FindIt
                                         break;
                                     }
                                 }
-                                else if (keyword.StartsWith("#") && keyword.Length > 1)
+                                else if (keyword.StartsWith("#") && keyword.Length > 1) // search for custom tag only
                                 {
                                     foreach (string tag in asset.tagsCustom)
                                     {
@@ -127,7 +131,7 @@ namespace FindIt
                                         break;
                                     }
                                 }
-                                else if (keyword.StartsWith("+") && keyword.Length > 1)
+                                else if (keyword.StartsWith("+") && keyword.Length > 1) // OR search
                                 {
                                     orSearch = true;
                                     score = GetOverallScore(asset, keyword.Substring(1), filter);
@@ -165,7 +169,7 @@ namespace FindIt
                     asset.RefreshRico();
                     if (asset.prefab != null)
                     {
-                        if (!CheckAssetFilter(asset, filter)) continue;
+                        if (!CheckAssetFilters(asset, filter)) continue;
                         matches.Add(asset);
                         if (Settings.instanceCounterSort != 0) UpdateAssetInstanceCount(asset);
                     }
@@ -175,13 +179,10 @@ namespace FindIt
             return matches;
         }
 
-        /// <summary>
-        /// return true if the asset type matches UISearchbox filter dropdown options
-        /// </summary>
-        private bool CheckAssetFilter(Asset asset, UISearchBox.DropDownOptions filter)
+        private bool CheckAssetFilters(Asset asset, UISearchBox.DropDownOptions filter)
         {
             if (!CheckAssetTypeFilter(asset, filter)) return false;
-            
+
             if (filter == UISearchBox.DropDownOptions.Growable || filter == UISearchBox.DropDownOptions.Rico || filter == UISearchBox.DropDownOptions.GrwbRico)
             {
                 if (!CheckGrowableRICOFilter(asset, filter)) return false;
@@ -898,9 +899,9 @@ namespace FindIt
         {
             prefabInstanceCountDictionary.Clear();
 
-            if (BuildingManager.exists && 
-                ((filter == UISearchBox.DropDownOptions.All) || (filter == UISearchBox.DropDownOptions.Growable) || 
-                (filter == UISearchBox.DropDownOptions.GrwbRico) || (filter == UISearchBox.DropDownOptions.Ploppable) 
+            if (BuildingManager.exists &&
+                ((filter == UISearchBox.DropDownOptions.All) || (filter == UISearchBox.DropDownOptions.Growable) ||
+                (filter == UISearchBox.DropDownOptions.GrwbRico) || (filter == UISearchBox.DropDownOptions.Ploppable)
                 || (filter == UISearchBox.DropDownOptions.Rico)))
             {
                 foreach (Building building in BuildingManager.instance.m_buildings.m_buffer)
@@ -1025,7 +1026,7 @@ namespace FindIt
             int maintenanceCost = 0;
             string thumbnail = "";
 
-            if (prefab.name == "Airplane Runway" )
+            if (prefab.name == "Airplane Runway")
             {
                 constructionCost = 7000;
                 maintenanceCost = 600;

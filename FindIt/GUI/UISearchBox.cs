@@ -1,5 +1,6 @@
 ﻿// modified from SamsamTS's original Find It mod
 // https://github.com/SamsamTS/CS-FindIt
+// main UI class
 
 using UnityEngine;
 using ColossalFramework;

@@ -1,5 +1,6 @@
 ﻿// modified from SamsamTS's original Find It mod
 // https://github.com/SamsamTS/CS-FindIt
+// Filter tabs panel for tree
 
 using UnityEngine;
 using ColossalFramework.UI;
