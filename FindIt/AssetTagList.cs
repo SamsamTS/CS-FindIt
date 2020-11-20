@@ -997,7 +997,7 @@ namespace FindIt
             }
         }
 
-        private void UpdateAssetInstanceCount(Asset asset)
+        public void UpdateAssetInstanceCount(Asset asset)
         {
             if (!prefabInstanceCountDictionary.ContainsKey(asset.prefab)) asset.instanceCount = 0;
             else asset.instanceCount = prefabInstanceCountDictionary[asset.prefab];
