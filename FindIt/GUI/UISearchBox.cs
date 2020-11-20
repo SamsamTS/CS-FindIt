@@ -1,5 +1,6 @@
 ﻿// modified from SamsamTS's original Find It mod
 // https://github.com/SamsamTS/CS-FindIt
+// main UI class
 
 using UnityEngine;
 using ColossalFramework;
@@ -18,7 +19,7 @@ namespace FindIt.GUI
         public UIPanel inputPanel;
         public UITextField input;
         public UIScrollPanel scrollPanel;
-        UIPanel panel;
+        public UIPanel panel;
         public UISprite searchIcon;
         public UISprite clearButton;
 
@@ -28,7 +29,7 @@ namespace FindIt.GUI
         /// </summary>
         public UIDropDown typeFilter;
 
-        private UILabel sizeLabel;
+        public UILabel sizeLabel;
         private UIDropDown sizeFilterX;
         private UIDropDown sizeFilterY;
         private UIFilterGrowable filterGrowable;
@@ -49,11 +50,15 @@ namespace FindIt.GUI
         public UISprite quickMenuIcon;
         public bool quickMenuVisible;
 
+        public UIAssetTypePanel assetTypePanel;
+
         // true = sort by relevance
         // false = sort by most recently downloaded
         private bool sortButtonTextState = true;
 
+        public List<Asset> matches;
         public List<string> searchResultList = new List<string>();
+        public Dictionary<DropDownOptions, string> storedQueries = new Dictionary<DropDownOptions, string>();
 
         public enum DropDownOptions
         {
@@ -104,6 +109,9 @@ namespace FindIt.GUI
             input.eventTextChanged += (c, p) =>
             {
                 search = p;
+                // store search query individually for each asset type
+                Debugging.Message($"store query for index '{this.typeFilter.selectedIndex}' (cast '{(DropDownOptions)this.typeFilter.selectedIndex}'): \"{p}\"");
+                this.storedQueries[(DropDownOptions)this.typeFilter.selectedIndex] = p;
                 Search();
             };
 
@@ -192,6 +200,22 @@ namespace FindIt.GUI
             typeFilter.eventSelectedIndexChanged += (c, p) =>
             {
                 UpdateFilterPanels();
+
+                // restore stored search query individually for each asset type
+                // or hold SHIFT when switching asset type to share query keyword temporarily
+                Event e = Event.current;
+                if (Settings.separateSearchKeyword && !e.shift)
+                {
+                    if (this.storedQueries.TryGetValue((UISearchBox.DropDownOptions)p, out string storedQuery))
+                    {
+                        // Debugging.Message($"restore stored query for category {p} (cast: '{(UISearchBox.DropDownOptions)p}': \"{storedQuery}\"");
+                        this.input.text = storedQuery;
+                    }
+                    else
+                    {
+                        this.input.text = "";
+                    }
+                }
                 Search();
             };
 
@@ -235,7 +259,7 @@ namespace FindIt.GUI
                     Search();
                 }
                 UpdateTopPanelsPosition();
-                
+
             };
 
             tagToolIcon.eventMouseEnter += (c, p) =>
@@ -263,7 +287,7 @@ namespace FindIt.GUI
             extraFiltersIcon.tooltip = Translations.Translate("FIF_SE_EFI");
             extraFiltersIcon.opacity = 0.5f;
             extraFiltersIcon.relativePosition = new Vector3(tagToolIcon.relativePosition.x + tagToolIcon.width + 5, 6);
-            
+
             extraFiltersIcon.eventClicked += (c, p) =>
             {
                 if (extraFiltersPanel == null)
@@ -352,7 +376,8 @@ namespace FindIt.GUI
             // panel of sort button and filter toggle tabs
             panel = AddUIComponent<UIPanel>();
             panel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
-            panel.backgroundSprite = "GenericTabHovered";
+            if (!Settings.useLightBackground) panel.backgroundSprite = "GenericTabHovered";
+            else panel.backgroundSprite = "GenericTab";
             panel.size = new Vector2(parent.width, 45);
             panel.relativePosition = new Vector3(0, -panel.height + 5);
 
@@ -421,6 +446,7 @@ namespace FindIt.GUI
             filterDecal.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
 
             UpdateFilterPanels();
+            if (Settings.showAssetTypePanel) CreateAssetTypePanel();
 
             size = Vector2.zero;
         }
@@ -432,6 +458,27 @@ namespace FindIt.GUI
             if (input != null && !isVisible)
             {
                 input.Unfocus();
+            }
+
+            // do some initialization work when the UI is first shown
+            if (isVisible && !FindIt.instance.firstVisibleFlag)
+            {
+                FindIt.instance.firstVisibleFlag = true;
+
+                // show update notice
+                if (!Settings.disableUpdateNotice && (ModInfo.updateNoticeDate > Settings.lastUpdateNotice))
+                {
+                    UIUpdateNoticePopUp.ShowAt();
+                    UIUpdateNoticePopUp.instance.relativePosition += new Vector3(0, -100);
+                    Settings.lastUpdateNotice = ModInfo.updateNoticeDate;
+                    XMLUtils.SaveSettings();
+                }
+
+                // set up prop categories for props generated by Elektrix's TVP mod. Need the TVP Patch mod
+                if (FindIt.isTVPPatchEnabled && !AssetTagList.instance.isTVPPatchModProcessed)
+                    AssetTagList.instance.GetTVPProps();
+
+                Search();
             }
         }
 
@@ -447,6 +494,10 @@ namespace FindIt.GUI
             }
 
             HideAllFilterTabs();
+            if (UIAssetTypePanel.instance != null)
+            {
+                UIAssetTypePanel.instance.SetSelectedTab((DropDownOptions)index);
+            }
 
             switch ((DropDownOptions)index)
             {
@@ -555,6 +606,31 @@ namespace FindIt.GUI
             tagPanel.Close();
             RemoveUIComponent(tagPanel);
             tagPanel = null;
+            UISearchBox.instance.scrollPanel.Refresh();
+        }
+
+        public void CreateAssetTypePanel()
+        {
+            if (assetTypePanel != null) return;
+            assetTypePanel = AddUIComponent<UIAssetTypePanel>();
+            assetTypePanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
+            assetTypePanel.backgroundSprite = "GenericTab";
+            assetTypePanel.color = new Color32(196, 200, 206, 255);
+            assetTypePanel.isVisible = true;
+            assetTypePanel.size = new Vector2(75, 145);
+            assetTypePanel.relativePosition = new Vector2(Settings.assetTypePanelX, Settings.assetTypePanelY);
+        }
+
+        public void DestroyAssetTypePanel()
+        {
+            if (assetTypePanel == null) return;
+            assetTypePanel.Close();
+            RemoveUIComponent(assetTypePanel);
+            assetTypePanel = null;
+
+            Settings.assetTypePanelX = -80.0f;
+            Settings.assetTypePanelY = -75.0f;
+            XMLUtils.SaveSettings();
         }
 
         private void UpdateTopPanelsPosition()
@@ -628,7 +704,8 @@ namespace FindIt.GUI
                 if (UISearchBox.instance.buildingSizeFilterIndex.x > 4) UISearchBox.instance.sizeFilterX.selectedIndex = 0;
                 if (UISearchBox.instance.buildingSizeFilterIndex.y > 4) UISearchBox.instance.sizeFilterY.selectedIndex = 0;
             }
-            List<Asset> matches = AssetTagList.instance.Find(text, type);
+            
+            matches = AssetTagList.instance.Find(text, type);
 
             // sort by used/unused instance count
             if (Settings.showInstancesCounter && Settings.instanceCounterSort != 0)
@@ -665,6 +742,7 @@ namespace FindIt.GUI
             // sort by relevance, same as original Find It
             else
             {
+                // sort network by ui priority instead
                 if (UISearchBox.instance?.typeFilter.selectedIndex == 1)
                 {
                     matches = matches.OrderBy(s => s.uiPriority).ToList();

@@ -17,7 +17,7 @@ namespace FindIt.GUI
 
             ResourceLoader.AddTexturesInAtlas(prefab.m_Atlas, GenerateMissingThumbnailVariants(texture));
 
-            if (ModInfo.showExtraDebuggingMessage) Debugging.Message("Generated thumbnails variants for: " + prefab.name);
+            // Debugging.Message("Generated thumbnails variants for: " + prefab.name);
         }
 
         public static void FixThumbnails(PrefabInfo prefab, UIButton button)

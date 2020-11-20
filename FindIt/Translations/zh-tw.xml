@@ -57,7 +57,7 @@
     <Translation ID="FIF_SO_RETP" String="按關聯性排序。 與原始“Find It”相同" />
     <Translation ID="FIF_SO_NETP" String="按最近下載的素材排序" />
     <Translation ID="FIF_SO_RE" String="關聯性" />
-    <Translation ID="FIF_SO_NE" String="新素材" />
+    <Translation ID="FIF_SO_NE" String="最近下載" />
     <Translation ID="TRN_CHOICE" String="語言設置 (下次生效)" />
     <Translation ID="TRN_SYS" String="使用遊戲默認語言" />
     <Translation ID="FIF_PROP_IND" String="工業類物體" />
@@ -168,6 +168,27 @@
     <Translation ID="FIF_NET_ONE" String="單行道" />
     <Translation ID="FIF_NET_PAR" String="允許路邊停車" />
     <Translation ID="FIF_NET_NOP" String="禁止路邊停車" />
+    <Translation ID="FIF_PROP_VEH" String="未分類載具 (由Tree and Vehicle Props mod 生成)" />
+    <Translation ID="FIF_PROP_TRE" String="樹木 (由Tree and Vehicle Props mod 生成)" />
+    <Translation ID="FIF_SET_BACK" String="對主面板使用淺色背景顏色" />
+    <Translation ID="FIF_SET_BACKTP" String="更易於查看較暗的素材, 但更難查看較明亮的素材" />
+    <Translation ID="FIF_SET_DUN" String="隱藏未來的更新通知" />
+    <Translation ID="FIF_PROP_MOT" String="機動車輛 (由Tree and Vehicle Props mod 生成)" />
+    <Translation ID="FIF_PROP_RAI" String="軌道車輛 (由Tree and Vehicle Props mod 生成)" />
+    <Translation ID="FIF_PROP_AIR" String="航空器 (由Tree and Vehicle Props mod 生成)" />
+    <Translation ID="FIF_PROP_WAT" String="船 (由Tree and Vehicle Props mod 生成)" />
+    <Translation ID="FIF_EF_SB" String="子建築" />
+    <Translation ID="FIF_ATP_TP" String="點擊選項卡之間的間隙並拖曳以移動此面板" />
+    <Translation ID="FIF_SET_ATP" String="顯示素材類型面板" />
+    <Translation ID="FIF_EF_CT" String="有自定義標籤" />
+    <Translation ID="FIF_EF_NCT" String="無自定義標籤" />
+    <Translation ID="FIF_UPN_UP" String="更新通知" />
+    <Translation ID="FIF_PROP_TC" String="依地勢變形" />
+    <Translation ID="FIF_PROP_NTC" String="不依地勢變形" />
+    <Translation ID="FIF_SET_SSK" String="各素材類型使用獨立搜尋字串" />
+    <Translation ID="FIF_SET_SSKTP" String="切換素材類型時按住SHIFT以暫時共用搜尋字串" />
+    <Translation ID="FIF_TAG_SA" String="全選" />
+    <Translation ID="FIF_TAG_SATP" String="選擇全部顯示的素材" />
 
   </Translations>
 </Language>

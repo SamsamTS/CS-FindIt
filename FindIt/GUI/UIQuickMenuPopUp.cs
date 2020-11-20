@@ -9,10 +9,7 @@ namespace FindIt.GUI
     public class UIQuickMenuPopUp : UIPanel
     {
         public static UIQuickMenuPopUp instance;
-        private UIComponent m_button;
-
         private const float spacing = 5f;
-
         private UIDropDown instanceCounterSort;
         private UICheckBox includePOinstances;
 
@@ -96,6 +93,39 @@ namespace FindIt.GUI
                 UIFilterProp.instance.UpdateMarkerToggleVisibility();
             };
 
+            // Use light background theme
+            UICheckBox useLightBackground = SamsamTS.UIUtils.CreateCheckBox(this);
+            useLightBackground.isChecked = Settings.useLightBackground;
+            useLightBackground.label.text = Translations.Translate("FIF_SET_BACK");
+            useLightBackground.label.textScale = 0.8f;
+            useLightBackground.width = size.x;
+            useLightBackground.label.textColor = new Color32(0, 0, 0, 255);
+            useLightBackground.tooltip = Translations.Translate("FIF_SET_BACKTP");
+            useLightBackground.relativePosition = new Vector3(title.relativePosition.x, showPropMarker.relativePosition.y + showPropMarker.height + 10);
+            useLightBackground.eventCheckChanged += (c, i) =>
+            {
+                Settings.useLightBackground = useLightBackground.isChecked;
+                XMLUtils.SaveSettings();
+                FindIt.instance.UpdateDefaultPanelBackground();
+            };
+
+            // Show asset type panel
+            UICheckBox showAssetTypePanel = SamsamTS.UIUtils.CreateCheckBox(this);
+            showAssetTypePanel.isChecked = Settings.showAssetTypePanel;
+            showAssetTypePanel.label.text = Translations.Translate("FIF_SET_ATP");
+            showAssetTypePanel.label.textScale = 0.8f;
+            showAssetTypePanel.width = size.x;
+            showAssetTypePanel.label.textColor = new Color32(0, 0, 0, 255);
+            showAssetTypePanel.tooltip = Translations.Translate("FIF_ATP_TP");
+            showAssetTypePanel.relativePosition = new Vector3(title.relativePosition.x, useLightBackground.relativePosition.y + useLightBackground.height + 10);
+            showAssetTypePanel.eventCheckChanged += (c, i) =>
+            {
+                Settings.showAssetTypePanel = showAssetTypePanel.isChecked;
+                XMLUtils.SaveSettings();
+                if (Settings.showAssetTypePanel) UISearchBox.instance.CreateAssetTypePanel();
+                else UISearchBox.instance.DestroyAssetTypePanel();
+            };
+
             // Show the number of existing instances of each asset
             UICheckBox showInstancesCounter = SamsamTS.UIUtils.CreateCheckBox(this);
             showInstancesCounter.isChecked = Settings.showInstancesCounter;
@@ -104,7 +134,7 @@ namespace FindIt.GUI
             showInstancesCounter.width = size.x;
             showInstancesCounter.tooltip = Translations.Translate("FIF_SET_ICTP");
             showInstancesCounter.label.textColor = new Color32(0, 0, 0, 255);
-            showInstancesCounter.relativePosition = new Vector3(title.relativePosition.x, showPropMarker.relativePosition.y + showPropMarker.height + 10);
+            showInstancesCounter.relativePosition = new Vector3(title.relativePosition.x, showAssetTypePanel.relativePosition.y + showAssetTypePanel.height + 10);
             showInstancesCounter.eventCheckChanged += (c, i) =>
             {
                 if (showInstancesCounter.isChecked)
@@ -125,7 +155,7 @@ namespace FindIt.GUI
                 XMLUtils.SaveSettings();
                 if (Settings.showInstancesCounter && AssetTagList.instance?.prefabInstanceCountDictionary != null)
                 {
-                    AssetTagList.instance.UpdatePrefabInstanceCount();
+                    AssetTagList.instance.UpdatePrefabInstanceCount(UISearchBox.DropDownOptions.All);
                 }
                 UISearchBox.instance.Search();
             };
@@ -221,7 +251,6 @@ namespace FindIt.GUI
 
                 UIView.PushModal(instance);
             }
-            instance.m_button = component;
             instance.Show(true);
         }
 

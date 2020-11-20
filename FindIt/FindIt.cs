@@ -19,9 +19,21 @@ namespace FindIt
         public static FindIt instance;
         public static UITextureAtlas atlas = LoadResources();
         public static bool inEditor = false;
+        /// <summary>
+        /// Ploppable RICO (Revisited) mod enabled?
+        /// </summary>
         public static bool isRicoEnabled = false;
+        /// <summary>
+        /// Procedural Object mod enabled?
+        /// </summary>
         public static bool isPOEnabled = false;
+        /// <summary>
+        /// Tree & Vehicle Props Patch mod enabled?
+        /// </summary>
+        public static bool isTVPPatchEnabled = false;
         public ProceduralObjectsTool POTool;
+
+        public bool firstVisibleFlag = false;
 
         public static AssetTagList list;
 
@@ -33,20 +45,25 @@ namespace FindIt
         private RoadsPanel m_roadsPanel;
         private BeautificationPanel m_beautificationPanel;
 
+        private UIPanel defaultPanel;
+        private UITextureAtlas defaultPanelAtlas;
+        private string defaultPanelBackgroundSprite;
+
         private float m_defaultXPos;
 
         public void Start()
         {
             try
             {
-                isRicoEnabled = IsRicoEnabled();
-                isPOEnabled = IsPOEnabled();
-
                 GameObject gameObject = GameObject.Find("FindItMainButton");
                 if (gameObject != null)
                 {
                     return;
                 }
+
+                isRicoEnabled = IsRicoEnabled();
+                isPOEnabled = IsPOEnabled();
+                isTVPPatchEnabled = IsTVPPatchEnabled();
 
                 if (isPOEnabled)
                 {
@@ -97,7 +114,7 @@ namespace FindIt
                 };
                 if (!locale.Exists(key))
                 {
-                    locale.AddLocalizedString(key, "Thanks for subscribing to Find It! 2.\n\nStart typing some keywords into the input field to find the desired asset.\n\nThis mod is still under developing/testing.\n\nCheck the workshop page occasionally for new features or bug reports.");
+                    locale.AddLocalizedString(key, "Thanks for subscribing to Find It! 2.\n\nStart typing some keywords into the input field to find the desired asset.\n\nCheck the workshop page occasionally for new features or bug reports.");
                 }
 
                 FieldInfo m_ObjectIndex = typeof(MainToolbar).GetField("m_ObjectIndex", BindingFlags.Instance | BindingFlags.NonPublic);
@@ -156,6 +173,11 @@ namespace FindIt
 
                 m_roadsPanel = FindObjectOfType<RoadsPanel>();
                 m_beautificationPanel = FindObjectOfType<BeautificationPanel>();
+
+                defaultPanel = GameObject.Find("FindItDefaultPanel").GetComponent<UIPanel>();
+                defaultPanelAtlas = defaultPanel.atlas;
+                defaultPanelBackgroundSprite = defaultPanel.backgroundSprite;
+                UpdateDefaultPanelBackground();
 
                 Debugging.Message("Initialized");
 
@@ -216,7 +238,6 @@ namespace FindIt
             {
                 brushPanel.isVisible = false;
             }
-
         }
 
         public void OnButtonClicked(UIComponent c, UIMouseEventParameter p)
@@ -304,29 +325,29 @@ namespace FindIt
 
         private static bool IsRicoEnabled()
         {
-            foreach (PluginManager.PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
-            {
-                foreach (Assembly assembly in plugin.GetAssemblies())
-                {
-                    if (assembly.GetName().Name.ToLower() == "ploppablerico")
-                    {
-                        Debugging.Message($"Found enabled RICO mod? {plugin.isEnabled}");
-                        return plugin.isEnabled;
-                    }
-                }
-            }
-            return false;
+            return IsAssemblyEnabled("ploppablerico"); ;
         }
 
         private static bool IsPOEnabled()
         {
+            return IsAssemblyEnabled("proceduralobjects");
+        }
+
+        private static bool IsTVPPatchEnabled()
+        {
+            return IsAssemblyEnabled("tvproppatch");
+        }
+
+        private static bool IsAssemblyEnabled(string assemblyName)
+        {
+
             foreach (PluginManager.PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
             {
                 foreach (Assembly assembly in plugin.GetAssemblies())
                 {
-                    if (assembly.GetName().Name.ToLower() == "proceduralobjects")
+                    if (assembly.GetName().Name.ToLower() == assemblyName)
                     {
-                        Debugging.Message($"Found enabled Procedural Objects mod? {plugin.isEnabled}");
+                        Debugging.Message($"Found enabled mod: {assemblyName}. Find It 2 integration will be applied");
                         return plugin.isEnabled;
                     }
                 }
@@ -378,39 +399,35 @@ namespace FindIt
                     "FindItPressed",
                     "Tag",
                     "ZoningCommercialEco",
-                    "ZoningCommercialEcoDisabled",
                     "ZoningCommercialLeisure",
-                    "ZoningCommercialLeisureDisabled",
                     "ZoningCommercialTourist",
-                    "ZoningCommercialTouristDisabled",
                     "ZoningOfficeHightech",
-                    "ZoningOfficeHightechDisabled",
                     "ZoningResidentialHighEco",
-                    "ZoningResidentialHighEcoDisabled",
                     "ZoningResidentialLowEco",
-                    "ZoningResidentialLowEcoDisabled",
                     "ToolbarIconPropsBillboards",
                     "ToolbarIconPropsSpecialBillboards",
-                    "ToolbarIconPropsBillboardsDisabled",
-                    "ToolbarIconPropsSpecialBillboardsDisabled",
                     "ExtraFilters",
                     "Dice",
                     "TreeLg",
                     "TreeMd",
                     "TreeSm",
-                    "TreeLgDisabled",
-                    "TreeMdDisabled",
-                    "TreeSmDisabled",
                     "TinyRoads",
-                    "TinyRoadsDisabled",
                     "QuickMenu",
                     "Clear",
                     "Oneway",
-                    "OnewayDisabled",
                     "Parking",
-                    "ParkingDisabled",
                     "NoParking",
-                    "NoParkingDisabled"
+                    "GrwbRico",
+                    "Runway",
+                    "RunwayDisabled",
+                    "RunwayFocused",
+                    "RunwayHovered",
+                    "RunwayPressed",
+                    "Taxiway",
+                    "TaxiwayDisabled",
+                    "TaxiwayFocused",
+                    "TaxiwayHovered",
+                    "TaxiwayPressed"
                 };
 
                 atlas = ResourceLoader.CreateTextureAtlas("FindItAtlas", spriteNames, "FindIt.Icons.");
@@ -428,6 +445,24 @@ namespace FindIt
             }
 
             return atlas;
+        }
+
+        public void UpdateDefaultPanelBackground()
+        {
+            if (!Settings.useLightBackground)
+            {
+                defaultPanel.atlas = defaultPanelAtlas;
+                defaultPanel.backgroundSprite = defaultPanelBackgroundSprite;
+                if (UISearchBox.instance?.panel != null)
+                    UISearchBox.instance.panel.backgroundSprite = "GenericTabHovered";
+            }
+            else
+            {
+                defaultPanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
+                defaultPanel.backgroundSprite = "GenericTabHovered";
+                if (UISearchBox.instance?.panel != null)
+                    UISearchBox.instance.panel.backgroundSprite = "GenericTab";
+            }
         }
     }
 

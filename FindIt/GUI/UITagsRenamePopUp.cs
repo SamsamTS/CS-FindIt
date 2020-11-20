@@ -30,7 +30,7 @@ namespace FindIt.GUI
             name = "FindIt_TagsRenamePopUp";
             atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             backgroundSprite = "GenericPanelWhite";
-            size = new Vector2(380, 200);
+            size = new Vector2(400, 200);
 
             UILabel title = AddUIComponent<UILabel>();
             title.text = Translations.Translate("FIF_RE_TIT");
@@ -65,7 +65,7 @@ namespace FindIt.GUI
             newTagInput.eventTextSubmitted += (c, t) =>
             {
                 // use the first string as the the tag name
-                string[] tagsArr = Regex.Split(t, @"([^\w]|[_-]|\s)+", RegexOptions.IgnoreCase);
+                string[] tagsArr = Regex.Split(t, @"([^\w]|[-]|\s)+", RegexOptions.IgnoreCase);
                 if (tagsArr[0] != "")
                 {
                     newTagName = tagsArr[0];

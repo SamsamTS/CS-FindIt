@@ -57,7 +57,7 @@
     <Translation ID="FIF_SO_RETP" String="Relevanteste zuerst. Wie ursprüngliches Find It" />
     <Translation ID="FIF_SO_NETP" String="Neueste zuerst" />
     <Translation ID="FIF_SO_RE" String="Relevanz" />
-    <Translation ID="FIF_SO_NE" String="Neueste" />
+    <Translation ID="FIF_SO_NE" String="Recent DLs" />
     <Translation ID="TRN_CHOICE" String="Sprache wählen (Wird beim nächsten Start aktiviert)" />
     <Translation ID="TRN_SYS" String="Systemsprache verwenden" />
     <Translation ID="FIF_PROP_IND" String="Industrie" />

@@ -82,7 +82,7 @@ namespace FindIt
 
                 for (int i = 0; i < tagsEntries.Length; i++)
                 {
-                    if (ModInfo.showExtraDebuggingMessage) Debugging.Message(tagsEntries[i].key + " " + tagsEntries[i].value);
+                    // Debugging.Message(tagsEntries[i].key + " " + tagsEntries[i].value);
                     assetTags[tagsEntries[i].key] = tagsEntries[i].value;
                 }
             }

@@ -129,6 +129,10 @@ namespace FindIt
                             steamSprite.opacity = 0.05f;
                             steamSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
                             steamSprite.relativePosition = new Vector3(component.width - steamSprite.width - 5, component.height - steamSprite.height - 5);
+                            steamSprite.eventMouseLeave += (c, p) =>
+                            {
+                                steamSprite.tooltipBox.Hide();
+                            };
 
                             if (!asset.author.IsNullOrWhiteSpace())
                             {
@@ -145,7 +149,14 @@ namespace FindIt
 
                                         if (publishedFileId != PublishedFileId.invalid)
                                         {
-                                            PlatformService.ActivateGameOverlayToWorkshopItem(publishedFileId);
+                                            if (!Settings.useDefaultBrowser)
+                                            {
+                                                PlatformService.ActivateGameOverlayToWorkshopItem(publishedFileId);
+                                            }
+                                            else
+                                            {
+                                                System.Diagnostics.Process.Start("https://steamcommunity.com/sharedfiles/filedetails/?id=" + publishedFileId);
+                                            }
                                             p.Use();
                                         }
                                     }
@@ -171,7 +182,7 @@ namespace FindIt
                 {
                     if (ImageUtils.FixFocusedTexture(prefab))
                     {
-                        if (ModInfo.showExtraDebuggingMessage) Debugging.Message("Fixed focused texture: " + prefab.name);
+                        // Debugging.Message("Fixed focused texture: " + prefab.name);
                     }
                     UIScrollPanelItem.fixedFocusedTexture.Add(prefab);
                 }

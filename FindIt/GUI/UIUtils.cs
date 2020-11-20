@@ -147,8 +147,8 @@ namespace SamsamTS
             dropDown.listScrollbar.value = 0;
             dropDown.listScrollbar.incrementAmount = 50;
             dropDown.listScrollbar.AlignTo(dropDown, UIAlignAnchor.TopRight);
-            dropDown.listScrollbar.autoHide = false;
-
+            dropDown.listScrollbar.autoHide = true;
+            dropDown.listScrollbar.isVisible = false;
             // the game automatically creates 2 scrollbar clones: one for the drowdown itself and one for the dropdown popup list box
             // we only need the one inside the dropdown popup which will automatically be placed inside the popup
             // move the other one off screen to hide it(we can't set it to invisible or both would become invisible)
@@ -163,7 +163,6 @@ namespace SamsamTS
             tracSprite.size = tracSprite.parent.size;
             tracSprite.fillDirection = UIFillDirection.Vertical;
             tracSprite.spriteName = "ScrollbarTrack";
-
             dropDown.listScrollbar.trackObject = tracSprite;
 
             UISlicedSprite thumbSprite = tracSprite.AddUIComponent<UISlicedSprite>();
@@ -184,12 +183,13 @@ namespace SamsamTS
             }
         }
 
-        public static UICheckBox CreateIconToggle(UIComponent parent, string atlas, string checkedSprite, string uncheckedSprite)
+        public static UICheckBox CreateIconToggle(UIComponent parent, string atlas, string checkedSprite, string uncheckedSprite, float disabledSpriteOpacity = 1.0f, float tabSize = 35f)
         {
             UICheckBox checkBox = parent.AddUIComponent<UICheckBox>();
+            disabledSpriteOpacity = 0.3f;
 
-            checkBox.width = 35f;
-            checkBox.height = 35f;
+            checkBox.width = tabSize;
+            checkBox.height = tabSize;
             checkBox.clipChildren = true;
 
             UIPanel panel = checkBox.AddUIComponent<UIPanel>();
@@ -200,6 +200,7 @@ namespace SamsamTS
 
             UISprite sprite = panel.AddUIComponent<UISprite>();
             sprite.atlas = GetAtlas(atlas);
+
             sprite.spriteName = uncheckedSprite;
             sprite.size = checkBox.size;
             sprite.relativePosition = Vector3.zero;
@@ -213,9 +214,15 @@ namespace SamsamTS
             checkBox.eventCheckChanged += (c, b) =>
             {
                 if (checkBox.isChecked)
+                {
                     panel.backgroundSprite = "IconPolicyBaseRect";
+                    sprite.opacity = 1.0f;
+                }
                 else
+                {
                     panel.backgroundSprite = "IconPolicyBaseRectDisabled";
+                    sprite.opacity = disabledSpriteOpacity;
+                }
                 panel.Invalidate();
             };
 
@@ -223,15 +230,20 @@ namespace SamsamTS
             {
                 panel.backgroundSprite = "IconPolicyBaseRectHovered";
                 sprite.spriteName = checkedSprite;
+                sprite.opacity = 1.0f;
             };
 
             checkBox.eventMouseLeave += (c, p) =>
             {
                 if (checkBox.isChecked)
+                {
                     panel.backgroundSprite = "IconPolicyBaseRect";
+                    sprite.opacity = 1.0f;
+                }
                 else
                 {
                     panel.backgroundSprite = "IconPolicyBaseRectDisabled";
+                    sprite.opacity = disabledSpriteOpacity;
                 }
                 sprite.spriteName = uncheckedSprite;
             };

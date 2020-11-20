@@ -8,15 +8,33 @@ using CitiesHarmony.API;
 using System.IO;
 using ColossalFramework.IO;
 using UnityEngine;
-using FindIt.GUI;
 
 namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.0.4-1";
-        public const bool isBeta = true;
-        public const bool showExtraDebuggingMessage = false;
+        public const string version = "2.0.7";
+        public const bool isBeta = false;
+        public const double updateNoticeDate = 20201029;
+        public const string updateNotice =
+
+            "- Add a workaround patch for the inherited bulldoze tool hotkey bug\n\n" +
+
+            "    Not sure if the workaround patch will help or not.\n" +
+            "    This is a non-reproducible bug as it only happens to some players.\n\n" +
+
+            "- Vanilla assets will show which DLC or Content Creator Pack they belong to\n\n" +
+
+            "- (Optional. Disabled by default. Can be enabled in mod settings)\n" +
+            "  Each asset type can have their own separate search query keyword\n\n" +
+
+            "    When you switch from one asset type to another type temporarily, you\n" +
+            "    won't lose the original search. Hold SHIFT when switching asset type\n" +
+            "    to temporarily share search keyword between different asset types\n" +
+            "    Added by Brot\n\n" +
+
+            "- Minor UI changes\n" +
+            "- Miscellaneous backend changes\n\n";
 
         public string Name
         {
@@ -118,6 +136,24 @@ namespace FindIt
                     XMLUtils.SaveSettings();
                 });
                 useDefaultBrowser.tooltip = Translations.Translate("FIF_SET_DBTP");
+                group.AddSpace(10);
+
+                // Disable update notice
+                UICheckBox disableUpdateNotice = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DUN"), Settings.disableUpdateNotice, (b) =>
+                {
+                    Settings.disableUpdateNotice = b;
+                    XMLUtils.SaveSettings();
+                });
+                useDefaultBrowser.tooltip = Translations.Translate("FIF_SET_DBTP");
+                group.AddSpace(10);
+
+                // Disable update notice
+                UICheckBox separateSearchKeyword = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_SSK"), Settings.separateSearchKeyword, (b) =>
+                {
+                    Settings.separateSearchKeyword = b;
+                    XMLUtils.SaveSettings();
+                });
+                separateSearchKeyword.tooltip = Translations.Translate("FIF_SET_SSKTP");
                 group.AddSpace(10);
 
                 // languate settings

@@ -1,5 +1,6 @@
 ﻿// modified from SamsamTS's original Find It mod
 // https://github.com/SamsamTS/CS-FindIt
+// extra filters panel
 
 using UnityEngine;
 using ColossalFramework.UI;
@@ -41,14 +42,20 @@ namespace FindIt.GUI
             AssetCreator = 0,
             BuildingHeight,
             BuildingLevel,
-            UnusedAssets
+            SubBuildings,
+            UnusedAssets,
+            WithCustomTag,
+            WithoutCustomTag
         }
 
         string[] options = {
                     Translations.Translate("FIF_EF_AC"), // Asset Creator
                     Translations.Translate("FIF_EF_BH"), // Building Height
                     Translations.Translate("FIF_SE_LV"), // Building Level
-                    Translations.Translate("FIF_EF_UN") // Unused Asset
+                    Translations.Translate("FIF_EF_SB"), // Sub-building
+                    Translations.Translate("FIF_EF_UN"), // Unused Asset
+                    Translations.Translate("FIF_EF_CT"), // With Custom Tag
+                    Translations.Translate("FIF_EF_NCT"), // Without Custom Tag
                 };
 
         public override void Start()

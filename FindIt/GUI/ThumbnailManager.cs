@@ -114,7 +114,7 @@ namespace FindIt.GUI
                 }
 
                 // Assign default 'no thumbnail' thumbnail to any assets without valid thumbnails at this point.
-                if (prefab.m_Atlas == null)
+                if (prefab.m_Atlas == null || prefab.m_Thumbnail.IsNullOrWhiteSpace())
                 {
                     prefab.m_Atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
                     prefab.m_Thumbnail = "ToolbarIconProps";
@@ -228,7 +228,7 @@ namespace FindIt.GUI
                     prefab.m_Atlas = ResourceLoader.CreateTextureAtlas("FindItThumbnails_" + name, new string[] { }, null);
                     ResourceLoader.AddTexturesInAtlas(prefab.m_Atlas, ImageUtils.GenerateMissingThumbnailVariants(texture));
 
-                    if (ModInfo.showExtraDebuggingMessage) Debugging.Message("Generated thumbnails for: " + name);
+                    // Debugging.Message("Generated thumbnails for: " + name);
 
                     return true;
                 }
@@ -255,12 +255,12 @@ namespace FindIt.GUI
                 ResourceLoader.ResizeTexture(thumbnailTexture, 109, 100);
                 ResourceLoader.AddTexturesInAtlas(prefab.m_Atlas, ImageUtils.GenerateMissingThumbnailVariants(thumbnailTexture));
 
-                if (ModInfo.showExtraDebuggingMessage) Debugging.Message("Generated thumbnails for: " + name);
+                // Debugging.Message("Generated thumbnails for: " + name);
             }
             else
             {
                 // Rendering didn't occur - apply default thumbnail sprite name.
-                if (ModInfo.showExtraDebuggingMessage) prefab.m_Thumbnail = "ThumbnailBuildingDefault";
+                prefab.m_Thumbnail = "ThumbnailBuildingDefault";
             }
 
             return wasRendered;

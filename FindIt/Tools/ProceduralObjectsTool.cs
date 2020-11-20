@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace FindIt
 {
-    public  class ProceduralObjectsTool
+    public class ProceduralObjectsTool
     {
         private Dictionary<string, uint> poInstanceCount = new Dictionary<string, uint>();
 
@@ -31,8 +31,7 @@ namespace FindIt
                     string infoType = ProceduralObjectType.GetField("baseInfoType").GetValue(i).ToString();
                     if (basePrefabName != null && infoType != null)
                     {
-                        if (ModInfo.showExtraDebuggingMessage) 
-                            Debugging.Message("PO instance found - " + basePrefabName.ToString());
+                        // Debugging.Message("PO instance found - " + basePrefabName.ToString());
 
                         if (!poInstanceCount.ContainsKey(basePrefabName))
                         {
@@ -51,7 +50,7 @@ namespace FindIt
             }
         }
 
-        public uint GetPrefabInstanceCount(PrefabInfo info)
+        public uint GetPrefabPOInstanceCount(PrefabInfo info)
         {
             if (!(info is PropInfo) && !(info is BuildingInfo)) return 0;
 
