@@ -655,7 +655,8 @@ namespace FindIt
                 }
             }
 
-            CleanDictionarys();
+            // Inherited from Find It 1. I don't know why this is needed. It only removes the 's' in a name tag
+            // CleanDictionarys();
         }
 
         public void AddCustomTags(Asset asset, string text)
@@ -819,6 +820,8 @@ namespace FindIt
             return tag;
         }
 
+        // Inherited from Find It 1. I don't knonw why this is needed.
+        /*
         private void CleanDictionarys()
         {
             foreach (Asset asset in assets.Values)
@@ -862,6 +865,7 @@ namespace FindIt
                 }
             }
         }
+        */
 
         // if SteamID == 0, not a workshop asset
         private static ulong GetSteamID(PrefabInfo prefab)
