@@ -287,7 +287,7 @@ namespace FindIt.GUI
             exportButton.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 15, 5);
             exportButton.eventClick += (c, p) =>
             {
-                UITagsExportUnusedPopUp.ShowAt(exportButton);
+                ExportUnunsedTool.ExportUnused();
             };
 
         }
