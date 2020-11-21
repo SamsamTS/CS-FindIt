@@ -13,28 +13,23 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.0.7";
-        public const bool isBeta = false;
-        public const double updateNoticeDate = 20201029;
+        public const string version = "2.0.8-beta1";
+        public const bool isBeta = true;
+        public const double updateNoticeDate = 20201120;
         public const string updateNotice =
 
-            "- Add a workaround patch for the inherited bulldoze tool hotkey bug\n\n" +
+            "- Add a new search prefix % - search by workshop ID\n" +
+            "Example: %123456789\n" +
+            "Search by workshop ID is only available with this prefix\n\n" +
 
-            "    Not sure if the workaround patch will help or not.\n" +
-            "    This is a non-reproducible bug as it only happens to some players.\n\n" +
+            "- Add an \"Export\" button in extra filters panel -> Unused Assets\n" +
+            "It will export a list of unused workshop ID's in an html file\n\n" +
 
-            "- Vanilla assets will show which DLC or Content Creator Pack they belong to\n\n" +
+            "- Add Italian translation by Random5\n" +
+            "Need to be manually selected in mod settings\n\n" +
 
-            "- (Optional. Disabled by default. Can be enabled in mod settings)\n" +
-            "  Each asset type can have their own separate search query keyword\n\n" +
-
-            "    When you switch from one asset type to another type temporarily, you\n" +
-            "    won't lose the original search. Hold SHIFT when switching asset type\n" +
-            "    to temporarily share search keyword between different asset types\n" +
-            "    Added by Brot\n\n" +
-
-            "- Minor UI changes\n" +
-            "- Miscellaneous backend changes\n\n";
+            "- Some UI changes\n" +
+            "- Some bug fixes\n\n";
 
         public string Name
         {
