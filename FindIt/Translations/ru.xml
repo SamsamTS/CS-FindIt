@@ -187,6 +187,11 @@
     <Translation ID="FIF_PROP_NTC" String="Non-Terrain Conforming" />
     <Translation ID="FIF_SET_SSK" String="Используйте отд. слова поискового запроса для каждого типа активов" />
     <Translation ID="FIF_SET_SSKTP" String="Удерживайте SHIFT при переключении типа актива, чтобы временно использовать ключевое слово запроса" />
+    <Translation ID="FIF_TAG_SA" String="Выбрать все" />
+    <Translation ID="FIF_TAG_SATP" String="Выбрать все отображаемые элементы" />
+    <Translation ID="FIF_EF_UNEXP" String="Экспорт" />
+    <Translation ID="FIF_EF_UNEXPTP" String="Экспорт списка неиспользуемых объектов в HTML-файл со ссылками на Мастерскую" />
+    <Translation ID="FIF_UNEXP_CLO" String="Закрыть" />
  
   </Translations>
 </Language>
