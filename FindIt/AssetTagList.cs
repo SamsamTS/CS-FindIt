@@ -997,12 +997,12 @@ namespace FindIt
             }
         }
 
-        public void UpdateAssetInstanceCount(Asset asset)
+        public void UpdateAssetInstanceCount(Asset asset, bool forceUpdatePO = false)
         {
             if (!prefabInstanceCountDictionary.ContainsKey(asset.prefab)) asset.instanceCount = 0;
             else asset.instanceCount = prefabInstanceCountDictionary[asset.prefab];
 
-            if (Settings.includePOinstances && FindIt.isPOEnabled)
+            if ((Settings.includePOinstances || forceUpdatePO) && FindIt.isPOEnabled)
             {
                 asset.poInstanceCount = FindIt.instance.POTool.GetPrefabPOInstanceCount(asset.prefab);
             }

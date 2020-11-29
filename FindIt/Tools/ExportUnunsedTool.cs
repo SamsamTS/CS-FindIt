@@ -23,14 +23,14 @@ namespace FindIt
 
             // update instance count
             AssetTagList.instance.UpdatePrefabInstanceCount(UISearchBox.DropDownOptions.All);
-            if (FindIt.isPOEnabled && Settings.includePOinstances) FindIt.instance.POTool.UpdatePOInfoList();
+            if (FindIt.isPOEnabled) FindIt.instance.POTool.UpdatePOInfoList();
 
             // filter out used assets
             foreach (Asset asset in AssetTagList.instance.assets.Values)
             {
                 if (!asset.prefab.m_isCustomContent) continue;
                 if (asset.steamID == 0) continue;
-                AssetTagList.instance.UpdateAssetInstanceCount(asset);
+                AssetTagList.instance.UpdateAssetInstanceCount(asset, true);
                 if (asset.instanceCount > 0 || asset.poInstanceCount > 0) 
                 {
                     steamIds.Remove(asset.steamID);
@@ -45,7 +45,13 @@ namespace FindIt
                 file.WriteLine($"City Name: {GetCityName()}<br>");
                 file.WriteLine($"Export Date: {GetFormattedDateTime()}<br>");
                 file.WriteLine($"<br>This list only considers asset types that are monitored by Find It 2<br>");
+                file.WriteLine($"<br>Some mods are bundled with assets for other purpose. Ignore the mods in the list<br>");
                 file.WriteLine($"<br>If you ever copied assets from the workshop download folder to the local asset folder, the information here can be inaccurate<br>");
+                if (FindIt.isPOEnabled)
+                {
+                    file.WriteLine($"<br>It seems like you're using Procedural Objects. This list already considers POs<br>");
+                }
+                
                 foreach (ulong id in steamIds)
                 {
                     file.WriteLine($"<br><a href=\"https://steamcommunity.com/sharedfiles/filedetails/?id={id}\">{id}</a><br>");
