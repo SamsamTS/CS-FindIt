@@ -10,15 +10,29 @@ namespace FindIt
 {
     public static class ExportUnunsedTool
     {
-        public static void ExportUnused()
+        public static void ExportUnused(bool exportAllUnused)
         {
             // get steam id of all workship assets
             HashSet<ulong> steamIds = new HashSet<ulong>();
-            foreach (Asset asset in AssetTagList.instance.assets.Values)
+
+            if (exportAllUnused)
             {
-                if (!asset.prefab.m_isCustomContent) continue;
-                if (asset.steamID == 0) continue;
-                steamIds.Add(asset.steamID);
+                foreach (Asset asset in AssetTagList.instance.assets.Values)
+                {
+                    if (!asset.prefab.m_isCustomContent) continue;
+                    if (asset.steamID == 0) continue;
+                    steamIds.Add(asset.steamID);
+                }
+            }
+
+            else // only export assets from last search
+            {
+                foreach (Asset asset in UISearchBox.instance.matches)
+                {
+                    if (!asset.prefab.m_isCustomContent) continue;
+                    if (asset.steamID == 0) continue;
+                    steamIds.Add(asset.steamID);
+                }
             }
 
             // update instance count
@@ -26,6 +40,7 @@ namespace FindIt
             if (FindIt.isPOEnabled) FindIt.instance.POTool.UpdatePOInfoList();
 
             // filter out used assets
+            Dictionary<ulong, int> unusedIDs = new Dictionary<ulong, int>();
             foreach (Asset asset in AssetTagList.instance.assets.Values)
             {
                 if (!asset.prefab.m_isCustomContent) continue;
@@ -35,17 +50,23 @@ namespace FindIt
                 {
                     steamIds.Remove(asset.steamID);
                 }
+                else
+                {
+                    if (unusedIDs.ContainsKey(asset.steamID)) unusedIDs[asset.steamID] += 1;
+                    else unusedIDs.Add(asset.steamID, 1);
+                }
             }
 
-            string path = Path.Combine(DataLocation.localApplicationData, "FindItExportUnusedWorkshopID.html");
+            string currentTime = GetFormattedDateTime();
+            string path = Path.Combine(DataLocation.localApplicationData, $"FindItExportUnusedWorkshopID_{currentTime}.html");
             if (File.Exists(path)) File.Delete(path);
 
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(path, true))
             {
                 file.WriteLine($"City Name: {GetCityName()}<br>");
-                file.WriteLine($"Export Date: {GetFormattedDateTime()}<br>");
+                file.WriteLine($"Export Date: {currentTime}<br>");
                 file.WriteLine($"<br>This list only considers asset types that are monitored by Find It 2<br>");
-                file.WriteLine($"<br>Some mods are bundled with assets for other purpose. Ignore the mods in the list<br>");
+                file.WriteLine($"<br>Some mods are bundled with assets for other purpose. Ignore mods in the list<br>");
                 file.WriteLine($"<br>If you ever copied assets from the workshop download folder to the local asset folder, the information here can be inaccurate<br>");
                 if (FindIt.isPOEnabled)
                 {
@@ -54,7 +75,11 @@ namespace FindIt
                 
                 foreach (ulong id in steamIds)
                 {
-                    file.WriteLine($"<br><a href=\"https://steamcommunity.com/sharedfiles/filedetails/?id={id}\">{id}</a><br>");
+                    if (unusedIDs.ContainsKey(id))
+                    {
+                        file.WriteLine($"<br><a href=\"https://steamcommunity.com/sharedfiles/filedetails/?id={id}\">{id}</a><br>\n");
+                        file.WriteLine($"This workshop ID contains {unusedIDs[id]} asset(s). All unused<br>\n");
+                    }
                 }
             }
 
@@ -69,12 +94,12 @@ namespace FindIt
                 string cityName = Singleton<SimulationManager>.instance.m_metaData.m_CityName;
                 if (cityName != null) return cityName;
             }
-            return "";
+            return "(Unknown)";
         }
 
         private static string GetFormattedDateTime()
         {
-            return DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
+            return DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss");
         }
     }
 }

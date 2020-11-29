@@ -35,7 +35,8 @@ namespace FindIt.GUI
         public UIDropDown buildingLevelDropDownMenu;
 
         // unused assets
-        private UIButton exportButton;
+        private UIButton exportAllUnusedButton;
+        private UIButton exportSearchedUnusedButton;
 
         public enum DropDownOptions
         {
@@ -276,18 +277,32 @@ namespace FindIt.GUI
                 }
             };
 
-            // unused export asset list
-            exportButton = SamsamTS.UIUtils.CreateButton(this);
-            exportButton.size = new Vector2(80, 25);
-            exportButton.text = Translations.Translate("FIF_EF_UNEXP");
-            exportButton.textScale = 0.8f;
-            exportButton.textPadding = new RectOffset(0, 0, 5, 0);
-            exportButton.tooltip = Translations.Translate("FIF_EF_UNEXPTP");
-            exportButton.isVisible = false;
-            exportButton.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 15, 5);
-            exportButton.eventClick += (c, p) =>
+            // export all unused asset list
+            exportAllUnusedButton = SamsamTS.UIUtils.CreateButton(this);
+            exportAllUnusedButton.size = new Vector2(80, 25);
+            exportAllUnusedButton.text = Translations.Translate("FIF_EF_UNEXP");
+            exportAllUnusedButton.textScale = 0.8f;
+            exportAllUnusedButton.textPadding = new RectOffset(0, 0, 5, 0);
+            exportAllUnusedButton.tooltip = Translations.Translate("FIF_EF_UNEXPTP");
+            exportAllUnusedButton.isVisible = false;
+            exportAllUnusedButton.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 15, 5);
+            exportAllUnusedButton.eventClick += (c, p) =>
             {
-                ExportUnunsedTool.ExportUnused();
+                ExportUnunsedTool.ExportUnused(true);
+            };
+
+            // export searched unused asset list
+            exportSearchedUnusedButton = SamsamTS.UIUtils.CreateButton(this);
+            exportSearchedUnusedButton.size = new Vector2(130, 25);
+            exportSearchedUnusedButton.text = Translations.Translate("FIF_EF_UNEXPSE");
+            exportSearchedUnusedButton.textScale = 0.8f;
+            exportSearchedUnusedButton.textPadding = new RectOffset(0, 0, 5, 0);
+            exportSearchedUnusedButton.tooltip = Translations.Translate("FIF_EF_UNEXPTPSE");
+            exportSearchedUnusedButton.isVisible = false;
+            exportSearchedUnusedButton.relativePosition = new Vector3(exportAllUnusedButton.relativePosition.x + exportAllUnusedButton.width + 5, 5);
+            exportSearchedUnusedButton.eventClick += (c, p) =>
+            {
+                ExportUnunsedTool.ExportUnused(false);
             };
 
         }
@@ -346,7 +361,8 @@ namespace FindIt.GUI
 
         private void UpdateUnusedAssetsVisibility(bool visibility)
         {
-            exportButton.isVisible = visibility;
+            exportAllUnusedButton.isVisible = visibility;
+            exportSearchedUnusedButton.isVisible = visibility;
         }
 
         private void HideAll()

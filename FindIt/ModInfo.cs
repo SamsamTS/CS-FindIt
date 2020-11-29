@@ -13,7 +13,7 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.0.8";
+        public const string version = "2.0.9";
         public const bool isBeta = false;
         public const double updateNoticeDate = 20201126;
         public const string updateNotice =
@@ -22,8 +22,8 @@ namespace FindIt
             "Example: %123456789\n" +
             "Search by workshop ID is only available with this prefix\n\n" +
 
-            "- Add an \"Export\" button in extra filters panel -> Unused Assets\n" +
-            "It will export a list of unused workshop ID's into an html file\n\n" +
+            "- Add \"Export\" buttons in extra filters panel -> Unused Assets\n" +
+            "They will export a list of unused workshop ID's into an html file\n\n" +
 
             "- Add Italian translation by Random5\n" +
             "Need to be manually selected in mod settings\n\n" +
