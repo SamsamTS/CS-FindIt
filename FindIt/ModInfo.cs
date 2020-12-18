@@ -13,22 +13,17 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.0.9";
-        public const bool isBeta = false;
-        public const double updateNoticeDate = 20201126;
+        public const string version = "2.1";
+        public const bool isBeta = true;
+        public const double updateNoticeDate = 20201218;
         public const string updateNotice =
 
-            "- Add a new search prefix % - search by workshop ID\n" +
-            "Example: %123456789\n" +
-            "Search by workshop ID is only available with this prefix\n\n" +
+            "- \"Require DLC/CCP\" filter\n\n" +
 
-            "- Add \"Export\" buttons in extra filters panel -> Unused Assets\n" +
-            "They will export a list of unused workshop ID's into an html file\n\n" +
+            "- \"Local Custom\" filter - custom assets but not from workshop subscription\n\n" +
 
-            "- Add Italian translation by Random5\n" +
-            "Need to be manually selected in mod settings\n\n" +
+            "- \"Work Subscription\" filter - custom assets from workshop subscription\n\n" +
 
-            "- Some UI changes\n" +
             "- Some bug fixes\n\n";
 
         public string Name
