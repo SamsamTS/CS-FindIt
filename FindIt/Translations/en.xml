@@ -193,6 +193,9 @@
     <Translation ID="FIF_EF_UNEXPTP" String="Export the list of all unused workshop ID's into an HTML file with workshop links" />
     <Translation ID="FIF_EF_UNEXPSE" String="Export Searched" />
     <Translation ID="FIF_EF_UNEXPTPSE" String="Export the list of unused workshop ID's from the last search into an HTML file with workshop links" />
+    <Translation ID="FIF_EF_LC" String="Local Custom" />
+    <Translation ID="FIF_EF_WC" String="Workshop Subscription" />
+    <Translation ID="FIF_EF_DLC" String="Require DLC/CCP" />
 
   </Translations>
 </Language>

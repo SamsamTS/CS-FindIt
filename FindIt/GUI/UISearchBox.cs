@@ -777,7 +777,7 @@ namespace FindIt.GUI
                 if (asset.prefab != null)
                 {
                     UIScrollPanelItem.ItemData data = new UIScrollPanelItem.ItemData();
-                    data.name = asset.title;// + "_" + asset.score;
+                    data.name = asset.title;// + "_" + asset.steamID;
                     data.tooltip = Asset.GetLocalizedTooltip(asset, asset.prefab, data.name);
                     data.tooltipBox = GeneratedPanel.GetTooltipBox(TooltipHelper.GetHashCode(data.tooltip));
                     data.asset = asset;

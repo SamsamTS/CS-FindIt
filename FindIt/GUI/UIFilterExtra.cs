@@ -49,6 +49,8 @@ namespace FindIt.GUI
             DLC,
             SubBuildings,
             UnusedAssets,
+            LocalCustom,
+            WorkshopCustom,
             WithCustomTag,
             WithoutCustomTag
         }
@@ -57,9 +59,11 @@ namespace FindIt.GUI
                     Translations.Translate("FIF_EF_AC"), // Asset Creator
                     Translations.Translate("FIF_EF_BH"), // Building Height
                     Translations.Translate("FIF_SE_LV"), // Building Level
-                    "DLC & CCP", // DLCs
+                    Translations.Translate("FIF_EF_DLC"), // Require DLC/CCP
                     Translations.Translate("FIF_EF_SB"), // Sub-building
                     Translations.Translate("FIF_EF_UN"), // Unused Asset
+                    Translations.Translate("FIF_EF_LC"), // Local Custom
+                    Translations.Translate("FIF_EF_WC"), // Workshop Subscription
                     Translations.Translate("FIF_EF_CT"), // With Custom Tag
                     Translations.Translate("FIF_EF_NCT"), // Without Custom Tag
                 };
@@ -106,7 +110,7 @@ namespace FindIt.GUI
             // extra filter dropdown
             optionDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
             optionDropDownMenu.size = new Vector2(200, 25);
-            optionDropDownMenu.listHeight = 240;
+            optionDropDownMenu.listHeight = 300;
             optionDropDownMenu.itemHeight = 30;
             optionDropDownMenu.items = options;
             optionDropDownMenu.selectedIndex = 0;

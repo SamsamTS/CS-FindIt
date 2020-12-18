@@ -608,7 +608,7 @@ namespace FindIt.GUI
                 }
             }
         }
-        
+
         private void SetDLCSprite(UISprite sprite, SteamHelper.DLC_BitMask dlc)
         {
             if (dlc == SteamHelper.DLC_BitMask.None) return;
@@ -721,6 +721,6 @@ namespace FindIt.GUI
                 sprite.spriteName = "ToolbarIconHelp";
             }
         }
-        
+
     }
 }

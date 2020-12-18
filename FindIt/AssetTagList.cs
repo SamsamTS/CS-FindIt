@@ -14,6 +14,7 @@ using ColossalFramework.Packaging;
 using FindIt.GUI;
 using System.Reflection;
 using ColossalFramework.Globalization;
+using ColossalFramework.IO;
 
 namespace FindIt
 {
@@ -36,6 +37,11 @@ namespace FindIt
         /// key = asset steam ID, value = asset download timestamp
         /// </summary>
         public Dictionary<ulong, ulong> downloadTimes = new Dictionary<ulong, ulong>();
+
+        /// <summary>
+        /// assets with steam workshop ID but are local assets, not from workshop subscription
+        /// </summary>
+        public HashSet<ulong> localWorkshopIDs = new HashSet<ulong>();
 
         /// <summary>
         /// key = asset creator name, value = number of assets made by this creator
@@ -155,7 +161,7 @@ namespace FindIt
                                         break;
                                     }
                                 }
-                                
+
                                 else
                                 {
                                     // Calculate relevance score. Algorithm decided by Sam. Unchanged.
@@ -470,6 +476,21 @@ namespace FindIt
                 if (!CheckDLCFilters(asset.prefab.m_dlcRequired)) return false;
             }
 
+            // local custom filter
+            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.LocalCustom)
+            {
+                if (!asset.prefab.m_isCustomContent) return false;
+                if (!localWorkshopIDs.Contains(asset.steamID) && asset.steamID != 0) return false;
+            }
+
+            // workshop subscription assets
+            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.WorkshopCustom)
+            {
+                if (!asset.prefab.m_isCustomContent) return false;
+                if (localWorkshopIDs.Contains(asset.steamID)) return false;
+                if (asset.steamID == 0) return false;
+            }
+
             return true;
         }
 
@@ -512,31 +533,31 @@ namespace FindIt
                 == (int)UIFilterExtra.DLCDropDownOptions.MatchDay) return false;
 
             else if (dlc != SteamHelper.DLC_BitMask.Football2345 && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
-               == (int)UIFilterExtra.DLCDropDownOptions.Stadiums) return false;
+                == (int)UIFilterExtra.DLCDropDownOptions.Stadiums) return false;
 
             else if (dlc != SteamHelper.DLC_BitMask.OrientalBuildings && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
-               == (int)UIFilterExtra.DLCDropDownOptions.PearlsFromTheEast) return false;
+                == (int)UIFilterExtra.DLCDropDownOptions.PearlsFromTheEast) return false;
 
             else if (dlc != SteamHelper.DLC_BitMask.MusicFestival && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
-               == (int)UIFilterExtra.DLCDropDownOptions.Concerts) return false;
+                == (int)UIFilterExtra.DLCDropDownOptions.Concerts) return false;
 
             else if (dlc != SteamHelper.DLC_BitMask.ModderPack1 && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
-               == (int)UIFilterExtra.DLCDropDownOptions.ArtDeco) return false;
+                == (int)UIFilterExtra.DLCDropDownOptions.ArtDeco) return false;
 
             else if (dlc != SteamHelper.DLC_BitMask.ModderPack2 && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
-              == (int)UIFilterExtra.DLCDropDownOptions.HighTechBuildings) return false;
+                == (int)UIFilterExtra.DLCDropDownOptions.HighTechBuildings) return false;
 
             else if (dlc != SteamHelper.DLC_BitMask.ModderPack3 && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
-              == (int)UIFilterExtra.DLCDropDownOptions.EuropeanSuburbias) return false;
+                == (int)UIFilterExtra.DLCDropDownOptions.EuropeanSuburbias) return false;
 
             else if (dlc != SteamHelper.DLC_BitMask.ModderPack4 && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
-              == (int)UIFilterExtra.DLCDropDownOptions.UniverisityCity) return false;
+                == (int)UIFilterExtra.DLCDropDownOptions.UniverisityCity) return false;
 
             else if (dlc != SteamHelper.DLC_BitMask.ModderPack5 && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
-              == (int)UIFilterExtra.DLCDropDownOptions.ModernCityCenter) return false;
+                == (int)UIFilterExtra.DLCDropDownOptions.ModernCityCenter) return false;
 
             else if (dlc != SteamHelper.DLC_BitMask.ModderPack6 && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
-              == (int)UIFilterExtra.DLCDropDownOptions.ModernJapan) return false;
+                == (int)UIFilterExtra.DLCDropDownOptions.ModernJapan) return false;
 
             return true;
         }
@@ -643,6 +664,9 @@ namespace FindIt
                                 DateTime dt = Directory.GetCreationTimeUtc(parentPath);
                                 ulong time = (ulong)dt.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
                                 downloadTimes.Add(steamid, time);
+
+                                // check local custom assets(not from steam workshop subscription)
+                                if (current.package.packagePath.StartsWith(DataLocation.addonsPath)) localWorkshopIDs.Add(steamid);
                             }
                         }
                     }
