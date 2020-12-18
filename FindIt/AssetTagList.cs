@@ -463,6 +463,82 @@ namespace FindIt
             {
                 if (asset.tagsCustom.Count > 0) return false;
             }
+
+            // DLC & CCP filter
+            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.DLC)
+            {
+                if (asset.prefab.m_isCustomContent) return false;
+                if (!CheckDLCFilters(asset.prefab.m_dlcRequired)) return false;
+            }
+
+            return true;
+        }
+
+        private bool CheckDLCFilters(SteamHelper.DLC_BitMask dlc)
+        {
+            if (dlc != SteamHelper.DLC_BitMask.None && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+                == (int)UIFilterExtra.DLCDropDownOptions.BaseGame) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.DeluxeDLC && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+                == (int)UIFilterExtra.DLCDropDownOptions.DeluxeUpgrade) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.AfterDarkDLC && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+                == (int)UIFilterExtra.DLCDropDownOptions.AfterDark) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.SnowFallDLC && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+                == (int)UIFilterExtra.DLCDropDownOptions.SnowFall) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.NaturalDisastersDLC && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+                == (int)UIFilterExtra.DLCDropDownOptions.NaturalDisasters) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.InMotionDLC && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+                == (int)UIFilterExtra.DLCDropDownOptions.MassTransit) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.GreenCitiesDLC && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+                == (int)UIFilterExtra.DLCDropDownOptions.GreenCities) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.ParksDLC && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+                == (int)UIFilterExtra.DLCDropDownOptions.Parklife) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.IndustryDLC && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+                == (int)UIFilterExtra.DLCDropDownOptions.Industries) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.CampusDLC && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+                == (int)UIFilterExtra.DLCDropDownOptions.Campus) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.UrbanDLC && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+                == (int)UIFilterExtra.DLCDropDownOptions.SunsetHarbor) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.Football && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+                == (int)UIFilterExtra.DLCDropDownOptions.MatchDay) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.Football2345 && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+               == (int)UIFilterExtra.DLCDropDownOptions.Stadiums) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.OrientalBuildings && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+               == (int)UIFilterExtra.DLCDropDownOptions.PearlsFromTheEast) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.MusicFestival && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+               == (int)UIFilterExtra.DLCDropDownOptions.Concerts) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.ModderPack1 && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+               == (int)UIFilterExtra.DLCDropDownOptions.ArtDeco) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.ModderPack2 && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+              == (int)UIFilterExtra.DLCDropDownOptions.HighTechBuildings) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.ModderPack3 && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+              == (int)UIFilterExtra.DLCDropDownOptions.EuropeanSuburbias) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.ModderPack4 && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+              == (int)UIFilterExtra.DLCDropDownOptions.UniverisityCity) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.ModderPack5 && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+              == (int)UIFilterExtra.DLCDropDownOptions.ModernCityCenter) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.ModderPack6 && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+              == (int)UIFilterExtra.DLCDropDownOptions.ModernJapan) return false;
+
             return true;
         }
 

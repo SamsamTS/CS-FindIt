@@ -38,11 +38,15 @@ namespace FindIt.GUI
         private UIButton exportAllUnusedButton;
         private UIButton exportSearchedUnusedButton;
 
+        // DLC & CCP
+        public UIDropDown DLCDropDownMenu;
+
         public enum DropDownOptions
         {
             AssetCreator = 0,
             BuildingHeight,
             BuildingLevel,
+            DLC,
             SubBuildings,
             UnusedAssets,
             WithCustomTag,
@@ -53,11 +57,37 @@ namespace FindIt.GUI
                     Translations.Translate("FIF_EF_AC"), // Asset Creator
                     Translations.Translate("FIF_EF_BH"), // Building Height
                     Translations.Translate("FIF_SE_LV"), // Building Level
+                    "DLC & CCP", // DLCs
                     Translations.Translate("FIF_EF_SB"), // Sub-building
                     Translations.Translate("FIF_EF_UN"), // Unused Asset
                     Translations.Translate("FIF_EF_CT"), // With Custom Tag
                     Translations.Translate("FIF_EF_NCT"), // Without Custom Tag
                 };
+
+        public enum DLCDropDownOptions
+        {
+            BaseGame = 0,
+            AfterDark,
+            Campus,
+            GreenCities,
+            Industries,
+            MassTransit,
+            NaturalDisasters,
+            Parklife,
+            SnowFall,
+            SunsetHarbor,
+            ArtDeco,
+            HighTechBuildings,
+            EuropeanSuburbias,
+            UniverisityCity,
+            ModernCityCenter,
+            ModernJapan,
+            Concerts,
+            DeluxeUpgrade,
+            MatchDay,
+            PearlsFromTheEast,
+            Stadiums
+        }
 
         public override void Start()
         {
@@ -76,7 +106,7 @@ namespace FindIt.GUI
             // extra filter dropdown
             optionDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
             optionDropDownMenu.size = new Vector2(200, 25);
-            optionDropDownMenu.listHeight = 210;
+            optionDropDownMenu.listHeight = 240;
             optionDropDownMenu.itemHeight = 30;
             optionDropDownMenu.items = options;
             optionDropDownMenu.selectedIndex = 0;
@@ -100,6 +130,10 @@ namespace FindIt.GUI
                 else if (optionDropDownMenu.selectedIndex == (int)DropDownOptions.UnusedAssets)
                 {
                     UpdateUnusedAssetsVisibility(true);
+                }
+                else if (optionDropDownMenu.selectedIndex == (int)DropDownOptions.DLC)
+                {
+                    UpdateDLCVisibility(true);
                 }
 
                 if (optionDropDownCheckBox.isChecked)
@@ -305,6 +339,43 @@ namespace FindIt.GUI
                 ExportUnunsedTool.ExportUnused(false);
             };
 
+            // DLC & CCP
+            DLCDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
+            DLCDropDownMenu.size = new Vector2(300, 25);
+            DLCDropDownMenu.listHeight = 300;
+            DLCDropDownMenu.itemHeight = 30;
+            DLCDropDownMenu.AddItem("Base Game");
+            DLCDropDownMenu.AddItem("After Dark DLC");
+            DLCDropDownMenu.AddItem("Campus DLC");
+            DLCDropDownMenu.AddItem("Green Cities DLC");
+            DLCDropDownMenu.AddItem("Industries DLC");
+            DLCDropDownMenu.AddItem("Mass Transit DLC");
+            DLCDropDownMenu.AddItem("Natural Disasters DLC");
+            DLCDropDownMenu.AddItem("Parklife DLC");
+            DLCDropDownMenu.AddItem("Snow Fall DLC");
+            DLCDropDownMenu.AddItem("Sunset Harbor DLC");
+            DLCDropDownMenu.AddItem("Art Deco CCP");
+            DLCDropDownMenu.AddItem("High-Tech Buildings CCP");
+            DLCDropDownMenu.AddItem("European Suburbias CCP");
+            DLCDropDownMenu.AddItem("University City CCP");
+            DLCDropDownMenu.AddItem("Modern City Center CCP");
+            DLCDropDownMenu.AddItem("Modern Japan CCP");
+            DLCDropDownMenu.AddItem("Concerts DLC");
+            DLCDropDownMenu.AddItem("Deluxe Upgrade Pack");
+            DLCDropDownMenu.AddItem("Match Day DLC");
+            DLCDropDownMenu.AddItem("Pearls from the East DLC");
+            DLCDropDownMenu.AddItem("Stadiums: European Club Pack DLC");
+            DLCDropDownMenu.isVisible = false;
+            DLCDropDownMenu.selectedIndex = 0;
+            DLCDropDownMenu.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 50, 5);
+            SamsamTS.UIUtils.CreateDropDownScrollBar(DLCDropDownMenu);
+            DLCDropDownMenu.eventSelectedIndexChanged += (c, p) =>
+            {
+                if (optionDropDownCheckBox.isChecked)
+                {
+                    ((UISearchBox)parent).Search();
+                }
+            };
         }
         public void Close()
         {
@@ -364,6 +435,10 @@ namespace FindIt.GUI
             exportAllUnusedButton.isVisible = visibility;
             exportSearchedUnusedButton.isVisible = visibility;
         }
+        private void UpdateDLCVisibility(bool visibility)
+        {
+            DLCDropDownMenu.isVisible = visibility;
+        }
 
         private void HideAll()
         {
@@ -371,6 +446,7 @@ namespace FindIt.GUI
             UpdateBuildingHeightOptionVisibility(false);
             UpdateBuildingLevelOptionVisibility(false);
             UpdateUnusedAssetsVisibility(false);
+            UpdateDLCVisibility(false);
         }
     }
 }
