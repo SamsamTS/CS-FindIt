@@ -61,9 +61,9 @@ namespace FindIt
                     return;
                 }
 
-                isRicoEnabled = IsRicoEnabled();
-                isPOEnabled = IsPOEnabled();
-                isTVPPatchEnabled = IsTVPPatchEnabled();
+                isRicoEnabled = IsAssemblyEnabled("ploppablerico");
+                isPOEnabled = IsAssemblyEnabled("proceduralobjects");
+                isTVPPatchEnabled = IsAssemblyEnabled("tvproppatch");
 
                 if (isPOEnabled)
                 {
@@ -323,24 +323,8 @@ namespace FindIt
             }
         }
 
-        private static bool IsRicoEnabled()
-        {
-            return IsAssemblyEnabled("ploppablerico"); ;
-        }
-
-        private static bool IsPOEnabled()
-        {
-            return IsAssemblyEnabled("proceduralobjects");
-        }
-
-        private static bool IsTVPPatchEnabled()
-        {
-            return IsAssemblyEnabled("tvproppatch");
-        }
-
         private static bool IsAssemblyEnabled(string assemblyName)
         {
-
             foreach (PluginManager.PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
             {
                 foreach (Assembly assembly in plugin.GetAssemblies())

@@ -16,6 +16,7 @@ namespace FindIt
             try
             {
                 GameObject gameLogicObject = GameObject.Find("Logic_ProceduralObjects");
+                if (gameLogicObject == null) return;
 
                 Type ProceduralObjectsLogicType = Type.GetType("ProceduralObjects.ProceduralObjectsLogic");
 
