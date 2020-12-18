@@ -467,7 +467,6 @@ namespace FindIt
             // DLC & CCP filter
             else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.DLC)
             {
-                if (asset.prefab.m_isCustomContent) return false;
                 if (!CheckDLCFilters(asset.prefab.m_dlcRequired)) return false;
             }
 
