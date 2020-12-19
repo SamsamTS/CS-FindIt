@@ -190,7 +190,12 @@
     <Translation ID="FIF_TAG_SA" String="Выбрать все" />
     <Translation ID="FIF_TAG_SATP" String="Выбрать все отображаемые элементы" />
     <Translation ID="FIF_EF_UNEXP" String="Экспорт" />
-    <Translation ID="FIF_EF_UNEXPTP" String="Экспорт списка неиспользуемых объектов в HTML-файл со ссылками на Мастерскую" />
+    <Translation ID="FIF_EF_UNEXPTP" String="Экспорт списка ID неиспользуемых объектов в HTML-файл со ссылками на Мастерскую" />
+    <Translation ID="FIF_EF_UNEXPSE" String="Экспорт поиска" />
+    <Translation ID="FIF_EF_UNEXPTPSE" String="Экспорт списка ID неиспользуемых объектов из последнего поиска в файл HTML со ссылками на Мастерскую" />
+    <Translation ID="FIF_EF_LC" String="Объекты не из Мастерской" />
+    <Translation ID="FIF_EF_WC" String="Объекты из Мастерской" />
+    <Translation ID="FIF_EF_DLC" String="Необходимые DLC/CCP" />
  
   </Translations>
 </Language>
