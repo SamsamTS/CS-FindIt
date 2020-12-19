@@ -14,8 +14,8 @@ namespace FindIt
     public class ModInfo : IUserMod
     {
         public const string version = "2.1";
-        public const bool isBeta = true;
-        public const double updateNoticeDate = 20201218;
+        public const bool isBeta = false;
+        public const double updateNoticeDate = 20201219;
         public const string updateNotice =
 
             "- \"Require DLC/CCP\" filter\n\n" +
@@ -24,7 +24,9 @@ namespace FindIt
 
             "- \"Work Subscription\" filter - custom assets from workshop subscription\n\n" +
 
-            "- Some bug fixes\n\n";
+            "- Some bug fixes\n\n" +
+
+            "- Update translations\n\n";
 
         public string Name
         {
