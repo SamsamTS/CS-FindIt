@@ -189,6 +189,13 @@
     <Translation ID="FIF_SET_SSKTP" String="切換素材類型時按住SHIFT以暫時共用搜尋字串" />
     <Translation ID="FIF_TAG_SA" String="全選" />
     <Translation ID="FIF_TAG_SATP" String="選擇全部顯示的素材" />
+    <Translation ID="FIF_EF_UNEXP" String="全部輸出" />
+    <Translation ID="FIF_EF_UNEXPTP" String="將所有未使用的工坊 ID 的素材清單匯出到包含 Steam 連結的 HTML 檔中" />
+    <Translation ID="FIF_EF_UNEXPSE" String="輸出搜索" />
+    <Translation ID="FIF_EF_UNEXPTPSE" String="將上次搜尋中未使用的工坊 ID 的素材清單匯出到包含 Steam 連結的 HTML 檔中" />
+    <Translation ID="FIF_EF_LC" String="本地自製" />
+    <Translation ID="FIF_EF_WC" String="工坊自製" />
+    <Translation ID="FIF_EF_DLC" String="需要 DLC/CCP" />
 
   </Translations>
 </Language>

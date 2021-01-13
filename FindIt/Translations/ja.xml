@@ -71,7 +71,7 @@
     <Translation ID="FIF_PROP_UNS" String="未分類" />
     <Translation ID="FIF_SET_KS" String="ホットキー" />
     <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
-    <Translation ID="FIF_SET_CTFL" String="フォルダを開く" />
+    <Translation ID="FIF_SET_CTFL" String="カスタムタグ保存ファイル (このファイルをバックアップしてください)" />
     <Translation ID="FIF_SET_CTFOP" String="フォルダを表示" />
     <Translation ID="FIF_SE_SCTP" String="カスタムタグパネルを表示" />
     <Translation ID="FIF_POP_SCR" String="マウスホイールを使用して上下にスクロール" />
@@ -188,6 +188,9 @@
     <Translation ID="FIF_SET_SSK" String="アセットタイプごとに別々の検索クエリキーワードを使用する" />
     <Translation ID="FIF_TAG_SA" String="すべて選択" />
     <Translation ID="FIF_TAG_SATP" String="検索されたすべてのアセットを選択" />
+    <Translation ID="FIF_EF_LC" String="ローカルカスタム" />
+    <Translation ID="FIF_EF_WC" String="ワークショップ" />
+    <Translation ID="FIF_EF_DLC" String="DLC/CCP が必要" />
 
   </Translations>
 </Language>
