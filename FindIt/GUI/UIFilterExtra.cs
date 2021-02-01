@@ -52,7 +52,9 @@ namespace FindIt.GUI
             LocalCustom,
             WorkshopCustom,
             WithCustomTag,
-            WithoutCustomTag
+            WithoutCustomTag,
+            TerrainConforming,
+            NonTerrainConforming
         }
 
         string[] options = {
@@ -66,6 +68,8 @@ namespace FindIt.GUI
                     Translations.Translate("FIF_EF_WC"), // Workshop Subscription
                     Translations.Translate("FIF_EF_CT"), // With Custom Tag
                     Translations.Translate("FIF_EF_NCT"), // Without Custom Tag
+                    Translations.Translate("FIF_PROP_TC"), // Terrain conforming
+                    Translations.Translate("FIF_PROP_NTC") // Non-Terrain conforming
                 };
 
         public enum DLCDropDownOptions
@@ -109,12 +113,13 @@ namespace FindIt.GUI
 
             // extra filter dropdown
             optionDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
-            optionDropDownMenu.size = new Vector2(200, 25);
+            optionDropDownMenu.size = new Vector2(230, 25);
             optionDropDownMenu.listHeight = 300;
             optionDropDownMenu.itemHeight = 30;
             optionDropDownMenu.items = options;
             optionDropDownMenu.selectedIndex = 0;
             optionDropDownMenu.relativePosition = new Vector3(optionDropDownCheckBox.relativePosition.x + optionDropDownCheckBox.width + 5, 5);
+            SamsamTS.UIUtils.CreateDropDownScrollBar(optionDropDownMenu);
             optionDropDownMenu.eventSelectedIndexChanged += (c, p) =>
             {
                 HideAll();
@@ -148,12 +153,12 @@ namespace FindIt.GUI
 
             // asset creator
             assetCreatorInput = SamsamTS.UIUtils.CreateTextField(this);
-            assetCreatorInput.size = new Vector2(120, 25);
+            assetCreatorInput.size = new Vector2(110, 25);
             assetCreatorInput.padding.top = 5;
             assetCreatorInput.isVisible = true;
             assetCreatorInput.text = "";
             assetCreatorInput.textScale = 0.9f;
-            assetCreatorInput.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 30, 5);
+            assetCreatorInput.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 20, 5);
             assetCreatorInput.eventTextChanged += (c, p) =>
             {
                 if (assetCreatorInput.text == "") return;
@@ -182,7 +187,7 @@ namespace FindIt.GUI
             assetCreatorSearchIcon.atlas = FindIt.atlas;
             assetCreatorSearchIcon.spriteName = "FindItDisabled";
             assetCreatorSearchIcon.isVisible = true;
-            assetCreatorSearchIcon.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 30, 3);
+            assetCreatorSearchIcon.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 20, 3);
 
             assetCreatorDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
             assetCreatorDropDownMenu.size = new Vector2(270, 25);

@@ -22,6 +22,16 @@ namespace FindIt
     {
         public static AssetTagList instance;
 
+        // public static Shader shaderDefault = Shader.Find("Custom/Props/Decal/Default");
+        public static Shader shaderBlend = Shader.Find("Custom/Props/Decal/Blend");
+        public static Shader shaderSolid = Shader.Find("Custom/Props/Decal/Solid");
+        // public static Shader shaderFence = Shader.Find("Custom/Props/Decal/Fence");
+
+        public static Shader shaderPropFence = Shader.Find("Custom/Props/Prop/Fence");
+        public static Shader shaderBuildingFence = Shader.Find("Custom/Building/Fence");
+        public static Shader shaderNetworkFence = Shader.Find("Custom/Net/Fence");
+
+
         public Dictionary<string, int> tagsTitleDictionary = new Dictionary<string, int>();
         public Dictionary<string, int> tagsDescDictionary = new Dictionary<string, int>();
         public Dictionary<string, int> tagsCustomDictionary = new Dictionary<string, int>();
@@ -489,6 +499,59 @@ namespace FindIt
                 if (!asset.prefab.m_isCustomContent) return false;
                 if (localWorkshopIDs.Contains(asset.steamID)) return false;
                 if (asset.steamID == 0) return false;
+            }
+
+            // Terrain conforming
+            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.TerrainConforming)
+            {
+                if (asset.assetType == Asset.AssetType.Prop)
+                {
+                    PropInfo propInfo = asset.prefab as PropInfo;
+                    if (propInfo.m_material?.shader != shaderPropFence) return false;
+                }
+                else if ((asset.assetType == Asset.AssetType.Ploppable) || (asset.assetType == Asset.AssetType.Growable) || (asset.assetType == Asset.AssetType.Rico))
+                {
+                    BuildingInfo buildingInfo = asset.prefab as BuildingInfo;
+                    if (buildingInfo.m_material?.shader != shaderBuildingFence) return false;
+                }
+
+                // if all segments are not using the fence shader, it is non-terrain conforming
+                else if (asset.assetType == Asset.AssetType.Network)
+                {
+                    NetInfo netInfo = asset.prefab as NetInfo;
+                    bool noFenceShader = true;
+                    foreach (NetInfo.Segment segment in netInfo.m_segments)
+                    {
+                        if (segment.m_material?.shader == shaderNetworkFence) noFenceShader = false;
+                    }
+                    if (noFenceShader) return false;
+                }
+            }
+
+            // Non-Terrain conforming
+            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.NonTerrainConforming)
+            {
+                if (asset.assetType == Asset.AssetType.Decal || asset.assetType == Asset.AssetType.Tree) return false;
+                else if (asset.assetType == Asset.AssetType.Prop)
+                {
+                    PropInfo propInfo = asset.prefab as PropInfo;
+                    if (propInfo.m_material?.shader == shaderPropFence) return false;
+                }
+                else if ((asset.assetType == Asset.AssetType.Ploppable) || (asset.assetType == Asset.AssetType.Growable) || (asset.assetType == Asset.AssetType.Rico))
+                {
+                    BuildingInfo buildingInfo = asset.prefab as BuildingInfo;
+                    if (buildingInfo.m_material?.shader == shaderBuildingFence) return false;
+                }
+
+                // if any segment is using the fence shader, it is terrain conforming
+                else if (asset.assetType == Asset.AssetType.Network)
+                {
+                    NetInfo netInfo = asset.prefab as NetInfo;
+                    foreach (NetInfo.Segment segment in netInfo.m_segments)
+                    {
+                        if (segment.m_material?.shader == shaderNetworkFence) return false;
+                    }
+                }
             }
 
             return true;

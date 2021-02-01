@@ -13,20 +13,17 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.1";
-        public const bool isBeta = false;
-        public const double updateNoticeDate = 20201219;
+        public const string version = "2.2";
+        public const bool isBeta = true;
+        public const double updateNoticeDate = 20210131;
         public const string updateNotice =
 
-            "- \"Require DLC/CCP\" filter\n\n" +
+            "- New filters: Terrain Conforming & Non-Terrain Conforming\n\n" +
 
-            "- \"Local Custom\" filter - custom assets but not from workshop subscription\n\n" +
+            "- Minor UI Changes: Add pop-up info for terrain conforming buildings\n" +
+            "                    Remove pop-up for non-terrain conforming props\n\n" +
 
-            "- \"Work Subscription\" filter - custom assets from workshop subscription\n\n" +
-
-            "- Some bug fixes\n\n" +
-
-            "- Update translations\n\n";
+            "- Update to Harmony 2.0.4 & CitiesHarmony API 1.0.6\n\n";
 
         public string Name
         {

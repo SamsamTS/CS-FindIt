@@ -198,7 +198,7 @@ namespace FindIt.GUI
             else if (prefab is PropInfo prop)
             {
                 // Different treatment for props with blend or solid shaders.
-                if (prop.m_material.shader == Asset.shaderBlend || prop.m_material.shader == Asset.shaderSolid)
+                if (prop.m_material.shader == AssetTagList.shaderBlend || prop.m_material.shader == AssetTagList.shaderSolid)
                 {
                     Texture2D mainTexture = prop.m_material.GetTexture("_MainTex") as Texture2D;
                     Texture2D aci = prop.m_material.GetTexture("_ACIMap") as Texture2D;
