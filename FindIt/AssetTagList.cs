@@ -504,56 +504,69 @@ namespace FindIt
             // Terrain conforming
             else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.TerrainConforming)
             {
-                if (asset.assetType == Asset.AssetType.Prop)
-                {
-                    PropInfo propInfo = asset.prefab as PropInfo;
-                    if (propInfo.m_material?.shader != shaderPropFence) return false;
-                }
-                else if ((asset.assetType == Asset.AssetType.Ploppable) || (asset.assetType == Asset.AssetType.Growable) || (asset.assetType == Asset.AssetType.Rico))
-                {
-                    BuildingInfo buildingInfo = asset.prefab as BuildingInfo;
-                    if (buildingInfo.m_material?.shader != shaderBuildingFence) return false;
-                }
-
-                // if all segments are not using the fence shader, it is non-terrain conforming
-                else if (asset.assetType == Asset.AssetType.Network)
-                {
-                    NetInfo netInfo = asset.prefab as NetInfo;
-                    bool noFenceShader = true;
-                    foreach (NetInfo.Segment segment in netInfo.m_segments)
-                    {
-                        if (segment.m_material?.shader == shaderNetworkFence) noFenceShader = false;
-                    }
-                    if (noFenceShader) return false;
-                }
+                if (!CheckTerrainConforming(asset, true)) return false;
             }
 
             // Non-Terrain conforming
             else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.NonTerrainConforming)
             {
-                if (asset.assetType == Asset.AssetType.Decal || asset.assetType == Asset.AssetType.Tree) return false;
-                else if (asset.assetType == Asset.AssetType.Prop)
-                {
-                    PropInfo propInfo = asset.prefab as PropInfo;
-                    if (propInfo.m_material?.shader == shaderPropFence) return false;
-                }
-                else if ((asset.assetType == Asset.AssetType.Ploppable) || (asset.assetType == Asset.AssetType.Growable) || (asset.assetType == Asset.AssetType.Rico))
-                {
-                    BuildingInfo buildingInfo = asset.prefab as BuildingInfo;
-                    if (buildingInfo.m_material?.shader == shaderBuildingFence) return false;
-                }
+                if (!CheckTerrainConforming(asset, false)) return false;
+            }
 
-                // if any segment is using the fence shader, it is terrain conforming
-                else if (asset.assetType == Asset.AssetType.Network)
+            return true;
+        }
+
+        private bool CheckTerrainConforming(Asset asset, bool checkTCFlag)
+        {
+
+            if (asset.assetType == Asset.AssetType.Decal || asset.assetType == Asset.AssetType.Tree) return checkTCFlag;
+
+            else if (asset.assetType == Asset.AssetType.Prop)
+            {
+                PropInfo propInfo = asset.prefab as PropInfo;
+
+                if (checkTCFlag) // check terrain conforming
                 {
-                    NetInfo netInfo = asset.prefab as NetInfo;
-                    foreach (NetInfo.Segment segment in netInfo.m_segments)
-                    {
-                        if (segment.m_material?.shader == shaderNetworkFence) return false;
-                    }
+                    if (propInfo.m_material?.shader != shaderPropFence) return false;
+                }
+                else // check non-terrain conforming
+                {
+                    if (propInfo.m_material?.shader == shaderPropFence) return false;
                 }
             }
 
+            else if ((asset.assetType == Asset.AssetType.Ploppable) || (asset.assetType == Asset.AssetType.Growable) || (asset.assetType == Asset.AssetType.Rico))
+            {
+                BuildingInfo buildingInfo = asset.prefab as BuildingInfo;
+                if (checkTCFlag)
+                {
+                    if (buildingInfo.m_material?.shader != shaderBuildingFence) return false;
+                }
+                else
+                {
+                    if (buildingInfo.m_material?.shader == shaderBuildingFence) return false;
+                }
+            }
+
+            else if (asset.assetType == Asset.AssetType.Network)
+            {
+                NetInfo netInfo = asset.prefab as NetInfo;
+                bool noFenceShader = true;
+                foreach (NetInfo.Segment segment in netInfo.m_segments)
+                {
+                    if (checkTCFlag) // check terrain conforming
+                    {
+                        // if all segments are not using the fence shader, it is non-terrain conforming
+                        if (segment.m_material?.shader == shaderNetworkFence) noFenceShader = false;
+                    }
+                    else // check non-terrain conforming
+                    {
+                        // if any segment is using the fence shader, it is terrain conforming
+                        if (segment.m_material?.shader == shaderNetworkFence) return false;
+                    }
+                }
+                if (checkTCFlag && noFenceShader) return false;
+            }
             return true;
         }
 

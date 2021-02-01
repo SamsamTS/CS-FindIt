@@ -20,8 +20,9 @@ namespace FindIt
 
             "- New filters: Terrain Conforming & Non-Terrain Conforming\n\n" +
 
-            "- Minor UI Changes: Add pop-up info for terrain conforming buildings\n" +
-            "                    Remove pop-up for non-terrain conforming props\n\n" +
+            "- Minor UI Changes: \n" +
+            "     Add pop-up info for terrain conforming buildings\n" +
+            "     Remove pop-up info for non-terrain conforming props\n\n" +
 
             "- Update to Harmony 2.0.4 & CitiesHarmony API 1.0.6\n\n";
 
