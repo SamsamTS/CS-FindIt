@@ -13,9 +13,9 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.2-beta1";
-        public const bool isBeta = true;
-        public const double updateNoticeDate = 20210201;
+        public const string version = "2.2";
+        public const bool isBeta = false;
+        public const double updateNoticeDate = 20210203;
         public const string updateNotice =
 
             "- New filters: Terrain Conforming & Non-Terrain Conforming\n\n" +
