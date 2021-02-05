@@ -108,6 +108,12 @@ namespace FindIt.GUI
             optionDropDownCheckBox.relativePosition = new Vector3(10, 10);
             optionDropDownCheckBox.eventCheckChanged += (c, i) =>
             {
+                if (optionDropDownMenu.selectedIndex == (int)DropDownOptions.SubBuildings)
+                {
+                    if (optionDropDownCheckBox.isChecked)
+                        UISearchBox.instance.typeFilter.selectedIndex = (int)UISearchBox.DropDownOptions.All;
+                }
+
                 ((UISearchBox)parent).Search();
             };
 
@@ -143,6 +149,11 @@ namespace FindIt.GUI
                 else if (optionDropDownMenu.selectedIndex == (int)DropDownOptions.DLC)
                 {
                     UpdateDLCVisibility(true);
+                }
+                else if (optionDropDownMenu.selectedIndex == (int)DropDownOptions.SubBuildings)
+                {
+                    if (optionDropDownCheckBox.isChecked)
+                        UISearchBox.instance.typeFilter.selectedIndex = (int)UISearchBox.DropDownOptions.All;
                 }
 
                 if (optionDropDownCheckBox.isChecked)
