@@ -98,6 +98,7 @@
     <Compile Include="Patches\Patcher.cs" />
     <Compile Include="Patches\SelectUIButton.cs" />
     <Compile Include="Tools\ExportUnunsedTool.cs" />
+    <Compile Include="Tools\LocateNextInstanceTool.cs" />
     <Compile Include="Tools\ProceduralObjectsTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GUI\UITagsBatchRemovePopUp.cs" />
@@ -153,6 +154,8 @@
     <EmbeddedResource Include="Icons\TaxiwayFocused.png" />
     <EmbeddedResource Include="Icons\TaxiwayHovered.png" />
     <EmbeddedResource Include="Icons\TaxiwayPressed.png" />
+    <EmbeddedResource Include="Icons\Refresh.png" />
+    <EmbeddedResource Include="Icons\Locate.png" />
     <Content Include="Translations\cz.xml" />
     <Content Include="Translations\de.xml" />
     <Content Include="Translations\en.xml" />

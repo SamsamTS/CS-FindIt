@@ -13,18 +13,22 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.2";
-        public const bool isBeta = false;
-        public const double updateNoticeDate = 20210203;
+        public const string version = "2.3-beta1";
+        public const bool isBeta = true;
+        public const double updateNoticeDate = 20210207;
         public const string updateNotice =
 
-            "- New filters: Terrain Conforming & Non-Terrain Conforming\n\n" +
+            "- Add \"Locate Next Instance\" tool:\n" +
+            "     First click an asset thumbnail, then click the new tool icon\n" +
+            "     Find It 2 will find a placed instance of the asset and move\n" +
+            "     the camera to the placed instance. Click the icon again to\n" +
+            "     find the next instance\n\n" +
 
-            "- Minor UI Changes: \n" +
-            "     Add pop-up info for terrain conforming buildings\n" +
-            "     Remove pop-up info for non-terrain conforming props\n\n" +
+            "- Add \"Refresh Display\" tool: \n" +
+            "     You can use it to refresh the asset instance counter\n\n" +
 
-            "- Update to Harmony 2.0.4 & CitiesHarmony API 1.0.6\n\n";
+            "- When the \"Sub-buildings\" filter is selected, the asset type\n" +
+            "  dropdown menu will be set to \"All\" automatically\n\n";
 
         public string Name
         {

@@ -8,6 +8,7 @@ using ColossalFramework.DataBinding;
 using ColossalFramework.UI;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace FindIt.GUI
 {
@@ -42,6 +43,9 @@ namespace FindIt.GUI
         public UICheckBox workshopFilter;
         public UICheckBox vanillaFilter;
         private UIButton sortButton;
+
+        private UISprite refreshDisplayIcon;
+        private UISprite locateInstanceIcon;
 
         private UISprite tagToolIcon;
         public UIFilterTag tagPanel;
@@ -136,14 +140,14 @@ namespace FindIt.GUI
             searchIcon.spriteName = "FindItDisabled";
             searchIcon.relativePosition = new Vector3(5, 4);
 
-            // change custom tag panel visibility
+            // clear search box
             clearButton = inputPanel.AddUIComponent<UISprite>();
-            clearButton.size = new Vector2(30, 30);
+            clearButton.size = new Vector2(26, 26);
             clearButton.atlas = FindIt.atlas;
             clearButton.spriteName = "Clear";
             clearButton.tooltip = Translations.Translate("FIF_SE_SEBTP");
             clearButton.opacity = 0.5f;
-            clearButton.relativePosition = new Vector3(input.relativePosition.x + input.width + 5, 2.5f);
+            clearButton.relativePosition = new Vector3(input.relativePosition.x + input.width + 5, 4);
             clearButton.eventClicked += (c, p) =>
             {
                 input.text = "";
@@ -151,7 +155,7 @@ namespace FindIt.GUI
             };
             clearButton.eventMouseEnter += (c, p) =>
             {
-                clearButton.opacity = 1.0f;
+                clearButton.opacity = 0.9f;
             };
 
             clearButton.eventMouseLeave += (c, p) =>
@@ -165,7 +169,7 @@ namespace FindIt.GUI
             typeFilter.name = "FindIt_AssetTypeFilter";
             typeFilter.size = new Vector2(105, 25);
             typeFilter.tooltip = Translations.Translate("FIF_POP_SCR");
-            typeFilter.relativePosition = new Vector3(clearButton.relativePosition.x + clearButton.width + 15, 5);
+            typeFilter.relativePosition = new Vector3(clearButton.relativePosition.x + clearButton.width + 5, 5);
 
             if (FindIt.isRicoEnabled)
             {
@@ -237,6 +241,55 @@ namespace FindIt.GUI
             vanillaFilter.relativePosition = new Vector3(workshopFilter.relativePosition.x + workshopFilter.width, 10);
             vanillaFilter.eventCheckChanged += (c, i) => Search();
 
+            // Refresh Display
+            refreshDisplayIcon = inputPanel.AddUIComponent<UISprite>();
+            refreshDisplayIcon.size = new Vector2(26, 22);
+            refreshDisplayIcon.atlas = FindIt.atlas;
+            refreshDisplayIcon.spriteName = "Refresh";
+            refreshDisplayIcon.tooltip = Translations.Translate("FIF_REF_DIS");
+            refreshDisplayIcon.opacity = 0.45f;
+            refreshDisplayIcon.relativePosition = new Vector3(vanillaFilter.relativePosition.x + vanillaFilter.width + 5, 6.5f);
+            refreshDisplayIcon.eventClicked += (c, p) =>
+            {
+                AssetTagList.instance.UpdatePrefabInstanceCount(DropDownOptions.All);
+                if (FindIt.isPOEnabled && Settings.includePOinstances) FindIt.instance.POTool.UpdatePOInfoList();
+                UISearchBox.instance.scrollPanel.Refresh();
+            };
+
+            refreshDisplayIcon.eventMouseEnter += (c, p) =>
+            {
+                refreshDisplayIcon.opacity = 0.9f;
+            };
+
+            refreshDisplayIcon.eventMouseLeave += (c, p) =>
+            {
+                refreshDisplayIcon.opacity = 0.45f;
+            };
+
+            // Locate Instance
+            LocateNextInstanceTool.Initialize();
+            locateInstanceIcon = inputPanel.AddUIComponent<UISprite>();
+            locateInstanceIcon.size = new Vector2(26, 23);
+            locateInstanceIcon.atlas = FindIt.atlas;
+            locateInstanceIcon.spriteName = "Locate";
+            locateInstanceIcon.tooltip = Translations.Translate("FIF_LOC_TOOL");
+            locateInstanceIcon.opacity = 0.45f;
+            locateInstanceIcon.relativePosition = new Vector3(refreshDisplayIcon.relativePosition.x + refreshDisplayIcon.width + 4, 5.5f);
+            locateInstanceIcon.eventClicked += (c, p) =>
+            {
+                LocateNextInstanceTool.LocateNextInstance();
+            };
+
+            locateInstanceIcon.eventMouseEnter += (c, p) =>
+            {
+                locateInstanceIcon.opacity = 1.0f;
+            };
+
+            locateInstanceIcon.eventMouseLeave += (c, p) =>
+            {
+                locateInstanceIcon.opacity = 0.45f;
+            };
+
             // change custom tag panel visibility
             tagToolIcon = inputPanel.AddUIComponent<UISprite>();
             tagToolIcon.size = new Vector2(26, 21);
@@ -244,7 +297,7 @@ namespace FindIt.GUI
             tagToolIcon.spriteName = "Tag";
             tagToolIcon.tooltip = Translations.Translate("FIF_SE_SCTP");
             tagToolIcon.opacity = 0.5f;
-            tagToolIcon.relativePosition = new Vector3(vanillaFilter.relativePosition.x + vanillaFilter.width + 5, 7);
+            tagToolIcon.relativePosition = new Vector3(locateInstanceIcon.relativePosition.x + locateInstanceIcon.width + 3.5f, 7);
             tagToolIcon.eventClicked += (c, p) =>
             {
                 if (tagPanel == null)
@@ -286,7 +339,7 @@ namespace FindIt.GUI
             extraFiltersIcon.spriteName = "ExtraFilters";
             extraFiltersIcon.tooltip = Translations.Translate("FIF_SE_EFI");
             extraFiltersIcon.opacity = 0.5f;
-            extraFiltersIcon.relativePosition = new Vector3(tagToolIcon.relativePosition.x + tagToolIcon.width + 5, 6);
+            extraFiltersIcon.relativePosition = new Vector3(tagToolIcon.relativePosition.x + tagToolIcon.width + 4, 6);
 
             extraFiltersIcon.eventClicked += (c, p) =>
             {
@@ -327,7 +380,7 @@ namespace FindIt.GUI
             quickMenuIcon.spriteName = "QuickMenu";
             quickMenuIcon.tooltip = Translations.Translate("FIF_QM_TIT");
             quickMenuIcon.opacity = 0.5f;
-            quickMenuIcon.relativePosition = new Vector3(extraFiltersIcon.relativePosition.x + extraFiltersIcon.width + 5, 6);
+            quickMenuIcon.relativePosition = new Vector3(extraFiltersIcon.relativePosition.x + extraFiltersIcon.width + 4, 6);
             quickMenuIcon.eventClicked += (c, p) =>
             {
                 UIQuickMenuPopUp.ShowAt(quickMenuIcon);
@@ -352,23 +405,23 @@ namespace FindIt.GUI
             };
 
             // building size filter
-            sizeLabel = inputPanel.AddUIComponent<UILabel>();
-            sizeLabel.textScale = 0.8f;
-            sizeLabel.padding = new RectOffset(0, 0, 8, 0);
-            sizeLabel.text = Translations.Translate("FIF_SE_SZ");
-            sizeLabel.relativePosition = new Vector3(quickMenuIcon.relativePosition.x + quickMenuIcon.width + 10, 5);
-
             sizeFilterX = SamsamTS.UIUtils.CreateDropDown(inputPanel);
             sizeFilterX.size = new Vector2(55, 25);
             sizeFilterX.items = filterItemsGrowable;
             sizeFilterX.selectedIndex = 0;
-            sizeFilterX.relativePosition = new Vector3(sizeLabel.relativePosition.x + sizeLabel.width + 5, 5);
+            sizeFilterX.relativePosition = new Vector3(quickMenuIcon.relativePosition.x + quickMenuIcon.width + 9, 5);
+
+            sizeLabel = inputPanel.AddUIComponent<UILabel>();
+            sizeLabel.textScale = 0.8f;
+            sizeLabel.padding = new RectOffset(0, 0, 8, 0);
+            sizeLabel.text = "x";
+            sizeLabel.relativePosition = new Vector3(sizeFilterX.relativePosition.x + sizeFilterX.width + 3.5f, 5);
 
             sizeFilterY = SamsamTS.UIUtils.CreateDropDown(inputPanel);
             sizeFilterY.size = new Vector2(55, 25);
             sizeFilterY.items = filterItemsGrowable;
             sizeFilterY.selectedIndex = 0;
-            sizeFilterY.relativePosition = new Vector3(sizeFilterX.relativePosition.x + sizeFilterX.width + 10, 5);
+            sizeFilterY.relativePosition = new Vector3(sizeLabel.relativePosition.x + sizeLabel.width + 2f, 5);
 
             sizeFilterX.eventSelectedIndexChanged += (c, i) => Search();
             sizeFilterY.eventSelectedIndexChanged += (c, i) => Search();
@@ -565,7 +618,7 @@ namespace FindIt.GUI
             sizeFilterX.isVisible = false;
             sizeFilterY.isVisible = false;
             sizeLabel.isVisible = false;
-            inputPanel.width = sizeLabel.position.x;
+            inputPanel.width = sizeFilterX.position.x;
         }
 
         private void CreateExtraFiltersPanel()
@@ -576,7 +629,7 @@ namespace FindIt.GUI
             extraFiltersPanel.backgroundSprite = "GenericTab";
             extraFiltersPanel.color = new Color32(196, 200, 206, 255);
             extraFiltersPanel.isVisible = true;
-            extraFiltersPanel.size = new Vector2(sizeLabel.position.x, 35);
+            extraFiltersPanel.size = new Vector2(sizeFilterX.position.x, 35);
             extraFiltersPanel.relativePosition = new Vector2(0, -inputPanel.height - extraFiltersPanel.height - 40);
         }
 
@@ -596,7 +649,7 @@ namespace FindIt.GUI
             tagPanel.backgroundSprite = "GenericTab";
             tagPanel.color = new Color32(196, 200, 206, 255);
             tagPanel.isVisible = true;
-            tagPanel.size = new Vector2(sizeLabel.position.x, 35);
+            tagPanel.size = new Vector2(sizeFilterX.position.x, 35);
             tagPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height - 40);
         }
 

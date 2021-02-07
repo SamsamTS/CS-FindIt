@@ -196,6 +196,8 @@
     <Translation ID="FIF_EF_LC" String="Local Custom" />
     <Translation ID="FIF_EF_WC" String="Workshop Subscription" />
     <Translation ID="FIF_EF_DLC" String="Require DLC/CCP" />
+    <Translation ID="FIF_LOC_TOOL" String="Locate next asset instance of the selected asset. Right click to locate the next PO instance." />
+    <Translation ID="FIF_REF_DIS" String="Refresh display" />
 
   </Translations>
 </Language>
