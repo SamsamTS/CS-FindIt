@@ -252,7 +252,7 @@ namespace FindIt.GUI
             refreshDisplayIcon.eventClicked += (c, p) =>
             {
                 AssetTagList.instance.UpdatePrefabInstanceCount(DropDownOptions.All);
-                if (FindIt.isPOEnabled && Settings.includePOinstances) FindIt.instance.POTool.UpdatePOInfoList();
+                if (FindIt.isPOEnabled && Settings.includePOinstances) ProceduralObjectsTool.UpdatePOInfoList();
                 UISearchBox.instance.scrollPanel.Refresh();
             };
 
@@ -277,8 +277,17 @@ namespace FindIt.GUI
             locateInstanceIcon.relativePosition = new Vector3(refreshDisplayIcon.relativePosition.x + refreshDisplayIcon.width + 4, 5.5f);
             locateInstanceIcon.eventClicked += (c, p) =>
             {
-                LocateNextInstanceTool.LocateNextInstance();
+                Event e = Event.current;
+                if (e.shift)
+                {
+                    LocateNextInstanceTool.LocateNextInstance(true); // find PO instance
+                }
+                else
+                {
+                    LocateNextInstanceTool.LocateNextInstance(false); // find normal asset instance
+                }
             };
+
 
             locateInstanceIcon.eventMouseEnter += (c, p) =>
             {
@@ -459,7 +468,7 @@ namespace FindIt.GUI
 
                 if (FindIt.isPOEnabled)
                 {
-                    FindIt.instance.POTool.UpdatePOInfoList();
+                    ProceduralObjectsTool.UpdatePOInfoList();
                 }
             };
 

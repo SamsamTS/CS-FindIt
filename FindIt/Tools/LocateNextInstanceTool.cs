@@ -16,8 +16,7 @@ namespace FindIt
         private static uint buildingInstanceCounter = 0;
         private static uint networkSegmentInstanceCounter = 0;
 
-
-        private static CameraController cameraController;
+        public static CameraController cameraController;
         public static PrefabInfo selectedPrefab;
         
         public static void Initialize()
@@ -30,13 +29,32 @@ namespace FindIt
             }
         }
 
-        public static void LocateNextInstance()
+        public static void LocateNextInstance(bool findPOInstance)
         {
             if (selectedPrefab == null) return;
-            else if (selectedPrefab is PropInfo) LocateNextPropDecalInstance(selectedPrefab);
+
+            if (findPOInstance)
+            {
+                if (!FindIt.isPOEnabled) return;
+                if (!(selectedPrefab is BuildingInfo || selectedPrefab is PropInfo)) return;
+                LocateNextPOInstance(selectedPrefab);
+                return;
+            }
+
+            if (selectedPrefab is PropInfo) LocateNextPropDecalInstance(selectedPrefab);
             else if (selectedPrefab is BuildingInfo) LocateNextBuildingInstance(selectedPrefab);
             else if (selectedPrefab is TreeInfo) LocateNextTreeInstance(selectedPrefab);
             else if (selectedPrefab is NetInfo) LocateNextNetworkSegmentInstance(selectedPrefab);
+        }
+
+        private static void LocateNextPOInstance(PrefabInfo prefab)
+        {
+            Vector3 position = ProceduralObjectsTool.GetPOInstancePosition(prefab);
+            if (position == Vector3.zero)
+            {
+                return;
+            }
+            cameraController.m_targetPosition = position;
         }
 
         private static void LocateNextPropDecalInstance(PrefabInfo prefab)

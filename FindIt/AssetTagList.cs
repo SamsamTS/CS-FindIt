@@ -94,7 +94,7 @@ namespace FindIt
 
                     if ((filter != UISearchBox.DropDownOptions.Tree) && (filter != UISearchBox.DropDownOptions.Network))
                     {
-                        if (FindIt.isPOEnabled && Settings.includePOinstances) FindIt.instance.POTool.UpdatePOInfoList();
+                        if (FindIt.isPOEnabled && Settings.includePOinstances) ProceduralObjectsTool.UpdatePOInfoList();
                     }
                 }
             }
@@ -466,7 +466,7 @@ namespace FindIt
                 }
                 if (FindIt.isPOEnabled && Settings.includePOinstances)
                 {
-                    if (FindIt.instance.POTool.GetPrefabPOInstanceCount(asset.prefab) > 0) return false;
+                    if (ProceduralObjectsTool.GetPrefabPOInstanceCount(asset.prefab) > 0) return false;
                 }
             }
             // only show assets with custom tags
@@ -1179,7 +1179,7 @@ namespace FindIt
 
             if ((Settings.includePOinstances || forceUpdatePO) && FindIt.isPOEnabled)
             {
-                asset.poInstanceCount = FindIt.instance.POTool.GetPrefabPOInstanceCount(asset.prefab);
+                asset.poInstanceCount = ProceduralObjectsTool.GetPrefabPOInstanceCount(asset.prefab);
             }
         }
 

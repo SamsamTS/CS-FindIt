@@ -31,7 +31,6 @@ namespace FindIt
         /// Tree & Vehicle Props Patch mod enabled?
         /// </summary>
         public static bool isTVPPatchEnabled = false;
-        public ProceduralObjectsTool POTool;
 
         public bool firstVisibleFlag = false;
 
@@ -64,11 +63,6 @@ namespace FindIt
                 isRicoEnabled = IsAssemblyEnabled("ploppablerico");
                 isPOEnabled = IsAssemblyEnabled("proceduralobjects");
                 isTVPPatchEnabled = IsAssemblyEnabled("tvproppatch");
-
-                if (isPOEnabled)
-                {
-                    POTool = new ProceduralObjectsTool();
-                }
 
                 list = AssetTagList.instance;
 

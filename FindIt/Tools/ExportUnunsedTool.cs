@@ -37,7 +37,7 @@ namespace FindIt
 
             // update instance count
             AssetTagList.instance.UpdatePrefabInstanceCount(UISearchBox.DropDownOptions.All);
-            if (FindIt.isPOEnabled) FindIt.instance.POTool.UpdatePOInfoList();
+            if (FindIt.isPOEnabled) ProceduralObjectsTool.UpdatePOInfoList();
 
             // filter out used assets
             Dictionary<ulong, int> unusedIDs = new Dictionary<ulong, int>();

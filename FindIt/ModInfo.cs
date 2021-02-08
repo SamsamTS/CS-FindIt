@@ -13,10 +13,15 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.3-beta1";
+        public const string version = "2.3-beta2";
         public const bool isBeta = true;
-        public const double updateNoticeDate = 20210207;
+        public const double updateNoticeDate = 20210208;
         public const string updateNotice =
+
+            "- \"Locate Next Instance\" tool now works with PO instances\n" +
+            "     Hold SHIFT and click the tool icon to locate next PO instance\n\n" + 
+
+            "From 2.3-beta1:\n\n" +
 
             "- Add \"Locate Next Instance\" tool:\n" +
             "     First click an asset thumbnail, then click the new tool icon\n" +

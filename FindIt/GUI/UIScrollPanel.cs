@@ -433,7 +433,7 @@ namespace FindIt.GUI
                                 if (Settings.includePOinstances && FindIt.isPOEnabled)
                                 {
                                     uint poCount = 0;
-                                    poCount = FindIt.instance.POTool.GetPrefabPOInstanceCount(data.asset.prefab);
+                                    poCount = ProceduralObjectsTool.GetPrefabPOInstanceCount(data.asset.prefab);
                                     m_instanceCountLabel.text = "";
                                     if (count == 0 && poCount == 0)
                                     {
