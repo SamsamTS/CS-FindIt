@@ -21,7 +21,7 @@ namespace FindIt
             " - If an asset has terrible default thumbnail, add the custom \n" +
             "   tag \"bad_thumbnail\" to the asset and Find It 2 will attempt\n" +
             "   to generate a custom thumbnail\n" +
-            "   Not applicable for every asset. Not applicable for networks.\n" +
+            "   Not applicable to every asset. Not applicable to networks.\n" +
             "   Remove the tag & restart the game to roll back to the default\n" +
             "   thumbnail\n\n";
             
