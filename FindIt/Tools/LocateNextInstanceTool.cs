@@ -50,10 +50,7 @@ namespace FindIt
         private static void LocateNextPOInstance(PrefabInfo prefab)
         {
             Vector3 position = ProceduralObjectsTool.GetPOInstancePosition(prefab);
-            if (position == Vector3.zero)
-            {
-                return;
-            }
+            if (position == Vector3.zero) return;
             cameraController.m_targetPosition = position;
         }
 

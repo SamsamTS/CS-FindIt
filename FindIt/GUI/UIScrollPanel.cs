@@ -334,7 +334,7 @@ namespace FindIt.GUI
                     return;
                 }
 
-                ImageUtils.FixThumbnails(prefab, null);
+                ImageUtils.FixThumbnails(prefab, null, data.asset);
 
                 component.atlas = prefab.m_Atlas;
                 component.verticalAlignment = UIVerticalAlignment.Middle;

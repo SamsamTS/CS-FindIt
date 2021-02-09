@@ -105,6 +105,7 @@
     <Compile Include="ResourceLoader.cs" />
     <Compile Include="Settings\ModSettings.cs" />
     <Compile Include="Settings\XMLUtils.cs" />
+    <Compile Include="Tools\SearchTool.cs" />
     <Compile Include="TranslationFramework\TranslationFramework.cs" />
     <Compile Include="TranslationFramework\TranslationXML.cs" />
   </ItemGroup>

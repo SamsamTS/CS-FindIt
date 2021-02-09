@@ -13,10 +13,18 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.3-beta2";
+        public const string version = "2.3-beta3";
         public const bool isBeta = true;
-        public const double updateNoticeDate = 20210208;
+        public const double updateNoticeDate = 20210209;
         public const string updateNotice =
+
+            " - If an asset has terrible default thumbnail, add the custom \n" +
+            "   tag \"bad_thumbnail\" to the asset and Find It 2 will attempt\n" +
+            "   to generate a custom thumbnail(excluding Network assets)\n" +
+            "   Remove the tag & restart the game to roll back to the default\n" +
+            "   thumbnail\n\n" +
+            
+            "From 2.3-beta2:\n\n" +
 
             "- \"Locate Next Instance\" tool now works with PO instances\n" +
             "     Hold SHIFT and click the tool icon to locate next PO instance\n\n" + 
