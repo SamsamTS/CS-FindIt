@@ -57,7 +57,7 @@
     <Translation ID="FIF_SO_RETP" String="Сортировать по релевантности. Как в оригинальном Find It!" />
     <Translation ID="FIF_SO_NETP" String="Сортировать по последним загруженным" />
     <Translation ID="FIF_SO_RE" String="Relevance" />
-    <Translation ID="FIF_SO_NE" String="Recent DLs" />
+    <Translation ID="FIF_SO_NE" String="Нов. загр." />
     <Translation ID="TRN_CHOICE" String="Установить язык (применится при следующей загрузке)" />
     <Translation ID="TRN_SYS" String="Использовать язык ОС" />
     <Translation ID="FIF_PROP_IND" String="Промышленность" />
@@ -150,7 +150,7 @@
     <Translation ID="FIF_NET_UTI" String="Utility" />
     <Translation ID="FIF_NET_TRA" String="Поезд" />
     <Translation ID="FIF_SET_PM" String="Show marker type props in game mode(restart needed)" />
-    <Translation ID="FIF_SET_PMTP" String="Most marker type props can only be removed by the Better Bulldozer mod in game mode. Use with caution" />
+    <Translation ID="FIF_SET_PMTP" String="Marker type props are invisible and most don't work in game mode. Use Move It to delete them." />
     <Translation ID="FIF_SET_IC" String="Показать кол-во размещённых экземпляров объекта" />
     <Translation ID="FIF_EF_UN" String="Неиспользуем. объекты" />
     <Translation ID="FIF_QM_TIT" String="Дополнительные фильтры сортировки" />

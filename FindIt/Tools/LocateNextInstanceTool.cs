@@ -6,6 +6,7 @@ using FindIt.GUI;
 using ColossalFramework.UI;
 using ColossalFramework.IO;
 using UnityEngine;
+using System.Reflection;
 
 namespace FindIt
 {
@@ -47,11 +48,17 @@ namespace FindIt
             else if (selectedPrefab is NetInfo) LocateNextNetworkSegmentInstance(selectedPrefab);
         }
 
+        private static void SetCameraPosition(Vector3 targetPosition)
+        {
+            cameraController.m_targetAngle.y = 90f;
+            cameraController.m_targetPosition = targetPosition;
+        }
+
         private static void LocateNextPOInstance(PrefabInfo prefab)
         {
             Vector3 position = ProceduralObjectsTool.GetPOInstancePosition(prefab);
             if (position == Vector3.zero) return;
-            cameraController.m_targetPosition = position;
+            SetCameraPosition(position);
         }
 
         private static void LocateNextPropDecalInstance(PrefabInfo prefab)
@@ -63,7 +70,7 @@ namespace FindIt
                 {
                     bool isValid = ((PropInstance.Flags)props.m_buffer[i].m_flags != PropInstance.Flags.None && (PropInstance.Flags)props.m_buffer[i].m_flags != PropInstance.Flags.Deleted) ;
                     if (!isValid) continue;
-                    cameraController.m_targetPosition = props.m_buffer[i].Position;
+                    SetCameraPosition(props.m_buffer[i].Position);
                     propInstanceCounter = (i + 1) % props.m_size;
                     return;
                 }
@@ -80,7 +87,7 @@ namespace FindIt
                 {
                     bool isValid = ((TreeInstance.Flags)trees.m_buffer[i].m_flags != TreeInstance.Flags.None && (TreeInstance.Flags)trees.m_buffer[i].m_flags != TreeInstance.Flags.Deleted);
                     if (!isValid) continue;
-                    cameraController.m_targetPosition = trees.m_buffer[i].Position;
+                    SetCameraPosition(trees.m_buffer[i].Position);
                     treeInstanceCounter = (i + 1) % trees.m_size;
                     return;
                 }
@@ -97,7 +104,7 @@ namespace FindIt
                 {
                     bool isValid = (buildings.m_buffer[i].m_flags != Building.Flags.None && buildings.m_buffer[i].m_flags != Building.Flags.Deleted);
                     if (!isValid) continue;
-                    cameraController.m_targetPosition = buildings.m_buffer[i].m_position;
+                    SetCameraPosition(buildings.m_buffer[i].m_position);
                     buildingInstanceCounter = (i + 1) % buildings.m_size;
                     return;
                 }
@@ -114,7 +121,7 @@ namespace FindIt
                 {
                     bool isValid = (segments.m_buffer[i].m_flags != NetSegment.Flags.None && segments.m_buffer[i].m_flags != NetSegment.Flags.Deleted);
                     if (!isValid) continue;
-                    cameraController.m_targetPosition = segments.m_buffer[i].m_middlePosition;
+                    SetCameraPosition(segments.m_buffer[i].m_middlePosition);
                     networkSegmentInstanceCounter = (i + 1) % segments.m_size;
                     return;
                 }

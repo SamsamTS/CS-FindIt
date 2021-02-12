@@ -191,6 +191,8 @@
     <Translation ID="FIF_EF_LC" String="ローカルカスタム" />
     <Translation ID="FIF_EF_WC" String="ワークショップ" />
     <Translation ID="FIF_EF_DLC" String="DLC/CCP が必要" />
+    <Translation ID="FIF_LOC_TOOL" String="選択したアセットの次のインスタンスを見つけるためにクリックします。SHIFT キーを押しながらクリックすると、次の PO インスタンスが見つかります。" />
+    <Translation ID="FIF_REF_DIS" String="アセットの既存のインスタンスの数を更新" />
 
   </Translations>
 </Language>
