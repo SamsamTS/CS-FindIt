@@ -13,40 +13,29 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.3-beta3";
+        public const string version = "2.3-rc1";
         public const bool isBeta = true;
         public const double updateNoticeDate = 20210209;
         public const string updateNotice =
 
-            " - If an asset has terrible default thumbnail, add the custom \n" +
-            "   tag \"bad_thumbnail\" to the asset and Find It 2 will attempt\n" +
-            "   to generate a custom thumbnail\n" +
-            "   Not applicable to every asset. Not applicable to networks.\n" +
-            "   Remove the tag & restart the game to roll back to the default\n" +
-            "   thumbnail\n\n";
-            
-            /*
-            
-            "From 2.3-beta2:\n\n" +
-
-            "- \"Locate Next Instance\" tool now works with PO instances\n" +
-            "     Hold SHIFT and click the tool icon to locate next PO instance\n\n" + 
-
-            "From 2.3-beta1:\n\n" +
-
             "- Add \"Locate Next Instance\" tool:\n" +
-            "     First click an asset thumbnail, then click the new tool icon\n" +
-            "     Find It 2 will find a placed instance of the asset and move\n" +
-            "     the camera to the placed instance. Click the icon again to\n" +
-            "     find the next instance\n\n" +
+            "   Click an asset thumbnail, then click the new tool icon. Find It 2 will\n" +
+            "   find a placed instance of the asset and move the camera to the placed\n" +
+            "   instance. Click the icon again to find the next instance.Hold SHIFT and\n" +
+            "   click the tool icon to locate next Procedural Objects instance\n\n" +
 
-            "- Add \"Refresh Display\" tool: \n" +
-            "     You can use it to refresh the asset instance counter\n\n" +
+            "- If an asset has terrible default thumbnail, add the custom tag\n" +
+            "   \"bad_thumbnail\" to the asset and Find It 2 will attempt to generate\n" +
+            "   a custom thumbnail\n" +
+            "   Not applicable to every asset. Not applicable to networks\n" +
+            "   Remove the custom tag and RESTART the game to change back to\n" +
+            "   default thumbnail\n\n" +
 
-            "- When the \"Sub-buildings\" filter is selected, the asset type\n" +
-            "  dropdown menu will be set to \"All\" automatically\n\n";
+            "- Add \"Refresh Display\" tool:\n" +
+            "   You can use it to refresh the asset instance counter\n\n" +
 
-            */
+            "- When the \"Sub-buildings\" filter is selected, the asset type dropdown\n" +
+            "   menu will be set to \"All\" automatically\n\n";
 
         public string Name
         {
