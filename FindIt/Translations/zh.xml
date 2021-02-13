@@ -198,6 +198,7 @@
     <Translation ID="FIF_EF_DLC" String="需要 DLC/CCP" />
     <Translation ID="FIF_LOC_TOOL" String="单击以定位所选资产的下一个实例。按住SHIFT键并单击以定位下一个PO实例。" />
     <Translation ID="FIF_REF_DIS" String="刷新显示" />
+    <Translation ID="FIF_EF_US" String="使用中资产" />
 
   </Translations>
 </Language>
