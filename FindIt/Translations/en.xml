@@ -198,6 +198,9 @@
     <Translation ID="FIF_EF_DLC" String="Require DLC/CCP" />
     <Translation ID="FIF_LOC_TOOL" String="Click to locate next instance of the selected asset. Hold SHIFT and click to locate the next PO instance." />
     <Translation ID="FIF_REF_DIS" String="Refresh display" />
+    <Translation ID="FIF_EF_US" String="Used Assets" />
+    <Translation ID="FIF_EF_USEXPTP" String="Export the list of all used workshop ID's into an HTML file with workshop links" />
+    <Translation ID="FIF_EF_USEXPTPSE" String="Export the list of used workshop ID's from the last search into an HTML file with workshop links" />
 
   </Translations>
 </Language>

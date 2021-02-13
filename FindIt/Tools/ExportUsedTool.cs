@@ -5,17 +5,18 @@ using ColossalFramework;
 using FindIt.GUI;
 using ColossalFramework.UI;
 using ColossalFramework.IO;
+using UnityEngine;
 
 namespace FindIt
 {
-    public static class ExportUnunsedTool
+    public static class ExportUsedTool
     {
-        public static void ExportUnused(bool exportAllUnused)
+        public static void ExportUsed(bool exportAllUsed)
         {
             // get steam id of all workship assets
             HashSet<ulong> steamIds = new HashSet<ulong>();
 
-            if (exportAllUnused)
+            if (exportAllUsed)
             {
                 foreach (Asset asset in AssetTagList.instance.assets.Values)
                 {
@@ -39,26 +40,22 @@ namespace FindIt
             AssetTagList.instance.UpdatePrefabInstanceCount(UISearchBox.DropDownOptions.All);
             if (FindIt.isPOEnabled) ProceduralObjectsTool.UpdatePOInfoList();
 
-            // filter out used assets
-            Dictionary<ulong, int> unusedIDs = new Dictionary<ulong, int>();
+            // filter out unused assets
+            Dictionary<ulong, int> usedIDs = new Dictionary<ulong, int>();
             foreach (Asset asset in AssetTagList.instance.assets.Values)
             {
                 if (!asset.prefab.m_isCustomContent) continue;
                 if (asset.steamID == 0) continue;
                 AssetTagList.instance.UpdateAssetInstanceCount(asset, true);
-                if (asset.instanceCount > 0 || asset.poInstanceCount > 0) 
+                if (asset.instanceCount > 0 || asset.poInstanceCount > 0)
                 {
-                    steamIds.Remove(asset.steamID);
-                }
-                else
-                {
-                    if (unusedIDs.ContainsKey(asset.steamID)) unusedIDs[asset.steamID] += 1;
-                    else unusedIDs.Add(asset.steamID, 1);
+                    if (usedIDs.ContainsKey(asset.steamID)) usedIDs[asset.steamID] += 1;
+                    else usedIDs.Add(asset.steamID, 1);
                 }
             }
 
             string currentTime = GetFormattedDateTime();
-            string path = Path.Combine(DataLocation.localApplicationData, $"FindItExportUnusedWorkshopID_{currentTime}.html");
+            string path = Path.Combine(DataLocation.localApplicationData, $"FindItExportUsedWorkshopID_{currentTime}.html");
             if (File.Exists(path)) File.Delete(path);
 
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(path, true))
@@ -72,19 +69,24 @@ namespace FindIt
                 {
                     file.WriteLine($"<br>It seems like you're using Procedural Objects. This list already considers POs<br>");
                 }
-                
+
                 foreach (ulong id in steamIds)
                 {
-                    if (unusedIDs.ContainsKey(id))
+                    if (usedIDs.ContainsKey(id))
                     {
                         file.WriteLine($"<br><a href=\"https://steamcommunity.com/sharedfiles/filedetails/?id={id}\">{id}</a><br>\n");
-                        file.WriteLine($"This workshop ID contains {unusedIDs[id]} asset(s). All unused<br>\n");
+                        file.WriteLine($"This workshop ID contains {usedIDs[id]} used asset(s).<br>\n");
                     }
+                }
+
+                if (steamIds.Count == 0)
+                {
+                    file.WriteLine($"Can't find any used workshop asset.<br>\n");
                 }
             }
 
             ExceptionPanel panel = UIView.library.ShowModal<ExceptionPanel>("ExceptionPanel");
-            panel.SetMessage("Find It 2", $"FindItExportUnusedWorkshopID.html is exported.\n\nIt only considers asset types that are monitored by Find It 2.\n\n{path}", false);
+            panel.SetMessage("Find It 2", $"FindItExportUsedWorkshopID.html is exported.\n\nIt only considers asset types that are monitored by Find It 2.\n\n{path}", false);
         }
 
         private static string GetCityName()

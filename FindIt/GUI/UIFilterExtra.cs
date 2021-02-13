@@ -38,6 +38,10 @@ namespace FindIt.GUI
         private UIButton exportAllUnusedButton;
         private UIButton exportSearchedUnusedButton;
 
+        // unused assets
+        private UIButton exportAllUsedButton;
+        private UIButton exportSearchedUsedButton;
+
         // DLC & CCP
         public UIDropDown DLCDropDownMenu;
 
@@ -48,6 +52,7 @@ namespace FindIt.GUI
             BuildingLevel,
             DLC,
             SubBuildings,
+            UsedAssets,
             UnusedAssets,
             LocalCustom,
             WorkshopCustom,
@@ -63,6 +68,7 @@ namespace FindIt.GUI
                     Translations.Translate("FIF_SE_LV"), // Building Level
                     Translations.Translate("FIF_EF_DLC"), // Require DLC/CCP
                     Translations.Translate("FIF_EF_SB"), // Sub-building
+                    Translations.Translate("FIF_EF_US"), // Used Asset
                     Translations.Translate("FIF_EF_UN"), // Unused Asset
                     Translations.Translate("FIF_EF_LC"), // Local Custom
                     Translations.Translate("FIF_EF_WC"), // Workshop Subscription
@@ -145,6 +151,10 @@ namespace FindIt.GUI
                 else if (optionDropDownMenu.selectedIndex == (int)DropDownOptions.UnusedAssets)
                 {
                     UpdateUnusedAssetsVisibility(true);
+                }
+                else if (optionDropDownMenu.selectedIndex == (int)DropDownOptions.UsedAssets)
+                {
+                    UpdateUsedAssetsVisibility(true);
                 }
                 else if (optionDropDownMenu.selectedIndex == (int)DropDownOptions.DLC)
                 {
@@ -342,7 +352,7 @@ namespace FindIt.GUI
             exportAllUnusedButton.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 15, 5);
             exportAllUnusedButton.eventClick += (c, p) =>
             {
-                ExportUnunsedTool.ExportUnused(true);
+                ExportUnusedTool.ExportUnused(true);
             };
 
             // export searched unused asset list
@@ -356,7 +366,35 @@ namespace FindIt.GUI
             exportSearchedUnusedButton.relativePosition = new Vector3(exportAllUnusedButton.relativePosition.x + exportAllUnusedButton.width + 5, 5);
             exportSearchedUnusedButton.eventClick += (c, p) =>
             {
-                ExportUnunsedTool.ExportUnused(false);
+                ExportUnusedTool.ExportUnused(false);
+            };
+
+            // export all used asset list
+            exportAllUsedButton = SamsamTS.UIUtils.CreateButton(this);
+            exportAllUsedButton.size = new Vector2(80, 25);
+            exportAllUsedButton.text = Translations.Translate("FIF_EF_UNEXP");
+            exportAllUsedButton.textScale = 0.8f;
+            exportAllUsedButton.textPadding = new RectOffset(0, 0, 5, 0);
+            exportAllUsedButton.tooltip = Translations.Translate("FIF_EF_USEXPTP");
+            exportAllUsedButton.isVisible = false;
+            exportAllUsedButton.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 15, 5);
+            exportAllUsedButton.eventClick += (c, p) =>
+            {
+                ExportUsedTool.ExportUsed(true);
+            };
+
+            // export searched used asset list
+            exportSearchedUsedButton = SamsamTS.UIUtils.CreateButton(this);
+            exportSearchedUsedButton.size = new Vector2(130, 25);
+            exportSearchedUsedButton.text = Translations.Translate("FIF_EF_UNEXPSE");
+            exportSearchedUsedButton.textScale = 0.8f;
+            exportSearchedUsedButton.textPadding = new RectOffset(0, 0, 5, 0);
+            exportSearchedUsedButton.tooltip = Translations.Translate("FIF_EF_USEXPTPSE");
+            exportSearchedUsedButton.isVisible = false;
+            exportSearchedUsedButton.relativePosition = new Vector3(exportAllUsedButton.relativePosition.x + exportAllUsedButton.width + 5, 5);
+            exportSearchedUsedButton.eventClick += (c, p) =>
+            {
+                ExportUsedTool.ExportUsed(false);
             };
 
             // DLC & CCP
@@ -455,6 +493,11 @@ namespace FindIt.GUI
             exportAllUnusedButton.isVisible = visibility;
             exportSearchedUnusedButton.isVisible = visibility;
         }
+        private void UpdateUsedAssetsVisibility(bool visibility)
+        {
+            exportAllUsedButton.isVisible = visibility;
+            exportSearchedUsedButton.isVisible = visibility;
+        }
         private void UpdateDLCVisibility(bool visibility)
         {
             DLCDropDownMenu.isVisible = visibility;
@@ -466,6 +509,7 @@ namespace FindIt.GUI
             UpdateBuildingHeightOptionVisibility(false);
             UpdateBuildingLevelOptionVisibility(false);
             UpdateUnusedAssetsVisibility(false);
+            UpdateUsedAssetsVisibility(false);
             UpdateDLCVisibility(false);
         }
     }

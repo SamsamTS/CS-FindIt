@@ -97,7 +97,8 @@
     <Compile Include="Patches\GeneratedScrollPanel.cs" />
     <Compile Include="Patches\Patcher.cs" />
     <Compile Include="Patches\SelectUIButton.cs" />
-    <Compile Include="Tools\ExportUnunsedTool.cs" />
+    <Compile Include="Tools\ExportUnusedTool.cs" />
+    <Compile Include="Tools\ExportUsedTool.cs" />
     <Compile Include="Tools\LocateNextInstanceTool.cs" />
     <Compile Include="Tools\ProceduralObjectsTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

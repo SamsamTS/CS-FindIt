@@ -22,13 +22,16 @@ namespace FindIt
             // if showing instance counts, refresh
             try
             {
-                if ((Settings.showInstancesCounter) || (UISearchBox.instance?.extraFiltersPanel != null && UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.UnusedAssets))
+                bool usingUsedUnusedFilterFlag = UISearchBox.instance?.extraFiltersPanel != null &&　(UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.UnusedAssets ||
+                    UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.UsedAssets);
+
+                if (Settings.showInstancesCounter || usingUsedUnusedFilterFlag)
                 {
                     UpdatePrefabInstanceCount(filter);
 
                     if ((filter != UISearchBox.DropDownOptions.Tree) && (filter != UISearchBox.DropDownOptions.Network))
                     {
-                        if (FindIt.isPOEnabled && Settings.includePOinstances) ProceduralObjectsTool.UpdatePOInfoList();
+                        if (FindIt.isPOEnabled && (Settings.includePOinstances || usingUsedUnusedFilterFlag)) ProceduralObjectsTool.UpdatePOInfoList();
                     }
                 }
             }
@@ -402,6 +405,20 @@ namespace FindIt
                 {
                     if (ProceduralObjectsTool.GetPrefabPOInstanceCount(asset.prefab) > 0) return false;
                 }
+            }
+            // only show used assets
+            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.UsedAssets)
+            {
+                uint counter = 0;
+                if (prefabInstanceCountDictionary.ContainsKey(asset.prefab))
+                {
+                    counter += prefabInstanceCountDictionary[asset.prefab];
+                }
+                if (FindIt.isPOEnabled && Settings.includePOinstances)
+                {
+                    counter += ProceduralObjectsTool.GetPrefabPOInstanceCount(asset.prefab);
+                }
+                if (counter < 1) return false;
             }
             // only show assets with custom tags
             else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.WithCustomTag)

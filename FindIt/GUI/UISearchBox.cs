@@ -465,11 +465,6 @@ namespace FindIt.GUI
                     sortButton.tooltip = Translations.Translate("FIF_SO_RETP");
                 }
                 Search();
-
-                if (FindIt.isPOEnabled)
-                {
-                    ProceduralObjectsTool.UpdatePOInfoList();
-                }
             };
 
             // ploppable filter tabs
