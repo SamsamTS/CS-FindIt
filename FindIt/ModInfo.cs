@@ -13,9 +13,9 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.3-rc1";
-        public const bool isBeta = true;
-        public const double updateNoticeDate = 20210209;
+        public const string version = "2.3";
+        public const bool isBeta = false;
+        public const double updateNoticeDate = 20210213;
         public const string updateNotice =
 
             "- Add \"Locate Next Instance\" tool:\n" +
@@ -33,6 +33,8 @@ namespace FindIt
 
             "- Add \"Refresh Display\" tool:\n" +
             "   You can use it to refresh the asset instance counter\n\n" +
+
+            "- Add \"Used Assets\" filter\n\n" +
 
             "- When the \"Sub-buildings\" filter is selected, the asset type dropdown\n" +
             "   menu will be set to \"All\" automatically\n\n";
