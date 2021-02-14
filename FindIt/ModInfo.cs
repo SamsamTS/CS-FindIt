@@ -13,11 +13,14 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.3";
-        public const bool isBeta = false;
-        public const double updateNoticeDate = 20210213;
+        public const string version = "2.3.1";
+        public const bool isBeta = true;
+        public const double updateNoticeDate = 20210214;
         public const string updateNotice =
 
+            "- Update to CitiesHarmony.API 2.0.0\n\n" +
+
+            "From 2.3:\n\n" + 
             "- Add \"Locate Next Instance\" tool:\n" +
             "   Click an asset thumbnail, then click the new tool icon. Find It 2 will\n" +
             "   find a placed instance of the asset and move the camera to the placed\n" +
