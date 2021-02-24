@@ -198,6 +198,9 @@
     <Translation ID="FIF_EF_DLC" String="Необходимые DLC/CCP" />
     <Translation ID="FIF_LOC_TOOL" String="Щелкните, чтобы найти следующий экземпляр выбранного актива. Удерживая SHIFT нажатым, щелкните, чтобы найти следующий экземпляр PO." />
     <Translation ID="FIF_REF_DIS" String="Обновить дисплей" />
+    <Translation ID="FIF_EF_US" String="Используемые объекты" />
+    <Translation ID="FIF_EF_USEXPTP" String="Экспорт списка всех используемых ID в HTML-файл со ссылками на Мастерскую" />
+    <Translation ID="FIF_EF_USEXPTPSE" String="Экспорт списка используемых ID из последнего поиска в файл HTML со ссылками на Мастерскую" />
  
   </Translations>
 </Language>
