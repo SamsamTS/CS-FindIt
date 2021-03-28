@@ -424,7 +424,14 @@ namespace FindIt.GUI
             sizeLabel.textScale = 0.8f;
             sizeLabel.padding = new RectOffset(0, 0, 8, 0);
             sizeLabel.text = "x";
+            sizeLabel.tooltip = Translations.Translate("FIF_SE_SIZEX");
             sizeLabel.relativePosition = new Vector3(sizeFilterX.relativePosition.x + sizeFilterX.width + 3.5f, 5);
+
+            sizeLabel.eventClick += (c, p) =>
+            {
+                sizeFilterX.selectedIndex = 0;
+                sizeFilterY.selectedIndex = 0;
+            };
 
             sizeFilterY = SamsamTS.UIUtils.CreateDropDown(inputPanel);
             sizeFilterY.size = new Vector2(55, 25);

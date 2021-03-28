@@ -201,6 +201,7 @@
     <Translation ID="FIF_EF_US" String="Used Assets" />
     <Translation ID="FIF_EF_USEXPTP" String="Export the list of all used workshop ID's into an HTML file with workshop links" />
     <Translation ID="FIF_EF_USEXPTPSE" String="Export the list of used workshop ID's from the last search into an HTML file with workshop links" />
+    <Translation ID="FIF_SE_SIZEX" String="Click this x to reset the building size filters" />
 
   </Translations>
 </Language>
