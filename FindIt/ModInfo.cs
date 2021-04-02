@@ -13,34 +13,15 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.3.1";
+        public const string version = "2.3.2";
         public const bool isBeta = true;
-        public const double updateNoticeDate = 20210214;
+        public const double updateNoticeDate = 20210403;
         public const string updateNotice =
 
-            "- Update to CitiesHarmony.API 2.0.0\n\n" +
-
-            "From 2.3:\n\n" + 
-            "- Add \"Locate Next Instance\" tool:\n" +
-            "   Click an asset thumbnail, then click the new tool icon. Find It 2 will\n" +
-            "   find a placed instance of the asset and move the camera to the placed\n" +
-            "   instance. Click the icon again to find the next instance.Hold SHIFT and\n" +
-            "   click the tool icon to locate next Procedural Objects instance\n\n" +
-
-            "- If an asset has terrible default thumbnail, add the custom tag\n" +
-            "   \"bad_thumbnail\" to the asset and Find It 2 will attempt to generate\n" +
-            "   a custom thumbnail\n" +
-            "   Not applicable to every asset. Not applicable to networks\n" +
-            "   Remove the custom tag and RESTART the game to change back to\n" +
-            "   default thumbnail\n\n" +
-
-            "- Add \"Refresh Display\" tool:\n" +
-            "   You can use it to refresh the asset instance counter\n\n" +
-
-            "- Add \"Used Assets\" filter\n\n" +
-
-            "- When the \"Sub-buildings\" filter is selected, the asset type dropdown\n" +
-            "   menu will be set to \"All\" automatically\n\n";
+            "- Improve compatability with More Advanced Toolbar & Yet Another Toolbar's\n" +
+            "  panel scaling feature\n\n" +
+            "- Click the x in the building size sub-panel can reset the filters\n\n" + 
+            "- Update translations\n";
 
         public string Name
         {
