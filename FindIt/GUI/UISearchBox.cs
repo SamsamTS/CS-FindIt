@@ -309,15 +309,17 @@ namespace FindIt.GUI
             tagToolIcon.relativePosition = new Vector3(locateInstanceIcon.relativePosition.x + locateInstanceIcon.width + 3.5f, 7);
             tagToolIcon.eventClicked += (c, p) =>
             {
-                if (tagPanel == null)
+                if (!tagPanel.isVisible)
                 {
                     tagToolIcon.opacity = 1.0f;
-                    CreateCustomTagPanel();
+                    //CreateCustomTagPanel();
+                    tagPanel.isVisible = true;
                 }
                 else
                 {
                     tagToolIcon.opacity = 0.5f;
-                    DestroyCustomTagPanel();
+                    //DestroyCustomTagPanel();
+                    tagPanel.isVisible = false;
                     Search();
                 }
                 UpdateTopPanelsPosition();
@@ -331,7 +333,7 @@ namespace FindIt.GUI
 
             tagToolIcon.eventMouseLeave += (c, p) =>
             {
-                if (tagPanel != null)
+                if (tagPanel.isVisible)
                 {
                     tagToolIcon.opacity = 1.0f;
                 }
@@ -352,15 +354,17 @@ namespace FindIt.GUI
 
             extraFiltersIcon.eventClicked += (c, p) =>
             {
-                if (extraFiltersPanel == null)
+                if (!extraFiltersPanel.isVisible)
                 {
                     extraFiltersIcon.opacity = 1.0f;
-                    CreateExtraFiltersPanel();
+                    //CreateExtraFiltersPanel();
+                    extraFiltersPanel.isVisible = true;
                 }
                 else
                 {
                     extraFiltersIcon.opacity = 0.5f;
-                    DestroyExtraFiltersPanel();
+                    //DestroyExtraFiltersPanel();
+                    extraFiltersPanel.isVisible = false;
                     Search();
                 }
                 UpdateTopPanelsPosition();
@@ -373,7 +377,7 @@ namespace FindIt.GUI
 
             extraFiltersIcon.eventMouseLeave += (c, p) =>
             {
-                if (extraFiltersPanel != null)
+                if (extraFiltersPanel.isVisible)
                 {
                     extraFiltersIcon.opacity = 1.0f;
                 }
@@ -510,7 +514,10 @@ namespace FindIt.GUI
             filterDecal.relativePosition = new Vector3(sortButton.relativePosition.x + sortButton.width, 0);
 
             UpdateFilterPanels();
-            if (Settings.showAssetTypePanel) CreateAssetTypePanel();
+            CreateAssetTypePanel();
+            if (Settings.showAssetTypePanel) assetTypePanel.isVisible = true;
+            CreateCustomTagPanel();
+            CreateExtraFiltersPanel();
 
             size = Vector2.zero;
         }
@@ -637,7 +644,7 @@ namespace FindIt.GUI
             extraFiltersPanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             extraFiltersPanel.backgroundSprite = "GenericTab";
             extraFiltersPanel.color = new Color32(196, 200, 206, 255);
-            extraFiltersPanel.isVisible = true;
+            extraFiltersPanel.isVisible = false;
             extraFiltersPanel.size = new Vector2(sizeFilterX.position.x, 35);
             extraFiltersPanel.relativePosition = new Vector2(0, -inputPanel.height - extraFiltersPanel.height - 40);
         }
@@ -657,7 +664,7 @@ namespace FindIt.GUI
             tagPanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             tagPanel.backgroundSprite = "GenericTab";
             tagPanel.color = new Color32(196, 200, 206, 255);
-            tagPanel.isVisible = true;
+            tagPanel.isVisible = false;
             tagPanel.size = new Vector2(sizeFilterX.position.x, 35);
             tagPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height - 40);
         }
@@ -678,7 +685,7 @@ namespace FindIt.GUI
             assetTypePanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             assetTypePanel.backgroundSprite = "GenericTab";
             assetTypePanel.color = new Color32(196, 200, 206, 255);
-            assetTypePanel.isVisible = true;
+            assetTypePanel.isVisible = false;
             assetTypePanel.size = new Vector2(75, 145);
             assetTypePanel.relativePosition = new Vector2(Settings.assetTypePanelX, Settings.assetTypePanelY);
         }
@@ -697,16 +704,16 @@ namespace FindIt.GUI
 
         private void UpdateTopPanelsPosition()
         {
-            if (extraFiltersPanel != null && tagPanel != null)
+            if (extraFiltersPanel.isVisible && tagPanel.isVisible)
             {
                 tagPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height - 40);
                 extraFiltersPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height * 2 - 40);
             }
-            else if (extraFiltersPanel != null && tagPanel == null)
+            else if (extraFiltersPanel.isVisible && !tagPanel.isVisible)
             {
                 extraFiltersPanel.relativePosition = new Vector2(0, -inputPanel.height - extraFiltersPanel.height - 40);
             }
-            else if (extraFiltersPanel == null && tagPanel != null)
+            else if (!extraFiltersPanel.isVisible && tagPanel.isVisible)
             {
                 tagPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height - 40);
             }
