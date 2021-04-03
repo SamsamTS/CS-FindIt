@@ -320,6 +320,7 @@ namespace FindIt.GUI
                     tagToolIcon.opacity = 0.5f;
                     //DestroyCustomTagPanel();
                     tagPanel.isVisible = false;
+                    tagPanel.tagDropDownCheckBox.isChecked = false;
                     Search();
                 }
                 UpdateTopPanelsPosition();
@@ -365,6 +366,7 @@ namespace FindIt.GUI
                     extraFiltersIcon.opacity = 0.5f;
                     //DestroyExtraFiltersPanel();
                     extraFiltersPanel.isVisible = false;
+                    extraFiltersPanel.optionDropDownCheckBox.isChecked = false;
                     Search();
                 }
                 UpdateTopPanelsPosition();
