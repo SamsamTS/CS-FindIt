@@ -14,8 +14,8 @@ namespace FindIt
     public class ModInfo : IUserMod
     {
         public const string version = "2.3.2";
-        public const bool isBeta = true;
-        public const double updateNoticeDate = 20210403;
+        public const bool isBeta = false;
+        public const double updateNoticeDate = 20210406;
         public const string updateNotice =
 
             "- Improve compatability with More Advanced Toolbar & Yet Another Toolbar's\n" +
