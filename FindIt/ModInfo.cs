@@ -75,16 +75,16 @@ namespace FindIt
                 UIPanel panel = group.self as UIPanel;
 
                 // Disable debug messages logging
-                UICheckBox checkBox = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DM"), Settings.hideDebugMessages, (b) =>
+                UICheckBox hideDebugMessages = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DM"), Settings.hideDebugMessages, (b) =>
                {
                    Settings.hideDebugMessages = b;
                    XMLUtils.SaveSettings();
                });
-                checkBox.tooltip = Translations.Translate("FIF_SET_DMTP");
+                hideDebugMessages.tooltip = Translations.Translate("FIF_SET_DMTP");
                 group.AddSpace(10);
 
                 // Center the main toolbar
-                checkBox = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_CMT"), Settings.centerToolbar, (b) =>
+                UICheckBox centerToolbar = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_CMT"), Settings.centerToolbar, (b) =>
                 {
                     Settings.centerToolbar = b;
                     XMLUtils.SaveSettings();
@@ -94,16 +94,16 @@ namespace FindIt
                         FindIt.instance.UpdateMainToolbar();
                     }
                 });
-                checkBox.tooltip = Translations.Translate("FIF_SET_CMTTP");
+                centerToolbar.tooltip = Translations.Translate("FIF_SET_CMTTP");
                 group.AddSpace(10);
 
                 // Unlock all
-                checkBox = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_UL"), Settings.unlockAll, (b) =>
+                UICheckBox unlockAll = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_UL"), Settings.unlockAll, (b) =>
                 {
                     Settings.unlockAll = b;
                     XMLUtils.SaveSettings();
                 });
-                checkBox.tooltip = Translations.Translate("FIF_SET_ULTP");
+                unlockAll.tooltip = Translations.Translate("FIF_SET_ULTP");
                 group.AddSpace(10);
 
                 // Fix bad props next loaded save
@@ -131,7 +131,7 @@ namespace FindIt
                     Settings.disableUpdateNotice = b;
                     XMLUtils.SaveSettings();
                 });
-                useDefaultBrowser.tooltip = Translations.Translate("FIF_SET_DBTP");
+                disableUpdateNotice.tooltip = Translations.Translate("FIF_SET_DBTP");
                 group.AddSpace(10);
 
                 // Disable update notice
