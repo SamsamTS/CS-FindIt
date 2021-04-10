@@ -131,7 +131,11 @@ namespace FindIt.GUI
             optionDropDownMenu.items = options;
             optionDropDownMenu.selectedIndex = 0;
             optionDropDownMenu.relativePosition = new Vector3(optionDropDownCheckBox.relativePosition.x + optionDropDownCheckBox.width + 5, 5);
-            SamsamTS.UIUtils.CreateDropDownScrollBar(optionDropDownMenu);
+            optionDropDownMenu.eventVisibilityChanged += (c, p) =>
+            {
+                SamsamTS.UIUtils.DestroyDropDownScrollBar(optionDropDownMenu);
+                SamsamTS.UIUtils.CreateDropDownScrollBar(optionDropDownMenu);
+            };
             optionDropDownMenu.eventSelectedIndexChanged += (c, p) =>
             {
                 HideAll();
@@ -216,9 +220,13 @@ namespace FindIt.GUI
             assetCreatorDropDownMenu.listHeight = 300;
             assetCreatorDropDownMenu.itemHeight = 30;
             UpdateAssetCreatorList();
-            SamsamTS.UIUtils.CreateDropDownScrollBar(assetCreatorDropDownMenu);
             assetCreatorDropDownMenu.isVisible = true;
             assetCreatorDropDownMenu.relativePosition = new Vector3(assetCreatorInput.relativePosition.x + assetCreatorInput.width + 10, 5);
+            assetCreatorDropDownMenu.eventVisibilityChanged += (c, p) =>
+            {
+                SamsamTS.UIUtils.DestroyDropDownScrollBar(assetCreatorDropDownMenu);
+                SamsamTS.UIUtils.CreateDropDownScrollBar(assetCreatorDropDownMenu);
+            };
             assetCreatorDropDownMenu.eventSelectedIndexChanged += (c, p) =>
             {
                 if (optionDropDownCheckBox.isChecked)
@@ -426,7 +434,11 @@ namespace FindIt.GUI
             DLCDropDownMenu.isVisible = false;
             DLCDropDownMenu.selectedIndex = 0;
             DLCDropDownMenu.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 50, 5);
-            SamsamTS.UIUtils.CreateDropDownScrollBar(DLCDropDownMenu);
+            DLCDropDownMenu.eventVisibilityChanged += (c, p) =>
+            {
+                SamsamTS.UIUtils.DestroyDropDownScrollBar(DLCDropDownMenu);
+                SamsamTS.UIUtils.CreateDropDownScrollBar(DLCDropDownMenu);
+            };
             DLCDropDownMenu.eventSelectedIndexChanged += (c, p) =>
             {
                 if (optionDropDownCheckBox.isChecked)
