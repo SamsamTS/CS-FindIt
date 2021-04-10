@@ -13,15 +13,12 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.3.2";
-        public const bool isBeta = false;
-        public const double updateNoticeDate = 20210406;
+        public const string version = "2.3.3";
+        public const bool isBeta = true;
+        public const double updateNoticeDate = 20210403;
         public const string updateNotice =
 
-            "- Improve compatability with More Advanced Toolbar & Yet Another Toolbar's\n" +
-            "  panel scaling feature\n\n" +
-            "- Click the x in the building size sub-panel can reset the filters\n\n" + 
-            "- Update translations\n";
+            "- Fix some minor UI bugs\n";
 
         public string Name
         {
