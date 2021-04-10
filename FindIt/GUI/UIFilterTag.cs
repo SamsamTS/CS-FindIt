@@ -66,12 +66,6 @@ namespace FindIt.GUI
                 }
             };
 
-            tagDropDownMenu.eventVisibilityChanged += (c, p) =>
-            {
-                SamsamTS.UIUtils.DestroyDropDownScrollBar(tagDropDownMenu);
-                SamsamTS.UIUtils.CreateDropDownScrollBar(tagDropDownMenu);
-            };
-
             // refresh button 
             refreshButton = SamsamTS.UIUtils.CreateButton(this);
             refreshButton.size = new Vector2(80, 25);

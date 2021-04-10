@@ -58,6 +58,22 @@ namespace FindIt.GUI
             {
                 DestroyScrollbars(parent);
             }
+
+            // adjust scrollbars in dropdown menus(needed for Yet Another Toolbar & Resize It)
+            if (UIFilterExtra.instance != null)
+            {
+                SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterExtra.instance.optionDropDownMenu);
+                SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtra.instance.optionDropDownMenu);
+                SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterExtra.instance.assetCreatorDropDownMenu);
+                SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtra.instance.assetCreatorDropDownMenu);
+                SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterExtra.instance.DLCDropDownMenu);
+                SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtra.instance.DLCDropDownMenu);
+            }
+            if (UIFilterTag.instance != null)
+            {
+                SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterTag.instance.tagDropDownMenu);
+                SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterTag.instance.tagDropDownMenu);
+            }
         }
 
         public static UIScrollPanel Create(UIScrollablePanel oldPanel)
