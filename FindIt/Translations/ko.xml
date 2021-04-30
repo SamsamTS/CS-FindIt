@@ -193,6 +193,14 @@
     <Translation ID="FIF_EF_UNEXPTP" String="사용되지 않는 모든 창작마당 ID 목록을 창작마당 링크가 있는 HTML 파일로 내보내기" />
     <Translation ID="FIF_EF_UNEXPSE" String="검색된 것 내보내기" />
     <Translation ID="FIF_EF_UNEXPTPSE" String="마지막 검색에서의 사용되지 않는 창작마당 ID 목록을 창작마당 링크가 있는 HTML 파일로 내보내기" />
+    <Translation ID="FIF_EF_LC" String="로컬 커스텀" />
+    <Translation ID="FIF_EF_WC" String="창작마당 커스텀" />
+    <Translation ID="FIF_EF_DLC" String="DLC/CCP 필요" />
+    <Translation ID="FIF_LOC_TOOL" String="클릭해서 선택된 에셋의 다음 인스턴스를 찾습니다. SHIFT를 누른 상태에서 클릭해서 다음 PO 인스턴스를 찾습니다." />
+    <Translation ID="FIF_REF_DIS" String="창 새로고침" />
+    <Translation ID="FIF_EF_US" String="사용된 에셋" />
+    <Translation ID="FIF_EF_USEXPTP" String="사용된 모든 창작마당 ID의 목록을 창작마당 링크가 있는 HTML 파일로 내보내기" />
+    <Translation ID="FIF_EF_USEXPTPSE" String="마지막 검색에서 사용된 창작마당 ID의 목록을 창작마당 링크가 있는 HTML 파일로 내보내기" />
 
   </Translations>
 </Language>
