@@ -56,10 +56,6 @@ namespace FindIt.GUI
 
         public UIAssetTypePanel assetTypePanel;
 
-        // true = sort by relevance
-        // false = sort by most recently downloaded
-        private bool sortButtonTextState = true;
-
         public List<Asset> matches;
         public List<string> searchResultList = new List<string>();
         public Dictionary<DropDownOptions, string> storedQueries = new Dictionary<DropDownOptions, string>();
@@ -225,21 +221,31 @@ namespace FindIt.GUI
 
             // workshop filter checkbox (custom assets saved in local asset folder are also included)
             workshopFilter = SamsamTS.UIUtils.CreateCheckBox(inputPanel);
-            workshopFilter.isChecked = true;
+            workshopFilter.isChecked = Settings.useWorkshopFilter;
             workshopFilter.width = 80;
             workshopFilter.label.text = Translations.Translate("FIF_SE_WF");
             workshopFilter.label.textScale = 0.8f;
             workshopFilter.relativePosition = new Vector3(typeFilter.relativePosition.x + typeFilter.width + 12, 10);
-            workshopFilter.eventCheckChanged += (c, i) => Search();
+            workshopFilter.eventCheckChanged += (c, i) =>
+            {
+                Settings.useWorkshopFilter = workshopFilter.isChecked;
+                XMLUtils.SaveSettings();
+                Search();
+            };
 
             // vanilla filter checkbox
             vanillaFilter = SamsamTS.UIUtils.CreateCheckBox(inputPanel);
-            vanillaFilter.isChecked = true;
+            vanillaFilter.isChecked = Settings.useVanillaFilter;
             vanillaFilter.width = 80;
             vanillaFilter.label.text = Translations.Translate("FIF_SE_VF");
             vanillaFilter.label.textScale = 0.8f;
             vanillaFilter.relativePosition = new Vector3(workshopFilter.relativePosition.x + workshopFilter.width, 10);
-            vanillaFilter.eventCheckChanged += (c, i) => Search();
+            vanillaFilter.eventCheckChanged += (c, i) =>
+            {
+                Settings.useVanillaFilter = vanillaFilter.isChecked;
+                XMLUtils.SaveSettings();
+                Search();
+            };
 
             // Refresh Display
             refreshDisplayIcon = inputPanel.AddUIComponent<UISprite>();
@@ -459,22 +465,33 @@ namespace FindIt.GUI
             // sort button
             sortButton = SamsamTS.UIUtils.CreateButton(panel);
             sortButton.size = new Vector2(100, 35);
-            sortButton.text = Translations.Translate("FIF_SO_RE");
-            sortButton.tooltip = Translations.Translate("FIF_SO_RETP");
+            if (Settings.useRelevanceSort)
+            {
+                sortButton.text = Translations.Translate("FIF_SO_RE");
+                sortButton.tooltip = Translations.Translate("FIF_SO_RETP");
+            }
+            else
+            {
+                sortButton.text = Translations.Translate("FIF_SO_NE");
+                sortButton.tooltip = Translations.Translate("FIF_SO_NETP");
+            }
             sortButton.relativePosition = new Vector3(5, 5);
 
             sortButton.eventClick += (c, p) =>
             {
-                if (sortButtonTextState)
+
+                if (Settings.useRelevanceSort)
                 {
+                    Settings.useRelevanceSort = false;
+                    XMLUtils.SaveSettings();
                     sortButton.text = Translations.Translate("FIF_SO_NE");
-                    sortButtonTextState = false;
                     sortButton.tooltip = Translations.Translate("FIF_SO_NETP");
                 }
                 else
                 {
+                    Settings.useRelevanceSort = true;
+                    XMLUtils.SaveSettings();
                     sortButton.text = Translations.Translate("FIF_SO_RE");
-                    sortButtonTextState = true;
                     sortButton.tooltip = Translations.Translate("FIF_SO_RETP");
                 }
                 Search();
@@ -806,7 +823,7 @@ namespace FindIt.GUI
             }
 
             // sort by most recently downloaded
-            else if (sortButtonTextState == false)
+            else if (!Settings.useRelevanceSort)
             {
                 matches = matches.OrderByDescending(s => s.downloadTime).ToList();
             }

@@ -40,6 +40,12 @@ namespace FindIt
 
         internal static bool separateSearchKeyword = false;
 
+        internal static bool useRelevanceSort = true;
+
+        internal static bool useWorkshopFilter = true;
+
+        internal static bool useVanillaFilter = true;
+
         internal static bool showAssetTypePanel = true;
 
         internal static float assetTypePanelX = -80.0f;
@@ -117,6 +123,15 @@ namespace FindIt
 
         [XmlElement("SeparateSearchKeyword")]
         public bool SeparateSearchKeyword { get => Settings.separateSearchKeyword; set => Settings.separateSearchKeyword = value; }
+
+        [XmlElement("UseRelevanceSort")]
+        public bool UseRelevanceSort { get => Settings.useRelevanceSort; set => Settings.useRelevanceSort = value; }
+
+        [XmlElement("UseWorkshopFilter")]
+        public bool UseWorkshopFilter { get => Settings.useWorkshopFilter; set => Settings.useWorkshopFilter = value; }
+
+        [XmlElement("UseVanillaFilter")]
+        public bool UseVanillaFilter { get => Settings.useVanillaFilter; set => Settings.useVanillaFilter = value; }
 
         [XmlElement("LastUpdateNotice")]
         public double LastUpdateNotice { get => Settings.lastUpdateNotice; set => Settings.lastUpdateNotice = value; }

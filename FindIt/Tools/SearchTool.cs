@@ -22,7 +22,7 @@ namespace FindIt
             // if showing instance counts, refresh
             try
             {
-                bool usingUsedUnusedFilterFlag = UISearchBox.instance?.extraFiltersPanel != null &&　(UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.UnusedAssets ||
+                bool usingUsedUnusedFilterFlag = UISearchBox.instance?.extraFiltersPanel != null && (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.UnusedAssets ||
                     UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtra.DropDownOptions.UsedAssets);
 
                 if (Settings.showInstancesCounter || usingUsedUnusedFilterFlag)
@@ -190,40 +190,37 @@ namespace FindIt
 
             try
             {
-                if (UISearchBox.instance?.workshopFilter != null && UISearchBox.instance?.vanillaFilter != null)
+                // filter out custom asset
+                if (asset.prefab.m_isCustomContent && !Settings.useWorkshopFilter) return false;
+
+                // filter out vanilla asset. will not filter out content creater pack assets
+                if (!asset.prefab.m_isCustomContent && !Settings.useVanillaFilter && !asset.isCCP) return false;
+
+                // filter out assets without matching custom tag
+                if (UISearchBox.instance?.tagPanel != null)
                 {
-                    // filter out custom asset
-                    if (asset.prefab.m_isCustomContent && !UISearchBox.instance.workshopFilter.isChecked) return false;
-
-                    // filter out vanilla asset. will not filter out content creater pack assets
-                    if (!asset.prefab.m_isCustomContent && !UISearchBox.instance.vanillaFilter.isChecked && !asset.isCCP) return false;
-
-                    // filter out assets without matching custom tag
-                    if (UISearchBox.instance?.tagPanel != null)
+                    if (UISearchBox.instance.tagPanel.tagDropDownCheckBox.isChecked && UISearchBox.instance.tagPanel.customTagListStrArray.Length > 0)
                     {
-                        if (UISearchBox.instance.tagPanel.tagDropDownCheckBox.isChecked && UISearchBox.instance.tagPanel.customTagListStrArray.Length > 0)
-                        {
-                            if (!asset.tagsCustom.Contains(UISearchBox.instance.tagPanel.GetDropDownListKey())) return false;
-                        }
+                        if (!asset.tagsCustom.Contains(UISearchBox.instance.tagPanel.GetDropDownListKey())) return false;
                     }
+                }
 
-                    // extra filters check
-                    if (UISearchBox.instance?.extraFiltersPanel != null)
+                // extra filters check
+                if (UISearchBox.instance?.extraFiltersPanel != null)
+                {
+                    if (UISearchBox.instance.extraFiltersPanel.optionDropDownCheckBox.isChecked)
                     {
-                        if (UISearchBox.instance.extraFiltersPanel.optionDropDownCheckBox.isChecked)
-                        {
-                            if (!CheckExtraFilters(asset)) return false;
-                        }
-                        else
-                        {
-                            if (asset.isSubBuilding) return false;
-                        }
+                        if (!CheckExtraFilters(asset)) return false;
                     }
-                    // skip sub-buildings if not using the extra filters panel
                     else
                     {
                         if (asset.isSubBuilding) return false;
                     }
+                }
+                // skip sub-buildings if not using the extra filters panel
+                else
+                {
+                    if (asset.isSubBuilding) return false;
                 }
             }
             catch (Exception e)
