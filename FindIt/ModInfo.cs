@@ -13,12 +13,14 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.4";
+        public const string version = "2.3.4";
         public const bool isBeta = true;
-        public const double updateNoticeDate = 20210411;
+        public const double updateNoticeDate = 20210502;
         public const string updateNotice =
 
-            "- Fix some minor UI bugs\n";
+            "- Some search options will be saved and auto-applied next time you start the game\n" +
+            "  (sort by relevance or recently downloaded, custom/vanilla filters enabled/disabled)\n\n" +
+            "- Update translations\n";
 
         public string Name
         {
