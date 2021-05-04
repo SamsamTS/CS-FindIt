@@ -201,6 +201,9 @@
     <Translation ID="FIF_EF_US" String="使用中资产" />
     <Translation ID="FIF_EF_USEXPTP" String="将所有使用中的工坊 ID 的资产列表导出到包含 Steam 链接的 HTML 文件中" />
     <Translation ID="FIF_EF_USEXPTPSE" String="将上次搜索中使用中的工坊 ID 的资产列表导出到包含 Steam 链接的 HTML 文件中" />
+    <Translation ID="FIF_SE_SIZEX" String="单击此 x 重置建筑物大小过滤器" />
+    <Translation ID="FIF_SET_UIVP" String="不要在香草面板上显示Find It 2的额外用户界面(需重启游戏)" />
+    <Translation ID="FIF_SET_UIVPTP" String="包括：自定义标签图标、Steam 工坊图标和 DLC 图标" />
 
   </Translations>
 </Language>

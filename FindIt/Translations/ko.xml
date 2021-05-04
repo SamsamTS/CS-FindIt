@@ -201,6 +201,9 @@
     <Translation ID="FIF_EF_US" String="사용된 에셋" />
     <Translation ID="FIF_EF_USEXPTP" String="사용된 모든 창작마당 ID의 목록을 창작마당 링크가 있는 HTML 파일로 내보내기" />
     <Translation ID="FIF_EF_USEXPTPSE" String="마지막 검색에서 사용된 창작마당 ID의 목록을 창작마당 링크가 있는 HTML 파일로 내보내기" />
+    <Translation ID="FIF_SE_SIZEX" String="건물 크기 필터를 초기화하려면 x를 클릭하십시오." />
+    <Translation ID="FIF_SET_UIVP" String="바닐라 패널에서 Find It 2의 추가 UI를 표시하지 않음(재시작 필요)" />
+    <Translation ID="FIF_SET_UIVPTP" String="포함: 커스텀 태그 아이콘, 스팀 아이콘 및 DLC 아이콘" />
 
   </Translations>
 </Language>

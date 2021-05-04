@@ -201,6 +201,9 @@
     <Translation ID="FIF_EF_US" String="使用中的素材" />
     <Translation ID="FIF_EF_USEXPTP" String="將所有使用中的工坊 ID 的素材清單匯出到包含 Steam 連結的 HTML 檔中" />
     <Translation ID="FIF_EF_USEXPTPSE" String="將上次搜尋中使用中的工坊 ID 的素材清單匯出到包含 Steam 連結的 HTML 檔中" />
+    <Translation ID="FIF_SE_SIZEX" String="點擊此X可快速重置建築物尺寸搜尋條件" />
+    <Translation ID="FIF_SET_UIVP" String="不要在遊戲原生面板中顯示Find It 2的額外UI(需重啟遊戲)" />
+    <Translation ID="FIF_SET_UIVPTP" String="包含: 自定義標籤圖示.工作坊圖示.DLC圖示" />
 
   </Translations>
 </Language>
