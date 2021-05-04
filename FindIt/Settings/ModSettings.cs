@@ -19,6 +19,8 @@ namespace FindIt
 
         internal static bool useDefaultBrowser = false;
 
+        internal static bool hideExtraUIonVP = false;
+
         // false = sort by number of assets
         // true = sort alphabetically
         internal static bool customTagListSort = false;
@@ -96,6 +98,9 @@ namespace FindIt
 
         [XmlElement("UseDefaultBrowser")]
         public bool UseDefaultBrowser { get => Settings.useDefaultBrowser; set => Settings.useDefaultBrowser = value; }
+
+        [XmlElement("HideExtraUIonVP")]
+        public bool HideExtraUIonVP { get => Settings.hideExtraUIonVP; set => Settings.hideExtraUIonVP = value; }
 
         [XmlElement("CustomTagListSort")]
         public bool CustomTagListSort { get => Settings.customTagListSort; set => Settings.customTagListSort = value; }

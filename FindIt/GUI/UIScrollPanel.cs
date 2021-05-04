@@ -39,7 +39,7 @@ namespace FindIt.GUI
                 tracSprite.autoSize = true;
                 tracSprite.size = tracSprite.parent.size;
                 tracSprite.fillDirection = UIFillDirection.Vertical;
-                tracSprite.spriteName = "ScrollbarTrack";
+                tracSprite.spriteName = ""; // "ScrollbarTrack";
 
                 scroll.trackObject = tracSprite;
 
@@ -162,7 +162,7 @@ namespace FindIt.GUI
     {
         private ItemData currentData;
         private UISprite m_tagSprite;
-        private UISprite m_steamSprite;
+        // private UISprite m_steamSprite;
         private UISprite m_dlcSprite;
 
         private UICheckBox m_batchCheckBox;
@@ -295,6 +295,7 @@ namespace FindIt.GUI
                 }
             };
 
+            /*
             m_steamSprite = component.AddUIComponent<UISprite>();
             m_steamSprite.size = new Vector2(26, 16);
             m_steamSprite.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
@@ -312,18 +313,23 @@ namespace FindIt.GUI
             {
                 m_steamSprite.eventMouseUp += OnTooltipClicked;
             }
+            */
 
             m_dlcSprite = component.AddUIComponent<UISprite>();
             m_dlcSprite.size = new Vector2(18, 18);
             m_dlcSprite.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
-            m_dlcSprite.opacity = 0.8f;
+            m_dlcSprite.opacity = 0.6f;
             m_dlcSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
-            m_dlcSprite.relativePosition = new Vector3(component.width - m_dlcSprite.width - 5, component.height - m_dlcSprite.height - 5);
+            m_dlcSprite.relativePosition = new Vector3(component.width - m_dlcSprite.width - 3, component.height - m_dlcSprite.height - 3);
             m_dlcSprite.isVisible = false;
             m_dlcSprite.eventMouseLeave += (c, p) =>
             {
                 m_dlcSprite.tooltipBox.Hide();
             };
+            if (PlatformService.IsOverlayEnabled())
+            {
+                m_dlcSprite.eventMouseUp += OnTooltipClicked;
+            }
         }
 
         public void Display(ItemData data, int index)
@@ -476,6 +482,7 @@ namespace FindIt.GUI
                     else m_instanceCountLabel.isVisible = false;
                 }
 
+                /*
                 if (m_steamSprite != null)
                 {
                     m_steamSprite.tooltip = null;
@@ -503,15 +510,46 @@ namespace FindIt.GUI
                         m_steamSprite.tooltipBox.isVisible = m_steamSprite.tooltip != null;
                     }
                 }
+                */
 
                 if (m_dlcSprite != null)
                 {
                     m_dlcSprite.tooltip = null;
                     m_dlcSprite.isVisible = false;
 
-                    if (data.asset != null && !data.asset.prefab.m_isCustomContent)
+                    if (data.asset != null)
                     {
-                        SetDLCSprite(m_dlcSprite, data.asset.prefab.m_dlcRequired);
+                        if (FindIt.isNext2Enabled && AssetTagList.instance.next2Assets.Contains(data.asset))
+                        {
+                            m_dlcSprite.isVisible = true;
+                            m_dlcSprite.spriteName = "UIFilterWorkshopItemsFocusedHovered";
+                            m_dlcSprite.tooltip = "Network Extension 2 Mod";
+                        }
+                        else if (FindIt.isETSTEnabled && AssetTagList.instance.etstAssets.Contains(data.asset))
+                        {
+                            m_dlcSprite.isVisible = true;
+                            m_dlcSprite.spriteName = "UIFilterWorkshopItemsFocusedHovered";
+                            m_dlcSprite.tooltip = "Extra Train Station Tracks Mod";
+                        }
+                        else if (FindIt.isOWTTEnabled && AssetTagList.instance.owttAssets.Contains(data.asset))
+                        {
+                            m_dlcSprite.isVisible = true;
+                            m_dlcSprite.spriteName = "UIFilterWorkshopItemsFocusedHovered";
+                            m_dlcSprite.tooltip = "One-Way Train Tracks Mod";
+                        }
+                        else if (!data.asset.prefab.m_isCustomContent)
+                        {
+                            SetDLCSprite(m_dlcSprite, data.asset.prefab.m_dlcRequired);
+                        }
+                        else
+                        {
+                            if (!data.asset.author.IsNullOrWhiteSpace() && (data.asset.steamID != 0))
+                            {
+                                m_dlcSprite.isVisible = true;
+                                m_dlcSprite.spriteName = "UIFilterWorkshopItems";
+                                m_dlcSprite.tooltip = "By " + data.asset.author + "\n" + Translations.Translate("FIF_UIS_WS");
+                            }
+                        }
                     }
                 }
             }
@@ -584,6 +622,9 @@ namespace FindIt.GUI
         {
             if (!p.used && p.buttons == UIMouseButton.Right && currentData != null && currentData.asset != null)
             {
+
+                if (currentData.asset.author.IsNullOrWhiteSpace() || currentData.asset.steamID == 0 || !currentData.asset.prefab.m_isCustomContent) return;
+
                 PublishedFileId publishedFileId = new PublishedFileId(currentData.asset.steamID);
 
                 if (publishedFileId != PublishedFileId.invalid)

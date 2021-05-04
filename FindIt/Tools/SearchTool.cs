@@ -187,14 +187,11 @@ namespace FindIt
 
             // filter out marker prop if not in editor mode
             if ((!FindIt.inEditor && !Settings.showPropMarker) && (asset.propType == Asset.PropType.PropsMarker)) return false;
-
+            
             try
             {
-                // filter out custom asset
-                if (asset.prefab.m_isCustomContent && !Settings.useWorkshopFilter) return false;
-
-                // filter out vanilla asset. will not filter out content creater pack assets
-                if (!asset.prefab.m_isCustomContent && !Settings.useVanillaFilter && !asset.isCCP) return false;
+                // check vanila & workshop filters
+                if (!CheckVanillaWorkshopFilter(asset)) return false;
 
                 // filter out assets without matching custom tag
                 if (UISearchBox.instance?.tagPanel != null)
@@ -241,6 +238,31 @@ namespace FindIt
             if (asset.assetType != Asset.AssetType.Tree && filter == UISearchBox.DropDownOptions.Tree) return false;
             if (asset.assetType != Asset.AssetType.Decal && filter == UISearchBox.DropDownOptions.Decal) return false;
             if ((asset.assetType != Asset.AssetType.Rico && asset.assetType != Asset.AssetType.Growable) && filter == UISearchBox.DropDownOptions.GrwbRico) return false;
+            return true;
+        }
+
+        private bool CheckVanillaWorkshopFilter(Asset asset)
+        {
+            // filter out custom asset
+            if(!Settings.useWorkshopFilter)
+            {
+                if (FindIt.isNext2Enabled && next2Assets.Contains(asset)) return false;
+                if (FindIt.isETSTEnabled && etstAssets.Contains(asset)) return false;
+                if (FindIt.isOWTTEnabled && owttAssets.Contains(asset)) return false;
+                if (asset.prefab.m_isCustomContent) return false;
+            } 
+
+            // filter out vanilla asset. will not filter out content creater pack assets
+            if (!Settings.useVanillaFilter)
+            {
+                bool notGeneratedByMods = true;
+                if (FindIt.isNext2Enabled && next2Assets.Contains(asset)) notGeneratedByMods =  false;
+                else if (FindIt.isETSTEnabled && etstAssets.Contains(asset)) notGeneratedByMods = false;
+                else if (FindIt.isOWTTEnabled && owttAssets.Contains(asset)) notGeneratedByMods = false;
+
+                if (!asset.prefab.m_isCustomContent && notGeneratedByMods && !asset.isCCP) return false;
+            }
+
             return true;
         }
 

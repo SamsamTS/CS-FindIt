@@ -31,6 +31,18 @@ namespace FindIt
         /// Tree & Vehicle Props Patch mod enabled?
         /// </summary>
         public static bool isTVPPatchEnabled = false;
+        /// <summary>
+        /// Network Extension 2 mod enabled?
+        /// </summary>
+        public static bool isNext2Enabled = false;
+        /// <summary>
+        /// Extra Train Station Track mod enabled?
+        /// </summary>
+        public static bool isETSTEnabled = false;
+        /// <summary>
+        /// One-Way Train Tracks mod enabled?
+        /// </summary>
+        public static bool isOWTTEnabled = false;
 
         public bool firstVisibleFlag = false;
 
@@ -63,8 +75,14 @@ namespace FindIt
                 isRicoEnabled = IsAssemblyEnabled("ploppablerico");
                 isPOEnabled = IsAssemblyEnabled("proceduralobjects");
                 isTVPPatchEnabled = IsAssemblyEnabled("tvproppatch");
+                isNext2Enabled = IsAssemblyEnabled("networkextensions2");
+                isETSTEnabled = IsAssemblyEnabled("elevatedtrainstationtrack");
+                isOWTTEnabled = IsAssemblyEnabled("singletraintrack");
 
                 list = AssetTagList.instance;
+                if (isNext2Enabled) AssetTagList.instance.SetNext2Assets();
+                if (isETSTEnabled) AssetTagList.instance.SetETSTAssets();
+                if (isOWTTEnabled) AssetTagList.instance.SetOWTTAssets();
 
                 UITabstrip tabstrip = ToolsModifierControl.mainToolbar.component as UITabstrip;
 
