@@ -8,24 +8,31 @@ namespace FindIt
     public static class ProceduralObjectsTool
     {
         private static Dictionary<string, uint> poInstanceCount = new Dictionary<string, uint>();
+        public static bool initialized = false;
+        private static Type ProceduralObjectType;
+        private static object poList;
+
+        private static bool Init()
+        {
+            GameObject gameLogicObject = GameObject.Find("Logic_ProceduralObjects");
+            if (gameLogicObject == null) return false;
+            Type ProceduralObjectsLogicType = Type.GetType("ProceduralObjects.ProceduralObjectsLogic");
+            ProceduralObjectType = Type.GetType("ProceduralObjects.Classes.ProceduralObject");
+            Component logic = gameLogicObject.GetComponent("ProceduralObjectsLogic");
+            poList = ProceduralObjectsLogicType.GetField("proceduralObjects").GetValue(logic);
+            initialized = true;
+            return true;
+        }
 
         public static void UpdatePOInfoList()
         {
-            poInstanceCount.Clear();
-
             try
             {
-                GameObject gameLogicObject = GameObject.Find("Logic_ProceduralObjects");
-                if (gameLogicObject == null) return;
-
-                Type ProceduralObjectsLogicType = Type.GetType("ProceduralObjects.ProceduralObjectsLogic");
-
-                Type ProceduralObjectType = Type.GetType("ProceduralObjects.Classes.ProceduralObject");
-
-                Component logic = gameLogicObject.GetComponent("ProceduralObjectsLogic");
-
-                object poList = ProceduralObjectsLogicType.GetField("proceduralObjects").GetValue(logic);
-
+                if (!initialized)
+                {
+                    if (!Init()) return;
+                }
+                poInstanceCount.Clear();
                 foreach (var i in poList as IList)
                 {
                     string basePrefabName = ProceduralObjectType.GetField("basePrefabName").GetValue(i).ToString();
@@ -68,17 +75,10 @@ namespace FindIt
         {
             try
             {
-                GameObject gameLogicObject = GameObject.Find("Logic_ProceduralObjects");
-                if (gameLogicObject == null)
+                if (!initialized)
                 {
-                    return Vector3.zero;
+                    if (!Init()) return Vector3.zero;
                 }
-
-                Type ProceduralObjectsLogicType = Type.GetType("ProceduralObjects.ProceduralObjectsLogic");
-                Type ProceduralObjectType = Type.GetType("ProceduralObjects.Classes.ProceduralObject");
-                Component logic = gameLogicObject.GetComponent("ProceduralObjectsLogic");
-                object poList = ProceduralObjectsLogicType.GetField("proceduralObjects").GetValue(logic);
-
                 storedPositions.Clear();
                 foreach (var i in poList as IList)
                 {
@@ -118,9 +118,8 @@ namespace FindIt
             catch (Exception e)
             {
                 Debugging.LogException(e);
+                return Vector3.zero;
             }
-
-            return Vector3.zero;
         }
     }
 }
