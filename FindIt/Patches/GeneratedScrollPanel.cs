@@ -170,7 +170,7 @@ namespace FindIt
 
                         // adding DLC/steam icon
                         UISprite m_dlcSprite = component.AddUIComponent<UISprite>();
-                        m_dlcSprite.size = new Vector2(18, 18);
+                        m_dlcSprite.size = new Vector2(16, 16);
                         m_dlcSprite.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
                         m_dlcSprite.opacity = 0.6f;
                         m_dlcSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
