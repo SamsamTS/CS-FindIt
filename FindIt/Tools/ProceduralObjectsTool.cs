@@ -8,31 +8,24 @@ namespace FindIt
     public static class ProceduralObjectsTool
     {
         private static Dictionary<string, uint> poInstanceCount = new Dictionary<string, uint>();
-        public static bool initialized = false;
-        private static Type ProceduralObjectType;
-        private static object poList;
-
-        private static bool Init()
-        {
-            GameObject gameLogicObject = GameObject.Find("Logic_ProceduralObjects");
-            if (gameLogicObject == null) return false;
-            Type ProceduralObjectsLogicType = Type.GetType("ProceduralObjects.ProceduralObjectsLogic");
-            ProceduralObjectType = Type.GetType("ProceduralObjects.Classes.ProceduralObject");
-            Component logic = gameLogicObject.GetComponent("ProceduralObjectsLogic");
-            poList = ProceduralObjectsLogicType.GetField("proceduralObjects").GetValue(logic);
-            initialized = true;
-            return true;
-        }
 
         public static void UpdatePOInfoList()
         {
+            poInstanceCount.Clear();
+
             try
             {
-                if (!initialized)
-                {
-                    if (!Init()) return;
-                }
-                poInstanceCount.Clear();
+                GameObject gameLogicObject = GameObject.Find("Logic_ProceduralObjects");
+                if (gameLogicObject == null) return;
+
+                Type ProceduralObjectsLogicType = Type.GetType("ProceduralObjects.ProceduralObjectsLogic");
+
+                Type ProceduralObjectType = Type.GetType("ProceduralObjects.Classes.ProceduralObject");
+
+                Component logic = gameLogicObject.GetComponent("ProceduralObjectsLogic");
+
+                object poList = ProceduralObjectsLogicType.GetField("proceduralObjects").GetValue(logic);
+
                 foreach (var i in poList as IList)
                 {
                     string basePrefabName = ProceduralObjectType.GetField("basePrefabName").GetValue(i).ToString();
@@ -52,7 +45,7 @@ namespace FindIt
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debugging.LogException(e);
             }
@@ -63,7 +56,7 @@ namespace FindIt
             if (!(info is PropInfo) && !(info is BuildingInfo)) return 0;
 
             if (poInstanceCount.ContainsKey(info.name)) return poInstanceCount[info.name];
-            
+
             return 0;
         }
 
@@ -75,10 +68,17 @@ namespace FindIt
         {
             try
             {
-                if (!initialized)
+                GameObject gameLogicObject = GameObject.Find("Logic_ProceduralObjects");
+                if (gameLogicObject == null)
                 {
-                    if (!Init()) return Vector3.zero;
+                    return Vector3.zero;
                 }
+
+                Type ProceduralObjectsLogicType = Type.GetType("ProceduralObjects.ProceduralObjectsLogic");
+                Type ProceduralObjectType = Type.GetType("ProceduralObjects.Classes.ProceduralObject");
+                Component logic = gameLogicObject.GetComponent("ProceduralObjectsLogic");
+                object poList = ProceduralObjectsLogicType.GetField("proceduralObjects").GetValue(logic);
+
                 storedPositions.Clear();
                 foreach (var i in poList as IList)
                 {
@@ -118,8 +118,9 @@ namespace FindIt
             catch (Exception e)
             {
                 Debugging.LogException(e);
-                return Vector3.zero;
             }
+
+            return Vector3.zero;
         }
     }
 }

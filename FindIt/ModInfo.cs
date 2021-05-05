@@ -13,7 +13,7 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.4-beta1";
+        public const string version = "2.4-beta2";
         public const bool isBeta = true;
         public const double updateNoticeDate = 20210503;
         public const string updateNotice =
@@ -118,8 +118,9 @@ namespace FindIt
                 unlockAll.tooltip = Translations.Translate("FIF_SET_ULTP");
                 group.AddSpace(10);
 
+                /*
                 // Fix bad props next loaded save
-                // Implemented by samsamTS. Need to figure out why this is needed. 
+                // Implemented by samsamTS. Only needed for pre-2018 savefiles 
                 UICheckBox fixProps = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_BP"), false, (b) =>
                 {
                     Settings.fixBadProps = b;
@@ -127,6 +128,7 @@ namespace FindIt
                 });
                 fixProps.tooltip = Translations.Translate("FIF_SET_BPTP");
                 group.AddSpace(10);
+                */
 
                 // Use system default browser instead of steam overlay
                 UICheckBox useDefaultBrowser = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DB"), Settings.useDefaultBrowser, (b) =>

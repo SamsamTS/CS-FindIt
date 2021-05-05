@@ -83,7 +83,6 @@ namespace FindIt
                 if (isNext2Enabled) AssetTagList.instance.SetNext2Assets();
                 if (isETSTEnabled) AssetTagList.instance.SetETSTAssets();
                 if (isOWTTEnabled) AssetTagList.instance.SetOWTTAssets();
-                if (isPOEnabled) ProceduralObjectsTool.initialized = false;
 
                 UITabstrip tabstrip = ToolsModifierControl.mainToolbar.component as UITabstrip;
 
