@@ -172,7 +172,7 @@ namespace FindIt
                         UISprite m_dlcSprite = component.AddUIComponent<UISprite>();
                         m_dlcSprite.size = new Vector2(16, 16);
                         m_dlcSprite.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
-                        m_dlcSprite.opacity = 0.55f;
+                        m_dlcSprite.opacity = 0.8f;
                         m_dlcSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
                         m_dlcSprite.relativePosition = new Vector3(component.width - m_dlcSprite.width - 3, component.height - m_dlcSprite.height - 3);
                         m_dlcSprite.isVisible = false;
@@ -212,6 +212,7 @@ namespace FindIt
                             {
                                 if (!asset.author.IsNullOrWhiteSpace() && (asset.steamID != 0))
                                 {
+                                    m_dlcSprite.opacity = 0.55f;
                                     m_dlcSprite.isVisible = true;
                                     m_dlcSprite.spriteName = "UIFilterWorkshopItems";
                                     m_dlcSprite.tooltip = "By " + asset.author + "\n" + Translations.Translate("FIF_UIS_WS");

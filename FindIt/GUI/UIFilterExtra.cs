@@ -131,7 +131,7 @@ namespace FindIt.GUI
             optionDropDownMenu.items = options;
             optionDropDownMenu.selectedIndex = 0;
             optionDropDownMenu.relativePosition = new Vector3(optionDropDownCheckBox.relativePosition.x + optionDropDownCheckBox.width + 5, 5);
-            
+
             optionDropDownMenu.eventSelectedIndexChanged += (c, p) =>
             {
                 HideAll();
@@ -218,7 +218,7 @@ namespace FindIt.GUI
             UpdateAssetCreatorList();
             assetCreatorDropDownMenu.isVisible = true;
             assetCreatorDropDownMenu.relativePosition = new Vector3(assetCreatorInput.relativePosition.x + assetCreatorInput.width + 10, 5);
-            
+
             assetCreatorDropDownMenu.eventSelectedIndexChanged += (c, p) =>
             {
                 if (optionDropDownCheckBox.isChecked)
@@ -426,7 +426,7 @@ namespace FindIt.GUI
             DLCDropDownMenu.isVisible = false;
             DLCDropDownMenu.selectedIndex = 0;
             DLCDropDownMenu.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 50, 5);
-            
+
             DLCDropDownMenu.eventSelectedIndexChanged += (c, p) =>
             {
                 if (optionDropDownCheckBox.isChecked)
@@ -434,6 +434,13 @@ namespace FindIt.GUI
                     ((UISearchBox)parent).Search();
                 }
             };
+
+            SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterExtra.instance.optionDropDownMenu);
+            SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtra.instance.optionDropDownMenu);
+            SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterExtra.instance.assetCreatorDropDownMenu);
+            SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtra.instance.assetCreatorDropDownMenu);
+            SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterExtra.instance.DLCDropDownMenu);
+            SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtra.instance.DLCDropDownMenu);
         }
         public void Close()
         {

@@ -237,6 +237,10 @@ namespace FindIt.GUI
                 }
                 UISearchBox.instance.scrollPanel.Refresh();
             };
+
+            SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterTag.instance.tagDropDownMenu);
+            SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterTag.instance.tagDropDownMenu);
+
         }
 
         public void Close()
