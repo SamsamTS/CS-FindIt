@@ -201,6 +201,9 @@
     <Translation ID="FIF_EF_US" String="Используемые объекты" />
     <Translation ID="FIF_EF_USEXPTP" String="Экспорт списка всех используемых ID в HTML-файл со ссылками на Мастерскую" />
     <Translation ID="FIF_EF_USEXPTPSE" String="Экспорт списка используемых ID из последнего поиска в файл HTML со ссылками на Мастерскую" />
+    <Translation ID="FIF_SE_SIZEX" String="Нажмите на этот x, чтобы сбросить фильтры размера здания" />
+    <Translation ID="FIF_SET_UIVP" String="Не показывать дополнительный пользовательский интерфейс Find It 2 на стандартных панелях(требуется перезагрузка)" />
+    <Translation ID="FIF_SET_UIVPTP" String="В том числе: пользовательские значки тегов, значки Steam и значки DLC" />
  
   </Translations>
 </Language>

@@ -58,6 +58,7 @@ namespace FindIt.GUI
             tagDropDownMenu.itemHeight = 30;
             tagDropDownMenu.relativePosition = new Vector3(tagDropDownCheckBox.relativePosition.x + tagDropDownCheckBox.width + 5, 5);
             UpdateCustomTagList();
+
             tagDropDownMenu.eventSelectedIndexChanged += (c, p) =>
             {
                 if (tagDropDownCheckBox.isChecked)
@@ -237,9 +238,6 @@ namespace FindIt.GUI
                 }
                 UISearchBox.instance.scrollPanel.Refresh();
             };
-
-            SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterTag.instance.tagDropDownMenu);
-            SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterTag.instance.tagDropDownMenu);
 
         }
 
