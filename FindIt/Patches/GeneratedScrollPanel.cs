@@ -212,7 +212,7 @@ namespace FindIt
                             {
                                 if (!asset.author.IsNullOrWhiteSpace() && (asset.steamID != 0))
                                 {
-                                    m_dlcSprite.opacity = 0.55f;
+                                    m_dlcSprite.opacity = 0.2f;
                                     m_dlcSprite.isVisible = true;
                                     m_dlcSprite.spriteName = "UIFilterWorkshopItems";
                                     m_dlcSprite.tooltip = "By " + asset.author + "\n" + Translations.Translate("FIF_UIS_WS");

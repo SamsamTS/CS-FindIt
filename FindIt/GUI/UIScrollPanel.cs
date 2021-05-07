@@ -546,7 +546,7 @@ namespace FindIt.GUI
                         {
                             if (!data.asset.author.IsNullOrWhiteSpace() && (data.asset.steamID != 0))
                             {
-                                m_dlcSprite.opacity = 0.55f;
+                                m_dlcSprite.opacity = 0.45f;
                                 m_dlcSprite.isVisible = true;
                                 m_dlcSprite.spriteName = "UIFilterWorkshopItems";
                                 m_dlcSprite.tooltip = "By " + data.asset.author + "\n" + Translations.Translate("FIF_UIS_WS");
