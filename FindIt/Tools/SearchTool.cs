@@ -187,7 +187,7 @@ namespace FindIt
 
             // filter out marker prop if not in editor mode
             if ((!FindIt.inEditor && !Settings.showPropMarker) && (asset.propType == Asset.PropType.PropsMarker)) return false;
-            
+
             try
             {
                 // check vanila & workshop filters
@@ -244,19 +244,19 @@ namespace FindIt
         private bool CheckVanillaWorkshopFilter(Asset asset)
         {
             // filter out custom asset
-            if(!Settings.useWorkshopFilter)
+            if (!Settings.useWorkshopFilter)
             {
                 if (FindIt.isNext2Enabled && next2Assets.Contains(asset)) return false;
                 if (FindIt.isETSTEnabled && etstAssets.Contains(asset)) return false;
                 if (FindIt.isOWTTEnabled && owttAssets.Contains(asset)) return false;
                 if (asset.prefab.m_isCustomContent) return false;
-            } 
+            }
 
             // filter out vanilla asset. will not filter out content creater pack assets
             if (!Settings.useVanillaFilter)
             {
                 bool notGeneratedByMods = true;
-                if (FindIt.isNext2Enabled && next2Assets.Contains(asset)) notGeneratedByMods =  false;
+                if (FindIt.isNext2Enabled && next2Assets.Contains(asset)) notGeneratedByMods = false;
                 else if (FindIt.isETSTEnabled && etstAssets.Contains(asset)) notGeneratedByMods = false;
                 else if (FindIt.isOWTTEnabled && owttAssets.Contains(asset)) notGeneratedByMods = false;
 

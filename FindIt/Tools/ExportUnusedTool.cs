@@ -46,7 +46,7 @@ namespace FindIt
                 if (!asset.prefab.m_isCustomContent) continue;
                 if (asset.steamID == 0) continue;
                 AssetTagList.instance.UpdateAssetInstanceCount(asset, true);
-                if (asset.instanceCount > 0 || asset.poInstanceCount > 0) 
+                if (asset.instanceCount > 0 || asset.poInstanceCount > 0)
                 {
                     steamIds.Remove(asset.steamID);
                 }
@@ -72,7 +72,7 @@ namespace FindIt
                 {
                     file.WriteLine($"<br>It seems like you're using Procedural Objects. This list already considers POs<br>");
                 }
-                
+
                 foreach (ulong id in steamIds)
                 {
                     if (unusedIDs.ContainsKey(id))

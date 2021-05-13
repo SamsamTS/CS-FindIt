@@ -19,7 +19,7 @@ namespace FindIt
 
         public static CameraController cameraController;
         public static PrefabInfo selectedPrefab;
-        
+
         public static void Initialize()
         {
             // Find camera controller
@@ -68,7 +68,7 @@ namespace FindIt
             {
                 if (props.m_buffer[i].Info == prefab)
                 {
-                    bool isValid = ((PropInstance.Flags)props.m_buffer[i].m_flags != PropInstance.Flags.None && (PropInstance.Flags)props.m_buffer[i].m_flags != PropInstance.Flags.Deleted) ;
+                    bool isValid = ((PropInstance.Flags)props.m_buffer[i].m_flags != PropInstance.Flags.None && (PropInstance.Flags)props.m_buffer[i].m_flags != PropInstance.Flags.Deleted);
                     if (!isValid) continue;
                     SetCameraPosition(props.m_buffer[i].Position);
                     propInstanceCounter = (i + 1) % props.m_size;

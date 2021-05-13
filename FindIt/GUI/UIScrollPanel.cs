@@ -162,7 +162,6 @@ namespace FindIt.GUI
     {
         private ItemData currentData;
         private UISprite m_tagSprite;
-        // private UISprite m_steamSprite;
         private UISprite m_dlcSprite;
 
         private UICheckBox m_batchCheckBox;
@@ -294,26 +293,6 @@ namespace FindIt.GUI
                     m_tagSprite.isVisible = false;
                 }
             };
-
-            /*
-            m_steamSprite = component.AddUIComponent<UISprite>();
-            m_steamSprite.size = new Vector2(26, 16);
-            m_steamSprite.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
-            m_steamSprite.spriteName = "SteamWorkshop";
-            m_steamSprite.opacity = 0.1f;
-            m_steamSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
-            m_steamSprite.relativePosition = new Vector3(component.width - m_steamSprite.width - 5, component.height - m_steamSprite.height - 5);
-            m_steamSprite.isVisible = false;
-            m_steamSprite.eventMouseLeave += (c, p) =>
-            {
-                m_steamSprite.tooltipBox.Hide();
-            };
-
-            if (PlatformService.IsOverlayEnabled())
-            {
-                m_steamSprite.eventMouseUp += OnTooltipClicked;
-            }
-            */
 
             m_dlcSprite = component.AddUIComponent<UISprite>();
             m_dlcSprite.size = new Vector2(18, 18);
@@ -481,36 +460,6 @@ namespace FindIt.GUI
                     }
                     else m_instanceCountLabel.isVisible = false;
                 }
-
-                /*
-                if (m_steamSprite != null)
-                {
-                    m_steamSprite.tooltip = null;
-
-                    if (data.asset != null)
-                    {
-                        m_steamSprite.isVisible = data.asset.steamID != 0;
-                        if (!data.asset.author.IsNullOrWhiteSpace())
-                        {
-                            if (data.asset.steamID != 0)
-                                m_steamSprite.tooltip = "By " + data.asset.author + "\n" + Translations.Translate("FIF_UIS_WS");
-                        }
-                    }
-
-                    if (m_steamSprite.containsMouse)
-                    {
-                        m_steamSprite.tooltipBox.isVisible = m_steamSprite.tooltip != null;
-                    }
-
-                    m_steamSprite.isVisible = m_steamSprite.tooltip != null;
-
-                    if (m_steamSprite.containsMouse)
-                    {
-                        m_steamSprite.RefreshTooltip();
-                        m_steamSprite.tooltipBox.isVisible = m_steamSprite.tooltip != null;
-                    }
-                }
-                */
 
                 if (m_dlcSprite != null)
                 {

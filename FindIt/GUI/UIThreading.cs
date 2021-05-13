@@ -118,6 +118,7 @@ namespace FindIt
                 }
                 else
                 {
+                    // From Brot:
                     // Simulate a search
                     // Select search box text only if FindIt was opened via a category-specific hotkey or the "all"
                     // hotkey. This is intended to make overall behaviour more intuitive now that we're storing search

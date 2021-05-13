@@ -121,53 +121,6 @@ namespace FindIt
                             }
                         };
 
-                        /*
-                        // Adding steam icon
-                        if (asset.steamID != 0)
-                        {
-                            UISprite steamSprite = component.AddUIComponent<UISprite>();
-                            steamSprite.size = new Vector2(26, 16);
-                            steamSprite.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
-                            steamSprite.spriteName = "SteamWorkshop";
-                            steamSprite.opacity = 0.05f;
-                            steamSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
-                            steamSprite.relativePosition = new Vector3(component.width - steamSprite.width - 5, component.height - steamSprite.height - 5);
-                            steamSprite.eventMouseLeave += (c, p) =>
-                            {
-                                steamSprite.tooltipBox.Hide();
-                            };
-
-                            if (!asset.author.IsNullOrWhiteSpace())
-                            {
-                                steamSprite.tooltip = "By " + asset.author + "\n" + Translations.Translate("FIF_UIS_WS");
-                            }
-
-                            if (PlatformService.IsOverlayEnabled())
-                            {
-                                steamSprite.eventMouseUp += (c, p) =>
-                                {
-                                    if (!p.used && p.buttons == UIMouseButton.Right)
-                                    {
-                                        PublishedFileId publishedFileId = new PublishedFileId(asset.steamID);
-
-                                        if (publishedFileId != PublishedFileId.invalid)
-                                        {
-                                            if (!Settings.useDefaultBrowser)
-                                            {
-                                                PlatformService.ActivateGameOverlayToWorkshopItem(publishedFileId);
-                                            }
-                                            else
-                                            {
-                                                System.Diagnostics.Process.Start("https://steamcommunity.com/sharedfiles/filedetails/?id=" + publishedFileId);
-                                            }
-                                            p.Use();
-                                        }
-                                    }
-                                };
-                            }
-                        }
-                        */
-
                         // adding DLC/steam icon
                         UISprite m_dlcSprite = component.AddUIComponent<UISprite>();
                         m_dlcSprite.size = new Vector2(16, 16);

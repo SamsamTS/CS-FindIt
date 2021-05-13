@@ -13,7 +13,7 @@ namespace FindIt.GUI
 
         public enum Category
         {
-            Network = 0, 
+            Network = 0,
             Ploppable,
             Prop,
             Decal,
@@ -197,7 +197,7 @@ namespace FindIt.GUI
         }
 
         private void SelectTab(int tab)
-        { 
+        {
             if (tab == -1)
             {
                 for (int i = 0; i < 8; i++)
@@ -206,7 +206,7 @@ namespace FindIt.GUI
                 }
                 return;
             }
-            
+
             for (int i = 0; i < 8; i++)
             {
                 toggles[i].isChecked = false;

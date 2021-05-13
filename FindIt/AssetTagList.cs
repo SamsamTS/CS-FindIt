@@ -354,53 +354,6 @@ namespace FindIt
             return tag;
         }
 
-        // Inherited from Find It 1. I don't knonw why this is needed.
-        /*
-        private void CleanDictionarys()
-        {
-            foreach (Asset asset in assets.Values)
-            {
-                List<string> keys = asset.tagsTitle.ToList();
-                foreach (string key in keys)
-                {
-                    if (key.EndsWith("s"))
-                    {
-                        string tag = key.Substring(0, key.Length - 1);
-                        if (tagsTitleDictionary.ContainsKey(tag))
-                        {
-                            if (tagsTitleDictionary.ContainsKey(key))
-                            {
-                                tagsTitleDictionary[tag] += tagsTitleDictionary[key];
-                                tagsTitleDictionary.Remove(key);
-                            }
-                            asset.tagsTitle.Remove(key);
-                            asset.tagsTitle.Add(tag);
-                        }
-                    }
-                }
-
-                keys = asset.tagsDesc.ToList();
-                foreach (string key in keys)
-                {
-                    if (key.EndsWith("s"))
-                    {
-                        string tag = key.Substring(0, key.Length - 1);
-                        if (tagsDescDictionary.ContainsKey(tag))
-                        {
-                            if (tagsDescDictionary.ContainsKey(key))
-                            {
-                                tagsDescDictionary[tag] += tagsDescDictionary[key];
-                                tagsDescDictionary.Remove(key);
-                            }
-                            asset.tagsDesc.Remove(key);
-                            asset.tagsDesc.Add(tag);
-                        }
-                    }
-                }
-            }
-        }
-        */
-
         // if SteamID == 0, not a workshop asset
         private static ulong GetSteamID(PrefabInfo prefab)
         {
