@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Language UniqueName="fi" ReadableName="suomi">
+  <Translations>
+    <Translation ID="FIF_DESC" String="Etsi ja järjestä assettisi" />
+    <Translation ID="FIF_SET_DM" String="Poista virheenkorjausloki käytöstä" />
+    <Translation ID="FIF_SET_DMTP" String="Jos valittu, virheenkorjausviestit eivät tallennu lokiin." />
+    <Translation ID="FIF_SET_CMT" String="Keskitä päätyökalurivi" />
+    <Translation ID="FIF_SET_CMTTP" String="Päätyökalurivi keskitetään, jos se ylittää tietyn pituuden." />
+    <Translation ID="FIF_SET_UL" String="Avaa kaikki" />
+    <Translation ID="FIF_SET_ULTP" String="Voit valita ja asettaa esineitä, vaikka ne olisivat lukittuja." />
+    <Translation ID="FIF_SET_BP" String="Korjaa huonoja proppeja, seuraavalla kerralla, kun tallennus ladataan" />
+    <Translation ID="FIF_SET_BPTP" String="Poista kaikki propit, jotka aiheuttavat ongelmia. Tarkista asetus ja lataa tallennuksesi." />
+    <Translation ID="FIF_SE_WF" String="Mukautettu" />
+    <Translation ID="FIF_SE_VF" String="Vanilla" />
+    <Translation ID="FIF_SE_IA" String="Kaikki" />
+    <Translation ID="FIF_SE_IN" String="Verkko" />
+    <Translation ID="FIF_SE_IP" String="Plopattava" />
+    <Translation ID="FIF_SE_IG" String="Kasvava" />
+    <Translation ID="FIF_SE_IR" String="RICO" />
+    <Translation ID="FIF_SE_IPR" String="Prop" />
+    <Translation ID="FIF_SE_ID" String="Decal" />
+    <Translation ID="FIF_SE_IT" String="Puu" />
+    <Translation ID="FIF_SE_LV" String="Rakennuksen taso" />
+    <Translation ID="FIF_SE_SZ" String="Koko:" />
+    <Translation ID="FIF_SE_SC" String="Pidä pohjassa SHIFT tai CTRL valitaksesi useamman kategorian" />
+    <Translation ID="FIF_PLOP_E" String="Sähkö" />
+    <Translation ID="FIF_PLOP_W" String="Vesi/Jätevesi" />
+    <Translation ID="FIF_PLOP_G" String="Roskat" />
+    <Translation ID="FIF_PLOP_H" String="Terveydenhuolto" />
+    <Translation ID="FIF_PLOP_F" String="Palokunta" />
+    <Translation ID="FIF_PLOP_P" String="Poliisi" />
+    <Translation ID="FIF_PLOP_ED" String="Koulutus" />
+    <Translation ID="FIF_PLOP_PT" String="Julkinen liikenne" />
+    <Translation ID="FIF_PLOP_PPW" String="Puisto/Aukio/Luonto" />
+    <Translation ID="FIF_PLOP_U" String="Uniikit rakennukset" />
+    <Translation ID="FIF_PLOP_I" String="Teollisuus" />
+    <Translation ID="FIF_PLOP_D" String="Katastrofi" />
+    <Translation ID="FIF_PLOP_C" String="Kampus" />
+    <Translation ID="FIF_PLOP_V" String="Yliopistotason urheilu" />
+    <Translation ID="FIF_PLOP_FI" String="Kalastus" />
+    <Translation ID="FIF_GR_LDR" String="Matalan tiheyden asutus" />
+    <Translation ID="FIF_GR_HDR" String="Korkean tiheyden asutus" />
+    <Translation ID="FIF_GR_LDRE" String="Matalan tiheyden asutus EKO" />
+    <Translation ID="FIF_GR_HDRE" String="Korkean tiheyden asutus EKO" />
+    <Translation ID="FIF_GR_LDC" String="Matalan tiheyden kaupallinen" />
+    <Translation ID="FIF_GR_HDC" String="Korkean tiheyden kaupallinen" />
+    <Translation ID="FIF_GR_CE" String="Kaupallinen EKO" />
+    <Translation ID="FIF_GR_O" String="Toimisto" />
+    <Translation ID="FIF_GR_ITC" String="IT-rypäs" />
+    <Translation ID="FIF_GR_GI" String="Yleinen teollisuus" />
+    <Translation ID="FIF_GR_FAI" String="Maatalous" />
+    <Translation ID="FIF_GR_FOI" String="Metsätalous" />
+    <Translation ID="FIF_GR_OII" String="Öljyteollisuus" />
+    <Translation ID="FIF_GR_ORI" String="Kaivosteollisuus" />
+    <Translation ID="FIF_GR_LC" String="Vapaa-ajan kaupallinen" />
+    <Translation ID="FIF_GR_TC" String="Matkailu" />
+    <Translation ID="FIF_SO_RETP" String="Lajittele merkityksellisyyden mukaan. Sama kuin alkuperäisessä Find It:ssä" />
+    <Translation ID="FIF_SO_NETP" String="Lajittele viimeksi ladattujen mukaan" />
+    <Translation ID="FIF_SO_RE" String="Merkityksellisyys" />
+    <Translation ID="FIF_SO_NE" String="Viimeisimmät lataukset" />
+    <Translation ID="TRN_CHOICE" String="Aseta kieli (vaihtuu seuraavalla kerralla)" />
+    <Translation ID="TRN_SYS" String="Käytä järjestelmän kieltä" />
+    <Translation ID="FIF_PROP_IND" String="Teollinen" />
+    <Translation ID="FIF_PROP_PAR" String="Puistot" />
+    <Translation ID="FIF_PROP_COM" String="Yleinen" />
+    <Translation ID="FIF_PROP_RES" String="Asuinalue" />
+    <Translation ID="FIF_PROP_BIL" String="Mainostaulut" />
+    <Translation ID="FIF_PROP_SPE" String="Erikoismainostaulut" />
+    <Translation ID="FIF_PROP_LIG" String="Valot" />
+    <Translation ID="FIF_PROP_NAT" String="Luonnollinen" />
+    <Translation ID="FIF_PROP_UNS" String="Lajittelematon" />
+    <Translation ID="FIF_SET_KS" String="Pikanäppäin" />
+    <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
+    <Translation ID="FIF_SET_CTFL" String="Mukautettujen tägien tiedostosijainti (Muista varmuuskopioida tämä tiedosto ajoittain)" />
+    <Translation ID="FIF_SET_CTFOP" String="Näytä resurssienhallinnassa" />
+    <Translation ID="FIF_SE_SCTP" String="Näytä mukautettujen tägien paneeli" />
+    <Translation ID="FIF_POP_SCR" String="Käytä hiiren rullaa liikkuaksesi ylös/alas" />
+    <Translation ID="FIF_POP_CON" String="Vahvista" />
+    <Translation ID="FIF_POP_CAN" String="Peruuta" />
+    <Translation ID="FIF_POP_NU" String="Tätä ei voi perua." />
+    <Translation ID="FIF_CO_TIT" String="Yhdistä" />
+    <Translation ID="FIF_CO_MSG" String="Valitse olemassaoleva tägi, jonka kanssa yhdistää." />
+    <Translation ID="FIF_CO_CH" String="Valitse" />
+    <Translation ID="FIF_CO_CHTP" String="Yhdistä tämän olemassaolevan tägin kanssa" />
+    <Translation ID="FIF_CO_CHLBL" String="Yhdistä:" />
+    <Translation ID="FIF_CO_NELBL" String="Valitse olemassaoleva tägi" />
+    <Translation ID="FIF_DE_TIT" String="Poista" />
+    <Translation ID="FIF_DE_MSG" String="Oletko varma, että haluat poistaa tämän tägin?" />
+    <Translation ID="FIF_RE_TIT" String="Nimeä uudelleen" />
+    <Translation ID="FIF_RE_MSG" String="Kirjoita tägille uusi nimi ja paina Enter." />
+    <Translation ID="FIF_RE_ITP" String="Paina Enter antaaksesi uuden nimen tägille" />
+    <Translation ID="FIF_RE_ELBL" String="Kirjoita uusi nimi tägille" />
+    <Translation ID="FIF_RE_NEWLBL" String="Tägin uusi nimi:" />
+    <Translation ID="FIF_RE_SLBL" String="Tämä nimi on liian lyhyt" />
+    <Translation ID="FIF_RE_AELBL" String="Tämä tägi on jo olemassa" />
+    <Translation ID="FIF_CT_TIT" String="Mukautettu tägi" />
+    <Translation ID="FIF_CT_DDMSG" String="Lisää olemassaoleva tägi tähän assettiin:" />
+    <Translation ID="FIF_CT_DDTP" String="Lisää olemassaoleva tägi tähän assettiin" />
+    <Translation ID="FIF_CT_ILBL1" String="Tai" />
+    <Translation ID="FIF_CT_ILBL2" String="Kirjoita uusi nimi tägille ja paina Enter:" />
+    <Translation ID="FIF_CT_ITP" String="Paina Enter lisätäksesi uusia tägejä" />
+    <Translation ID="FIF_SET_CTLS" String="Lajittele mukautettujen tägien lista aakkosjärjestyksessä" />
+    <Translation ID="FIF_TAG_DDTP" String="Näytä vain assetit, joissa on tämä tägi" />
+    <Translation ID="FIF_TAG_REF" String="Päivitä" />
+    <Translation ID="FIF_TAG_REFTP" String="Päivitä mukautettujen tägien pudotusvalikko" />
+    <Translation ID="FIF_TAG_REN" String="Nimeä uudelleen" />
+    <Translation ID="FIF_TAG_RENTP" String="Nimeä tämä tägi uudelleen" />
+    <Translation ID="FIF_TAG_COM" String="Yhdistä" />
+    <Translation ID="FIF_TAG_COMTP" String="Yhdistä tämä tägi toisen kanssa" />
+    <Translation ID="FIF_TAG_DEL" String="Poista" />
+    <Translation ID="FIF_TAG_DELTP" String="Poista tämä tägi" />
+    <Translation ID="FIF_UIS_WS" String="Klikkaa hiiren oikealla näppäimellä tarkastellaksesi tätä assettia Steam Workshopissa" />
+    <Translation ID="FIF_TREE_SM" String="Pienet puut" />
+    <Translation ID="FIF_TREE_MD" String="Keskikokoiset puut" />
+    <Translation ID="FIF_TREE_LG" String="Suuret puut" />
+    <Translation ID="FIF_TAG_BAT" String="Joukko" />
+    <Translation ID="FIF_TAG_BAC" String="Takaisin" />
+    <Translation ID="FIF_TAG_ADD" String="Lisää" />
+    <Translation ID="FIF_TAG_ADDTP" String="Lisää tägi valittuihin assetteihin" />
+    <Translation ID="FIF_TAG_REM" String="Poista" />
+    <Translation ID="FIF_TAG_REMTP" String="Poista tägi valituista asseteista" />
+    <Translation ID="FIF_TAG_CLE" String="Tyhjennä" />
+    <Translation ID="FIF_TAG_CLETP" String="Tyhjennä valinta" />
+    <Translation ID="FIF_ADD_TIT" String="Lisää joukko" />
+    <Translation ID="FIF_ADD_NUM" String="Valittujen assettien määrä:" />
+    <Translation ID="FIF_ADD_ADD" String="Lisää olemassaoleva tägi valittuihin assetteihin:" />
+    <Translation ID="FIF_ADD_CHTP" String="Lisää tähän olemassaolevaan tägiin" />
+    <Translation ID="FIF_ADD_TAG" String="Tägi:" />
+    <Translation ID="FIF_ADD_ELBL" String="Syötä uusi tägi tai valitse olemassaoleva" />
+    <Translation ID="FIF_REM_TIT" String="Poisto joukko" />
+    <Translation ID="FIF_REM_REM" String="Poista tägi valituista asseteista" />
+    <Translation ID="FIF_REM_CHTP" String="Poista tämä tägi" />
+    <Translation ID="FIF_REM_ELBL" String="Valitse tägi" />
+    <Translation ID="FIF_SE_EFI" String="Näytä lisää suodattimia" />
+    <Translation ID="FIF_EF_AC" String="Asset Creator" />
+    <Translation ID="FIF_EF_BH" String="Rakennuksen korkeus" />
+    <Translation ID="FIF_EF_MET" String="metriä" />
+    <Translation ID="FIF_EF_FEE" String="jalkaa" />
+    <Translation ID="FIF_SET_ACLS" String="Lajittele asset creatorin lista aakkosjärjestyksessä" />
+    <Translation ID="FIF_GR_RAN" String="Satunnainen valinta" />
+    <Translation ID="FIF_NET_SMR" String="Pienet tiet" />
+    <Translation ID="FIF_NET_MDR" String="Keskikokoiset tiet" />
+    <Translation ID="FIF_NET_LGR" String="Suuret tiet" />
+    <Translation ID="FIF_NET_HGHW" String="Moottoritiet" />
+    <Translation ID="FIF_NET_PATH" String="Polut" />
+    <Translation ID="FIF_NET_WALL" String="Seinät ja aidat" />
+    <Translation ID="FIF_NET_WAT" String="Vesirakenteet" />
+    <Translation ID="FIF_PROP_MAR" String="Editor-merkit" />
+    <Translation ID="FIF_NET_TNR" String="Pikkuruiset tiet" />
+    <Translation ID="FIF_NET_UTI" String="Julkiset palvelut" />
+    <Translation ID="FIF_NET_TRA" String="Juna" />
+    <Translation ID="FIF_SET_PM" String="Näytä marker-tyyppiset propit pelimuodossa" />
+    <Translation ID="FIF_SET_PMTP" String="Marker-tyyppiset propit ovat näkymättömiä ja suurin osa ei toimi pelimuodossa. Käytä Move It -modia poistaaksesti ne." />
+
+  </Translations>
+</Language>

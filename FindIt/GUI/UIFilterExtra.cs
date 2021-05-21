@@ -96,6 +96,8 @@ namespace FindIt.GUI
             UniverisityCity,
             ModernCityCenter,
             ModernJapan,
+            TrainStations,
+            BridgesPiers,
             Concerts,
             DeluxeUpgrade,
             MatchDay,
@@ -420,6 +422,8 @@ namespace FindIt.GUI
             DLCDropDownMenu.AddItem("University City CCP");
             DLCDropDownMenu.AddItem("Modern City Center CCP");
             DLCDropDownMenu.AddItem("Modern Japan CCP");
+            DLCDropDownMenu.AddItem("Train Stations CCP");
+            DLCDropDownMenu.AddItem("Bridges & Piers CCP");
             DLCDropDownMenu.AddItem("Concerts DLC");
             DLCDropDownMenu.AddItem("Deluxe Upgrade Pack");
             DLCDropDownMenu.AddItem("Match Day DLC");

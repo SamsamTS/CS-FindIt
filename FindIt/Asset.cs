@@ -596,6 +596,9 @@ namespace FindIt
             else if (dlc == SteamHelper.DLC_BitMask.ModderPack4) author = "KingLeno";
             else if (dlc == SteamHelper.DLC_BitMask.ModderPack5) author = "AmiPolizeiFunk";
             else if (dlc == SteamHelper.DLC_BitMask.ModderPack6) author = "Ryuichi Kaminogi";
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack7) author = "BadPeanut";
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack8) author = "Armesto";
+
             else return false;
 
             return true;

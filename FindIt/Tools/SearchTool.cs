@@ -603,6 +603,10 @@ namespace FindIt
 
             else if (dlc != SteamHelper.DLC_BitMask.ModderPack6 && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
                 == (int)UIFilterExtra.DLCDropDownOptions.ModernJapan) return false;
+            else if (dlc != SteamHelper.DLC_BitMask.ModderPack7 && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+                == (int)UIFilterExtra.DLCDropDownOptions.TrainStations) return false;
+            else if (dlc != SteamHelper.DLC_BitMask.ModderPack8 && UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex
+                == (int)UIFilterExtra.DLCDropDownOptions.BridgesPiers) return false;
 
             return true;
         }

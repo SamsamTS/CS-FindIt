@@ -723,6 +723,16 @@ namespace FindIt.GUI
                 sprite.tooltip = "Modern Japan Content Creator Pack by Ryuichi Kaminogi";
                 sprite.spriteName = "Modderpack6Icon";
             }
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack7)
+            {
+                sprite.tooltip = "Train Stations Content Creator Pack by BadPeanut";
+                sprite.spriteName = "Modderpack7Icon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack8)
+            {
+                sprite.tooltip = "Bridges & Piers Content Creator Pack by Armesto";
+                sprite.spriteName = "Modderpack8Icon";
+            }
             else
             {
                 sprite.tooltip = "Unknown DLC";
