@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using ColossalFramework;
-using FindIt.GUI;
-using ColossalFramework.UI;
-using ColossalFramework.IO;
-using UnityEngine;
-using System.Reflection;
+﻿using UnityEngine;
 
 namespace FindIt
 {
