@@ -13,16 +13,16 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.5.1";
+        public const string version = "2.5.2";
         public const bool isBeta = true;
-        public const double updateNoticeDate = 20210522;
+        public const double updateNoticeDate = 20210630;
         public const string updateNotice =
 
-            "- Add support for the two new content creator packs:\n" +
-            "       Train Stations by BadPeanut\n" +
-            "       Bridges & Piers by Armesto\n\n" +
+            "- Add shortcut buttons to see assets in following mods:\n" +
+            "       Ploppable RICO Revisited\n" +
+            "       Mesh Info\n\n" +
 
-            "- Update translations\n";
+            "Double-click asset thumbnails to see the shortcut menu\n";
 
         public string Name
         {

@@ -294,6 +294,14 @@ namespace FindIt.GUI
                 }
             };
 
+            component.eventDoubleClick += (c, p) =>
+            {
+                if (currentData != null && currentData.asset != null)
+                {
+                    UIDoubleClickMenu.ShowAt(component, currentData.asset);
+                }
+            };
+
             m_dlcSprite = component.AddUIComponent<UISprite>();
             m_dlcSprite.size = new Vector2(18, 18);
             m_dlcSprite.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");

@@ -44,6 +44,11 @@ namespace FindIt
         /// </summary>
         public static bool isOWTTEnabled = false;
 
+        /// <summary>
+        /// MeshInfo mod enabled?
+        /// </summary>
+        public static bool isMeshInfoEnabled = false;
+
         public bool firstVisibleFlag = false;
 
         public static AssetTagList list;
@@ -78,6 +83,7 @@ namespace FindIt
                 isNext2Enabled = IsAssemblyEnabled("networkextensions2");
                 isETSTEnabled = IsAssemblyEnabled("elevatedtrainstationtrack");
                 isOWTTEnabled = IsAssemblyEnabled("singletraintrack");
+                isMeshInfoEnabled = IsAssemblyEnabled("meshinfo");
 
                 list = AssetTagList.instance;
                 if (isNext2Enabled) AssetTagList.instance.SetNext2Assets();

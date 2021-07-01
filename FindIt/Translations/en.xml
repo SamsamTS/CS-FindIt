@@ -156,11 +156,11 @@
     <Translation ID="FIF_QM_TIT" String="Quick Menu" />
     <Translation ID="FIF_UIS_UN" String="Unused" />
     <Translation ID="FIF_UIS_IN" String="In Use" />
-    <Translation ID="FIF_SET_ICTP" String="This option slows down search speed. Disable it when it is not needed" />
+    <Translation ID="FIF_SET_ICTP" String="This option slightly slows down search speed. Disable it when it is not needed" />
+    <Translation ID="FIF_SET_PO" String="Include Procedural Objects" />
     <Translation ID="FIF_SET_ICO" String="Use original sorting option" />
     <Translation ID="FIF_SET_ICUS" String="Show used assets on top" />
     <Translation ID="FIF_SET_ICUN" String="Show unused assets on top" />
-    <Translation ID="FIF_SET_PO" String="Include Procedural Objects" />
     <Translation ID="FIF_TAG_BATTP" String="Batch Editing" />
     <Translation ID="FIF_SE_SEBTP" String="Clear the search box" />
     <Translation ID="FIF_SET_DB" String="Use system default browser instead of Steam overlay" />
@@ -194,7 +194,7 @@
     <Translation ID="FIF_EF_UNEXPSE" String="Export Searched" />
     <Translation ID="FIF_EF_UNEXPTPSE" String="Export the list of unused workshop ID's from the last search into an HTML file with workshop links" />
     <Translation ID="FIF_EF_LC" String="Local Custom" />
-    <Translation ID="FIF_EF_WC" String="Workshop Subscription" />
+    <Translation ID="FIF_EF_WC" String="Workshop Custom" />
     <Translation ID="FIF_EF_DLC" String="Require DLC/CCP" />
     <Translation ID="FIF_LOC_TOOL" String="Click to locate next instance of the selected asset. Hold SHIFT and click to locate the next PO instance." />
     <Translation ID="FIF_REF_DIS" String="Refresh display" />
@@ -204,6 +204,14 @@
     <Translation ID="FIF_SE_SIZEX" String="Click this x to reset the building size filters" />
     <Translation ID="FIF_SET_UIVP" String="Do not show Find It 2's extra UI on vanilla panels(restart required)" />
     <Translation ID="FIF_SET_UIVPTP" String="Including: custom tag icons, steam icons, and DLC icons" />
+    <Translation ID="FIF_DOU_MESH" String="View in Mesh Info" />
+    <Translation ID="FIF_DOU_MESHNO" String="Mesh Info mod not installed or enabled" />
+    <Translation ID="FIF_DOU_MESHTYPE" String="Mesh Info mod only supports custom non-network assets" />
+    <Translation ID="FIF_DOU_MESHOPEN" String="See this asset in Mesh Info mod" />
+    <Translation ID="FIF_DOU_RICO" String="View in RICO Revisited" />
+    <Translation ID="FIF_DOU_RICONO" String="Ploppable RICO Revisited mod not installed or enabled" />
+    <Translation ID="FIF_DOU_RICOTYPE" String="Ploppable RICO Revisited mod only supports building assets" />
+    <Translation ID="FIF_DOU_RICOOPEN" String="See this asset in Ploppable RICO Revisited mod" />
 
   </Translations>
 </Language>

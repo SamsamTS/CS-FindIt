@@ -70,6 +70,7 @@
     <Compile Include="GUI\PreviewRenderer.cs" />
     <Compile Include="GUI\ThumbnailManager.cs" />
     <Compile Include="GUI\UIAssetTypePanel.cs" />
+    <Compile Include="GUI\UIDoubleClickMenu.cs" />
     <Compile Include="GUI\UIFilterDecal.cs" />
     <Compile Include="GUI\UIFilterExtra.cs" />
     <Compile Include="GUI\UIFilterGrowable.cs" />
