@@ -13,11 +13,20 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.5.2";
+        public const string version = "2.6";
         public const bool isBeta = true;
-        public const double updateNoticeDate = 20210630;
+        public const double updateNoticeDate = 20210702;
         public const string updateNotice =
 
+            "- Marker type props are no longer hidden by default in Game mode\n\n" +
+
+            "- Recent DLs sorting now also works with local custom assets\n\n" +
+
+            "- Add a shortcut button to open the parent folder of an asset\n\n" +
+
+            "- Custom non-workshop assets have a new icon on their thumbnails\n\n" +
+
+            "From 2.5.2 beta:\n"+
             "- Add shortcut buttons to see assets in following mods:\n" +
             "       Ploppable RICO Revisited\n" +
             "       Mesh Info\n\n" +
@@ -169,12 +178,7 @@ namespace FindIt
                 string path = Path.Combine(DataLocation.localApplicationData, "FindItCustomTags.xml");
                 UITextField customTagsFilePath = (UITextField)group.AddTextfield(Translations.Translate("FIF_SET_CTFL"), path, _ => { }, _ => { });
                 customTagsFilePath.width = panel.width - 30;
-
-                // from aubergine10's AutoRepair
-                if (Application.platform == RuntimePlatform.WindowsPlayer)
-                {
-                    group.AddButton(Translations.Translate("FIF_SET_CTFOP"), () => System.Diagnostics.Process.Start("explorer.exe", "/select," + path));
-                }
+                group.AddButton(Translations.Translate("FIF_SET_CTFOP"), () => UnityEngine.Application.OpenURL(DataLocation.localApplicationData));
 
                 // shortcut keys
                 panel.gameObject.AddComponent<MainButtonKeyMapping>();

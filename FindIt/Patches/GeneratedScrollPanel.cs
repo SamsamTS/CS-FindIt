@@ -170,6 +170,13 @@ namespace FindIt
                                     m_dlcSprite.spriteName = "UIFilterWorkshopItems";
                                     m_dlcSprite.tooltip = "By " + asset.author + "\n" + Translations.Translate("FIF_UIS_WS");
                                 }
+                                else
+                                {
+                                    m_dlcSprite.opacity = 0.45f;
+                                    m_dlcSprite.isVisible = true;
+                                    m_dlcSprite.spriteName = "UIFilterProcessingBuildings";
+                                    m_dlcSprite.tooltip = Translations.Translate("FIF_UIS_CNWS");
+                                }
                             }
                         }
 
@@ -189,7 +196,7 @@ namespace FindIt
                                         }
                                         else
                                         {
-                                            System.Diagnostics.Process.Start("https://steamcommunity.com/sharedfiles/filedetails/?id=" + publishedFileId);
+                                            UnityEngine.Application.OpenURL("https://steamcommunity.com/sharedfiles/filedetails/?id=" + publishedFileId);
                                         }
                                         p.Use();
                                     }

@@ -212,6 +212,11 @@
     <Translation ID="FIF_DOU_RICONO" String="Ploppable RICO Revisited mod not installed or enabled" />
     <Translation ID="FIF_DOU_RICOTYPE" String="Ploppable RICO Revisited mod only supports building assets" />
     <Translation ID="FIF_DOU_RICOOPEN" String="See this asset in Ploppable RICO Revisited mod" />
+    <Translation ID="FIF_DOU_FOLD" String="Open File Folder" />
+    <Translation ID="FIF_DOU_FOLDCUS" String="This feature only works with custom assets" />
+    <Translation ID="FIF_DOU_FOLDOPEN" String="Open the parent folder of this asset" />
+    <Translation ID="FIF_UIS_CNWS" String="Custom non-workshop asset" />
+
 
   </Translations>
 </Language>

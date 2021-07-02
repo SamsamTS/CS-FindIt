@@ -15,8 +15,6 @@ namespace FindIt
 
         internal static bool centerToolbar = true;
 
-        internal static bool fixBadProps = false;
-
         internal static bool useDefaultBrowser = false;
 
         internal static bool hideExtraUIonVP = false;
@@ -25,8 +23,6 @@ namespace FindIt
         // true = sort alphabetically
         internal static bool customTagListSort = false;
         internal static bool assetCreatorListSort = false;
-
-        internal static bool showPropMarker = false;
 
         internal static bool showInstancesCounter = false;
 
@@ -93,9 +89,6 @@ namespace FindIt
         [XmlElement("CenterToolbar")]
         public bool CenterToolbar { get => Settings.centerToolbar; set => Settings.centerToolbar = value; }
 
-        [XmlElement("FixBadProps")]
-        public bool FixBadProps { get => Settings.fixBadProps; set => Settings.fixBadProps = value; }
-
         [XmlElement("UseDefaultBrowser")]
         public bool UseDefaultBrowser { get => Settings.useDefaultBrowser; set => Settings.useDefaultBrowser = value; }
 
@@ -107,9 +100,6 @@ namespace FindIt
 
         [XmlElement("AssetCreatorListSort")]
         public bool AssetCreatorListSort { get => Settings.assetCreatorListSort; set => Settings.assetCreatorListSort = value; }
-
-        [XmlElement("ShowPropMarker")]
-        public bool ShowPropMarker { get => Settings.showPropMarker; set => Settings.showPropMarker = value; }
 
         [XmlElement("ShowInstancesCounter")]
         public bool ShowInstancesCounter { get => Settings.showInstancesCounter; set => Settings.showInstancesCounter = value; }

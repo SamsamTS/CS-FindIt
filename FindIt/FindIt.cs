@@ -358,37 +358,6 @@ namespace FindIt
             return false;
         }
 
-        public static void FixBadProps()
-        {
-            PropInstance[] buffer = PropManager.instance.m_props.m_buffer;
-            uint size = PropManager.instance.m_props.m_size;
-
-            string log = "";
-
-            for (uint i = 0; i < size; i++)
-            {
-                try
-                {
-                    if (buffer[i].m_flags != 0)
-                    {
-                        PropInfo info = buffer[i].Info;
-
-                        if (info == null) continue;
-
-                        if (info.m_requireWaterMap && info.m_lodWaterHeightMap == null)
-                        {
-                            PropManager.instance.ReleaseProp((ushort)i);
-                            log += "Removed " + info.name + "\n";
-                        }
-                    }
-                }
-                catch
-                { }
-            }
-
-            if (log != "") Debugging.Message(log);
-        }
-
         public static UITextureAtlas LoadResources()
         {
             if (atlas == null)
@@ -492,14 +461,6 @@ namespace FindIt
         public override void OnLevelLoaded(LoadMode mode)
         {
             AssetTagList.instance.Init();
-
-            if (Settings.fixBadProps)
-            {
-                Debugging.Message("Fixing bad props");
-                FindIt.FixBadProps();
-                Settings.fixBadProps = false;
-                Debugging.Message("Bad props fixed");
-            }
 
             if ((ToolManager.instance.m_properties.m_mode & ItemClass.Availability.GameAndMap) != ItemClass.Availability.None)
             {

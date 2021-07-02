@@ -258,30 +258,8 @@ namespace FindIt.GUI
                 eventFilteringChanged(this, 0);
             };
 
-            UpdateMarkerToggleVisibility();
-
             width = parent.width;
         }
 
-        /// <summary>
-        /// Hide marder toggle checkbox if not in asset editor
-        /// </summary>
-        public void UpdateMarkerToggleVisibility()
-        {
-            UICheckBox last = toggles[toggles.Length - 1];
-
-            if (FindIt.inEditor || Settings.showPropMarker)
-            {
-                last.isVisible = true;
-                randomIcon.relativePosition = new Vector3(last.relativePosition.x + last.width + 5, 5);
-            }
-            else
-            {
-                last.isVisible = false;
-                UICheckBox secondLast = toggles[toggles.Length - 2];
-                randomIcon.relativePosition = new Vector3(secondLast.relativePosition.x + secondLast.width + 5, 5);
-            }
-            all.relativePosition = new Vector3(randomIcon.relativePosition.x + randomIcon.width + 5, 5);
-        }
     }
 }

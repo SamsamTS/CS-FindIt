@@ -6,7 +6,9 @@ using ColossalFramework.UI;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-
+using ColossalFramework.IO;
+using ColossalFramework.Packaging;
+using System.IO;
 
 namespace FindIt.GUI
 {
@@ -16,8 +18,9 @@ namespace FindIt.GUI
         private UIButton cancelButton;
         private UIButton meshInfoButton;
         private UIButton ricoButton;
+        private UIButton openFolderButton;
         private static readonly int PanelWidth = 200;
-        private static readonly int PanelHeight = 80;
+        private static readonly int PanelHeight = 120;
         private Asset selectedAsset;
 
         public override void Start()
@@ -29,11 +32,12 @@ namespace FindIt.GUI
 
             SetUpMeshInfoButton();
             SetUpRICOButton();
+            SetUpOpenFolderButton();
 
             cancelButton = SamsamTS.UIUtils.CreateButton(this);
             cancelButton.size = new Vector2(PanelWidth, 40);
             cancelButton.text = Translations.Translate("FIF_POP_CAN");
-            cancelButton.relativePosition = new Vector3(0, ricoButton.relativePosition.y + ricoButton.height);
+            cancelButton.relativePosition = new Vector3(0, openFolderButton.relativePosition.y + openFolderButton.height);
             cancelButton.eventClick += (c, p) =>
             {
                 Close();
@@ -198,6 +202,52 @@ namespace FindIt.GUI
             MethodInfo OpenMI = SettingsPanelType.GetMethod("Open", BindingFlags.NonPublic | BindingFlags.Static);
             BuildingInfo info = selectedAsset.prefab as BuildingInfo;
             OpenMI.Invoke(null, new object[] { info });
+        }
+
+        private void SetUpOpenFolderButton()
+        {
+            openFolderButton = SamsamTS.UIUtils.CreateButton(this);
+            openFolderButton.size = new Vector2(PanelWidth, 40);
+            openFolderButton.text = Translations.Translate("FIF_DOU_FOLD");
+            openFolderButton.relativePosition = new Vector3(0, ricoButton.relativePosition.y + ricoButton.height);
+            openFolderButton.eventClick += (c, p) =>
+            {
+                OpenFolder();
+                openFolderButton.tooltipBox.Hide();
+                Close();
+            };
+
+            // set up tooltip
+            openFolderButton.Disable();
+
+            if (!selectedAsset.prefab.m_isCustomContent)
+            {
+                openFolderButton.tooltip = Translations.Translate("FIF_DOU_FOLDCUS");
+            }
+            else
+            {
+                openFolderButton.tooltip = Translations.Translate("FIF_DOU_FOLDOPEN");
+                openFolderButton.Enable();
+            }
+        }
+
+        private void OpenFolder()
+        {
+            Package.Asset asset = PackageManager.FindAssetByName(selectedAsset.prefab.name, Package.AssetType.Object);
+            if (asset?.package?.packagePath != null)
+            {
+                string path = Path.GetDirectoryName(asset.package.packagePath);
+                UnityEngine.Application.OpenURL(path);
+            }
+            else if(FindIt.isTVPPatchEnabled && selectedAsset.assetType == Asset.AssetType.Prop)
+            {
+                asset = PackageManager.FindAssetByName(selectedAsset.prefab.name.Replace(" Prop", ""), Package.AssetType.Object);
+                if (asset?.package?.packagePath != null)
+                {
+                    string path = Path.GetDirectoryName(asset.package.packagePath);
+                    UnityEngine.Application.OpenURL(path);
+                }
+            }
         }
     }
 }

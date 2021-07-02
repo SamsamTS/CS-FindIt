@@ -77,22 +77,6 @@ namespace FindIt.GUI
                 }
             };
 
-            // Show prop markers in 'game' mode
-            UICheckBox showPropMarker = SamsamTS.UIUtils.CreateCheckBox(this);
-            showPropMarker.isChecked = Settings.showPropMarker;
-            showPropMarker.label.text = Translations.Translate("FIF_SET_PM");
-            showPropMarker.label.textScale = 0.8f;
-            showPropMarker.width = size.x;
-            showPropMarker.label.textColor = new Color32(0, 0, 0, 255);
-            showPropMarker.tooltip = Translations.Translate("FIF_SET_PMTP");
-            showPropMarker.relativePosition = new Vector3(title.relativePosition.x, assetCreatorListSort.relativePosition.y + assetCreatorListSort.height + 10);
-            showPropMarker.eventCheckChanged += (c, i) =>
-            {
-                Settings.showPropMarker = showPropMarker.isChecked;
-                XMLUtils.SaveSettings();
-                UIFilterProp.instance.UpdateMarkerToggleVisibility();
-            };
-
             // Use light background theme
             UICheckBox useLightBackground = SamsamTS.UIUtils.CreateCheckBox(this);
             useLightBackground.isChecked = Settings.useLightBackground;
@@ -101,7 +85,7 @@ namespace FindIt.GUI
             useLightBackground.width = size.x;
             useLightBackground.label.textColor = new Color32(0, 0, 0, 255);
             useLightBackground.tooltip = Translations.Translate("FIF_SET_BACKTP");
-            useLightBackground.relativePosition = new Vector3(title.relativePosition.x, showPropMarker.relativePosition.y + showPropMarker.height + 10);
+            useLightBackground.relativePosition = new Vector3(title.relativePosition.x, assetCreatorListSort.relativePosition.y + assetCreatorListSort.height + 10);
             useLightBackground.eventCheckChanged += (c, i) =>
             {
                 Settings.useLightBackground = useLightBackground.isChecked;

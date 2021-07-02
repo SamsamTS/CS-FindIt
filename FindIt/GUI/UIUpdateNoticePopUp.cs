@@ -41,7 +41,7 @@ namespace FindIt.GUI
             UILabel message = AddUIComponent<UILabel>();
             message.text = "\n" + ModInfo.updateNotice;
             message.textColor = new Color32(0, 0, 0, 255);
-            message.relativePosition = new Vector3(spacing * 2, spacing + title.height + spacing);
+            message.relativePosition = new Vector3(spacing * 4, spacing + title.height + spacing);
 
             closeButton = SamsamTS.UIUtils.CreateButton(this);
             closeButton.size = new Vector2(100, 40);
@@ -53,6 +53,8 @@ namespace FindIt.GUI
             };
 
             height = closeButton.relativePosition.y + closeButton.height + 10;
+            width = message.width + 40;
+            close.relativePosition = new Vector3(width - close.width, 0);
             closeButton.Focus();
         }
 

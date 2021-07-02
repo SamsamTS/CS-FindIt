@@ -185,9 +185,6 @@ namespace FindIt
                 if (!CheckNetworkFilter(asset)) return false;
             }
 
-            // filter out marker prop if not in editor mode
-            if ((!FindIt.inEditor && !Settings.showPropMarker) && (asset.propType == Asset.PropType.PropsMarker)) return false;
-
             try
             {
                 // check vanila & workshop filters
