@@ -18,8 +18,8 @@ namespace FindIt.GUI
         private UIButton meshInfoButton;
         private UIButton ricoButton;
         private UIButton openFolderButton;
-        private static readonly int PanelWidth = 200;
-        private static readonly int PanelHeight = 120;
+        private static readonly int PanelWidth = 300;
+        private static readonly int PanelHeight = 160;
         private Asset selectedAsset;
 
         public override void Start()
@@ -239,6 +239,25 @@ namespace FindIt.GUI
             }
             else
             {
+                string packageFileName = "";
+                Package.Asset asset = PackageManager.FindAssetByName(selectedAsset.prefab.name, Package.AssetType.Object);
+                if (asset?.package?.packagePath != null)
+                {
+
+                    packageFileName = Path.GetFileName(asset.package.packagePath);
+                }
+                else if (FindIt.isTVPPatchEnabled && selectedAsset.assetType == Asset.AssetType.Prop)
+                {
+                    asset = PackageManager.FindAssetByName(selectedAsset.prefab.name.Replace(" Prop", ""), Package.AssetType.Object);
+                    if (asset?.package?.packagePath != null)
+                    {
+                        packageFileName = Path.GetFileName(asset.package.packagePath);
+                    }
+                }
+
+                if (packageFileName != "") {
+                    openFolderButton.text += $"\n{packageFileName}";
+                }
                 openFolderButton.tooltip = Translations.Translate("FIF_DOU_FOLDOPEN");
                 openFolderButton.Enable();
             }
@@ -247,6 +266,7 @@ namespace FindIt.GUI
         private void OpenFolder()
         {
             Package.Asset asset = PackageManager.FindAssetByName(selectedAsset.prefab.name, Package.AssetType.Object);
+            
             if (asset?.package?.packagePath != null)
             {
                 string path = Path.GetDirectoryName(asset.package.packagePath);
