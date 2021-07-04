@@ -4,11 +4,10 @@
 using UnityEngine;
 using ColossalFramework.UI;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
-using ColossalFramework.IO;
 using ColossalFramework.Packaging;
 using System.IO;
+using ColossalFramework.Globalization;
 
 namespace FindIt.GUI
 {
@@ -156,11 +155,25 @@ namespace FindIt.GUI
             }
             UITextField textField = meshInfoPanel.GetComponentInChildren<UITextField>();
             if (textField == null) return;
-            textField.text = selectedAsset.title;
+            textField.text = GetMeshInfoName(selectedAsset.prefab);
+
             Type UIMainPanelType = Type.GetType("MeshInfo.GUI.UIMainPanel");
             MethodInfo InitializePreafabListsMI = UIMainPanelType.GetMethod("InitializePreafabLists", BindingFlags.NonPublic | BindingFlags.Instance);
             InitializePreafabListsMI.Invoke(meshInfoPanel, new object[] { });
             meshInfoPanel.BringToFront();
+        }
+
+        // use the same method from the original Mesh Info mod
+        private string GetMeshInfoName(PrefabInfo prefab)
+        {
+            string meshInfoName = Locale.GetUnchecked("VEHICLE_TITLE", prefab.name);
+            if (meshInfoName.StartsWith("VEHICLE_TITLE"))
+            {
+                meshInfoName = prefab.name;
+                // Removes the steam ID and trailing _Data from the name
+                meshInfoName = meshInfoName.Substring(meshInfoName.IndexOf('.') + 1).Replace("_Data", "");
+            }
+            return meshInfoName;
         }
 
         private void SetUpRICOButton()

@@ -13,8 +13,8 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.6";
-        public const bool isBeta = true;
+        public const string version = "2.6.1";
+        public const bool isBeta = false;
         public const double updateNoticeDate = 20210702;
         public const string updateNotice =
 
@@ -26,7 +26,6 @@ namespace FindIt
 
             "- Custom non-workshop assets have a new icon on their thumbnails\n\n" +
 
-            "From 2.5.2 beta:\n"+
             "- Add shortcut buttons to see assets in following mods:\n" +
             "       Ploppable RICO Revisited\n" +
             "       Mesh Info\n\n" +
