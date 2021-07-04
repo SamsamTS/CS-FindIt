@@ -32,6 +32,10 @@ namespace FindIt
         /// </summary>
         public static bool isTVPPatchEnabled = false;
         /// <summary>
+        /// Non-terrain conforming mod enabled?
+        /// </summary>
+        public static bool isNTCPEnabled = false;
+        /// <summary>
         /// Network Extension 2 mod enabled?
         /// </summary>
         public static bool isNext2Enabled = false;
@@ -84,6 +88,7 @@ namespace FindIt
                 isETSTEnabled = IsAssemblyEnabled("elevatedtrainstationtrack");
                 isOWTTEnabled = IsAssemblyEnabled("singletraintrack");
                 isMeshInfoEnabled = IsAssemblyEnabled("meshinfo");
+                isNTCPEnabled = IsAssemblyEnabled("nonterrainconformingprops");
 
                 list = AssetTagList.instance;
                 if (isNext2Enabled) AssetTagList.instance.SetNext2Assets();

@@ -192,10 +192,7 @@ namespace FindIt.GUI
             // set up tooltip
             ricoButton.Disable();
 
-            // check if old rico is installed
-            Type ploppablericoType = Type.GetType("PloppableRICO.SettingsPanel, ploppablerico");
-
-            if (!FindIt.isRicoEnabled || ploppablericoType == null) ricoButton.tooltip = Translations.Translate("FIF_DOU_RICONO");
+            if (!FindIt.isRicoEnabled) ricoButton.tooltip = Translations.Translate("FIF_DOU_RICONO");
             else if (selectedAsset.assetType != Asset.AssetType.Ploppable &&
                 selectedAsset.assetType != Asset.AssetType.Growable &&
                 selectedAsset.assetType != Asset.AssetType.Rico)
@@ -204,8 +201,13 @@ namespace FindIt.GUI
             }
             else
             {
-                ricoButton.tooltip = Translations.Translate("FIF_DOU_RICOOPEN");
-                ricoButton.Enable();
+                // check if old rico is installed
+                Type ploppablericoType = Type.GetType("PloppableRICO.SettingsPanel, ploppablerico");
+                if (ploppablericoType != null)
+                {
+                    ricoButton.tooltip = Translations.Translate("FIF_DOU_RICOOPEN");
+                    ricoButton.Enable();
+                }
             }
         }
 
@@ -246,12 +248,23 @@ namespace FindIt.GUI
 
                     packageFileName = Path.GetFileName(asset.package.packagePath);
                 }
-                else if (FindIt.isTVPPatchEnabled && selectedAsset.assetType == Asset.AssetType.Prop)
+                else if (selectedAsset.assetType == Asset.AssetType.Prop)
                 {
-                    asset = PackageManager.FindAssetByName(selectedAsset.prefab.name.Replace(" Prop", ""), Package.AssetType.Object);
-                    if (asset?.package?.packagePath != null)
+                    if (FindIt.isTVPPatchEnabled)
                     {
-                        packageFileName = Path.GetFileName(asset.package.packagePath);
+                        asset = PackageManager.FindAssetByName(selectedAsset.prefab.name.Replace(" Prop", ""), Package.AssetType.Object);
+                        if (asset?.package?.packagePath != null)
+                        {
+                            packageFileName = Path.GetFileName(asset.package.packagePath);
+                        }
+                    }
+                    if (FindIt.isNTCPEnabled)
+                    {
+                        asset = PackageManager.FindAssetByName(selectedAsset.prefab.name.Replace(" NTCP", ""), Package.AssetType.Object);
+                        if (asset?.package?.packagePath != null)
+                        {
+                            packageFileName = Path.GetFileName(asset.package.packagePath);
+                        }
                     }
                 }
 
@@ -272,13 +285,25 @@ namespace FindIt.GUI
                 string path = Path.GetDirectoryName(asset.package.packagePath);
                 UnityEngine.Application.OpenURL(path);
             }
-            else if(FindIt.isTVPPatchEnabled && selectedAsset.assetType == Asset.AssetType.Prop)
+            else if (selectedAsset.assetType == Asset.AssetType.Prop)
             {
-                asset = PackageManager.FindAssetByName(selectedAsset.prefab.name.Replace(" Prop", ""), Package.AssetType.Object);
-                if (asset?.package?.packagePath != null)
+                if (FindIt.isTVPPatchEnabled)
                 {
-                    string path = Path.GetDirectoryName(asset.package.packagePath);
-                    UnityEngine.Application.OpenURL(path);
+                    asset = PackageManager.FindAssetByName(selectedAsset.prefab.name.Replace(" Prop", ""), Package.AssetType.Object);
+                    if (asset?.package?.packagePath != null)
+                    {
+                        string path = Path.GetDirectoryName(asset.package.packagePath);
+                        UnityEngine.Application.OpenURL(path);
+                    }
+                }
+                if (FindIt.isNTCPEnabled)
+                {
+                    asset = PackageManager.FindAssetByName(selectedAsset.prefab.name.Replace(" NTCP", ""), Package.AssetType.Object);
+                    if (asset?.package?.packagePath != null)
+                    {
+                        string path = Path.GetDirectoryName(asset.package.packagePath);
+                        UnityEngine.Application.OpenURL(path);
+                    }
                 }
             }
         }
