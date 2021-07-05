@@ -204,6 +204,18 @@
     <Translation ID="FIF_SE_SIZEX" String="건물 크기 필터를 초기화하려면 x를 클릭하십시오." />
     <Translation ID="FIF_SET_UIVP" String="바닐라 패널에서 Find It 2의 추가 UI를 표시하지 않음(재시작 필요)" />
     <Translation ID="FIF_SET_UIVPTP" String="포함: 커스텀 태그 아이콘, 스팀 아이콘 및 DLC 아이콘" />
+    <Translation ID="FIF_DOU_MESH" String="Mesh Info에서 보기" />
+    <Translation ID="FIF_DOU_MESHNO" String="Mesh Info 모드가 설치되지 않았거나 활성화되지 않았습니다" />
+    <Translation ID="FIF_DOU_MESHTYPE" String="Mesh Info 모드는 네트워크가 아닌 커스텀 에셋만 지원합니다" />
+    <Translation ID="FIF_DOU_MESHOPEN" String="이 에셋을 Mesh Info 모드에서 보기" />
+    <Translation ID="FIF_DOU_RICO" String="RICO Revisited에서 보기" />
+    <Translation ID="FIF_DOU_RICONO" String="RICO Revisited 모드가 설치되지 않았거나 활성화되지 않았습니다" />
+    <Translation ID="FIF_DOU_RICOTYPE" String="RICO Revisited 모드는 빌딩 에셋만 지원합니다" />
+    <Translation ID="FIF_DOU_RICOOPEN" String="이 에셋을 RICO Revisited 모드에서 보기" />
+    <Translation ID="FIF_DOU_FOLD" String="파일 폴더 열기" />
+    <Translation ID="FIF_DOU_FOLDCUS" String="이 기능은 커스텀 에셋에만 가능합니다" />
+    <Translation ID="FIF_DOU_FOLDOPEN" String="이 에셋의 상위 폴더 열기" />
+    <Translation ID="FIF_UIS_CNWS" String="non-workshop 커스텀 에셋" />
 
   </Translations>
 </Language>

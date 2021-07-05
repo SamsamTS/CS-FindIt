@@ -194,7 +194,7 @@
     <Translation ID="FIF_EF_UNEXPSE" String="輸出搜索" />
     <Translation ID="FIF_EF_UNEXPTPSE" String="將上次搜尋中未使用的工坊 ID 的素材清單匯出到包含 Steam 連結的 HTML 檔中" />
     <Translation ID="FIF_EF_LC" String="本地自製" />
-    <Translation ID="FIF_EF_WC" String="工坊自製" />
+    <Translation ID="FIF_EF_WC" String="工坊訂閱自製" />
     <Translation ID="FIF_EF_DLC" String="需要 DLC/CCP" />
     <Translation ID="FIF_LOC_TOOL" String="單擊以查找所選資產的下一個實例。按住 SHIFT 並單擊以查找下一個 PO 實例。" />
     <Translation ID="FIF_REF_DIS" String="重新整理各素材使用次數顯示" />
@@ -204,6 +204,18 @@
     <Translation ID="FIF_SE_SIZEX" String="點擊此X可快速重置建築物尺寸搜尋條件" />
     <Translation ID="FIF_SET_UIVP" String="不要在遊戲原生面板中顯示Find It 2的額外UI(需重啟遊戲)" />
     <Translation ID="FIF_SET_UIVPTP" String="包含: 自定義標籤圖示.工作坊圖示.DLC圖示" />
+    <Translation ID="FIF_DOU_MESH" String="自 Mesh Info 查看" />
+    <Translation ID="FIF_DOU_MESHNO" String="Mesh Info 模組僅支援非香草非道路資產" />
+    <Translation ID="FIF_DOU_MESHTYPE" String="Mesh Info 模組未安裝或未啟用" />
+    <Translation ID="FIF_DOU_MESHOPEN" String="自 Mesh Info 查看此資產" />
+    <Translation ID="FIF_DOU_RICO" String="自 RICO Revisited 查看" />
+    <Translation ID="FIF_DOU_RICONO" String="RICO Revisited 模組未安裝或未啟用" />
+    <Translation ID="FIF_DOU_RICOTYPE" String="RICO Revisited 模組僅支援建築資產" />
+    <Translation ID="FIF_DOU_RICOOPEN" String="自 RICO Revisited 查看此資產" />
+    <Translation ID="FIF_DOU_FOLD" String="開啟檔案資料夾" />
+    <Translation ID="FIF_DOU_FOLDCUS" String="此功能僅支援非香草資產" />
+    <Translation ID="FIF_DOU_FOLDOPEN" String="開啟此資產所在的檔案資料夾" />
+    <Translation ID="FIF_UIS_CNWS" String="自製非工坊資產" />
 
   </Translations>
 </Language>

@@ -194,7 +194,7 @@
     <Translation ID="FIF_EF_UNEXPSE" String="导出搜索" />
     <Translation ID="FIF_EF_UNEXPTPSE" String="将上次搜索中未使用的工坊 ID 的资产列表导出到包含 Steam 链接的 HTML 文件中" />
     <Translation ID="FIF_EF_LC" String="本地自制" />
-    <Translation ID="FIF_EF_WC" String="工坊自制" />
+    <Translation ID="FIF_EF_WC" String="工坊订阅自制" />
     <Translation ID="FIF_EF_DLC" String="需要 DLC/CCP" />
     <Translation ID="FIF_LOC_TOOL" String="单击以定位所选资产的下一个实例。按住SHIFT键并单击以定位下一个PO实例。" />
     <Translation ID="FIF_REF_DIS" String="刷新显示" />
@@ -204,6 +204,18 @@
     <Translation ID="FIF_SE_SIZEX" String="单击此 x 重置建筑物大小过滤器" />
     <Translation ID="FIF_SET_UIVP" String="不要在香草面板上显示Find It 2的额外用户界面(需重启游戏)" />
     <Translation ID="FIF_SET_UIVPTP" String="包括：自定义标签图标、Steam 工坊图标和 DLC 图标" />
+    <Translation ID="FIF_DOU_MESH" String="查看 Mesh Info" />
+    <Translation ID="FIF_DOU_MESHNO" String="Mesh Info 模组未安装或未启用" />
+    <Translation ID="FIF_DOU_MESHTYPE" String="Mesh Info 模组仅支持自制非道路资产" />
+    <Translation ID="FIF_DOU_MESHOPEN" String="在 Mesh Info 模组中查看此资产" />
+    <Translation ID="FIF_DOU_RICO" String="查看 Rico Revisited" />
+    <Translation ID="FIF_DOU_RICONO" String="Ploppable Rico Revisited 模组未安装或未启用" />
+    <Translation ID="FIF_DOU_RICOTYPE" String="Ploppable Rico Revisited 模组仅支持建筑资产" />
+    <Translation ID="FIF_DOU_RICOOPEN" String="在 Ploppable Rico Revisited 模组中查看此资产" />
+    <Translation ID="FIF_DOU_FOLD" String="打开文件夹" />
+    <Translation ID="FIF_DOU_FOLDCUS" String="此功能仅适用于自制资产" />
+    <Translation ID="FIF_DOU_FOLDOPEN" String="打开此资产的文件夹" />
+    <Translation ID="FIF_UIS_CNWS" String="自制非工坊资产" />
 
   </Translations>
 </Language>
