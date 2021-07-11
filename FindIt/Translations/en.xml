@@ -216,10 +216,10 @@
     <Translation ID="FIF_DOU_FOLDCUS" String="This feature only works with custom assets" />
     <Translation ID="FIF_DOU_FOLDOPEN" String="Open the parent folder of this asset" />
     <Translation ID="FIF_UIS_CNWS" String="Custom non-workshop asset" />
-    <Translation ID="FIF_NET_BUS" String="bus lanes" />
-    <Translation ID="FIF_NET_TRO" String="trolley bus lanes" />
-    <Translation ID="FIF_NET_BIK" String="bike lanes" />
-    <Translation ID="FIF_NET_TRM" String="tram tracks" />
+    <Translation ID="FIF_NET_BUS" String="Bus Lanes" />
+    <Translation ID="FIF_NET_TRO" String="Trolley Bus Lanes" />
+    <Translation ID="FIF_NET_BIK" String="Bike Lanes" />
+    <Translation ID="FIF_NET_TRM" String="Tram Tracks" />
 
 
   </Translations>
