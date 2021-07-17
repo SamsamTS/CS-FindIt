@@ -72,6 +72,7 @@ namespace FindIt
             WaterStructures,
             Utility,
             Train,
+            Metro,
             Unsorted
         }
 
@@ -454,6 +455,7 @@ namespace FindIt
             else if (info.m_class.m_service == ItemClass.Service.Water) return Asset.NetworkType.Utility;
 
             else if (info.m_class.m_subService == ItemClass.SubService.PublicTransportTrain) return Asset.NetworkType.Train;
+            else if (info.m_class.m_subService == ItemClass.SubService.PublicTransportMetro) return Asset.NetworkType.Metro;
 
             return NetworkType.Unsorted;
         }
@@ -481,6 +483,7 @@ namespace FindIt
                 else if (networkType == Asset.NetworkType.WaterStructures) findIt2Description += Translations.Translate("FIF_NET_WAT");
                 else if (networkType == Asset.NetworkType.Utility) findIt2Description += Translations.Translate("FIF_NET_UTI");
                 else if (networkType == Asset.NetworkType.Train) findIt2Description += Translations.Translate("FIF_NET_TRA");
+                else if (networkType == Asset.NetworkType.Metro) findIt2Description += Translations.Translate("FIF_NET_MET");
                 else if (networkType == Asset.NetworkType.Unsorted) findIt2Description += Translations.Translate("FIF_PROP_UNS");
 
                 if (UIFilterNetwork.IsNormalRoads(networkType))
@@ -490,6 +493,7 @@ namespace FindIt
 
                     if (UIFilterNetwork.HasParking(info)) findIt2Description += ($", {Translations.Translate("FIF_NET_PAR")}");
                     else findIt2Description += ($", {Translations.Translate("FIF_NET_NOP")}");
+
                 }
             }
             else if (assetType == AssetType.Growable || assetType == AssetType.Rico)

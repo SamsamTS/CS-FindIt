@@ -220,6 +220,7 @@
     <Translation ID="FIF_NET_TRO" String="Trolley Bus Lanes" />
     <Translation ID="FIF_NET_BIK" String="Bike Lanes" />
     <Translation ID="FIF_NET_TRM" String="Tram Tracks" />
+    <Translation ID="FIF_NET_MET" String="Metro" />
 
 
   </Translations>
