@@ -7,6 +7,7 @@ using System;
 using System.Reflection;
 using ColossalFramework.UI;
 using ColossalFramework.Plugins;
+using System.Collections.Generic;
 using ColossalFramework.Globalization;
 using FindIt.GUI;
 
@@ -19,39 +20,15 @@ namespace FindIt
         public static FindIt instance;
         public static UITextureAtlas atlas = LoadResources();
         public static bool inEditor = false;
-        /// <summary>
-        /// Ploppable RICO (Revisited) mod enabled?
-        /// </summary>
-        public static bool isRicoEnabled = false;
-        /// <summary>
-        /// Procedural Object mod enabled?
-        /// </summary>
-        public static bool isPOEnabled = false;
-        /// <summary>
-        /// Tree & Vehicle Props Patch mod enabled?
-        /// </summary>
-        public static bool isTVPPatchEnabled = false;
-        /// <summary>
-        /// Non-terrain conforming mod enabled?
-        /// </summary>
-        public static bool isNTCPEnabled = false;
-        /// <summary>
-        /// Network Extension 2 mod enabled?
-        /// </summary>
-        public static bool isNext2Enabled = false;
-        /// <summary>
-        /// Extra Train Station Track mod enabled?
-        /// </summary>
-        public static bool isETSTEnabled = false;
-        /// <summary>
-        /// One-Way Train Tracks mod enabled?
-        /// </summary>
-        public static bool isOWTTEnabled = false;
-
-        /// <summary>
-        /// MeshInfo mod enabled?
-        /// </summary>
-        public static bool isMeshInfoEnabled = false;
+       
+        public static bool isRicoEnabled = false; // Ploppable RICO (Revisited) mod enabled?
+        public static bool isPOEnabled = false; // Procedural Object mod enabled?
+        public static bool isTVPPatchEnabled = false; // Tree & Vehicle Props Patch mod enabled?
+        public static bool isNTCPEnabled = false; // Non-terrain conforming mod enabled?
+        public static bool isNext2Enabled = false; // Network Extension 2 mod enabled?
+        public static bool isETSTEnabled = false; // Extra Train Station Track mod enabled?
+        public static bool isOWTTEnabled = false; // One-Way Train Tracks mod enabled?
+        public static bool isMeshInfoEnabled = false; // MeshInfo mod enabled?
 
         public bool firstVisibleFlag = false;
 
@@ -81,14 +58,7 @@ namespace FindIt
                     return;
                 }
 
-                isRicoEnabled = IsAssemblyEnabled("ploppablerico");
-                isPOEnabled = IsAssemblyEnabled("proceduralobjects");
-                isTVPPatchEnabled = IsAssemblyEnabled("tvproppatch");
-                isNext2Enabled = IsAssemblyEnabled("networkextensions2");
-                isETSTEnabled = IsAssemblyEnabled("elevatedtrainstationtrack");
-                isOWTTEnabled = IsAssemblyEnabled("singletraintrack");
-                isMeshInfoEnabled = IsAssemblyEnabled("meshinfo");
-                isNTCPEnabled = IsAssemblyEnabled("nonterrainconformingprops");
+                CheckEnabledMods();
 
                 list = AssetTagList.instance;
                 if (isNext2Enabled) AssetTagList.instance.SetNext2Assets();
@@ -347,20 +317,25 @@ namespace FindIt
             }
         }
 
-        private static bool IsAssemblyEnabled(string assemblyName)
+        private static void CheckEnabledMods()
         {
+            HashSet<String> enabledMods = new HashSet<string>();
             foreach (PluginManager.PluginInfo plugin in PluginManager.instance.GetPluginsInfo())
             {
                 foreach (Assembly assembly in plugin.GetAssemblies())
                 {
-                    if (assembly.GetName().Name.ToLower() == assemblyName)
-                    {
-                        Debugging.Message($"Found enabled mod: {assemblyName}. Find It 2 integration will be applied");
-                        return plugin.isEnabled;
-                    }
+                    if (plugin.isEnabled) enabledMods.Add(assembly.GetName().Name.ToLower());
                 }
             }
-            return false;
+
+            isRicoEnabled = enabledMods.Contains("ploppablerico");
+            isPOEnabled = enabledMods.Contains("proceduralobjects");
+            isTVPPatchEnabled = enabledMods.Contains("tvproppatch");
+            isNext2Enabled = enabledMods.Contains("networkextensions2");
+            isETSTEnabled = enabledMods.Contains("elevatedtrainstationtrack");
+            isOWTTEnabled = enabledMods.Contains("singletraintrack");
+            isMeshInfoEnabled = enabledMods.Contains("meshinfo");
+            isNTCPEnabled = enabledMods.Contains("nonterrainconformingprops");
         }
 
         public static UITextureAtlas LoadResources()

@@ -302,46 +302,54 @@ namespace FindIt
                 UIFilterNetwork.Category category = UIFilterNetwork.GetCategory(asset.networkType);
                 NetInfo info = asset.prefab as NetInfo;
                 if (info == null) return false;
+
                 // not mutually exclusive with other categories. Handle them differently.
-                if (UIFilterNetwork.instance.IsOnlySelected(UIFilterNetwork.Category.OneWay))
+                bool extraFlagMatched = false;
+                if (UIFilterNetwork.instance.IsSelected(UIFilterNetwork.Category.OneWay))
                 {
                     if (!UIFilterNetwork.IsNormalRoads(asset.networkType)) return false;
                     if (!UIFilterNetwork.IsOneWay(info)) return false;
+                    extraFlagMatched = true;
                 }
-                else if (UIFilterNetwork.instance.IsOnlySelected(UIFilterNetwork.Category.Parking))
+                if (UIFilterNetwork.instance.IsSelected(UIFilterNetwork.Category.Parking))
                 {
                     if (!UIFilterNetwork.IsNormalRoads(asset.networkType)) return false;
                     if (!UIFilterNetwork.HasParking(info)) return false;
+                    extraFlagMatched = true;
                 }
-                else if (UIFilterNetwork.instance.IsOnlySelected(UIFilterNetwork.Category.NoParking))
+                if (UIFilterNetwork.instance.IsSelected(UIFilterNetwork.Category.NoParking))
                 {
                     if (!UIFilterNetwork.IsNormalRoads(asset.networkType)) return false;
                     if (UIFilterNetwork.HasParking(info)) return false;
+                    extraFlagMatched = true;
                 }
-                else if (UIFilterNetwork.instance.IsOnlySelected(UIFilterNetwork.Category.Bus))
+                if (UIFilterNetwork.instance.IsSelected(UIFilterNetwork.Category.Bus))
                 {
                     if (!UIFilterNetwork.IsNormalRoads(asset.networkType)) return false;
                     if (!UIFilterNetwork.HasBuslane(info)) return false;
+                    extraFlagMatched = true;
                 }
-                else if (UIFilterNetwork.instance.IsOnlySelected(UIFilterNetwork.Category.Bike))
+                if (UIFilterNetwork.instance.IsSelected(UIFilterNetwork.Category.Bike))
                 {
                     if (!UIFilterNetwork.IsNormalRoads(asset.networkType) && asset.networkType != Asset.NetworkType.Path) return false;
                     if (!UIFilterNetwork.HasBikeLane(info)) return false;
+                    extraFlagMatched = true;
                 }
-                else if (UIFilterNetwork.instance.IsOnlySelected(UIFilterNetwork.Category.Tram))
+                if (UIFilterNetwork.instance.IsSelected(UIFilterNetwork.Category.Tram))
                 {
                     if (!UIFilterNetwork.IsNormalRoads(asset.networkType)) return false;
                     if (!UIFilterNetwork.HasTramLane(info)) return false;
+                    extraFlagMatched = true;
                 }
-                else if (UIFilterNetwork.instance.IsOnlySelected(UIFilterNetwork.Category.TrolleyBus))
+                if (UIFilterNetwork.instance.IsSelected(UIFilterNetwork.Category.TrolleyBus))
                 {
                     if (!UIFilterNetwork.IsNormalRoads(asset.networkType)) return false;
                     if (!UIFilterNetwork.HasTrolleyBusLane(info)) return false;
+                    extraFlagMatched = true;
                 }
-                else
-                {
-                    if (category == UIFilterNetwork.Category.None || !UIFilterNetwork.instance.IsSelected(category)) return false;
-                }
+             
+                if (category == UIFilterNetwork.Category.None || (!UIFilterNetwork.instance.IsSelected(category) && !extraFlagMatched)) return false;
+
             }
             return true;
         }
