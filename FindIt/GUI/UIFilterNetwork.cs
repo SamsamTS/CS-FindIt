@@ -24,6 +24,7 @@ namespace FindIt.GUI
             WaterStructures,
             Utility,
             Train,
+            Metro,
             OneWay,
             Parking,
             NoParking,
@@ -51,6 +52,7 @@ namespace FindIt.GUI
             if (networkType == Asset.NetworkType.WaterStructures) return Category.WaterStructures;
             if (networkType == Asset.NetworkType.Utility) return Category.Utility;
             if (networkType == Asset.NetworkType.Train) return Category.Train;
+            if (networkType == Asset.NetworkType.Metro) return Category.Metro;
             if (networkType == Asset.NetworkType.Unsorted) return Category.Unsorted;
 
             return Category.None;
@@ -124,6 +126,7 @@ namespace FindIt.GUI
                 "Ingame",
                 "Ingame",
                 "Ingame",
+                "Ingame",
                 "FindItAtlas",
                 "FindItAtlas",
                 "FindItAtlas",
@@ -146,6 +149,7 @@ namespace FindIt.GUI
                 "SubBarLandscapingWaterStructures",
                 "ToolbarIconElectricity",
                 "SubBarPublicTransportTrain",
+                "SubBarPublicTransportMetro",
                 "Oneway",
                 "Parking",
                 "NoParking",
@@ -168,6 +172,7 @@ namespace FindIt.GUI
                 Translations.Translate("FIF_NET_WAT"), // Water Structures
                 Translations.Translate("FIF_NET_UTI"), // Utility
                 Translations.Translate("FIF_NET_TRA"), // Train
+                Translations.Translate("FIF_NET_MET"), // Metro
                 Translations.Translate("FIF_NET_ONE"), // One-way Roads
                 Translations.Translate("FIF_NET_PAR"), // Roads with parking spaces
                 Translations.Translate("FIF_NET_NOP"), // Roads without parking spaces
@@ -234,9 +239,9 @@ namespace FindIt.GUI
             toggles = new UICheckBox[(int)Category.All];
             for (int i = 0; i < (int)Category.All; i++)
             {
-                toggles[i] = SamsamTS.UIUtils.CreateIconToggle(this, CategoryIcons.atlases[i], CategoryIcons.spriteNames[i], CategoryIcons.spriteNames[i], 0.4f);
+                toggles[i] = SamsamTS.UIUtils.CreateIconToggle(this, CategoryIcons.atlases[i], CategoryIcons.spriteNames[i], CategoryIcons.spriteNames[i], 0.4f, 34f);
                 toggles[i].tooltip = CategoryIcons.tooltips[i] + "\n" + Translations.Translate("FIF_SE_SC");
-                toggles[i].relativePosition = new Vector3(5 + 38 * i, 5);
+                toggles[i].relativePosition = new Vector3(5 + 37 * i, 5);
                 toggles[i].isChecked = true;
                 toggles[i].readOnly = true;
                 toggles[i].checkedBoxObject.isInteractive = false; // Don't eat my double click event please
@@ -296,7 +301,7 @@ namespace FindIt.GUI
             {
                 for (int i = 1; i < (int)Category.All; i++)
                 {
-                    toggles[i].relativePosition = new Vector3(5 + 38 * (i - 1), 5);
+                    toggles[i].relativePosition = new Vector3(5 + 37 * (i - 1), 5);
                 }
             }
 
