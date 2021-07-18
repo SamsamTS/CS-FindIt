@@ -283,7 +283,8 @@ namespace FindIt.GUI
             if (asset?.package?.packagePath != null)
             {
                 string path = Path.GetDirectoryName(asset.package.packagePath);
-                UnityEngine.Application.OpenURL(path);
+                // UnityEngine.Application.OpenURL(path);
+                System.Diagnostics.Process.Start(path);
             }
             else if (selectedAsset.assetType == Asset.AssetType.Prop)
             {
@@ -293,7 +294,8 @@ namespace FindIt.GUI
                     if (asset?.package?.packagePath != null)
                     {
                         string path = Path.GetDirectoryName(asset.package.packagePath);
-                        UnityEngine.Application.OpenURL(path);
+                        // UnityEngine.Application.OpenURL(path);
+                        System.Diagnostics.Process.Start(path);
                     }
                 }
                 if (FindIt.isNTCPEnabled)
@@ -302,7 +304,8 @@ namespace FindIt.GUI
                     if (asset?.package?.packagePath != null)
                     {
                         string path = Path.GetDirectoryName(asset.package.packagePath);
-                        UnityEngine.Application.OpenURL(path);
+                        // UnityEngine.Application.OpenURL(path);
+                        System.Diagnostics.Process.Start(path);
                     }
                 }
             }
