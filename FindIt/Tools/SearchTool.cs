@@ -347,8 +347,23 @@ namespace FindIt
                     if (!UIFilterNetwork.HasTrolleyBusLane(info)) return false;
                     extraFlagMatched = true;
                 }
-             
-                if (category == UIFilterNetwork.Category.None || (!UIFilterNetwork.instance.IsSelected(category) && !extraFlagMatched)) return false;
+
+                if (category == UIFilterNetwork.Category.None) return false;
+                if (!UIFilterNetwork.instance.IsAnyExtraFlagSelected())
+                {
+                    if (!UIFilterNetwork.instance.IsSelected(category)) return false;
+                }
+                else
+                {
+                    if (UIFilterNetwork.instance.IsAnyRoadPathSelected())
+                    {
+                        if (!UIFilterNetwork.instance.IsSelected(category) || !extraFlagMatched) return false;
+                    }
+                    else
+                    {
+                        if (!extraFlagMatched) return false;
+                    }
+                }
 
             }
             return true;

@@ -212,6 +212,30 @@ namespace FindIt.GUI
             return true;
         }
 
+        public bool IsAnyRoadPathSelected()
+        {
+            for (int i = (int)Category.TinyRoads; i < (int)Category.Fence; i++)
+            {
+                if (toggles[i].isChecked)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool IsAnyExtraFlagSelected()
+        {
+            for (int i = (int)Category.OneWay; i < (int)Category.Unsorted; i++)
+            {
+                if (toggles[i].isChecked)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public void SelectAll()
         {
             for (int i = 0; i < (int)Category.All; i++)

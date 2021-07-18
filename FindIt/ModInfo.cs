@@ -13,24 +13,27 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.6.2";
-        public const bool isBeta = false;
-        public const double updateNoticeDate = 20210702;
+        public const string version = "2.6.3";
+        public const bool isBeta = true;
+        public const double updateNoticeDate = 20210718;
         public const string updateNotice =
 
-            "- Marker type props are no longer hidden by default in Game mode\n\n" +
+            "- Add more network type filter tabs\n\n" +
 
-            "- Recent DLs sorting now also works with local custom assets\n\n" +
+            "- Improve network tabs multi-select search logic:\n\n" +
 
-            "- Add a shortcut button to open the parent folder of an asset\n\n" +
+            "      Road Type + Lane Flag = AND search. Example: Small Roads AND One-way Roads\n\n" +
 
-            "- Custom non-workshop assets have a new icon on their thumbnails\n\n" +
+            "      Lane Flag + Lane Flag = AND search. Example: No Street Parking AND Bike Lanes\n\n" +
 
-            "- Add shortcut buttons to see assets in following mods:\n" +
-            "       Ploppable RICO Revisited\n" +
-            "       Mesh Info\n\n" +
+            "      Road Type + Road Type = OR search.  Example: Medium Roads OR Large Roads\n\n" +
 
-            "Double-click asset thumbnails to see the shortcut menu\n";
+            "- Some potential bugfixes for macOS users(untested)\n\n" +
+
+            "      If you are using macOS and the \"Open File Folder\" shortcut\n" +
+            "      button still doesn't work, leave a comment on steam workshop\n\n" +
+
+            "      Double-click asset thumbnails to see the shortcut menu\n";
 
         public string Name
         {
