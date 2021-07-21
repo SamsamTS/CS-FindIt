@@ -13,7 +13,7 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.6.3";
+        public const string version = "2.6.3-beta2";
         public const bool isBeta = true;
         public const double updateNoticeDate = 20210718;
         public const string updateNotice =
@@ -157,13 +157,22 @@ namespace FindIt
                 disableUpdateNotice.tooltip = Translations.Translate("FIF_SET_DBTP");
                 group.AddSpace(10);
 
-                // Disable update notice
+                // Use separate keywords
                 UICheckBox separateSearchKeyword = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_SSK"), Settings.separateSearchKeyword, (b) =>
                 {
                     Settings.separateSearchKeyword = b;
                     XMLUtils.SaveSettings();
                 });
                 separateSearchKeyword.tooltip = Translations.Translate("FIF_SET_SSKTP");
+                group.AddSpace(10);
+
+                // Use parent folder creation timestamp for Recend DLs sorting
+                UICheckBox useFolderCreationTimestamp = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DLT"), Settings.useFolderCreationTimestamp, (b) =>
+                {
+                    Settings.useFolderCreationTimestamp = b;
+                    XMLUtils.SaveSettings();
+                });
+                useFolderCreationTimestamp.tooltip = Translations.Translate("FIF_SET_DLTTP");
                 group.AddSpace(10);
 
                 // languate settings

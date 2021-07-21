@@ -95,9 +95,8 @@ namespace FindIt
                                 // Get the downloaded time of an asset by checking the creation time of its package
                                 // store this info and use it for sorting
                                 string path = current.package.packagePath;
-                                // string parentPath = Directory.GetParent(path).FullName;
-                                // DateTime dt = Directory.GetCreationTimeUtc(parentPath);
-                                DateTime dt = Directory.GetCreationTimeUtc(path);
+                                string parentPath = Directory.GetParent(path).FullName;
+                                DateTime dt = Directory.GetCreationTimeUtc(Settings.useFolderCreationTimestamp ? parentPath : path);
                                 ulong time = (ulong)dt.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
                                 downloadTimes.Add(steamid, time);
 
@@ -161,7 +160,8 @@ namespace FindIt
                             if (packageAsset?.package?.packagePath != null)
                             {
                                 string path = packageAsset.package.packagePath;
-                                DateTime dt = Directory.GetCreationTimeUtc(path);
+                                string parentPath = Directory.GetParent(path).FullName;
+                                DateTime dt = Directory.GetCreationTimeUtc(Settings.useFolderCreationTimestamp? parentPath : path);
                                 ulong time = (ulong)dt.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
                                 asset.downloadTime = time;
                             }

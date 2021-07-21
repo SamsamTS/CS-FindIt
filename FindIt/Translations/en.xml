@@ -58,7 +58,7 @@
     <Translation ID="FIF_SO_NETP" String="Sort by most recently downloaded" />
     <Translation ID="FIF_SO_RE" String="Relevance" />
     <Translation ID="FIF_SO_NE" String="Recent DLs" />
-    <Translation ID="TRN_CHOICE" String="Set language (will be effective next time)" />
+    <Translation ID="TRN_CHOICE" String="Set language(restart required)" />
     <Translation ID="TRN_SYS" String="Use system language" />
     <Translation ID="FIF_PROP_IND" String="Industrial" />
     <Translation ID="FIF_PROP_PAR" String="Parks" />
@@ -221,6 +221,8 @@
     <Translation ID="FIF_NET_BIK" String="Bike Lanes" />
     <Translation ID="FIF_NET_TRM" String="Tram Tracks" />
     <Translation ID="FIF_NET_MET" String="Metro" />
+    <Translation ID="FIF_SET_DLT" String="Use parent folder creation timestamp for Recent DLs sorting(restart required)" />
+    <Translation ID="FIF_SET_DLTTP" String="Use parent folder creation timesteamp instead of crp file creation timestamp" />
 
 
   </Translations>
