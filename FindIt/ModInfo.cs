@@ -15,8 +15,10 @@ namespace FindIt
     {
         public const string version = "2.6.3-beta2";
         public const bool isBeta = true;
-        public const double updateNoticeDate = 20210718;
+        public const double updateNoticeDate = 20210721;
         public const string updateNotice =
+
+            "- Revert to old way of Recent DLs sorting(use parent folder creation timestamp)\n\n"+
 
             "- Add more network type filter tabs\n\n" +
 
@@ -164,15 +166,6 @@ namespace FindIt
                     XMLUtils.SaveSettings();
                 });
                 separateSearchKeyword.tooltip = Translations.Translate("FIF_SET_SSKTP");
-                group.AddSpace(10);
-
-                // Use parent folder creation timestamp for Recend DLs sorting
-                UICheckBox useFolderCreationTimestamp = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DLT"), Settings.useFolderCreationTimestamp, (b) =>
-                {
-                    Settings.useFolderCreationTimestamp = b;
-                    XMLUtils.SaveSettings();
-                });
-                useFolderCreationTimestamp.tooltip = Translations.Translate("FIF_SET_DLTTP");
                 group.AddSpace(10);
 
                 // languate settings

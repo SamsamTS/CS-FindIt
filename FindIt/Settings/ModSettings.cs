@@ -38,8 +38,6 @@ namespace FindIt
 
         internal static bool separateSearchKeyword = false;
 
-        internal static bool useFolderCreationTimestamp = false; // if false, use crp file timestamp
-
         internal static bool useRelevanceSort = true;
 
         internal static bool useWorkshopFilter = true;
@@ -120,9 +118,6 @@ namespace FindIt
 
         [XmlElement("SeparateSearchKeyword")]
         public bool SeparateSearchKeyword { get => Settings.separateSearchKeyword; set => Settings.separateSearchKeyword = value; }
-
-        [XmlElement("UseFolderCreationTimestamp")]
-        public bool UseFolderCreationTimestamp { get => Settings.useFolderCreationTimestamp; set => Settings.useFolderCreationTimestamp = value; }
 
         [XmlElement("UseRelevanceSort")]
         public bool UseRelevanceSort { get => Settings.useRelevanceSort; set => Settings.useRelevanceSort = value; }

@@ -92,11 +92,11 @@ namespace FindIt
                                 string author = new Friend(new UserID(authorID)).personaName;
                                 authors.Add(steamid, author);
 
-                                // Get the downloaded time of an asset by checking the creation time of its package
+                                // Get the downloaded time of an asset by checking the creation time of its package folder
                                 // store this info and use it for sorting
                                 string path = current.package.packagePath;
                                 string parentPath = Directory.GetParent(path).FullName;
-                                DateTime dt = Directory.GetCreationTimeUtc(Settings.useFolderCreationTimestamp ? parentPath : path);
+                                DateTime dt = Directory.GetCreationTimeUtc(parentPath);
                                 ulong time = (ulong)dt.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
                                 downloadTimes.Add(steamid, time);
 
@@ -149,23 +149,8 @@ namespace FindIt
                             asset.tagsTitle.UnionWith(AddAssetTags(asset, tagsTitleDictionary, asset.prefab.name.Substring(0, index)));
                         }
 
-                        // if steamID == 0, non-workshop
-                        if (!asset.prefab.m_isCustomContent)
-                        {
-                            asset.downloadTime = 0;
-                        }
-                        else
-                        {
-                            Package.Asset packageAsset = PackageManager.FindAssetByName(asset.prefab.name, Package.AssetType.Object);
-                            if (packageAsset?.package?.packagePath != null)
-                            {
-                                string path = packageAsset.package.packagePath;
-                                string parentPath = Directory.GetParent(path).FullName;
-                                DateTime dt = Directory.GetCreationTimeUtc(Settings.useFolderCreationTimestamp? parentPath : path);
-                                ulong time = (ulong)dt.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
-                                asset.downloadTime = time;
-                            }
-                        }
+                        // if steamID == 0, non-workshop, download time = 0
+                        asset.downloadTime = 0;
 
                         if (asset.isCCP)
                         {

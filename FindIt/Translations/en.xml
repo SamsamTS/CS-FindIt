@@ -221,9 +221,6 @@
     <Translation ID="FIF_NET_BIK" String="Bike Lanes" />
     <Translation ID="FIF_NET_TRM" String="Tram Tracks" />
     <Translation ID="FIF_NET_MET" String="Metro" />
-    <Translation ID="FIF_SET_DLT" String="Use parent folder creation timestamp for Recent DLs sorting(restart required)" />
-    <Translation ID="FIF_SET_DLTTP" String="Use parent folder creation timesteamp instead of crp file creation timestamp" />
-
 
   </Translations>
 </Language>
