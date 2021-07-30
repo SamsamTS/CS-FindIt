@@ -146,7 +146,6 @@ namespace FindIt
                     Settings.disableUpdateNotice = b;
                     XMLUtils.SaveSettings();
                 });
-                disableUpdateNotice.tooltip = Translations.Translate("FIF_SET_DBTP");
                 group.AddSpace(10);
 
                 // Use separate keywords
