@@ -136,7 +136,7 @@
     <Translation ID="FIF_EF_BH" String="Высота здания" />
     <Translation ID="FIF_EF_MET" String="метров" />
     <Translation ID="FIF_EF_FEE" String="футов" />
-    <Translation ID="FIF_SET_ACLS" String="Сортировать список создателей активов по алфавиту" />
+    <Translation ID="FIF_SET_ACLS" String="Сортировать список создателей объектов по алфавиту" />
     <Translation ID="FIF_GR_RAN" String="Случайный выбор" />
     <Translation ID="FIF_NET_SMR" String="Узкие улицы" />
     <Translation ID="FIF_NET_MDR" String="Средние улицы" />
@@ -164,7 +164,7 @@
     <Translation ID="FIF_TAG_BATTP" String="Пакетное редактирование" />
     <Translation ID="FIF_SE_SEBTP" String="Очистить поле поиска" />
     <Translation ID="FIF_SET_DB" String="Использовать системный браузер по умолчанию вместо оверлея Steam" />
-    <Translation ID="FIF_SET_DBTP" String="Щёлкните правой кнопкой мыши значок Steam на миниатюре актива, чтобы просмотреть актив в мастерской Steam." />
+    <Translation ID="FIF_SET_DBTP" String="Щёлкните правой кнопкой мыши значок Steam на миниатюре объекта, чтобы просмотреть объект в мастерской Steam." />
     <Translation ID="FIF_NET_ONE" String="Дороги с односторонним движением" />
     <Translation ID="FIF_NET_PAR" String="Парковка разрешена" />
     <Translation ID="FIF_NET_NOP" String="Парковка запрещена" />
@@ -185,8 +185,8 @@
     <Translation ID="FIF_UPN_UP" String="Update" />
     <Translation ID="FIF_PROP_TC" String="Terrain Conforming" />
     <Translation ID="FIF_PROP_NTC" String="Non-Terrain Conforming" />
-    <Translation ID="FIF_SET_SSK" String="Используйте отд. слова поискового запроса для каждого типа активов" />
-    <Translation ID="FIF_SET_SSKTP" String="Удерживайте SHIFT при переключении типа актива, чтобы временно использовать ключевое слово запроса" />
+    <Translation ID="FIF_SET_SSK" String="Используйте отд. слова поискового запроса для каждого типа объектов" />
+    <Translation ID="FIF_SET_SSKTP" String="Удерживайте SHIFT при переключении типа объекта, чтобы временно использовать ключевое слово запроса" />
     <Translation ID="FIF_TAG_SA" String="Выбрать все" />
     <Translation ID="FIF_TAG_SATP" String="Выбрать все отображаемые элементы" />
     <Translation ID="FIF_EF_UNEXP" String="Экспорт" />
@@ -196,7 +196,7 @@
     <Translation ID="FIF_EF_LC" String="Объекты не из Мастерской" />
     <Translation ID="FIF_EF_WC" String="Объекты из Мастерской" />
     <Translation ID="FIF_EF_DLC" String="Необходимые DLC/CCP" />
-    <Translation ID="FIF_LOC_TOOL" String="Щелкните, чтобы найти следующий экземпляр выбранного актива. Удерживая SHIFT нажатым, щелкните, чтобы найти следующий экземпляр PO." />
+    <Translation ID="FIF_LOC_TOOL" String="Щелкните, чтобы найти следующий экземпляр выбранного объекта. Удерживая SHIFT нажатым, щелкните, чтобы найти следующий экземпляр PO." />
     <Translation ID="FIF_REF_DIS" String="Обновить дисплей" />
     <Translation ID="FIF_EF_US" String="Используемые объекты" />
     <Translation ID="FIF_EF_USEXPTP" String="Экспорт списка всех используемых ID в HTML-файл со ссылками на Мастерскую" />
@@ -204,6 +204,23 @@
     <Translation ID="FIF_SE_SIZEX" String="Нажмите на этот x, чтобы сбросить фильтры размера здания" />
     <Translation ID="FIF_SET_UIVP" String="Не показывать дополнительный пользовательский интерфейс Find It 2 на стандартных панелях(требуется перезагрузка)" />
     <Translation ID="FIF_SET_UIVPTP" String="В том числе: пользовательские значки тегов, значки Steam и значки DLC" />
+    <Translation ID="FIF_DOU_MESH" String="Просмотр в Mesh Info" />
+    <Translation ID="FIF_DOU_MESHNO" String="Mesh Info не установлен или не включён" />
+    <Translation ID="FIF_DOU_MESHTYPE" String="Mesh Info поддерживает только пользовательские недорожные объекты" />
+    <Translation ID="FIF_DOU_MESHOPEN" String="Смотреть этот объект в моде Mesh Info" />
+    <Translation ID="FIF_DOU_RICO" String="Просмотр в RICO Revisited" />
+    <Translation ID="FIF_DOU_RICONO" String="Ploppable RICO Revisited не установлен или не включён" />
+    <Translation ID="FIF_DOU_RICOTYPE" String="Мод Ploppable RICO Revisited поддерживает только здания" />
+    <Translation ID="FIF_DOU_RICOOPEN" String="Смотреть этот объект в моде Ploppable RICO Revisited" />
+    <Translation ID="FIF_DOU_FOLD" String="Открыть папку с файлами" />
+    <Translation ID="FIF_DOU_FOLDCUS" String="Эта функция работает только с пользовательскими объектами" />
+    <Translation ID="FIF_DOU_FOLDOPEN" String="Открыть родительскую папку этого объекта" />
+    <Translation ID="FIF_UIS_CNWS" String="Пользовательский объект, не из Мастерской" />
+    <Translation ID="FIF_NET_BUS" String="Автобусные маршруты" />
+    <Translation ID="FIF_NET_TRO" String="Троллейбусные маршруты" />
+    <Translation ID="FIF_NET_BIK" String="Велодорожки" />
+    <Translation ID="FIF_NET_TRM" String="Трамвайные маршруты" />
+    <Translation ID="FIF_NET_MET" String="Метро" />
  
   </Translations>
 </Language>
