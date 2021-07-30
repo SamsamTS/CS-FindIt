@@ -92,12 +92,7 @@ namespace FindIt
                                 string author = new Friend(new UserID(authorID)).personaName;
                                 authors.Add(steamid, author);
 
-                                // Get the downloaded time of an asset by checking the creation time of its package folder
-                                // store this info and use it for sorting
-                                string path = current.package.packagePath;
-                                string parentPath = Directory.GetParent(path).FullName;
-                                DateTime dt = Directory.GetCreationTimeUtc(parentPath);
-                                ulong time = (ulong)dt.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
+                                ulong time = GetPackageDownloadTime(current.package);
                                 downloadTimes.Add(steamid, time);
 
                                 // check local custom assets(not from steam workshop subscription)
@@ -191,9 +186,6 @@ namespace FindIt
                     }
                 }
             }
-
-            // Inherited from Find It 1. I don't know why this is needed. It only removes the 's' in a name tag
-            // CleanDictionarys();
         }
 
         public void AddCustomTags(Asset asset, string text)
@@ -686,6 +678,39 @@ namespace FindIt
             if (!locale.Exists(key)) locale.AddLocalizedString(key, prefab.name);
             key = new Locale.Key() { m_Identifier = "NET_DESC", m_Key = prefab.name };
             if (!locale.Exists(key)) locale.AddLocalizedString(key, thumbnail);
+        }
+
+        /// <summary>
+        /// Get the downloaded time of a workshop asset by checking the creation or modification time of its parent folder or the package file itself
+        /// store this info and use it for sorting
+        /// </summary>
+        /// <param name="package"></param>
+        /// <returns></returns>
+        private ulong GetPackageDownloadTime(Package package)
+        {
+            string path = package.packagePath;
+            string parentPath = Directory.GetParent(path).FullName;
+            DateTime dt;
+            switch (Settings.recentDLSorting)
+            {
+                case 0:
+                    dt = Directory.GetCreationTimeUtc(parentPath);
+                    break;
+                case 1:
+                    dt = Directory.GetLastWriteTimeUtc(parentPath);
+                    break;
+                case 2:
+                    dt = Directory.GetCreationTimeUtc(path);
+                    break;
+                case 3:
+                    dt = Directory.GetLastWriteTimeUtc(path);
+                    break;
+                default:
+                    dt = Directory.GetCreationTimeUtc(parentPath);
+                    break;
+            }
+            ulong time = (ulong)dt.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
+            return time;
         }
 
     }

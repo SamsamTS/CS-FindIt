@@ -221,6 +221,11 @@
     <Translation ID="FIF_NET_BIK" String="Bike Lanes" />
     <Translation ID="FIF_NET_TRM" String="Tram Tracks" />
     <Translation ID="FIF_NET_MET" String="Metro" />
+    <Translation ID="FIF_SET_REC" String="Recent DLs sorting method(restart required)" />
+    <Translation ID="FIF_SET_RECPC" String="Parent folder creation time" />
+    <Translation ID="FIF_SET_RECPM" String="Parent folder modification time" />
+    <Translation ID="FIF_SET_RECFC" String="CRP file creation time" />
+    <Translation ID="FIF_SET_RECFM" String="CRP file modificaiton time" />
 
   </Translations>
 </Language>

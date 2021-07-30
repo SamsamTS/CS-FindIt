@@ -216,6 +216,16 @@
     <Translation ID="FIF_DOU_FOLDCUS" String="此功能僅支援非香草資產" />
     <Translation ID="FIF_DOU_FOLDOPEN" String="開啟此資產所在的檔案資料夾" />
     <Translation ID="FIF_UIS_CNWS" String="自製非工坊資產" />
+    <Translation ID="FIF_NET_BUS" String="公車專用道" />
+    <Translation ID="FIF_NET_TRO" String="無軌電車車道" />
+    <Translation ID="FIF_NET_BIK" String="自行車專用道" />
+    <Translation ID="FIF_NET_TRM" String="路面電車軌道" />
+    <Translation ID="FIF_NET_MET" String="地下鐵軌道" />
+    <Translation ID="FIF_SET_REC" String="最近下載排序方式(須重啟遊戲)" />
+    <Translation ID="FIF_SET_RECPC" String="資料夾創建時間" />
+    <Translation ID="FIF_SET_RECPM" String="資料夾修改時間" />
+    <Translation ID="FIF_SET_RECFC" String="CRP 檔案創建時間" />
+    <Translation ID="FIF_SET_RECFM" String="CRP 檔案修改時間" />
 
   </Translations>
 </Language>

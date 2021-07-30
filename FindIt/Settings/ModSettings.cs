@@ -19,6 +19,14 @@ namespace FindIt
 
         internal static bool hideExtraUIonVP = false;
 
+        /// <summary>
+        /// 0 = sort by parent folder creation time,
+        /// 1 = soty by parent folder modification time,
+        /// 2 = sort by crp file creation time,
+        /// 3 = sory by crp file modification time
+        /// </summary>
+        internal static int recentDLSorting = 0;
+
         // false = sort by number of assets
         // true = sort alphabetically
         internal static bool customTagListSort = false;
@@ -94,6 +102,9 @@ namespace FindIt
 
         [XmlElement("HideExtraUIonVP")]
         public bool HideExtraUIonVP { get => Settings.hideExtraUIonVP; set => Settings.hideExtraUIonVP = value; }
+
+        [XmlElement("RecentDLSorting")]
+        public int RecentDLSorting { get => Settings.recentDLSorting; set => Settings.recentDLSorting = value; }
 
         [XmlElement("CustomTagListSort")]
         public bool CustomTagListSort { get => Settings.customTagListSort; set => Settings.customTagListSort = value; }

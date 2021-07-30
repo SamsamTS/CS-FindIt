@@ -177,6 +177,7 @@
     <Translation ID="FIF_PROP_RAI" String="Véhicule ferroviaire (généré par Tree and Vehicle Props)" />
     <Translation ID="FIF_PROP_AIR" String="Avion (généré par Tree and Vehicle Props)" />
     <Translation ID="FIF_PROP_WAT" String="Bateau (généré par Tree and Vehicle Props)" />
+    <Translation ID="FIF_EF_SB" String="Sub-buildings" />
     <Translation ID="FIF_ATP_TP" String="Cliquez l'espace entre les onglets pour déplacer le panneau" />
     <Translation ID="FIF_SET_ATP" String="Afficher le panneau de type de ressource" />
     <Translation ID="FIF_EF_CT" String="Avec étiquette personnalisée" />
@@ -192,6 +193,8 @@
     <Translation ID="FIF_EF_UNEXPTP" String="Exporter la liste des identifiant du Workshop de toutes les ressources inutilisés dans un fichier HTML avec les liens du Workshop" />
     <Translation ID="FIF_EF_UNEXPSE" String="Exporter la recherche" />
     <Translation ID="FIF_EF_UNEXPTPSE" String="Exporter la liste des identifiant du Workshop des ressources recherchées inutilisées dans un fichier HTML avec les liens du Workshop" />
+    <Translation ID="FIF_EF_LC" String="Custom locaux" />
+    <Translation ID="FIF_EF_WC" String="Custom du Workshop" />
     <Translation ID="FIF_EF_DLC" String="Requiert DLC/CCP" />
     <Translation ID="FIF_LOC_TOOL" String="Cliquez pour localiser l'instance suivante de la ressource sélectionnée. Maintenez MAJ et cliquez pour localiser l'instance de PO (objet procédural) suivant." />
     <Translation ID="FIF_REF_DIS" String="Rafraichir l'affichage" />
@@ -201,6 +204,23 @@
     <Translation ID="FIF_SE_SIZEX" String="Cliquez sur le x pour réinitialiser les filtres de taille de bâtiment" />
     <Translation ID="FIF_SET_UIVP" String="Ne pas afficher l'interface utilisateur supplémentaire de Find It 2 sur les panneaux par défaut (redémarrage requis)" />
     <Translation ID="FIF_SET_UIVPTP" String="Comprend : icônes d'étiquettes personnalisées, icônes Steam et icônes de DLC" />
+    <Translation ID="FIF_DOU_MESH" String="Voir avec Mesh Info" />
+    <Translation ID="FIF_DOU_MESHNO" String="Le mod Mesh Info n'est pas installé ou activé" />
+    <Translation ID="FIF_DOU_MESHTYPE" String="Le mod Mesh Info ne supportes pas les ressources de type réseau" />
+    <Translation ID="FIF_DOU_MESHOPEN" String="Voir cette ressource avec le mod Mesh Info" />
+    <Translation ID="FIF_DOU_RICO" String="Voir avec RICO Revisited" />
+    <Translation ID="FIF_DOU_RICONO" String="Le mod Ploppable RICO Revisited n'est pas installé ou activé" />
+    <Translation ID="FIF_DOU_RICOTYPE" String="Le mod Ploppable RICO Revisited ne supporte que les bâtiments" />
+    <Translation ID="FIF_DOU_RICOOPEN" String="Voir cette ressource dans le mod Ploppable RICO Revisited" />
+    <Translation ID="FIF_DOU_FOLD" String="Ouvrir le dossier du fichier" />
+    <Translation ID="FIF_DOU_FOLDCUS" String="Cette fonctionnalité fonctionne uniquement avec des ressources custom" />
+    <Translation ID="FIF_DOU_FOLDOPEN" String="Ouvrir le dossier parent de cette ressource" />
+    <Translation ID="FIF_UIS_CNWS" String="Ressource custom or Workshop" />
+    <Translation ID="FIF_NET_BUS" String="Lignes de bus" />
+    <Translation ID="FIF_NET_TRO" String="Lignes de trolleybus" />
+    <Translation ID="FIF_NET_BIK" String="Pistes cyclables" />
+    <Translation ID="FIF_NET_TRM" String="Voies de tram" />
+    <Translation ID="FIF_NET_MET" String="Métro" />
 
   </Translations>
 </Language>

@@ -13,29 +13,19 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.6.3";
-        public const bool isBeta = false;
-        public const double updateNoticeDate = 20210721;
+        public const string version = "2.6.4";
+        public const bool isBeta = true;
+        public const double updateNoticeDate = 20210730;
         public const string updateNotice =
 
-            "- Revert to old way of Recent DLs sorting(use parent folder creation timestamp)\n\n"+
+            "- Add different Recent DLs sorting options in mod settings:\n\n" +
 
-            "- Add more network type filter tabs\n\n" +
+            "  parent folder creation time\n" +
+            "  parent folder modification time\n" +
+            "  CRP file creation time\n" +
+            "  CRP file modification time\n\n" +
 
-            "- Improve network tabs multi-select search logic:\n\n" +
-
-            "      Road Type + Lane Flag = AND search. Example: Small Roads AND One-way Roads\n\n" +
-
-            "      Lane Flag + Lane Flag = AND search. Example: No Street Parking AND Bike Lanes\n\n" +
-
-            "      Road Type + Road Type = OR search.  Example: Medium Roads OR Large Roads\n\n" +
-
-            "- Some potential bugfixes for macOS users(untested)\n\n" +
-
-            "      If you are using macOS and the \"Open File Folder\" shortcut\n" +
-            "      button still doesn't work, leave a comment on steam workshop\n\n" +
-
-            "      Double-click asset thumbnails to see the shortcut menu\n";
+            "- Update translations\n\n";
 
         public string Name
         {
@@ -168,13 +158,28 @@ namespace FindIt
                 separateSearchKeyword.tooltip = Translations.Translate("FIF_SET_SSKTP");
                 group.AddSpace(10);
 
+                // Recent DLs sorting
+                string[] RencentDLsSortingList =
+                {
+                    Translations.Translate("FIF_SET_RECPC"),
+                    Translations.Translate("FIF_SET_RECPM"),
+                    Translations.Translate("FIF_SET_RECFC"),
+                    Translations.Translate("FIF_SET_RECFM")
+                };
+                UIDropDown rencentDLsDropDown = (UIDropDown)group.AddDropdown(Translations.Translate("FIF_SET_REC"), RencentDLsSortingList, Settings.recentDLSorting, (value) =>
+                {
+                    Settings.recentDLSorting = value;
+                    XMLUtils.SaveSettings();
+                });
+                rencentDLsDropDown.width = 400;
+                group.AddSpace(10);
+
                 // languate settings
                 UIDropDown languageDropDown = (UIDropDown)group.AddDropdown(Translations.Translate("TRN_CHOICE"), Translations.LanguageList, Translations.Index, (value) =>
                 {
                     Translations.Index = value;
                     XMLUtils.SaveSettings();
                 });
-
                 languageDropDown.width = 300;
                 group.AddSpace(10);
 
