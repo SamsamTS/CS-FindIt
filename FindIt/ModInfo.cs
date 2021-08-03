@@ -14,8 +14,8 @@ namespace FindIt
     public class ModInfo : IUserMod
     {
         public const string version = "2.6.4";
-        public const bool isBeta = true;
-        public const double updateNoticeDate = 20210730;
+        public const bool isBeta = false;
+        public const double updateNoticeDate = 20210803;
         public const string updateNotice =
 
             "- Add different Recent DLs sorting options in mod settings:\n\n" +
