@@ -216,6 +216,16 @@
     <Translation ID="FIF_DOU_FOLDCUS" String="이 기능은 커스텀 에셋에만 가능합니다" />
     <Translation ID="FIF_DOU_FOLDOPEN" String="이 에셋의 상위 폴더 열기" />
     <Translation ID="FIF_UIS_CNWS" String="non-workshop 커스텀 에셋" />
+    <Translation ID="FIF_NET_BUS" String="버스 차선" />
+    <Translation ID="FIF_NET_TRO" String="트롤리버스 차선" />
+    <Translation ID="FIF_NET_BIK" String="자전거 차선" />
+    <Translation ID="FIF_NET_TRM" String="트램 트랙" />
+    <Translation ID="FIF_NET_MET" String="지하철" />
+    <Translation ID="FIF_SET_REC" String="최근 다운로드 정렬 방식(재시작 필요)" />
+    <Translation ID="FIF_SET_RECPC" String="상위 폴더 생성 시간" />
+    <Translation ID="FIF_SET_RECPM" String="상위 폴더 수정 시간" />
+    <Translation ID="FIF_SET_RECFC" String="CRP 파일 생성 시간" />
+    <Translation ID="FIF_SET_RECFM" String="CRP 파일 수정 시간" />
 
   </Translations>
 </Language>

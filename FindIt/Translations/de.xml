@@ -8,7 +8,7 @@
     <Translation ID="FIF_SET_CMTTP" String="Haupt-Toolbar wird ab einer bestimmten Länge zentriert" />
     <Translation ID="FIF_SET_UL" String="Alles entsperren" />
     <Translation ID="FIF_SET_ULTP" String="Items auswählen und platzieren, selbst wenn sie gesperrt sind." />
-    <Translation ID="FIF_SET_BP" String="Requisiten-Fehler beim Laden beheben" />
+    <Translation ID="FIF_SET_BP" String="Requisiten-Fehler beim nächsten Laden beheben" />
     <Translation ID="FIF_SET_BPTP" String="Alle Requisiten mit Problemen entfernen. Aktivieren und Spielstand laden" />
     <Translation ID="FIF_SE_WF" String="Custom" />
     <Translation ID="FIF_SE_VF" String="Vanilla" />
@@ -21,8 +21,8 @@
     <Translation ID="FIF_SE_ID" String="Decal" />
     <Translation ID="FIF_SE_IT" String="Bäume" />
     <Translation ID="FIF_SE_LV" String="Building Level" />
-    <Translation ID="FIF_SE_SZ" String="Größe" />
-    <Translation ID="FIF_SE_SC" String="SHIFT oder STRG drücken für Mehrfachauswahl" />
+    <Translation ID="FIF_SE_SZ" String="Größe:" />
+    <Translation ID="FIF_SE_SC" String="SHIFT oder STRG halten für Mehrfachauswahl" />
     <Translation ID="FIF_PLOP_E" String="Strom" />
     <Translation ID="FIF_PLOP_W" String="Wasser/Abwasser" />
     <Translation ID="FIF_PLOP_G" String="Abfallwirtschaft" />
@@ -30,7 +30,7 @@
     <Translation ID="FIF_PLOP_F" String="Feuerwehr" />
     <Translation ID="FIF_PLOP_P" String="Polizei" />
     <Translation ID="FIF_PLOP_ED" String="Bildung" />
-    <Translation ID="FIF_PLOP_PT" String="Transport" />
+    <Translation ID="FIF_PLOP_PT" String="Öffentlicher Nahverkehr" />
     <Translation ID="FIF_PLOP_PPW" String="Parks/Plätze/Natur" />
     <Translation ID="FIF_PLOP_U" String="Einzigartige Gebäude" />
     <Translation ID="FIF_PLOP_I" String="Industrie" />
@@ -38,16 +38,16 @@
     <Translation ID="FIF_PLOP_C" String="Universitätsgelände" />
     <Translation ID="FIF_PLOP_V" String="Universitätssport" />
     <Translation ID="FIF_PLOP_FI" String="Fischerei" />
-    <Translation ID="FIF_GR_LDR" String="gering besiedeltes Wohngebiet" />
-    <Translation ID="FIF_GR_HDR" String="dicht besiedeltes Wohngebiet" />
+    <Translation ID="FIF_GR_LDR" String="Gering besiedeltes Wohngebiet" />
+    <Translation ID="FIF_GR_HDR" String="Dicht besiedeltes Wohngebiet" />
     <Translation ID="FIF_GR_LDRE" String="Selbstvers. Wohngebiet geringer Dichte" />
     <Translation ID="FIF_GR_HDRE" String="Selbstvers. Wohngebiet hoher Dichte" />
-    <Translation ID="FIF_GR_LDC" String="gering besiedeltes Gewerbegebiet " />
-    <Translation ID="FIF_GR_HDC" String="dicht besiedeltes Gewerbegebiet " />
+    <Translation ID="FIF_GR_LDC" String="Gering besiedeltes Gewerbegebiet " />
+    <Translation ID="FIF_GR_HDC" String="Dicht besiedeltes Gewerbegebiet " />
     <Translation ID="FIF_GR_CE" String="Gewerbe mit biol., lokaler Produktion" />
     <Translation ID="FIF_GR_O" String="Bürogebiet" />
-    <Translation ID="FIF_GR_ITC" String="IT Cluster" />
-    <Translation ID="FIF_GR_GI" String="allgemeine Industrie" />
+    <Translation ID="FIF_GR_ITC" String="IT-Cluster" />
+    <Translation ID="FIF_GR_GI" String="Allgemeine Industrie" />
     <Translation ID="FIF_GR_FAI" String="Agrarindustrie" />
     <Translation ID="FIF_GR_FOI" String="Forstindustrie" />
     <Translation ID="FIF_GR_OII" String="Ölindustrie" />
@@ -71,6 +71,36 @@
     <Translation ID="FIF_PROP_UNS" String="Unsortiert" />
     <Translation ID="FIF_SET_KS" String="Tastenkürzel" />
     <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
+    <Translation ID="FIF_SET_CTFOP" String="Im Datei-Explorer anzeigen" />
+    <Translation ID="FIF_POP_SCR" String="Mit Mausrad scrollen" />
+    <Translation ID="FIF_POP_CON" String="bestätigen" />
+    <Translation ID="FIF_POP_CAN" String="Abbrechen" />
+    <Translation ID="FIF_POP_NU" String="Dies kann nicht rückgängig gemach werden." />
+    <Translation ID="FIF_DE_TIT" String="Löschen" />
+    <Translation ID="FIF_DE_MSG" String="Dieses Tag wirklich löschen?" />
+    <Translation ID="FIF_RE_TIT" String="Umbenennen" />
+    <Translation ID="FIF_CT_ILBL1" String="oder" />
+    <Translation ID="FIF_TAG_REF" String="Neu laden" />
+    <Translation ID="FIF_TAG_REN" String="Umbenennen" />
+    <Translation ID="FIF_TAG_DEL" String="löschen" />
+    <Translation ID="FIF_TAG_DELTP" String="Dieses Tag löschen" />
+    <Translation ID="FIF_TAG_BAC" String="Zurück" />
+    <Translation ID="FIF_TAG_ADD" String="Hinzufügen" />
+    <Translation ID="FIF_TAG_REM" String="Entfernen" />
+    <Translation ID="FIF_EF_BH" String="Gebäudehöhe" />
+    <Translation ID="FIF_EF_MET" String="Meter" />
+    <Translation ID="FIF_EF_FEE" String="Fuß" />
+    <Translation ID="FIF_GR_RAN" String="Zufällige Auswahl" />
+    <Translation ID="FIF_EF_UN" String="Nicht verwendete Assets" />
+    <Translation ID="FIF_UIS_UN" String="Nicht verwendet" />
+    <Translation ID="FIF_SET_ICTP" String="Diese Option verringert die Suchgeschwindigkeit leicht. Deaktiviere sie, wenn sie nicht benötigt wird." />
+    <Translation ID="FIF_SET_ICO" String="Ursprüngliche Sortieroptionen verwenden" />
+    <Translation ID="FIF_SET_DB" String="Standardbrowser anstelle des Steam-Overlays verwenden." />
+    <Translation ID="FIF_NET_ONE" String="Einbahnstraßen" />
+    <Translation ID="FIF_SET_DUN" String="Zukünftige Updatebenachrichtigungen deaktivieren" />
+    <Translation ID="FIF_TAG_SA" String="Alle auswählen" />
+    <Translation ID="FIF_TAG_SATP" String="Alle angezeigten Objekte auswählen" />
+    <Translation ID="FIF_EF_UNEXP" String="Alle exportieren" />
 
   </Translations>
 </Language>

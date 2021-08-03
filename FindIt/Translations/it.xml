@@ -21,12 +21,12 @@
     <Translation ID="FIF_SE_ID" String="Decal" />
     <Translation ID="FIF_SE_IT" String="Albero" />
     <Translation ID="FIF_SE_LV" String="Livello Edificio" />
-    <Translation ID="FIF_SE_SZ" String="Size:" />
+    <Translation ID="FIF_SE_SZ" String="Dimensione:" />
     <Translation ID="FIF_SE_SC" String="Premi SHIFT o CTRL per selezionare più categorie" />
     <Translation ID="FIF_PLOP_E" String="Elettricità" />
     <Translation ID="FIF_PLOP_W" String="Acqua/Fognature" />
     <Translation ID="FIF_PLOP_G" String="Rifiuti" />
-    <Translation ID="FIF_PLOP_H" String="Salute" />
+    <Translation ID="FIF_PLOP_H" String="Sanità" />
     <Translation ID="FIF_PLOP_F" String="Pompieri" />
     <Translation ID="FIF_PLOP_P" String="Polizia" />
     <Translation ID="FIF_PLOP_ED" String="Educazione" />
@@ -57,7 +57,7 @@
     <Translation ID="FIF_SO_RETP" String="Elenca per Rilevanza. Come nel Find It originale" />
     <Translation ID="FIF_SO_NETP" String="Elenca per Download più recente" />
     <Translation ID="FIF_SO_RE" String="Rilevanza" />
-    <Translation ID="FIF_SO_NE" String="Recente DLs" />
+    <Translation ID="FIF_SO_NE" String="DL Recenti" />
     <Translation ID="TRN_CHOICE" String="Seleziona lingua (attivo alla prossima partita)" />
     <Translation ID="TRN_SYS" String="Usa lingua di sistema" />
     <Translation ID="FIF_PROP_IND" String="Industriale" />
@@ -131,7 +131,7 @@
     <Translation ID="FIF_REM_REM" String="Rimuovi una etichetta dagli asset selezionati:" />
     <Translation ID="FIF_REM_CHTP" String="Rimuovi questa etichetta" />
     <Translation ID="FIF_REM_ELBL" String="Scegli una etichetta" />
-    <Translation ID="FIF_SE_EFI" String="Mostra altri panneli per filtri" />
+    <Translation ID="FIF_SE_EFI" String="Mostra il pannello per altri filtri" />
     <Translation ID="FIF_EF_AC" String="Creatore di Asset" />
     <Translation ID="FIF_EF_BH" String="Altezza Edificio" />
     <Translation ID="FIF_EF_MET" String="metri" />
@@ -143,21 +143,21 @@
     <Translation ID="FIF_NET_LGR" String="Strade Grandi" />
     <Translation ID="FIF_NET_HGHW" String="Autostrade" />
     <Translation ID="FIF_NET_PATH" String="Sentieri" />
-    <Translation ID="FIF_NET_WALL" String="Muri E Staccionate" />
+    <Translation ID="FIF_NET_WALL" String="Muri e Staccionate" />
     <Translation ID="FIF_NET_WAT" String="Strutture per l'acqua" />
     <Translation ID="FIF_PROP_MAR" String="Marcatore dell'Editor" />
     <Translation ID="FIF_NET_TNR" String="Strade Piccole" />
     <Translation ID="FIF_NET_UTI" String="Servizi" />
     <Translation ID="FIF_NET_TRA" String="Treno" />
-    <Translation ID="FIF_SET_PM" String="Mostra i prop dei tipi di marcatori in gioco" />
-    <Translation ID="FIF_SET_PMTP" String="I prop dei tipi di marcatori sono invisibili e molti son funzionano in gioco. Usa Move It per cancellarli." />
+    <Translation ID="FIF_SET_PM" String="Mostra i prop marcatori in gioco" />
+    <Translation ID="FIF_SET_PMTP" String="I prop marcatori sono invisibili e molti non funzionano in gioco. Usa Move It per cancellarli." />
     <Translation ID="FIF_SET_IC" String="Mostra il numero di istanze esistenti di ogni asset" />
     <Translation ID="FIF_EF_UN" String="Asset non usati" />
     <Translation ID="FIF_QM_TIT" String="Quick Menu" />
     <Translation ID="FIF_UIS_UN" String="Non in uso" />
     <Translation ID="FIF_UIS_IN" String="In uso" />
     <Translation ID="FIF_SET_ICTP" String="Questa opzione rallenta leggemente la velocità di ricerca. Disabilita quando non in uso" />
-    <Translation ID="FIF_SET_PO" String="Includdi oggetti procedurali" />
+    <Translation ID="FIF_SET_PO" String="Includi oggetti procedurali" />
     <Translation ID="FIF_SET_ICO" String="Usa l'opzione di elenco originale" />
     <Translation ID="FIF_SET_ICUS" String="Mostra asset usati in cima" />
     <Translation ID="FIF_SET_ICUN" String="Mostra asset non usati in cima" />
@@ -190,9 +190,42 @@
     <Translation ID="FIF_TAG_SA" String="Seleziona tutto" />
     <Translation ID="FIF_TAG_SATP" String="Seleziona tutti gli oggetti visibili" />
     <Translation ID="FIF_EF_UNEXP" String="Esporta Tutto" />
-    <Translation ID="FIF_EF_UNEXPTP" String="Esporta lista di non in uso workshop ID in file HTML con workshop links" />
+    <Translation ID="FIF_EF_UNEXPTP" String="Esporta la lista di tutti gli ID del workshop non usati in un file HTML con link al workshop" />
     <Translation ID="FIF_EF_UNEXPSE" String="Esporta Cercati" />
-    <Translation ID="FIF_EF_UNEXPTPSE" String="Esporta lista di non in uso workshop ID dell'ultima ricerca in file HTML con workshop links" />
+    <Translation ID="FIF_EF_UNEXPTPSE" String="Esporta la lista degli ID del workshop non usati dall'ultima ricerca in un file HTML con link al workshop" />
+    <Translation ID="FIF_EF_LC" String="Personalizzato Locale" />
+    <Translation ID="FIF_EF_WC" String="Personalizzato Workshop" />
+    <Translation ID="FIF_EF_DLC" String="Richiede DLC/CCP" />
+    <Translation ID="FIF_LOC_TOOL" String="Clicca per trovare la prossima istanza dell'asset selezionato. Premi SHIFT e clicca per trovare la prossima istanza di PO" />
+    <Translation ID="FIF_REF_DIS" String="Ricarica Schermo" />
+    <Translation ID="FIF_EF_US" String="Asset Usati" />
+    <Translation ID="FIF_EF_USEXPTP" String="Esporta la lista di tutti gli ID del workshop usati in un file HTML con link al workshop" />
+    <Translation ID="FIF_EF_USEXPTPSE" String="Esporta la lista degli ID del workshop usati dall'ultima ricerca in un file HTML con link al workshop" />
+    <Translation ID="FIF_SE_SIZEX" String="Clicca la x per ripristinare i filtri delle dimensioni degli edifici" />
+    <Translation ID="FIF_SET_UIVP" String="Non mostrare la UI extra di Find It 2 sui pannelli vanilla (riavvio richiesto)" />
+    <Translation ID="FIF_SET_UIVPTP" String="Incluso icone di etichette personalizzate, icone steam, icone DLC" />
+    <Translation ID="FIF_DOU_MESH" String="Vedi in Mesh Info" />
+    <Translation ID="FIF_DOU_MESHNO" String="La mod Mesh Info non è installata o abilitata" />
+    <Translation ID="FIF_DOU_MESHTYPE" String="La mod Mesh Info supporta solo asset personalizzati non network" />
+    <Translation ID="FIF_DOU_MESHOPEN" String="Vedi questo assed nella mod Mesh Info" />
+    <Translation ID="FIF_DOU_RICO" String="Vedi in RICO Revisited" />
+    <Translation ID="FIF_DOU_RICONO" String="La mod Ploppable RICO Revisited non è installata o abilitata" />
+    <Translation ID="FIF_DOU_RICOTYPE" String="La mod Ploppable RICO Revisited supporta solo asset di edifici" />
+    <Translation ID="FIF_DOU_RICOOPEN" String="Vedi questo assed nella mod Ploppable RICO Revisited" />
+    <Translation ID="FIF_DOU_FOLD" String="Apri la cartella file" />
+    <Translation ID="FIF_DOU_FOLDCUS" String="Funziona solo con asset personalizzati" />
+    <Translation ID="FIF_DOU_FOLDOPEN" String="Apri la cartella principale dell'asset" />
+    <Translation ID="FIF_UIS_CNWS" String="Asset personalizzato non dal workshop" />
+    <Translation ID="FIF_NET_BUS" String="Corsie Bus" />
+    <Translation ID="FIF_NET_TRO" String="Corsie Filobus" />
+    <Translation ID="FIF_NET_BIK" String="Corsie per bici" />
+    <Translation ID="FIF_NET_TRM" String="Binari Tram" />
+    <Translation ID="FIF_NET_MET" String="Metro" />
+    <Translation ID="FIF_SET_REC" String="Metodo di elenco per DL recenti (riavvio richiesto)" />
+    <Translation ID="FIF_SET_RECPC" String="Tempo di ceazione cartella principale" />
+    <Translation ID="FIF_SET_RECPM" String="Tempo di modifica cartella principale" />
+    <Translation ID="FIF_SET_RECFC" String="Orario creazione file CRP" />
+    <Translation ID="FIF_SET_RECFM" String="Orario modifica file crp" />
 
   </Translations>
 </Language>
