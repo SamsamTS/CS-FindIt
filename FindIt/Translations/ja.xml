@@ -183,17 +183,49 @@
     <Translation ID="FIF_EF_CT" String="カスタム タグあり" />
     <Translation ID="FIF_EF_NCT" String="カスタム タグなし" />
     <Translation ID="FIF_UPN_UP" String="アップデート" />
-    <Translation ID="FIF_PROP_TC" String="地形に応じて変形" />
-    <Translation ID="FIF_PROP_NTC" String="地形に応じて変形しない" />
+    <Translation ID="FIF_PROP_TC" String="地形に追従" />
+    <Translation ID="FIF_PROP_NTC" String="地形に非追従" />
     <Translation ID="FIF_SET_SSK" String="アセットタイプごとに別々の検索クエリキーワードを使用する" />
+    <Translation ID="FIF_SET_SSKTP" String="アセットタイプの切り替えでSHIFTを押したままで、クエリキーワードを一時的に共有できます" />
     <Translation ID="FIF_TAG_SA" String="すべて選択" />
-    <Translation ID="FIF_TAG_SATP" String="検索されたすべてのアセットを選択" />
+    <Translation ID="FIF_TAG_SATP" String="検索した全てのアセットを選択" />
+    <Translation ID="FIF_EF_UNEXP" String="全てをエクスポート" />
+    <Translation ID="FIF_EF_UNEXPTP" String="未使用なワークショップIDのリストを、URLのリンク付きでHTMLファイルにエクスポート" />
+    <Translation ID="FIF_EF_UNEXPSE" String="検索済みをエクスポート" />
+    <Translation ID="FIF_EF_UNEXPTPSE" String="前回の検索で未使用なワークショップIDのリストを、URLのリンク付きでHTMLファイルにエクスポート" />
     <Translation ID="FIF_EF_LC" String="ローカルカスタム" />
     <Translation ID="FIF_EF_WC" String="ワークショップ" />
     <Translation ID="FIF_EF_DLC" String="DLC/CCP が必要" />
     <Translation ID="FIF_LOC_TOOL" String="選択したアセットの次のインスタンスを見つけるためにクリックします。SHIFT キーを押しながらクリックすると、次の PO インスタンスが見つかります。" />
     <Translation ID="FIF_REF_DIS" String="アセットの既存のインスタンスの数を更新" />
     <Translation ID="FIF_EF_US" String="使用中のアセット" />
+    <Translation ID="FIF_EF_USEXPTP" String="全て使用中なワークショップIDのリストを、URLのリンク付きでHTMLファイルにエクスポート" />
+    <Translation ID="FIF_EF_USEXPTPSE" String="最後の検索で使用中なワークショップIDのリストを、URLのリンクを含むHTMLファイルにエクスポート" />
+    <Translation ID="FIF_SE_SIZEX" String="X部分をクリックすると、建物サイズのフィルターをリセット" />
+    <Translation ID="FIF_SET_UIVP" String="バニラのパネルでは、Find It!2の追加UIを表示しない(再起動が必要)" />
+    <Translation ID="FIF_SET_UIVPTP" String="カスタムタグのアイコン・スチームのアイコン・DLCのアイコンの表示" />
+    <Translation ID="FIF_DOU_MESH" String="Mesh Infoで表示" />
+    <Translation ID="FIF_DOU_MESHNO" String="Mesh Info MODが未インストール・有効化されていない" />
+    <Translation ID="FIF_DOU_MESHTYPE" String="Mesh Info MODはネットワーク以外のカスタムアセットに対応" />
+    <Translation ID="FIF_DOU_MESHOPEN" String="Mesh Info MODでアセットの情報を見る" />
+    <Translation ID="FIF_DOU_RICO" String="RICO Revisitedで表示" />
+    <Translation ID="FIF_DOU_RICONO" String="Ploppable RICO Revisited MODが未インストール・有効化されていない" />
+    <Translation ID="FIF_DOU_RICOTYPE" String="Ploppable RICO Revisited MODは建物系のアセットに対応" />
+    <Translation ID="FIF_DOU_RICOOPEN" String="Ploppable RICO Revisited MODでアセットの情報を見る" />
+    <Translation ID="FIF_DOU_FOLD" String="ファイルのあるフォルダを開く" />
+    <Translation ID="FIF_DOU_FOLDCUS" String="この機能はカスタムアセットでのみ動作" />
+    <Translation ID="FIF_DOU_FOLDOPEN" String="このアセットがある親フォルダを開く" />
+    <Translation ID="FIF_UIS_CNWS" String="ワークショップ以外のカスタムアセット" />
+    <Translation ID="FIF_NET_BUS" String="バスレーン" />
+    <Translation ID="FIF_NET_TRO" String="トローリーバスレーン" />
+    <Translation ID="FIF_NET_BIK" String="自転車レーン" />
+    <Translation ID="FIF_NET_TRM" String="トラムの軌道" />
+    <Translation ID="FIF_NET_MET" String="地下鉄の軌道" />
+    <Translation ID="FIF_SET_REC" String="最近のDLした順でソート(再起動が必要)" />
+    <Translation ID="FIF_SET_RECPC" String="親フォルダの作成日" />
+    <Translation ID="FIF_SET_RECPM" String="親フォルダの更新時" />
+    <Translation ID="FIF_SET_RECFC" String="CRPファイルの作成日" />
+    <Translation ID="FIF_SET_RECFM" String="CRPファイルの更新日" />
 
   </Translations>
 </Language>
