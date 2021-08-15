@@ -8,8 +8,8 @@
     <Translation ID="FIF_SET_CMTTP" String="Главная панель инструментов будет центрирована, если она превысит определённую длину." />
     <Translation ID="FIF_SET_UL" String="Разблокировать всё" />
     <Translation ID="FIF_SET_ULTP" String="Позволяет выбирать и размещать предметы, даже когда они заблокированы" />
-    <Translation ID="FIF_SET_BP" String="Fix bad props next loaded save" />
-    <Translation ID="FIF_SET_BPTP" String="Remove all props causing issue. Check the option and load your save" />
+    <Translation ID="FIF_SET_BP" String="Исправить плохие объекты при следующем сохранении" />
+    <Translation ID="FIF_SET_BPTP" String="Удалите все реквизиты, вызывающие проблему. Отметьте эту опцию и загрузите своё сохранение" />
     <Translation ID="FIF_SE_WF" String="Custom" />
     <Translation ID="FIF_SE_VF" String="Vanilla" />
     <Translation ID="FIF_SE_IA" String="Все" />
@@ -221,6 +221,11 @@
     <Translation ID="FIF_NET_BIK" String="Велодорожки" />
     <Translation ID="FIF_NET_TRM" String="Трамвайные маршруты" />
     <Translation ID="FIF_NET_MET" String="Метро" />
+    <Translation ID="FIF_SET_REC" String="Недавний метод сортировки DLs(требуется перезапуск)" />
+    <Translation ID="FIF_SET_RECPC" String="Время создания родительской папки" />
+    <Translation ID="FIF_SET_RECPM" String="Время изменения родительской папки" />
+    <Translation ID="FIF_SET_RECFC" String="Время создания файла .crp" />
+    <Translation ID="FIF_SET_RECFM" String="Время изменения файла .crp" />
  
   </Translations>
 </Language>
