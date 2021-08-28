@@ -16,10 +16,10 @@ namespace FindIt
         public const string version = "2.6.5";
         public const bool isBeta = false;
         public const bool debug = true;
-        public const double updateNoticeDate = 20210826;
+        public const double updateNoticeDate = 20210828;
         public const string updateNotice =
 
-            "- Add an option to disable instant search\n\n" +
+            "- Add an option to disable instant text search (in mod settings)\n\n" +
             "  Enable this option to reduce UI lag when typing in the search box\n" +
             "  Press ENTER to submit a new text search\n\n";
 
