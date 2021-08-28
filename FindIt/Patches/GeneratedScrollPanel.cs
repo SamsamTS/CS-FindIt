@@ -139,28 +139,56 @@ namespace FindIt
 
                         if (asset != null)
                         {
+                            // next 2 assets, show blue steam icon
                             if (FindIt.isNext2Enabled && AssetTagList.instance.next2Assets.Contains(asset))
                             {
                                 m_dlcSprite.isVisible = true;
                                 m_dlcSprite.spriteName = "UIFilterWorkshopItemsFocusedHovered";
                                 m_dlcSprite.tooltip = "Network Extension 2 Mod";
                             }
+                            // etst assets, show blue steam icon
                             else if (FindIt.isETSTEnabled && AssetTagList.instance.etstAssets.Contains(asset))
                             {
                                 m_dlcSprite.isVisible = true;
                                 m_dlcSprite.spriteName = "UIFilterWorkshopItemsFocusedHovered";
                                 m_dlcSprite.tooltip = "Extra Train Station Tracks Mod";
                             }
+                            // owtt assets, show blue steam icon
                             else if (FindIt.isOWTTEnabled && AssetTagList.instance.owttAssets.Contains(asset))
                             {
                                 m_dlcSprite.isVisible = true;
                                 m_dlcSprite.spriteName = "UIFilterWorkshopItemsFocusedHovered";
                                 m_dlcSprite.tooltip = "One-Way Train Tracks Mod";
                             }
+                            // tvp patch assets, show blue steam icon
+                            else if (FindIt.isTVPPatchEnabled && asset.assetType == Asset.AssetType.Prop && AssetTagList.instance.tvppAssets.Contains(asset))
+                            {
+                                m_dlcSprite.isVisible = true;
+                                m_dlcSprite.spriteName = "UIFilterWorkshopItemsFocusedHovered";
+
+                                // if based on vanilla assets, show blue steam icon
+                                if (!asset.prefab.m_isCustomContent)
+                                {
+                                    m_dlcSprite.tooltip = "Tree & Vehicle Props Patch Mod";
+                                }
+                                else
+                                {
+                                    if (!asset.author.IsNullOrWhiteSpace() && (asset.steamID != 0))
+                                    {
+                                        m_dlcSprite.tooltip = "Tree & Vehicle Props Patch Mod\nBy " + asset.author + "\n" + Translations.Translate("FIF_UIS_WS");
+                                    }
+                                    else
+                                    {
+                                        m_dlcSprite.tooltip = "Tree & Vehicle Props Patch Mod\n" + Translations.Translate("FIF_UIS_CNWS");
+                                    }
+                                }
+                            }
+                            // vanilla assets, show corresponding dlc icons
                             else if (!asset.prefab.m_isCustomContent)
                             {
                                 SetDLCSprite(m_dlcSprite, asset.prefab.m_dlcRequired);
                             }
+                            // custom assets, show steam icon(has workshop info) or yellow cogwheel icon(no workshop info)
                             else
                             {
                                 if (!asset.author.IsNullOrWhiteSpace() && (asset.steamID != 0))

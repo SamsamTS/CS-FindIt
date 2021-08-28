@@ -74,6 +74,7 @@ namespace FindIt
         public HashSet<Asset> next2Assets = new HashSet<Asset>();
         public HashSet<Asset> etstAssets = new HashSet<Asset>();
         public HashSet<Asset> owttAssets = new HashSet<Asset>();
+        public HashSet<Asset> tvppAssets = new HashSet<Asset>();
 
         public AssetTagList()
         {
@@ -508,8 +509,16 @@ namespace FindIt
                     PropInfo propInfo = asset.prefab as PropInfo;
                     if (propInfo == null) continue;
 
-                    if (generatedTreeProp.Contains(propInfo)) asset.propType = Asset.PropType.PropsTree;
-                    if (generatedVehicleProp.Contains(propInfo)) asset.SetVehiclePropType(propVehicleInfoTable, propInfo);
+                    if (generatedTreeProp.Contains(propInfo))
+                    {
+                        asset.propType = Asset.PropType.PropsTree;
+                        tvppAssets.Add(asset);
+                    }
+                    if (generatedVehicleProp.Contains(propInfo))
+                    {
+                        asset.SetVehiclePropType(propVehicleInfoTable, propInfo);
+                        tvppAssets.Add(asset);
+                    }
                     asset.SetFindIt2Description();
                 }
             }
