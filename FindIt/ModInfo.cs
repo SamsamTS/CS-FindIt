@@ -14,8 +14,8 @@ namespace FindIt
     public class ModInfo : IUserMod
     {
         public const string version = "2.6.5";
-        public const bool isBeta = false;
-        public const bool debug = true;
+        public const bool isBeta = true;
+        public const bool debug = false;
         public const double updateNoticeDate = 20210828;
         public const string updateNotice =
 
@@ -28,7 +28,8 @@ namespace FindIt
             "  their thumbnails, hover your mouse over the icon and it will show\n" +
             "  the name of the mod:\n\n" +
 
-            "  Tree & Vehicle Props Patch\n";
+            "  Tree & Vehicle Props Patch\n" +
+            "  Non-terrain Conforming Props\n";
 
         public string Name
         {
@@ -189,7 +190,7 @@ namespace FindIt
                 string path = Path.Combine(DataLocation.localApplicationData, "FindItCustomTags.xml");
                 UITextField customTagsFilePath = (UITextField)group.AddTextfield(Translations.Translate("FIF_SET_CTFL"), path, _ => { }, _ => { });
                 customTagsFilePath.width = panel.width - 30;
-                group.AddButton(Translations.Translate("FIF_SET_CTFOP"), () => UnityEngine.Application.OpenURL(DataLocation.localApplicationData));
+                group.AddButton(Translations.Translate("FIF_SET_CTFOP"), () => System.Diagnostics.Process.Start(DataLocation.localApplicationData));
 
                 // shortcut keys
                 panel.gameObject.AddComponent<MainButtonKeyMapping>();

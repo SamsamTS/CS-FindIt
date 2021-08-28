@@ -521,6 +521,29 @@ namespace FindIt.GUI
                                 }
                             }
                         }
+                        // ntcp assets, show blue steam icon
+                        else if (FindIt.isNTCPEnabled && data.asset.assetType == Asset.AssetType.Prop && AssetTagList.instance.ntcpAssets.Contains(data.asset))
+                        {
+                            m_dlcSprite.isVisible = true;
+                            m_dlcSprite.spriteName = "UIFilterWorkshopItemsFocusedHovered";
+
+                            // if based on vanilla assets, show blue steam icon
+                            if (!data.asset.prefab.m_isCustomContent)
+                            {
+                                m_dlcSprite.tooltip = "Non-terrain Conforming Props Mod";
+                            }
+                            else
+                            {
+                                if (!data.asset.author.IsNullOrWhiteSpace() && (data.asset.steamID != 0))
+                                {
+                                    m_dlcSprite.tooltip = "Non-terrain Conforming Props Mod\nBy " + data.asset.author + "\n" + Translations.Translate("FIF_UIS_WS");
+                                }
+                                else
+                                {
+                                    m_dlcSprite.tooltip = "Non-terrain Conforming Props Mod\n" + Translations.Translate("FIF_UIS_CNWS");
+                                }
+                            }
+                        }
                         // vanilla assets, show corresponding dlc icons
                         else if (!data.asset.prefab.m_isCustomContent)
                         {

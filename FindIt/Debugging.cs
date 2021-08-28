@@ -48,7 +48,7 @@ namespace FindIt
             }
 
             // Write to log.
-            Message(message.ToString());
+            Debug.Log("Find It 2: " + message.ToString() + ".");
         }
     }
 }
