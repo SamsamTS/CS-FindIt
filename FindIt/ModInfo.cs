@@ -13,19 +13,15 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.6.4";
+        public const string version = "2.6.5";
         public const bool isBeta = false;
-        public const double updateNoticeDate = 20210803;
+        public const bool debug = true;
+        public const double updateNoticeDate = 20210826;
         public const string updateNotice =
 
-            "- Add different Recent DLs sorting options in mod settings:\n\n" +
-
-            "  parent folder creation time\n" +
-            "  parent folder modification time\n" +
-            "  CRP file creation time\n" +
-            "  CRP file modification time\n\n" +
-
-            "- Update translations\n\n";
+            "- Add an option to disable instant search\n\n" +
+            "  Enable this option to reduce UI lag when typing in the search box\n" +
+            "  Press ENTER to submit a new text search\n\n";
 
         public string Name
         {
@@ -78,15 +74,6 @@ namespace FindIt
                 UIHelper group = helper.AddGroup(Name) as UIHelper;
                 UIPanel panel = group.self as UIPanel;
 
-                // Disable debug messages logging
-                UICheckBox hideDebugMessages = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DM"), Settings.hideDebugMessages, (b) =>
-               {
-                   Settings.hideDebugMessages = b;
-                   XMLUtils.SaveSettings();
-               });
-                hideDebugMessages.tooltip = Translations.Translate("FIF_SET_DMTP");
-                group.AddSpace(10);
-
                 // Center the main toolbar
                 UICheckBox centerToolbar = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_CMT"), Settings.centerToolbar, (b) =>
                 {
@@ -138,6 +125,15 @@ namespace FindIt
                     XMLUtils.SaveSettings();
                 });
                 hideExtraUIonVP.tooltip = Translations.Translate("FIF_SET_UIVPTP");
+                group.AddSpace(10);
+
+                // Disable instant search
+                UICheckBox disableInstantSearch = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DIS"), Settings.disableInstantSearch, (b) =>
+                {
+                    Settings.disableInstantSearch = b;
+                    XMLUtils.SaveSettings();
+                });
+                disableInstantSearch.tooltip = Translations.Translate("FIF_SET_DISTP");
                 group.AddSpace(10);
 
                 // Disable update notice

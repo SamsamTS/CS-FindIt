@@ -18,7 +18,7 @@ namespace FindIt
         /// <param name="message">Message to log</param>
         internal static void Message(string message)
         {
-            if (Settings.hideDebugMessages) return;
+            if (!ModInfo.debug) return;
             Debug.Log("Find It 2: " + message + ".");
         }
 

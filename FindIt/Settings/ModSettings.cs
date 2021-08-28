@@ -9,8 +9,6 @@ namespace FindIt
     [XmlRoot(ElementName = "FindIt2", Namespace = "", IsNullable = false)]
     internal static class Settings
     {
-        internal static bool hideDebugMessages = true;
-
         internal static bool unlockAll = false;
 
         internal static bool centerToolbar = true;
@@ -18,6 +16,8 @@ namespace FindIt
         internal static bool useDefaultBrowser = false;
 
         internal static bool hideExtraUIonVP = false;
+
+        internal static bool disableInstantSearch = false;
 
         /// <summary>
         /// 0 = sort by parent folder creation time,
@@ -88,9 +88,6 @@ namespace FindIt
     [XmlRoot(ElementName = "FindIt", Namespace = "", IsNullable = false)]
     public class XMLSettingsFile
     {
-        [XmlElement("HideDebugMessages")]
-        public bool HideDebugMessages { get => Settings.hideDebugMessages; set => Settings.hideDebugMessages = value; }
-
         [XmlElement("UnlockAll")]
         public bool UnlockAll { get => Settings.unlockAll; set => Settings.unlockAll = value; }
 
@@ -102,6 +99,9 @@ namespace FindIt
 
         [XmlElement("HideExtraUIonVP")]
         public bool HideExtraUIonVP { get => Settings.hideExtraUIonVP; set => Settings.hideExtraUIonVP = value; }
+
+        [XmlElement("DisableInstantSearch")]
+        public bool DisableInstantSearch { get => Settings.disableInstantSearch; set => Settings.disableInstantSearch = value; }
 
         [XmlElement("RecentDLSorting")]
         public int RecentDLSorting { get => Settings.recentDLSorting; set => Settings.recentDLSorting = value; }

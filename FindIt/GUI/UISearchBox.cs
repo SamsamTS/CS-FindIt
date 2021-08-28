@@ -108,10 +108,33 @@ namespace FindIt.GUI
             string search = null;
             input.eventTextChanged += (c, p) =>
             {
+                if (Settings.disableInstantSearch && p != "") return;
+
+                if (Settings.separateSearchKeyword)
+                {
+                    // store search query individually for each asset type
+                    Debugging.Message($"store query for index '{this.typeFilter.selectedIndex}' (cast '{(DropDownOptions)this.typeFilter.selectedIndex}'): \"{p}\"");
+                    this.storedQueries[(DropDownOptions)this.typeFilter.selectedIndex] = p;
+                }
+
                 search = p;
-                // store search query individually for each asset type
-                Debugging.Message($"store query for index '{this.typeFilter.selectedIndex}' (cast '{(DropDownOptions)this.typeFilter.selectedIndex}'): \"{p}\"");
-                this.storedQueries[(DropDownOptions)this.typeFilter.selectedIndex] = p;
+                Search();
+            };
+
+            // press ENTER
+            input.eventTextSubmitted += (c, p) =>
+            {
+                if (!Settings.disableInstantSearch) return;
+
+                if (Settings.separateSearchKeyword)
+                {
+                    // store search query individually for each asset type
+                    Debugging.Message($"store query for index '{this.typeFilter.selectedIndex}' (cast '{(DropDownOptions)this.typeFilter.selectedIndex}'): \"{p}\"");
+                    this.storedQueries[(DropDownOptions)this.typeFilter.selectedIndex] = p;
+                }
+
+                if (search != p) input.Focus();
+                search = p;
                 Search();
             };
 
