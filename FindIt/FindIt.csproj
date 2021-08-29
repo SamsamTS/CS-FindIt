@@ -162,6 +162,7 @@
     <EmbeddedResource Include="Icons\Refresh.png" />
     <EmbeddedResource Include="Icons\Locate.png" />
     <EmbeddedResource Include="Icons\NewTab.png" />
+    <Content Include="Translations\cat.xml" />
     <Content Include="Translations\cz.xml" />
     <Content Include="Translations\de.xml" />
     <Content Include="Translations\en.xml" />

@@ -221,6 +221,11 @@
     <Translation ID="FIF_NET_BIK" String="Pistes cyclables" />
     <Translation ID="FIF_NET_TRM" String="Voies de tram" />
     <Translation ID="FIF_NET_MET" String="Métro" />
+    <Translation ID="FIF_SET_REC" String="Triage des téléchargements récents (redémarrage requis)" />
+    <Translation ID="FIF_SET_RECPC" String="Création du dossier parent" />
+    <Translation ID="FIF_SET_RECPM" String="Modification du dossier parent" />
+    <Translation ID="FIF_SET_RECFC" String="Création du fichier CRP" />
+    <Translation ID="FIF_SET_RECFM" String="Modification du fichier CRP" />
 
   </Translations>
 </Language>
