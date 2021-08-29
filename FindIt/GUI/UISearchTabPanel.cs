@@ -5,8 +5,6 @@
 using UnityEngine;
 using ColossalFramework.UI;
 using System.Collections.Generic;
-using System.Reflection;
-using System;
 
 namespace FindIt.GUI
 {
@@ -35,7 +33,7 @@ namespace FindIt.GUI
         private void AddNewSearchTab()
         {
             // find an inactive tab in the pool
-            foreach(UISearchTab tab in searchTabsPool)
+            foreach (UISearchTab tab in searchTabsPool)
             {
                 if (!tab.isActiveTab)
                 {
@@ -58,8 +56,8 @@ namespace FindIt.GUI
                     {
                         // if selected tab is the last tab, select the left neighbor tab
                         // else, select the right neighbor tab
-                        if (i == searchTabsList.Count-1) searchTabsList[i-1].Selected();
-                        else searchTabsList[i+1].Selected();
+                        if (i == searchTabsList.Count - 1) searchTabsList[i - 1].Selected();
+                        else searchTabsList[i + 1].Selected();
                         break;
                     }
                 }

@@ -20,7 +20,7 @@ namespace FindIt
         public static FindIt instance;
         public static UITextureAtlas atlas = LoadResources();
         public static bool inEditor = false;
-       
+
         public static bool isRicoEnabled = false; // Ploppable RICO (Revisited) mod enabled?
         public static bool isPOEnabled = false; // Procedural Object mod enabled?
         public static bool isTVPPatchEnabled = false; // Tree & Vehicle Props Patch mod enabled?

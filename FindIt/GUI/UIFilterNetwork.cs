@@ -72,7 +72,7 @@ namespace FindIt.GUI
         public static bool HasBikeLane(NetInfo info)
         {
             // get all lanes
-            foreach(NetInfo.Lane laneInfo in info.m_lanes)
+            foreach (NetInfo.Lane laneInfo in info.m_lanes)
             {
                 if ((laneInfo.m_vehicleType & VehicleInfo.VehicleType.Bicycle) != 0) return true;
             }

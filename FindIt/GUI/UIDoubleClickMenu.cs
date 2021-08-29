@@ -268,7 +268,8 @@ namespace FindIt.GUI
                     }
                 }
 
-                if (packageFileName != "") {
+                if (packageFileName != "")
+                {
                     openFolderButton.text += $"\n{packageFileName}";
                 }
                 openFolderButton.tooltip = Translations.Translate("FIF_DOU_FOLDOPEN");
@@ -279,7 +280,7 @@ namespace FindIt.GUI
         private void OpenFolder()
         {
             Package.Asset asset = PackageManager.FindAssetByName(selectedAsset.prefab.name, Package.AssetType.Object);
-            
+
             if (asset?.package?.packagePath != null)
             {
                 string path = Path.GetDirectoryName(asset.package.packagePath);
