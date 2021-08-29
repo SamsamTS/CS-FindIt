@@ -110,10 +110,7 @@ namespace FindIt.GUI
                 if (Settings.disableInstantSearch && p != "") return;
 
                 // change icon of the selected search tab 
-                if (Settings.showSearchTabs)
-                {
-                    UISearchTabPanel.instance.GetSelectedTab().ChangeTabLabel(p);
-                }
+                UISearchTabPanel.instance.GetSelectedTab().ChangeTabLabel(p);
 
                 search = p;
                 Search();
@@ -125,10 +122,7 @@ namespace FindIt.GUI
                 if (!Settings.disableInstantSearch) return;
 
                 // change icon of the selected search tab 
-                if (Settings.showSearchTabs)
-                {
-                    UISearchTabPanel.instance.GetSelectedTab().ChangeTabLabel(p);
-                }
+                UISearchTabPanel.instance.GetSelectedTab().ChangeTabLabel(p);
 
                 if (search != p) input.Focus();
                 search = p;
@@ -222,10 +216,7 @@ namespace FindIt.GUI
                 UpdateFilterPanels();
 
                 // change icon of the selected search tab 
-                if (Settings.showSearchTabs)
-                {
-                    UISearchTabPanel.instance.GetSelectedTab().ChangeTabIcon(typeFilter.selectedIndex);
-                }
+                UISearchTabPanel.instance.GetSelectedTab().ChangeTabIcon(typeFilter.selectedIndex);
 
                 Search();
             };
