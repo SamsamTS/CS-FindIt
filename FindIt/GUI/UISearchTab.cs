@@ -186,8 +186,9 @@ namespace FindIt.GUI
         {
             if (instance != null)
             {
-                DeactivateTab();
+                // don't change the order of these two lines
                 UISearchTabPanel.instance.RemoveSearchTab(instance);
+                DeactivateTab();
             }
         }
 
