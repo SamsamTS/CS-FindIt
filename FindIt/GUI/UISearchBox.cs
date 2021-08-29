@@ -8,7 +8,6 @@ using ColossalFramework.DataBinding;
 using ColossalFramework.UI;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace FindIt.GUI
 {
@@ -32,7 +31,7 @@ namespace FindIt.GUI
 
         public UILabel sizeLabel;
         public UIDropDown sizeFilterX;
-        private UIDropDown sizeFilterY;
+        public UIDropDown sizeFilterY;
         private UIFilterGrowable filterGrowable;
         private UIFilterPloppable filterPloppable;
         private UIFilterProp filterProp;
@@ -48,17 +47,17 @@ namespace FindIt.GUI
         private UISprite locateInstanceIcon;
 
         private UISprite tagToolIcon;
-        public UIFilterTag tagPanel;
+        public UIFilterTagPanel tagPanel;
         private UISprite extraFiltersIcon;
-        public UIFilterExtra extraFiltersPanel;
+        public UIFilterExtraPanel extraFiltersPanel;
         public UISprite quickMenuIcon;
         public bool quickMenuVisible;
 
         public UIAssetTypePanel assetTypePanel;
+        public UISearchTabPanel searchTabPanel;
 
         public List<Asset> matches;
         public List<string> searchResultList = new List<string>();
-        public Dictionary<DropDownOptions, string> storedQueries = new Dictionary<DropDownOptions, string>();
 
         public enum DropDownOptions
         {
@@ -110,11 +109,10 @@ namespace FindIt.GUI
             {
                 if (Settings.disableInstantSearch && p != "") return;
 
-                if (Settings.separateSearchKeyword)
+                // change icon of the selected search tab 
+                if (Settings.showSearchTabs)
                 {
-                    // store search query individually for each asset type
-                    // Debugging.Message($"store query for index '{this.typeFilter.selectedIndex}' (cast '{(DropDownOptions)this.typeFilter.selectedIndex}'): \"{p}\"");
-                    this.storedQueries[(DropDownOptions)this.typeFilter.selectedIndex] = p;
+                    UISearchTabPanel.instance.GetSelectedTab().ChangeTabLabel(p);
                 }
 
                 search = p;
@@ -126,11 +124,10 @@ namespace FindIt.GUI
             {
                 if (!Settings.disableInstantSearch) return;
 
-                if (Settings.separateSearchKeyword)
+                // change icon of the selected search tab 
+                if (Settings.showSearchTabs)
                 {
-                    // store search query individually for each asset type
-                    // Debugging.Message($"store query for index '{this.typeFilter.selectedIndex}' (cast '{(DropDownOptions)this.typeFilter.selectedIndex}'): \"{p}\"");
-                    this.storedQueries[(DropDownOptions)this.typeFilter.selectedIndex] = p;
+                    UISearchTabPanel.instance.GetSelectedTab().ChangeTabLabel(p);
                 }
 
                 if (search != p) input.Focus();
@@ -224,21 +221,12 @@ namespace FindIt.GUI
             {
                 UpdateFilterPanels();
 
-                // restore stored search query individually for each asset type
-                // or hold SHIFT when switching asset type to share query keyword temporarily
-                Event e = Event.current;
-                if (Settings.separateSearchKeyword && !e.shift)
+                // change icon of the selected search tab 
+                if (Settings.showSearchTabs)
                 {
-                    if (this.storedQueries.TryGetValue((UISearchBox.DropDownOptions)p, out string storedQuery))
-                    {
-                        // Debugging.Message($"restore stored query for category {p} (cast: '{(UISearchBox.DropDownOptions)p}': \"{storedQuery}\"");
-                        this.input.text = storedQuery;
-                    }
-                    else
-                    {
-                        this.input.text = "";
-                    }
+                    UISearchTabPanel.instance.GetSelectedTab().ChangeTabIcon(typeFilter.selectedIndex);
                 }
+
                 Search();
             };
 
@@ -560,6 +548,7 @@ namespace FindIt.GUI
             if (Settings.showAssetTypePanel) assetTypePanel.isVisible = true;
             CreateCustomTagPanel();
             CreateExtraFiltersPanel();
+            CreateSearchTabPanel();
 
             size = Vector2.zero;
         }
@@ -679,7 +668,7 @@ namespace FindIt.GUI
         private void CreateExtraFiltersPanel()
         {
             if (extraFiltersPanel != null) return;
-            extraFiltersPanel = AddUIComponent<UIFilterExtra>();
+            extraFiltersPanel = AddUIComponent<UIFilterExtraPanel>();
             extraFiltersPanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             extraFiltersPanel.backgroundSprite = "GenericTab";
             extraFiltersPanel.color = new Color32(196, 200, 206, 255);
@@ -699,7 +688,7 @@ namespace FindIt.GUI
         private void CreateCustomTagPanel()
         {
             if (tagPanel != null) return;
-            tagPanel = AddUIComponent<UIFilterTag>();
+            tagPanel = AddUIComponent<UIFilterTagPanel>();
             tagPanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
             tagPanel.backgroundSprite = "GenericTab";
             tagPanel.color = new Color32(196, 200, 206, 255);
@@ -741,20 +730,39 @@ namespace FindIt.GUI
             XMLUtils.SaveSettings();
         }
 
+        private void CreateSearchTabPanel()
+        {
+            if (searchTabPanel != null) return;
+            searchTabPanel = AddUIComponent<UISearchTabPanel>();
+            searchTabPanel.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
+            searchTabPanel.backgroundSprite = "GenericTab";
+            searchTabPanel.color = new Color32(196, 200, 206, 255);
+            searchTabPanel.isVisible = true;
+            searchTabPanel.size = new Vector2(sizeFilterX.position.x, 35);
+            searchTabPanel.relativePosition = new Vector2(0, -inputPanel.height - searchTabPanel.height - 40);
+        }
+
         private void UpdateTopPanelsPosition()
         {
             if (extraFiltersPanel.isVisible && tagPanel.isVisible)
             {
                 tagPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height - 40);
                 extraFiltersPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height * 2 - 40);
+                searchTabPanel.relativePosition = new Vector2(0, -inputPanel.height - extraFiltersPanel.height - tagPanel.height - searchTabPanel.height - 40);
             }
             else if (extraFiltersPanel.isVisible && !tagPanel.isVisible)
             {
                 extraFiltersPanel.relativePosition = new Vector2(0, -inputPanel.height - extraFiltersPanel.height - 40);
+                searchTabPanel.relativePosition = new Vector2(0, -inputPanel.height - extraFiltersPanel.height - searchTabPanel.height - 40);
             }
             else if (!extraFiltersPanel.isVisible && tagPanel.isVisible)
             {
                 tagPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height - 40);
+                searchTabPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height - searchTabPanel.height - 40);
+            }
+            else
+            {
+                searchTabPanel.relativePosition = new Vector2(0, -inputPanel.height - searchTabPanel.height - 40);
             }
         }
 
@@ -771,8 +779,8 @@ namespace FindIt.GUI
             sizeFilterX.selectedIndex = 0;
             sizeFilterY.selectedIndex = 0;
 
-            UIFilterTag.instance.tagDropDownCheckBox.isChecked = false;
-            UIFilterExtra.instance.optionDropDownCheckBox.isChecked = false;
+            UIFilterTagPanel.instance.tagDropDownCheckBox.isChecked = false;
+            UIFilterExtraPanel.instance.optionDropDownCheckBox.isChecked = false;
 
             filterGrowable.SelectAll();
             filterPloppable.SelectAll();
@@ -1041,8 +1049,8 @@ namespace FindIt.GUI
             }
 
             input.text = "";
-            if (UIFilterTag.instance?.tagDropDownCheckBox != null) UIFilterTag.instance.tagDropDownCheckBox.isChecked = false;
-            if (UIFilterExtra.instance?.optionDropDownCheckBox != null) UIFilterExtra.instance.optionDropDownCheckBox.isChecked = false;
+            if (UIFilterTagPanel.instance?.tagDropDownCheckBox != null) UIFilterTagPanel.instance.tagDropDownCheckBox.isChecked = false;
+            if (UIFilterExtraPanel.instance?.optionDropDownCheckBox != null) UIFilterExtraPanel.instance.optionDropDownCheckBox.isChecked = false;
 
             if (targetAsset.prefab.m_isCustomContent) workshopFilter.isChecked = true;
             else vanillaFilter.isChecked = true;

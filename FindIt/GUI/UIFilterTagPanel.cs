@@ -8,9 +8,9 @@ using System.Collections.Generic;
 
 namespace FindIt.GUI
 {
-    public class UIFilterTag : UIPanel
+    public class UIFilterTagPanel : UIPanel
     {
-        public static UIFilterTag instance;
+        public static UIFilterTagPanel instance;
 
         public UICheckBox tagDropDownCheckBox;
         public UIDropDown tagDropDownMenu;

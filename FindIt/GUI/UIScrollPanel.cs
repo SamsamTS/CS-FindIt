@@ -60,19 +60,19 @@ namespace FindIt.GUI
             }
 
             // adjust scrollbars in dropdown menus(needed for Yet Another Toolbar & Resize It)
-            if (UIFilterExtra.instance != null)
+            if (UIFilterExtraPanel.instance != null)
             {
-                SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterExtra.instance.optionDropDownMenu);
-                SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtra.instance.optionDropDownMenu);
-                SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterExtra.instance.assetCreatorDropDownMenu);
-                SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtra.instance.assetCreatorDropDownMenu);
-                SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterExtra.instance.DLCDropDownMenu);
-                SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtra.instance.DLCDropDownMenu);
+                SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterExtraPanel.instance.optionDropDownMenu);
+                SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtraPanel.instance.optionDropDownMenu);
+                SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterExtraPanel.instance.assetCreatorDropDownMenu);
+                SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtraPanel.instance.assetCreatorDropDownMenu);
+                SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterExtraPanel.instance.DLCDropDownMenu);
+                SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtraPanel.instance.DLCDropDownMenu);
             }
-            if (UIFilterTag.instance != null)
+            if (UIFilterTagPanel.instance != null)
             {
-                SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterTag.instance.tagDropDownMenu);
-                SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterTag.instance.tagDropDownMenu);
+                SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterTagPanel.instance.tagDropDownMenu);
+                SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterTagPanel.instance.tagDropDownMenu);
             }
         }
 
@@ -259,12 +259,12 @@ namespace FindIt.GUI
                 {
                     if (m_batchCheckBox.isChecked)
                     {
-                        UIFilterTag.instance.batchAssetSet.Add(currentData.asset);
+                        UIFilterTagPanel.instance.batchAssetSet.Add(currentData.asset);
                         // Debugging.Message("Batch - Add to batch set: " + currentData.asset.name);
                     }
                     else
                     {
-                        UIFilterTag.instance.batchAssetSet.Remove(currentData.asset);
+                        UIFilterTagPanel.instance.batchAssetSet.Remove(currentData.asset);
                         // Debugging.Message("Batch - Remove from batch set: " + currentData.asset.name);
                     }
                 }
@@ -397,9 +397,9 @@ namespace FindIt.GUI
 
 
                 // batch action check box
-                if (m_batchCheckBox != null && data.asset != null && UIFilterTag.instance?.batchAssetSet != null)
+                if (m_batchCheckBox != null && data.asset != null && UIFilterTagPanel.instance?.batchAssetSet != null)
                 {
-                    if (UIFilterTag.instance.batchAssetSet.Contains(data.asset))
+                    if (UIFilterTagPanel.instance.batchAssetSet.Contains(data.asset))
                     {
                         m_batchCheckBox.isChecked = true;
                     }

@@ -131,7 +131,7 @@ namespace FindIt.GUI
                     }
 
                     // when a tab is already checked, toggle it will move back to select all
-                    if (((UICheckBox)c).isChecked == true)
+                    if (((UICheckBox)c).isChecked)
                     {
                         for (int j = 0; j < 8; j++)
                             toggles[j].isChecked = true;
