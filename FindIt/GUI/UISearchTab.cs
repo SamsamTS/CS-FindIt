@@ -223,10 +223,10 @@ namespace FindIt.GUI
 
             public TabData()
             {
-                reset();
+                Reset();
             }
 
-            public void reset()
+            public void Reset()
             {
                 inputText = "";
                 typeFilterSelectedIndex = 0;
@@ -364,14 +364,14 @@ namespace FindIt.GUI
             tabIcon.atlas = SamsamTS.UIUtils.GetAtlas(CategoryIcons.atlases[(int)Category.All]);
             tabIcon.spriteName = CategoryIcons.spriteNames[(int)Category.All];
             tabLabel.text = Translations.Translate("FIF_STAB_NTAB");
-            tabData.reset();
+            tabData.Reset();
         }
 
         public void DeactivateTab()
         {
             instance.isActiveTab = false;
-            ResetTab();
             instance.isVisible = false;
+            ResetTab();
         }
     }
 }
