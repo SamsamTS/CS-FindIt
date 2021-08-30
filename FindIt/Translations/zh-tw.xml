@@ -226,8 +226,8 @@
     <Translation ID="FIF_SET_RECPM" String="資料夾修改時間" />
     <Translation ID="FIF_SET_RECFC" String="CRP 檔案創建時間" />
     <Translation ID="FIF_SET_RECFM" String="CRP 檔案修改時間" />
-    <Translation ID="FIF_SET_DIS" String="停用即時文字搜尋。按 Enter 送出新文字搜尋" />
-    <Translation ID="FIF_SET_DISTP" String="啟用此選項可減少搜尋框輸入時的UI Lag" />
+    <Translation ID="FIF_SET_DIS" String="停用即時文字搜尋。按 Enter 以送出新文字搜尋" />
+    <Translation ID="FIF_SET_DISTP" String="啟用此選項可減少搜尋框輸入時的 UI Lag" />
     <Translation ID="FIF_SET_STAB" String="顯示搜尋分頁功能 [ 實驗 ]" />
     <Translation ID="FIF_STAB_NTAB" String="新分頁" />
 

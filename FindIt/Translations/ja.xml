@@ -226,6 +226,8 @@
     <Translation ID="FIF_SET_RECPM" String="親フォルダの更新時" />
     <Translation ID="FIF_SET_RECFC" String="CRPファイルの作成日" />
     <Translation ID="FIF_SET_RECFM" String="CRPファイルの更新日" />
+    <Translation ID="FIF_SET_STAB" String="検索タブを表示する [実験中]" />
+    <Translation ID="FIF_STAB_NTAB" String="新しいタブ" />
 
   </Translations>
 </Language>
