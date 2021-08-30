@@ -13,7 +13,7 @@ namespace FindIt.GUI
         public static UISearchTabPanel instance;
         private UISprite newTabIcon;
         private UISearchTab selectedTab;
-        private readonly int maxNumOfTabs = 10;
+        private readonly int maxNumOfTabs = 8;
         private List<UISearchTab> searchTabsPool = new List<UISearchTab>();
         public List<UISearchTab> searchTabsList = new List<UISearchTab>();
 
@@ -41,6 +41,7 @@ namespace FindIt.GUI
                     tab.isVisible = true;
                     searchTabsList.Add(tab);
                     RefreshUIPositions();
+                    tab.Selected();
                     break;
                 }
             }

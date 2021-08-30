@@ -12,14 +12,14 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7-beta2";
+        public const string version = "2.7-beta3";
         public const bool isBeta = true;
         public const bool debug = false;
         public const double updateNoticeDate = 20210829;
         public const string updateNotice =
 
             "- Introduce the new search tabs system [Experimental]\n\n" +
-            "  Works like browser tabs. You can enable it in the Quick Menu\n" +
+            "  Works like web browser tabs. You can enable it in the Quick Menu\n" +
             "  Doesn't interact with the custom tag and extra filters panels yet\n\n" +
 
             "- Add an option to disable instant text search (in mod settings)\n\n" +
