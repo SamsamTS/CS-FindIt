@@ -730,30 +730,30 @@ namespace FindIt.GUI
             searchTabPanel.color = new Color32(196, 200, 206, 255);
             searchTabPanel.isVisible = true;
             searchTabPanel.size = new Vector2(sizeFilterX.position.x, 35);
-            searchTabPanel.relativePosition = new Vector2(0, -inputPanel.height - searchTabPanel.height - 40);
+            searchTabPanel.relativePosition = new Vector2(0, 2 -inputPanel.height - searchTabPanel.height - 40);
         }
 
         private void UpdateTopPanelsPosition()
         {
             if (extraFiltersPanel.isVisible && tagPanel.isVisible)
             {
-                tagPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height - 40);
-                extraFiltersPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height * 2 - 40);
-                searchTabPanel.relativePosition = new Vector2(0, -inputPanel.height - extraFiltersPanel.height - tagPanel.height - searchTabPanel.height - 40);
+                tagPanel.relativePosition = new Vector2(0, 2 -inputPanel.height - tagPanel.height - 40);
+                extraFiltersPanel.relativePosition = new Vector2(0, 4 -inputPanel.height - extraFiltersPanel.height - tagPanel.height - 40);
+                searchTabPanel.relativePosition = new Vector2(0, 6 -inputPanel.height - extraFiltersPanel.height - tagPanel.height - searchTabPanel.height - 40);
             }
             else if (extraFiltersPanel.isVisible && !tagPanel.isVisible)
             {
-                extraFiltersPanel.relativePosition = new Vector2(0, -inputPanel.height - extraFiltersPanel.height - 40);
-                searchTabPanel.relativePosition = new Vector2(0, -inputPanel.height - extraFiltersPanel.height - searchTabPanel.height - 40);
+                extraFiltersPanel.relativePosition = new Vector2(0, 2 -inputPanel.height - extraFiltersPanel.height - 40);
+                searchTabPanel.relativePosition = new Vector2(0, 4 -inputPanel.height - extraFiltersPanel.height - searchTabPanel.height - 40);
             }
             else if (!extraFiltersPanel.isVisible && tagPanel.isVisible)
             {
-                tagPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height - 40);
-                searchTabPanel.relativePosition = new Vector2(0, -inputPanel.height - tagPanel.height - searchTabPanel.height - 40);
+                tagPanel.relativePosition = new Vector2(0, 2 -inputPanel.height - tagPanel.height - 40);
+                searchTabPanel.relativePosition = new Vector2(0, 4 -inputPanel.height - tagPanel.height - searchTabPanel.height - 40);
             }
             else
             {
-                searchTabPanel.relativePosition = new Vector2(0, -inputPanel.height - searchTabPanel.height - 40);
+                searchTabPanel.relativePosition = new Vector2(0, 2 -inputPanel.height - searchTabPanel.height - 40);
             }
         }
 
