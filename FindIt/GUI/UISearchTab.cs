@@ -231,8 +231,8 @@ namespace FindIt.GUI
             {
                 inputText = "";
                 typeFilterSelectedIndex = 0;
-                workshopFilterIsChecked = true;
-                vanillaFilterIsChecked = true;
+                workshopFilterIsChecked = Settings.useWorkshopFilter;
+                vanillaFilterIsChecked = Settings.useVanillaFilter;
                 sizeFilterXSelectedIndex = 0;
                 sizeFilterYSelectedIndex = 0;
                 firstAssetTitle = "";
@@ -292,8 +292,6 @@ namespace FindIt.GUI
             }
 
             // store the first displayed asset title
-            // if (FindIt.instance.scrollPanel.savedItems[0] == null) Debug.Log("FindIt.instance.scrollPanel.savedItems[0] is null");
-            // if (FindIt.instance.scrollPanel.savedItems[0].asset == null) Debug.Log("FindIt.instance.scrollPanel.savedItems[0].asset is null");
             tabData.firstAssetTitle = FindIt.instance.scrollPanel.GetItem(0).component.name;
         }
 
