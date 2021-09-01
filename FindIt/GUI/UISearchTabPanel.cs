@@ -39,6 +39,7 @@ namespace FindIt.GUI
                 {
                     tab.isActiveTab = true;
                     tab.isVisible = true;
+                    tab.ResetTab();
                     searchTabsList.Add(tab);
                     RefreshUIPositions();
                     tab.Selected();

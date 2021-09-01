@@ -370,7 +370,6 @@ namespace FindIt.GUI
         {
             instance.isActiveTab = false;
             instance.isVisible = false;
-            ResetTab();
         }
     }
 }
