@@ -12,7 +12,7 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7-beta4";
+        public const string version = "2.7-beta5";
         public const bool isBeta = true;
         public const bool debug = false;
         public const double updateNoticeDate = 20210829;
