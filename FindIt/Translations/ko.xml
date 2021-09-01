@@ -226,7 +226,7 @@
     <Translation ID="FIF_SET_RECPM" String="상위 폴더 수정 시간" />
     <Translation ID="FIF_SET_RECFC" String="CRP 파일 생성 시간" />
     <Translation ID="FIF_SET_RECFM" String="CRP 파일 수정 시간" />
-    <Translation ID="FIF_SET_DIS" String="즉시 검색을 비활성화합니다. 엔터를 눌러 새 텍스트 검색을 제출하세요." />
+    <Translation ID="FIF_SET_DIS" String="즉시 검색을 비활성화. 엔터를 눌러 새 텍스트 검색을 제출하세요" />
     <Translation ID="FIF_SET_DISTP" String="검색 문구를 입력할 때 UI 렉을 줄이려면 이 옵션을 사용하세요" />
     <Translation ID="FIF_SET_STAB" String="검색 탭 보이기 [실험적인]" />
     <Translation ID="FIF_STAB_NTAB" String="새 탭" />
