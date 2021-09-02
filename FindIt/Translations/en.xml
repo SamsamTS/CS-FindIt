@@ -228,7 +228,7 @@
     <Translation ID="FIF_SET_RECFM" String="CRP file modificaiton time" />
     <Translation ID="FIF_SET_DIS" String="Disable instant text search. Press ENTER to submit a new text search" />
     <Translation ID="FIF_SET_DISTP" String="Use this option to reduce UI lag when typing in the search box" />
-    <Translation ID="FIF_SET_STAB" String="Show search tabs [Experimental]" />
+    <Translation ID="FIF_SET_STAB" String="Show search tabs" />
     <Translation ID="FIF_STAB_NTAB" String="New tab" />
 
   </Translations>
