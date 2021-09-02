@@ -51,7 +51,7 @@ namespace FindIt.GUI
             close.eventClicked += (c, p) => Close();
 
             UILabel message = AddUIComponent<UILabel>();
-            message.text = "\n" + Translations.Translate("FIF_ADD_NUM") + " " + UIFilterTag.instance.batchAssetSet.Count + "\n\n" + Translations.Translate("FIF_REM_REM");
+            message.text = "\n" + Translations.Translate("FIF_ADD_NUM") + " " + UIFilterTagPanel.instance.batchAssetSet.Count + "\n\n" + Translations.Translate("FIF_REM_REM");
             message.textColor = new Color32(0, 0, 0, 255);
             message.relativePosition = new Vector3(spacing * 2, spacing + title.height + spacing);
 
@@ -100,7 +100,7 @@ namespace FindIt.GUI
                 }
 
                 BatchRemoveTag(newTagName);
-                ((UIFilterTag)m_button.parent).UpdateCustomTagList();
+                ((UIFilterTagPanel)m_button.parent).UpdateCustomTagList();
                 UISearchBox.instance.scrollPanel.Refresh();
                 Close();
             };
@@ -178,7 +178,7 @@ namespace FindIt.GUI
 
         private void BatchRemoveTag(string newTagName)
         {
-            foreach (Asset asset in UIFilterTag.instance.batchAssetSet)
+            foreach (Asset asset in UIFilterTagPanel.instance.batchAssetSet)
             {
                 if (asset.tagsCustom.Contains(newTagName))
                 {

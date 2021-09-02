@@ -8,9 +8,9 @@ using System.Collections.Generic;
 
 namespace FindIt.GUI
 {
-    public class UIFilterExtra : UIPanel
+    public class UIFilterExtraPanel : UIPanel
     {
-        public static UIFilterExtra instance;
+        public static UIFilterExtraPanel instance;
 
         public UICheckBox optionDropDownCheckBox;
         public UIDropDown optionDropDownMenu;
@@ -133,7 +133,7 @@ namespace FindIt.GUI
             optionDropDownMenu.items = options;
             optionDropDownMenu.selectedIndex = 0;
             optionDropDownMenu.relativePosition = new Vector3(optionDropDownCheckBox.relativePosition.x + optionDropDownCheckBox.width + 5, 5);
-            SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtra.instance.optionDropDownMenu);
+            SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtraPanel.instance.optionDropDownMenu);
 
             optionDropDownMenu.eventSelectedIndexChanged += (c, p) =>
             {
@@ -221,7 +221,7 @@ namespace FindIt.GUI
             UpdateAssetCreatorList();
             assetCreatorDropDownMenu.isVisible = true;
             assetCreatorDropDownMenu.relativePosition = new Vector3(assetCreatorInput.relativePosition.x + assetCreatorInput.width + 10, 5);
-            SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtra.instance.assetCreatorDropDownMenu);
+            SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtraPanel.instance.assetCreatorDropDownMenu);
 
             assetCreatorDropDownMenu.eventSelectedIndexChanged += (c, p) =>
             {
@@ -432,7 +432,7 @@ namespace FindIt.GUI
             DLCDropDownMenu.isVisible = false;
             DLCDropDownMenu.selectedIndex = 0;
             DLCDropDownMenu.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 50, 5);
-            SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtra.instance.DLCDropDownMenu);
+            SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtraPanel.instance.DLCDropDownMenu);
 
             DLCDropDownMenu.eventSelectedIndexChanged += (c, p) =>
             {

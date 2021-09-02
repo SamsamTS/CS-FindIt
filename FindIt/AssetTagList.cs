@@ -152,8 +152,19 @@ namespace FindIt
                             asset.tagsTitle.UnionWith(AddAssetTags(asset, tagsTitleDictionary, asset.prefab.name.Substring(0, index)));
                         }
 
-                        // if steamID == 0, non-workshop, download time = 0
-                        asset.downloadTime = 0;
+                        // if steamID == 0, non-workshop vanilla, download time = 0
+                        if (!asset.prefab.m_isCustomContent) asset.downloadTime = 0;
+
+                        // else, custom but non-workshop
+                        else
+                        {
+                            asset.downloadTime = 0;
+                            Package.Asset packageAsset = PackageManager.FindAssetByName(asset.prefab.name, Package.AssetType.Object);
+                            if (packageAsset?.package?.packagePath != null)
+                            {
+                                asset.downloadTime = GetPackageDownloadTime(packageAsset.package);
+                            }
+                        }
 
                         if (asset.isCCP)
                         {

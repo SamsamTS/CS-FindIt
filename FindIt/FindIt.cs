@@ -20,7 +20,7 @@ namespace FindIt
         public static FindIt instance;
         public static UITextureAtlas atlas = LoadResources();
         public static bool inEditor = false;
-       
+
         public static bool isRicoEnabled = false; // Ploppable RICO (Revisited) mod enabled?
         public static bool isPOEnabled = false; // Procedural Object mod enabled?
         public static bool isTVPPatchEnabled = false; // Tree & Vehicle Props Patch mod enabled?
@@ -29,6 +29,8 @@ namespace FindIt
         public static bool isETSTEnabled = false; // Extra Train Station Track mod enabled?
         public static bool isOWTTEnabled = false; // One-Way Train Tracks mod enabled?
         public static bool isMeshInfoEnabled = false; // MeshInfo mod enabled?
+        public static bool isYATEnabled = false; // Yet Another Toolbar enabled?
+
 
         public bool firstVisibleFlag = false;
 
@@ -336,6 +338,7 @@ namespace FindIt
             isOWTTEnabled = enabledMods.Contains("singletraintrack");
             isMeshInfoEnabled = enabledMods.Contains("meshinfo");
             isNTCPEnabled = enabledMods.Contains("nonterrainconformingprops");
+            isYATEnabled = enabledMods.Contains("yetanothertoolbar");
         }
 
         public static UITextureAtlas LoadResources()
@@ -381,7 +384,8 @@ namespace FindIt
                     "TaxiwayHovered",
                     "TaxiwayPressed",
                     "Refresh",
-                    "Locate"
+                    "Locate",
+                    "NewTab"
                 };
 
                 atlas = ResourceLoader.CreateTextureAtlas("FindItAtlas", spriteNames, "FindIt.Icons.");

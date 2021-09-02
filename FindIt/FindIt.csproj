@@ -72,11 +72,11 @@
     <Compile Include="GUI\UIAssetTypePanel.cs" />
     <Compile Include="GUI\UIDoubleClickMenu.cs" />
     <Compile Include="GUI\UIFilterDecal.cs" />
-    <Compile Include="GUI\UIFilterExtra.cs" />
+    <Compile Include="GUI\UIFilterExtraPanel.cs" />
     <Compile Include="GUI\UIFilterGrowable.cs" />
     <Compile Include="GUI\UIFilterNetwork.cs" />
     <Compile Include="GUI\UIFilterProp.cs" />
-    <Compile Include="GUI\UIFilterTag.cs" />
+    <Compile Include="GUI\UIFilterTagPanel.cs" />
     <Compile Include="GUI\UIFilterTree.cs" />
     <Compile Include="GUI\UIGroupPanel.cs" />
     <Compile Include="GUI\UIFilterPloppable.cs" />
@@ -84,6 +84,8 @@
     <Compile Include="GUI\UIScrollPanel.cs" />
     <Compile Include="GUI\UIFastList.cs" />
     <Compile Include="GUI\UISearchBox.cs" />
+    <Compile Include="GUI\UISearchTab.cs" />
+    <Compile Include="GUI\UISearchTabPanel.cs" />
     <Compile Include="GUI\UITag.cs" />
     <Compile Include="GUI\UITagsBatchAddPopUp.cs" />
     <Compile Include="GUI\UITagsRenamePopUp.cs" />
@@ -159,6 +161,8 @@
     <EmbeddedResource Include="Icons\TaxiwayPressed.png" />
     <EmbeddedResource Include="Icons\Refresh.png" />
     <EmbeddedResource Include="Icons\Locate.png" />
+    <EmbeddedResource Include="Icons\NewTab.png" />
+    <Content Include="Translations\cat.xml" />
     <Content Include="Translations\cz.xml" />
     <Content Include="Translations\de.xml" />
     <Content Include="Translations\en.xml" />

@@ -7,17 +7,20 @@ using ColossalFramework.UI;
 using CitiesHarmony.API;
 using System.IO;
 using ColossalFramework.IO;
-using UnityEngine;
 
 namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.6.5";
+        public const string version = "2.7-beta5";
         public const bool isBeta = true;
         public const bool debug = false;
-        public const double updateNoticeDate = 20210828;
+        public const double updateNoticeDate = 20210829;
         public const string updateNotice =
+
+            "- Introduce the new search tabs system [Experimental]\n\n" +
+            "  Works like web browser tabs. You can enable it in the Quick Menu\n" +
+            "  Doesn't interact with the custom tag and extra filters panels yet\n\n" +
 
             "- Add an option to disable instant text search (in mod settings)\n\n" +
 
@@ -150,15 +153,6 @@ namespace FindIt
                     Settings.disableUpdateNotice = b;
                     XMLUtils.SaveSettings();
                 });
-                group.AddSpace(10);
-
-                // Use separate keywords
-                UICheckBox separateSearchKeyword = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_SSK"), Settings.separateSearchKeyword, (b) =>
-                {
-                    Settings.separateSearchKeyword = b;
-                    XMLUtils.SaveSettings();
-                });
-                separateSearchKeyword.tooltip = Translations.Translate("FIF_SET_SSKTP");
                 group.AddSpace(10);
 
                 // Recent DLs sorting

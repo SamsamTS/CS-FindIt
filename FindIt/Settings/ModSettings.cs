@@ -40,11 +40,11 @@ namespace FindIt
 
         internal static bool useLightBackground = false;
 
+        internal static bool showSearchTabs = false;
+
         internal static bool disableUpdateNotice = false;
 
         internal static double lastUpdateNotice = 0.0;
-
-        internal static bool separateSearchKeyword = false;
 
         internal static bool useRelevanceSort = true;
 
@@ -124,11 +124,11 @@ namespace FindIt
         [XmlElement("UseLightBackground")]
         public bool UseLightBackground { get => Settings.useLightBackground; set => Settings.useLightBackground = value; }
 
+        [XmlElement("ShowSearchTabs")]
+        public bool ShowSearchTabs { get => Settings.showSearchTabs; set => Settings.showSearchTabs = value; }
+
         [XmlElement("DisableUpdateNotice")]
         public bool DisableUpdateNotice { get => Settings.disableUpdateNotice; set => Settings.disableUpdateNotice = value; }
-
-        [XmlElement("SeparateSearchKeyword")]
-        public bool SeparateSearchKeyword { get => Settings.separateSearchKeyword; set => Settings.separateSearchKeyword = value; }
 
         [XmlElement("UseRelevanceSort")]
         public bool UseRelevanceSort { get => Settings.useRelevanceSort; set => Settings.useRelevanceSort = value; }

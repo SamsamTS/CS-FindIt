@@ -5,7 +5,6 @@ using ColossalFramework;
 using FindIt.GUI;
 using ColossalFramework.UI;
 using ColossalFramework.IO;
-using UnityEngine;
 
 namespace FindIt
 {

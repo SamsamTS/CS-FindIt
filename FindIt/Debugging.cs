@@ -19,7 +19,9 @@ namespace FindIt
         internal static void Message(string message)
         {
             if (!ModInfo.debug) return;
+#pragma warning disable CS0162 // Unreachable code detected
             Debug.Log("Find It 2: " + message + ".");
+#pragma warning restore CS0162 // Unreachable code detected
         }
 
 

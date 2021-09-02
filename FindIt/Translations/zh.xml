@@ -226,6 +226,10 @@
     <Translation ID="FIF_SET_RECPM" String="文件夹修改时间" />
     <Translation ID="FIF_SET_RECFC" String="CRP 文件创建时间" />
     <Translation ID="FIF_SET_RECFM" String="CRP 文件修改时间" />
+    <Translation ID="FIF_SET_DIS" String="禁用即时文字搜索。按 ENTER 以提交新的文字搜索" />
+    <Translation ID="FIF_SET_DISTP" String="在搜索框中键入时，使用此选项可减少 UI 延迟" />
+    <Translation ID="FIF_SET_STAB" String="显示搜索标签页功能" />
+    <Translation ID="FIF_STAB_NTAB" String="新标签页" />
 
   </Translations>
 </Language>

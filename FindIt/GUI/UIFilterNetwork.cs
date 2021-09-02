@@ -72,7 +72,7 @@ namespace FindIt.GUI
         public static bool HasBikeLane(NetInfo info)
         {
             // get all lanes
-            foreach(NetInfo.Lane laneInfo in info.m_lanes)
+            foreach (NetInfo.Lane laneInfo in info.m_lanes)
             {
                 if ((laneInfo.m_vehicleType & VehicleInfo.VehicleType.Bicycle) != 0) return true;
             }
@@ -309,7 +309,7 @@ namespace FindIt.GUI
                         }
 
                         // when a tab is already checked, toggle it will move back to select all
-                        if (((UICheckBox)c).isChecked == true)
+                        if (((UICheckBox)c).isChecked)
                         {
                             for (int j = 0; j < (int)Category.All; j++)
                                 toggles[j].isChecked = true;

@@ -51,9 +51,9 @@ namespace FindIt.GUI
             {
                 Settings.customTagListSort = customTagListSort.isChecked;
                 XMLUtils.SaveSettings();
-                if (UIFilterTag.instance != null)
+                if (UIFilterTagPanel.instance != null)
                 {
-                    UIFilterTag.instance.UpdateCustomTagList();
+                    UIFilterTagPanel.instance.UpdateCustomTagList();
                     UISearchBox.instance.Search();
                 }
             };
@@ -70,11 +70,26 @@ namespace FindIt.GUI
             {
                 Settings.assetCreatorListSort = assetCreatorListSort.isChecked;
                 XMLUtils.SaveSettings();
-                if (UIFilterExtra.instance != null)
+                if (UIFilterExtraPanel.instance != null)
                 {
-                    UIFilterExtra.instance.UpdateAssetCreatorList();
+                    UIFilterExtraPanel.instance.UpdateAssetCreatorList();
                     UISearchBox.instance.Search();
                 }
+            };
+
+            // show search tabs
+            UICheckBox showSearchTabs = SamsamTS.UIUtils.CreateCheckBox(this);
+            showSearchTabs.isChecked = Settings.showSearchTabs;
+            showSearchTabs.label.text = Translations.Translate("FIF_SET_STAB");
+            showSearchTabs.label.textScale = 0.8f;
+            showSearchTabs.width = size.x;
+            showSearchTabs.label.textColor = new Color32(0, 0, 0, 255);
+            showSearchTabs.relativePosition = new Vector3(title.relativePosition.x, assetCreatorListSort.relativePosition.y + assetCreatorListSort.height + 10);
+            showSearchTabs.eventCheckChanged += (c, i) =>
+            {
+                Settings.showSearchTabs = showSearchTabs.isChecked;
+                XMLUtils.SaveSettings();
+                UISearchTabPanel.instance.isVisible = Settings.showSearchTabs;
             };
 
             // Use light background theme
@@ -85,7 +100,7 @@ namespace FindIt.GUI
             useLightBackground.width = size.x;
             useLightBackground.label.textColor = new Color32(0, 0, 0, 255);
             useLightBackground.tooltip = Translations.Translate("FIF_SET_BACKTP");
-            useLightBackground.relativePosition = new Vector3(title.relativePosition.x, assetCreatorListSort.relativePosition.y + assetCreatorListSort.height + 10);
+            useLightBackground.relativePosition = new Vector3(title.relativePosition.x, showSearchTabs.relativePosition.y + showSearchTabs.height + 10);
             useLightBackground.eventCheckChanged += (c, i) =>
             {
                 Settings.useLightBackground = useLightBackground.isChecked;
