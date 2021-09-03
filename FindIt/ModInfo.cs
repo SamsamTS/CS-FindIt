@@ -12,13 +12,13 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7-beta5";
-        public const bool isBeta = true;
+        public const string version = "2.7";
+        public const bool isBeta = false;
         public const bool debug = false;
-        public const double updateNoticeDate = 20210829;
+        public const double updateNoticeDate = 20210903;
         public const string updateNotice =
 
-            "- Introduce the new search tabs system [Experimental]\n\n" +
+            "- Introduce the new search tabs system\n\n" +
             "  Works like web browser tabs. You can enable it in the Quick Menu\n" +
             "  Doesn't interact with the custom tag and extra filters panels yet\n\n" +
 
