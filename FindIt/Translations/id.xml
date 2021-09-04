@@ -11,7 +11,7 @@
     <Translation ID="FIF_SET_BP" String="Perbaiki prop cacat saat memuat penyimpanan selanjutnya" />
     <Translation ID="FIF_SET_BPTP" String="Hapus semua prop penyebab masalah. Centang opsi dan memuat penyimpananmu" />
     <Translation ID="FIF_SE_WF" String="Kustom" />
-    <Translation ID="FIF_SE_VF" String="Bawaan Gim" />
+    <Translation ID="FIF_SE_VF" String="Bawaan" />
     <Translation ID="FIF_SE_IA" String="Semua" />
     <Translation ID="FIF_SE_IN" String="Jaringan" />
     <Translation ID="FIF_SE_IP" String="Ploppable" />
@@ -172,7 +172,7 @@
     <Translation ID="FIF_PROP_TRE" String="Pohon (dihasilkan oleh Prop Pohon dan Kendaraan)" />
     <Translation ID="FIF_SET_BACK" String="Gunakan pencahayaan warna latar belakang untuk panel utama" />
     <Translation ID="FIF_SET_BACKTP" String="Permudah untuk melihat aset yang gelap, tapi sulit untuk melihat aset yang terang" />
-    <Translation ID="FIF_SET_DUN" String="Nonaktifkan pemberitahuan update kedepan" />
+    <Translation ID="FIF_SET_DUN" String="Nonaktifkan pemberitahuan pembaruan kedepan" />
     <Translation ID="FIF_PROP_MOT" String="Kendaraan Bermotor (dihasilkan oleh Prop Pohon dan Kendaraan)" />
     <Translation ID="FIF_PROP_RAI" String="Perkeretaapian (dihasilkan oleh Prop Pohon dan Kendaraan)" />
     <Translation ID="FIF_PROP_AIR" String="Transportasi Udara (dihasilkan oleh Prop Pohon dan Kendaraan)" />
@@ -182,7 +182,7 @@
     <Translation ID="FIF_SET_ATP" String="Tunjukkan panel tipe aset" />
     <Translation ID="FIF_EF_CT" String="Dengan tag kustom" />
     <Translation ID="FIF_EF_NCT" String="Tanpa tag kustom" />
-    <Translation ID="FIF_UPN_UP" String="Perbaharui" />
+    <Translation ID="FIF_UPN_UP" String="Perbarui" />
     <Translation ID="FIF_PROP_TC" String="Dapat menyesuaikan Terrain" />
     <Translation ID="FIF_PROP_NTC" String="Tidak dapat menyesuaikan Terrain" />
     <Translation ID="FIF_SET_SSK" String="Gunakan kata kunci query pencarian berbeda untuk tiap tipe aset" />

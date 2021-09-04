@@ -103,7 +103,7 @@
     <Translation ID="FIF_TAG_DDTP" String="このタグを付けたアセットのみ表示" />
     <Translation ID="FIF_TAG_REF" String="再読込" />
     <Translation ID="FIF_TAG_REFTP" String="カスタムタグのドロップダウンリストを更新" />
-    <Translation ID="FIF_TAG_REN" String="名前変更"" />
+    <Translation ID="FIF_TAG_REN" String="名前変更" />
     <Translation ID="FIF_TAG_RENTP" String="このタグの名前を変更" />
     <Translation ID="FIF_TAG_COM" String="マージ" />
     <Translation ID="FIF_TAG_COMTP" String="このタグを別のタグとマージします" />
