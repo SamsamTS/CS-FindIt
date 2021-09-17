@@ -281,7 +281,7 @@ namespace FindIt.GUI
             }
 
             // Ignore buildings with sub-meshes and sub-buildings
-            if ((building.m_isCustomContent) && (building.m_subBuildings.Length > 0 || building.m_subMeshes.Length > 0))
+            if ((building.m_isCustomContent) && (building.m_subBuildings?.Length > 0 || building.m_subMeshes?.Length > 0))
             {
                 return false;
             }

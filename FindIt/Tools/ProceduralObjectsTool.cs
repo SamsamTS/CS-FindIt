@@ -19,12 +19,16 @@ namespace FindIt
                 if (gameLogicObject == null) return;
 
                 Type ProceduralObjectsLogicType = Type.GetType("ProceduralObjects.ProceduralObjectsLogic");
+                if (ProceduralObjectsLogicType == null) return;
 
                 Type ProceduralObjectType = Type.GetType("ProceduralObjects.Classes.ProceduralObject");
+                if (ProceduralObjectType == null) return;
 
                 Component logic = gameLogicObject.GetComponent("ProceduralObjectsLogic");
+                if (logic == null) return;
 
                 object poList = ProceduralObjectsLogicType.GetField("proceduralObjects").GetValue(logic);
+                if (poList == null) return;
 
                 foreach (var i in poList as IList)
                 {
