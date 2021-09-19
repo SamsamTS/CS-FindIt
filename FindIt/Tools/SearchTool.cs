@@ -10,6 +10,14 @@ namespace FindIt
     public partial class AssetTagList
     {
         public List<Asset> matches = new List<Asset>();
+        private HashSet<char> searchPrefixes = new HashSet<char>
+        {
+            '!',
+            '#',
+            '%',
+            '+',
+            '$'
+        };
 
         /// <summary>
         /// main backend search method. called by UISearchBox's search method
@@ -43,7 +51,7 @@ namespace FindIt
             // if there is something in the search input box
             if (!text.IsNullOrWhiteSpace())
             {
-                string[] keywords = Regex.Split(text, @"([^\w!#+%]|[-]|\s)+", RegexOptions.IgnoreCase);
+                string[] keywords = Regex.Split(text, @"([^\w!#+%$]|[-]|\s)+", RegexOptions.IgnoreCase);
                 bool matched, orSearch;
                 float score, orScore;
 
@@ -62,53 +70,70 @@ namespace FindIt
                         {
                             if (!keyword.IsNullOrWhiteSpace())
                             {
-                                if (keyword == "!" || keyword == "#" || keyword == "+" || keyword == "%") continue;
-                                if (keyword.StartsWith("!") && keyword.Length > 1) // exclude search
-                                {
-                                    score = GetOverallScore(asset, keyword.Substring(1), filter);
-                                    if (score > 0)
+                                if (keyword.Length == 1 && searchPrefixes.Contains(keyword[0])) continue;
+
+                                if (searchPrefixes.Contains(keyword[0]) && keyword.Length > 1) {
+                                    if (keyword[0] == '!') // exclude search
                                     {
-                                        matched = false;
-                                        break;
+                                        score = GetOverallScore(asset, keyword.Substring(1), filter);
+                                        if (score > 0)
+                                        {
+                                            matched = false;
+                                            break;
+                                        }
                                     }
-                                }
-                                else if (keyword.StartsWith("#") && keyword.Length > 1) // search for custom tag only
-                                {
-                                    foreach (string tag in asset.tagsCustom)
+                                    else if (keyword[0] == '#') // search for custom tag only
                                     {
-                                        score = GetScore(keyword.Substring(1), tag, tagsCustomDictionary);
-                                    }
-                                    if (score <= 0)
-                                    {
-                                        matched = false;
-                                        break;
-                                    }
-                                }
-                                else if (keyword.StartsWith("+") && keyword.Length > 1) // OR search
-                                {
-                                    orSearch = true;
-                                    score = GetOverallScore(asset, keyword.Substring(1), filter);
-                                    orScore += score;
-                                    asset.score += score;
-                                }
-                                else if (keyword.StartsWith("%") && keyword.Length > 1) // search by workshop id
-                                {
-                                    if (asset.prefab.m_isCustomContent && asset.steamID != 0)
-                                    {
-                                        score = GetScore(keyword.Substring(1), asset.steamID.ToString(), null);
+                                        foreach (string tag in asset.tagsCustom)
+                                        {
+                                            score = GetScore(keyword.Substring(1), tag, tagsCustomDictionary);
+                                        }
                                         if (score <= 0)
                                         {
                                             matched = false;
                                             break;
                                         }
                                     }
-                                    else
+                                    else if (keyword[0] == '$') // search for assets without this custom tag
                                     {
-                                        matched = false;
-                                        break;
+                                        Debug.Log("we are here");
+                                        foreach (string tag in asset.tagsCustom)
+                                        {
+                                            score = GetScore(keyword.Substring(1), tag, tagsCustomDictionary);
+                                        }
+                                        if (score > 0)
+                                        {
+                                            Debug.Log("we are here2");
+
+                                            matched = false;
+                                            break;
+                                        }
+                                    }
+                                    else if (keyword[0] == '+') // OR search
+                                    {
+                                        orSearch = true;
+                                        score = GetOverallScore(asset, keyword.Substring(1), filter);
+                                        orScore += score;
+                                        asset.score += score;
+                                    }
+                                    else if (keyword[0] == '%') // search by workshop id
+                                    {
+                                        if (asset.prefab.m_isCustomContent && asset.steamID != 0)
+                                        {
+                                            score = GetScore(keyword.Substring(1), asset.steamID.ToString(), null);
+                                            if (score <= 0)
+                                            {
+                                                matched = false;
+                                                break;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            matched = false;
+                                            break;
+                                        }
                                     }
                                 }
-
                                 else
                                 {
                                     // Calculate relevance score. Algorithm decided by Sam. Unchanged.
