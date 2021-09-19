@@ -96,15 +96,12 @@ namespace FindIt
                                     }
                                     else if (keyword[0] == '$') // search for assets without this custom tag
                                     {
-                                        Debug.Log("we are here");
                                         foreach (string tag in asset.tagsCustom)
                                         {
                                             score = GetScore(keyword.Substring(1), tag, tagsCustomDictionary);
                                         }
                                         if (score > 0)
                                         {
-                                            Debug.Log("we are here2");
-
                                             matched = false;
                                             break;
                                         }
