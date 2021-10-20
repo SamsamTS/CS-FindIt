@@ -18,8 +18,8 @@
     <Translation ID="FIF_SE_IG" String="Growable" />
     <Translation ID="FIF_SE_IR" String="RICO" />
     <Translation ID="FIF_SE_IPR" String="Prop" />
-    <Translation ID="FIF_SE_ID" String="Декаль" />
-    <Translation ID="FIF_SE_IT" String="Дерево" />
+    <Translation ID="FIF_SE_ID" String="Декали" />
+    <Translation ID="FIF_SE_IT" String="Растения" />
     <Translation ID="FIF_SE_LV" String="Уровень здания" />
     <Translation ID="FIF_SE_SZ" String="Размер: " />
     <Translation ID="FIF_SE_SC" String="Зажмите SHIFT или CTRL чтобы выбрать несколько категорий" />
@@ -233,3 +233,5 @@
  
   </Translations>
 </Language>
+ 
+RAW Paste Data
