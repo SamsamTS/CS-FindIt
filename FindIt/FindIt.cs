@@ -30,6 +30,7 @@ namespace FindIt
         public static bool isOWTTEnabled = false; // One-Way Train Tracks mod enabled?
         public static bool isMeshInfoEnabled = false; // MeshInfo mod enabled?
         public static bool isYATEnabled = false; // Yet Another Toolbar enabled?
+        public static bool isEMLEnabled = false; // Extended Managers Library enabled?
 
 
         public bool firstVisibleFlag = false;
@@ -339,6 +340,7 @@ namespace FindIt
             isMeshInfoEnabled = enabledMods.Contains("meshinfo");
             isNTCPEnabled = enabledMods.Contains("nonterrainconformingprops");
             isYATEnabled = enabledMods.Contains("yetanothertoolbar");
+            isEMLEnabled = enabledMods.Contains("emanagerslib");
         }
 
         public static UITextureAtlas LoadResources()
