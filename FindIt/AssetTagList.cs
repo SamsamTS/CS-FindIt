@@ -447,7 +447,7 @@ namespace FindIt
             if (PropManager.exists && ((filter == UISearchBox.DropDownOptions.All) || (filter == UISearchBox.DropDownOptions.Prop) || (filter == UISearchBox.DropDownOptions.Decal)))
             {
                 // Use separate sub-class to control EML API type requirements via insantiation, so API file is not needed to be included with mod.
-                CountPropPrefabs counter = FindIt.isEMLEnabled ? new CountPropPrefabs() : new ECountPropPrefabs();
+                CountPropPrefabs counter = FindIt.isEMLEnabled ? new ECountPropPrefabs() : new CountPropPrefabs();
 
                 counter.Count(prefabInstanceCountDictionary);
             }
