@@ -15,6 +15,7 @@ using FindIt.GUI;
 using System.Reflection;
 using ColossalFramework.Globalization;
 using ColossalFramework.IO;
+using EManagersLib.API;
 
 namespace FindIt
 {
@@ -445,20 +446,10 @@ namespace FindIt
 
             if (PropManager.exists && ((filter == UISearchBox.DropDownOptions.All) || (filter == UISearchBox.DropDownOptions.Prop) || (filter == UISearchBox.DropDownOptions.Decal)))
             {
-                foreach (PropInstance prop in PropManager.instance.m_props.m_buffer)
-                {
-                    if ((PropInstance.Flags)prop.m_flags != PropInstance.Flags.None && (PropInstance.Flags)prop.m_flags != PropInstance.Flags.Deleted)
-                    {
-                        if (prefabInstanceCountDictionary.ContainsKey(prop.Info))
-                        {
-                            prefabInstanceCountDictionary[prop.Info] += 1;
-                        }
-                        else
-                        {
-                            prefabInstanceCountDictionary.Add(prop.Info, 1);
-                        }
-                    }
-                }
+                // Use separate sub-class to control EML API type requirements via insantiation, so API file is not needed to be included with mod.
+                CountPropPrefabs counter = FindIt.isEMLEnabled ? new ECountPropPrefabs() : new CountPropPrefabs();
+
+                counter.Count(prefabInstanceCountDictionary);
             }
 
             if (TreeManager.exists && ((filter == UISearchBox.DropDownOptions.All) || (filter == UISearchBox.DropDownOptions.Tree)))
@@ -767,5 +758,66 @@ namespace FindIt
             return time;
         }
 
+    }
+
+
+    /// <summary>
+    /// Class to count prop prefabs - without Extended Managers Library present.
+    /// </summary>
+    internal class CountPropPrefabs
+    {
+        /// <summary>
+        /// Counts each prop prefab loaded by game and adds to provided dictionary of prefab counts.
+        /// </summary>
+        /// <param name="prefabInstanceCountDictionary">Dictionary to add counts to</param>
+        internal virtual void Count(Dictionary<PrefabInfo, uint> prefabInstanceCountDictionary)
+        {
+            foreach (PropInstance prop in PropManager.instance.m_props.m_buffer)
+            {
+                if ((PropInstance.Flags)prop.m_flags != PropInstance.Flags.None && (PropInstance.Flags)prop.m_flags != PropInstance.Flags.Deleted)
+                {
+                    if (prefabInstanceCountDictionary.ContainsKey(prop.Info))
+                    {
+                        prefabInstanceCountDictionary[prop.Info] += 1;
+                    }
+                    else
+                    {
+                        prefabInstanceCountDictionary.Add(prop.Info, 1);
+                    }
+                }
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// Class to count prop prefabs - with Extended Managers Library present.
+    /// All references to EML types are contained within this class, so if it is not instantiated then no EML binaries are needed.
+    /// When this class is instantiated, the EML API will need to be present in-game to avoid a TypeLoadError, but does not need to be bundled with this mod.
+    /// Checking for EML availablilty before instantiating this class means that no EML API binary needs to be distributed with this mod.
+    /// </summary>
+    internal class ECountPropPrefabs : CountPropPrefabs
+    {
+        /// <summary>
+        /// Counts each prop prefab loaded by game and adds to provided dictionary of prefab counts.
+        /// </summary>
+        /// <param name="prefabInstanceCountDictionary">Dictionary to add counts to</param>
+        internal override void Count(Dictionary<PrefabInfo, uint> prefabInstanceCountDictionary)
+        {
+            foreach (EPropInstance prop in EPropManager.m_props.m_buffer)
+            {
+                if ((EPropInstance.Flags)prop.m_flags != EPropInstance.Flags.None && (EPropInstance.Flags)prop.m_flags != EPropInstance.Flags.Deleted)
+                {
+                    if (prefabInstanceCountDictionary.ContainsKey(prop.Info))
+                    {
+                        prefabInstanceCountDictionary[prop.Info] += 1;
+                    }
+                    else
+                    {
+                        prefabInstanceCountDictionary.Add(prop.Info, 1);
+                    }
+                }
+            }
+        }
     }
 }
