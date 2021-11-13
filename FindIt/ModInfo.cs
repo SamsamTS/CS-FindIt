@@ -15,11 +15,13 @@ namespace FindIt
         public const string version = "2.7.2-beta3";
         public const bool isBeta = true;
         public const bool debug = false;
-        public const double updateNoticeDate = 20211110;
+        public const double updateNoticeDate = 20211112;
         public const string updateNotice =
 
             "- Fix compatibility issues with the new Extended Managers Library mod\n" +
             "  (thanks to the help from algernon)\n\n" +
+
+            "- Fix some bugs caused by the \"Disable instant search\" option\n" +
 
             "- Update translations\n\n";
 
