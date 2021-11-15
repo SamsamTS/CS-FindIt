@@ -12,19 +12,16 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7.1";
-        public const bool isBeta = false;
+        public const string version = "2.7.2-beta3";
+        public const bool isBeta = true;
         public const bool debug = false;
-        public const double updateNoticeDate = 20210923;
+        public const double updateNoticeDate = 20211112;
         public const string updateNotice =
 
-            "- Add new search prefix $ to exclude assets with a specific custom tag\n\n" +
+            "- Fix compatibility issues with the new Extended Managers Library mod\n" +
+            "  (thanks to the help from algernon)\n\n" +
 
-            "  Example: $test_tag\n" +
-            "  Assets tagged with the test_tag custom tag will be excluded\n\n" +
-            "  You can use it to find new assets that are not tagged\n\n" + 
-
-            "- Fix thumbnail errors caused by some very old workshop building assets\n\n" +
+            "- Fix some bugs caused by the \"Disable instant search\" option\n" +
 
             "- Update translations\n\n";
 
