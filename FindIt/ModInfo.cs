@@ -12,7 +12,7 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7.2-beta3";
+        public const string version = "2.7.2-beta4";
         public const bool isBeta = true;
         public const bool debug = false;
         public const double updateNoticeDate = 20211112;
@@ -21,7 +21,7 @@ namespace FindIt
             "- Fix compatibility issues with the new Extended Managers Library mod\n" +
             "  (thanks to the help from algernon)\n\n" +
 
-            "- Fix some bugs caused by the \"Disable instant search\" option\n" +
+            "- Fix some bugs caused by the \"Disable instant search\" option\n\n" +
 
             "- Update translations\n\n";
 
