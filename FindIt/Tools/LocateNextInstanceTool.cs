@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using EManagersLib.API;
 
 namespace FindIt
 {
@@ -55,19 +56,22 @@ namespace FindIt
 
         private static void LocateNextPropDecalInstance(PrefabInfo prefab)
         {
-            Array16<PropInstance> props = PropManager.instance.m_props;
-            for (uint i = (propInstanceCounter + 1) % props.m_size; i != propInstanceCounter; i = (i + 1) % props.m_size)
+            // Use EML API to read props from buffer
+            uint propBufferLen = (uint)PropAPI.PropBufferLen;
+            for (uint i = (propInstanceCounter + 1) % propBufferLen; i != propInstanceCounter; i = (i + 1) % propBufferLen)
             {
-                if (props.m_buffer[i].Info == prefab)
+                if (PropAPI.Wrapper.GetInfo(i) == prefab)
                 {
-                    bool isValid = ((PropInstance.Flags)props.m_buffer[i].m_flags != PropInstance.Flags.None && (PropInstance.Flags)props.m_buffer[i].m_flags != PropInstance.Flags.Deleted);
+                    PropInstance.Flags flags = (PropInstance.Flags)PropAPI.Wrapper.GetFlags(i);
+                    bool isValid = (flags != PropInstance.Flags.None && flags != PropInstance.Flags.Deleted);
                     if (!isValid) continue;
-                    SetCameraPosition(props.m_buffer[i].Position);
-                    propInstanceCounter = (i + 1) % props.m_size;
+                    SetCameraPosition(PropAPI.Wrapper.GetPosition(i));
+                    propInstanceCounter = (i + 1) % propBufferLen;
                     return;
                 }
             }
             propInstanceCounter = 0;
+
         }
 
         private static void LocateNextTreeInstance(PrefabInfo prefab)
