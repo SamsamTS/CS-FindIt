@@ -130,16 +130,20 @@ namespace FindIt.GUI
                         typeFilter.selectedIndex = Mathf.Clamp(typeFilter.selectedIndex + (eventParam.keycode == KeyCode.DownArrow ? 1 : -1), 0, typeFilter.items.Length);
                     }
                 }
+            };
 
-                // press ENTER
+            // if instant search is disabled, press ENTER to make a new search
+            input.eventTextSubmitted += (c, p) =>
+            {
                 if (!Settings.disableInstantSearch) return;
-                if (eventParam.keycode == KeyCode.Return || eventParam.keycode == KeyCode.KeypadEnter)
+
+                if (Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.KeypadEnter))
                 {
                     // change icon of the selected search tab 
-                    UISearchTabPanel.instance.GetSelectedTab().ChangeTabLabel(input.text);
+                    UISearchTabPanel.instance.GetSelectedTab().ChangeTabLabel(p);
 
-                    if (search != input.text) input.Focus();
-                    search = input.text;
+                    if (search != p && !input.hasFocus) input.Focus();
+                    search = p;
                     Search();
                 }
             };
