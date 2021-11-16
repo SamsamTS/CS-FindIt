@@ -10,6 +10,7 @@ using ColossalFramework.Plugins;
 using System.Collections.Generic;
 using ColossalFramework.Globalization;
 using FindIt.GUI;
+using EManagersLib.API;
 
 namespace FindIt
 {
@@ -30,7 +31,6 @@ namespace FindIt
         public static bool isOWTTEnabled = false; // One-Way Train Tracks mod enabled?
         public static bool isMeshInfoEnabled = false; // MeshInfo mod enabled?
         public static bool isYATEnabled = false; // Yet Another Toolbar enabled?
-        public static bool isEMLEnabled = false; // Extended Managers Library enabled?
 
 
         public bool firstVisibleFlag = false;
@@ -62,6 +62,9 @@ namespace FindIt
                 }
 
                 CheckEnabledMods();
+
+                // Initializae PropAPI.
+                PropAPI.Initialize();
 
                 list = AssetTagList.instance;
                 if (isNext2Enabled) AssetTagList.instance.SetNext2Assets();
@@ -340,7 +343,6 @@ namespace FindIt
             isMeshInfoEnabled = enabledMods.Contains("meshinfo");
             isNTCPEnabled = enabledMods.Contains("nonterrainconformingprops");
             isYATEnabled = enabledMods.Contains("yetanothertoolbar");
-            isEMLEnabled = enabledMods.Contains("emanagerslib");
         }
 
         public static UITextureAtlas LoadResources()
