@@ -10,6 +10,7 @@ using ColossalFramework.Plugins;
 using System.Collections.Generic;
 using ColossalFramework.Globalization;
 using FindIt.GUI;
+using EManagersLib.API;
 
 namespace FindIt
 {
@@ -61,6 +62,9 @@ namespace FindIt
                 }
 
                 CheckEnabledMods();
+
+                // Initializae PropAPI.
+                PropAPI.Initialize();
 
                 list = AssetTagList.instance;
                 if (isNext2Enabled) AssetTagList.instance.SetNext2Assets();

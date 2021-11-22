@@ -116,19 +116,6 @@ namespace FindIt.GUI
                 Search();
             };
 
-            // press ENTER
-            input.eventTextSubmitted += (c, p) =>
-            {
-                if (!Settings.disableInstantSearch) return;
-
-                // change icon of the selected search tab 
-                UISearchTabPanel.instance.GetSelectedTab().ChangeTabLabel(p);
-
-                if (search != p) input.Focus();
-                search = p;
-                Search();
-            };
-
             input.eventTextCancelled += (c, p) =>
             {
                 if (search != null) input.text = search;
@@ -136,10 +123,28 @@ namespace FindIt.GUI
 
             input.eventKeyDown += (component, eventParam) =>
             {
-                if (eventParam.keycode != KeyCode.DownArrow && eventParam.keycode != KeyCode.UpArrow) return;
-                if (typeFilter != null)
+                if (eventParam.keycode == KeyCode.DownArrow || eventParam.keycode == KeyCode.UpArrow)
                 {
-                    typeFilter.selectedIndex = Mathf.Clamp(typeFilter.selectedIndex + (eventParam.keycode == KeyCode.DownArrow ? 1 : -1), 0, typeFilter.items.Length);
+                    if (typeFilter != null)
+                    {
+                        typeFilter.selectedIndex = Mathf.Clamp(typeFilter.selectedIndex + (eventParam.keycode == KeyCode.DownArrow ? 1 : -1), 0, typeFilter.items.Length);
+                    }
+                }
+            };
+
+            // if instant search is disabled, press ENTER to make a new search
+            input.eventTextSubmitted += (c, p) =>
+            {
+                if (!Settings.disableInstantSearch) return;
+
+                if (Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.KeypadEnter))
+                {
+                    // change icon of the selected search tab 
+                    UISearchTabPanel.instance.GetSelectedTab().ChangeTabLabel(p);
+
+                    if (search != p && !input.hasFocus) input.Focus();
+                    search = p;
+                    Search();
                 }
             };
 

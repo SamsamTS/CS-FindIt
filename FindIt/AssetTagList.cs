@@ -15,6 +15,7 @@ using FindIt.GUI;
 using System.Reflection;
 using ColossalFramework.Globalization;
 using ColossalFramework.IO;
+using EManagersLib.API;
 
 namespace FindIt
 {
@@ -445,17 +446,20 @@ namespace FindIt
 
             if (PropManager.exists && ((filter == UISearchBox.DropDownOptions.All) || (filter == UISearchBox.DropDownOptions.Prop) || (filter == UISearchBox.DropDownOptions.Decal)))
             {
-                foreach (PropInstance prop in PropManager.instance.m_props.m_buffer)
+                // Use EML API to read props from buffer.
+                for (uint i = 0; i < PropAPI.PropBufferLen; ++i)
                 {
-                    if ((PropInstance.Flags)prop.m_flags != PropInstance.Flags.None && (PropInstance.Flags)prop.m_flags != PropInstance.Flags.Deleted)
+                    PropInstance.Flags flags = (PropInstance.Flags)PropAPI.Wrapper.GetFlags(i);
+                    if (flags != PropInstance.Flags.None && flags != PropInstance.Flags.Deleted)
                     {
-                        if (prefabInstanceCountDictionary.ContainsKey(prop.Info))
+                        PropInfo prop = PropAPI.Wrapper.GetInfo(i);
+                        if (prefabInstanceCountDictionary.ContainsKey(prop))
                         {
-                            prefabInstanceCountDictionary[prop.Info] += 1;
+                            prefabInstanceCountDictionary[prop] += 1;
                         }
                         else
                         {
-                            prefabInstanceCountDictionary.Add(prop.Info, 1);
+                            prefabInstanceCountDictionary.Add(prop, 1);
                         }
                     }
                 }
