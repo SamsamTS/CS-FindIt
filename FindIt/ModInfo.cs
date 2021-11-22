@@ -12,10 +12,10 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7.2-beta4";
-        public const bool isBeta = true;
+        public const string version = "2.7.2";
+        public const bool isBeta = false;
         public const bool debug = false;
-        public const double updateNoticeDate = 20211112;
+        public const double updateNoticeDate = 20211121;
         public const string updateNotice =
 
             "- Fix compatibility issues with the new Extended Managers Library mod\n" +
