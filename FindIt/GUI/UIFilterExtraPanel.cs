@@ -23,16 +23,19 @@ namespace FindIt.GUI
         private string[] assetCreatorListStrArray;
 
         // building height
-        private UILabel minLabel;
-        private UILabel maxLabel;
-        private UITextField minInput;
-        private UITextField maxInput;
+        private UILabel buildingHeightMinLabel;
+        private UILabel buildingHeightMaxLabel;
+        private UITextField buildingHeightMinInput;
+        private UITextField buildingHeightMaxInput;
         private UIDropDown builingHeightUnit;
         public float minBuildingHeight = float.MinValue;
         public float maxBuildingHeight = float.MaxValue;
 
         // building level
-        public UIDropDown buildingLevelDropDownMenu;
+        private UILabel buildingLevelMinLabel;
+        private UILabel buildingLevelMaxLabel;
+        public UIDropDown buildingLevelMinDropDownMenu;
+        public UIDropDown buildingLevelMaxDropDownMenu;
 
         // unused assets
         private UIButton exportAllUnusedButton;
@@ -232,23 +235,23 @@ namespace FindIt.GUI
             };
 
             // building height min label
-            minLabel = this.AddUIComponent<UILabel>();
-            minLabel.textScale = 0.8f;
-            minLabel.padding = new RectOffset(0, 0, 8, 0);
-            minLabel.text = "Min:";
-            minLabel.isVisible = false;
-            minLabel.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 50, 5);
+            buildingHeightMinLabel = this.AddUIComponent<UILabel>();
+            buildingHeightMinLabel.textScale = 0.8f;
+            buildingHeightMinLabel.padding = new RectOffset(0, 0, 8, 0);
+            buildingHeightMinLabel.text = "Min:";
+            buildingHeightMinLabel.isVisible = false;
+            buildingHeightMinLabel.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 50, 5);
 
             // building height min input box
-            minInput = SamsamTS.UIUtils.CreateTextField(this);
-            minInput.size = new Vector2(60, 25);
-            minInput.padding.top = 5;
-            minInput.isVisible = false;
-            minInput.text = "";
-            minInput.relativePosition = new Vector3(minLabel.relativePosition.x + minLabel.width + 10, 5);
-            minInput.eventTextChanged += (c, p) =>
+            buildingHeightMinInput = SamsamTS.UIUtils.CreateTextField(this);
+            buildingHeightMinInput.size = new Vector2(60, 25);
+            buildingHeightMinInput.padding.top = 5;
+            buildingHeightMinInput.isVisible = false;
+            buildingHeightMinInput.text = "";
+            buildingHeightMinInput.relativePosition = new Vector3(buildingHeightMinLabel.relativePosition.x + buildingHeightMinLabel.width + 10, 5);
+            buildingHeightMinInput.eventTextChanged += (c, p) =>
             {
-                if (float.TryParse(minInput.text, out minBuildingHeight))
+                if (float.TryParse(buildingHeightMinInput.text, out minBuildingHeight))
                 {
                     if (builingHeightUnit.selectedIndex == 1)
                     {
@@ -257,7 +260,7 @@ namespace FindIt.GUI
                     ((UISearchBox)parent).Search();
 
                 }
-                if (minInput.text == "")
+                if (buildingHeightMinInput.text == "")
                 {
                     minBuildingHeight = float.MinValue;
                     ((UISearchBox)parent).Search();
@@ -265,24 +268,24 @@ namespace FindIt.GUI
             };
 
             // building height max label
-            maxLabel = this.AddUIComponent<UILabel>();
-            maxLabel.textScale = 0.8f;
-            maxLabel.padding = new RectOffset(0, 0, 8, 0);
-            maxLabel.text = "Max:";
-            maxLabel.isVisible = false;
-            maxLabel.relativePosition = new Vector3(minInput.relativePosition.x + minInput.width + 20, 5);
+            buildingHeightMaxLabel = this.AddUIComponent<UILabel>();
+            buildingHeightMaxLabel.textScale = 0.8f;
+            buildingHeightMaxLabel.padding = new RectOffset(0, 0, 8, 0);
+            buildingHeightMaxLabel.text = "Max:";
+            buildingHeightMaxLabel.isVisible = false;
+            buildingHeightMaxLabel.relativePosition = new Vector3(buildingHeightMinInput.relativePosition.x + buildingHeightMinInput.width + 20, 5);
 
             // building height max input box
-            maxInput = SamsamTS.UIUtils.CreateTextField(this);
-            maxInput.size = new Vector2(60, 25);
-            maxInput.padding.top = 5;
-            maxInput.isVisible = false;
-            maxInput.text = "";
-            maxInput.relativePosition = new Vector3(maxLabel.relativePosition.x + maxLabel.width + 10, 5);
-            maxInput.eventTextChanged += (c, p) =>
+            buildingHeightMaxInput = SamsamTS.UIUtils.CreateTextField(this);
+            buildingHeightMaxInput.size = new Vector2(60, 25);
+            buildingHeightMaxInput.padding.top = 5;
+            buildingHeightMaxInput.isVisible = false;
+            buildingHeightMaxInput.text = "";
+            buildingHeightMaxInput.relativePosition = new Vector3(buildingHeightMaxLabel.relativePosition.x + buildingHeightMaxLabel.width + 10, 5);
+            buildingHeightMaxInput.eventTextChanged += (c, p) =>
             {
 
-                if (float.TryParse(maxInput.text, out maxBuildingHeight))
+                if (float.TryParse(buildingHeightMaxInput.text, out maxBuildingHeight))
                 {
                     if (builingHeightUnit.selectedIndex == 1)
                     {
@@ -291,7 +294,7 @@ namespace FindIt.GUI
                     ((UISearchBox)parent).Search();
                 }
 
-                if (maxInput.text == "")
+                if (buildingHeightMaxInput.text == "")
                 {
                     maxBuildingHeight = float.MaxValue;
                     ((UISearchBox)parent).Search();
@@ -307,37 +310,74 @@ namespace FindIt.GUI
             builingHeightUnit.AddItem(Translations.Translate("FIF_EF_FEE"));
             builingHeightUnit.selectedIndex = 0;
             builingHeightUnit.isVisible = false;
-            builingHeightUnit.relativePosition = new Vector3(maxInput.relativePosition.x + maxInput.width + 30, 5);
+            builingHeightUnit.relativePosition = new Vector3(buildingHeightMaxInput.relativePosition.x + buildingHeightMaxInput.width + 30, 5);
             builingHeightUnit.eventSelectedIndexChanged += (c, p) =>
             {
-                if (float.TryParse(minInput.text, out minBuildingHeight))
+                if (float.TryParse(buildingHeightMinInput.text, out minBuildingHeight))
                 {
                     if (builingHeightUnit.selectedIndex == 1) minBuildingHeight *= 0.3048f;
                 }
 
-                if (float.TryParse(maxInput.text, out maxBuildingHeight))
+                if (float.TryParse(buildingHeightMaxInput.text, out maxBuildingHeight))
                 {
                     if (builingHeightUnit.selectedIndex == 1) maxBuildingHeight *= 0.3048f;
                 }
-                if (minInput.text == "") minBuildingHeight = float.MinValue;
-                if (maxInput.text == "") maxBuildingHeight = float.MaxValue;
+                if (buildingHeightMinInput.text == "") minBuildingHeight = float.MinValue;
+                if (buildingHeightMaxInput.text == "") maxBuildingHeight = float.MaxValue;
                 ((UISearchBox)parent).Search();
             };
 
-            // building level dropdown
-            buildingLevelDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
-            buildingLevelDropDownMenu.size = new Vector2(80, 25);
-            buildingLevelDropDownMenu.listHeight = 300;
-            buildingLevelDropDownMenu.itemHeight = 30;
-            buildingLevelDropDownMenu.AddItem("1");
-            buildingLevelDropDownMenu.AddItem("2");
-            buildingLevelDropDownMenu.AddItem("3");
-            buildingLevelDropDownMenu.AddItem("4");
-            buildingLevelDropDownMenu.AddItem("5");
-            buildingLevelDropDownMenu.isVisible = false;
-            buildingLevelDropDownMenu.selectedIndex = 0;
-            buildingLevelDropDownMenu.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 50, 5);
-            buildingLevelDropDownMenu.eventSelectedIndexChanged += (c, p) =>
+            // building level min label
+            buildingLevelMinLabel = this.AddUIComponent<UILabel>();
+            buildingLevelMinLabel.textScale = 0.8f;
+            buildingLevelMinLabel.padding = new RectOffset(0, 0, 8, 0);
+            buildingLevelMinLabel.text = "Min:";
+            buildingLevelMinLabel.isVisible = false;
+            buildingLevelMinLabel.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 50, 5);
+
+            // building level min dropdown
+            buildingLevelMinDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
+            buildingLevelMinDropDownMenu.size = new Vector2(60, 25);
+            buildingLevelMinDropDownMenu.listHeight = 300;
+            buildingLevelMinDropDownMenu.itemHeight = 30;
+            buildingLevelMinDropDownMenu.AddItem("1");
+            buildingLevelMinDropDownMenu.AddItem("2");
+            buildingLevelMinDropDownMenu.AddItem("3");
+            buildingLevelMinDropDownMenu.AddItem("4");
+            buildingLevelMinDropDownMenu.AddItem("5");
+            buildingLevelMinDropDownMenu.isVisible = false;
+            buildingLevelMinDropDownMenu.selectedIndex = 0;
+            buildingLevelMinDropDownMenu.relativePosition = new Vector3(buildingLevelMinLabel.relativePosition.x + buildingLevelMinLabel.width + 10, 5);
+            buildingLevelMinDropDownMenu.eventSelectedIndexChanged += (c, p) =>
+            {
+                if (optionDropDownCheckBox.isChecked)
+                {
+                    ((UISearchBox)parent).Search();
+                }
+            };
+
+            // building level max label
+            buildingLevelMaxLabel = this.AddUIComponent<UILabel>();
+            buildingLevelMaxLabel.textScale = 0.8f;
+            buildingLevelMaxLabel.padding = new RectOffset(0, 0, 8, 0);
+            buildingLevelMaxLabel.text = "Max:";
+            buildingLevelMaxLabel.isVisible = false;
+            buildingLevelMaxLabel.relativePosition = new Vector3(buildingLevelMinDropDownMenu.relativePosition.x + buildingLevelMinDropDownMenu.width + 20, 5);
+
+            // building level max dropdown
+            buildingLevelMaxDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
+            buildingLevelMaxDropDownMenu.size = new Vector2(60, 25);
+            buildingLevelMaxDropDownMenu.listHeight = 300;
+            buildingLevelMaxDropDownMenu.itemHeight = 30;
+            buildingLevelMaxDropDownMenu.AddItem("1");
+            buildingLevelMaxDropDownMenu.AddItem("2");
+            buildingLevelMaxDropDownMenu.AddItem("3");
+            buildingLevelMaxDropDownMenu.AddItem("4");
+            buildingLevelMaxDropDownMenu.AddItem("5");
+            buildingLevelMaxDropDownMenu.isVisible = false;
+            buildingLevelMaxDropDownMenu.selectedIndex = 0;
+            buildingLevelMaxDropDownMenu.relativePosition = new Vector3(buildingLevelMaxLabel.relativePosition.x + buildingLevelMaxLabel.width + 10, 5);
+            buildingLevelMaxDropDownMenu.eventSelectedIndexChanged += (c, p) =>
             {
                 if (optionDropDownCheckBox.isChecked)
                 {
@@ -484,16 +524,19 @@ namespace FindIt.GUI
 
         private void UpdateBuildingHeightOptionVisibility(bool visibility)
         {
-            minLabel.isVisible = visibility;
-            minInput.isVisible = visibility;
-            maxLabel.isVisible = visibility;
-            maxInput.isVisible = visibility;
+            buildingHeightMinLabel.isVisible = visibility;
+            buildingHeightMinInput.isVisible = visibility;
+            buildingHeightMaxLabel.isVisible = visibility;
+            buildingHeightMaxInput.isVisible = visibility;
             builingHeightUnit.isVisible = visibility;
         }
 
         private void UpdateBuildingLevelOptionVisibility(bool visibility)
         {
-            buildingLevelDropDownMenu.isVisible = visibility;
+            buildingLevelMinDropDownMenu.isVisible = visibility;
+            buildingLevelMaxDropDownMenu.isVisible = visibility;
+            buildingLevelMinLabel.isVisible = visibility;
+            buildingLevelMaxLabel.isVisible = visibility;
         }
 
         private void UpdateUnusedAssetsVisibility(bool visibility)
