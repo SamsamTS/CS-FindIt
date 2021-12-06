@@ -373,6 +373,8 @@ namespace FindIt.GUI
                     extraFiltersIcon.opacity = 1.0f;
                     //CreateExtraFiltersPanel();
                     extraFiltersPanel.isVisible = true;
+                    extraFiltersPanel.optionDropDownCheckBox.isChecked = true;
+                    Search();
                 }
                 else
                 {
