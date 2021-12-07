@@ -146,6 +146,15 @@ namespace FindIt
                 });
                 group.AddSpace(10);
 
+                // Disable secondary keyboard shortcuts
+                UICheckBox disableSecondaryKeyboardShortcuts = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DSK"), Settings.disableSecondaryKeyboardShortcuts, (b) =>
+                {
+                    Settings.disableSecondaryKeyboardShortcuts = b;
+                    XMLUtils.SaveSettings();
+                });
+                disableSecondaryKeyboardShortcuts.tooltip = Translations.Translate("FIF_SET_DSKTP");
+                group.AddSpace(10);
+
                 // Recent DLs sorting
                 string[] RencentDLsSortingList =
                 {

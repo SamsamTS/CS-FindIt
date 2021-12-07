@@ -69,7 +69,7 @@
     <Translation ID="FIF_PROP_LIG" String="Lights" />
     <Translation ID="FIF_PROP_NAT" String="Natural" />
     <Translation ID="FIF_PROP_UNS" String="Unsorted" />
-    <Translation ID="FIF_SET_KS" String="Keyboard Shortcut" />
+    <Translation ID="FIF_SET_KS" String="Main Keyboard Shortcut" />
     <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
     <Translation ID="FIF_SET_CTFL" String="Custom Tags File Location (Remember to back up this file periodically)" />
     <Translation ID="FIF_SET_CTFOP" String="Show in File Explorer" />
@@ -230,6 +230,8 @@
     <Translation ID="FIF_SET_DISTP" String="Use this option to reduce UI lag when typing in the search box" />
     <Translation ID="FIF_SET_STAB" String="Show search tabs" />
     <Translation ID="FIF_STAB_NTAB" String="New tab" />
+    <Translation ID="FIF_SET_DSK" String="Disable secondary keyboard shortcuts when Find It panel is closed" />
+    <Translation ID="FIF_SET_DSKTP" String="Avoid conflicts with TM:PE. Only the main keyboard shortcut will remain functional when Find It panel is closed" />
 
   </Translations>
 </Language>
