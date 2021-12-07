@@ -44,6 +44,8 @@ namespace FindIt
 
         internal static bool disableUpdateNotice = false;
 
+        internal static bool disableSecondaryKeyboardShortcuts = true;
+
         internal static double lastUpdateNotice = 0.0;
 
         internal static bool useRelevanceSort = true;
@@ -129,6 +131,9 @@ namespace FindIt
 
         [XmlElement("DisableUpdateNotice")]
         public bool DisableUpdateNotice { get => Settings.disableUpdateNotice; set => Settings.disableUpdateNotice = value; }
+
+        [XmlElement("DisableSecondaryKeyboardShortcuts")]
+        public bool DisableSecondaryKeyboardShortcuts { get => Settings.disableSecondaryKeyboardShortcuts; set => Settings.disableSecondaryKeyboardShortcuts = value; }
 
         [XmlElement("UseRelevanceSort")]
         public bool UseRelevanceSort { get => Settings.useRelevanceSort; set => Settings.useRelevanceSort = value; }
