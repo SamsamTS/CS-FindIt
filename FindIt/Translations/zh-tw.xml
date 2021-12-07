@@ -69,7 +69,6 @@
     <Translation ID="FIF_PROP_LIG" String="燈光類物體" />
     <Translation ID="FIF_PROP_NAT" String="自然類物體" />
     <Translation ID="FIF_PROP_UNS" String="未分類" />
-    <Translation ID="FIF_SET_KS" String="鍵盤快捷鍵" />
     <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
     <Translation ID="FIF_SET_CTFL" String="自訂標籤存檔路徑 (請定期備份此檔案)" />
     <Translation ID="FIF_SET_CTFOP" String="在檔案總管中顯示" />
@@ -178,7 +177,6 @@
     <Translation ID="FIF_PROP_AIR" String="航空器 (由Tree and Vehicle Props mod 生成)" />
     <Translation ID="FIF_PROP_WAT" String="船 (由Tree and Vehicle Props mod 生成)" />
     <Translation ID="FIF_EF_SB" String="子建築" />
-    <Translation ID="FIF_ATP_TP" String="點擊選項卡之間的間隙並拖曳以移動此面板" />
     <Translation ID="FIF_SET_ATP" String="顯示素材類型面板" />
     <Translation ID="FIF_EF_CT" String="有自定義標籤" />
     <Translation ID="FIF_EF_NCT" String="無自定義標籤" />

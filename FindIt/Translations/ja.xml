@@ -69,7 +69,6 @@
     <Translation ID="FIF_PROP_LIG" String="ライト" />
     <Translation ID="FIF_PROP_NAT" String="自然" />
     <Translation ID="FIF_PROP_UNS" String="未分類" />
-    <Translation ID="FIF_SET_KS" String="ショートカット" />
     <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
     <Translation ID="FIF_SET_CTFL" String="カスタムタグファイルの保存場所 (定期的なバックアップを推奨)" />
     <Translation ID="FIF_SET_CTFOP" String="エクスプローラで開く" />
@@ -178,7 +177,6 @@
     <Translation ID="FIF_PROP_AIR" String="航空機 (Tree and Vehicle Propsによって生成)" />
     <Translation ID="FIF_PROP_WAT" String="船舶 (Tree and Vehicle Propsによって生成)" />
     <Translation ID="FIF_EF_SB" String="サブビルディング" />
-    <Translation ID="FIF_ATP_TP" String="タブ間のギャップをクリックして、このパネルをドラッグして移動します" />
     <Translation ID="FIF_SET_ATP" String="アセットタイプのパネルを表示" />
     <Translation ID="FIF_EF_CT" String="カスタムタグあり" />
     <Translation ID="FIF_EF_NCT" String="カスタムタグなし" />

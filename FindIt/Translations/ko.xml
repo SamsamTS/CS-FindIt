@@ -69,7 +69,6 @@
     <Translation ID="FIF_PROP_LIG" String="조명" />
     <Translation ID="FIF_PROP_NAT" String="자연" />
     <Translation ID="FIF_PROP_UNS" String="미분류소품" />
-    <Translation ID="FIF_SET_KS" String="단축키" />
     <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
     <Translation ID="FIF_SET_CTFL" String="커스텀 태그 파일 위치(주기적으로 이 파일을 백업하십시오)" />
     <Translation ID="FIF_SET_CTFOP" String="파일 탐색기에서 보기" />
@@ -178,7 +177,6 @@
     <Translation ID="FIF_PROP_AIR" String="비행기 (Tree and Vehicle Props으로 생성됨)" />
     <Translation ID="FIF_PROP_WAT" String="선박 (Tree and Vehicle Props으로 생성됨)" />
     <Translation ID="FIF_EF_SB" String="서브 빌딩" />
-    <Translation ID="FIF_ATP_TP" String="탭 사이의 간격을 클릭하고 드래그하여 이 패널 움직이기" />
     <Translation ID="FIF_SET_ATP" String="에셋 유형 패널 표시" />
     <Translation ID="FIF_EF_CT" String="커스텀 태그 포함" />
     <Translation ID="FIF_EF_NCT" String="커스텀 태그 미포함" />

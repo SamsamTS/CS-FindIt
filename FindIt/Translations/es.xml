@@ -69,7 +69,6 @@
     <Translation ID="FIF_PROP_LIG" String="Luces" />
     <Translation ID="FIF_PROP_NAT" String="Natural" />
     <Translation ID="FIF_PROP_UNS" String="Miscelánea" />
-    <Translation ID="FIF_SET_KS" String="Atajo de teclado" />
     <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
     <Translation ID="FIF_SET_CTFL" String="Ubicacion del archivo de Etiquetas Personalizadas (acuérdese de hacerle respaldos periódicamente)" />
     <Translation ID="FIF_SET_CTFOP" String="Mostrar en el Explorador de Archivos" />
@@ -178,7 +177,6 @@
     <Translation ID="FIF_PROP_AIR" String="Aeronaves (generadas por Tree and Vehicle Props)" />
     <Translation ID="FIF_PROP_WAT" String="Vehículos acuáticos (generados por Tree and Vehicle Props)" />
     <Translation ID="FIF_EF_SB" String="Subedificios" />
-    <Translation ID="FIF_ATP_TP" String="Clic en el espacio entre pestañas para arrastrar y mover el panel" />
     <Translation ID="FIF_SET_ATP" String="Mostrar el panel de tipos de elemento" />
     <Translation ID="FIF_EF_CT" String="Con etiqueta personalizada" />
     <Translation ID="FIF_EF_NCT" String="Sin etiqueta personalizada" />

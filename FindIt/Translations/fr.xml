@@ -69,7 +69,6 @@
     <Translation ID="FIF_PROP_LIG" String="Lumières" />
     <Translation ID="FIF_PROP_NAT" String="Naturels" />
     <Translation ID="FIF_PROP_UNS" String="Sans catégorie" />
-    <Translation ID="FIF_SET_KS" String="Raccourci clavier" />
     <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
     <Translation ID="FIF_SET_CTFL" String="Fichier des étiquettes personnalisés (pensez à sauvegarder le fichier régulièrement)" />
     <Translation ID="FIF_SET_CTFOP" String="Afficher dans l'explorateur de fichiers" />
@@ -178,7 +177,6 @@
     <Translation ID="FIF_PROP_AIR" String="Avion (généré par Tree and Vehicle Props)" />
     <Translation ID="FIF_PROP_WAT" String="Bateau (généré par Tree and Vehicle Props)" />
     <Translation ID="FIF_EF_SB" String="Sub-buildings" />
-    <Translation ID="FIF_ATP_TP" String="Cliquez l'espace entre les onglets pour déplacer le panneau" />
     <Translation ID="FIF_SET_ATP" String="Afficher le panneau de type de ressource" />
     <Translation ID="FIF_EF_CT" String="Avec étiquette personnalisée" />
     <Translation ID="FIF_EF_NCT" String="Sans étiquette personnalisée" />

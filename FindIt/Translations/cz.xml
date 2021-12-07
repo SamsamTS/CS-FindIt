@@ -55,7 +55,6 @@
     <Translation ID="FIF_PROP_LIG" String="Světla" />
     <Translation ID="FIF_PROP_NAT" String="Příroda" />
     <Translation ID="FIF_PROP_UNS" String="Nezařazené" />
-    <Translation ID="FIF_SET_KS" String="Klávesové zkratky" />
     <Translation ID="FIF_SET_CTFOP" String="Zobrazit v Průzkumníku souborů" />
     <Translation ID="FIF_POP_SCR" String="Použít kolečko k rollování nahoru/dolů" />
     <Translation ID="FIF_POP_CON" String="Potvrdit" />
