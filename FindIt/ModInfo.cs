@@ -12,18 +12,26 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7.2";
-        public const bool isBeta = false;
+        public const string version = "2.7.3-beta1";
+        public const bool isBeta = true;
         public const bool debug = false;
-        public const double updateNoticeDate = 20211121;
+        public const double updateNoticeDate = 20211207;
         public const string updateNotice =
 
-            "- Fix compatibility issues with the new Extended Managers Library mod\n" +
-            "  (thanks to the help from algernon)\n\n" +
+            "- Building level filter is now range-based (can set min/max)\n" + 
+            "  You can find this filter in the extra filters panel\n\n" +
+   
+            "- Secondary keyboard shortcuts are now disabled by default when Find It 2 is closed\n" +
+            "  These shortcuts (Alt + 0-9/V) will only function when Find it 2's panel is opened\n" +
+            "  Main keyboard shortcut (Ctrl + F) is unaffected\n\n" +
 
-            "- Fix some bugs caused by the \"Disable instant search\" option\n\n" +
+            "  This change is to avoid keyboard shortcut conflicts with future TM:PE updates\n" +
+            "  You can switch back to the original behavior in Find It 2's mod settings\n\n" +
 
-            "- Update translations\n\n";
+            "- Right-click anywhere on the asset type panel to drag and move it\n" +
+            "  No need to click the tiny gaps anymore\n\n" +
+
+            "- A few other small changes\n";
 
         public string Name
         {
