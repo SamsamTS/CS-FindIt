@@ -9,7 +9,7 @@ namespace FindIt.GUI
     public class UIAssetTypePanel : UIPanel
     {
         public static UIAssetTypePanel instance;
-        private UIDragHandle m_dragHandle;
+        // private UIDragHandle m_dragHandle;
 
         public enum Category
         {
@@ -70,10 +70,10 @@ namespace FindIt.GUI
 
             tooltip = Translations.Translate("FIF_ATP_TP");
 
-            m_dragHandle = AddUIComponent<UIDragHandle>();
-            m_dragHandle.target = instance;
-            m_dragHandle.relativePosition = Vector3.zero;
-            m_dragHandle.size = new Vector2(75, 145);
+            //m_dragHandle = AddUIComponent<UIDragHandle>();
+            //m_dragHandle.target = instance;
+            //m_dragHandle.relativePosition = Vector3.zero;
+            //m_dragHandle.size = new Vector2(75, 145);
 
             eventPositionChanged += (c, p) =>
             {
@@ -228,6 +228,28 @@ namespace FindIt.GUI
             else if (option == UISearchBox.DropDownOptions.Decal) type = (int)Category.Decal;
 
             SelectTab(type);
+        }
+
+        private Vector3 deltaPosition;
+        protected override void OnMouseDown(UIMouseEventParameter p)
+        {
+            if (p.buttons.IsFlagSet(UIMouseButton.Right))
+            {
+                Vector3 mousePosition = Input.mousePosition;
+                mousePosition.y = m_OwnerView.fixedHeight - mousePosition.y;
+                deltaPosition = absolutePosition - mousePosition;
+                BringToFront();
+            }
+        }
+
+        protected override void OnMouseMove(UIMouseEventParameter p)
+        {
+            if (p.buttons.IsFlagSet(UIMouseButton.Right))
+            {
+                Vector3 mousePosition = Input.mousePosition;
+                mousePosition.y = m_OwnerView.fixedHeight - mousePosition.y;
+                absolutePosition = mousePosition + deltaPosition;
+            }
         }
     }
 }
