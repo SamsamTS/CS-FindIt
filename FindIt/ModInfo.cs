@@ -96,7 +96,7 @@ namespace FindIt
                     }
                 });
                 centerToolbar.tooltip = Translations.Translate("FIF_SET_CMTTP");
-                group.AddSpace(10);
+                group.AddSpace(5);
 
                 // Unlock all
                 UICheckBox unlockAll = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_UL"), Settings.unlockAll, (b) =>
@@ -105,7 +105,7 @@ namespace FindIt
                     XMLUtils.SaveSettings();
                 });
                 unlockAll.tooltip = Translations.Translate("FIF_SET_ULTP");
-                group.AddSpace(10);
+                group.AddSpace(5);
 
                 /*
                 // Fix bad props next loaded save
@@ -126,7 +126,7 @@ namespace FindIt
                     XMLUtils.SaveSettings();
                 });
                 useDefaultBrowser.tooltip = Translations.Translate("FIF_SET_DBTP");
-                group.AddSpace(10);
+                group.AddSpace(5);
 
                 // Do not show extra Find It 2 UI on vanilla panels
                 UICheckBox hideExtraUIonVP = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_UIVP"), Settings.hideExtraUIonVP, (b) =>
@@ -135,7 +135,7 @@ namespace FindIt
                     XMLUtils.SaveSettings();
                 });
                 hideExtraUIonVP.tooltip = Translations.Translate("FIF_SET_UIVPTP");
-                group.AddSpace(10);
+                group.AddSpace(5);
 
                 // Disable instant search
                 UICheckBox disableInstantSearch = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DIS"), Settings.disableInstantSearch, (b) =>
@@ -144,7 +144,7 @@ namespace FindIt
                     XMLUtils.SaveSettings();
                 });
                 disableInstantSearch.tooltip = Translations.Translate("FIF_SET_DISTP");
-                group.AddSpace(10);
+                group.AddSpace(5);
 
                 // Disable update notice
                 UICheckBox disableUpdateNotice = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DUN"), Settings.disableUpdateNotice, (b) =>
@@ -152,7 +152,7 @@ namespace FindIt
                     Settings.disableUpdateNotice = b;
                     XMLUtils.SaveSettings();
                 });
-                group.AddSpace(10);
+                group.AddSpace(5);
 
                 // Disable secondary keyboard shortcuts
                 UICheckBox disableSecondaryKeyboardShortcuts = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DSK"), Settings.disableSecondaryKeyboardShortcuts, (b) =>
@@ -161,7 +161,7 @@ namespace FindIt
                     XMLUtils.SaveSettings();
                 });
                 disableSecondaryKeyboardShortcuts.tooltip = Translations.Translate("FIF_SET_DSKTP");
-                group.AddSpace(10);
+                group.AddSpace(5);
 
                 // Recent DLs sorting
                 string[] RencentDLsSortingList =
@@ -177,7 +177,7 @@ namespace FindIt
                     XMLUtils.SaveSettings();
                 });
                 rencentDLsDropDown.width = 400;
-                group.AddSpace(10);
+                group.AddSpace(5);
 
                 // languate settings
                 UIDropDown languageDropDown = (UIDropDown)group.AddDropdown(Translations.Translate("TRN_CHOICE"), Translations.LanguageList, Translations.Index, (value) =>
@@ -186,13 +186,20 @@ namespace FindIt
                     XMLUtils.SaveSettings();
                 });
                 languageDropDown.width = 300;
-                group.AddSpace(10);
+                group.AddSpace(5);
 
                 // show path to FindItCustomTags.xml
-                string path = Path.Combine(DataLocation.localApplicationData, "FindItCustomTags.xml");
-                UITextField customTagsFilePath = (UITextField)group.AddTextfield(Translations.Translate("FIF_SET_CTFL"), path, _ => { }, _ => { });
+                string customTagsFilePathStr = Path.Combine(DataLocation.localApplicationData, "FindItCustomTags.xml");
+                UITextField customTagsFilePath = (UITextField)group.AddTextfield(Translations.Translate("FIF_SET_CTFL"), customTagsFilePathStr, _ => { }, _ => { });
                 customTagsFilePath.width = panel.width - 30;
                 group.AddButton(Translations.Translate("FIF_SET_CTFOP"), () => System.Diagnostics.Process.Start(DataLocation.localApplicationData));
+                group.AddSpace(5);
+
+                // show path to FindIt.xml
+                string configFilePathStr = Path.Combine(DataLocation.executableDirectory, "FindIt.xml");
+                UITextField configFilePath = (UITextField)group.AddTextfield(Translations.Translate("FIF_SET_CFFL"), configFilePathStr, _ => { }, _ => { });
+                configFilePath.width = panel.width - 30;
+                group.AddButton(Translations.Translate("FIF_SET_CTFOP"), () => System.Diagnostics.Process.Start(DataLocation.executableDirectory));
 
                 // shortcut keys
                 panel.gameObject.AddComponent<MainButtonKeyMapping>();

@@ -232,6 +232,7 @@
     <Translation ID="FIF_STAB_NTAB" String="New tab" />
     <Translation ID="FIF_SET_DSK" String="Disable secondary keyboard shortcuts when Find It panel is closed" />
     <Translation ID="FIF_SET_DSKTP" String="Avoid conflicts with TM:PE. Only the main keyboard shortcut will remain functional when Find It panel is closed" />
+    <Translation ID="FIF_SET_CFFL" String="Configuration File Location" />
 
   </Translations>
 </Language>
