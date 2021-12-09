@@ -69,6 +69,7 @@
     <Translation ID="FIF_PROP_LIG" String="燈光類物體" />
     <Translation ID="FIF_PROP_NAT" String="自然類物體" />
     <Translation ID="FIF_PROP_UNS" String="未分類" />
+    <Translation ID="FIF_SET_KS" String="主快捷鍵" />
     <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
     <Translation ID="FIF_SET_CTFL" String="自訂標籤存檔路徑 (請定期備份此檔案)" />
     <Translation ID="FIF_SET_CTFOP" String="在檔案總管中顯示" />
@@ -177,6 +178,7 @@
     <Translation ID="FIF_PROP_AIR" String="航空器 (由Tree and Vehicle Props mod 生成)" />
     <Translation ID="FIF_PROP_WAT" String="船 (由Tree and Vehicle Props mod 生成)" />
     <Translation ID="FIF_EF_SB" String="子建築" />
+    <Translation ID="FIF_ATP_TP" String="滑鼠右鍵拖曳以拖動和移動此面板" />
     <Translation ID="FIF_SET_ATP" String="顯示素材類型面板" />
     <Translation ID="FIF_EF_CT" String="有自定義標籤" />
     <Translation ID="FIF_EF_NCT" String="無自定義標籤" />
@@ -228,6 +230,9 @@
     <Translation ID="FIF_SET_DISTP" String="啟用此選項可減少搜尋框輸入時的 UI Lag" />
     <Translation ID="FIF_SET_STAB" String="顯示搜尋分頁功能" />
     <Translation ID="FIF_STAB_NTAB" String="新分頁" />
+    <Translation ID="FIF_SET_DSK" String="當 Find It 面板關閉時, 停用次要快捷鍵" />
+    <Translation ID="FIF_SET_DSKTP" String="避免與 TM:PE 快捷鍵產生衝突, 當 Find It 面板關閉時只有主快捷鍵維持運作" />
+    <Translation ID="FIF_SET_CFFL" String="設定文件存檔路徑" />
 
   </Translations>
 </Language>

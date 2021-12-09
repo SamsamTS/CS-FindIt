@@ -69,6 +69,7 @@
     <Translation ID="FIF_PROP_LIG" String="灯具" />
     <Translation ID="FIF_PROP_NAT" String="自然" />
     <Translation ID="FIF_PROP_UNS" String="未分类" />
+    <Translation ID="FIF_SET_KS" String="主快捷键" />
     <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
     <Translation ID="FIF_SET_CTFL" String="自定义标签文件位置（请定期备份此文件）" />
     <Translation ID="FIF_SET_CTFOP" String="在文件夹中显示" />
@@ -177,6 +178,7 @@
     <Translation ID="FIF_PROP_AIR" String="飞机（由 Tree and Vehicle Props 生成）" />
     <Translation ID="FIF_PROP_WAT" String="水船（由 Tree and Vehicle Props 生成）" />
     <Translation ID="FIF_EF_SB" String="子建筑" />
+    <Translation ID="FIF_ATP_TP" String="右键单击以拖动和移动此面板" />
     <Translation ID="FIF_SET_ATP" String="显示资产类型面板" />
     <Translation ID="FIF_EF_CT" String="有自定义标签" />
     <Translation ID="FIF_EF_NCT" String="无自定义标签" />
@@ -228,6 +230,9 @@
     <Translation ID="FIF_SET_DISTP" String="在搜索框中键入时，使用此选项可减少 UI 延迟" />
     <Translation ID="FIF_SET_STAB" String="显示搜索标签页功能" />
     <Translation ID="FIF_STAB_NTAB" String="新标签页" />
+    <Translation ID="FIF_SET_DSK" String="当 Find It 面板关闭时, 禁用辅助键盘快捷键" />
+    <Translation ID="FIF_SET_DSKTP" String="避免与 TM:PE 冲突, 只有主快捷键在 Find It 面板关闭时仍可正常工作" />
+    <Translation ID="FIF_SET_CFFL" String="配置文件位置" />
 
   </Translations>
 </Language>

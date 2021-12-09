@@ -232,6 +232,7 @@
     <Translation ID="FIF_STAB_NTAB" String="Новая вкладка" />
     <Translation ID="FIF_SET_DSK" String="Отключить дополнительные сочетания клавиш, когда панель Find It закрыта" />
     <Translation ID="FIF_SET_DSKTP" String="Для предотвращения конфликтов с TM:PE. Только основное сочетание клавиш останется работоспособным, когда панель Find It будет закрыта" />
+    <Translation ID="FIF_SET_CFFL" String="Расположение файла конфигурации" />
 
   </Translations>
 </Language>
