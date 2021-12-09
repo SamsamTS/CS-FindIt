@@ -524,8 +524,8 @@ namespace FindIt
                 else if (subService == ItemClass.SubService.OfficeHightech) findIt2Description += Translations.Translate("FIF_GR_ITC");
                 else findIt2Description += Translations.Translate("FIF_PROP_UNS");
 
-                findIt2Description += $", {size.x}x{size.y}, {(int)buildingHeight} {Translations.Translate("FIF_EF_MET")} ({(int)(buildingHeight * 3.28084f)} {Translations.Translate("FIF_EF_FEE")})";
                 BuildingInfo buildingInfo = m_prefab as BuildingInfo;
+                findIt2Description += $", L{(int)buildingInfo.m_class.m_level + 1}, {size.x}x{size.y}, {(int)buildingHeight} {Translations.Translate("FIF_EF_MET")} ({(int)(buildingHeight * 3.28084f)} {Translations.Translate("FIF_EF_FEE")})";
                 // terrain conforming?
                 if (buildingInfo.m_material?.shader == AssetTagList.shaderBuildingFence) findIt2Description += $", {Translations.Translate("FIF_PROP_TC")}";
             }

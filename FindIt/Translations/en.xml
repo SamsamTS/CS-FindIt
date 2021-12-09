@@ -134,8 +134,8 @@
     <Translation ID="FIF_SE_EFI" String="Show extra filters panel" />
     <Translation ID="FIF_EF_AC" String="Asset Creator" />
     <Translation ID="FIF_EF_BH" String="Building Height" />
-    <Translation ID="FIF_EF_MET" String="meters" />
-    <Translation ID="FIF_EF_FEE" String="feet" />
+    <Translation ID="FIF_EF_MET" String="m" />
+    <Translation ID="FIF_EF_FEE" String="ft" />
     <Translation ID="FIF_SET_ACLS" String="Sort asset creator list alphabetically" />
     <Translation ID="FIF_GR_RAN" String="Random Selection" />
     <Translation ID="FIF_NET_SMR" String="Small Roads" />
