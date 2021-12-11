@@ -12,10 +12,10 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7.3-beta2";
-        public const bool isBeta = true;
+        public const string version = "2.7.3";
+        public const bool isBeta = false;
         public const bool debug = false;
-        public const double updateNoticeDate = 20211207;
+        public const double updateNoticeDate = 20211210;
         public const string updateNotice =
 
             "- Building level filter is now range-based (can set min/max)\n" + 
@@ -30,6 +30,10 @@ namespace FindIt
 
             "- Right-click anywhere on the asset type panel to drag and move it\n" +
             "  No need to click the tiny gaps anymore\n\n" +
+
+            "- Asset description pop-up window will show growable building levels\n\n" +
+
+            "- Mod settings page will show the location of Find It 2's configuration file\n\n" +
 
             "- A few other small changes\n";
 
