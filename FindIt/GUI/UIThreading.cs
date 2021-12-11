@@ -97,6 +97,13 @@ namespace FindIt
             _processed = true;
             try
             {
+                // secondary keyboard shortcuts
+                // if users choose to disable secondary hotkeys when Find it is invisible, don't do anything
+                if (index != -1 && Settings.disableSecondaryKeyboardShortcuts && !FindIt.instance.searchBox.isVisible)
+                {
+                    return;
+                }
+
                 if (index > -1)
                 {
                     if (index > 5 && !FindIt.isRicoEnabled)

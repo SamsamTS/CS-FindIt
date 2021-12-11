@@ -69,7 +69,7 @@
     <Translation ID="FIF_PROP_LIG" String="Освещение" />
     <Translation ID="FIF_PROP_NAT" String="Природа" />
     <Translation ID="FIF_PROP_UNS" String="Несортированные" />
-    <Translation ID="FIF_SET_KS" String="Сочетание клавиш" />
+    <Translation ID="FIF_SET_KS" String="Основная горячая клавиша" />
     <Translation ID="FIF_SE_IGR" String="Grow.RICO" />
     <Translation ID="FIF_SET_CTFL" String="Распол. файла пользовательских тегов. Создавайте резервные копии файла!" />
     <Translation ID="FIF_SET_CTFOP" String="Показать в Проводнике" />
@@ -178,7 +178,7 @@
     <Translation ID="FIF_PROP_AIR" String="Авиатранспорт (сгенерированный Tree and Vehicle Props)" />
     <Translation ID="FIF_PROP_WAT" String="Водный транспорт (сгенерированный Tree and Vehicle Props)" />
     <Translation ID="FIF_EF_SB" String="Sub-buildings" />
-    <Translation ID="FIF_ATP_TP" String="Щёлкнув по зазору между вкладками вы можете перемещать эту панель" />
+    <Translation ID="FIF_ATP_TP" String="Щёлкните правой кнопкой мыши, чтобы зацепить и переместить эту панель" />
     <Translation ID="FIF_SET_ATP" String="Показать панель типа объектов" />
     <Translation ID="FIF_EF_CT" String="С добавленным тегом" />
     <Translation ID="FIF_EF_NCT" String="Без добавленного тега" />
@@ -230,5 +230,9 @@
     <Translation ID="FIF_SET_DISTP" String="Используйте этот параметр, чтобы уменьшить задержку пользовательского интерфейса при вводе текста в поле поиска" />
     <Translation ID="FIF_SET_STAB" String="Показать вкладки поиска" />
     <Translation ID="FIF_STAB_NTAB" String="Новая вкладка" />
+    <Translation ID="FIF_SET_DSK" String="Отключить дополнительные сочетания клавиш, когда панель Find It закрыта" />
+    <Translation ID="FIF_SET_DSKTP" String="Для предотвращения конфликтов с TM:PE. Только основное сочетание клавиш останется работоспособным, когда панель Find It будет закрыта" />
+    <Translation ID="FIF_SET_CFFL" String="Расположение файла конфигурации" />
+
   </Translations>
 </Language>

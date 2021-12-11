@@ -62,7 +62,7 @@ namespace FindIt.GUI
         {
             if (instance != null)
             {
-                UIView.PopModal();
+                // UIView.PopModal();
                 instance.isVisible = false;
                 Destroy(instance.gameObject);
                 instance = null;
@@ -86,7 +86,7 @@ namespace FindIt.GUI
             {
                 instance = UIView.GetAView().AddUIComponent(typeof(UIUpdateNoticePopUp)) as UIUpdateNoticePopUp;
                 instance.Show(true);
-                UIView.PushModal(instance);
+                // UIView.PushModal(instance);
             }
             else
             {

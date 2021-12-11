@@ -69,7 +69,6 @@
     <Translation ID="FIF_PROP_LIG" String="Luzes" />
     <Translation ID="FIF_PROP_NAT" String="Natural" />
     <Translation ID="FIF_PROP_UNS" String="Desordenados" />
-    <Translation ID="FIF_SET_KS" String="Atalho de teclado" />
     <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
     <Translation ID="FIF_SET_CTFL" String="FIcheiro de Tags personalizadas (Lembra-te de fazer backup deste ficheiro periodicamente)" />
     <Translation ID="FIF_SET_CTFOP" String="Mostra o explorar do windows" />

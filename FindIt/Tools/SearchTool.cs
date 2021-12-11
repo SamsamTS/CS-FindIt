@@ -478,8 +478,14 @@ namespace FindIt
             {
                 if (!(asset.prefab is BuildingInfo)) return false;
                 BuildingInfo info = asset.prefab as BuildingInfo;
-                ItemClass.Level level = (ItemClass.Level)UISearchBox.instance.extraFiltersPanel.buildingLevelDropDownMenu.selectedIndex;
-                if (info.m_class.m_level != level) return false;
+
+                int level = (int)info.m_class.m_level;
+
+                if (level < UISearchBox.instance.extraFiltersPanel.buildingLevelMinDropDownMenu.selectedIndex ||
+                    level > UISearchBox.instance.extraFiltersPanel.buildingLevelMaxDropDownMenu.selectedIndex )
+                {
+                    return false;
+                }
             }
             // only show sub-buildings
             else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtraPanel.DropDownOptions.SubBuildings)

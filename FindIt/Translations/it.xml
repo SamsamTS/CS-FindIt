@@ -69,7 +69,6 @@
     <Translation ID="FIF_PROP_LIG" String="Luci" />
     <Translation ID="FIF_PROP_NAT" String="Naturale" />
     <Translation ID="FIF_PROP_UNS" String="Altro" />
-    <Translation ID="FIF_SET_KS" String="Scorciatoie da tastiera" />
     <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
     <Translation ID="FIF_SET_CTFL" String="Posizione dei file delle etichette personalizzate (Ricorda di eseguire spesso il backup)" />
     <Translation ID="FIF_SET_CTFOP" String="Mostra nel File Explorer" />
@@ -178,7 +177,6 @@
     <Translation ID="FIF_PROP_AIR" String="Aerei (generato dai prop Alberi e Veicoli)" />
     <Translation ID="FIF_PROP_WAT" String="Barche (generato dai prop Alberi e Veicoli)" />
     <Translation ID="FIF_EF_SB" String="Sub-edifici" />
-    <Translation ID="FIF_ATP_TP" String="Clicca lo spazio tra le finestre per muovere questo pannello" />
     <Translation ID="FIF_SET_ATP" String="Mostra pannello dei tipi d asset" />
     <Translation ID="FIF_EF_CT" String="Con Etichetta Personalizzata" />
     <Translation ID="FIF_EF_NCT" String="Senza Etichetta Personalizzata" />
