@@ -222,6 +222,10 @@ namespace FindIt.GUI
             public bool[] filterTreeChecked = new bool[(int)UIFilterTree.Category.All];
             public string firstAssetTitle;
 
+            // custom tag panel
+            public bool customTagPanelEnabled = false;
+            public string selectedCustomtag = "";
+
             public TabData()
             {
                 Reset();
@@ -241,7 +245,11 @@ namespace FindIt.GUI
                 for (int i = 0; i < (int)UIFilterPloppable.Category.All; ++i) filterPloppableChecked[i] = true;
                 for (int i = 0; i < (int)UIFilterProp.Category.All; ++i) filterPropChecked[i] = true;
                 for (int i = 0; i < (int)UIFilterTree.Category.All; ++i) filterTreeChecked[i] = true;
-            }
+
+                // custom tag panel
+                customTagPanelEnabled = false;
+                selectedCustomtag = "";
+        }
         }
         private TabData tabData = new TabData();
 
@@ -289,6 +297,13 @@ namespace FindIt.GUI
             else if (type == UISearchBox.DropDownOptions.Tree)
             {
                 for (int i = 0; i < (int)UIFilterTree.Category.All; ++i) tabData.filterTreeChecked[i] = UIFilterTree.instance.toggles[i].isChecked;
+            }
+
+            // store custom tag panel info
+            tabData.customTagPanelEnabled = UIFilterTagPanel.instance.tagDropDownCheckBox.isChecked;
+            if (tabData.customTagPanelEnabled)
+            {
+                tabData.selectedCustomtag = UISearchBox.instance.tagPanel.GetDropDownListKey();
             }
 
             // store the first displayed asset title
@@ -339,6 +354,27 @@ namespace FindIt.GUI
             else if (type == UISearchBox.DropDownOptions.Tree)
             {
                 for (int i = 0; i < (int)UIFilterTree.Category.All; ++i) UIFilterTree.instance.toggles[i].isChecked = tabData.filterTreeChecked[i];
+            }
+
+            // restore custom tag panel info
+            UIFilterTagPanel.instance.tagDropDownCheckBox.isChecked = tabData.customTagPanelEnabled;
+                
+            if (tabData.customTagPanelEnabled)
+            {
+                if (!UIFilterTagPanel.instance.isVisible)
+                {
+                    UISearchBox.instance.OpenCustomTagPanel();
+                }
+
+                int selectedIndex = UIFilterTagPanel.instance.GetDropDownListIndex(tabData.selectedCustomtag);
+                if (selectedIndex != -1) // found the index
+                {
+                    UIFilterTagPanel.instance.tagDropDownMenu.selectedIndex = selectedIndex;
+                }
+                else // can't restore the selected tag, disable the panel
+                {
+                    UIFilterTagPanel.instance.tagDropDownCheckBox.isChecked = false;
+                }
             }
 
             searchbox.Search();

@@ -324,20 +324,12 @@ namespace FindIt.GUI
             {
                 if (!tagPanel.isVisible)
                 {
-                    tagToolIcon.opacity = 1.0f;
-                    //CreateCustomTagPanel();
-                    tagPanel.isVisible = true;
+                    OpenCustomTagPanel();
                 }
                 else
                 {
-                    tagToolIcon.opacity = 0.5f;
-                    //DestroyCustomTagPanel();
-                    tagPanel.isVisible = false;
-                    tagPanel.tagDropDownCheckBox.isChecked = false;
-                    Search();
+                    CloseCustomTagPanel();
                 }
-                UpdateTopPanelsPosition();
-
             };
 
             tagToolIcon.eventMouseEnter += (c, p) =>
@@ -702,6 +694,22 @@ namespace FindIt.GUI
             RemoveUIComponent(tagPanel);
             tagPanel = null;
             UISearchBox.instance.scrollPanel.Refresh();
+        }
+
+        public void OpenCustomTagPanel()
+        {
+            tagToolIcon.opacity = 1.0f;
+            tagPanel.isVisible = true;
+            UpdateTopPanelsPosition();
+        }
+
+        public void CloseCustomTagPanel()
+        {
+            tagToolIcon.opacity = 0.5f;
+            tagPanel.isVisible = false;
+            tagPanel.tagDropDownCheckBox.isChecked = false;
+            Search();
+            UpdateTopPanelsPosition();
         }
 
         public void CreateAssetTypePanel()
