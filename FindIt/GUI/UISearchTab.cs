@@ -226,6 +226,20 @@ namespace FindIt.GUI
             public bool customTagPanelEnabled = false;
             public string selectedCustomtag = "";
 
+            // extra filters panel
+            public bool extraFiltersPanelEnabled = false;
+            public int selectedExtraFiltersIndex = 0;
+
+            // extra filtes panel sub-filters
+            public int assetCreatorDropDownMenuSelectedIndex = 0;
+            public string assetCreatorInputString = "";
+            public string buildingHeightMinInputString = "";
+            public string buildingHeightMaxInputString = "";
+            public int builingHeightUnitSelectedIndex = 0;
+            public int buildingLevelMinDropDownMenuSelectedIndex = 0;
+            public int buildingLevelMaxDropDownMenuSelectedIndex = 0;
+            public int DLCDropDownMenuSelectedIndex = 0;
+
             public TabData()
             {
                 Reset();
@@ -249,6 +263,20 @@ namespace FindIt.GUI
                 // custom tag panel
                 customTagPanelEnabled = false;
                 selectedCustomtag = "";
+
+                // extra filers panel
+                extraFiltersPanelEnabled = false;
+                selectedExtraFiltersIndex = 0;
+
+                // extra filtes panel sub-filters
+                assetCreatorDropDownMenuSelectedIndex = 0;
+                assetCreatorInputString = "";
+                buildingHeightMinInputString = "";
+                buildingHeightMaxInputString = "";
+                builingHeightUnitSelectedIndex = 0;
+                buildingLevelMinDropDownMenuSelectedIndex = 0;
+                buildingLevelMaxDropDownMenuSelectedIndex = 0;
+                DLCDropDownMenuSelectedIndex = 0;
         }
         }
         private TabData tabData = new TabData();
@@ -303,7 +331,37 @@ namespace FindIt.GUI
             tabData.customTagPanelEnabled = UIFilterTagPanel.instance.tagDropDownCheckBox.isChecked;
             if (tabData.customTagPanelEnabled)
             {
-                tabData.selectedCustomtag = UISearchBox.instance.tagPanel.GetDropDownListKey();
+                tabData.selectedCustomtag = UIFilterTagPanel.instance.GetDropDownListKey();
+            }
+
+            // store extra filters panel info
+            tabData.extraFiltersPanelEnabled = UIFilterExtraPanel.instance.optionDropDownCheckBox.isChecked;
+            if (tabData.extraFiltersPanelEnabled)
+            {
+                tabData.selectedExtraFiltersIndex = UIFilterExtraPanel.instance.optionDropDownMenu.selectedIndex;
+
+                // store sub filters in each extra filter
+                switch (tabData.selectedExtraFiltersIndex)
+                {
+                    case (int)UIFilterExtraPanel.DropDownOptions.AssetCreator:
+                        tabData.assetCreatorDropDownMenuSelectedIndex = UIFilterExtraPanel.instance.assetCreatorDropDownMenu.selectedIndex;
+                        tabData.assetCreatorInputString = UIFilterExtraPanel.instance.assetCreatorInput.text;
+                        break;
+                    case (int)UIFilterExtraPanel.DropDownOptions.BuildingHeight:
+                        tabData.buildingHeightMinInputString = UIFilterExtraPanel.instance.buildingHeightMinInput.text;
+                        tabData.buildingHeightMaxInputString = UIFilterExtraPanel.instance.buildingHeightMaxInput.text;
+                        tabData.builingHeightUnitSelectedIndex = UIFilterExtraPanel.instance.builingHeightUnit.selectedIndex;
+                        break;
+                    case (int)UIFilterExtraPanel.DropDownOptions.BuildingLevel:
+                        tabData.buildingLevelMinDropDownMenuSelectedIndex = UIFilterExtraPanel.instance.buildingLevelMinDropDownMenu.selectedIndex;
+                        tabData.buildingLevelMaxDropDownMenuSelectedIndex = UIFilterExtraPanel.instance.buildingLevelMaxDropDownMenu.selectedIndex;
+                        break;
+                    case (int)UIFilterExtraPanel.DropDownOptions.DLC:
+                        tabData.DLCDropDownMenuSelectedIndex = UIFilterExtraPanel.instance.DLCDropDownMenu.selectedIndex;
+                        break;
+                    default:
+                        break;
+                }
             }
 
             // store the first displayed asset title
@@ -374,6 +432,41 @@ namespace FindIt.GUI
                 else // can't restore the selected tag, disable the panel
                 {
                     UIFilterTagPanel.instance.tagDropDownCheckBox.isChecked = false;
+                }
+            }
+
+            // restore extra filters panel info
+            UIFilterExtraPanel.instance.optionDropDownCheckBox.isChecked = tabData.extraFiltersPanelEnabled;
+
+            if (tabData.extraFiltersPanelEnabled)
+            {
+                if (!UIFilterExtraPanel.instance.isVisible)
+                {
+                    UISearchBox.instance.OpenExtraFiltersPanel();
+                }
+                UIFilterExtraPanel.instance.optionDropDownMenu.selectedIndex = tabData.selectedExtraFiltersIndex;
+
+                // restore sub filters in each extra filter
+                switch (tabData.selectedExtraFiltersIndex)
+                {
+                    case (int)UIFilterExtraPanel.DropDownOptions.AssetCreator:
+                        UIFilterExtraPanel.instance.assetCreatorDropDownMenu.selectedIndex = tabData.assetCreatorDropDownMenuSelectedIndex;
+                        UIFilterExtraPanel.instance.assetCreatorInput.text = tabData.assetCreatorInputString;
+                        break;
+                    case (int)UIFilterExtraPanel.DropDownOptions.BuildingHeight:
+                        UIFilterExtraPanel.instance.buildingHeightMinInput.text = tabData.buildingHeightMinInputString;
+                        UIFilterExtraPanel.instance.buildingHeightMaxInput.text = tabData.buildingHeightMaxInputString;
+                        UIFilterExtraPanel.instance.builingHeightUnit.selectedIndex = tabData.builingHeightUnitSelectedIndex;
+                        break;
+                    case (int)UIFilterExtraPanel.DropDownOptions.BuildingLevel:
+                        UIFilterExtraPanel.instance.buildingLevelMinDropDownMenu.selectedIndex = tabData.buildingLevelMinDropDownMenuSelectedIndex;
+                        UIFilterExtraPanel.instance.buildingLevelMaxDropDownMenu.selectedIndex = tabData.buildingLevelMaxDropDownMenuSelectedIndex;
+                        break;
+                    case (int)UIFilterExtraPanel.DropDownOptions.DLC:
+                        UIFilterExtraPanel.instance.DLCDropDownMenu.selectedIndex = tabData.DLCDropDownMenuSelectedIndex;
+                        break;
+                    default:
+                        break;
                 }
             }
 

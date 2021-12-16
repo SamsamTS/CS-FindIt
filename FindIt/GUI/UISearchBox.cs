@@ -362,21 +362,13 @@ namespace FindIt.GUI
             {
                 if (!extraFiltersPanel.isVisible)
                 {
-                    extraFiltersIcon.opacity = 1.0f;
-                    //CreateExtraFiltersPanel();
-                    extraFiltersPanel.isVisible = true;
-                    extraFiltersPanel.optionDropDownCheckBox.isChecked = true;
+                    OpenExtraFiltersPanel();
                     Search();
                 }
                 else
                 {
-                    extraFiltersIcon.opacity = 0.5f;
-                    //DestroyExtraFiltersPanel();
-                    extraFiltersPanel.isVisible = false;
-                    extraFiltersPanel.optionDropDownCheckBox.isChecked = false;
-                    Search();
+                    CloseExtraFiltersPanel();
                 }
-                UpdateTopPanelsPosition();
             };
 
             extraFiltersIcon.eventMouseEnter += (c, p) =>
@@ -673,6 +665,23 @@ namespace FindIt.GUI
             extraFiltersPanel.Close();
             RemoveUIComponent(extraFiltersPanel);
             extraFiltersPanel = null;
+        }
+
+        public void OpenExtraFiltersPanel()
+        {
+            extraFiltersIcon.opacity = 1.0f;
+            extraFiltersPanel.isVisible = true;
+            extraFiltersPanel.optionDropDownCheckBox.isChecked = true;
+            UpdateTopPanelsPosition();
+        }
+
+        public void CloseExtraFiltersPanel()
+        {
+            extraFiltersIcon.opacity = 0.5f;
+            extraFiltersPanel.isVisible = false;
+            extraFiltersPanel.optionDropDownCheckBox.isChecked = false;
+            Search();
+            UpdateTopPanelsPosition();
         }
 
         private void CreateCustomTagPanel()
