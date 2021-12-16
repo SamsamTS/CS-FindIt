@@ -229,7 +229,7 @@ namespace FindIt.GUI
         {
             if (instance != null)
             {
-                UIView.PopModal();
+                //UIView.PopModal();
                 UISearchBox.instance.quickMenuVisible = false;
                 UISearchBox.instance.quickMenuIcon.opacity = 0.5f;
                 instance.isVisible = false;
@@ -255,9 +255,31 @@ namespace FindIt.GUI
             {
                 instance = UIView.GetAView().AddUIComponent(typeof(UIQuickMenuPopUp)) as UIQuickMenuPopUp;
 
-                UIView.PushModal(instance);
+                //UIView.PushModal(instance);
             }
             instance.Show(true);
+        }
+
+        private Vector3 deltaPosition;
+        protected override void OnMouseDown(UIMouseEventParameter p)
+        {
+            if (p.buttons.IsFlagSet(UIMouseButton.Right))
+            {
+                Vector3 mousePosition = Input.mousePosition;
+                mousePosition.y = m_OwnerView.fixedHeight - mousePosition.y;
+                deltaPosition = absolutePosition - mousePosition;
+                BringToFront();
+            }
+        }
+
+        protected override void OnMouseMove(UIMouseEventParameter p)
+        {
+            if (p.buttons.IsFlagSet(UIMouseButton.Right))
+            {
+                Vector3 mousePosition = Input.mousePosition;
+                mousePosition.y = m_OwnerView.fixedHeight - mousePosition.y;
+                absolutePosition = mousePosition + deltaPosition;
+            }
         }
 
     }
