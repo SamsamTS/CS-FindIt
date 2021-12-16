@@ -16,7 +16,7 @@ namespace FindIt.GUI
         public UIDropDown optionDropDownMenu;
 
         // asset creator
-        private UITextField assetCreatorInput;
+        public UITextField assetCreatorInput;
         private UISprite assetCreatorSearchIcon;
         public UIDropDown assetCreatorDropDownMenu;
         private List<KeyValuePair<string, int>> assetCreatorList;
@@ -25,9 +25,9 @@ namespace FindIt.GUI
         // building height
         private UILabel buildingHeightMinLabel;
         private UILabel buildingHeightMaxLabel;
-        private UITextField buildingHeightMinInput;
-        private UITextField buildingHeightMaxInput;
-        private UIDropDown builingHeightUnit;
+        public UITextField buildingHeightMinInput;
+        public UITextField buildingHeightMaxInput;
+        public UIDropDown builingHeightUnit;
         public float minBuildingHeight = float.MinValue;
         public float maxBuildingHeight = float.MaxValue;
 

@@ -251,7 +251,9 @@ namespace FindIt.GUI
             }
         }
 
-        // Update custom tag list 
+        /// <summary>
+        /// Refresh customg tag list and the data for custom tag panel display
+        /// </summary>
         public void UpdateCustomTagList()
         {
             customTagList = AssetTagList.instance.GetCustomTagList();
@@ -275,9 +277,30 @@ namespace FindIt.GUI
             SamsamTS.UIUtils.CreateDropDownScrollBar(tagDropDownMenu);
         }
 
+        /// <summary>
+        /// Return the selected custom tag string in the custom tag panel dropdown
+        /// </summary>
         public string GetDropDownListKey()
         {
             return customTagList[tagDropDownMenu.selectedIndex].Key;
+        }
+
+        /// <summary>
+        /// Given string key, find the corresponding index in the custom tag dropdown,
+        /// return -1 if not found
+        /// </summary>
+        public int GetDropDownListIndex(string key)
+        {
+            UpdateCustomTagList();
+            
+            for(int i = 0; i < customTagList.Count; ++i)
+            {
+                if (customTagList[i].Key == key)
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
 
     }
