@@ -513,7 +513,11 @@ namespace FindIt.GUI
                             {
                                 if (!data.asset.author.IsNullOrWhiteSpace() && (data.asset.steamID != 0))
                                 {
-                                    m_dlcSprite.tooltip = "Tree & Vehicle Props Patch Mod\nBy " + data.asset.author + "\n" + Translations.Translate("FIF_UIS_WS");
+                                    m_dlcSprite.tooltip = "Tree & Vehicle Props Patch Mod\nBy " + data.asset.author + "\n" + "ID: " + data.asset.steamID + "\n" + Translations.Translate("FIF_UIS_WS");
+                                }
+                                else if (data.asset.steamID != 0)
+                                {
+                                    m_dlcSprite.tooltip = "Tree & Vehicle Props Patch Mod\n" + "ID: " + data.asset.steamID + "\n" + Translations.Translate("FIF_UIS_WS");
                                 }
                                 else
                                 {
@@ -536,7 +540,11 @@ namespace FindIt.GUI
                             {
                                 if (!data.asset.author.IsNullOrWhiteSpace() && (data.asset.steamID != 0))
                                 {
-                                    m_dlcSprite.tooltip = "Non-terrain Conforming Props Mod\nBy " + data.asset.author + "\n" + Translations.Translate("FIF_UIS_WS");
+                                    m_dlcSprite.tooltip = "Non-terrain Conforming Props Mod\nBy " + data.asset.author + "\n" + "ID: " + data.asset.steamID + "\n" + Translations.Translate("FIF_UIS_WS");
+                                }
+                                else if (data.asset.steamID != 0)
+                                {
+                                    m_dlcSprite.tooltip = "Non-terrain Conforming Props Mod" + "\n" + "ID: " + data.asset.steamID + "\n" + Translations.Translate("FIF_UIS_WS");
                                 }
                                 else
                                 {
@@ -557,7 +565,7 @@ namespace FindIt.GUI
                                 m_dlcSprite.opacity = 0.45f;
                                 m_dlcSprite.isVisible = true;
                                 m_dlcSprite.spriteName = "UIFilterWorkshopItems";
-                                m_dlcSprite.tooltip = "By " + data.asset.author + "\n" + Translations.Translate("FIF_UIS_WS");
+                                m_dlcSprite.tooltip = "By " + data.asset.author + "\n" + "ID: " + data.asset.steamID + "\n" + Translations.Translate("FIF_UIS_WS");
                             }
                             else
                             {
@@ -640,7 +648,7 @@ namespace FindIt.GUI
             if (!p.used && p.buttons == UIMouseButton.Right && currentData != null && currentData.asset != null)
             {
 
-                if (currentData.asset.author.IsNullOrWhiteSpace() || currentData.asset.steamID == 0 || !currentData.asset.prefab.m_isCustomContent) return;
+                if (currentData.asset.steamID == 0 || !currentData.asset.prefab.m_isCustomContent) return;
 
                 PublishedFileId publishedFileId = new PublishedFileId(currentData.asset.steamID);
 

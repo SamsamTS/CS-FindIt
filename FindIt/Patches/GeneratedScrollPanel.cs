@@ -175,7 +175,11 @@ namespace FindIt
                                 {
                                     if (!asset.author.IsNullOrWhiteSpace() && (asset.steamID != 0))
                                     {
-                                        m_dlcSprite.tooltip = "Tree & Vehicle Props Patch Mod\nBy " + asset.author + "\n" + Translations.Translate("FIF_UIS_WS");
+                                        m_dlcSprite.tooltip = "Tree & Vehicle Props Patch Mod\nBy " + asset.author + "\n" + "ID: " + asset.steamID + "\n" + Translations.Translate("FIF_UIS_WS");
+                                    }
+                                    else if (asset.steamID != 0)
+                                    {
+                                        m_dlcSprite.tooltip = "Tree & Vehicle Props Patch Mod\n" + "ID: " + asset.steamID + "\n" + Translations.Translate("FIF_UIS_WS");
                                     }
                                     else
                                     {
@@ -198,7 +202,11 @@ namespace FindIt
                                 {
                                     if (!asset.author.IsNullOrWhiteSpace() && (asset.steamID != 0))
                                     {
-                                        m_dlcSprite.tooltip = "Non-terrain Conforming Props Mod\nBy " + asset.author + "\n" + Translations.Translate("FIF_UIS_WS");
+                                        m_dlcSprite.tooltip = "Non-terrain Conforming Props Mod\nBy " + asset.author + "\n" + "ID: " + asset.steamID + "\n" + Translations.Translate("FIF_UIS_WS");
+                                    }
+                                    else if (asset.steamID != 0)
+                                    {
+                                        m_dlcSprite.tooltip = "Non-terrain Conforming Props Mod" + "\n" + "ID: " + asset.steamID + "\n" + Translations.Translate("FIF_UIS_WS");
                                     }
                                     else
                                     {
@@ -219,7 +227,7 @@ namespace FindIt
                                     m_dlcSprite.opacity = 0.2f;
                                     m_dlcSprite.isVisible = true;
                                     m_dlcSprite.spriteName = "UIFilterWorkshopItems";
-                                    m_dlcSprite.tooltip = "By " + asset.author + "\n" + Translations.Translate("FIF_UIS_WS");
+                                    m_dlcSprite.tooltip = "By " + asset.author + "\n" + "ID: " + asset.steamID + "\n" + Translations.Translate("FIF_UIS_WS");
                                 }
                                 else
                                 {
