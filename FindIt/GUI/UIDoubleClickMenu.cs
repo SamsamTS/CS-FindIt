@@ -8,6 +8,8 @@ using System.Reflection;
 using ColossalFramework.Packaging;
 using System.IO;
 using ColossalFramework.Globalization;
+using ColossalFramework.PlatformServices;
+
 
 namespace FindIt.GUI
 {
@@ -18,8 +20,10 @@ namespace FindIt.GUI
         private UIButton meshInfoButton;
         private UIButton ricoButton;
         private UIButton openFolderButton;
+        private UIButton openWorkshopOverlayButton;
+        private UIButton openWorkshopBrowserButton;
         private static readonly int PanelWidth = 300;
-        private static readonly int PanelHeight = 160;
+        private static readonly int PanelHeight = 240;
         private Asset selectedAsset;
 
         public override void Start()
@@ -32,11 +36,12 @@ namespace FindIt.GUI
             SetUpMeshInfoButton();
             SetUpRICOButton();
             SetUpOpenFolderButton();
+            SetUpOpenWorkshopButtons();
 
             cancelButton = SamsamTS.UIUtils.CreateButton(this);
             cancelButton.size = new Vector2(PanelWidth, 40);
             cancelButton.text = Translations.Translate("FIF_POP_CAN");
-            cancelButton.relativePosition = new Vector3(0, openFolderButton.relativePosition.y + openFolderButton.height);
+            cancelButton.relativePosition = new Vector3(0, openWorkshopBrowserButton.relativePosition.y + openWorkshopBrowserButton.height);
             cancelButton.eventClick += (c, p) =>
             {
                 Close();
@@ -88,7 +93,7 @@ namespace FindIt.GUI
             {
                 absoluteX = component.absolutePosition.x - PanelWidth;
             }
-            instance.absolutePosition = new Vector2(absoluteX, component.absolutePosition.y);
+            instance.absolutePosition = new Vector2(absoluteX, component.absolutePosition.y - 80);
 
         }
 
@@ -308,6 +313,72 @@ namespace FindIt.GUI
                         // UnityEngine.Application.OpenURL(path);
                         System.Diagnostics.Process.Start(path);
                     }
+                }
+            }
+        }
+
+        private void SetUpOpenWorkshopButtons()
+        {
+            openWorkshopOverlayButton = SamsamTS.UIUtils.CreateButton(this);
+            openWorkshopOverlayButton.size = new Vector2(PanelWidth, 40);
+            openWorkshopOverlayButton.text = Translations.Translate("FIF_DOU_WS") + "\n" + Translations.Translate("FIF_DOU_WS_STEAM");
+            openWorkshopOverlayButton.relativePosition = new Vector3(0, openFolderButton.relativePosition.y + openFolderButton.height);
+            openWorkshopOverlayButton.eventClick += (c, p) =>
+            {
+                OpenWorkshop(true);
+                openWorkshopOverlayButton.tooltipBox.Hide();
+                Close();
+            };
+
+            openWorkshopBrowserButton = SamsamTS.UIUtils.CreateButton(this);
+            openWorkshopBrowserButton.size = new Vector2(PanelWidth, 40);
+            openWorkshopBrowserButton.text = Translations.Translate("FIF_DOU_WS") + "\n" + Translations.Translate("FIF_DOU_WS_BROWSER");
+            openWorkshopBrowserButton.relativePosition = new Vector3(0, openWorkshopOverlayButton.relativePosition.y + openWorkshopOverlayButton.height);
+            openWorkshopBrowserButton.eventClick += (c, p) =>
+            {
+                OpenWorkshop(false);
+                openWorkshopBrowserButton.tooltipBox.Hide();
+                Close();
+            };
+
+            // set up tooltip
+            openWorkshopOverlayButton.Disable();
+            openWorkshopBrowserButton.Disable();
+
+            if (!selectedAsset.prefab.m_isCustomContent)
+            {
+                openWorkshopOverlayButton.tooltip = Translations.Translate("FIF_DOU_FOLDCUS");
+                openWorkshopBrowserButton.tooltip = Translations.Translate("FIF_DOU_FOLDCUS");
+            }
+            else if(selectedAsset.steamID == 0)
+            {
+                openWorkshopOverlayButton.tooltip = Translations.Translate("FIF_DOU_WS_NOID");
+                openWorkshopBrowserButton.tooltip = Translations.Translate("FIF_DOU_WS_NOID");
+            }
+            else
+            {
+                openWorkshopOverlayButton.tooltip = Translations.Translate("FIF_DOU_WS_STEAMTP");
+                openWorkshopBrowserButton.tooltip = Translations.Translate("FIF_DOU_WS_BROWSERTP");
+
+                openWorkshopOverlayButton.Enable();
+                openWorkshopBrowserButton.Enable();
+            }
+        }
+
+        private void OpenWorkshop(bool useSteamOverlay)
+        {
+            PublishedFileId publishedFileId = new PublishedFileId(selectedAsset.steamID);
+
+            if (publishedFileId != PublishedFileId.invalid)
+            {
+                if (useSteamOverlay)
+                {
+                    PlatformService.ActivateGameOverlayToWorkshopItem(publishedFileId);
+                }
+                else
+                {
+                    // UnityEngine.Application.OpenURL("https://steamcommunity.com/sharedfiles/filedetails/?id=" + publishedFileId);
+                    System.Diagnostics.Process.Start("https://steamcommunity.com/sharedfiles/filedetails/?id=" + publishedFileId);
                 }
             }
         }
