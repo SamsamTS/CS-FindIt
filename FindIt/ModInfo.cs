@@ -12,7 +12,7 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7.4-beta2";
+        public const string version = "2.7.4-beta3";
         public const bool isBeta = true;
         public const bool debug = false;
         public const double updateNoticeDate = 20211215;
@@ -24,7 +24,9 @@ namespace FindIt
 
             "- Double-click shortcut menu has two new buttons to open an asset's workshop page\n\n" +
 
-            "- Move the mouse over the steam icon on asset thumbnail will show its workshop ID";
+            "- Move the mouse over the steam icon on asset thumbnail will show its workshop ID\n\n" +
+
+            "- Add support for the upcoming Tree & Vehicle Props 2 mod\n\n";
 
         public string Name
         {

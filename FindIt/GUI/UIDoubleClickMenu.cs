@@ -255,7 +255,7 @@ namespace FindIt.GUI
                 }
                 else if (selectedAsset.assetType == Asset.AssetType.Prop)
                 {
-                    if (FindIt.isTVPPatchEnabled)
+                    if (FindIt.isTVPPatchEnabled || FindIt.isTVP2Enabled)
                     {
                         asset = PackageManager.FindAssetByName(selectedAsset.prefab.name.Replace(" Prop", ""), Package.AssetType.Object);
                         if (asset?.package?.packagePath != null)
@@ -294,7 +294,7 @@ namespace FindIt.GUI
             }
             else if (selectedAsset.assetType == Asset.AssetType.Prop)
             {
-                if (FindIt.isTVPPatchEnabled)
+                if (FindIt.isTVPPatchEnabled || FindIt.isTVP2Enabled)
                 {
                     asset = PackageManager.FindAssetByName(selectedAsset.prefab.name.Replace(" Prop", ""), Package.AssetType.Object);
                     if (asset?.package?.packagePath != null)
