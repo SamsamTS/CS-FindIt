@@ -12,7 +12,7 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7.4";
+        public const string version = "2.7.4-beta2";
         public const bool isBeta = true;
         public const bool debug = false;
         public const double updateNoticeDate = 20211215;
@@ -20,7 +20,11 @@ namespace FindIt
 
             "- Search tabs now can interact with the extra filters and custom tags panels\n\n" +
 
-            "- Most pop-up windows are movable(right-click and drag)\n\n";
+            "- Most pop-up windows are movable(right-click and drag)\n\n" +
+
+            "- Double-click shortcut menu has two new buttons to open an asset's workshop page\n\n" +
+
+            "- Move the mouse over the steam icon on asset thumbnail will show its workshop ID";
 
         public string Name
         {
