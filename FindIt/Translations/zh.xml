@@ -168,15 +168,15 @@
     <Translation ID="FIF_NET_ONE" String="单向路" />
     <Translation ID="FIF_NET_PAR" String="允许路边停车" />
     <Translation ID="FIF_NET_NOP" String="禁止路边停车" />
-    <Translation ID="FIF_PROP_VEH" String="未分类车辆（由 Tree and Vehicle Props 生成）" />
-    <Translation ID="FIF_PROP_TRE" String="树（由 Tree and Vehicle Props 生成）" />
+    <Translation ID="FIF_PROP_VEH" String="未分类车辆" />
+    <Translation ID="FIF_PROP_TRE" String="树" />
     <Translation ID="FIF_SET_BACK" String="对主面板使用浅色背景颜色" />
     <Translation ID="FIF_SET_BACKTP" String="更易于查看较暗的资产，但更难看到较亮的资产" />
     <Translation ID="FIF_SET_DUN" String="禁用将来的更新通知" />
-    <Translation ID="FIF_PROP_MOT" String="机动车辆（由 Tree and Vehicle Props 生成）" />
-    <Translation ID="FIF_PROP_RAI" String="铁路车辆（由 Tree and Vehicle Props 生成）" />
-    <Translation ID="FIF_PROP_AIR" String="飞机（由 Tree and Vehicle Props 生成）" />
-    <Translation ID="FIF_PROP_WAT" String="水船（由 Tree and Vehicle Props 生成）" />
+    <Translation ID="FIF_PROP_MOT" String="机动车辆" />
+    <Translation ID="FIF_PROP_RAI" String="铁路车辆" />
+    <Translation ID="FIF_PROP_AIR" String="飞机" />
+    <Translation ID="FIF_PROP_WAT" String="水船" />
     <Translation ID="FIF_EF_SB" String="子建筑" />
     <Translation ID="FIF_ATP_TP" String="右键单击以拖动和移动此面板" />
     <Translation ID="FIF_SET_ATP" String="显示资产类型面板" />

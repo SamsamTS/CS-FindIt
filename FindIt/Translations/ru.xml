@@ -168,15 +168,15 @@
     <Translation ID="FIF_NET_ONE" String="Дороги с односторонним движением" />
     <Translation ID="FIF_NET_PAR" String="Парковка разрешена" />
     <Translation ID="FIF_NET_NOP" String="Парковка запрещена" />
-    <Translation ID="FIF_PROP_VEH" String="Транспорт без категории (сгенерированный Tree and Vehicle Props)" />
-    <Translation ID="FIF_PROP_TRE" String="Растительность (сгенерированная Tree and Vehicle Props)" />
+    <Translation ID="FIF_PROP_VEH" String="Транспорт без категории" />
+    <Translation ID="FIF_PROP_TRE" String="Растительность" />
     <Translation ID="FIF_SET_BACK" String="Использовать светлый цвет фона для основной панели" />
     <Translation ID="FIF_SET_BACKTP" String="Легче увидеть более тёмные объекты, но труднее увидеть более яркие" />
     <Translation ID="FIF_SET_DUN" String="Отключить уведомление об обновлении" />
-    <Translation ID="FIF_PROP_MOT" String="Автотранспорт (сгенерированный Tree and Vehicle Props)" />
-    <Translation ID="FIF_PROP_RAI" String="Ж/д транспорт (сгенерированный Tree and Vehicle Props)" />
-    <Translation ID="FIF_PROP_AIR" String="Авиатранспорт (сгенерированный Tree and Vehicle Props)" />
-    <Translation ID="FIF_PROP_WAT" String="Водный транспорт (сгенерированный Tree and Vehicle Props)" />
+    <Translation ID="FIF_PROP_MOT" String="Автотранспорт" />
+    <Translation ID="FIF_PROP_RAI" String="Ж/д транспорт" />
+    <Translation ID="FIF_PROP_AIR" String="Авиатранспорт" />
+    <Translation ID="FIF_PROP_WAT" String="Водный транспорт" />
     <Translation ID="FIF_EF_SB" String="Sub-buildings" />
     <Translation ID="FIF_ATP_TP" String="Щёлкните правой кнопкой мыши, чтобы зацепить и переместить эту панель" />
     <Translation ID="FIF_SET_ATP" String="Показать панель типа объектов" />
