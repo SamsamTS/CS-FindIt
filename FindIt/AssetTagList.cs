@@ -521,7 +521,7 @@ namespace FindIt
         {
             try
             {
-                Type TVPropPatchModType = Type.GetType("TVPropPatch.Mod");
+                Type TVPropPatchModType = FindIt.isTVP2Enabled ? Type.GetType("TreeVehicleProps.Mod") : Type.GetType("TVPropPatch.Mod");
                 HashSet<PropInfo> generatedVehicleProp = (HashSet<PropInfo>)TVPropPatchModType.GetField("generatedVehicleProp").GetValue(null);
                 HashSet<PropInfo> generatedTreeProp = (HashSet<PropInfo>)TVPropPatchModType.GetField("generatedTreeProp").GetValue(null);
                 Dictionary<PropInfo, VehicleInfo> propVehicleInfoTable = (Dictionary<PropInfo, VehicleInfo>)TVPropPatchModType.GetField("propVehicleInfoTable").GetValue(null);

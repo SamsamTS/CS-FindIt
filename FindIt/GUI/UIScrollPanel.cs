@@ -499,7 +499,7 @@ namespace FindIt.GUI
                             m_dlcSprite.tooltip = "One-Way Train Tracks Mod";
                         }
                         // tvp patch assets, show blue steam icon
-                        else if (FindIt.isTVPPatchEnabled && data.asset.assetType == Asset.AssetType.Prop && AssetTagList.instance.tvppAssets.Contains(data.asset))
+                        else if ((FindIt.isTVPPatchEnabled || FindIt.isTVP2Enabled) && data.asset.assetType == Asset.AssetType.Prop && AssetTagList.instance.tvppAssets.Contains(data.asset))
                         {
                             m_dlcSprite.isVisible = true;
                             m_dlcSprite.spriteName = "UIFilterWorkshopItemsFocusedHovered";
@@ -507,21 +507,21 @@ namespace FindIt.GUI
                             // if based on vanilla assets, show blue steam icon
                             if (!data.asset.prefab.m_isCustomContent)
                             {
-                                m_dlcSprite.tooltip = "Tree & Vehicle Props Patch Mod";
+                                m_dlcSprite.tooltip = "Tree & Vehicle Props Mod";
                             }
                             else
                             {
                                 if (!data.asset.author.IsNullOrWhiteSpace() && (data.asset.steamID != 0))
                                 {
-                                    m_dlcSprite.tooltip = "Tree & Vehicle Props Patch Mod\nBy " + data.asset.author + "\n" + "ID: " + data.asset.steamID + "\n" + Translations.Translate("FIF_UIS_WS");
+                                    m_dlcSprite.tooltip = "Tree & Vehicle Props Mod\nBy " + data.asset.author + "\n" + "ID: " + data.asset.steamID + "\n" + Translations.Translate("FIF_UIS_WS");
                                 }
                                 else if (data.asset.steamID != 0)
                                 {
-                                    m_dlcSprite.tooltip = "Tree & Vehicle Props Patch Mod\n" + "ID: " + data.asset.steamID + "\n" + Translations.Translate("FIF_UIS_WS");
+                                    m_dlcSprite.tooltip = "Tree & Vehicle Props Mod\n" + "ID: " + data.asset.steamID + "\n" + Translations.Translate("FIF_UIS_WS");
                                 }
                                 else
                                 {
-                                    m_dlcSprite.tooltip = "Tree & Vehicle Props Patch Mod\n" + Translations.Translate("FIF_UIS_CNWS");
+                                    m_dlcSprite.tooltip = "Tree & Vehicle Props Mod\n" + Translations.Translate("FIF_UIS_CNWS");
                                 }
                             }
                         }
