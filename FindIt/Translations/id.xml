@@ -1,233 +1,244 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <Language UniqueName="id" ReadableName="Bahasa Indonesia">
   <Translations>
-    <Translation ID="FIF_DESC" String="Cari dan kelompokan asetmu" />
-    <Translation ID="FIF_SET_DM" String="Nonaktifkan pesan debug logging" />
-    <Translation ID="FIF_SET_DMTP" String="Jika dicentang, pesan debug tidak akan dicatat" />
-    <Translation ID="FIF_SET_CMT" String="Pusatkan toolbar utama" />
-    <Translation ID="FIF_SET_CMTTP" String="Toolbar utama akan dipusatkan jika melebihi panjang tertentu" />
-    <Translation ID="FIF_SET_UL" String="Buka semua" />
-    <Translation ID="FIF_SET_ULTP" String="Biarkan kamu memilih dan menempatkan item bahkan ketika terkunci" />
-    <Translation ID="FIF_SET_BP" String="Perbaiki prop cacat saat memuat penyimpanan selanjutnya" />
-    <Translation ID="FIF_SET_BPTP" String="Hapus semua prop penyebab masalah. Centang opsi dan memuat penyimpananmu" />
-    <Translation ID="FIF_SE_WF" String="Kustom" />
-    <Translation ID="FIF_SE_VF" String="Bawaan" />
-    <Translation ID="FIF_SE_IA" String="Semua" />
-    <Translation ID="FIF_SE_IN" String="Jaringan" />
-    <Translation ID="FIF_SE_IP" String="Ploppable" />
-    <Translation ID="FIF_SE_IG" String="Growable" />
-    <Translation ID="FIF_SE_IR" String="RICO" />
-    <Translation ID="FIF_SE_IPR" String="Prop" />
-    <Translation ID="FIF_SE_ID" String="Stiker" />
-    <Translation ID="FIF_SE_IT" String="Pohon" />
-    <Translation ID="FIF_SE_LV" String="Tingkat Bangunan" />
-    <Translation ID="FIF_SE_SZ" String="Ukuran" />
-    <Translation ID="FIF_SE_SC" String="Tekan SHIFT atau CTRL untuk memilih banyak kategori" />
-    <Translation ID="FIF_PLOP_E" String="Listrik" />
-    <Translation ID="FIF_PLOP_W" String="Air/Saluran Limbah" />
-    <Translation ID="FIF_PLOP_G" String="Sampah" />
-    <Translation ID="FIF_PLOP_H" String="Kesehatan" />
-    <Translation ID="FIF_PLOP_F" String="Pemadam Kebakaran" />
-    <Translation ID="FIF_PLOP_P" String="Polisi" />
-    <Translation ID="FIF_PLOP_ED" String="Pendidikan" />
-    <Translation ID="FIF_PLOP_PT" String="Transportasi Publik" />
-    <Translation ID="FIF_PLOP_PPW" String="Taman/Plaza/Alam Liar" />
-    <Translation ID="FIF_PLOP_U" String="Bangunan Unik" />
-    <Translation ID="FIF_PLOP_I" String="Industri" />
-    <Translation ID="FIF_PLOP_D" String="Bencana" />
-    <Translation ID="FIF_PLOP_C" String="Kampus" />
-    <Translation ID="FIF_PLOP_V" String="Olahraga Kampus" />
-    <Translation ID="FIF_PLOP_FI" String="Perikanan" />
-    <Translation ID="FIF_GR_LDR" String="Pemukiman Kelas Bawah" />
-    <Translation ID="FIF_GR_HDR" String="Pemukiman Kelas Atas" />
-    <Translation ID="FIF_GR_LDRE" String="Pemukiman Kelas Bawah ECO" />
-    <Translation ID="FIF_GR_HDRE" String="Pemukiman Kelas Atas ECO" />
-    <Translation ID="FIF_GR_LDC" String="Pertokoan Kelas Bawah" />
-    <Translation ID="FIF_GR_HDC" String="Pertokoan Kelas Atas" />
-    <Translation ID="FIF_GR_CE" String="Pertokoan ECO" />
-    <Translation ID="FIF_GR_O" String="Perkantoran" />
-    <Translation ID="FIF_GR_ITC" String="Klaster IT" />
-    <Translation ID="FIF_GR_GI" String="Industri Umum" />
-    <Translation ID="FIF_GR_FAI" String="Industri Pertanian" />
-    <Translation ID="FIF_GR_FOI" String="Industri Kehutanan" />
-    <Translation ID="FIF_GR_OII" String="Industri Minyak" />
-    <Translation ID="FIF_GR_ORI" String="Industri Pertambangan" />
-    <Translation ID="FIF_GR_LC" String="Bisnis Hiburan" />
-    <Translation ID="FIF_GR_TC" String="Bisnis Pariwisata" />
-    <Translation ID="FIF_SO_RETP" String="Memilah berdasarkan relevansi. Sama seperti Find It aslinya" />
-    <Translation ID="FIF_SO_NETP" String="Memilah berdasarkan yang paling baru diunduh" />
-    <Translation ID="FIF_SO_RE" String="Relevansi" />
-    <Translation ID="FIF_SO_NE" String="DL Terkini" />
-    <Translation ID="TRN_CHOICE" String="Atur bahasa (akan efektif di waktu berikutnya)" />
-    <Translation ID="TRN_SYS" String="Gunakan bahasa sistem" />
-    <Translation ID="FIF_PROP_IND" String="Industri" />
-    <Translation ID="FIF_PROP_PAR" String="Taman" />
-    <Translation ID="FIF_PROP_COM" String="Umum" />
-    <Translation ID="FIF_PROP_RES" String="Pemukiman" />
-    <Translation ID="FIF_PROP_BIL" String="Papan Iklan" />
-    <Translation ID="FIF_PROP_SPE" String="Papan Iklan Khusus" />
-    <Translation ID="FIF_PROP_LIG" String="Lampu" />
-    <Translation ID="FIF_PROP_NAT" String="Alam" />
-    <Translation ID="FIF_PROP_UNS" String="Tidak Dipilah" />
-    <Translation ID="FIF_SE_IGR" String="Grwb/RICO" />
-    <Translation ID="FIF_SET_CTFL" String="Lokasi Berkas Tag Kustom (Ingat untuk mencadangkan berkas ini secara berkala)" />
-    <Translation ID="FIF_SET_CTFOP" String="Tunjukkan File Explorer" />
-    <Translation ID="FIF_SE_SCTP" String="Tunjukkan Panel Tag Kustom" />
-    <Translation ID="FIF_POP_SCR" String="Gunakan roda mouse untuk menggulir keatas/kebawah" />
-    <Translation ID="FIF_POP_CON" String="Konfirmasi" />
-    <Translation ID="FIF_POP_CAN" String="Batalkan" />
-    <Translation ID="FIF_POP_NU" String="Ini tidak bisa dibatalkan" />
-    <Translation ID="FIF_CO_TIT" String="Gabungkan" />
-    <Translation ID="FIF_CO_MSG" String="Pilih tag yang ada untuk digabungkan dengan" />
-    <Translation ID="FIF_CO_CH" String="Pilih" />
-    <Translation ID="FIF_CO_CHTP" String="Gabungkan dengan tag yang ada sekarang" />
-    <Translation ID="FIF_CO_CHLBL" String="Gabungkan dengan:" />
-    <Translation ID="FIF_CO_NELBL" String="Tolong pilih tag yang ada" />
-    <Translation ID="FIF_DE_TIT" String="Hapus" />
-    <Translation ID="FIF_DE_MSG" String="Apakah kamu yakin mau menghapus tag ini?" />
-    <Translation ID="FIF_RE_TIT" String="Ubah Nama" />
-    <Translation ID="FIF_RE_MSG" String="Ketik nama tag baru dan tekan Enter" />
-    <Translation ID="FIF_RE_ITP" String="Tekan Enter untuk mengajukan nama tag baru" />
-    <Translation ID="FIF_RE_ELBL" String="Tolong masukan nama tag baru" />
-    <Translation ID="FIF_RE_NEWLBL" String="Nama Tag Baru:" />
-    <Translation ID="FIF_RE_SLBL" String="Nama tag ini terlalu pendek" />
-    <Translation ID="FIF_RE_AELBL" String="Tag ini sudah ada" />
-    <Translation ID="FIF_CT_TIT" String="Tag Kustom" />
-    <Translation ID="FIF_CT_DDMSG" String="Tambah tag yang ada ke aset ini:" />
-    <Translation ID="FIF_CT_DDTP" String="Tambah tag yang ada ke aset ini" />
-    <Translation ID="FIF_CT_ILBL1" String="Atau" />
-    <Translation ID="FIF_CT_ILBL2" String="Ketik nama tag baru dan tekan Enter:" />
-    <Translation ID="FIF_CT_ITP" String="Tekan Enter untuk menambah tag baru" />
-    <Translation ID="FIF_SET_CTLS" String="Memilah daftar tag kustom sesuai abjad" />
-    <Translation ID="FIF_TAG_DDTP" String="Hanya tunjukkan aset dengan tag ini" />
-    <Translation ID="FIF_TAG_REF" String="Segarkan" />
-    <Translation ID="FIF_TAG_REFTP" String="Segarkan daftar drop-down tag kustom" />
-    <Translation ID="FIF_TAG_REN" String="Ubah Nama" />
-    <Translation ID="FIF_TAG_RENTP" String="Ubah nama tag ini" />
-    <Translation ID="FIF_TAG_COM" String="Gabungkan" />
-    <Translation ID="FIF_TAG_COMTP" String="Gabungkan tag ini dengan tag lainnya" />
-    <Translation ID="FIF_TAG_DEL" String="Hapus" />
-    <Translation ID="FIF_TAG_DELTP" String="Hapus tag ini" />
-    <Translation ID="FIF_UIS_WS" String="Klik kanan untuk melihat aset ini pada Steam Workshop" />
-    <Translation ID="FIF_TREE_SM" String="Pohon Kecil" />
-    <Translation ID="FIF_TREE_MD" String="Pohon Sedang" />
-    <Translation ID="FIF_TREE_LG" String="Pohon Besar" />
-    <Translation ID="FIF_TAG_BAT" String="Batch" />
-    <Translation ID="FIF_TAG_BAC" String="Kembali" />
-    <Translation ID="FIF_TAG_ADD" String="Tambah" />
-    <Translation ID="FIF_TAG_ADDTP" String="Tambahkan tag untuk aset yang dipilih" />
-    <Translation ID="FIF_TAG_REM" String="Hapus" />
-    <Translation ID="FIF_TAG_REMTP" String="Hapus tag dari aset yang dipilih" />
-    <Translation ID="FIF_TAG_CLE" String="Bersihkan" />
-    <Translation ID="FIF_TAG_CLETP" String="Bersihkan seleksi" />
-    <Translation ID="FIF_ADD_TIT" String="Tambahkan Batch" />
-    <Translation ID="FIF_ADD_NUM" String="Jumlah aset dipilih:" />
-    <Translation ID="FIF_ADD_ADD" String="Tambahkan tag yang ada untuk aset dipilih:" />
-    <Translation ID="FIF_ADD_CHTP" String="Tambahkan tag yang ini" />
-    <Translation ID="FIF_ADD_TAG" String="Tag:" />
-    <Translation ID="FIF_ADD_ELBL" String="Masukkan tag baru atau pilih tag yang ada" />
-    <Translation ID="FIF_REM_TIT" String="Hapus Batch" />
-    <Translation ID="FIF_REM_REM" String="Hapus tag dari aset dipilih:" />
-    <Translation ID="FIF_REM_CHTP" String="Hapus tag ini" />
-    <Translation ID="FIF_REM_ELBL" String="Pilih tag" />
-    <Translation ID="FIF_SE_EFI" String="Tunjukkan panel filter tambahan" />
-    <Translation ID="FIF_EF_AC" String="Kreator Aset" />
-    <Translation ID="FIF_EF_BH" String="Tinggi Bangunan" />
-    <Translation ID="FIF_EF_MET" String="meter" />
-    <Translation ID="FIF_EF_FEE" String="kaki" />
-    <Translation ID="FIF_SET_ACLS" String="Memilah daftar kreator aset sesuai abjad" />
-    <Translation ID="FIF_GR_RAN" String="Seleksi Acak" />
-    <Translation ID="FIF_NET_SMR" String="Jalan Kecil" />
-    <Translation ID="FIF_NET_MDR" String="Jalan Sedang" />
-    <Translation ID="FIF_NET_LGR" String="Jalan Besar" />
-    <Translation ID="FIF_NET_HGHW" String="Jalan Tol" />
-    <Translation ID="FIF_NET_PATH" String="Jalan Setapak" />
-    <Translation ID="FIF_NET_WALL" String="Tembok dan Pagar" />
-    <Translation ID="FIF_NET_WAT" String="Struktur Air" />
-    <Translation ID="FIF_PROP_MAR" String="Penanda Editor" />
-    <Translation ID="FIF_NET_TNR" String="Jalan Gang" />
-    <Translation ID="FIF_NET_UTI" String="Utilitas" />
-    <Translation ID="FIF_NET_TRA" String="Kereta" />
-    <Translation ID="FIF_SET_PM" String="Tunjukkan tipe penanda prop dalam mode gim" />
-    <Translation ID="FIF_SET_PMTP" String="Tipe penanda prop tak kelihatan dan kebanyakan tidak berfungsi dalam mode gim. Gunakan Move It untuk menghapus" />
-    <Translation ID="FIF_SET_IC" String="Tunjukkan angka dari contoh tiap aset yang ada" />
-    <Translation ID="FIF_EF_UN" String="Aset Tidak Digunakan" />
-    <Translation ID="FIF_QM_TIT" String="Menu Cepat" />
-    <Translation ID="FIF_UIS_UN" String="Tidak Digunakan" />
-    <Translation ID="FIF_UIS_IN" String="Digunakan" />
-    <Translation ID="FIF_SET_ICTP" String="Opsi ini agak memperlambat kecepatan pencarian. Nonaktifkan ketika tak dibutuhkan" />
-    <Translation ID="FIF_SET_PO" String="Menyertakan Procedural Objects" />
-    <Translation ID="FIF_SET_ICO" String="Gunakan opsi pemilahan asli" />
-    <Translation ID="FIF_SET_ICUS" String="Tunjukkan aset yang digunakan lebih dulu" />
-    <Translation ID="FIF_SET_ICUN" String="Tunjukkan aset yang tidak digunakan lebih dulu" />
-    <Translation ID="FIF_TAG_BATTP" String="Mengedit Batch" />
-    <Translation ID="FIF_SE_SEBTP" String="Bersihkan kotak pencarian" />
-    <Translation ID="FIF_SET_DB" String="Gunakan sistem peramban bawaan dari pada Steam overlay" />
-    <Translation ID="FIF_SET_DBTP" String="Klik kanan ikon Steam pada tampilan mini aset untuk melihat aset pada Steam Workshop" />
-    <Translation ID="FIF_NET_ONE" String="Jalan Satu Lajur" />
-    <Translation ID="FIF_NET_PAR" String="Perbolehkan Parkir Pinggir Jalan" />
-    <Translation ID="FIF_NET_NOP" String="Dilarang Parkir Pinggir Jalan" />
-    <Translation ID="FIF_PROP_VEH" String="Kendaraan Tidak Dipilah (dihasilkan oleh Prop Pohon dan Kendaraan)" />
-    <Translation ID="FIF_PROP_TRE" String="Pohon (dihasilkan oleh Prop Pohon dan Kendaraan)" />
-    <Translation ID="FIF_SET_BACK" String="Gunakan pencahayaan warna latar belakang untuk panel utama" />
-    <Translation ID="FIF_SET_BACKTP" String="Permudah untuk melihat aset yang gelap, tapi sulit untuk melihat aset yang terang" />
-    <Translation ID="FIF_SET_DUN" String="Nonaktifkan pemberitahuan pembaruan kedepan" />
-    <Translation ID="FIF_PROP_MOT" String="Kendaraan Bermotor (dihasilkan oleh Prop Pohon dan Kendaraan)" />
-    <Translation ID="FIF_PROP_RAI" String="Perkeretaapian (dihasilkan oleh Prop Pohon dan Kendaraan)" />
-    <Translation ID="FIF_PROP_AIR" String="Transportasi Udara (dihasilkan oleh Prop Pohon dan Kendaraan)" />
-    <Translation ID="FIF_PROP_WAT" String="Transportasi Air (dihasilkan oleh Prop Pohon dan Kendaraan)" />
-    <Translation ID="FIF_EF_SB" String="Sub-Bangunan" />
-    <Translation ID="FIF_SET_ATP" String="Tunjukkan panel tipe aset" />
-    <Translation ID="FIF_EF_CT" String="Dengan tag kustom" />
-    <Translation ID="FIF_EF_NCT" String="Tanpa tag kustom" />
-    <Translation ID="FIF_UPN_UP" String="Perbarui" />
-    <Translation ID="FIF_PROP_TC" String="Dapat menyesuaikan Terrain" />
-    <Translation ID="FIF_PROP_NTC" String="Tidak dapat menyesuaikan Terrain" />
-    <Translation ID="FIF_SET_SSK" String="Gunakan kata kunci query pencarian berbeda untuk tiap tipe aset" />
-    <Translation ID="FIF_SET_SSKTP" String="Tahan SHIFT ketika mengalihkan tipe aset untuk membagi kata kunci query sementara" />
-    <Translation ID="FIF_TAG_SA" String="Pilih Semua" />
-    <Translation ID="FIF_TAG_SATP" String="Pilih semua barang yang ditampilkan" />
-    <Translation ID="FIF_EF_UNEXP" String="Ekspor Semua" />
-    <Translation ID="FIF_EF_UNEXPTP" String="Ekspor daftar semua ID workshop yang tidak digunakan ke dalam berkas HTML dengan link workshop" />
-    <Translation ID="FIF_EF_UNEXPSE" String="Ekspor yang Dicari" />
-    <Translation ID="FIF_EF_UNEXPTPSE" String="Ekspor daftar ID workshop yang tidak digunakan dari pencarian terakhir ke dalam berkas HTML dengan link workshop" />
-    <Translation ID="FIF_EF_LC" String="Kustom Lokal" />
-    <Translation ID="FIF_EF_WC" String="Kustom Workshop" />
-    <Translation ID="FIF_EF_DLC" String="Perlu DLC/CCP" />
-    <Translation ID="FIF_LOC_TOOL" String="Klik untuk menempatkan contoh aset yang dipilih berikutnya. Tahan SHIFT dan klik untuk menempatkan contoh PO berikutnya" />
-    <Translation ID="FIF_REF_DIS" String="Segarkan Tampilan" />
-    <Translation ID="FIF_EF_US" String="Aset yang Digunakan" />
-    <Translation ID="FIF_EF_USEXPTP" String="Ekspor daftar semua ID workshop yang digunakan ke dalam berkas HTML dengan link workshop" />
-    <Translation ID="FIF_EF_USEXPTPSE" String="Ekspor daftar ID workshop yang digunakan dari pencarian terakhir ke dalam berkas HTML dengan link workshop" />
-    <Translation ID="FIF_SE_SIZEX" String="Klik x ini untuk mengatur ulang penyaringan ukuran bangunan" />
-    <Translation ID="FIF_SET_UIVP" String="Jangan tunjukkan UI tambahan Find It 2 pada panel bawaan (perlu memulai ulang)" />
-    <Translation ID="FIF_SET_UIVPTP" String="Termasuk: ikon tag kustom, ikon steam, dan ikon DLC" />
-    <Translation ID="FIF_DOU_MESH" String="Lihat dalam Mesh Info" />
-    <Translation ID="FIF_DOU_MESHNO" String="Mod Mesh Info tidak dipasang atau dinyalakan" />
-    <Translation ID="FIF_DOU_MESHTYPE" String="Mod Mesh Info hanya mendukung aset kustom non-jaringan" />
-    <Translation ID="FIF_DOU_MESHOPEN" String="Lihat aset ini dalam Mod Mesh Info" />
-    <Translation ID="FIF_DOU_RICO" String="Lihat dalam RICO Revisited" />
-    <Translation ID="FIF_DOU_RICONO" String="Mod Ploppable RICO Revisited tidak dipasang atau dinyalakan" />
-    <Translation ID="FIF_DOU_RICOTYPE" String="Mod Ploppable RICO Revisited hanya mendukung aset bangunan" />
-    <Translation ID="FIF_DOU_RICOOPEN" String="Lihat aset ini dalam Mod Ploppable RICO Revisited" />
-    <Translation ID="FIF_DOU_FOLD" String="Buka Folder Berkas" />
-    <Translation ID="FIF_DOU_FOLDCUS" String="Fitur ini hanya berfungsi dengan aset kustom" />
-    <Translation ID="FIF_DOU_FOLDOPEN" String="Buka folder utama dari aset ini" />
-    <Translation ID="FIF_UIS_CNWS" String="Aset Kustom Non-Workshop" />
-    <Translation ID="FIF_NET_BUS" String="Jalur Bus" />
-    <Translation ID="FIF_NET_TRO" String="Jalur Bus Troli" />
-    <Translation ID="FIF_NET_BIK" String="Jalur Sepeda" />
-    <Translation ID="FIF_NET_TRM" String="Jalur Trem" />
-    <Translation ID="FIF_NET_MET" String="Metro" />
-    <Translation ID="FIF_SET_REC" String="Metode pemilahan DL terkini (perlu memulai ulang)" />
-    <Translation ID="FIF_SET_RECPC" String="Waktu pembuatan folder utama" />
-    <Translation ID="FIF_SET_RECPM" String="Waktu modifikasi folder utama" />
-    <Translation ID="FIF_SET_RECFC" String="Waktu pembuatan berkas CRP" />
-    <Translation ID="FIF_SET_RECFM" String="Waktu modifikasi berkas CRP" />
-    <Translation ID="FIF_SET_DIS" String="Nonaktifkan pencarian teks instan. Tekan ENTER untuk mengajukan pencarian teks baru" />
-    <Translation ID="FIF_SET_DISTP" String="Gunakan opsi ini untuk mengurangi UI lag ketika mengetik di kotak pencarian" />
-    <Translation ID="FIF_SET_STAB" String="Tunjukkan tab pencarian" />
-    <Translation ID="FIF_STAB_NTAB" String="Tab baru" />
+    <Translation ID="FIF_DESC" String="Cari dan kelompokan asetmu"/>
+    <Translation ID="FIF_SET_DM" String="Nonaktifkan pesan debug logging"/>
+    <Translation ID="FIF_SET_DMTP" String="Jika dicentang, pesan debug tidak akan dicatat"/>
+    <Translation ID="FIF_SET_CMT" String="Pusatkan toolbar utama"/>
+    <Translation ID="FIF_SET_CMTTP" String="Toolbar utama akan dipusatkan jika melebihi panjang tertentu"/>
+    <Translation ID="FIF_SET_UL" String="Buka semua"/>
+    <Translation ID="FIF_SET_ULTP" String="Biarkan kamu memilih dan menempatkan item bahkan ketika terkunci"/>
+    <Translation ID="FIF_SET_BP" String="Perbaiki prop cacat saat memuat penyimpanan selanjutnya"/>
+    <Translation ID="FIF_SET_BPTP" String="Hapus semua prop penyebab masalah. Centang opsi dan memuat penyimpananmu"/>
+    <Translation ID="FIF_SE_WF" String="Kustom"/>
+    <Translation ID="FIF_SE_VF" String="Bawaan"/>
+    <Translation ID="FIF_SE_IA" String="Semua"/>
+    <Translation ID="FIF_SE_IN" String="Jaringan"/>
+    <Translation ID="FIF_SE_IP" String="Ploppable"/>
+    <Translation ID="FIF_SE_IG" String="Growable"/>
+    <Translation ID="FIF_SE_IR" String="RICO"/>
+    <Translation ID="FIF_SE_IPR" String="Prop"/>
+    <Translation ID="FIF_SE_ID" String="Stiker"/>
+    <Translation ID="FIF_SE_IT" String="Pohon"/>
+    <Translation ID="FIF_SE_LV" String="Tingkat Bangunan"/>
+    <Translation ID="FIF_SE_SZ" String="Ukuran"/>
+    <Translation ID="FIF_SE_SC" String="Tekan SHIFT atau CTRL untuk memilih banyak kategori"/>
+    <Translation ID="FIF_PLOP_E" String="Listrik"/>
+    <Translation ID="FIF_PLOP_W" String="Air/Saluran Limbah"/>
+    <Translation ID="FIF_PLOP_G" String="Sampah"/>
+    <Translation ID="FIF_PLOP_H" String="Kesehatan"/>
+    <Translation ID="FIF_PLOP_F" String="Pemadam Kebakaran"/>
+    <Translation ID="FIF_PLOP_P" String="Polisi"/>
+    <Translation ID="FIF_PLOP_ED" String="Pendidikan"/>
+    <Translation ID="FIF_PLOP_PT" String="Transportasi Publik"/>
+    <Translation ID="FIF_PLOP_PPW" String="Taman/Plaza/Alam Liar"/>
+    <Translation ID="FIF_PLOP_U" String="Bangunan Unik"/>
+    <Translation ID="FIF_PLOP_I" String="Industri"/>
+    <Translation ID="FIF_PLOP_D" String="Bencana"/>
+    <Translation ID="FIF_PLOP_C" String="Kampus"/>
+    <Translation ID="FIF_PLOP_V" String="Olahraga Kampus"/>
+    <Translation ID="FIF_PLOP_FI" String="Perikanan"/>
+    <Translation ID="FIF_GR_LDR" String="Pemukiman Kelas Bawah"/>
+    <Translation ID="FIF_GR_HDR" String="Pemukiman Kelas Atas"/>
+    <Translation ID="FIF_GR_LDRE" String="Pemukiman Kelas Bawah ECO"/>
+    <Translation ID="FIF_GR_HDRE" String="Pemukiman Kelas Atas ECO"/>
+    <Translation ID="FIF_GR_LDC" String="Pertokoan Kelas Bawah"/>
+    <Translation ID="FIF_GR_HDC" String="Pertokoan Kelas Atas"/>
+    <Translation ID="FIF_GR_CE" String="Pertokoan ECO"/>
+    <Translation ID="FIF_GR_O" String="Perkantoran"/>
+    <Translation ID="FIF_GR_ITC" String="Klaster IT"/>
+    <Translation ID="FIF_GR_GI" String="Industri Umum"/>
+    <Translation ID="FIF_GR_FAI" String="Industri Pertanian"/>
+    <Translation ID="FIF_GR_FOI" String="Industri Kehutanan"/>
+    <Translation ID="FIF_GR_OII" String="Industri Minyak"/>
+    <Translation ID="FIF_GR_ORI" String="Industri Pertambangan"/>
+    <Translation ID="FIF_GR_LC" String="Bisnis Hiburan"/>
+    <Translation ID="FIF_GR_TC" String="Bisnis Pariwisata"/>
+    <Translation ID="FIF_SO_RETP" String="Memilah berdasarkan relevansi. Sama seperti Find It aslinya"/>
+    <Translation ID="FIF_SO_NETP" String="Memilah berdasarkan yang paling baru diunduh"/>
+    <Translation ID="FIF_SO_RE" String="Relevansi"/>
+    <Translation ID="FIF_SO_NE" String="DL Terkini"/>
+    <Translation ID="TRN_CHOICE" String="Atur bahasa (akan efektif di waktu berikutnya)"/>
+    <Translation ID="TRN_SYS" String="Gunakan bahasa sistem"/>
+    <Translation ID="FIF_PROP_IND" String="Industri"/>
+    <Translation ID="FIF_PROP_PAR" String="Taman"/>
+    <Translation ID="FIF_PROP_COM" String="Umum"/>
+    <Translation ID="FIF_PROP_RES" String="Pemukiman"/>
+    <Translation ID="FIF_PROP_BIL" String="Papan Iklan"/>
+    <Translation ID="FIF_PROP_SPE" String="Papan Iklan Khusus"/>
+    <Translation ID="FIF_PROP_LIG" String="Lampu"/>
+    <Translation ID="FIF_PROP_NAT" String="Alam"/>
+    <Translation ID="FIF_PROP_UNS" String="Tidak Dipilah"/>
+    <Translation ID="FIF_SET_KS" String="Main Keyboard Shortcut"/>
+    <Translation ID="FIF_SE_IGR" String="Grwb/RICO"/>
+    <Translation ID="FIF_SET_CTFL" String="Tunjukkan File Explorer"/>
+    <Translation ID="FIF_SET_CTFOP" String="Tunjukkan Panel Tag Kustom"/>
+    <Translation ID="FIF_SE_SCTP" String="Gunakan roda mouse untuk menggulir keatas/kebawah"/>
+    <Translation ID="FIF_POP_SCR" String="Konfirmasi"/>
+    <Translation ID="FIF_POP_CON" String="Batalkan"/>
+    <Translation ID="FIF_POP_CAN" String="Ini tidak bisa dibatalkan"/>
+    <Translation ID="FIF_POP_NU" String="Gabungkan"/>
+    <Translation ID="FIF_CO_TIT" String="Pilih tag yang ada untuk digabungkan dengan"/>
+    <Translation ID="FIF_CO_MSG" String="Pilih"/>
+    <Translation ID="FIF_CO_CH" String="Gabungkan dengan tag yang ada sekarang"/>
+    <Translation ID="FIF_CO_CHTP" String="Gabungkan dengan:"/>
+    <Translation ID="FIF_CO_CHLBL" String="Tolong pilih tag yang ada"/>
+    <Translation ID="FIF_CO_NELBL" String="Hapus"/>
+    <Translation ID="FIF_DE_TIT" String="Apakah kamu yakin mau menghapus tag ini?"/>
+    <Translation ID="FIF_DE_MSG" String="Ubah Nama"/>
+    <Translation ID="FIF_RE_TIT" String="Ketik nama tag baru dan tekan Enter"/>
+    <Translation ID="FIF_RE_MSG" String="Tekan Enter untuk mengajukan nama tag baru"/>
+    <Translation ID="FIF_RE_ITP" String="Tolong masukan nama tag baru"/>
+    <Translation ID="FIF_RE_ELBL" String="Nama Tag Baru:"/>
+    <Translation ID="FIF_RE_NEWLBL" String="Nama tag ini terlalu pendek"/>
+    <Translation ID="FIF_RE_SLBL" String="Tag ini sudah ada"/>
+    <Translation ID="FIF_RE_AELBL" String="Tag Kustom"/>
+    <Translation ID="FIF_CT_TIT" String="Tambah tag yang ada ke aset ini:"/>
+    <Translation ID="FIF_CT_DDMSG" String="Tambah tag yang ada ke aset ini"/>
+    <Translation ID="FIF_CT_DDTP" String="Atau"/>
+    <Translation ID="FIF_CT_ILBL1" String="Ketik nama tag baru dan tekan Enter:"/>
+    <Translation ID="FIF_CT_ILBL2" String="Tekan Enter untuk menambah tag baru"/>
+    <Translation ID="FIF_CT_ITP" String="Memilah daftar tag kustom sesuai abjad"/>
+    <Translation ID="FIF_SET_CTLS" String="Hanya tunjukkan aset dengan tag ini"/>
+    <Translation ID="FIF_TAG_DDTP" String="Segarkan"/>
+    <Translation ID="FIF_TAG_REF" String="Segarkan daftar drop-down tag kustom"/>
+    <Translation ID="FIF_TAG_REFTP" String="Ubah Nama"/>
+    <Translation ID="FIF_TAG_REN" String="Ubah nama tag ini"/>
+    <Translation ID="FIF_TAG_RENTP" String="Gabungkan"/>
+    <Translation ID="FIF_TAG_COM" String="Gabungkan tag ini dengan tag lainnya"/>
+    <Translation ID="FIF_TAG_COMTP" String="Hapus"/>
+    <Translation ID="FIF_TAG_DEL" String="Hapus tag ini"/>
+    <Translation ID="FIF_TAG_DELTP" String="Klik kanan untuk melihat aset ini pada Steam Workshop"/>
+    <Translation ID="FIF_UIS_WS" String="Pohon Kecil"/>
+    <Translation ID="FIF_TREE_SM" String="Pohon Sedang"/>
+    <Translation ID="FIF_TREE_MD" String="Pohon Besar"/>
+    <Translation ID="FIF_TREE_LG" String="Large Trees"/>
+    <Translation ID="FIF_TAG_BAT" String="Batch"/>
+    <Translation ID="FIF_TAG_BAC" String="Tambah"/>
+    <Translation ID="FIF_TAG_ADD" String="Tambahkan tag untuk aset yang dipilih"/>
+    <Translation ID="FIF_TAG_ADDTP" String="Hapus"/>
+    <Translation ID="FIF_TAG_REM" String="Hapus tag dari aset yang dipilih"/>
+    <Translation ID="FIF_TAG_REMTP" String="Bersihkan"/>
+    <Translation ID="FIF_TAG_CLE" String="Bersihkan seleksi"/>
+    <Translation ID="FIF_TAG_CLETP" String="Tambahkan Batch"/>
+    <Translation ID="FIF_ADD_TIT" String="Jumlah aset dipilih:"/>
+    <Translation ID="FIF_ADD_NUM" String="Tambahkan tag yang ada untuk aset dipilih:"/>
+    <Translation ID="FIF_ADD_ADD" String="Tambahkan tag yang ini"/>
+    <Translation ID="FIF_ADD_CHTP" String="Add this existing tag"/>
+    <Translation ID="FIF_ADD_TAG" String="Tag:"/>
+    <Translation ID="FIF_ADD_ELBL" String="Hapus Batch"/>
+    <Translation ID="FIF_REM_TIT" String="Hapus tag dari aset dipilih:"/>
+    <Translation ID="FIF_REM_REM" String="Hapus tag ini"/>
+    <Translation ID="FIF_REM_CHTP" String="Pilih tag"/>
+    <Translation ID="FIF_REM_ELBL" String="Tunjukkan panel filter tambahan"/>
+    <Translation ID="FIF_SE_EFI" String="Kreator Aset"/>
+    <Translation ID="FIF_EF_AC" String="Tinggi Bangunan"/>
+    <Translation ID="FIF_EF_BH" String="meter"/>
+    <Translation ID="FIF_EF_MET" String="kaki"/>
+    <Translation ID="FIF_EF_FEE" String="Memilah daftar kreator aset sesuai abjad"/>
+    <Translation ID="FIF_SET_ACLS" String="Seleksi Acak"/>
+    <Translation ID="FIF_GR_RAN" String="Jalan Kecil"/>
+    <Translation ID="FIF_NET_SMR" String="Jalan Sedang"/>
+    <Translation ID="FIF_NET_MDR" String="Jalan Besar"/>
+    <Translation ID="FIF_NET_LGR" String="Jalan Tol"/>
+    <Translation ID="FIF_NET_HGHW" String="Jalan Setapak"/>
+    <Translation ID="FIF_NET_PATH" String="Tembok dan Pagar"/>
+    <Translation ID="FIF_NET_WALL" String="Struktur Air"/>
+    <Translation ID="FIF_NET_WAT" String="Penanda Editor"/>
+    <Translation ID="FIF_PROP_MAR" String="Jalan Gang"/>
+    <Translation ID="FIF_NET_TNR" String="Utilitas"/>
+    <Translation ID="FIF_NET_UTI" String="Kereta"/>
+    <Translation ID="FIF_NET_TRA" String="Tunjukkan tipe penanda prop dalam mode gim"/>
+    <Translation ID="FIF_SET_PM" String="Tipe penanda prop tak kelihatan dan kebanyakan tidak berfungsi dalam mode gim. Gunakan Move It untuk menghapus"/>
+    <Translation ID="FIF_SET_PMTP" String="Tunjukkan angka dari contoh tiap aset yang ada"/>
+    <Translation ID="FIF_SET_IC" String="Aset Tidak Digunakan"/>
+    <Translation ID="FIF_EF_UN" String="Menu Cepat"/>
+    <Translation ID="FIF_QM_TIT" String="Tidak Digunakan"/>
+    <Translation ID="FIF_UIS_UN" String="Digunakan"/>
+    <Translation ID="FIF_UIS_IN" String="Opsi ini agak memperlambat kecepatan pencarian. Nonaktifkan ketika tak dibutuhkan"/>
+    <Translation ID="FIF_SET_ICTP" String="Menyertakan Procedural Objects"/>
+    <Translation ID="FIF_SET_PO" String="Gunakan opsi pemilahan asli"/>
+    <Translation ID="FIF_SET_ICO" String="Tunjukkan aset yang digunakan lebih dulu"/>
+    <Translation ID="FIF_SET_ICUS" String="Tunjukkan aset yang tidak digunakan lebih dulu"/>
+    <Translation ID="FIF_SET_ICUN" String="Mengedit Batch"/>
+    <Translation ID="FIF_TAG_BATTP" String="Bersihkan kotak pencarian"/>
+    <Translation ID="FIF_SE_SEBTP" String="Gunakan sistem peramban bawaan dari pada Steam overlay"/>
+    <Translation ID="FIF_SET_DB" String="Klik kanan ikon Steam pada tampilan mini aset untuk melihat aset pada Steam Workshop"/>
+    <Translation ID="FIF_SET_DBTP" String="Jalan Satu Lajur"/>
+    <Translation ID="FIF_NET_ONE" String="Perbolehkan Parkir Pinggir Jalan"/>
+    <Translation ID="FIF_NET_PAR" String="Dilarang Parkir Pinggir Jalan"/>
+    <Translation ID="FIF_NET_NOP" String="Kendaraan Tidak Dipilah (dihasilkan oleh Prop Pohon dan Kendaraan)"/>
+    <Translation ID="FIF_PROP_VEH" String="Unsorted Vehicle"/>
+    <Translation ID="FIF_PROP_TRE" String="Tree"/>
+    <Translation ID="FIF_SET_BACK" String="Permudah untuk melihat aset yang gelap, tapi sulit untuk melihat aset yang terang"/>
+    <Translation ID="FIF_SET_BACKTP" String="Nonaktifkan pemberitahuan pembaruan kedepan"/>
+    <Translation ID="FIF_SET_DUN" String="Kendaraan Bermotor (dihasilkan oleh Prop Pohon dan Kendaraan)"/>
+    <Translation ID="FIF_PROP_MOT" String="Motor Vehicle"/>
+    <Translation ID="FIF_PROP_RAI" String="Railway Vehicle"/>
+    <Translation ID="FIF_PROP_AIR" String="Aircraft"/>
+    <Translation ID="FIF_PROP_WAT" String="Watercraft"/>
+    <Translation ID="FIF_EF_SB" String="Tunjukkan panel tipe aset"/>
+    <Translation ID="FIF_ATP_TP" String="Dengan tag kustom"/>
+    <Translation ID="FIF_SET_ATP" String="Tanpa tag kustom"/>
+    <Translation ID="FIF_EF_CT" String="Perbarui"/>
+    <Translation ID="FIF_EF_NCT" String="Dapat menyesuaikan Terrain"/>
+    <Translation ID="FIF_UPN_UP" String="Tidak dapat menyesuaikan Terrain"/>
+    <Translation ID="FIF_PROP_TC" String="Gunakan kata kunci query pencarian berbeda untuk tiap tipe aset"/>
+    <Translation ID="FIF_PROP_NTC" String="Tahan SHIFT ketika mengalihkan tipe aset untuk membagi kata kunci query sementara"/>
+    <Translation ID="FIF_SET_SSK" String="Pilih Semua"/>
+    <Translation ID="FIF_SET_SSKTP" String="Pilih semua barang yang ditampilkan"/>
+    <Translation ID="FIF_TAG_SA" String="Ekspor Semua"/>
+    <Translation ID="FIF_TAG_SATP" String="Ekspor daftar semua ID workshop yang tidak digunakan ke dalam berkas HTML dengan link workshop"/>
+    <Translation ID="FIF_EF_UNEXP" String="Ekspor yang Dicari"/>
+    <Translation ID="FIF_EF_UNEXPTP" String="Ekspor daftar ID workshop yang tidak digunakan dari pencarian terakhir ke dalam berkas HTML dengan link workshop"/>
+    <Translation ID="FIF_EF_UNEXPSE" String="Kustom Lokal"/>
+    <Translation ID="FIF_EF_UNEXPTPSE" String="Kustom Workshop"/>
+    <Translation ID="FIF_EF_LC" String="Perlu DLC/CCP"/>
+    <Translation ID="FIF_EF_WC" String="Klik untuk menempatkan contoh aset yang dipilih berikutnya. Tahan SHIFT dan klik untuk menempatkan contoh PO berikutnya"/>
+    <Translation ID="FIF_EF_DLC" String="Segarkan Tampilan"/>
+    <Translation ID="FIF_LOC_TOOL" String="Aset yang Digunakan"/>
+    <Translation ID="FIF_REF_DIS" String="Ekspor daftar semua ID workshop yang digunakan ke dalam berkas HTML dengan link workshop"/>
+    <Translation ID="FIF_EF_US" String="Ekspor daftar ID workshop yang digunakan dari pencarian terakhir ke dalam berkas HTML dengan link workshop"/>
+    <Translation ID="FIF_EF_USEXPTP" String="Klik x ini untuk mengatur ulang penyaringan ukuran bangunan"/>
+    <Translation ID="FIF_EF_USEXPTPSE" String="Jangan tunjukkan UI tambahan Find It 2 pada panel bawaan (perlu memulai ulang)"/>
+    <Translation ID="FIF_SE_SIZEX" String="Termasuk: ikon tag kustom, ikon steam, dan ikon DLC"/>
+    <Translation ID="FIF_SET_UIVP" String="Lihat dalam Mesh Info"/>
+    <Translation ID="FIF_SET_UIVPTP" String="Mod Mesh Info tidak dipasang atau dinyalakan"/>
+    <Translation ID="FIF_DOU_MESH" String="Mod Mesh Info hanya mendukung aset kustom non-jaringan"/>
+    <Translation ID="FIF_DOU_MESHNO" String="Lihat aset ini dalam Mod Mesh Info"/>
+    <Translation ID="FIF_DOU_MESHTYPE" String="Lihat dalam RICO Revisited"/>
+    <Translation ID="FIF_DOU_MESHOPEN" String="Mod Ploppable RICO Revisited tidak dipasang atau dinyalakan"/>
+    <Translation ID="FIF_DOU_RICO" String="Mod Ploppable RICO Revisited hanya mendukung aset bangunan"/>
+    <Translation ID="FIF_DOU_RICONO" String="Lihat aset ini dalam Mod Ploppable RICO Revisited"/>
+    <Translation ID="FIF_DOU_RICOTYPE" String="Buka Folder Berkas"/>
+    <Translation ID="FIF_DOU_RICOOPEN" String="Fitur ini hanya berfungsi dengan aset kustom"/>
+    <Translation ID="FIF_DOU_FOLD" String="Buka folder utama dari aset ini"/>
+    <Translation ID="FIF_DOU_FOLDCUS" String="Aset Kustom Non-Workshop"/>
+    <Translation ID="FIF_DOU_FOLDOPEN" String="Jalur Bus"/>
+    <Translation ID="FIF_UIS_CNWS" String="Jalur Bus Troli"/>
+    <Translation ID="FIF_NET_BUS" String="Jalur Sepeda"/>
+    <Translation ID="FIF_NET_TRO" String="Jalur Trem"/>
+    <Translation ID="FIF_NET_BIK" String="Bike Lanes"/>
+    <Translation ID="FIF_NET_TRM" String="Metode pemilahan DL terkini (perlu memulai ulang)"/>
+    <Translation ID="FIF_NET_MET" String="Metro"/>
+    <Translation ID="FIF_SET_REC" String="Waktu modifikasi folder utama"/>
+    <Translation ID="FIF_SET_RECPC" String="Waktu pembuatan berkas CRP"/>
+    <Translation ID="FIF_SET_RECPM" String="Waktu modifikasi berkas CRP"/>
+    <Translation ID="FIF_SET_RECFC" String="Nonaktifkan pencarian teks instan. Tekan ENTER untuk mengajukan pencarian teks baru"/>
+    <Translation ID="FIF_SET_RECFM" String="Gunakan opsi ini untuk mengurangi UI lag ketika mengetik di kotak pencarian"/>
+    <Translation ID="FIF_SET_DIS" String="Tunjukkan tab pencarian"/>
+    <Translation ID="FIF_SET_DISTP" String="Tab baru"/>
+    <Translation ID="FIF_SET_STAB" String="Show search tabs"/>
+    <Translation ID="FIF_STAB_NTAB" String="New tab"/>
+    <Translation ID="FIF_SET_DSK" String="Disable secondary keyboard shortcuts when Find It panel is closed"/>
+    <Translation ID="FIF_SET_DSKTP" String="Avoid conflicts with TM:PE. Only the main keyboard shortcut will remain functional when Find It panel is closed"/>
+    <Translation ID="FIF_SET_CFFL" String="Configuration File Location"/>
+    <Translation ID="FIF_DOU_WS" String="Steam Workshop page"/>
+    <Translation ID="FIF_DOU_WS_STEAM" String="via Steam"/>
+    <Translation ID="FIF_DOU_WS_BROWSER" String="via default browser"/>
+    <Translation ID="FIF_DOU_WS_NOID" String="This feature only works with custom assets with Steam Workshop IDs"/>
+    <Translation ID="FIF_DOU_WS_STEAMTP" String="See this asset on Steam Workshop in Steam overlay"/>
+    <Translation ID="FIF_DOU_WS_BROWSERTP" String="See this asset on Steam Workshop in default browser"/>
 
   </Translations>
 </Language>
