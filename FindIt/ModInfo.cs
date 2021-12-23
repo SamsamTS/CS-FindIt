@@ -12,10 +12,10 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7.4-beta3";
-        public const bool isBeta = true;
+        public const string version = "2.7.4";
+        public const bool isBeta = false;
         public const bool debug = false;
-        public const double updateNoticeDate = 20211215;
+        public const double updateNoticeDate = 20211223;
         public const string updateNotice =
 
             "- Search tabs now can interact with the extra filters and custom tags panels\n\n" +
@@ -26,7 +26,7 @@ namespace FindIt
 
             "- Move the mouse over the steam icon on asset thumbnail will show its workshop ID\n\n" +
 
-            "- Add support for the upcoming Tree & Vehicle Props 2 mod\n\n";
+            "- Add support for the Tree & Vehicle Props 2 mod\n\n";
 
         public string Name
         {
