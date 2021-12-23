@@ -157,10 +157,10 @@
     <Translation ID="FIF_UIS_UN" String="Unused" />
     <Translation ID="FIF_UIS_IN" String="In Use" />
     <Translation ID="FIF_SET_ICTP" String="Эта опция немного замедляет скорость поиска. Отключите её, когда она не нужна" />
+    <Translation ID="FIF_SET_PO" String="Показать Procedural Objects" />
     <Translation ID="FIF_SET_ICO" String="Исходный вариант сортировки" />
     <Translation ID="FIF_SET_ICUS" String="Сначала используемые объекты" />
     <Translation ID="FIF_SET_ICUN" String="Сначала неиспользуемые объекты" />
-    <Translation ID="FIF_SET_PO" String="Учитывать Procedural Objects" />
     <Translation ID="FIF_TAG_BATTP" String="Пакетное редактирование" />
     <Translation ID="FIF_SE_SEBTP" String="Очистить поле поиска" />
     <Translation ID="FIF_SET_DB" String="Использовать системный браузер по умолчанию вместо оверлея Steam" />
@@ -168,15 +168,15 @@
     <Translation ID="FIF_NET_ONE" String="Дороги с односторонним движением" />
     <Translation ID="FIF_NET_PAR" String="Парковка разрешена" />
     <Translation ID="FIF_NET_NOP" String="Парковка запрещена" />
-    <Translation ID="FIF_PROP_VEH" String="Транспорт без категории (сгенерированный Tree and Vehicle Props)" />
-    <Translation ID="FIF_PROP_TRE" String="Растительность (сгенерированная Tree and Vehicle Props)" />
+    <Translation ID="FIF_PROP_VEH" String="Транспорт без категории" />
+    <Translation ID="FIF_PROP_TRE" String="Растительность" />
     <Translation ID="FIF_SET_BACK" String="Использовать светлый цвет фона для основной панели" />
     <Translation ID="FIF_SET_BACKTP" String="Легче увидеть более тёмные объекты, но труднее увидеть более яркие" />
     <Translation ID="FIF_SET_DUN" String="Отключить уведомление об обновлении" />
-    <Translation ID="FIF_PROP_MOT" String="Автотранспорт (сгенерированный Tree and Vehicle Props)" />
-    <Translation ID="FIF_PROP_RAI" String="Ж/д транспорт (сгенерированный Tree and Vehicle Props)" />
-    <Translation ID="FIF_PROP_AIR" String="Авиатранспорт (сгенерированный Tree and Vehicle Props)" />
-    <Translation ID="FIF_PROP_WAT" String="Водный транспорт (сгенерированный Tree and Vehicle Props)" />
+    <Translation ID="FIF_PROP_MOT" String="Автотранспорт" />
+    <Translation ID="FIF_PROP_RAI" String="Ж/д транспорт" />
+    <Translation ID="FIF_PROP_AIR" String="Авиатранспорт" />
+    <Translation ID="FIF_PROP_WAT" String="Водный транспорт" />
     <Translation ID="FIF_EF_SB" String="Sub-buildings" />
     <Translation ID="FIF_ATP_TP" String="Щёлкните правой кнопкой мыши, чтобы зацепить и переместить эту панель" />
     <Translation ID="FIF_SET_ATP" String="Показать панель типа объектов" />
@@ -233,6 +233,12 @@
     <Translation ID="FIF_SET_DSK" String="Отключить дополнительные сочетания клавиш, когда панель Find It закрыта" />
     <Translation ID="FIF_SET_DSKTP" String="Для предотвращения конфликтов с TM:PE. Только основное сочетание клавиш останется работоспособным, когда панель Find It будет закрыта" />
     <Translation ID="FIF_SET_CFFL" String="Расположение файла конфигурации" />
-
+    <Translation ID="FIF_DOU_WS" String="Страница Мастерской Steam" />
+    <Translation ID="FIF_DOU_WS_STEAM" String="в оверлее Steam" />
+    <Translation ID="FIF_DOU_WS_BROWSER" String="в браузере по умолчанию" />
+    <Translation ID="FIF_DOU_WS_NOID" String="Эта функция работает только с пользовательскими активами с идентификаторами Steam Workshop" />
+    <Translation ID="FIF_DOU_WS_STEAMTP" String="Посмотреть этот объект в Мастерской Steam в оверлее Steam" />
+    <Translation ID="FIF_DOU_WS_BROWSERTP" String="Посмотреть этот объект в Мастерской Steam в браузере по умолчанию" />
+ 
   </Translations>
 </Language>

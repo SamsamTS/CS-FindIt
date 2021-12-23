@@ -167,15 +167,15 @@
     <Translation ID="FIF_NET_ONE" String="Carreteras de un sentido" />
     <Translation ID="FIF_NET_PAR" String="Permitir aparcamiento callejero" />
     <Translation ID="FIF_NET_NOP" String="Prohibir aparcamiento callejero" />
-    <Translation ID="FIF_PROP_VEH" String="Vehículos sin clasificar (generados por Tree and Vehicle Props)" />
-    <Translation ID="FIF_PROP_TRE" String="Árbol (generado por Tree and Vehicle Props)" />
+    <Translation ID="FIF_PROP_VEH" String="Vehículos sin clasificar" />
+    <Translation ID="FIF_PROP_TRE" String="Árbol" />
     <Translation ID="FIF_SET_BACK" String="Utilizar fondo claro en el panel principal" />
     <Translation ID="FIF_SET_BACKTP" String="Más fácil para ver assets oscuros, pero más complicado para ver aquéllos más claros" />
     <Translation ID="FIF_SET_DUN" String="Desactivar aviso de actualización" />
-    <Translation ID="FIF_PROP_MOT" String="Vehículos a motor (generados por Tree and Vehicle Props)" />
-    <Translation ID="FIF_PROP_RAI" String="Vehículos ferroviarios (generados por Tree and Vehicle Props)" />
-    <Translation ID="FIF_PROP_AIR" String="Aeronaves (generadas por Tree and Vehicle Props)" />
-    <Translation ID="FIF_PROP_WAT" String="Vehículos acuáticos (generados por Tree and Vehicle Props)" />
+    <Translation ID="FIF_PROP_MOT" String="Vehículos a motor" />
+    <Translation ID="FIF_PROP_RAI" String="Vehículos ferroviarios" />
+    <Translation ID="FIF_PROP_AIR" String="Aeronaves" />
+    <Translation ID="FIF_PROP_WAT" String="Vehículos acuáticos" />
     <Translation ID="FIF_EF_SB" String="Subedificios" />
     <Translation ID="FIF_SET_ATP" String="Mostrar el panel de tipos de elemento" />
     <Translation ID="FIF_EF_CT" String="Con etiqueta personalizada" />

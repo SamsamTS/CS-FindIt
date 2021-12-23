@@ -156,6 +156,27 @@ namespace FindIt.GUI
             instance.newTagName = "";
         }
 
+        private Vector3 deltaPosition;
+        protected override void OnMouseDown(UIMouseEventParameter p)
+        {
+            if (p.buttons.IsFlagSet(UIMouseButton.Right))
+            {
+                Vector3 mousePosition = Input.mousePosition;
+                mousePosition.y = m_OwnerView.fixedHeight - mousePosition.y;
+                deltaPosition = absolutePosition - mousePosition;
+                BringToFront();
+            }
+        }
+        protected override void OnMouseMove(UIMouseEventParameter p)
+        {
+            if (p.buttons.IsFlagSet(UIMouseButton.Right))
+            {
+                Vector3 mousePosition = Input.mousePosition;
+                mousePosition.y = m_OwnerView.fixedHeight - mousePosition.y;
+                absolutePosition = mousePosition + deltaPosition;
+            }
+        }
+
         private void UpdateCustomTagList()
         {
             customTagList = AssetTagList.instance.GetCustomTagList();

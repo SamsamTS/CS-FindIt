@@ -167,15 +167,15 @@
     <Translation ID="FIF_NET_ONE" String="Routes à sens unique" />
     <Translation ID="FIF_NET_PAR" String="Autoriser le stationnement sur la route" />
     <Translation ID="FIF_NET_NOP" String="Interdire le stationnement sur la route" />
-    <Translation ID="FIF_PROP_VEH" String="Véhicule sans catégorie (généré par Tree and Vehicle Props)" />
-    <Translation ID="FIF_PROP_TRE" String="Arbre (généré par Tree and Vehicle Props)" />
+    <Translation ID="FIF_PROP_VEH" String="Véhicule sans catégorie" />
+    <Translation ID="FIF_PROP_TRE" String="Arbre" />
     <Translation ID="FIF_SET_BACK" String="Utiliser une couleur de fond claire pour le panneau principal" />
     <Translation ID="FIF_SET_BACKTP" String="Il est plus facile de voir les ressources sombre, mais plus difficile de voir les ressources claires" />
     <Translation ID="FIF_SET_DUN" String="Désactiver les futures notifications de mise-à-jour" />
-    <Translation ID="FIF_PROP_MOT" String="Véhicule motorisé (généré par Tree and Vehicle Props)" />
-    <Translation ID="FIF_PROP_RAI" String="Véhicule ferroviaire (généré par Tree and Vehicle Props)" />
-    <Translation ID="FIF_PROP_AIR" String="Avion (généré par Tree and Vehicle Props)" />
-    <Translation ID="FIF_PROP_WAT" String="Bateau (généré par Tree and Vehicle Props)" />
+    <Translation ID="FIF_PROP_MOT" String="Véhicule motorisé" />
+    <Translation ID="FIF_PROP_RAI" String="Véhicule ferroviaire" />
+    <Translation ID="FIF_PROP_AIR" String="Avion" />
+    <Translation ID="FIF_PROP_WAT" String="Bateau" />
     <Translation ID="FIF_EF_SB" String="Sub-buildings" />
     <Translation ID="FIF_SET_ATP" String="Afficher le panneau de type de ressource" />
     <Translation ID="FIF_EF_CT" String="Avec étiquette personnalisée" />

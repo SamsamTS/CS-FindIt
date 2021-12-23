@@ -219,7 +219,7 @@ namespace FindIt.GUI
             }
 
             // Hide vehicle and tree tabs if the Tree & Vehicle Props Patch mod is not enabled
-            if (!FindIt.isTVPPatchEnabled)
+            if (!FindIt.isTVPPatchEnabled && !FindIt.isTVP2Enabled)
             {
                 for (int i = 0; i < 6; i++)
                 {

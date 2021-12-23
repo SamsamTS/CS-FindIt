@@ -31,7 +31,7 @@ namespace FindIt
         public static bool isOWTTEnabled = false; // One-Way Train Tracks mod enabled?
         public static bool isMeshInfoEnabled = false; // MeshInfo mod enabled?
         public static bool isYATEnabled = false; // Yet Another Toolbar enabled?
-
+        public static bool isTVP2Enabled = false; // Tree & Vehicle Props 2 enabled?
 
         public bool firstVisibleFlag = false;
 
@@ -343,6 +343,7 @@ namespace FindIt
             isMeshInfoEnabled = enabledMods.Contains("meshinfo");
             isNTCPEnabled = enabledMods.Contains("nonterrainconformingprops");
             isYATEnabled = enabledMods.Contains("yetanothertoolbar");
+            isTVP2Enabled = enabledMods.Contains("treevehicleprops");
         }
 
         public static UITextureAtlas LoadResources()

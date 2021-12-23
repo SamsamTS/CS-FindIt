@@ -167,15 +167,15 @@
     <Translation ID="FIF_NET_ONE" String="일방통행 도로" />
     <Translation ID="FIF_NET_PAR" String="가변 주차 허용" />
     <Translation ID="FIF_NET_NOP" String="가변 주차 없음" />
-    <Translation ID="FIF_PROP_VEH" String="정렬되지 않은 차량 (Tree and Vehicle Props으로 생성됨)" />
-    <Translation ID="FIF_PROP_TRE" String="나무 (Tree and Vehicle Props으로 생성됨)" />
+    <Translation ID="FIF_PROP_VEH" String="정렬되지 않은 차량" />
+    <Translation ID="FIF_PROP_TRE" String="나무" />
     <Translation ID="FIF_SET_BACK" String="메인 패널에 밝은 배경색 사용" />
     <Translation ID="FIF_SET_BACKTP" String="어두운 에셋을 더 쉽게 볼 수 있지만 밝은 에셋을 보기 어려워집니다" />
     <Translation ID="FIF_SET_DUN" String="미래 업데이트 알림 사용 안 함" />
-    <Translation ID="FIF_PROP_MOT" String="자동차 (Tree and Vehicle Props으로 생성됨)" />
-    <Translation ID="FIF_PROP_RAI" String="철도차량 (Tree and Vehicle Props으로 생성됨)" />
-    <Translation ID="FIF_PROP_AIR" String="비행기 (Tree and Vehicle Props으로 생성됨)" />
-    <Translation ID="FIF_PROP_WAT" String="선박 (Tree and Vehicle Props으로 생성됨)" />
+    <Translation ID="FIF_PROP_MOT" String="자동차" />
+    <Translation ID="FIF_PROP_RAI" String="철도차량" />
+    <Translation ID="FIF_PROP_AIR" String="비행기" />
+    <Translation ID="FIF_PROP_WAT" String="선박" />
     <Translation ID="FIF_EF_SB" String="서브 빌딩" />
     <Translation ID="FIF_SET_ATP" String="에셋 유형 패널 표시" />
     <Translation ID="FIF_EF_CT" String="커스텀 태그 포함" />

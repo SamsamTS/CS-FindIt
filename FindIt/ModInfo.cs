@@ -12,30 +12,21 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7.3";
-        public const bool isBeta = false;
+        public const string version = "2.7.4-beta3";
+        public const bool isBeta = true;
         public const bool debug = false;
-        public const double updateNoticeDate = 20211210;
+        public const double updateNoticeDate = 20211215;
         public const string updateNotice =
 
-            "- Building level filter is now range-based (can set min/max)\n" + 
-            "  You can find this filter in the extra filters panel\n\n" +
-   
-            "- Secondary keyboard shortcuts are now disabled by default when Find It 2 is closed\n" +
-            "  These shortcuts (Alt + 0-9/V) will only function when Find it 2's panel is opened\n" +
-            "  Main keyboard shortcut (Ctrl + F) is unaffected\n\n" +
+            "- Search tabs now can interact with the extra filters and custom tags panels\n\n" +
 
-            "  This change is to avoid keyboard shortcut conflicts with future TM:PE updates\n" +
-            "  You can switch back to the original behavior in Find It 2's mod settings\n\n" +
+            "- Most pop-up windows are movable(right-click and drag)\n\n" +
 
-            "- Right-click anywhere on the asset type panel to drag and move it\n" +
-            "  No need to click the tiny gaps anymore\n\n" +
+            "- Double-click shortcut menu has two new buttons to open an asset's workshop page\n\n" +
 
-            "- Asset description pop-up window will show growable building levels\n\n" +
+            "- Move the mouse over the steam icon on asset thumbnail will show its workshop ID\n\n" +
 
-            "- Mod settings page will show the location of Find It 2's configuration file\n\n" +
-
-            "- A few other small changes\n";
+            "- Add support for the upcoming Tree & Vehicle Props 2 mod\n\n";
 
         public string Name
         {

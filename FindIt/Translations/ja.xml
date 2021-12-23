@@ -168,15 +168,15 @@
     <Translation ID="FIF_NET_ONE" String="一方通行の道路"/>
     <Translation ID="FIF_NET_PAR" String="路上駐車を許可"/>
     <Translation ID="FIF_NET_NOP" String="路上駐車は不可"/>
-    <Translation ID="FIF_PROP_VEH" String="未分類乗り物 (Tree and Vehicle Propsで生成)"/>
-    <Translation ID="FIF_PROP_TRE" String="ツリー (Tree and Vehicle Propsで生成)"/>
+    <Translation ID="FIF_PROP_VEH" String="未分類の車両"/>
+    <Translation ID="FIF_PROP_TRE" String="ツリー"/>
     <Translation ID="FIF_SET_BACK" String="メインパネルに明るい背景色を使用する"/>
     <Translation ID="FIF_SET_BACKTP" String="暗いアセットは見やすくなりますが、逆に明るいアセットが見にくいです"/>
     <Translation ID="FIF_SET_DUN" String="将来の更新通知を無効"/>
-    <Translation ID="FIF_PROP_MOT" String="自動車 (Tree and Vehicle Propsで生成)"/>
-    <Translation ID="FIF_PROP_RAI" String="鉄道 (Tree and Vehicle Propsで生成)"/>
-    <Translation ID="FIF_PROP_AIR" String="航空機 (Tree and Vehicle Propsで生成)"/>
-    <Translation ID="FIF_PROP_WAT" String="船舶 (Tree and Vehicle Propsで生成)"/>
+    <Translation ID="FIF_PROP_MOT" String="自動車"/>
+    <Translation ID="FIF_PROP_RAI" String="鉄道"/>
+    <Translation ID="FIF_PROP_AIR" String="航空機"/>
+    <Translation ID="FIF_PROP_WAT" String="船舶"/>
     <Translation ID="FIF_EF_SB" String="サブビルディング"/>
     <Translation ID="FIF_ATP_TP" String="右クリックでパネルをドラッグして移動"/>
     <Translation ID="FIF_SET_ATP" String="アセットタイプのパネルを表示"/>
@@ -233,6 +233,12 @@
     <Translation ID="FIF_SET_DSK" String="Find It!のパネルを閉じた時は、セカンダリのキーボードショートカットを無効化"/>
     <Translation ID="FIF_SET_DSKTP" String="TM:PEとの競合を避けます。 Find It!のパネルを閉じても、メインのキーボードショートカットが機能します"/>
     <Translation ID="FIF_SET_CFFL" String="設定ファイルの場所"/>
+    <Translation ID="FIF_DOU_WS" String="Steamのワークショップ"/>
+    <Translation ID="FIF_DOU_WS_STEAM" String="Steam経由"/>
+    <Translation ID="FIF_DOU_WS_BROWSER" String="既定のブラウザー経由"/>
+    <Translation ID="FIF_DOU_WS_NOID" String="この機能は、SteamのワークショップIDを持つアセットのみ有効です"/>
+    <Translation ID="FIF_DOU_WS_STEAMTP" String="ワークショップにあるアセットを、Steamオーバーレイで確認する"/>
+    <Translation ID="FIF_DOU_WS_BROWSERTP" String="ワークショップにあるアセットを、既定のブラウザーで確認する"/>
 
   </Translations>
 </Language>

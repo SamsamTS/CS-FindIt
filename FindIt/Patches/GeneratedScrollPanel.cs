@@ -161,7 +161,7 @@ namespace FindIt
                                 m_dlcSprite.tooltip = "One-Way Train Tracks Mod";
                             }
                             // tvp patch assets, show blue steam icon
-                            else if (FindIt.isTVPPatchEnabled && asset.assetType == Asset.AssetType.Prop && AssetTagList.instance.tvppAssets.Contains(asset))
+                            else if ((FindIt.isTVPPatchEnabled || FindIt.isTVP2Enabled) && asset.assetType == Asset.AssetType.Prop && AssetTagList.instance.tvppAssets.Contains(asset))
                             {
                                 m_dlcSprite.isVisible = true;
                                 m_dlcSprite.spriteName = "UIFilterWorkshopItemsFocusedHovered";
@@ -169,17 +169,21 @@ namespace FindIt
                                 // if based on vanilla assets, show blue steam icon
                                 if (!asset.prefab.m_isCustomContent)
                                 {
-                                    m_dlcSprite.tooltip = "Tree & Vehicle Props Patch Mod";
+                                    m_dlcSprite.tooltip = "Tree & Vehicle Props Mod";
                                 }
                                 else
                                 {
                                     if (!asset.author.IsNullOrWhiteSpace() && (asset.steamID != 0))
                                     {
-                                        m_dlcSprite.tooltip = "Tree & Vehicle Props Patch Mod\nBy " + asset.author + "\n" + Translations.Translate("FIF_UIS_WS");
+                                        m_dlcSprite.tooltip = "Tree & Vehicle Props Mod\nBy " + asset.author + "\n" + "ID: " + asset.steamID + "\n" + Translations.Translate("FIF_UIS_WS");
+                                    }
+                                    else if (asset.steamID != 0)
+                                    {
+                                        m_dlcSprite.tooltip = "Tree & Vehicle Props Mod\n" + "ID: " + asset.steamID + "\n" + Translations.Translate("FIF_UIS_WS");
                                     }
                                     else
                                     {
-                                        m_dlcSprite.tooltip = "Tree & Vehicle Props Patch Mod\n" + Translations.Translate("FIF_UIS_CNWS");
+                                        m_dlcSprite.tooltip = "Tree & Vehicle Props Mod\n" + Translations.Translate("FIF_UIS_CNWS");
                                     }
                                 }
                             }
@@ -198,7 +202,11 @@ namespace FindIt
                                 {
                                     if (!asset.author.IsNullOrWhiteSpace() && (asset.steamID != 0))
                                     {
-                                        m_dlcSprite.tooltip = "Non-terrain Conforming Props Mod\nBy " + asset.author + "\n" + Translations.Translate("FIF_UIS_WS");
+                                        m_dlcSprite.tooltip = "Non-terrain Conforming Props Mod\nBy " + asset.author + "\n" + "ID: " + asset.steamID + "\n" + Translations.Translate("FIF_UIS_WS");
+                                    }
+                                    else if (asset.steamID != 0)
+                                    {
+                                        m_dlcSprite.tooltip = "Non-terrain Conforming Props Mod" + "\n" + "ID: " + asset.steamID + "\n" + Translations.Translate("FIF_UIS_WS");
                                     }
                                     else
                                     {
@@ -219,7 +227,7 @@ namespace FindIt
                                     m_dlcSprite.opacity = 0.2f;
                                     m_dlcSprite.isVisible = true;
                                     m_dlcSprite.spriteName = "UIFilterWorkshopItems";
-                                    m_dlcSprite.tooltip = "By " + asset.author + "\n" + Translations.Translate("FIF_UIS_WS");
+                                    m_dlcSprite.tooltip = "By " + asset.author + "\n" + "ID: " + asset.steamID + "\n" + Translations.Translate("FIF_UIS_WS");
                                 }
                                 else
                                 {
