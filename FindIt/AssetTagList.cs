@@ -140,71 +140,80 @@ namespace FindIt
 
             foreach (Asset asset in assets.Values)
             {
+
                 if (asset.prefab != null)
                 {
-                    asset.title = Asset.GetLocalizedTitle(asset.prefab);
-                    asset.tagsTitle = AddAssetTags(asset, tagsTitleDictionary, asset.title);
-
-                    if (asset.steamID == 0)
+                    try
                     {
-                        int index = asset.prefab.name.IndexOf(".");
-                        if (index >= 0)
-                        {
-                            asset.tagsTitle.UnionWith(AddAssetTags(asset, tagsTitleDictionary, asset.prefab.name.Substring(0, index)));
-                        }
+                        asset.title = Asset.GetLocalizedTitle(asset.prefab);
+                        asset.tagsTitle = AddAssetTags(asset, tagsTitleDictionary, asset.title);
 
-                        // if steamID == 0, non-workshop vanilla, download time = 0
-                        if (!asset.prefab.m_isCustomContent) asset.downloadTime = 0;
-
-                        // else, custom but non-workshop
-                        else
+                        if (asset.steamID == 0)
                         {
-                            asset.downloadTime = 0;
-                            Package.Asset packageAsset = PackageManager.FindAssetByName(asset.prefab.name, Package.AssetType.Object);
-                            if (packageAsset?.package?.packagePath != null)
+                            int index = asset.prefab.name.IndexOf(".");
+                            if (index >= 0)
                             {
-                                asset.downloadTime = GetPackageDownloadTime(packageAsset.package);
+                                asset.tagsTitle.UnionWith(AddAssetTags(asset, tagsTitleDictionary, asset.prefab.name.Substring(0, index)));
                             }
-                        }
 
-                        if (asset.isCCP)
-                        {
-                            if (!assetCreatorDictionary.ContainsKey(asset.author)) assetCreatorDictionary.Add(asset.author, 1);
-                            else assetCreatorDictionary[asset.author] += 1;
-                        }
-                    }
-                    else
-                    {
-                        if (downloadTimes.ContainsKey(asset.steamID))
-                        {
-                            asset.downloadTime = downloadTimes[asset.steamID];
+                            // if steamID == 0, non-workshop vanilla, download time = 0
+                            if (!asset.prefab.m_isCustomContent) asset.downloadTime = 0;
 
-                            if (authors.ContainsKey(asset.steamID))
+                            // else, custom but non-workshop
+                            else
                             {
-                                if (!assetCreatorDictionary.ContainsKey(authors[asset.steamID]))
+                                asset.downloadTime = 0;
+                                Package.Asset packageAsset = PackageManager.FindAssetByName(asset.prefab.name, Package.AssetType.Object);
+                                if (packageAsset?.package?.packagePath != null)
                                 {
-                                    assetCreatorDictionary.Add(authors[asset.steamID], 1);
+                                    asset.downloadTime = GetPackageDownloadTime(packageAsset.package);
                                 }
-                                else
-                                {
-                                    assetCreatorDictionary[authors[asset.steamID]] += 1;
-                                }
+                            }
+
+                            if (asset.isCCP)
+                            {
+                                if (!assetCreatorDictionary.ContainsKey(asset.author)) assetCreatorDictionary.Add(asset.author, 1);
+                                else assetCreatorDictionary[asset.author] += 1;
                             }
                         }
                         else
                         {
-                            asset.downloadTime = 0;
+                            if (downloadTimes.ContainsKey(asset.steamID))
+                            {
+                                asset.downloadTime = downloadTimes[asset.steamID];
+
+                                if (authors.ContainsKey(asset.steamID))
+                                {
+                                    if (!assetCreatorDictionary.ContainsKey(authors[asset.steamID]))
+                                    {
+                                        assetCreatorDictionary.Add(authors[asset.steamID], 1);
+                                    }
+                                    else
+                                    {
+                                        assetCreatorDictionary[authors[asset.steamID]] += 1;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                asset.downloadTime = 0;
+                            }
+                        }
+
+                        asset.tagsDesc = AddAssetTags(asset, tagsDescDictionary, Asset.GetLocalizedDescription(asset.prefab));
+
+                        string name = Asset.GetName(asset.prefab);
+                        if (CustomTagsLibrary.assetTags.ContainsKey(name))
+                        {
+                            asset.tagsCustom = AddAssetTags(asset, tagsCustomDictionary, CustomTagsLibrary.assetTags[name]);
                         }
                     }
-
-                    asset.tagsDesc = AddAssetTags(asset, tagsDescDictionary, Asset.GetLocalizedDescription(asset.prefab));
-
-                    string name = Asset.GetName(asset.prefab);
-                    if (CustomTagsLibrary.assetTags.ContainsKey(name))
+                    catch (Exception ex)
                     {
-                        asset.tagsCustom = AddAssetTags(asset, tagsCustomDictionary, CustomTagsLibrary.assetTags[name]);
+                        Debug.Log($"Find It 2 exception caught: PrefabInfo {asset.prefab.name} is problematic, {ex.Message}");
                     }
                 }
+
             }
         }
 
