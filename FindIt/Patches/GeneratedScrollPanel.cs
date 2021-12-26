@@ -40,6 +40,7 @@ namespace FindIt
             });
         }
 
+        private static UIComponent tsContainer;
 
         private static void Init(UIComponent component, bool b)
         {
@@ -72,14 +73,22 @@ namespace FindIt
                         // Fixing focused texture
                         component.eventClicked += new MouseEventHandler(FixFocusedTexture);
 
+                        // Find TSContainer
+                        if (tsContainer == null)
+                        {
+                            tsContainer = component.parent.parent.parent.parent.parent;
+                        }
+                        float uiScale = 1.0f;
+                        if (tsContainer != null) uiScale = tsContainer.transform.localScale.x;
+
                         // Adding custom tag icon
                         UISprite tagSprite = component.AddUIComponent<UISprite>();
-                        tagSprite.size = new Vector2(20, 16);
+                        tagSprite.size = new Vector2(20 * uiScale, 16 * uiScale);
                         tagSprite.atlas = FindIt.atlas;
                         tagSprite.spriteName = "Tag";
                         tagSprite.opacity = 0.5f;
                         tagSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
-                        tagSprite.relativePosition = new Vector3(component.width - tagSprite.width - 5, 5);
+                        tagSprite.relativePosition = new Vector3(component.width - tagSprite.width - (5 * uiScale), 5 * uiScale);
                         tagSprite.isVisible = false;
 
                         if (CustomTagsLibrary.assetTags.ContainsKey(name))
@@ -123,11 +132,11 @@ namespace FindIt
 
                         // adding DLC/steam icon
                         UISprite m_dlcSprite = component.AddUIComponent<UISprite>();
-                        m_dlcSprite.size = new Vector2(16, 16);
+                        m_dlcSprite.size = new Vector2(16 * uiScale, 16 * uiScale);
                         m_dlcSprite.atlas = SamsamTS.UIUtils.GetAtlas("Ingame");
                         m_dlcSprite.opacity = 0.8f;
                         m_dlcSprite.tooltipBox = UIView.GetAView().defaultTooltipBox;
-                        m_dlcSprite.relativePosition = new Vector3(component.width - m_dlcSprite.width - 3, component.height - m_dlcSprite.height - 3);
+                        m_dlcSprite.relativePosition = new Vector3(component.width - m_dlcSprite.width - (3 * uiScale), component.height - m_dlcSprite.height - (3 * uiScale));
                         m_dlcSprite.isVisible = false;
                         m_dlcSprite.eventMouseLeave += (c, p) =>
                         {
