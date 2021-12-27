@@ -139,6 +139,13 @@
     <EmbeddedResource Include="Icons\ZoningResidentialLowEco.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Translations\es.xml" />
+    <Content Include="Translations\ja.xml" />
+    <Content Include="Translations\ko.xml" />
+    <Content Include="Translations\pl.xml" />
+    <Content Include="Translations\ru.xml" />
+    <Content Include="Translations\zh-tw.xml" />
+    <Content Include="Translations\zh.xml" />
     <EmbeddedResource Include="Icons\ToolbarIconPropsBillboards.png" />
     <EmbeddedResource Include="Icons\ToolbarIconPropsSpecialBillboards.png" />
     <EmbeddedResource Include="Icons\ExtraFilters.png" />
@@ -167,23 +174,7 @@
     <EmbeddedResource Include="Icons\Locate.png" />
     <EmbeddedResource Include="Icons\NewTab.png" />
     <Content Include="Libraries\EManagersLib.API.dll" />
-    <Content Include="Translations\cat.xml" />
-    <Content Include="Translations\cz.xml" />
-    <Content Include="Translations\de.xml" />
     <Content Include="Translations\en.xml" />
-    <Content Include="Translations\es.xml" />
-    <Content Include="Translations\fi.xml" />
-    <Content Include="Translations\fr.xml" />
-    <Content Include="Translations\id.xml" />
-    <Content Include="Translations\it.xml" />
-    <Content Include="Translations\ja.xml" />
-    <Content Include="Translations\ko.xml" />
-    <Content Include="Translations\pl.xml" />
-    <Content Include="Translations\pt-br.xml" />
-    <Content Include="Translations\pt.xml" />
-    <Content Include="Translations\ru.xml" />
-    <Content Include="Translations\zh-tw.xml" />
-    <Content Include="Translations\zh.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

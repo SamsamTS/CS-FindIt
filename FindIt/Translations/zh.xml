@@ -168,15 +168,15 @@
     <Translation ID="FIF_NET_ONE" String="单向路"/>
     <Translation ID="FIF_NET_PAR" String="允许路边停车"/>
     <Translation ID="FIF_NET_NOP" String="禁止路边停车"/>
-    <Translation ID="FIF_PROP_VEH" String="Unsorted Vehicle"/>
-    <Translation ID="FIF_PROP_TRE" String="Tree"/>
+    <Translation ID="FIF_PROP_VEH" String="未分类的载具"/>
+    <Translation ID="FIF_PROP_TRE" String="树木"/>
     <Translation ID="FIF_SET_BACK" String="对主面板使用浅色背景颜色"/>
     <Translation ID="FIF_SET_BACKTP" String="更易于查看较暗的资产，但更难看到较亮的资产"/>
     <Translation ID="FIF_SET_DUN" String="禁用将来的更新通知"/>
-    <Translation ID="FIF_PROP_MOT" String="Motor Vehicle"/>
-    <Translation ID="FIF_PROP_RAI" String="Railway Vehicle"/>
-    <Translation ID="FIF_PROP_AIR" String="Aircraft"/>
-    <Translation ID="FIF_PROP_WAT" String="Watercraft"/>
+    <Translation ID="FIF_PROP_MOT" String="机动车辆"/>
+    <Translation ID="FIF_PROP_RAI" String="铁路车辆"/>
+    <Translation ID="FIF_PROP_AIR" String="航空器"/>
+    <Translation ID="FIF_PROP_WAT" String="船舶"/>
     <Translation ID="FIF_EF_SB" String="子建筑"/>
     <Translation ID="FIF_ATP_TP" String="右键单击以拖动和移动此面板"/>
     <Translation ID="FIF_SET_ATP" String="显示资产类型面板"/>
@@ -233,12 +233,12 @@
     <Translation ID="FIF_SET_DSK" String="当 Find It 面板关闭时, 禁用辅助键盘快捷键"/>
     <Translation ID="FIF_SET_DSKTP" String="避免与 TM:PE 冲突, 只有主快捷键在 Find It 面板关闭时仍可正常工作"/>
     <Translation ID="FIF_SET_CFFL" String="配置文件位置"/>
-    <Translation ID="FIF_DOU_WS" String="Steam Workshop page"/>
-    <Translation ID="FIF_DOU_WS_STEAM" String="via Steam"/>
-    <Translation ID="FIF_DOU_WS_BROWSER" String="via default browser"/>
-    <Translation ID="FIF_DOU_WS_NOID" String="This feature only works with custom assets with Steam Workshop IDs"/>
-    <Translation ID="FIF_DOU_WS_STEAMTP" String="See this asset on Steam Workshop in Steam overlay"/>
-    <Translation ID="FIF_DOU_WS_BROWSERTP" String="See this asset on Steam Workshop in default browser"/>
+    <Translation ID="FIF_DOU_WS" String="Steam 工坊页面"/>
+    <Translation ID="FIF_DOU_WS_STEAM" String="经由 Steam"/>
+    <Translation ID="FIF_DOU_WS_BROWSER" String="经由默认浏览器"/>
+    <Translation ID="FIF_DOU_WS_NOID" String="此功能仅适用于含有Steam工坊ID的自定义资产"/>
+    <Translation ID="FIF_DOU_WS_STEAMTP" String="在 Steam 上查看此资产 Steam 工坊页面"/>
+    <Translation ID="FIF_DOU_WS_BROWSERTP" String="在默认浏览器上查看此资产 Steam 工坊页面"/>
 
   </Translations>
 </Language>

@@ -12,21 +12,20 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7.4";
-        public const bool isBeta = false;
+        public const string version = "2.7.5-beta2";
+        public const bool isBeta = true;
         public const bool debug = false;
-        public const double updateNoticeDate = 20211223;
+        public const double updateNoticeDate = 20211226;
         public const string updateNotice =
 
-            "- Search tabs now can interact with the extra filters and custom tags panels\n\n" +
+            "- Better error handling for problematic assets\n\n" +
 
-            "- Most pop-up windows are movable(right-click and drag)\n\n" +
+            "- Fix DLC icon scaling bug on vanilla panels when toolbar mods are used\n\n" +
 
-            "- Double-click shortcut menu has two new buttons to open an asset's workshop page\n\n" +
+            "- Update bundled EML API file\n\n" +
 
-            "- Move the mouse over the steam icon on asset thumbnail will show its workshop ID\n\n" +
-
-            "- Add support for the Tree & Vehicle Props 2 mod\n\n";
+            "- Due to Crowdin import issues, some languages are temporarily removed\n" +
+            "  If you are interested, Crowdin project link can be found in workshop description\n\n";
 
         public string Name
         {
