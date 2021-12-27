@@ -12,13 +12,15 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7.5-beta1";
+        public const string version = "2.7.5-beta2";
         public const bool isBeta = true;
         public const bool debug = false;
         public const double updateNoticeDate = 20211215;
         public const string updateNotice =
 
-            "- Better error handling for problematic assets\n\n";
+            "- Better error handling for problematic assets\n\n" +
+
+            "- Fix DLC icon scaling bug on vanilla panels when toolbar mods are used\n";
 
         public string Name
         {
