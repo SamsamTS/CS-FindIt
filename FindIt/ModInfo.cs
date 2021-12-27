@@ -12,8 +12,8 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7.5-beta2";
-        public const bool isBeta = true;
+        public const string version = "2.7.5";
+        public const bool isBeta = false;
         public const bool debug = false;
         public const double updateNoticeDate = 20211226;
         public const string updateNotice =
