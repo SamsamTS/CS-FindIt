@@ -15,12 +15,17 @@ namespace FindIt
         public const string version = "2.7.5-beta2";
         public const bool isBeta = true;
         public const bool debug = false;
-        public const double updateNoticeDate = 20211215;
+        public const double updateNoticeDate = 20211226;
         public const string updateNotice =
 
             "- Better error handling for problematic assets\n\n" +
 
-            "- Fix DLC icon scaling bug on vanilla panels when toolbar mods are used\n";
+            "- Fix DLC icon scaling bug on vanilla panels when toolbar mods are used\n\n" +
+
+            "- Update bundled EML API file\n\n" +
+
+            "- Due to Crowdin import issues, some languages are temporarily removed\n" +
+            "  If you are interested, Crowdin project link can be found in workshop description\n\n";
 
         public string Name
         {
