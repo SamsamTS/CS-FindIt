@@ -143,6 +143,7 @@
     <Content Include="Translations\ja.xml" />
     <Content Include="Translations\ko.xml" />
     <Content Include="Translations\pl.xml" />
+    <Content Include="Translations\pt-br.xml" />
     <Content Include="Translations\ru.xml" />
     <Content Include="Translations\zh-tw.xml" />
     <Content Include="Translations\zh.xml" />
