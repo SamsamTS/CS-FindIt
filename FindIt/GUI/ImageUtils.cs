@@ -51,7 +51,7 @@ namespace FindIt.GUI
                 return;
             }
 
-            if (prefab.m_Atlas != null && (
+            if (prefab.m_Atlas != null && prefab.m_Atlas[prefab.m_Thumbnail] != null && (
                 // Missing variations
                 prefab.m_Atlas.name == "AssetThumbs" ||
                 prefab.m_Atlas.name == "Monorailthumbs" ||
@@ -82,10 +82,10 @@ namespace FindIt.GUI
                 }
             }
 
-            // Requested custom thumbnails
+            // Requested custom thumbnails or having null thumbnail atlas
             if (asset != null && (prefab.m_Atlas != null) && !(prefab is NetInfo))
             {
-                if (asset.tagsCustom.Contains("bad_thumbnail"))
+                if (asset.tagsCustom.Contains("bad_thumbnail") || prefab.m_Atlas[prefab.m_Thumbnail] == null)
                 {
                     ThumbnailManager.MakeThumbnail(prefab, button);
                     return;
