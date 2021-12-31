@@ -150,7 +150,7 @@
     <Translation ID="FIF_NET_UTI" String="Utility"/>
     <Translation ID="FIF_NET_TRA" String="Поезд"/>
     <Translation ID="FIF_SET_PM" String="Show marker type props in game mode(restart needed)"/>
-    <Translation ID="FIF_SET_PMTP" String="Marker type props are invisible and most don't work in game mode. Use Move It to delete them."/>
+    <Translation ID="FIF_SET_PMTP" String="Маркеры невидимы и большинство не работают в игре. Используйте Move It для их удаления."/>
     <Translation ID="FIF_SET_IC" String="Показать кол-во размещённых экземпляров объекта"/>
     <Translation ID="FIF_EF_UN" String="Неиспользуем. объекты"/>
     <Translation ID="FIF_QM_TIT" String="Дополнительные фильтры сортировки"/>

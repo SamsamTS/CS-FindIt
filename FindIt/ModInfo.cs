@@ -12,7 +12,7 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7.5";
+        public const string version = "2.7.6";
         public const bool isBeta = false;
         public const bool debug = false;
         public const double updateNoticeDate = 20211226;
@@ -21,6 +21,8 @@ namespace FindIt
             "- Better error handling for problematic assets\n\n" +
 
             "- Fix DLC icon scaling bug on vanilla panels when toolbar mods are used\n\n" +
+
+            "- Fix bug caused by assets with problematic atlas\n\n" + 
 
             "- Update bundled EML API file\n\n" +
 
