@@ -1,0 +1,240 @@
+CODE,zh
+NAME,简体中文
+FIF_DESC,搜索或整理资产
+FIF_SET_DM,禁用调试信息日志记录
+FIF_SET_DMTP,如果选中该选项，则不会记录调试信息。
+FIF_SET_CMT,主工具栏居中
+FIF_SET_CMTTP,如果主工具栏超过一定长度，将会强制居中。
+FIF_SET_UL,全部解锁
+FIF_SET_ULTP,允许选择和放置处于未解锁状态的内容。
+FIF_SET_BP,修复下一次加载保存时出现的错误道具
+FIF_SET_BPTP,移除所有引起问题的道具，选中该选项并加载保存。
+FIF_SE_WF,玩家自制
+FIF_SE_VF,游戏原版
+FIF_SE_IA,全部
+FIF_SE_IN,道路
+FIF_SE_IP,可放置的
+FIF_SE_IG,可自长的
+FIF_SE_IR,RICO
+FIF_SE_IPR,道具
+FIF_SE_ID,贴花
+FIF_SE_IT,树木
+FIF_SE_LV,建筑等级
+FIF_SE_SZ,尺寸: 
+FIF_SE_SC,按住SHIFT或CTRL键可选择多个类别
+FIF_PLOP_E,电力
+FIF_PLOP_W,水/污水处理
+FIF_PLOP_G,垃圾处理
+FIF_PLOP_H,医疗
+FIF_PLOP_F,消防
+FIF_PLOP_P,警察
+FIF_PLOP_ED,教育
+FIF_PLOP_PT,公共交通
+FIF_PLOP_PPW,公园/广场/野生动物
+FIF_PLOP_U,独特建筑
+FIF_PLOP_I,工业
+FIF_PLOP_D,自然灾害
+FIF_PLOP_C,校园
+FIF_PLOP_V,大学体育
+FIF_PLOP_FI,捕鱼业
+FIF_GR_LDR,低密度住宅
+FIF_GR_HDR,高密度住宅
+FIF_GR_LDRE,低密度环保住宅
+FIF_GR_HDRE,高密度环保住宅
+FIF_GR_LDC,低密度商业
+FIF_GR_HDC,高密度商业
+FIF_GR_CE,绿色环保商业
+FIF_GR_O,办公区
+FIF_GR_ITC,IT行政专区
+FIF_GR_GI,通用工业
+FIF_GR_FAI,农业
+FIF_GR_FOI,林业
+FIF_GR_OII,石油业
+FIF_GR_ORI,矿业
+FIF_GR_LC,休闲商业
+FIF_GR_TC,旅游商业
+FIF_SO_RETP,按相关性排列。 与原“Find It”相同
+FIF_SO_NETP,按下载时间排列
+FIF_SO_RE,相关性
+FIF_SO_NE,最近下载
+TRN_CHOICE,语言设定 (下次生效)
+TRN_SYS,使用游戏默认语言
+FIF_PROP_IND,工业
+FIF_PROP_PAR,公园
+FIF_PROP_COM,常见
+FIF_PROP_RES,住宅
+FIF_PROP_BIL,广告
+FIF_PROP_SPE,特殊广告
+FIF_PROP_LIG,灯具
+FIF_PROP_NAT,自然
+FIF_PROP_UNS,未分类
+FIF_SET_KS,主快捷键
+FIF_SE_IGR,Grwb/RICO
+FIF_SET_CTFL,自定义标签文件位置（请定期备份此文件）
+FIF_SET_CTFOP,在文件夹中显示
+FIF_SE_SCTP,显示自定义标签面板
+FIF_POP_SCR,使用鼠标滚轮向上/向下滚动
+FIF_POP_CON,确认
+FIF_POP_CAN,取消
+FIF_POP_NU,此操作无法恢复
+FIF_CO_TIT,合并
+FIF_CO_MSG,选择一个现有标签进行合并
+FIF_CO_CH,选择
+FIF_CO_CHTP,合并至此现有标签
+FIF_CO_CHLBL,合并至:
+FIF_CO_NELBL,请选择一个现有标签
+FIF_DE_TIT,删除
+FIF_DE_MSG,确定要删除此标签吗?
+FIF_RE_TIT,改名
+FIF_RE_MSG,输入新的标签名称后按Enter
+FIF_RE_ITP,按Enter提交新标签名称
+FIF_RE_ELBL,请输入新的标签名称
+FIF_RE_NEWLBL,新标签名称:
+FIF_RE_SLBL,该标签名称太短
+FIF_RE_AELBL,该标签名称已存在
+FIF_CT_TIT,自定义标签
+FIF_CT_DDMSG,将现有标签添加到此资产:
+FIF_CT_DDTP,将现有标签添加到此资产
+FIF_CT_ILBL1,或者
+FIF_CT_ILBL2,输入新的标签名称后按Enter:
+FIF_CT_ITP,按Enter添加新标签
+FIF_SET_CTLS,按字母顺序对自定义标签列表进行排序
+FIF_TAG_DDTP,仅显示带有此标签的资产
+FIF_TAG_REF,刷新
+FIF_TAG_REFTP,刷新自定义标签下拉列表
+FIF_TAG_REN,改名
+FIF_TAG_RENTP,重命名这个标签
+FIF_TAG_COM,合并
+FIF_TAG_COMTP,合并至一个现有标签
+FIF_TAG_DEL,删除
+FIF_TAG_DELTP,删除这个标签
+FIF_UIS_WS,右键单击以在Steam Workshop上查看此资产
+FIF_TREE_SM,小型树木
+FIF_TREE_MD,中型树木
+FIF_TREE_LG,大型树木
+FIF_TAG_BAT,批量
+FIF_TAG_BAC,返回
+FIF_TAG_ADD,添加
+FIF_TAG_ADDTP,将标签批量添加到所选资产
+FIF_TAG_REM,移除
+FIF_TAG_REMTP,从所选资产中批量移除标签
+FIF_TAG_CLE,重选
+FIF_TAG_CLETP,重新选择
+FIF_ADD_TIT,批量添加
+FIF_ADD_NUM,所选资产数量:
+FIF_ADD_ADD,将现有标签添加到所选资产:
+FIF_ADD_CHTP,添加此现有标签
+FIF_ADD_TAG,标签:
+FIF_ADD_ELBL,输入新标签或选择现有标签
+FIF_REM_TIT,批量移除
+FIF_REM_REM,从所选资产中批量移除标签:
+FIF_REM_CHTP,移除此标签
+FIF_REM_ELBL,选择一个标签
+FIF_SE_EFI,显示额外的过滤器面板
+FIF_EF_AC,资产作者
+FIF_EF_BH,建筑高度
+FIF_EF_MET,米
+FIF_EF_FEE,英尺
+FIF_SET_ACLS,按字母顺序对资产作者列表进行排序
+FIF_GR_RAN,随机选择
+FIF_NET_SMR,小宽度道路
+FIF_NET_MDR,中宽度道路
+FIF_NET_LGR,大宽度道路
+FIF_NET_HGHW,高速公路
+FIF_NET_PATH,行人路
+FIF_NET_WALL,墙和栅栏
+FIF_NET_WAT,水利设施
+FIF_PROP_MAR,编辑器标记
+FIF_NET_TNR,小路
+FIF_NET_UTI,电线和水管
+FIF_NET_TRA,铁路
+FIF_SET_PM,在游戏模式下显示编辑器标记类型的道具
+FIF_SET_PMTP,编辑器标记外观透明， 只有少数能在游戏模式中作用. 需要用 Move It 才能删除。
+FIF_SET_IC,显示每个资产的使用数
+FIF_EF_UN,未使用资产
+FIF_QM_TIT,快速选单
+FIF_UIS_UN,未使用
+FIF_UIS_IN,使用中
+FIF_SET_ICTP,此选项会降低搜索速度。不需要时请禁用
+FIF_SET_PO,包括 Procedural Objects
+FIF_SET_ICO,使用原始排序选项
+FIF_SET_ICUS,优先显示使用中的资产
+FIF_SET_ICUN,优先显示未使用的资产
+FIF_TAG_BATTP,批量编辑
+FIF_SE_SEBTP,单击以清除搜索框
+FIF_SET_DB,使用系统默认浏览器代替 Steam Overlay
+FIF_SET_DBTP,右键单击资产缩略图上的 Steam 图标以在 Steam Workshop 上查看资产
+FIF_NET_ONE,单向路
+FIF_NET_PAR,允许路边停车
+FIF_NET_NOP,禁止路边停车
+FIF_PROP_VEH,未分类的载具
+FIF_PROP_TRE,树木
+FIF_SET_BACK,对主面板使用浅色背景颜色
+FIF_SET_BACKTP,更易于查看较暗的资产，但更难看到较亮的资产
+FIF_SET_DUN,禁用将来的更新通知
+FIF_PROP_MOT,机动车辆
+FIF_PROP_RAI,铁路车辆
+FIF_PROP_AIR,航空器
+FIF_PROP_WAT,船舶
+FIF_EF_SB,子建筑
+FIF_ATP_TP,右键单击以拖动和移动此面板
+FIF_SET_ATP,显示资产类型面板
+FIF_EF_CT,有自定义标签
+FIF_EF_NCT,无自定义标签
+FIF_UPN_UP,更新通知
+FIF_PROP_TC,根据地形变形
+FIF_PROP_NTC,不根据地形变形
+FIF_SET_SSK,每个资产类型使用独立的搜索字符串
+FIF_SET_SSKTP,切换资产类型时按住 SHIFT 以暂时共享搜索字符串
+FIF_TAG_SA,全选
+FIF_TAG_SATP,选择全部显示的资产
+FIF_EF_UNEXP,全部导出
+FIF_EF_UNEXPTP,将所有未使用的工坊 ID 的资产列表导出到包含 Steam 链接的 HTML 文件中
+FIF_EF_UNEXPSE,导出搜索
+FIF_EF_UNEXPTPSE,将上次搜索中未使用的工坊 ID 的资产列表导出到包含 Steam 链接的 HTML 文件中
+FIF_EF_LC,本地自制
+FIF_EF_WC,工坊订阅自制
+FIF_EF_DLC,需要 DLC/CCP
+FIF_LOC_TOOL,单击以定位所选资产的下一个实例。按住SHIFT键并单击以定位下一个PO实例。
+FIF_REF_DIS,刷新显示
+FIF_EF_US,使用中资产
+FIF_EF_USEXPTP,将所有使用中的工坊 ID 的资产列表导出到包含 Steam 链接的 HTML 文件中
+FIF_EF_USEXPTPSE,将上次搜索中使用中的工坊 ID 的资产列表导出到包含 Steam 链接的 HTML 文件中
+FIF_SE_SIZEX,单击此 x 重置建筑物大小过滤器
+FIF_SET_UIVP,不要在香草面板上显示Find It 2的额外用户界面(需重启游戏)
+FIF_SET_UIVPTP,包括：自定义标签图标、Steam 工坊图标和 DLC 图标
+FIF_DOU_MESH,查看 Mesh Info
+FIF_DOU_MESHNO,Mesh Info 模组未安装或未启用
+FIF_DOU_MESHTYPE,Mesh Info 模组仅支持自制非道路资产
+FIF_DOU_MESHOPEN,在 Mesh Info 模组中查看此资产
+FIF_DOU_RICO,查看 Rico Revisited
+FIF_DOU_RICONO,Ploppable Rico Revisited 模组未安装或未启用
+FIF_DOU_RICOTYPE,Ploppable Rico Revisited 模组仅支持建筑资产
+FIF_DOU_RICOOPEN,在 Ploppable Rico Revisited 模组中查看此资产
+FIF_DOU_FOLD,打开文件夹
+FIF_DOU_FOLDCUS,此功能仅适用于自制资产
+FIF_DOU_FOLDOPEN,打开此资产的文件夹
+FIF_UIS_CNWS,自制非工坊资产
+FIF_NET_BUS,公交专用道
+FIF_NET_TRO,无轨电车道
+FIF_NET_BIK,自行车道
+FIF_NET_TRM,有轨电车道
+FIF_NET_MET,地铁
+FIF_SET_REC,最近下载排序方法（需要重启）
+FIF_SET_RECPC,文件夹创建时间
+FIF_SET_RECPM,文件夹修改时间
+FIF_SET_RECFC,CRP 文件创建时间
+FIF_SET_RECFM,CRP 文件修改时间
+FIF_SET_DIS,禁用即时文字搜索。按 ENTER 以提交新的文字搜索
+FIF_SET_DISTP,在搜索框中键入时，使用此选项可减少 UI 延迟
+FIF_SET_STAB,显示搜索标签页功能
+FIF_STAB_NTAB,新标签页
+FIF_SET_DSK,"当 Find It 面板关闭时, 禁用辅助键盘快捷键"
+FIF_SET_DSKTP,"避免与 TM:PE 冲突, 只有主快捷键在 Find It 面板关闭时仍可正常工作"
+FIF_SET_CFFL,配置文件位置
+FIF_DOU_WS,Steam 工坊页面
+FIF_DOU_WS_STEAM,经由 Steam
+FIF_DOU_WS_BROWSER,经由默认浏览器
+FIF_DOU_WS_NOID,此功能仅适用于含有Steam工坊ID的自定义资产
+FIF_DOU_WS_STEAMTP,在 Steam 上查看此资产 Steam 工坊页面
+FIF_DOU_WS_BROWSERTP,在默认浏览器上查看此资产 Steam 工坊页面
