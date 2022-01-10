@@ -12,22 +12,13 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7.6";
-        public const bool isBeta = false;
+        public const string version = "2.7.7-beta1";
+        public const bool isBeta = true;
         public const bool debug = false;
-        public const double updateNoticeDate = 20211226;
+        public const double updateNoticeDate = 20220109;
         public const string updateNotice =
 
-            "- Better error handling for problematic assets\n\n" +
-
-            "- Fix DLC icon scaling bug on vanilla panels when toolbar mods are used\n\n" +
-
-            "- Fix bug caused by assets with problematic atlas\n\n" + 
-
-            "- Update bundled EML API file\n\n" +
-
-            "- Due to Crowdin import issues, some languages are temporarily removed\n" +
-            "  If you are interested, Crowdin project link can be found in workshop description\n\n";
+            "- Migrate to new .csv based translation framework (thanks algernon!)\n\n";
 
         public string Name
         {
