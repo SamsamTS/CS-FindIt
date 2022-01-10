@@ -1,12 +1,15 @@
-﻿using System;
+﻿// from algernon
+// https://github.com/algernon-A/
+
+using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using ICities;
 using ColossalFramework;
 using ColossalFramework.Plugins;
 using ColossalFramework.Globalization;
+
 
 namespace FindIt
 {
@@ -26,11 +29,11 @@ namespace FindIt
         /// <returns>Translation (or key if translation failed)</returns>
         public static string Translate(string key) => Instance.Translate(key);
 
-        public static string Language
+        public static string CurrentLanguage
         {
             get
             {
-                return Instance.Language;
+                return Instance.CurrentLanguage;
             }
             set
             {
@@ -47,7 +50,7 @@ namespace FindIt
 
 
         /// <summary>
-        /// The current language index number (equals the index number of the language names list provied bye LanguageList).
+        /// The current language index number (equals the index number of the language names list provied by LanguageList).
         /// Useful for easy automatic drop-down language selection menus, working in conjunction with LanguageList:
         /// Set to set the language to the equivalent LanguageList index.
         /// Get to return the LanguageList index of the current languge.
@@ -93,8 +96,8 @@ namespace FindIt
     public class Translator
     {
         private Language systemLanguage = null;
-        private SortedList<string, Language> languages;
-        private string defaultLanguage = "en";
+        private readonly SortedList<string, Language> languages;
+        private readonly string defaultLanguage = "en";
         private int currentIndex = -1;
 
 
@@ -108,7 +111,7 @@ namespace FindIt
         /// <summary>
         /// Returns the current language code if one has specifically been set; otherwise, return "default".
         /// </summary>
-        public string Language => currentIndex < 0 ? "default" : languages.Values[currentIndex].uniqueName;
+        public string CurrentLanguage => currentIndex < 0 ? "default" : languages.Values[currentIndex].uniqueName;
 
 
         /// <summary>
@@ -116,7 +119,7 @@ namespace FindIt
         /// </summary>
         public void UpdateUILanguage()
         {
-            Debugging.Message("setting language to " + (currentIndex < 0 ? "system" : languages.Values[currentIndex].uniqueName));
+            Debugging.Message("setting language to ", currentIndex < 0 ? "system" : languages.Values[currentIndex].uniqueName);
 
             // UI update code goes here.
 
@@ -197,7 +200,7 @@ namespace FindIt
                 }
                 else
                 {
-                    // Debugging.Message("no translation for language " + currentLanguage.uniqueName + " found for key " + key);
+                    Debugging.Message("no translation for language ", currentLanguage.uniqueName, " found for key " + key);
 
                     // Attempt fallack translation.
                     return FallbackTranslation(currentLanguage.uniqueName, key);
@@ -205,7 +208,7 @@ namespace FindIt
             }
             else
             {
-                // Debugging.Message("no current language when translating key " + key);
+                Debugging.Error("no current language when translating key ", key);
             }
 
             // If we've made it this far, something went wrong; just return the key.
@@ -254,7 +257,7 @@ namespace FindIt
                 catch (Exception e)
                 {
                     // Don't really care.
-                    Debugging.LogException(e);
+                    Debugging.LogException(e, "exception setting system language");
                 }
             }
 
@@ -340,7 +343,7 @@ namespace FindIt
             catch (Exception e)
             {
                 // Don't care.  Just log the exception, as we really should have a default language.
-                Debugging.LogException(e);
+                Debugging.LogException(e, "exception attempting fallback translation");
             }
 
             // At this point we've failed; just return the key.
@@ -349,7 +352,7 @@ namespace FindIt
 
 
         /// <summary>
-        /// Loads languages from XML files.
+        /// Loads languages from CSV files.
         /// </summary>
         private void LoadLanguages()
         {
@@ -369,29 +372,156 @@ namespace FindIt
                     string[] translationFiles = Directory.GetFiles(localePath);
                     foreach (string translationFile in translationFiles)
                     {
-                        using (StreamReader reader = new StreamReader(translationFile))
+                        // Skip anything that's not marked as a .csv file.
+                        if (!translationFile.EndsWith(".csv"))
                         {
-                            XmlSerializer xmlSerializer = new XmlSerializer(typeof(Language));
-                            if (xmlSerializer.Deserialize(reader) is Language translation)
+                            continue;
+                        }
+
+                        // Read file.
+                        FileStream fileStream = new FileStream(translationFile, FileMode.Open, FileAccess.Read);
+                        using (StreamReader reader = new StreamReader(fileStream))
+                        {
+                            // Create new language instance for this file.
+                            Language thisLanguage = new Language();
+                            string key = null;
+                            bool quoting = false;
+
+                            // Iterate through each line of file.
+                            string line = reader.ReadLine();
+                            while (line != null)
                             {
-                                // Got one!  add it to the list.
-                                languages.Add(translation.uniqueName, translation);
+                                // Are we parsing quoted lines?
+                                if (quoting)
+                                {
+                                    // Parsing a quoted line - make sure we have a valid current key.
+                                    if (!key.IsNullOrWhiteSpace())
+                                    {
+                                        // Yes - if the line ends with a quote, trim the quote and add to existing dictionary entry and stop quoting.
+                                        if (line.EndsWith("\""))
+                                        {
+                                            quoting = false;
+                                            thisLanguage.translationDictionary[key] += line.Substring(0, line.Length - 1);
+                                        }
+                                        else
+                                        {
+                                            // Line doesn't end with a quote - add line to existing dictionary entry and keep going.
+                                            thisLanguage.translationDictionary[key] += line + Environment.NewLine;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    // Not parsing quoted line - look for comma separator on this line.
+                                    int commaPos = line.IndexOf(",");
+                                    if (commaPos > 0)
+                                    {
+                                        // Comma found - split line into key and value, delimited by first comma.
+                                        key = line.Substring(0, commaPos);
+                                        string value = line.Substring(commaPos + 1);
+
+                                        // Don't do anything if either key or value is invalid.
+                                        if (!key.IsNullOrWhiteSpace() && !value.IsNullOrWhiteSpace())
+                                        {
+                                            // Trim quotes off keys.
+                                            if (key.StartsWith("\""))
+                                            {
+                                                // Starts with quotation mark - if it also ends in a quotation mark, strip both quotation marks.
+                                                if (key.EndsWith("\""))
+                                                {
+                                                    key = key.Substring(1, key.Length - 2);
+                                                }
+                                                else
+                                                {
+                                                    // Doesn't end in a quotation mark, so just strip leading quotation mark.
+                                                    key = key.Substring(1);
+                                                }
+                                            }
+
+                                            // Does this value start with a quotation mark?
+                                            if (value.StartsWith("\""))
+                                            {
+                                                // Starts with quotation mark - if it also ends in a quotation mark, strip both quotation marks.
+                                                if (value.EndsWith("\""))
+                                                {
+                                                    value = value.Substring(1, value.Length - 2);
+                                                }
+                                                else
+                                                {
+                                                    // Doesn't end in a quotation mark, so we've (presumably) got a multi-line quoted entry
+                                                    // Flag quoting mode and set initial value to start of quoted string (less leading quotation mark), plus trailing newline.
+                                                    quoting = true;
+                                                    value = value.Substring(1) + Environment.NewLine;
+                                                }
+                                            }
+
+                                            // Check for reserved keywords.
+                                            if (key.Equals(Language.CodeKey))
+                                            {
+                                                // Language code.
+                                                thisLanguage.uniqueName = value;
+                                            }
+                                            else if (key.Equals(Language.NameKey))
+                                            {
+                                                // Language readable name.
+                                                thisLanguage.readableName = value;
+                                            }
+                                            else
+                                            {
+                                                // Try to add key/value pair to translation dictionary.
+                                                if (!thisLanguage.translationDictionary.ContainsKey(key))
+                                                {
+                                                    thisLanguage.translationDictionary.Add(key, value);
+                                                }
+                                                else
+                                                {
+                                                    Debugging.Error("duplicate translation key ", key, " in file ", translationFile);
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // No comma delimiter found - append to previous line (if last-used key is valid).
+                                        if (!key.IsNullOrWhiteSpace())
+                                        {
+                                            thisLanguage.translationDictionary[key] += line;
+                                        }
+                                    }
+                                }
+
+                                // Read next line.
+                                line = reader.ReadLine();
+                            }
+
+                            // Did we get a valid dictionary from this?
+                            if (thisLanguage.uniqueName != null && thisLanguage.readableName != null && thisLanguage.translationDictionary.Count > 0)
+                            {
+                                // Yes - add to languages dictionary.
+                                if (!languages.ContainsKey(thisLanguage.uniqueName))
+                                {
+                                    languages.Add(thisLanguage.uniqueName, thisLanguage);
+                                }
+                                else
+                                {
+                                    Debugging.Error("duplicate translation file for language ", thisLanguage.uniqueName);
+                                }
                             }
                             else
                             {
-                                Debugging.Message("couldn't deserialize translation file '" + translationFile);
+                                Debugging.Error("file ", translationFile, " did not produce a valid translation dictionary");
                             }
                         }
                     }
                 }
                 else
                 {
-                    Debugging.Message("translations directory not found");
+                    Debugging.Error("translations directory not found");
                 }
             }
             else
             {
-                Debugging.Message("assembly path was empty");
+                Debugging.Error("assembly path was empty");
             }
         }
 
