@@ -1,240 +1,240 @@
-CODE,it
-NAME,Italiano
-FIF_DESC,Trova e organizza i tuoi asset
-FIF_SET_DM,Disattiva il registro dei messaggi di debug
-FIF_SET_DMTP,"Se attivato, i messaggi di debug non saranno registrati."
-FIF_SET_CMT,Centra la barra principale
-FIF_SET_CMTTP,La barra principale sarà centrata se supera una certa lunghezza.
-FIF_SET_UL,Sblocca tutto
-FIF_SET_ULTP,Permette di selezionare e posizionare oggetti anche se bloccati.
-FIF_SET_BP,Sistema oggetti danneggati al prossimo caricamento
-FIF_SET_BPTP,Rimuovi tutti gli oggetti problematici. Attiva l'opzione e ricarica il salvataggio.
-FIF_SE_WF,Custom
-FIF_SE_VF,Vanilla
-FIF_SE_IA,Tutto
-FIF_SE_IN,Network
-FIF_SE_IP,Ploppable
-FIF_SE_IG,Growable
-FIF_SE_IR,RICO
-FIF_SE_IPR,Prop
-FIF_SE_ID,Decal
-FIF_SE_IT,Albero
-FIF_SE_LV,Livello Edificio
-FIF_SE_SZ,Dimensione:
-FIF_SE_SC,Premi SHIFT o CTRL per selezionare più categorie
-FIF_PLOP_E,Elettricità
-FIF_PLOP_W,Acqua/Fognature
-FIF_PLOP_G,Rifiuti
-FIF_PLOP_H,Sanità
-FIF_PLOP_F,Pompieri
-FIF_PLOP_P,Polizia
-FIF_PLOP_ED,Educazione
-FIF_PLOP_PT,Trasporti Pubblici
-FIF_PLOP_PPW,Parchi/Piazze/Fauna
-FIF_PLOP_U,Edifici Unici
-FIF_PLOP_I,Industria
-FIF_PLOP_D,Disastri
-FIF_PLOP_C,Campus
-FIF_PLOP_V,Sport Universitari
-FIF_PLOP_FI,Pesca
-FIF_GR_LDR,Residenziale Bassa Densità
-FIF_GR_HDR,Residenziale Alta Densità
-FIF_GR_LDRE,Residenziale Bassa Densità ECO
-FIF_GR_HDRE,Residenziale Alta Densità ECO
-FIF_GR_LDC,Commerciale Bassa Densità
-FIF_GR_HDC,Commerciale Alta Densità
-FIF_GR_CE,Commerciale ECO
-FIF_GR_O,Uffici
-FIF_GR_ITC,Cluster Tecnologici
-FIF_GR_GI,Industria Generica
-FIF_GR_FAI,Industria Agricola
-FIF_GR_FOI,Industria Forestale
-FIF_GR_OII,Industria Petrolifera
-FIF_GR_ORI,Industria Mineraria
-FIF_GR_LC,Commerciale Ricreativo
-FIF_GR_TC,Commerciale Turismo
-FIF_SO_RETP,Elenca per Rilevanza. Come nel Find It originale
-FIF_SO_NETP,Elenca per Download più recente
-FIF_SO_RE,Rilevanza
-FIF_SO_NE,DL Recenti
-TRN_CHOICE,Seleziona lingua (attivo alla prossima partita)
-TRN_SYS,Usa lingua di sistema
-FIF_PROP_IND,Industriale
-FIF_PROP_PAR,Parchi
-FIF_PROP_COM,Comune
-FIF_PROP_RES,Residenziale
-FIF_PROP_BIL,Cartelloni
-FIF_PROP_SPE,Cartelloni Speciali
-FIF_PROP_LIG,Luci
-FIF_PROP_NAT,Naturale
-FIF_PROP_UNS,Altro
-FIF_SET_KS,
-FIF_SE_IGR,Grwb/RICO
-FIF_SET_CTFL,Posizione dei file delle etichette personalizzate (Ricorda di eseguire spesso il backup)
-FIF_SET_CTFOP,Mostra nel File Explorer
-FIF_SE_SCTP,Mostra pannello delle etichette
-FIF_POP_SCR,Usa la rotella del mouse per salire/scendere
-FIF_POP_CON,Conferma
-FIF_POP_CAN,Cancella
-FIF_POP_NU,Questo non può essere annullato
-FIF_CO_TIT,Unisci
-FIF_CO_MSG,Scegli una etichetta esistente da unire
-FIF_CO_CH,Scegli
-FIF_CO_CHTP,Unisci con etichetta esistente
-FIF_CO_CHLBL,Unisci con:
-FIF_CO_NELBL,Scegli una etichetta esistente
-FIF_DE_TIT,Cancella
-FIF_DE_MSG,Sei sicuro di voler cancellare questa etichetta?
-FIF_RE_TIT,Rinomina
-FIF_RE_MSG,Scrivi un nuovo nome di etichetta e premi Invio.
-FIF_RE_ITP,Premi Invio per aggiungere un nuovo nome di etichetta
-FIF_RE_ELBL,Scrivi un nuovo nome di etichetta
-FIF_RE_NEWLBL,Nuovo nome di etichetta:
-FIF_RE_SLBL,Il nome di questa etichetta è troppo corto
-FIF_RE_AELBL,Questa etichetta esiste già
-FIF_CT_TIT,Etichette Personalizzate
-FIF_CT_DDMSG,Aggiungi etichetta esistente a questo asset:
-FIF_CT_DDTP,Aggiungi etichetta esistente a questo asset
-FIF_CT_ILBL1,O
-FIF_CT_ILBL2,Scrivi il nuovo nome dell'etichetta e premi Invio:
-FIF_CT_ITP,Premi invio per aggiungere nuova/e etichetta/e
-FIF_SET_CTLS,Ordina la lista delle etichette personalizzate alfabeticamente
-FIF_TAG_DDTP,Mostra solo gli asset con questa etichetta
-FIF_TAG_REF,Ricarica
-FIF_TAG_REFTP,Ricarica il menù a tendina delle etichette personalizzate
-FIF_TAG_REN,Rinomina
-FIF_TAG_RENTP,Rinomina l'etichetta
-FIF_TAG_COM,Unisci
-FIF_TAG_COMTP,Unisci questa etichetta con un'altra
-FIF_TAG_DEL,Cancella
-FIF_TAG_DELTP,Cancella questa etichetta
-FIF_UIS_WS,Click destro per vedere l'asset nel Workshop di Steam
-FIF_TREE_SM,Alberi Piccoli
-FIF_TREE_MD,Alberi Medi
-FIF_TREE_LG,Alberi Grandi
-FIF_TAG_BAT,Gruppo
-FIF_TAG_BAC,Indietro
-FIF_TAG_ADD,Aggiungi
-FIF_TAG_ADDTP,Aggiungi etichetta agli asset selezionati
-FIF_TAG_REM,Rimuovi
-FIF_TAG_REMTP,Rimuovi etichetta dagli asset selezionati
-FIF_TAG_CLE,Libera
-FIF_TAG_CLETP,Libera la selezione
-FIF_ADD_TIT,Aggiungi in Gruppo
-FIF_ADD_NUM,Numero di asset selezionati:
-FIF_ADD_ADD,Aggiungi etichetta esistente agli asset selezionati
-FIF_ADD_CHTP,Aggiungi etichetta esistente
-FIF_ADD_TAG,Etichetta:
-FIF_ADD_ELBL,Insericsi una nuova etichetta
-FIF_REM_TIT,Rimuovi in Gruppo
-FIF_REM_REM,Rimuovi una etichetta dagli asset selezionati:
-FIF_REM_CHTP,Rimuovi questa etichetta
-FIF_REM_ELBL,Scegli una etichetta
-FIF_SE_EFI,Mostra il pannello per altri filtri
-FIF_EF_AC,Creatore di Asset
-FIF_EF_BH,Altezza Edificio
-FIF_EF_MET,metri
-FIF_EF_FEE,piedi
-FIF_SET_ACLS,Elenca liste dei creatori di asset alfabeticamente
-FIF_GR_RAN,Selezione Casuale
-FIF_NET_SMR,Strade Piccole
-FIF_NET_MDR,Strade Medie
-FIF_NET_LGR,Strade Grandi
-FIF_NET_HGHW,Autostrade
-FIF_NET_PATH,Sentieri
-FIF_NET_WALL,Muri e Staccionate
-FIF_NET_WAT,Strutture per l'acqua
-FIF_PROP_MAR,Marcatore dell'Editor
-FIF_NET_TNR,Strade Piccole
-FIF_NET_UTI,Servizi
-FIF_NET_TRA,Treno
-FIF_SET_PM,Mostra i prop marcatori in gioco
-FIF_SET_PMTP,I prop marcatori sono invisibili e molti non funzionano in gioco. Usa Move It per cancellarli.
-FIF_SET_IC,Mostra il numero di istanze esistenti di ogni asset
-FIF_EF_UN,Asset non usati
-FIF_QM_TIT,Quick Menu
-FIF_UIS_UN,Non in uso
-FIF_UIS_IN,In uso
-FIF_SET_ICTP,Questa opzione rallenta leggemente la velocità di ricerca. Disabilita quando non in uso
-FIF_SET_PO,Includi oggetti procedurali
-FIF_SET_ICO,Usa l'opzione di elenco originale
-FIF_SET_ICUS,Mostra asset usati in cima
-FIF_SET_ICUN,Mostra asset non usati in cima
-FIF_TAG_BATTP,Modifica in gruppo
-FIF_SE_SEBTP,Pulisci la barra di ricerca
-FIF_SET_DB,Usa il browser di sistema al posto dell'overlay di Steam
-FIF_SET_DBTP,Click destro sull'icona di Steam nella copertina di un asset per vederlo sullo Steam Workshop
-FIF_NET_ONE,Strade a senso unico
-FIF_NET_PAR,Permetti Parcheggio
-FIF_NET_NOP,Nessun Parcheggio
-FIF_PROP_VEH,Veicoli senza categoria (generato dai prop Alberi e Veicoli)
-FIF_PROP_TRE,Alberi (generato dai prop Alberi e Veicoli)
-FIF_SET_BACK,Utilizza uno sfondo chiaro per il pannello principale
-FIF_SET_BACKTP,"Più facile vedere asset scuri, ma più difficile vedere asset chiari"
-FIF_SET_DUN,Disattiva notifiche di aggiornamenti futuri
-FIF_PROP_MOT,Veicoli (generato dai prop Alberi e Veicoli)
-FIF_PROP_RAI,Treni (generato dai prop Alberi e Veicoli)
-FIF_PROP_AIR,Aerei (generato dai prop Alberi e Veicoli)
-FIF_PROP_WAT,Barche (generato dai prop Alberi e Veicoli)
-FIF_EF_SB,Sub-edifici
-FIF_ATP_TP,
-FIF_SET_ATP,Mostra pannello dei tipi d asset
-FIF_EF_CT,Con Etichetta Personalizzata
-FIF_EF_NCT,Senza Etichetta Personalizzata
-FIF_UPN_UP,Aggiorna
-FIF_PROP_TC,Conforme al Terreno
-FIF_PROP_NTC,Non Conforme al Terreno
-FIF_SET_SSK,Usa parole chiave di ricerca diverse per ogni tipo di asset
-FIF_SET_SSKTP,Premi SHIFT mentre cambi tipo di asset per condividere parole chiave temporaneamente.
-FIF_TAG_SA,Seleziona tutto
-FIF_TAG_SATP,Seleziona tutti gli oggetti visibili
-FIF_EF_UNEXP,Esporta Tutto
-FIF_EF_UNEXPTP,Esporta la lista di tutti gli ID del workshop non usati in un file HTML con link al workshop
-FIF_EF_UNEXPSE,Esporta Cercati
-FIF_EF_UNEXPTPSE,Esporta la lista degli ID del workshop non usati dall'ultima ricerca in un file HTML con link al workshop
-FIF_EF_LC,Personalizzato Locale
-FIF_EF_WC,Personalizzato Workshop
-FIF_EF_DLC,Richiede DLC/CCP
-FIF_LOC_TOOL,Clicca per trovare la prossima istanza dell'asset selezionato. Premi SHIFT e clicca per trovare la prossima istanza di PO
-FIF_REF_DIS,Ricarica Schermo
-FIF_EF_US,Asset Usati
-FIF_EF_USEXPTP,Esporta la lista di tutti gli ID del workshop usati in un file HTML con link al workshop
-FIF_EF_USEXPTPSE,Esporta la lista degli ID del workshop usati dall'ultima ricerca in un file HTML con link al workshop
-FIF_SE_SIZEX,Clicca la x per ripristinare i filtri delle dimensioni degli edifici
-FIF_SET_UIVP,Non mostrare la UI extra di Find It 2 sui pannelli vanilla (riavvio richiesto)
-FIF_SET_UIVPTP,"Incluso icone di etichette personalizzate, icone steam, icone DLC"
-FIF_DOU_MESH,Vedi in Mesh Info
-FIF_DOU_MESHNO,La mod Mesh Info non è installata o abilitata
-FIF_DOU_MESHTYPE,La mod Mesh Info supporta solo asset personalizzati non network
-FIF_DOU_MESHOPEN,Vedi questo assed nella mod Mesh Info
-FIF_DOU_RICO,Vedi in RICO Revisited
-FIF_DOU_RICONO,La mod Ploppable RICO Revisited non è installata o abilitata
-FIF_DOU_RICOTYPE,La mod Ploppable RICO Revisited supporta solo asset di edifici
-FIF_DOU_RICOOPEN,Vedi questo assed nella mod Ploppable RICO Revisited
-FIF_DOU_FOLD,Apri la cartella file
-FIF_DOU_FOLDCUS,Funziona solo con asset personalizzati
-FIF_DOU_FOLDOPEN,Apri la cartella principale dell'asset
-FIF_UIS_CNWS,Asset personalizzato non dal workshop
-FIF_NET_BUS,Corsie Bus
-FIF_NET_TRO,Corsie Filobus
-FIF_NET_BIK,Corsie per bici
-FIF_NET_TRM,Binari Tram
-FIF_NET_MET,Metro
-FIF_SET_REC,Metodo di elenco per DL recenti (riavvio richiesto)
-FIF_SET_RECPC,Tempo di ceazione cartella principale
-FIF_SET_RECPM,Tempo di modifica cartella principale
-FIF_SET_RECFC,Orario creazione file CRP
-FIF_SET_RECFM,Orario modifica file crp
-FIF_SET_DIS,
-FIF_SET_DISTP,
-FIF_SET_STAB,
-FIF_STAB_NTAB,
-FIF_SET_DSK,
-FIF_SET_DSKTP,
-FIF_SET_CFFL,
-FIF_DOU_WS,
-FIF_DOU_WS_STEAM,
-FIF_DOU_WS_BROWSER,
-FIF_DOU_WS_NOID,
-FIF_DOU_WS_STEAMTP,
-FIF_DOU_WS_BROWSERTP,
+"CODE","it"
+"NAME","Italiano"
+"FIF_DESC","Trova e organizza i tuoi asset"
+"FIF_SET_DM","Disattiva il registro dei messaggi di debug"
+"FIF_SET_DMTP","Se attivato, i messaggi di debug non saranno registrati."
+"FIF_SET_CMT","Centra la barra principale"
+"FIF_SET_CMTTP","La barra principale sarà centrata se supera una certa lunghezza."
+"FIF_SET_UL","Sblocca tutto"
+"FIF_SET_ULTP","Permette di selezionare e posizionare oggetti anche se bloccati."
+"FIF_SET_BP","Sistema oggetti danneggati al prossimo caricamento"
+"FIF_SET_BPTP","Rimuovi tutti gli oggetti problematici. Attiva l'opzione e ricarica il salvataggio."
+"FIF_SE_WF","Custom"
+"FIF_SE_VF","Vanilla"
+"FIF_SE_IA","Tutto"
+"FIF_SE_IN","Network"
+"FIF_SE_IP","Ploppable"
+"FIF_SE_IG","Growable"
+"FIF_SE_IR","RICO"
+"FIF_SE_IPR","Prop"
+"FIF_SE_ID","Decal"
+"FIF_SE_IT","Albero"
+"FIF_SE_LV","Livello Edificio"
+"FIF_SE_SZ","Dimensione:"
+"FIF_SE_SC","Premi SHIFT o CTRL per selezionare più categorie"
+"FIF_PLOP_E","Elettricità"
+"FIF_PLOP_W","Acqua/Fognature"
+"FIF_PLOP_G","Rifiuti"
+"FIF_PLOP_H","Sanità"
+"FIF_PLOP_F","Pompieri"
+"FIF_PLOP_P","Polizia"
+"FIF_PLOP_ED","Educazione"
+"FIF_PLOP_PT","Trasporti Pubblici"
+"FIF_PLOP_PPW","Parchi/Piazze/Fauna"
+"FIF_PLOP_U","Edifici Unici"
+"FIF_PLOP_I","Industria"
+"FIF_PLOP_D","Disastri"
+"FIF_PLOP_C","Campus"
+"FIF_PLOP_V","Sport Universitari"
+"FIF_PLOP_FI","Pesca"
+"FIF_GR_LDR","Residenziale Bassa Densità"
+"FIF_GR_HDR","Residenziale Alta Densità"
+"FIF_GR_LDRE","Residenziale Bassa Densità ECO"
+"FIF_GR_HDRE","Residenziale Alta Densità ECO"
+"FIF_GR_LDC","Commerciale Bassa Densità"
+"FIF_GR_HDC","Commerciale Alta Densità"
+"FIF_GR_CE","Commerciale ECO"
+"FIF_GR_O","Uffici"
+"FIF_GR_ITC","Cluster Tecnologici"
+"FIF_GR_GI","Industria Generica"
+"FIF_GR_FAI","Industria Agricola"
+"FIF_GR_FOI","Industria Forestale"
+"FIF_GR_OII","Industria Petrolifera"
+"FIF_GR_ORI","Industria Mineraria"
+"FIF_GR_LC","Commerciale Ricreativo"
+"FIF_GR_TC","Commerciale Turismo"
+"FIF_SO_RETP","Elenca per Rilevanza. Come nel Find It originale"
+"FIF_SO_NETP","Elenca per Download più recente"
+"FIF_SO_RE","Rilevanza"
+"FIF_SO_NE","DL Recenti"
+"TRN_CHOICE","Seleziona lingua (attivo alla prossima partita)"
+"TRN_SYS","Usa lingua di sistema"
+"FIF_PROP_IND","Industriale"
+"FIF_PROP_PAR","Parchi"
+"FIF_PROP_COM","Comune"
+"FIF_PROP_RES","Residenziale"
+"FIF_PROP_BIL","Cartelloni"
+"FIF_PROP_SPE","Cartelloni Speciali"
+"FIF_PROP_LIG","Luci"
+"FIF_PROP_NAT","Naturale"
+"FIF_PROP_UNS","Altro"
+"FIF_SET_KS","Main Keyboard Shortcut"
+"FIF_SE_IGR","Grwb/RICO"
+"FIF_SET_CTFL","Posizione dei file delle etichette personalizzate (Ricorda di eseguire spesso il backup)"
+"FIF_SET_CTFOP","Mostra nel File Explorer"
+"FIF_SE_SCTP","Mostra pannello delle etichette"
+"FIF_POP_SCR","Usa la rotella del mouse per salire/scendere"
+"FIF_POP_CON","Conferma"
+"FIF_POP_CAN","Cancella"
+"FIF_POP_NU","Questo non può essere annullato"
+"FIF_CO_TIT","Unisci"
+"FIF_CO_MSG","Scegli una etichetta esistente da unire"
+"FIF_CO_CH","Scegli"
+"FIF_CO_CHTP","Unisci con etichetta esistente"
+"FIF_CO_CHLBL","Unisci con:"
+"FIF_CO_NELBL","Scegli una etichetta esistente"
+"FIF_DE_TIT","Cancella"
+"FIF_DE_MSG","Sei sicuro di voler cancellare questa etichetta?"
+"FIF_RE_TIT","Rinomina"
+"FIF_RE_MSG","Scrivi un nuovo nome di etichetta e premi Invio."
+"FIF_RE_ITP","Premi Invio per aggiungere un nuovo nome di etichetta"
+"FIF_RE_ELBL","Scrivi un nuovo nome di etichetta"
+"FIF_RE_NEWLBL","Nuovo nome di etichetta:"
+"FIF_RE_SLBL","Il nome di questa etichetta è troppo corto"
+"FIF_RE_AELBL","Questa etichetta esiste già"
+"FIF_CT_TIT","Etichette Personalizzate"
+"FIF_CT_DDMSG","Aggiungi etichetta esistente a questo asset:"
+"FIF_CT_DDTP","Aggiungi etichetta esistente a questo asset"
+"FIF_CT_ILBL1","O"
+"FIF_CT_ILBL2","Scrivi il nuovo nome dell'etichetta e premi Invio:"
+"FIF_CT_ITP","Premi invio per aggiungere nuova/e etichetta/e"
+"FIF_SET_CTLS","Ordina la lista delle etichette personalizzate alfabeticamente"
+"FIF_TAG_DDTP","Mostra solo gli asset con questa etichetta"
+"FIF_TAG_REF","Ricarica"
+"FIF_TAG_REFTP","Ricarica il menù a tendina delle etichette personalizzate"
+"FIF_TAG_REN","Rinomina"
+"FIF_TAG_RENTP","Rinomina l'etichetta"
+"FIF_TAG_COM","Unisci"
+"FIF_TAG_COMTP","Unisci questa etichetta con un'altra"
+"FIF_TAG_DEL","Cancella"
+"FIF_TAG_DELTP","Cancella questa etichetta"
+"FIF_UIS_WS","Click destro per vedere l'asset nel Workshop di Steam"
+"FIF_TREE_SM","Alberi Piccoli"
+"FIF_TREE_MD","Alberi Medi"
+"FIF_TREE_LG","Alberi Grandi"
+"FIF_TAG_BAT","Gruppo"
+"FIF_TAG_BAC","Indietro"
+"FIF_TAG_ADD","Aggiungi"
+"FIF_TAG_ADDTP","Aggiungi etichetta agli asset selezionati"
+"FIF_TAG_REM","Rimuovi"
+"FIF_TAG_REMTP","Rimuovi etichetta dagli asset selezionati"
+"FIF_TAG_CLE","Libera"
+"FIF_TAG_CLETP","Libera la selezione"
+"FIF_ADD_TIT","Aggiungi in Gruppo"
+"FIF_ADD_NUM","Numero di asset selezionati:"
+"FIF_ADD_ADD","Aggiungi etichetta esistente agli asset selezionati"
+"FIF_ADD_CHTP","Aggiungi etichetta esistente"
+"FIF_ADD_TAG","Etichetta:"
+"FIF_ADD_ELBL","Insericsi una nuova etichetta"
+"FIF_REM_TIT","Rimuovi in Gruppo"
+"FIF_REM_REM","Rimuovi una etichetta dagli asset selezionati:"
+"FIF_REM_CHTP","Rimuovi questa etichetta"
+"FIF_REM_ELBL","Scegli una etichetta"
+"FIF_SE_EFI","Mostra il pannello per altri filtri"
+"FIF_EF_AC","Creatore di Asset"
+"FIF_EF_BH","Altezza Edificio"
+"FIF_EF_MET","metri"
+"FIF_EF_FEE","piedi"
+"FIF_SET_ACLS","Elenca liste dei creatori di asset alfabeticamente"
+"FIF_GR_RAN","Selezione Casuale"
+"FIF_NET_SMR","Strade Piccole"
+"FIF_NET_MDR","Strade Medie"
+"FIF_NET_LGR","Strade Grandi"
+"FIF_NET_HGHW","Autostrade"
+"FIF_NET_PATH","Sentieri"
+"FIF_NET_WALL","Muri e Staccionate"
+"FIF_NET_WAT","Strutture per l'acqua"
+"FIF_PROP_MAR","Marcatore dell'Editor"
+"FIF_NET_TNR","Strade Piccole"
+"FIF_NET_UTI","Servizi"
+"FIF_NET_TRA","Treno"
+"FIF_SET_PM","Mostra i prop marcatori in gioco"
+"FIF_SET_PMTP","I prop marcatori sono invisibili e molti non funzionano in gioco. Usa Move It per cancellarli."
+"FIF_SET_IC","Mostra il numero di istanze esistenti di ogni asset"
+"FIF_EF_UN","Asset non usati"
+"FIF_QM_TIT","Quick Menu"
+"FIF_UIS_UN","Non in uso"
+"FIF_UIS_IN","In uso"
+"FIF_SET_ICTP","Questa opzione rallenta leggemente la velocità di ricerca. Disabilita quando non in uso"
+"FIF_SET_PO","Includi oggetti procedurali"
+"FIF_SET_ICO","Usa l'opzione di elenco originale"
+"FIF_SET_ICUS","Mostra asset usati in cima"
+"FIF_SET_ICUN","Mostra asset non usati in cima"
+"FIF_TAG_BATTP","Modifica in gruppo"
+"FIF_SE_SEBTP","Pulisci la barra di ricerca"
+"FIF_SET_DB","Usa il browser di sistema al posto dell'overlay di Steam"
+"FIF_SET_DBTP","Click destro sull'icona di Steam nella copertina di un asset per vederlo sullo Steam Workshop"
+"FIF_NET_ONE","Strade a senso unico"
+"FIF_NET_PAR","Permetti Parcheggio"
+"FIF_NET_NOP","Nessun Parcheggio"
+"FIF_PROP_VEH","Veicoli senza categoria (generato dai prop Alberi e Veicoli)"
+"FIF_PROP_TRE","Alberi (generato dai prop Alberi e Veicoli)"
+"FIF_SET_BACK","Utilizza uno sfondo chiaro per il pannello principale"
+"FIF_SET_BACKTP","Più facile vedere asset scuri, ma più difficile vedere asset chiari"
+"FIF_SET_DUN","Disattiva notifiche di aggiornamenti futuri"
+"FIF_PROP_MOT","Veicoli (generato dai prop Alberi e Veicoli)"
+"FIF_PROP_RAI","Treni (generato dai prop Alberi e Veicoli)"
+"FIF_PROP_AIR","Aerei (generato dai prop Alberi e Veicoli)"
+"FIF_PROP_WAT","Barche (generato dai prop Alberi e Veicoli)"
+"FIF_EF_SB","Sub-edifici"
+"FIF_ATP_TP","Right-click to drag and move this panel"
+"FIF_SET_ATP","Mostra pannello dei tipi d asset"
+"FIF_EF_CT","Con Etichetta Personalizzata"
+"FIF_EF_NCT","Senza Etichetta Personalizzata"
+"FIF_UPN_UP","Aggiorna"
+"FIF_PROP_TC","Conforme al Terreno"
+"FIF_PROP_NTC","Non Conforme al Terreno"
+"FIF_SET_SSK","Usa parole chiave di ricerca diverse per ogni tipo di asset"
+"FIF_SET_SSKTP","Premi SHIFT mentre cambi tipo di asset per condividere parole chiave temporaneamente."
+"FIF_TAG_SA","Seleziona tutto"
+"FIF_TAG_SATP","Seleziona tutti gli oggetti visibili"
+"FIF_EF_UNEXP","Esporta Tutto"
+"FIF_EF_UNEXPTP","Esporta la lista di tutti gli ID del workshop non usati in un file HTML con link al workshop"
+"FIF_EF_UNEXPSE","Esporta Cercati"
+"FIF_EF_UNEXPTPSE","Esporta la lista degli ID del workshop non usati dall'ultima ricerca in un file HTML con link al workshop"
+"FIF_EF_LC","Personalizzato Locale"
+"FIF_EF_WC","Personalizzato Workshop"
+"FIF_EF_DLC","Richiede DLC/CCP"
+"FIF_LOC_TOOL","Clicca per trovare la prossima istanza dell'asset selezionato. Premi SHIFT e clicca per trovare la prossima istanza di PO"
+"FIF_REF_DIS","Ricarica Schermo"
+"FIF_EF_US","Asset Usati"
+"FIF_EF_USEXPTP","Esporta la lista di tutti gli ID del workshop usati in un file HTML con link al workshop"
+"FIF_EF_USEXPTPSE","Esporta la lista degli ID del workshop usati dall'ultima ricerca in un file HTML con link al workshop"
+"FIF_SE_SIZEX","Clicca la x per ripristinare i filtri delle dimensioni degli edifici"
+"FIF_SET_UIVP","Non mostrare la UI extra di Find It 2 sui pannelli vanilla (riavvio richiesto)"
+"FIF_SET_UIVPTP","Incluso icone di etichette personalizzate, icone steam, icone DLC"
+"FIF_DOU_MESH","Vedi in Mesh Info"
+"FIF_DOU_MESHNO","La mod Mesh Info non è installata o abilitata"
+"FIF_DOU_MESHTYPE","La mod Mesh Info supporta solo asset personalizzati non network"
+"FIF_DOU_MESHOPEN","Vedi questo assed nella mod Mesh Info"
+"FIF_DOU_RICO","Vedi in RICO Revisited"
+"FIF_DOU_RICONO","La mod Ploppable RICO Revisited non è installata o abilitata"
+"FIF_DOU_RICOTYPE","La mod Ploppable RICO Revisited supporta solo asset di edifici"
+"FIF_DOU_RICOOPEN","Vedi questo assed nella mod Ploppable RICO Revisited"
+"FIF_DOU_FOLD","Apri la cartella file"
+"FIF_DOU_FOLDCUS","Funziona solo con asset personalizzati"
+"FIF_DOU_FOLDOPEN","Apri la cartella principale dell'asset"
+"FIF_UIS_CNWS","Asset personalizzato non dal workshop"
+"FIF_NET_BUS","Corsie Bus"
+"FIF_NET_TRO","Corsie Filobus"
+"FIF_NET_BIK","Corsie per bici"
+"FIF_NET_TRM","Binari Tram"
+"FIF_NET_MET","Metro"
+"FIF_SET_REC","Metodo di elenco per DL recenti (riavvio richiesto)"
+"FIF_SET_RECPC","Tempo di ceazione cartella principale"
+"FIF_SET_RECPM","Tempo di modifica cartella principale"
+"FIF_SET_RECFC","Orario creazione file CRP"
+"FIF_SET_RECFM","Orario modifica file crp"
+"FIF_SET_DIS","Disable instant text search. Press ENTER to submit a new text search"
+"FIF_SET_DISTP","Use this option to reduce UI lag when typing in the search box"
+"FIF_SET_STAB","Show search tabs"
+"FIF_STAB_NTAB","New tab"
+"FIF_SET_DSK","Disable secondary keyboard shortcuts when Find It panel is closed"
+"FIF_SET_DSKTP","Avoid conflicts with TM:PE. Only the main keyboard shortcut will remain functional when Find It panel is closed"
+"FIF_SET_CFFL","Configuration File Location"
+"FIF_DOU_WS","Steam Workshop page"
+"FIF_DOU_WS_STEAM","via Steam"
+"FIF_DOU_WS_BROWSER","via default browser"
+"FIF_DOU_WS_NOID","This feature only works with custom assets with Steam Workshop IDs"
+"FIF_DOU_WS_STEAMTP","See this asset on Steam Workshop in Steam overlay"
+"FIF_DOU_WS_BROWSERTP","See this asset on Steam Workshop in default browser"

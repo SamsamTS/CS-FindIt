@@ -1,240 +1,240 @@
-CODE,ko
-NAME,한국어
-FIF_DESC,자산 정리 및 찾기
-FIF_SET_DM,디버그 메시지 기록 비활성화
-FIF_SET_DMTP,선택하면 디버그 메시지가 기록되지 않습니다.
-FIF_SET_CMT,중앙 메인 툴바
-FIF_SET_CMTTP,메인 툴바가 일정 길이를 넘어서면 중앙으로 합니다.
-FIF_SET_UL,모두 잠금해제
-FIF_SET_ULTP,잠긴 상태에서도 아이템을 선택하고 배치할 수 있게 합니다.
-FIF_SET_BP,다음 불러올 때 잘못된 프롭 고치기
-FIF_SET_BPTP,문제를 유발하는 모든 프롭을 제거합니다. 옵션을 체크하고 세이브를 불러오세요
-FIF_SE_WF,커스텀
-FIF_SE_VF,바닐라
-FIF_SE_IA,모두
-FIF_SE_IN,네트워크
-FIF_SE_IP,Ploppable
-FIF_SE_IG,Growable
-FIF_SE_IR,RICO
-FIF_SE_IPR,프롭
-FIF_SE_ID,데칼
-FIF_SE_IT,나무
-FIF_SE_LV,건물 레벨
-FIF_SE_SZ,크기: 
-FIF_SE_SC,SHIFT 또는 CTRL을 누른 상태로 카테고리 중복 선택
-FIF_PLOP_E,전기
-FIF_PLOP_W,수도/하수
-FIF_PLOP_G,쓰레기
-FIF_PLOP_H,의료
-FIF_PLOP_F,소방
-FIF_PLOP_P,경찰
-FIF_PLOP_ED,교육
-FIF_PLOP_PT,대중교통
-FIF_PLOP_PPW,공원/광장/자연
-FIF_PLOP_U,고유 건물
-FIF_PLOP_I,산업
-FIF_PLOP_D,재해
-FIF_PLOP_C,캠퍼스
-FIF_PLOP_V,대학 스포츠
-FIF_PLOP_FI,낚시
-FIF_GR_LDR,저밀도 주거
-FIF_GR_HDR,고밀도 주거
-FIF_GR_LDRE,저밀도 주거 ECO
-FIF_GR_HDRE,고밀도 주거 ECO
-FIF_GR_LDC,저밀도 상업
-FIF_GR_HDC,고밀도 상업
-FIF_GR_CE,상업 ECO
-FIF_GR_O,사무
-FIF_GR_ITC,IT 클러스터
-FIF_GR_GI,일반 산업
-FIF_GR_FAI,농업
-FIF_GR_FOI,산림업
-FIF_GR_OII,석유산업
-FIF_GR_ORI,광업
-FIF_GR_LC,여가 상업
-FIF_GR_TC,관광 상업
-FIF_SO_RETP,관련성으로 정렬. 원래 Find It과 같음
-FIF_SO_NETP,최근 다운로드 순으로 정렬
-FIF_SO_RE,관련성
-FIF_SO_NE,최근 다운로드
-TRN_CHOICE,언어 선택 (재시작 필요)
-TRN_SYS,시스템 언어 사용
-FIF_PROP_IND,산업
-FIF_PROP_PAR,공원
-FIF_PROP_COM,일반
-FIF_PROP_RES,주거
-FIF_PROP_BIL,간판
-FIF_PROP_SPE,특수 간판
-FIF_PROP_LIG,조명
-FIF_PROP_NAT,자연
-FIF_PROP_UNS,미분류
-FIF_SET_KS,메인 키보드 단축키
-FIF_SE_IGR,Grwb/RICO
-FIF_SET_CTFL,커스텀 태그 파일 위치 (이 파일을 주기적으로 백업하십시오)
-FIF_SET_CTFOP,파일 탐색기에서 보기
-FIF_SE_SCTP,커스텀 태그 태널 표시
-FIF_POP_SCR,스크롤 업/다운에 마우스 휠 사용
-FIF_POP_CON,확인
-FIF_POP_CAN,취소
-FIF_POP_NU,이것은 되돌릴 수 없습니다.
-FIF_CO_TIT,합치기
-FIF_CO_MSG,합칠 존재하는 태그를 선택하십시오.
-FIF_CO_CH,선택
-FIF_CO_CHTP,이 기존 태그와 합치기
-FIF_CO_CHLBL,합치기: 
-FIF_CO_NELBL,존재하는 태그를 선택해주세요
-FIF_DE_TIT,삭제
-FIF_DE_MSG,이 태그를 정말 삭제하시겠습니까?
-FIF_RE_TIT,변경
-FIF_RE_MSG,새 태그 이름을 입력하고 Enter를 누르십시오.
-FIF_RE_ITP,Enter를 눌러 새 태그 이름 제출
-FIF_RE_ELBL,새 태그 이름을 입력해주세요
-FIF_RE_NEWLBL,새 태그 이름: 
-FIF_RE_SLBL,태그 이름이 너무 짧습니다
-FIF_RE_AELBL,이미 존재하는 태그입니다
-FIF_CT_TIT,커스텀 태그
-FIF_CT_DDMSG,이 에셋에 기존 태그 추가:
-FIF_CT_DDTP,이 에셋에 기존 태그 추가
-FIF_CT_ILBL1,또는
-FIF_CT_ILBL2,새 태그 이름을 입력하고 Enter를 누르십시오:
-FIF_CT_ITP,Enter를 눌러 새 태그 추가
-FIF_SET_CTLS,커스텀 태그 목록을 알파벳순으로 정렬
-FIF_TAG_DDTP,이 태그가 있는 에셋만 표시
-FIF_TAG_REF,새로고침
-FIF_TAG_REFTP,커스텀 태그 드롭다운 목록을 새로고침
-FIF_TAG_REN,변경
-FIF_TAG_RENTP,이 태그의 이름 변경
-FIF_TAG_COM,합치기
-FIF_TAG_COMTP,이 태그를 다른 태그와 합치기
-FIF_TAG_DEL,삭제
-FIF_TAG_DELTP,이 태그를 삭제
-FIF_UIS_WS,Steam 창작마당에서 에셋을 보려면 우클릭
-FIF_TREE_SM,작은 나무
-FIF_TREE_MD,중간 나무
-FIF_TREE_LG,큰 나무
-FIF_TAG_BAT,일괄
-FIF_TAG_BAC,뒤로
-FIF_TAG_ADD,추가
-FIF_TAG_ADDTP,선택된 에셋에 태그 추가
-FIF_TAG_REM,제거
-FIF_TAG_REMTP,선택된 에셋에서 태그 제거
-FIF_TAG_CLE,취소
-FIF_TAG_CLETP,선택 취소
-FIF_ADD_TIT,일괄 추가
-FIF_ADD_NUM,선택된 에셋의 개수:
-FIF_ADD_ADD,선택된 에셋에 기존 태그 추가:
-FIF_ADD_CHTP,이 기존 태그 추가
-FIF_ADD_TAG,태그:
-FIF_ADD_ELBL,새 태그를 입력하거나 기존 태그를 선택하세요
-FIF_REM_TIT,일괄 제거
-FIF_REM_REM,선택된 에셋에서 태그 제거:
-FIF_REM_CHTP,이 태그 제거
-FIF_REM_ELBL,태그를 선택하세요
-FIF_SE_EFI,추가 필터 패널 표시
-FIF_EF_AC,에셋 제작자
-FIF_EF_BH,건물 높이
-FIF_EF_MET,미터
-FIF_EF_FEE,피트
-FIF_SET_ACLS,에셋 제작자 목록을 알파벳순으로 정렬
-FIF_GR_RAN,랜덤 선택
-FIF_NET_SMR,소형 도로
-FIF_NET_MDR,중형 도로
-FIF_NET_LGR,대형 도로
-FIF_NET_HGHW,고속도로
-FIF_NET_PATH,길
-FIF_NET_WALL,벽과 울타리
-FIF_NET_WAT,물 구조물
-FIF_PROP_MAR,에디터 마커
-FIF_NET_TNR,작은 도로
-FIF_NET_UTI,전력
-FIF_NET_TRA,기차
-FIF_SET_PM,인게임에서 마커 유형 프롭 표시
-FIF_SET_PMTP,인게임에서 마커 유형 프롭은 보이지 않고 작동하지 않습니다. Move It을 사용해 삭제하세요.
-FIF_SET_IC,각 에셋의 존재하는 인스턴스 개수 표시
-FIF_EF_UN,사용되지 않은 에셋
-FIF_QM_TIT,퀵 메뉴
-FIF_UIS_UN,사용되지 않음
-FIF_UIS_IN,사용 중
-FIF_SET_ICTP,이 옵션은 검색 속도를 약간 느려지게 합니다. 필요하지 않을 때는 비활성화하세요.
-FIF_SET_PO,Procedural Objects 포함
-FIF_SET_ICO,기존 정렬 옵션 사용
-FIF_SET_ICUS,사용된 에셋을 위에 표시
-FIF_SET_ICUN,사용되지 않은 에셋을 위에 표시
-FIF_TAG_BATTP,일괄 편집
-FIF_SE_SEBTP,검색창 지우기
-FIF_SET_DB,Steam 오버레이 대신 시스템 기본 브라우저 사용
-FIF_SET_DBTP,에셋 섬네일에서 스팀 아이콘을 우클릭하여 Steam 창작마당에서 에셋을 확인하십시오
-FIF_NET_ONE,일방통행 도로
-FIF_NET_PAR,가변 주차 허용
-FIF_NET_NOP,가변 주차 없음
-FIF_PROP_VEH,정렬되지 않은 차량
-FIF_PROP_TRE,나무
-FIF_SET_BACK,메인 패널에 밝은 배경색 사용
-FIF_SET_BACKTP,어두운 에셋을 더 쉽게 볼 수 있지만 밝은 에셋을 보기 어려워집니다
-FIF_SET_DUN,미래 업데이트 알림 사용 안 함
-FIF_PROP_MOT,자동차
-FIF_PROP_RAI,철도 차량
-FIF_PROP_AIR,항공기
-FIF_PROP_WAT,선박
-FIF_EF_SB,서브-빌딩
-FIF_ATP_TP,우클릭으로 드래그해 이 패널 이동
-FIF_SET_ATP,에셋 유형 패널 보이기
-FIF_EF_CT,커스텀 태그 포함
-FIF_EF_NCT,커스텀 태그 미포함
-FIF_UPN_UP,업데이트
-FIF_PROP_TC,지형을 따르는
-FIF_PROP_NTC,지형을 따르지 않는
-FIF_SET_SSK,각 에셋 유형에 대해 별도의 검색 쿼리 키워드 사용
-FIF_SET_SSKTP,임시로 쿼리 키워드를 공유하도록 에셋 유형을 전환할 때 SHIFT를 누른 상태로 있으십시오
-FIF_TAG_SA,모두 선택
-FIF_TAG_SATP,표시된 모든 항목 선택
-FIF_EF_UNEXP,모두 내보내기
-FIF_EF_UNEXPTP,사용되지 않는 모든 창작마당 ID 목록을 창작마당 링크가 있는 HTML 파일로 내보내기
-FIF_EF_UNEXPSE,검색된 것 내보내기
-FIF_EF_UNEXPTPSE,마지막 검색에서의 사용되지 않는 창작마당 ID 목록을 창작마당 링크가 있는 HTML 파일로 내보내기
-FIF_EF_LC,로컬 커스텀
-FIF_EF_WC,창작마당 커스텀
-FIF_EF_DLC,DLC/CCP 필요
-FIF_LOC_TOOL,클릭해서 선택된 에셋의 다음 인스턴스를 찾습니다. SHIFT를 누른 상태에서 클릭해서 다음 PO 인스턴스를 찾습니다.
-FIF_REF_DIS,창 새로고침
-FIF_EF_US,사용된 에셋
-FIF_EF_USEXPTP,사용된 모든 창작마당 ID의 목록을 창작마당 링크가 있는 HTML 파일로 내보내기
-FIF_EF_USEXPTPSE,마지막 검색에서 사용된 창작마당 ID의 목록을 창작마당 링크가 있는 HTML 파일로 내보내기
-FIF_SE_SIZEX,건물 크기 필터를 초기화하려면 x를 클릭하십시오.
-FIF_SET_UIVP,바닐라 패널에서 Find It 2의 추가 UI 비활성화(재시작 필요)
-FIF_SET_UIVPTP,"포함: 커스텀 태그 아이콘, 스팀 아이콘 및 DLC 아이콘"
-FIF_DOU_MESH,Mesh Info에서 보기
-FIF_DOU_MESHNO,Mesh Info 모드가 설치되지 않았거나 활성화되지 않았습니다
-FIF_DOU_MESHTYPE,Mesh Info 모드는 네트워크가 아닌 커스텀 에셋만 지원합니다
-FIF_DOU_MESHOPEN,이 에셋을 Mesh Info 모드에서 보기
-FIF_DOU_RICO,RICO Revisited에서 보기
-FIF_DOU_RICONO,RICO Revisited 모드가 설치되지 않았거나 활성화되지 않았습니다
-FIF_DOU_RICOTYPE,RICO Revisited 모드는 빌딩 에셋만 지원합니다
-FIF_DOU_RICOOPEN,이 에셋을 RICO Revisited 모드에서 보기
-FIF_DOU_FOLD,파일 폴더 열기
-FIF_DOU_FOLDCUS,이 기능은 커스텀 에셋에만 가능합니다
-FIF_DOU_FOLDOPEN,이 에셋의 상위 폴더 열기
-FIF_UIS_CNWS,non-workshop 커스텀 에셋
-FIF_NET_BUS,버스 차선
-FIF_NET_TRO,트롤리버스 차선
-FIF_NET_BIK,자전거 차선
-FIF_NET_TRM,트램 트랙
-FIF_NET_MET,지하철
-FIF_SET_REC,최근 다운로드 정렬 방식(재시작 필요)
-FIF_SET_RECPC,상위 폴더 생성 시간
-FIF_SET_RECPM,상위 폴더 수정 시간
-FIF_SET_RECFC,CRP 파일 생성 시간
-FIF_SET_RECFM,CRP 파일 수정 시간
-FIF_SET_DIS,텍스트 즉시 검색 비활성화. 새 텍스트 검색을 제출하려면 ENTER를 누르십시오.
-FIF_SET_DISTP,검색창에 입력할 때 UI 랙을 줄이려면 이 옵션을 사용하세요
-FIF_SET_STAB,검색 탭 보이기
-FIF_STAB_NTAB,새 탭
-FIF_SET_DSK,Find It 패널이 닫혔을 때 보조 단축키 비활성화
-FIF_SET_DSKTP,TM:PE와의 충돌 방지. Find It 패널이 닫혔을 때는 메인 키보드 단축키만 기능합니다.
-FIF_SET_CFFL,구성 파일 위치
-FIF_DOU_WS,Steam 창작마당 페이지
-FIF_DOU_WS_STEAM,via Steam
-FIF_DOU_WS_BROWSER,via default browser
-FIF_DOU_WS_NOID,이 기능은 Steam 창작마당 ID가 있는 커스텀 에셋에서만 작동합니다.
-FIF_DOU_WS_STEAMTP,이 에셋을 Steam 오버레이로 Steam 창작마당에서 보기
-FIF_DOU_WS_BROWSERTP,이 에셋을 기본 브라우저로 Steam 창작마당에서 보기
+"CODE","ko"
+"NAME","한국어"
+"FIF_DESC","자산 정리 및 찾기"
+"FIF_SET_DM","디버그 메시지 기록 비활성화"
+"FIF_SET_DMTP","선택하면 디버그 메시지가 기록되지 않습니다."
+"FIF_SET_CMT","중앙 메인 툴바"
+"FIF_SET_CMTTP","메인 툴바가 일정 길이를 넘어서면 중앙으로 합니다."
+"FIF_SET_UL","모두 잠금해제"
+"FIF_SET_ULTP","잠긴 상태에서도 아이템을 선택하고 배치할 수 있게 합니다."
+"FIF_SET_BP","다음 불러올 때 잘못된 프롭 고치기"
+"FIF_SET_BPTP","문제를 유발하는 모든 프롭을 제거합니다. 옵션을 체크하고 세이브를 불러오세요"
+"FIF_SE_WF","커스텀"
+"FIF_SE_VF","바닐라"
+"FIF_SE_IA","모두"
+"FIF_SE_IN","네트워크"
+"FIF_SE_IP","Ploppable"
+"FIF_SE_IG","Growable"
+"FIF_SE_IR","RICO"
+"FIF_SE_IPR","프롭"
+"FIF_SE_ID","데칼"
+"FIF_SE_IT","나무"
+"FIF_SE_LV","건물 레벨"
+"FIF_SE_SZ","크기: "
+"FIF_SE_SC","SHIFT 또는 CTRL을 누른 상태로 카테고리 중복 선택"
+"FIF_PLOP_E","전기"
+"FIF_PLOP_W","수도/하수"
+"FIF_PLOP_G","쓰레기"
+"FIF_PLOP_H","의료"
+"FIF_PLOP_F","소방"
+"FIF_PLOP_P","경찰"
+"FIF_PLOP_ED","교육"
+"FIF_PLOP_PT","대중교통"
+"FIF_PLOP_PPW","공원/광장/자연"
+"FIF_PLOP_U","고유 건물"
+"FIF_PLOP_I","산업"
+"FIF_PLOP_D","재해"
+"FIF_PLOP_C","캠퍼스"
+"FIF_PLOP_V","대학 스포츠"
+"FIF_PLOP_FI","낚시"
+"FIF_GR_LDR","저밀도 주거"
+"FIF_GR_HDR","고밀도 주거"
+"FIF_GR_LDRE","저밀도 주거 ECO"
+"FIF_GR_HDRE","고밀도 주거 ECO"
+"FIF_GR_LDC","저밀도 상업"
+"FIF_GR_HDC","고밀도 상업"
+"FIF_GR_CE","상업 ECO"
+"FIF_GR_O","사무"
+"FIF_GR_ITC","IT 클러스터"
+"FIF_GR_GI","일반 산업"
+"FIF_GR_FAI","농업"
+"FIF_GR_FOI","산림업"
+"FIF_GR_OII","석유산업"
+"FIF_GR_ORI","광업"
+"FIF_GR_LC","여가 상업"
+"FIF_GR_TC","관광 상업"
+"FIF_SO_RETP","관련성으로 정렬. 원래 Find It과 같음"
+"FIF_SO_NETP","최근 다운로드 순으로 정렬"
+"FIF_SO_RE","관련성"
+"FIF_SO_NE","최근 다운로드"
+"TRN_CHOICE","언어 선택 (재시작 필요)"
+"TRN_SYS","시스템 언어 사용"
+"FIF_PROP_IND","산업"
+"FIF_PROP_PAR","공원"
+"FIF_PROP_COM","일반"
+"FIF_PROP_RES","주거"
+"FIF_PROP_BIL","간판"
+"FIF_PROP_SPE","특수 간판"
+"FIF_PROP_LIG","조명"
+"FIF_PROP_NAT","자연"
+"FIF_PROP_UNS","미분류"
+"FIF_SET_KS","메인 키보드 단축키"
+"FIF_SE_IGR","Grwb/RICO"
+"FIF_SET_CTFL","커스텀 태그 파일 위치 (이 파일을 주기적으로 백업하십시오)"
+"FIF_SET_CTFOP","파일 탐색기에서 보기"
+"FIF_SE_SCTP","커스텀 태그 태널 표시"
+"FIF_POP_SCR","스크롤 업/다운에 마우스 휠 사용"
+"FIF_POP_CON","확인"
+"FIF_POP_CAN","취소"
+"FIF_POP_NU","이것은 되돌릴 수 없습니다."
+"FIF_CO_TIT","합치기"
+"FIF_CO_MSG","합칠 존재하는 태그를 선택하십시오."
+"FIF_CO_CH","선택"
+"FIF_CO_CHTP","이 기존 태그와 합치기"
+"FIF_CO_CHLBL","합치기: "
+"FIF_CO_NELBL","존재하는 태그를 선택해주세요"
+"FIF_DE_TIT","삭제"
+"FIF_DE_MSG","이 태그를 정말 삭제하시겠습니까?"
+"FIF_RE_TIT","변경"
+"FIF_RE_MSG","새 태그 이름을 입력하고 Enter를 누르십시오."
+"FIF_RE_ITP","Enter를 눌러 새 태그 이름 제출"
+"FIF_RE_ELBL","새 태그 이름을 입력해주세요"
+"FIF_RE_NEWLBL","새 태그 이름: "
+"FIF_RE_SLBL","태그 이름이 너무 짧습니다"
+"FIF_RE_AELBL","이미 존재하는 태그입니다"
+"FIF_CT_TIT","커스텀 태그"
+"FIF_CT_DDMSG","이 에셋에 기존 태그 추가:"
+"FIF_CT_DDTP","이 에셋에 기존 태그 추가"
+"FIF_CT_ILBL1","또는"
+"FIF_CT_ILBL2","새 태그 이름을 입력하고 Enter를 누르십시오:"
+"FIF_CT_ITP","Enter를 눌러 새 태그 추가"
+"FIF_SET_CTLS","커스텀 태그 목록을 알파벳순으로 정렬"
+"FIF_TAG_DDTP","이 태그가 있는 에셋만 표시"
+"FIF_TAG_REF","새로고침"
+"FIF_TAG_REFTP","커스텀 태그 드롭다운 목록을 새로고침"
+"FIF_TAG_REN","변경"
+"FIF_TAG_RENTP","이 태그의 이름 변경"
+"FIF_TAG_COM","합치기"
+"FIF_TAG_COMTP","이 태그를 다른 태그와 합치기"
+"FIF_TAG_DEL","삭제"
+"FIF_TAG_DELTP","이 태그를 삭제"
+"FIF_UIS_WS","Steam 창작마당에서 에셋을 보려면 우클릭"
+"FIF_TREE_SM","작은 나무"
+"FIF_TREE_MD","중간 나무"
+"FIF_TREE_LG","큰 나무"
+"FIF_TAG_BAT","일괄"
+"FIF_TAG_BAC","뒤로"
+"FIF_TAG_ADD","추가"
+"FIF_TAG_ADDTP","선택된 에셋에 태그 추가"
+"FIF_TAG_REM","제거"
+"FIF_TAG_REMTP","선택된 에셋에서 태그 제거"
+"FIF_TAG_CLE","취소"
+"FIF_TAG_CLETP","선택 취소"
+"FIF_ADD_TIT","일괄 추가"
+"FIF_ADD_NUM","선택된 에셋의 개수:"
+"FIF_ADD_ADD","선택된 에셋에 기존 태그 추가:"
+"FIF_ADD_CHTP","이 기존 태그 추가"
+"FIF_ADD_TAG","태그:"
+"FIF_ADD_ELBL","새 태그를 입력하거나 기존 태그를 선택하세요"
+"FIF_REM_TIT","일괄 제거"
+"FIF_REM_REM","선택된 에셋에서 태그 제거:"
+"FIF_REM_CHTP","이 태그 제거"
+"FIF_REM_ELBL","태그를 선택하세요"
+"FIF_SE_EFI","추가 필터 패널 표시"
+"FIF_EF_AC","에셋 제작자"
+"FIF_EF_BH","건물 높이"
+"FIF_EF_MET","미터"
+"FIF_EF_FEE","피트"
+"FIF_SET_ACLS","에셋 제작자 목록을 알파벳순으로 정렬"
+"FIF_GR_RAN","랜덤 선택"
+"FIF_NET_SMR","소형 도로"
+"FIF_NET_MDR","중형 도로"
+"FIF_NET_LGR","대형 도로"
+"FIF_NET_HGHW","고속도로"
+"FIF_NET_PATH","길"
+"FIF_NET_WALL","벽과 울타리"
+"FIF_NET_WAT","물 구조물"
+"FIF_PROP_MAR","에디터 마커"
+"FIF_NET_TNR","작은 도로"
+"FIF_NET_UTI","전력"
+"FIF_NET_TRA","기차"
+"FIF_SET_PM","인게임에서 마커 유형 프롭 표시"
+"FIF_SET_PMTP","인게임에서 마커 유형 프롭은 보이지 않고 작동하지 않습니다. Move It을 사용해 삭제하세요."
+"FIF_SET_IC","각 에셋의 존재하는 인스턴스 개수 표시"
+"FIF_EF_UN","사용되지 않은 에셋"
+"FIF_QM_TIT","퀵 메뉴"
+"FIF_UIS_UN","사용되지 않음"
+"FIF_UIS_IN","사용 중"
+"FIF_SET_ICTP","이 옵션은 검색 속도를 약간 느려지게 합니다. 필요하지 않을 때는 비활성화하세요."
+"FIF_SET_PO","Procedural Objects 포함"
+"FIF_SET_ICO","기존 정렬 옵션 사용"
+"FIF_SET_ICUS","사용된 에셋을 위에 표시"
+"FIF_SET_ICUN","사용되지 않은 에셋을 위에 표시"
+"FIF_TAG_BATTP","일괄 편집"
+"FIF_SE_SEBTP","검색창 지우기"
+"FIF_SET_DB","Steam 오버레이 대신 시스템 기본 브라우저 사용"
+"FIF_SET_DBTP","에셋 섬네일에서 스팀 아이콘을 우클릭하여 Steam 창작마당에서 에셋을 확인하십시오"
+"FIF_NET_ONE","일방통행 도로"
+"FIF_NET_PAR","가변 주차 허용"
+"FIF_NET_NOP","가변 주차 없음"
+"FIF_PROP_VEH","정렬되지 않은 차량"
+"FIF_PROP_TRE","나무"
+"FIF_SET_BACK","메인 패널에 밝은 배경색 사용"
+"FIF_SET_BACKTP","어두운 에셋을 더 쉽게 볼 수 있지만 밝은 에셋을 보기 어려워집니다"
+"FIF_SET_DUN","미래 업데이트 알림 사용 안 함"
+"FIF_PROP_MOT","자동차"
+"FIF_PROP_RAI","철도 차량"
+"FIF_PROP_AIR","항공기"
+"FIF_PROP_WAT","선박"
+"FIF_EF_SB","서브-빌딩"
+"FIF_ATP_TP","우클릭으로 드래그해 이 패널 이동"
+"FIF_SET_ATP","에셋 유형 패널 보이기"
+"FIF_EF_CT","커스텀 태그 포함"
+"FIF_EF_NCT","커스텀 태그 미포함"
+"FIF_UPN_UP","업데이트"
+"FIF_PROP_TC","지형을 따르는"
+"FIF_PROP_NTC","지형을 따르지 않는"
+"FIF_SET_SSK","각 에셋 유형에 대해 별도의 검색 쿼리 키워드 사용"
+"FIF_SET_SSKTP","임시로 쿼리 키워드를 공유하도록 에셋 유형을 전환할 때 SHIFT를 누른 상태로 있으십시오"
+"FIF_TAG_SA","모두 선택"
+"FIF_TAG_SATP","표시된 모든 항목 선택"
+"FIF_EF_UNEXP","모두 내보내기"
+"FIF_EF_UNEXPTP","사용되지 않는 모든 창작마당 ID 목록을 창작마당 링크가 있는 HTML 파일로 내보내기"
+"FIF_EF_UNEXPSE","검색된 것 내보내기"
+"FIF_EF_UNEXPTPSE","마지막 검색에서의 사용되지 않는 창작마당 ID 목록을 창작마당 링크가 있는 HTML 파일로 내보내기"
+"FIF_EF_LC","로컬 커스텀"
+"FIF_EF_WC","창작마당 커스텀"
+"FIF_EF_DLC","DLC/CCP 필요"
+"FIF_LOC_TOOL","클릭해서 선택된 에셋의 다음 인스턴스를 찾습니다. SHIFT를 누른 상태에서 클릭해서 다음 PO 인스턴스를 찾습니다."
+"FIF_REF_DIS","창 새로고침"
+"FIF_EF_US","사용된 에셋"
+"FIF_EF_USEXPTP","사용된 모든 창작마당 ID의 목록을 창작마당 링크가 있는 HTML 파일로 내보내기"
+"FIF_EF_USEXPTPSE","마지막 검색에서 사용된 창작마당 ID의 목록을 창작마당 링크가 있는 HTML 파일로 내보내기"
+"FIF_SE_SIZEX","건물 크기 필터를 초기화하려면 x를 클릭하십시오."
+"FIF_SET_UIVP","바닐라 패널에서 Find It 2의 추가 UI 비활성화(재시작 필요)"
+"FIF_SET_UIVPTP","포함: 커스텀 태그 아이콘, 스팀 아이콘 및 DLC 아이콘"
+"FIF_DOU_MESH","Mesh Info에서 보기"
+"FIF_DOU_MESHNO","Mesh Info 모드가 설치되지 않았거나 활성화되지 않았습니다"
+"FIF_DOU_MESHTYPE","Mesh Info 모드는 네트워크가 아닌 커스텀 에셋만 지원합니다"
+"FIF_DOU_MESHOPEN","이 에셋을 Mesh Info 모드에서 보기"
+"FIF_DOU_RICO","RICO Revisited에서 보기"
+"FIF_DOU_RICONO","RICO Revisited 모드가 설치되지 않았거나 활성화되지 않았습니다"
+"FIF_DOU_RICOTYPE","RICO Revisited 모드는 빌딩 에셋만 지원합니다"
+"FIF_DOU_RICOOPEN","이 에셋을 RICO Revisited 모드에서 보기"
+"FIF_DOU_FOLD","파일 폴더 열기"
+"FIF_DOU_FOLDCUS","이 기능은 커스텀 에셋에만 가능합니다"
+"FIF_DOU_FOLDOPEN","이 에셋의 상위 폴더 열기"
+"FIF_UIS_CNWS","non-workshop 커스텀 에셋"
+"FIF_NET_BUS","버스 차선"
+"FIF_NET_TRO","트롤리버스 차선"
+"FIF_NET_BIK","자전거 차선"
+"FIF_NET_TRM","트램 트랙"
+"FIF_NET_MET","지하철"
+"FIF_SET_REC","최근 다운로드 정렬 방식(재시작 필요)"
+"FIF_SET_RECPC","상위 폴더 생성 시간"
+"FIF_SET_RECPM","상위 폴더 수정 시간"
+"FIF_SET_RECFC","CRP 파일 생성 시간"
+"FIF_SET_RECFM","CRP 파일 수정 시간"
+"FIF_SET_DIS","텍스트 즉시 검색 비활성화. 새 텍스트 검색을 제출하려면 ENTER를 누르십시오."
+"FIF_SET_DISTP","검색창에 입력할 때 UI 랙을 줄이려면 이 옵션을 사용하세요"
+"FIF_SET_STAB","검색 탭 보이기"
+"FIF_STAB_NTAB","새 탭"
+"FIF_SET_DSK","Find It 패널이 닫혔을 때 보조 단축키 비활성화"
+"FIF_SET_DSKTP","TM:PE와의 충돌 방지. Find It 패널이 닫혔을 때는 메인 키보드 단축키만 기능합니다."
+"FIF_SET_CFFL","구성 파일 위치"
+"FIF_DOU_WS","Steam 창작마당 페이지"
+"FIF_DOU_WS_STEAM","via Steam"
+"FIF_DOU_WS_BROWSER","via default browser"
+"FIF_DOU_WS_NOID","이 기능은 Steam 창작마당 ID가 있는 커스텀 에셋에서만 작동합니다."
+"FIF_DOU_WS_STEAMTP","이 에셋을 Steam 오버레이로 Steam 창작마당에서 보기"
+"FIF_DOU_WS_BROWSERTP","이 에셋을 기본 브라우저로 Steam 창작마당에서 보기"

@@ -1,240 +1,240 @@
-CODE,fr
-NAME,Français
-FIF_DESC,Trouvez et organisez vos ressources
-FIF_SET_DM,Désactiver la journalisation des messages de débogage
-FIF_SET_DMTP,"Si coché, les messages de débogage ne seront pas enregistrés."
-FIF_SET_CMT,Centrer la barre d'outils principale
-FIF_SET_CMTTP,La barre d'outils principale sera centrée si elle dépasse une certaine longueur.
-FIF_SET_UL,Tout débloquer
-FIF_SET_ULTP,Vous permet de sélectionner et de placer des éléments même lorsqu'ils sont verrouillés.
-FIF_SET_BP,Correction des mauvais accessoires lors de la prochaine sauvegarde
-FIF_SET_BPTP,Supprimer tous les accessoires causant des problèmes. Cochez l'option et chargez votre sauvegarde
-FIF_SE_WF,Custom
-FIF_SE_VF,Vanilla
-FIF_SE_IA,Tout
-FIF_SE_IN,Réseau
-FIF_SE_IP,Ploppable
-FIF_SE_IG,Growable
-FIF_SE_IR,RICO
-FIF_SE_IPR,Prop
-FIF_SE_ID,Decal
-FIF_SE_IT,Arbre
-FIF_SE_LV,Niveau du bâtiment
-FIF_SE_SZ,Size:
-FIF_SE_SC,Maintenez MAJ ou CTRL pour sélectionner plusieurs catégories
-FIF_PLOP_E,Électricité
-FIF_PLOP_W,Eau / eaux usées / chauffage
-FIF_PLOP_G,Déchets
-FIF_PLOP_H,Santé
-FIF_PLOP_F,Pompiers
-FIF_PLOP_P,Police
-FIF_PLOP_ED,Éducation
-FIF_PLOP_PT,Transports
-FIF_PLOP_PPW,Parc / Place / Faune
-FIF_PLOP_U,Bâtiments uniques
-FIF_PLOP_I,Industrie
-FIF_PLOP_D,Catastrophe
-FIF_PLOP_C,Campus
-FIF_PLOP_V,Sports universitaires
-FIF_PLOP_FI,Pêche
-FIF_GR_LDR,Résidentiel de faible densité
-FIF_GR_HDR,Résidentiel de densité élevée
-FIF_GR_LDRE,Résidentiel écologique de faible densité
-FIF_GR_HDRE,Résidentiel écologique de densité élevée
-FIF_GR_LDC,Commercial de faible densité
-FIF_GR_HDC,Commercial de densité élevée
-FIF_GR_CE,Commercial écologique
-FIF_GR_O,Bureaux
-FIF_GR_ITC,Spécialisation informatique
-FIF_GR_GI,Industrie générique
-FIF_GR_FAI,Industrie agricole
-FIF_GR_FOI,Industrie forestière
-FIF_GR_OII,Industrie pétrolière
-FIF_GR_ORI,Industrie minière
-FIF_GR_LC,Commercial de divertissement
-FIF_GR_TC,Commercial touristique
-FIF_SO_RETP,Trier par pertinence. Identique au Find It d'origine
-FIF_SO_NETP,Trier par téléchargement le plus récent
-FIF_SO_RE,Pertinence
-FIF_SO_NE,DLs récents
-TRN_CHOICE,Choix de langue (actif au prochain démarrage)
-TRN_SYS,Utiliser la langue du système
-FIF_PROP_IND,Industriel
-FIF_PROP_PAR,Parc
-FIF_PROP_COM,Commun
-FIF_PROP_RES,Résidentiel
-FIF_PROP_BIL,Panneaux
-FIF_PROP_SPE,Panneaux spéciaux
-FIF_PROP_LIG,Lumières
-FIF_PROP_NAT,Naturels
-FIF_PROP_UNS,Sans catégorie
-FIF_SET_KS,
-FIF_SE_IGR,Grwb/RICO
-FIF_SET_CTFL,Fichier des étiquettes personnalisés (pensez à sauvegarder le fichier régulièrement)
-FIF_SET_CTFOP,Afficher dans l'explorateur de fichiers
-FIF_SE_SCTP,Afficher le panneau des étiquettes personnalisées
-FIF_POP_SCR,Utilisez la molette de la souris pour naviguer verticalement
-FIF_POP_CON,Confirmer
-FIF_POP_CAN,Annuler
-FIF_POP_NU,Cela ne peut être annulé
-FIF_CO_TIT,Fusionner
-FIF_CO_MSG,Sélectionnez une étiquette existante avec laquelle fusionner
-FIF_CO_CH,Choisir
-FIF_CO_CHTP,Fusionner avec cette étiquette existante
-FIF_CO_CHLBL,Fusionner avec :
-FIF_CO_NELBL,Veuillez choisir une étiquette existante
-FIF_DE_TIT,Supprimer
-FIF_DE_MSG,Voulez-vous vraiment supprimer cette étiquette ?
-FIF_RE_TIT,Renommer
-FIF_RE_MSG,Saisissez un nouveau nom d'étiquette et appuyez sur Entrer
-FIF_RE_ITP,Appuyez sur Entrer pour valider le nouveau nom
-FIF_RE_ELBL,Veuillez saisir un nouveau nom
-FIF_RE_NEWLBL,Nouveau nom :
-FIF_RE_SLBL,Ce nom d'étiquette est trop court
-FIF_RE_AELBL,Ce nom d'étiquette existe déjà
-FIF_CT_TIT,Étiquette personnalisée
-FIF_CT_DDMSG,Ajouter une étiquette existante à cette ressource
-FIF_CT_DDTP,Ajouter une étiquette existante à cette ressource :
-FIF_CT_ILBL1,Ou
-FIF_CT_ILBL2,Saisissez une nouvelle étiquette et appuyez sur Entrer
-FIF_CT_ITP,Appuyer sur Entrer pour ajouter l'/les étiquette(s)
-FIF_SET_CTLS,Trier les étiquette alphabétiquement
-FIF_TAG_DDTP,Afficher uniquement les ressources avec cette étiquette
-FIF_TAG_REF,Rafraîchir
-FIF_TAG_REFTP,Rafraîchir la liste déroulante des étiquettes
-FIF_TAG_REN,Renommer
-FIF_TAG_RENTP,Renommer cette étiquette
-FIF_TAG_COM,Fusionner
-FIF_TAG_COMTP,Fusionner cette étiquette avec un autre étiquette
-FIF_TAG_DEL,Supprimer
-FIF_TAG_DELTP,Supprimer cette étiquette
-FIF_UIS_WS,Clic droit pour voir cette ressource dans le Steam Workshop
-FIF_TREE_SM,Petits arbres
-FIF_TREE_MD,Arbres moyens
-FIF_TREE_LG,Grands arbres
-FIF_TAG_BAT,Groupe
-FIF_TAG_BAC,Retour
-FIF_TAG_ADD,Ajouter
-FIF_TAG_ADDTP,Ajouter une étiquette sur les ressources sélectionnées
-FIF_TAG_REM,Retirer
-FIF_TAG_REMTP,Retirer une étiquette des ressources sélectionnées
-FIF_TAG_CLE,Nettoyer
-FIF_TAG_CLETP,Nettoyer la sélection
-FIF_ADD_TIT,Ajout groupé
-FIF_ADD_NUM,Nombre de ressources sélectionnées :
-FIF_ADD_ADD,Ajouter une étiquette existante sur les ressources sélectionnées
-FIF_ADD_CHTP,Ajouté cette étiquette
-FIF_ADD_TAG,Étiquette
-FIF_ADD_ELBL,Entrez une nouvelle étiquette ou sélectionnez une étiquette existante
-FIF_REM_TIT,Retrait groupé
-FIF_REM_REM,Retirer une étiquette des ressources sélectionnées
-FIF_REM_CHTP,Retirer cette étiquette
-FIF_REM_ELBL,Choisissez une étiquette
-FIF_SE_EFI,Afficher le panneau des filtres supplémentaires
-FIF_EF_AC,Créateur de ressource
-FIF_EF_BH,Hauteur de bâtiment
-FIF_EF_MET,mètres
-FIF_EF_FEE,pieds
-FIF_SET_ACLS,Trier les créateurs de ressource alphabétiquement
-FIF_GR_RAN,Sélection aléatoire
-FIF_NET_SMR,Petites routes
-FIF_NET_MDR,Routes moyennes
-FIF_NET_LGR,Grandes routes
-FIF_NET_HGHW,Autoroutes
-FIF_NET_PATH,Chemins
-FIF_NET_WALL,Murs et clôtures
-FIF_NET_WAT,Structures hydrauliques
-FIF_PROP_MAR,Marqueurs de l'éditeur de ressource
-FIF_NET_TNR,Routes minuscules
-FIF_NET_UTI,Services
-FIF_NET_TRA,Train
-FIF_SET_PM,Afficher les accessoires de type marqueur en jeu
-FIF_SET_PMTP,Les marqueurs sont invisible et la plupart ne fonctionnent pas en jeu. Utilisez Move It pour les supprimer.
-FIF_SET_IC,Afficher le nombre d'instance de chaque ressource
-FIF_EF_UN,Ressource inutilisé
-FIF_QM_TIT,Menu rapide
-FIF_UIS_UN,Inutilisé
-FIF_UIS_IN,Utilisé
-FIF_SET_ICTP,Cette option ralentis ma recherche. Ne l'activer que si nécessaire
-FIF_SET_PO,Inclure les objets procéduraux
-FIF_SET_ICO,Utiliser l'option de tri d'origine
-FIF_SET_ICUS,Afficher les ressources utilisées en premier
-FIF_SET_ICUN,Afficher les ressources non utilisées en premier
-FIF_TAG_BATTP,Édition groupée
-FIF_SE_SEBTP,Vider la barre de recherche
-FIF_SET_DB,Utiliser le navigateur par défaut du système au lieu de la superposition Steam
-FIF_SET_DBTP,Clic droit sur l'icone Steam d'une ressource pour l'afficher dans le Steam Workshop
-FIF_NET_ONE,Routes à sens unique
-FIF_NET_PAR,Autoriser le stationnement sur la route
-FIF_NET_NOP,Interdire le stationnement sur la route
-FIF_PROP_VEH,Véhicule sans catégorie
-FIF_PROP_TRE,Arbre
-FIF_SET_BACK,Utiliser une couleur de fond claire pour le panneau principal
-FIF_SET_BACKTP,"Il est plus facile de voir les ressources sombre, mais plus difficile de voir les ressources claires"
-FIF_SET_DUN,Désactiver les futures notifications de mise-à-jour
-FIF_PROP_MOT,Véhicule motorisé
-FIF_PROP_RAI,Véhicule ferroviaire
-FIF_PROP_AIR,Avion
-FIF_PROP_WAT,Bateau
-FIF_EF_SB,Sub-buildings
-FIF_ATP_TP,
-FIF_SET_ATP,Afficher le panneau de type de ressource
-FIF_EF_CT,Avec étiquette personnalisée
-FIF_EF_NCT,Sans étiquette personnalisée
-FIF_UPN_UP,Mettre à jour
-FIF_PROP_TC,S'adapte au terrain
-FIF_PROP_NTC,Ne s'adapte pas au terrain
-FIF_SET_SSK,Utilisez un mot clé de requête de recherche distinct pour chaque type de ressource
-FIF_SET_SSKTP,Maintenez MAJ lorsque vous changez de type de ressource pour partager temporairement les mot-clé de requête
-FIF_TAG_SA,Tout sélectionner
-FIF_TAG_SATP,Sélectionner toutes les ressources affichés
-FIF_EF_UNEXP,Tout exporter
-FIF_EF_UNEXPTP,Exporter la liste des identifiant du Workshop de toutes les ressources inutilisés dans un fichier HTML avec les liens du Workshop
-FIF_EF_UNEXPSE,Exporter la recherche
-FIF_EF_UNEXPTPSE,Exporter la liste des identifiant du Workshop des ressources recherchées inutilisées dans un fichier HTML avec les liens du Workshop
-FIF_EF_LC,Custom locaux
-FIF_EF_WC,Custom du Workshop
-FIF_EF_DLC,Requiert DLC/CCP
-FIF_LOC_TOOL,Cliquez pour localiser l'instance suivante de la ressource sélectionnée. Maintenez MAJ et cliquez pour localiser l'instance de PO (objet procédural) suivant.
-FIF_REF_DIS,Rafraichir l'affichage
-FIF_EF_US,Ressources utilisées
-FIF_EF_USEXPTP,Exporter la liste des identifiant du Workshop de toutes les ressources utilisées dans un fichier HTML avec les liens du Workshop
-FIF_EF_USEXPTPSE,Exporter la liste des identifiant du Workshop des ressources recherchées utilisées dans un fichier HTML avec les liens du Workshop
-FIF_SE_SIZEX,Cliquez sur le x pour réinitialiser les filtres de taille de bâtiment
-FIF_SET_UIVP,Ne pas afficher l'interface utilisateur supplémentaire de Find It 2 sur les panneaux par défaut (redémarrage requis)
-FIF_SET_UIVPTP,"Comprend : icônes d'étiquettes personnalisées, icônes Steam et icônes de DLC"
-FIF_DOU_MESH,Voir avec Mesh Info
-FIF_DOU_MESHNO,Le mod Mesh Info n'est pas installé ou activé
-FIF_DOU_MESHTYPE,Le mod Mesh Info ne supportes pas les ressources de type réseau
-FIF_DOU_MESHOPEN,Voir cette ressource avec le mod Mesh Info
-FIF_DOU_RICO,Voir avec RICO Revisited
-FIF_DOU_RICONO,Le mod Ploppable RICO Revisited n'est pas installé ou activé
-FIF_DOU_RICOTYPE,Le mod Ploppable RICO Revisited ne supporte que les bâtiments
-FIF_DOU_RICOOPEN,Voir cette ressource dans le mod Ploppable RICO Revisited
-FIF_DOU_FOLD,Ouvrir le dossier du fichier
-FIF_DOU_FOLDCUS,Cette fonctionnalité fonctionne uniquement avec des ressources custom
-FIF_DOU_FOLDOPEN,Ouvrir le dossier parent de cette ressource
-FIF_UIS_CNWS,Ressource custom or Workshop
-FIF_NET_BUS,Lignes de bus
-FIF_NET_TRO,Lignes de trolleybus
-FIF_NET_BIK,Pistes cyclables
-FIF_NET_TRM,Voies de tram
-FIF_NET_MET,Métro
-FIF_SET_REC,Triage des téléchargements récents (redémarrage requis)
-FIF_SET_RECPC,Création du dossier parent
-FIF_SET_RECPM,Modification du dossier parent
-FIF_SET_RECFC,Création du fichier CRP
-FIF_SET_RECFM,Modification du fichier CRP
-FIF_SET_DIS,
-FIF_SET_DISTP,
-FIF_SET_STAB,
-FIF_STAB_NTAB,
-FIF_SET_DSK,
-FIF_SET_DSKTP,
-FIF_SET_CFFL,
-FIF_DOU_WS,
-FIF_DOU_WS_STEAM,
-FIF_DOU_WS_BROWSER,
-FIF_DOU_WS_NOID,
-FIF_DOU_WS_STEAMTP,
-FIF_DOU_WS_BROWSERTP,
+"CODE","fr"
+"NAME","Français"
+"FIF_DESC","Trouvez et organisez vos ressources"
+"FIF_SET_DM","Désactiver la journalisation des messages de débogage"
+"FIF_SET_DMTP","Si coché, les messages de débogage ne seront pas enregistrés."
+"FIF_SET_CMT","Centrer la barre d'outils principale"
+"FIF_SET_CMTTP","La barre d'outils principale sera centrée si elle dépasse une certaine longueur."
+"FIF_SET_UL","Tout débloquer"
+"FIF_SET_ULTP","Vous permet de sélectionner et de placer des éléments même lorsqu'ils sont verrouillés."
+"FIF_SET_BP","Correction des mauvais accessoires lors de la prochaine sauvegarde"
+"FIF_SET_BPTP","Supprimer tous les accessoires causant des problèmes. Cochez l'option et chargez votre sauvegarde"
+"FIF_SE_WF","Custom"
+"FIF_SE_VF","Vanilla"
+"FIF_SE_IA","Tout"
+"FIF_SE_IN","Réseau"
+"FIF_SE_IP","Ploppable"
+"FIF_SE_IG","Growable"
+"FIF_SE_IR","RICO"
+"FIF_SE_IPR","Prop"
+"FIF_SE_ID","Decal"
+"FIF_SE_IT","Arbre"
+"FIF_SE_LV","Niveau du bâtiment"
+"FIF_SE_SZ","Size:"
+"FIF_SE_SC","Maintenez MAJ ou CTRL pour sélectionner plusieurs catégories"
+"FIF_PLOP_E","Électricité"
+"FIF_PLOP_W","Eau / eaux usées / chauffage"
+"FIF_PLOP_G","Déchets"
+"FIF_PLOP_H","Santé"
+"FIF_PLOP_F","Pompiers"
+"FIF_PLOP_P","Police"
+"FIF_PLOP_ED","Éducation"
+"FIF_PLOP_PT","Transports"
+"FIF_PLOP_PPW","Parc / Place / Faune"
+"FIF_PLOP_U","Bâtiments uniques"
+"FIF_PLOP_I","Industrie"
+"FIF_PLOP_D","Catastrophe"
+"FIF_PLOP_C","Campus"
+"FIF_PLOP_V","Sports universitaires"
+"FIF_PLOP_FI","Pêche"
+"FIF_GR_LDR","Résidentiel de faible densité"
+"FIF_GR_HDR","Résidentiel de densité élevée"
+"FIF_GR_LDRE","Résidentiel écologique de faible densité"
+"FIF_GR_HDRE","Résidentiel écologique de densité élevée"
+"FIF_GR_LDC","Commercial de faible densité"
+"FIF_GR_HDC","Commercial de densité élevée"
+"FIF_GR_CE","Commercial écologique"
+"FIF_GR_O","Bureaux"
+"FIF_GR_ITC","Spécialisation informatique"
+"FIF_GR_GI","Industrie générique"
+"FIF_GR_FAI","Industrie agricole"
+"FIF_GR_FOI","Industrie forestière"
+"FIF_GR_OII","Industrie pétrolière"
+"FIF_GR_ORI","Industrie minière"
+"FIF_GR_LC","Commercial de divertissement"
+"FIF_GR_TC","Commercial touristique"
+"FIF_SO_RETP","Trier par pertinence. Identique au Find It d'origine"
+"FIF_SO_NETP","Trier par téléchargement le plus récent"
+"FIF_SO_RE","Pertinence"
+"FIF_SO_NE","DLs récents"
+"TRN_CHOICE","Choix de langue (actif au prochain démarrage)"
+"TRN_SYS","Utiliser la langue du système"
+"FIF_PROP_IND","Industriel"
+"FIF_PROP_PAR","Parc"
+"FIF_PROP_COM","Commun"
+"FIF_PROP_RES","Résidentiel"
+"FIF_PROP_BIL","Panneaux"
+"FIF_PROP_SPE","Panneaux spéciaux"
+"FIF_PROP_LIG","Lumières"
+"FIF_PROP_NAT","Naturels"
+"FIF_PROP_UNS","Sans catégorie"
+"FIF_SET_KS","Main Keyboard Shortcut"
+"FIF_SE_IGR","Grwb/RICO"
+"FIF_SET_CTFL","Fichier des étiquettes personnalisés (pensez à sauvegarder le fichier régulièrement)"
+"FIF_SET_CTFOP","Afficher dans l'explorateur de fichiers"
+"FIF_SE_SCTP","Afficher le panneau des étiquettes personnalisées"
+"FIF_POP_SCR","Utilisez la molette de la souris pour naviguer verticalement"
+"FIF_POP_CON","Confirmer"
+"FIF_POP_CAN","Annuler"
+"FIF_POP_NU","Cela ne peut être annulé"
+"FIF_CO_TIT","Fusionner"
+"FIF_CO_MSG","Sélectionnez une étiquette existante avec laquelle fusionner"
+"FIF_CO_CH","Choisir"
+"FIF_CO_CHTP","Fusionner avec cette étiquette existante"
+"FIF_CO_CHLBL","Fusionner avec :"
+"FIF_CO_NELBL","Veuillez choisir une étiquette existante"
+"FIF_DE_TIT","Supprimer"
+"FIF_DE_MSG","Voulez-vous vraiment supprimer cette étiquette ?"
+"FIF_RE_TIT","Renommer"
+"FIF_RE_MSG","Saisissez un nouveau nom d'étiquette et appuyez sur Entrer"
+"FIF_RE_ITP","Appuyez sur Entrer pour valider le nouveau nom"
+"FIF_RE_ELBL","Veuillez saisir un nouveau nom"
+"FIF_RE_NEWLBL","Nouveau nom :"
+"FIF_RE_SLBL","Ce nom d'étiquette est trop court"
+"FIF_RE_AELBL","Ce nom d'étiquette existe déjà"
+"FIF_CT_TIT","Étiquette personnalisée"
+"FIF_CT_DDMSG","Ajouter une étiquette existante à cette ressource"
+"FIF_CT_DDTP","Ajouter une étiquette existante à cette ressource :"
+"FIF_CT_ILBL1","Ou"
+"FIF_CT_ILBL2","Saisissez une nouvelle étiquette et appuyez sur Entrer"
+"FIF_CT_ITP","Appuyer sur Entrer pour ajouter l'/les étiquette(s)"
+"FIF_SET_CTLS","Trier les étiquette alphabétiquement"
+"FIF_TAG_DDTP","Afficher uniquement les ressources avec cette étiquette"
+"FIF_TAG_REF","Rafraîchir"
+"FIF_TAG_REFTP","Rafraîchir la liste déroulante des étiquettes"
+"FIF_TAG_REN","Renommer"
+"FIF_TAG_RENTP","Renommer cette étiquette"
+"FIF_TAG_COM","Fusionner"
+"FIF_TAG_COMTP","Fusionner cette étiquette avec un autre étiquette"
+"FIF_TAG_DEL","Supprimer"
+"FIF_TAG_DELTP","Supprimer cette étiquette"
+"FIF_UIS_WS","Clic droit pour voir cette ressource dans le Steam Workshop"
+"FIF_TREE_SM","Petits arbres"
+"FIF_TREE_MD","Arbres moyens"
+"FIF_TREE_LG","Grands arbres"
+"FIF_TAG_BAT","Groupe"
+"FIF_TAG_BAC","Retour"
+"FIF_TAG_ADD","Ajouter"
+"FIF_TAG_ADDTP","Ajouter une étiquette sur les ressources sélectionnées"
+"FIF_TAG_REM","Retirer"
+"FIF_TAG_REMTP","Retirer une étiquette des ressources sélectionnées"
+"FIF_TAG_CLE","Nettoyer"
+"FIF_TAG_CLETP","Nettoyer la sélection"
+"FIF_ADD_TIT","Ajout groupé"
+"FIF_ADD_NUM","Nombre de ressources sélectionnées :"
+"FIF_ADD_ADD","Ajouter une étiquette existante sur les ressources sélectionnées"
+"FIF_ADD_CHTP","Ajouté cette étiquette"
+"FIF_ADD_TAG","Étiquette"
+"FIF_ADD_ELBL","Entrez une nouvelle étiquette ou sélectionnez une étiquette existante"
+"FIF_REM_TIT","Retrait groupé"
+"FIF_REM_REM","Retirer une étiquette des ressources sélectionnées"
+"FIF_REM_CHTP","Retirer cette étiquette"
+"FIF_REM_ELBL","Choisissez une étiquette"
+"FIF_SE_EFI","Afficher le panneau des filtres supplémentaires"
+"FIF_EF_AC","Créateur de ressource"
+"FIF_EF_BH","Hauteur de bâtiment"
+"FIF_EF_MET","mètres"
+"FIF_EF_FEE","pieds"
+"FIF_SET_ACLS","Trier les créateurs de ressource alphabétiquement"
+"FIF_GR_RAN","Sélection aléatoire"
+"FIF_NET_SMR","Petites routes"
+"FIF_NET_MDR","Routes moyennes"
+"FIF_NET_LGR","Grandes routes"
+"FIF_NET_HGHW","Autoroutes"
+"FIF_NET_PATH","Chemins"
+"FIF_NET_WALL","Murs et clôtures"
+"FIF_NET_WAT","Structures hydrauliques"
+"FIF_PROP_MAR","Marqueurs de l'éditeur de ressource"
+"FIF_NET_TNR","Routes minuscules"
+"FIF_NET_UTI","Services"
+"FIF_NET_TRA","Train"
+"FIF_SET_PM","Afficher les accessoires de type marqueur en jeu"
+"FIF_SET_PMTP","Les marqueurs sont invisible et la plupart ne fonctionnent pas en jeu. Utilisez Move It pour les supprimer."
+"FIF_SET_IC","Afficher le nombre d'instance de chaque ressource"
+"FIF_EF_UN","Ressource inutilisé"
+"FIF_QM_TIT","Menu rapide"
+"FIF_UIS_UN","Inutilisé"
+"FIF_UIS_IN","Utilisé"
+"FIF_SET_ICTP","Cette option ralentis ma recherche. Ne l'activer que si nécessaire"
+"FIF_SET_PO","Inclure les objets procéduraux"
+"FIF_SET_ICO","Utiliser l'option de tri d'origine"
+"FIF_SET_ICUS","Afficher les ressources utilisées en premier"
+"FIF_SET_ICUN","Afficher les ressources non utilisées en premier"
+"FIF_TAG_BATTP","Édition groupée"
+"FIF_SE_SEBTP","Vider la barre de recherche"
+"FIF_SET_DB","Utiliser le navigateur par défaut du système au lieu de la superposition Steam"
+"FIF_SET_DBTP","Clic droit sur l'icone Steam d'une ressource pour l'afficher dans le Steam Workshop"
+"FIF_NET_ONE","Routes à sens unique"
+"FIF_NET_PAR","Autoriser le stationnement sur la route"
+"FIF_NET_NOP","Interdire le stationnement sur la route"
+"FIF_PROP_VEH","Véhicule sans catégorie"
+"FIF_PROP_TRE","Arbre"
+"FIF_SET_BACK","Utiliser une couleur de fond claire pour le panneau principal"
+"FIF_SET_BACKTP","Il est plus facile de voir les ressources sombre, mais plus difficile de voir les ressources claires"
+"FIF_SET_DUN","Désactiver les futures notifications de mise-à-jour"
+"FIF_PROP_MOT","Véhicule motorisé"
+"FIF_PROP_RAI","Véhicule ferroviaire"
+"FIF_PROP_AIR","Avion"
+"FIF_PROP_WAT","Bateau"
+"FIF_EF_SB","Sub-buildings"
+"FIF_ATP_TP","Right-click to drag and move this panel"
+"FIF_SET_ATP","Afficher le panneau de type de ressource"
+"FIF_EF_CT","Avec étiquette personnalisée"
+"FIF_EF_NCT","Sans étiquette personnalisée"
+"FIF_UPN_UP","Mettre à jour"
+"FIF_PROP_TC","S'adapte au terrain"
+"FIF_PROP_NTC","Ne s'adapte pas au terrain"
+"FIF_SET_SSK","Utilisez un mot clé de requête de recherche distinct pour chaque type de ressource"
+"FIF_SET_SSKTP","Maintenez MAJ lorsque vous changez de type de ressource pour partager temporairement les mot-clé de requête"
+"FIF_TAG_SA","Tout sélectionner"
+"FIF_TAG_SATP","Sélectionner toutes les ressources affichés"
+"FIF_EF_UNEXP","Tout exporter"
+"FIF_EF_UNEXPTP","Exporter la liste des identifiant du Workshop de toutes les ressources inutilisés dans un fichier HTML avec les liens du Workshop"
+"FIF_EF_UNEXPSE","Exporter la recherche"
+"FIF_EF_UNEXPTPSE","Exporter la liste des identifiant du Workshop des ressources recherchées inutilisées dans un fichier HTML avec les liens du Workshop"
+"FIF_EF_LC","Custom locaux"
+"FIF_EF_WC","Custom du Workshop"
+"FIF_EF_DLC","Requiert DLC/CCP"
+"FIF_LOC_TOOL","Cliquez pour localiser l'instance suivante de la ressource sélectionnée. Maintenez MAJ et cliquez pour localiser l'instance de PO (objet procédural) suivant."
+"FIF_REF_DIS","Rafraichir l'affichage"
+"FIF_EF_US","Ressources utilisées"
+"FIF_EF_USEXPTP","Exporter la liste des identifiant du Workshop de toutes les ressources utilisées dans un fichier HTML avec les liens du Workshop"
+"FIF_EF_USEXPTPSE","Exporter la liste des identifiant du Workshop des ressources recherchées utilisées dans un fichier HTML avec les liens du Workshop"
+"FIF_SE_SIZEX","Cliquez sur le x pour réinitialiser les filtres de taille de bâtiment"
+"FIF_SET_UIVP","Ne pas afficher l'interface utilisateur supplémentaire de Find It 2 sur les panneaux par défaut (redémarrage requis)"
+"FIF_SET_UIVPTP","Comprend : icônes d'étiquettes personnalisées, icônes Steam et icônes de DLC"
+"FIF_DOU_MESH","Voir avec Mesh Info"
+"FIF_DOU_MESHNO","Le mod Mesh Info n'est pas installé ou activé"
+"FIF_DOU_MESHTYPE","Le mod Mesh Info ne supportes pas les ressources de type réseau"
+"FIF_DOU_MESHOPEN","Voir cette ressource avec le mod Mesh Info"
+"FIF_DOU_RICO","Voir avec RICO Revisited"
+"FIF_DOU_RICONO","Le mod Ploppable RICO Revisited n'est pas installé ou activé"
+"FIF_DOU_RICOTYPE","Le mod Ploppable RICO Revisited ne supporte que les bâtiments"
+"FIF_DOU_RICOOPEN","Voir cette ressource dans le mod Ploppable RICO Revisited"
+"FIF_DOU_FOLD","Ouvrir le dossier du fichier"
+"FIF_DOU_FOLDCUS","Cette fonctionnalité fonctionne uniquement avec des ressources custom"
+"FIF_DOU_FOLDOPEN","Ouvrir le dossier parent de cette ressource"
+"FIF_UIS_CNWS","Ressource custom or Workshop"
+"FIF_NET_BUS","Lignes de bus"
+"FIF_NET_TRO","Lignes de trolleybus"
+"FIF_NET_BIK","Pistes cyclables"
+"FIF_NET_TRM","Voies de tram"
+"FIF_NET_MET","Métro"
+"FIF_SET_REC","Triage des téléchargements récents (redémarrage requis)"
+"FIF_SET_RECPC","Création du dossier parent"
+"FIF_SET_RECPM","Modification du dossier parent"
+"FIF_SET_RECFC","Création du fichier CRP"
+"FIF_SET_RECFM","Modification du fichier CRP"
+"FIF_SET_DIS","Disable instant text search. Press ENTER to submit a new text search"
+"FIF_SET_DISTP","Use this option to reduce UI lag when typing in the search box"
+"FIF_SET_STAB","Show search tabs"
+"FIF_STAB_NTAB","New tab"
+"FIF_SET_DSK","Disable secondary keyboard shortcuts when Find It panel is closed"
+"FIF_SET_DSKTP","Avoid conflicts with TM:PE. Only the main keyboard shortcut will remain functional when Find It panel is closed"
+"FIF_SET_CFFL","Configuration File Location"
+"FIF_DOU_WS","Steam Workshop page"
+"FIF_DOU_WS_STEAM","via Steam"
+"FIF_DOU_WS_BROWSER","via default browser"
+"FIF_DOU_WS_NOID","This feature only works with custom assets with Steam Workshop IDs"
+"FIF_DOU_WS_STEAMTP","See this asset on Steam Workshop in Steam overlay"
+"FIF_DOU_WS_BROWSERTP","See this asset on Steam Workshop in default browser"

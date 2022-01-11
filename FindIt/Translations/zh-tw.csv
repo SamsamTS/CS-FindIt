@@ -1,240 +1,240 @@
-CODE,zh-tw
-NAME,繁體中文
-FIF_DESC,查找和分類你的素材
-FIF_SET_DM,禁用除錯訊息記錄
-FIF_SET_DMTP,"如果勾選, 除錯訊息將不會被記錄。"
-FIF_SET_CMT,主工具欄居中
-FIF_SET_CMTTP,如果超過一定長度，主工具欄將居中。
-FIF_SET_UL,解鎖全部
-FIF_SET_ULTP,未解鎖的素材仍然可以被放置。
-FIF_SET_BP,下次讀檔時修正錯誤的物體
-FIF_SET_BPTP,移除所有可能導致錯誤的物體，勾選此設置然後讀取你的存檔。
-FIF_SE_WF,玩家自製
-FIF_SE_VF,遊戲默認
-FIF_SE_IA,全選
-FIF_SE_IN,道路
-FIF_SE_IP,可放置型建築
-FIF_SE_IG,可成長型建築
-FIF_SE_IR,RICO
-FIF_SE_IPR,物體
-FIF_SE_ID,貼花
-FIF_SE_IT,樹木
-FIF_SE_LV,建築等級 
-FIF_SE_SZ,尺吋: 
-FIF_SE_SC,按住SHIFT或CTRL鍵可以選擇多個類別
-FIF_PLOP_E,電力系統
-FIF_PLOP_W,供水和汙水處理系統
-FIF_PLOP_G,垃圾處理系統
-FIF_PLOP_H,醫療保健系統
-FIF_PLOP_F,消防系統
-FIF_PLOP_P,警力系統
-FIF_PLOP_ED,教育系統
-FIF_PLOP_PT,大眾運輸系統
-FIF_PLOP_PPW,公園和集市廣場和野生動物
-FIF_PLOP_U,獨特建築
-FIF_PLOP_I,工業產業園區
-FIF_PLOP_D,災難救濟
-FIF_PLOP_C,教育園區
-FIF_PLOP_V,大學競技
-FIF_PLOP_FI,漁業產業
-FIF_GR_LDR,低密度住宅建築
-FIF_GR_HDR,高密度住宅建築
-FIF_GR_LDRE,低密度-專業化自給住宅行政專區建築
-FIF_GR_HDRE,高密度-專業化自給住宅行政專區建築
-FIF_GR_LDC,低密度商業建築
-FIF_GR_HDC,高密度商業建築
-FIF_GR_CE,專業化本土製造服務和有機農業行政專區建築
-FIF_GR_O,辦公區建築
-FIF_GR_ITC,專業化IT產業行政專區建築
-FIF_GR_GI,一般工業區建築
-FIF_GR_FAI,專業化農牧業行政專區建築
-FIF_GR_FOI,專業化林業行政專區建築
-FIF_GR_OII,專業化石化工業行政專區建築
-FIF_GR_ORI,專業化礦業行政專區建築
-FIF_GR_LC,專業化休閒娛樂行政專區建築
-FIF_GR_TC,專業化觀光旅遊行政專區建築
-FIF_SO_RETP,按關聯性排序。 與原始“Find It”相同
-FIF_SO_NETP,按最近下載的素材排序
-FIF_SO_RE,關聯性
-FIF_SO_NE,最近下載
-TRN_CHOICE,語言設置 (下次生效)
-TRN_SYS,使用遊戲默認語言
-FIF_PROP_IND,工業類物體
-FIF_PROP_PAR,公園類物體
-FIF_PROP_COM,常規類物體
-FIF_PROP_RES,住宅類物體
-FIF_PROP_BIL,廣告牌
-FIF_PROP_SPE,特殊廣告牌
-FIF_PROP_LIG,燈光類物體
-FIF_PROP_NAT,自然類物體
-FIF_PROP_UNS,未分類
-FIF_SET_KS,主快捷鍵
-FIF_SE_IGR,Grwb/RICO
-FIF_SET_CTFL,自訂標籤存檔路徑 (請定期備份此檔案)
-FIF_SET_CTFOP,在檔案總管中顯示
-FIF_SE_SCTP,顯示自訂標籤面板
-FIF_POP_SCR,使用滑鼠滾輪在清單中上下移動
-FIF_POP_CON,確認
-FIF_POP_CAN,取消
-FIF_POP_NU,此操作將無法復原
-FIF_CO_TIT,合併
-FIF_CO_MSG,選擇現有標籤合併目標
-FIF_CO_CH,選擇
-FIF_CO_CHTP,與此現有標籤合併
-FIF_CO_CHLBL,合併目標: 
-FIF_CO_NELBL,請選擇一個現有標籤
-FIF_DE_TIT,刪除
-FIF_DE_MSG,確定要刪除此標籤?
-FIF_RE_TIT,更名
-FIF_RE_MSG,輸入新標籤名稱後按Enter
-FIF_RE_ITP,按Enter送出新標籤名稱
-FIF_RE_ELBL,請輸入新標籤名稱
-FIF_RE_NEWLBL,新標籤名稱: 
-FIF_RE_SLBL,新標籤名稱過短
-FIF_RE_AELBL,該標籤名稱已存在
-FIF_CT_TIT,自訂標籤
-FIF_CT_DDMSG,新增現有標籤到此素材:
-FIF_CT_DDTP,新增現有標籤到此素材
-FIF_CT_ILBL1,或者
-FIF_CT_ILBL2,輸入新標籤名稱後按Enter
-FIF_CT_ITP,按Enter以增加新標籤
-FIF_SET_CTLS,以字母順序排列自訂標籤清單
-FIF_TAG_DDTP,只顯示含有此標籤的素材
-FIF_TAG_REF,重整
-FIF_TAG_REFTP,重整自訂標籤下拉清單
-FIF_TAG_REN,更名
-FIF_TAG_RENTP,重新命名此標籤
-FIF_TAG_COM,合併
-FIF_TAG_COMTP,將此標籤合併到另一標籤
-FIF_TAG_DEL,刪除
-FIF_TAG_DELTP,刪除此標籤
-FIF_UIS_WS,右鍵點擊可在Steam工作坊查看此素材
-FIF_TREE_SM,小型樹木
-FIF_TREE_MD,中型樹木
-FIF_TREE_LG,大型樹木
-FIF_TAG_BAT,批次
-FIF_TAG_BAC,返回
-FIF_TAG_ADD,新增
-FIF_TAG_ADDTP,批次新增自定義標籤到選擇的素材
-FIF_TAG_REM,移除
-FIF_TAG_REMTP,從選擇的素材中批次移除自定義標籤
-FIF_TAG_CLE,重選
-FIF_TAG_CLETP,重新選擇
-FIF_ADD_TIT,批次新增
-FIF_ADD_NUM,已選擇的素材數量:
-FIF_ADD_ADD,新增現有標籤到選擇的素材:
-FIF_ADD_CHTP,新增此現有標籤
-FIF_ADD_TAG,標籤:
-FIF_ADD_ELBL,輸入新標籤或選擇現有標籤
-FIF_REM_TIT,批次移除
-FIF_REM_REM,從選擇的素材中移除標籤:
-FIF_REM_CHTP,移除此標籤
-FIF_REM_ELBL,選擇一個標籤
-FIF_SE_EFI,顯示額外搜尋選項面板
-FIF_EF_AC,素材作者
-FIF_EF_BH,建築物高度
-FIF_EF_MET,公尺
-FIF_EF_FEE,英呎
-FIF_SET_ACLS,以字母順序排列素材作者清單
-FIF_GR_RAN,隨機選擇
-FIF_NET_SMR,小型道路
-FIF_NET_MDR,中型道路
-FIF_NET_LGR,大型道路
-FIF_NET_HGHW,高速公路
-FIF_NET_PATH,行人步道
-FIF_NET_WALL,圍欄和牆
-FIF_NET_WAT,水利設施
-FIF_PROP_MAR,編輯器標記
-FIF_NET_TNR,迷你道路
-FIF_NET_UTI,電線、水道管
-FIF_NET_TRA,鐵路
-FIF_SET_PM,在遊戲模式中也顯示編輯器標記
-FIF_SET_PMTP,"編輯器標記外觀透明, 只有少數能在遊戲模式中作用. 需要用 Move It 才能刪除"
-FIF_SET_IC,顯示各素材使用次數
-FIF_EF_UN,未使用的素材
-FIF_QM_TIT,快速選單
-FIF_UIS_UN,未使用
-FIF_UIS_IN,使用中
-FIF_SET_ICTP,此選項會增加搜尋時間. 不需要時請停用
-FIF_SET_PO,包含 Procedural Objects
-FIF_SET_ICO,使用預設排序方式
-FIF_SET_ICUS,優先顯示使用中的素材
-FIF_SET_ICUN,優先顯示未使用的素材
-FIF_TAG_BATTP,批次編輯
-FIF_SE_SEBTP,滑鼠點擊以清除搜尋欄內容
-FIF_SET_DB,使用預設瀏覽器取代 Steam Overlay
-FIF_SET_DBTP,右鍵單擊素材縮略圖上的 Steam 圖示以在 Steam 工作坊查看此素材
-FIF_NET_ONE,單行道
-FIF_NET_PAR,允許路邊停車
-FIF_NET_NOP,禁止路邊停車
-FIF_PROP_VEH,未分類交通工具
-FIF_PROP_TRE,樹木
-FIF_SET_BACK,對主面板使用淺色背景顏色
-FIF_SET_BACKTP,"更易於查看較暗的素材, 但更難查看較明亮的素材"
-FIF_SET_DUN,隱藏未來的更新通知
-FIF_PROP_MOT,機動車輛
-FIF_PROP_RAI,軌道車輛
-FIF_PROP_AIR,航空器
-FIF_PROP_WAT,水上交通工具
-FIF_EF_SB,子建築
-FIF_ATP_TP,滑鼠右鍵拖曳以拖動和移動此面板
-FIF_SET_ATP,顯示素材類型面板
-FIF_EF_CT,有自定義標籤
-FIF_EF_NCT,無自定義標籤
-FIF_UPN_UP,更新通知
-FIF_PROP_TC,依地勢變形
-FIF_PROP_NTC,不依地勢變形
-FIF_SET_SSK,各素材類型使用獨立搜尋字串
-FIF_SET_SSKTP,切換素材類型時按住SHIFT以暫時共用搜尋字串
-FIF_TAG_SA,全選
-FIF_TAG_SATP,選擇全部顯示的素材
-FIF_EF_UNEXP,全部輸出
-FIF_EF_UNEXPTP,將所有未使用的工坊 ID 的素材清單匯出到包含 Steam 連結的 HTML 檔中
-FIF_EF_UNEXPSE,輸出搜索
-FIF_EF_UNEXPTPSE,將上次搜尋中未使用的工坊 ID 的素材清單匯出到包含 Steam 連結的 HTML 檔中
-FIF_EF_LC,本地自製
-FIF_EF_WC,工坊訂閱自製
-FIF_EF_DLC,需要 DLC/CCP
-FIF_LOC_TOOL,單擊以查找所選資產的下一個實例。按住 SHIFT 並單擊以查找下一個 PO 實例。
-FIF_REF_DIS,重新整理各素材使用次數顯示
-FIF_EF_US,使用中的素材
-FIF_EF_USEXPTP,將所有使用中的工坊 ID 的素材清單匯出到包含 Steam 連結的 HTML 檔中
-FIF_EF_USEXPTPSE,將上次搜尋中使用中的工坊 ID 的素材清單匯出到包含 Steam 連結的 HTML 檔中
-FIF_SE_SIZEX,點擊此X可快速重置建築物尺寸搜尋條件
-FIF_SET_UIVP,不要在遊戲原生面板中顯示Find It 2的額外UI(需重啟遊戲)
-FIF_SET_UIVPTP,包含: 自定義標籤圖示.工作坊圖示.DLC圖示
-FIF_DOU_MESH,自 Mesh Info 查看
-FIF_DOU_MESHNO,Mesh Info 模組僅支援非香草非道路資產
-FIF_DOU_MESHTYPE,Mesh Info 模組未安裝或未啟用
-FIF_DOU_MESHOPEN,自 Mesh Info 查看此資產
-FIF_DOU_RICO,自 RICO Revisited 查看
-FIF_DOU_RICONO,RICO Revisited 模組未安裝或未啟用
-FIF_DOU_RICOTYPE,RICO Revisited 模組僅支援建築資產
-FIF_DOU_RICOOPEN,自 RICO Revisited 查看此資產
-FIF_DOU_FOLD,開啟檔案資料夾
-FIF_DOU_FOLDCUS,此功能僅支援非香草資產
-FIF_DOU_FOLDOPEN,開啟此資產所在的檔案資料夾
-FIF_UIS_CNWS,自製非工坊資產
-FIF_NET_BUS,公車專用道
-FIF_NET_TRO,無軌電車車道
-FIF_NET_BIK,自行車專用道
-FIF_NET_TRM,路面電車軌道
-FIF_NET_MET,地下鐵軌道
-FIF_SET_REC,最近下載排序方式(須重啟遊戲)
-FIF_SET_RECPC,資料夾創建時間
-FIF_SET_RECPM,資料夾修改時間
-FIF_SET_RECFC,CRP 檔案創建時間
-FIF_SET_RECFM,CRP 檔案修改時間
-FIF_SET_DIS,停用即時文字搜尋。按 Enter 以送出新文字搜尋
-FIF_SET_DISTP,啟用此選項可減少搜尋框輸入時的 UI Lag
-FIF_SET_STAB,顯示搜尋分頁功能
-FIF_STAB_NTAB,新分頁
-FIF_SET_DSK,"當 Find It 面板關閉時, 停用次要快捷鍵"
-FIF_SET_DSKTP,"避免與 TM:PE 快捷鍵產生衝突, 當 Find It 面板關閉時只有主快捷鍵維持運作"
-FIF_SET_CFFL,設定文件存檔路徑
-FIF_DOU_WS,Steam工坊頁面
-FIF_DOU_WS_STEAM,經由 Steam
-FIF_DOU_WS_BROWSER,經由預設瀏覽器
-FIF_DOU_WS_NOID,此功能僅適用帶有 Steam 工坊 ID 的自製素材
-FIF_DOU_WS_STEAMTP,在 Steam 程式內查看此素材的工坊頁面
-FIF_DOU_WS_BROWSERTP,使用預設瀏覽器查看此素材的工坊頁面
+"CODE","zh-tw"
+"NAME","繁體中文"
+"FIF_DESC","查找和分類你的素材"
+"FIF_SET_DM","禁用除錯訊息記錄"
+"FIF_SET_DMTP","如果勾選, 除錯訊息將不會被記錄。"
+"FIF_SET_CMT","主工具欄居中"
+"FIF_SET_CMTTP","如果超過一定長度，主工具欄將居中。"
+"FIF_SET_UL","解鎖全部"
+"FIF_SET_ULTP","未解鎖的素材仍然可以被放置。"
+"FIF_SET_BP","下次讀檔時修正錯誤的物體"
+"FIF_SET_BPTP","移除所有可能導致錯誤的物體，勾選此設置然後讀取你的存檔。"
+"FIF_SE_WF","玩家自製"
+"FIF_SE_VF","遊戲默認"
+"FIF_SE_IA","全選"
+"FIF_SE_IN","道路"
+"FIF_SE_IP","可放置型建築"
+"FIF_SE_IG","可成長型建築"
+"FIF_SE_IR","RICO"
+"FIF_SE_IPR","物體"
+"FIF_SE_ID","貼花"
+"FIF_SE_IT","樹木"
+"FIF_SE_LV","建築等級 "
+"FIF_SE_SZ","尺吋: "
+"FIF_SE_SC","按住SHIFT或CTRL鍵可以選擇多個類別"
+"FIF_PLOP_E","電力系統"
+"FIF_PLOP_W","供水和汙水處理系統"
+"FIF_PLOP_G","垃圾處理系統"
+"FIF_PLOP_H","醫療保健系統"
+"FIF_PLOP_F","消防系統"
+"FIF_PLOP_P","警力系統"
+"FIF_PLOP_ED","教育系統"
+"FIF_PLOP_PT","大眾運輸系統"
+"FIF_PLOP_PPW","公園和集市廣場和野生動物"
+"FIF_PLOP_U","獨特建築"
+"FIF_PLOP_I","工業產業園區"
+"FIF_PLOP_D","災難救濟"
+"FIF_PLOP_C","教育園區"
+"FIF_PLOP_V","大學競技"
+"FIF_PLOP_FI","漁業產業"
+"FIF_GR_LDR","低密度住宅建築"
+"FIF_GR_HDR","高密度住宅建築"
+"FIF_GR_LDRE","低密度-專業化自給住宅行政專區建築"
+"FIF_GR_HDRE","高密度-專業化自給住宅行政專區建築"
+"FIF_GR_LDC","低密度商業建築"
+"FIF_GR_HDC","高密度商業建築"
+"FIF_GR_CE","專業化本土製造服務和有機農業行政專區建築"
+"FIF_GR_O","辦公區建築"
+"FIF_GR_ITC","專業化IT產業行政專區建築"
+"FIF_GR_GI","一般工業區建築"
+"FIF_GR_FAI","專業化農牧業行政專區建築"
+"FIF_GR_FOI","專業化林業行政專區建築"
+"FIF_GR_OII","專業化石化工業行政專區建築"
+"FIF_GR_ORI","專業化礦業行政專區建築"
+"FIF_GR_LC","專業化休閒娛樂行政專區建築"
+"FIF_GR_TC","專業化觀光旅遊行政專區建築"
+"FIF_SO_RETP","按關聯性排序。 與原始“Find It”相同"
+"FIF_SO_NETP","按最近下載的素材排序"
+"FIF_SO_RE","關聯性"
+"FIF_SO_NE","最近下載"
+"TRN_CHOICE","語言設置 (下次生效)"
+"TRN_SYS","使用遊戲默認語言"
+"FIF_PROP_IND","工業類物體"
+"FIF_PROP_PAR","公園類物體"
+"FIF_PROP_COM","常規類物體"
+"FIF_PROP_RES","住宅類物體"
+"FIF_PROP_BIL","廣告牌"
+"FIF_PROP_SPE","特殊廣告牌"
+"FIF_PROP_LIG","燈光類物體"
+"FIF_PROP_NAT","自然類物體"
+"FIF_PROP_UNS","未分類"
+"FIF_SET_KS","主快捷鍵"
+"FIF_SE_IGR","Grwb/RICO"
+"FIF_SET_CTFL","自訂標籤存檔路徑 (請定期備份此檔案)"
+"FIF_SET_CTFOP","在檔案總管中顯示"
+"FIF_SE_SCTP","顯示自訂標籤面板"
+"FIF_POP_SCR","使用滑鼠滾輪在清單中上下移動"
+"FIF_POP_CON","確認"
+"FIF_POP_CAN","取消"
+"FIF_POP_NU","此操作將無法復原"
+"FIF_CO_TIT","合併"
+"FIF_CO_MSG","選擇現有標籤合併目標"
+"FIF_CO_CH","選擇"
+"FIF_CO_CHTP","與此現有標籤合併"
+"FIF_CO_CHLBL","合併目標: "
+"FIF_CO_NELBL","請選擇一個現有標籤"
+"FIF_DE_TIT","刪除"
+"FIF_DE_MSG","確定要刪除此標籤?"
+"FIF_RE_TIT","更名"
+"FIF_RE_MSG","輸入新標籤名稱後按Enter"
+"FIF_RE_ITP","按Enter送出新標籤名稱"
+"FIF_RE_ELBL","請輸入新標籤名稱"
+"FIF_RE_NEWLBL","新標籤名稱: "
+"FIF_RE_SLBL","新標籤名稱過短"
+"FIF_RE_AELBL","該標籤名稱已存在"
+"FIF_CT_TIT","自訂標籤"
+"FIF_CT_DDMSG","新增現有標籤到此素材:"
+"FIF_CT_DDTP","新增現有標籤到此素材"
+"FIF_CT_ILBL1","或者"
+"FIF_CT_ILBL2","輸入新標籤名稱後按Enter"
+"FIF_CT_ITP","按Enter以增加新標籤"
+"FIF_SET_CTLS","以字母順序排列自訂標籤清單"
+"FIF_TAG_DDTP","只顯示含有此標籤的素材"
+"FIF_TAG_REF","重整"
+"FIF_TAG_REFTP","重整自訂標籤下拉清單"
+"FIF_TAG_REN","更名"
+"FIF_TAG_RENTP","重新命名此標籤"
+"FIF_TAG_COM","合併"
+"FIF_TAG_COMTP","將此標籤合併到另一標籤"
+"FIF_TAG_DEL","刪除"
+"FIF_TAG_DELTP","刪除此標籤"
+"FIF_UIS_WS","右鍵點擊可在Steam工作坊查看此素材"
+"FIF_TREE_SM","小型樹木"
+"FIF_TREE_MD","中型樹木"
+"FIF_TREE_LG","大型樹木"
+"FIF_TAG_BAT","批次"
+"FIF_TAG_BAC","返回"
+"FIF_TAG_ADD","新增"
+"FIF_TAG_ADDTP","批次新增自定義標籤到選擇的素材"
+"FIF_TAG_REM","移除"
+"FIF_TAG_REMTP","從選擇的素材中批次移除自定義標籤"
+"FIF_TAG_CLE","重選"
+"FIF_TAG_CLETP","重新選擇"
+"FIF_ADD_TIT","批次新增"
+"FIF_ADD_NUM","已選擇的素材數量:"
+"FIF_ADD_ADD","新增現有標籤到選擇的素材:"
+"FIF_ADD_CHTP","新增此現有標籤"
+"FIF_ADD_TAG","標籤:"
+"FIF_ADD_ELBL","輸入新標籤或選擇現有標籤"
+"FIF_REM_TIT","批次移除"
+"FIF_REM_REM","從選擇的素材中移除標籤:"
+"FIF_REM_CHTP","移除此標籤"
+"FIF_REM_ELBL","選擇一個標籤"
+"FIF_SE_EFI","顯示額外搜尋選項面板"
+"FIF_EF_AC","素材作者"
+"FIF_EF_BH","建築物高度"
+"FIF_EF_MET","公尺"
+"FIF_EF_FEE","英呎"
+"FIF_SET_ACLS","以字母順序排列素材作者清單"
+"FIF_GR_RAN","隨機選擇"
+"FIF_NET_SMR","小型道路"
+"FIF_NET_MDR","中型道路"
+"FIF_NET_LGR","大型道路"
+"FIF_NET_HGHW","高速公路"
+"FIF_NET_PATH","行人步道"
+"FIF_NET_WALL","圍欄和牆"
+"FIF_NET_WAT","水利設施"
+"FIF_PROP_MAR","編輯器標記"
+"FIF_NET_TNR","迷你道路"
+"FIF_NET_UTI","電線、水道管"
+"FIF_NET_TRA","鐵路"
+"FIF_SET_PM","在遊戲模式中也顯示編輯器標記"
+"FIF_SET_PMTP","編輯器標記外觀透明, 只有少數能在遊戲模式中作用. 需要用 Move It 才能刪除"
+"FIF_SET_IC","顯示各素材使用次數"
+"FIF_EF_UN","未使用的素材"
+"FIF_QM_TIT","快速選單"
+"FIF_UIS_UN","未使用"
+"FIF_UIS_IN","使用中"
+"FIF_SET_ICTP","此選項會增加搜尋時間. 不需要時請停用"
+"FIF_SET_PO","包含 Procedural Objects"
+"FIF_SET_ICO","使用預設排序方式"
+"FIF_SET_ICUS","優先顯示使用中的素材"
+"FIF_SET_ICUN","優先顯示未使用的素材"
+"FIF_TAG_BATTP","批次編輯"
+"FIF_SE_SEBTP","滑鼠點擊以清除搜尋欄內容"
+"FIF_SET_DB","使用預設瀏覽器取代 Steam Overlay"
+"FIF_SET_DBTP","右鍵單擊素材縮略圖上的 Steam 圖示以在 Steam 工作坊查看此素材"
+"FIF_NET_ONE","單行道"
+"FIF_NET_PAR","允許路邊停車"
+"FIF_NET_NOP","禁止路邊停車"
+"FIF_PROP_VEH","未分類交通工具"
+"FIF_PROP_TRE","樹木"
+"FIF_SET_BACK","對主面板使用淺色背景顏色"
+"FIF_SET_BACKTP","更易於查看較暗的素材, 但更難查看較明亮的素材"
+"FIF_SET_DUN","隱藏未來的更新通知"
+"FIF_PROP_MOT","機動車輛"
+"FIF_PROP_RAI","軌道車輛"
+"FIF_PROP_AIR","航空器"
+"FIF_PROP_WAT","水上交通工具"
+"FIF_EF_SB","子建築"
+"FIF_ATP_TP","滑鼠右鍵拖曳以拖動和移動此面板"
+"FIF_SET_ATP","顯示素材類型面板"
+"FIF_EF_CT","有自定義標籤"
+"FIF_EF_NCT","無自定義標籤"
+"FIF_UPN_UP","更新通知"
+"FIF_PROP_TC","依地勢變形"
+"FIF_PROP_NTC","不依地勢變形"
+"FIF_SET_SSK","各素材類型使用獨立搜尋字串"
+"FIF_SET_SSKTP","切換素材類型時按住SHIFT以暫時共用搜尋字串"
+"FIF_TAG_SA","全選"
+"FIF_TAG_SATP","選擇全部顯示的素材"
+"FIF_EF_UNEXP","全部輸出"
+"FIF_EF_UNEXPTP","將所有未使用的工坊 ID 的素材清單匯出到包含 Steam 連結的 HTML 檔中"
+"FIF_EF_UNEXPSE","輸出搜索"
+"FIF_EF_UNEXPTPSE","將上次搜尋中未使用的工坊 ID 的素材清單匯出到包含 Steam 連結的 HTML 檔中"
+"FIF_EF_LC","本地自製"
+"FIF_EF_WC","工坊訂閱自製"
+"FIF_EF_DLC","需要 DLC/CCP"
+"FIF_LOC_TOOL","單擊以查找所選資產的下一個實例。按住 SHIFT 並單擊以查找下一個 PO 實例。"
+"FIF_REF_DIS","重新整理各素材使用次數顯示"
+"FIF_EF_US","使用中的素材"
+"FIF_EF_USEXPTP","將所有使用中的工坊 ID 的素材清單匯出到包含 Steam 連結的 HTML 檔中"
+"FIF_EF_USEXPTPSE","將上次搜尋中使用中的工坊 ID 的素材清單匯出到包含 Steam 連結的 HTML 檔中"
+"FIF_SE_SIZEX","點擊此X可快速重置建築物尺寸搜尋條件"
+"FIF_SET_UIVP","不要在遊戲原生面板中顯示Find It 2的額外UI(需重啟遊戲)"
+"FIF_SET_UIVPTP","包含: 自定義標籤圖示.工作坊圖示.DLC圖示"
+"FIF_DOU_MESH","自 Mesh Info 查看"
+"FIF_DOU_MESHNO","Mesh Info 模組僅支援非香草非道路資產"
+"FIF_DOU_MESHTYPE","Mesh Info 模組未安裝或未啟用"
+"FIF_DOU_MESHOPEN","自 Mesh Info 查看此資產"
+"FIF_DOU_RICO","自 RICO Revisited 查看"
+"FIF_DOU_RICONO","RICO Revisited 模組未安裝或未啟用"
+"FIF_DOU_RICOTYPE","RICO Revisited 模組僅支援建築資產"
+"FIF_DOU_RICOOPEN","自 RICO Revisited 查看此資產"
+"FIF_DOU_FOLD","開啟檔案資料夾"
+"FIF_DOU_FOLDCUS","此功能僅支援非香草資產"
+"FIF_DOU_FOLDOPEN","開啟此資產所在的檔案資料夾"
+"FIF_UIS_CNWS","自製非工坊資產"
+"FIF_NET_BUS","公車專用道"
+"FIF_NET_TRO","無軌電車車道"
+"FIF_NET_BIK","自行車專用道"
+"FIF_NET_TRM","路面電車軌道"
+"FIF_NET_MET","地下鐵軌道"
+"FIF_SET_REC","最近下載排序方式(須重啟遊戲)"
+"FIF_SET_RECPC","資料夾創建時間"
+"FIF_SET_RECPM","資料夾修改時間"
+"FIF_SET_RECFC","CRP 檔案創建時間"
+"FIF_SET_RECFM","CRP 檔案修改時間"
+"FIF_SET_DIS","停用即時文字搜尋。按 Enter 以送出新文字搜尋"
+"FIF_SET_DISTP","啟用此選項可減少搜尋框輸入時的 UI Lag"
+"FIF_SET_STAB","顯示搜尋分頁功能"
+"FIF_STAB_NTAB","新分頁"
+"FIF_SET_DSK","當 Find It 面板關閉時, 停用次要快捷鍵"
+"FIF_SET_DSKTP","避免與 TM:PE 快捷鍵產生衝突, 當 Find It 面板關閉時只有主快捷鍵維持運作"
+"FIF_SET_CFFL","設定文件存檔路徑"
+"FIF_DOU_WS","Steam工坊頁面"
+"FIF_DOU_WS_STEAM","經由 Steam"
+"FIF_DOU_WS_BROWSER","經由預設瀏覽器"
+"FIF_DOU_WS_NOID","此功能僅適用帶有 Steam 工坊 ID 的自製素材"
+"FIF_DOU_WS_STEAMTP","在 Steam 程式內查看此素材的工坊頁面"
+"FIF_DOU_WS_BROWSERTP","使用預設瀏覽器查看此素材的工坊頁面"

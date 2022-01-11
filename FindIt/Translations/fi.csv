@@ -1,240 +1,240 @@
-CODE,fi
-NAME,suomi
-FIF_DESC,Etsi ja järjestä assettisi
-FIF_SET_DM,Poista virheenkorjausloki käytöstä
-FIF_SET_DMTP,"Jos valittu, virheenkorjausviestit eivät tallennu lokiin."
-FIF_SET_CMT,Keskitä päätyökalurivi
-FIF_SET_CMTTP,"Päätyökalurivi keskitetään, jos se ylittää tietyn pituuden."
-FIF_SET_UL,Avaa kaikki
-FIF_SET_ULTP,"Voit valita ja asettaa esineitä, vaikka ne olisivat lukittuja."
-FIF_SET_BP,"Korjaa huonoja proppeja, seuraavalla kerralla, kun tallennus ladataan"
-FIF_SET_BPTP,"Poista kaikki propit, jotka aiheuttavat ongelmia. Tarkista asetus ja lataa tallennuksesi."
-FIF_SE_WF,Mukautettu
-FIF_SE_VF,Vanilla
-FIF_SE_IA,Kaikki
-FIF_SE_IN,Verkko
-FIF_SE_IP,Plopattava
-FIF_SE_IG,Kasvava
-FIF_SE_IR,RICO
-FIF_SE_IPR,Prop
-FIF_SE_ID,Decal
-FIF_SE_IT,Puu
-FIF_SE_LV,Rakennuksen taso
-FIF_SE_SZ,Koko:
-FIF_SE_SC,Pidä pohjassa SHIFT tai CTRL valitaksesi useamman kategorian
-FIF_PLOP_E,Sähkö
-FIF_PLOP_W,Vesi/Jätevesi
-FIF_PLOP_G,Roskat
-FIF_PLOP_H,Terveydenhuolto
-FIF_PLOP_F,Palokunta
-FIF_PLOP_P,Poliisi
-FIF_PLOP_ED,Koulutus
-FIF_PLOP_PT,Julkinen liikenne
-FIF_PLOP_PPW,Puisto/Aukio/Luonto
-FIF_PLOP_U,Uniikit rakennukset
-FIF_PLOP_I,Teollisuus
-FIF_PLOP_D,Katastrofi
-FIF_PLOP_C,Kampus
-FIF_PLOP_V,Yliopistotason urheilu
-FIF_PLOP_FI,Kalastus
-FIF_GR_LDR,Matalan tiheyden asutus
-FIF_GR_HDR,Korkean tiheyden asutus
-FIF_GR_LDRE,Matalan tiheyden asutus EKO
-FIF_GR_HDRE,Korkean tiheyden asutus EKO
-FIF_GR_LDC,Matalan tiheyden kaupallinen
-FIF_GR_HDC,Korkean tiheyden kaupallinen
-FIF_GR_CE,Kaupallinen EKO
-FIF_GR_O,Toimisto
-FIF_GR_ITC,IT-rypäs
-FIF_GR_GI,Yleinen teollisuus
-FIF_GR_FAI,Maatalous
-FIF_GR_FOI,Metsätalous
-FIF_GR_OII,Öljyteollisuus
-FIF_GR_ORI,Kaivosteollisuus
-FIF_GR_LC,Vapaa-ajan kaupallinen
-FIF_GR_TC,Matkailu
-FIF_SO_RETP,Lajittele merkityksellisyyden mukaan. Sama kuin alkuperäisessä Find It:ssä
-FIF_SO_NETP,Lajittele viimeksi ladattujen mukaan
-FIF_SO_RE,Merkityksellisyys
-FIF_SO_NE,Viimeisimmät lataukset
-TRN_CHOICE,Aseta kieli (vaihtuu seuraavalla kerralla)
-TRN_SYS,Käytä järjestelmän kieltä
-FIF_PROP_IND,Teollinen
-FIF_PROP_PAR,Puistot
-FIF_PROP_COM,Yleinen
-FIF_PROP_RES,Asuinalue
-FIF_PROP_BIL,Mainostaulut
-FIF_PROP_SPE,Erikoismainostaulut
-FIF_PROP_LIG,Valot
-FIF_PROP_NAT,Luonnollinen
-FIF_PROP_UNS,Lajittelematon
-FIF_SET_KS,
-FIF_SE_IGR,Grwb/RICO
-FIF_SET_CTFL,Mukautettujen tägien tiedostosijainti (Muista varmuuskopioida tämä tiedosto ajoittain)
-FIF_SET_CTFOP,Näytä resurssienhallinnassa
-FIF_SE_SCTP,Näytä mukautettujen tägien paneeli
-FIF_POP_SCR,Käytä hiiren rullaa liikkuaksesi ylös/alas
-FIF_POP_CON,Vahvista
-FIF_POP_CAN,Peruuta
-FIF_POP_NU,Tätä ei voi perua.
-FIF_CO_TIT,Yhdistä
-FIF_CO_MSG,"Valitse olemassaoleva tägi, jonka kanssa yhdistää."
-FIF_CO_CH,Valitse
-FIF_CO_CHTP,Yhdistä tämän olemassaolevan tägin kanssa
-FIF_CO_CHLBL,Yhdistä:
-FIF_CO_NELBL,Valitse olemassaoleva tägi
-FIF_DE_TIT,Poista
-FIF_DE_MSG,"Oletko varma, että haluat poistaa tämän tägin?"
-FIF_RE_TIT,Nimeä uudelleen
-FIF_RE_MSG,Kirjoita tägille uusi nimi ja paina Enter.
-FIF_RE_ITP,Paina Enter antaaksesi uuden nimen tägille
-FIF_RE_ELBL,Kirjoita uusi nimi tägille
-FIF_RE_NEWLBL,Tägin uusi nimi:
-FIF_RE_SLBL,Tämä nimi on liian lyhyt
-FIF_RE_AELBL,Tämä tägi on jo olemassa
-FIF_CT_TIT,Mukautettu tägi
-FIF_CT_DDMSG,Lisää olemassaoleva tägi tähän assettiin:
-FIF_CT_DDTP,Lisää olemassaoleva tägi tähän assettiin
-FIF_CT_ILBL1,Tai
-FIF_CT_ILBL2,Kirjoita uusi nimi tägille ja paina Enter:
-FIF_CT_ITP,Paina Enter lisätäksesi uusia tägejä
-FIF_SET_CTLS,Lajittele mukautettujen tägien lista aakkosjärjestyksessä
-FIF_TAG_DDTP,"Näytä vain assetit, joissa on tämä tägi"
-FIF_TAG_REF,Päivitä
-FIF_TAG_REFTP,Päivitä mukautettujen tägien pudotusvalikko
-FIF_TAG_REN,Nimeä uudelleen
-FIF_TAG_RENTP,Nimeä tämä tägi uudelleen
-FIF_TAG_COM,Yhdistä
-FIF_TAG_COMTP,Yhdistä tämä tägi toisen kanssa
-FIF_TAG_DEL,Poista
-FIF_TAG_DELTP,Poista tämä tägi
-FIF_UIS_WS,Klikkaa hiiren oikealla näppäimellä tarkastellaksesi tätä assettia Steam Workshopissa
-FIF_TREE_SM,Pienet puut
-FIF_TREE_MD,Keskikokoiset puut
-FIF_TREE_LG,Suuret puut
-FIF_TAG_BAT,Joukko
-FIF_TAG_BAC,Takaisin
-FIF_TAG_ADD,Lisää
-FIF_TAG_ADDTP,Lisää tägi valittuihin assetteihin
-FIF_TAG_REM,Poista
-FIF_TAG_REMTP,Poista tägi valituista asseteista
-FIF_TAG_CLE,Tyhjennä
-FIF_TAG_CLETP,Tyhjennä valinta
-FIF_ADD_TIT,Lisää joukko
-FIF_ADD_NUM,Valittujen assettien määrä:
-FIF_ADD_ADD,Lisää olemassaoleva tägi valittuihin assetteihin:
-FIF_ADD_CHTP,Lisää tähän olemassaolevaan tägiin
-FIF_ADD_TAG,Tägi:
-FIF_ADD_ELBL,Syötä uusi tägi tai valitse olemassaoleva
-FIF_REM_TIT,Poisto joukko
-FIF_REM_REM,Poista tägi valituista asseteista
-FIF_REM_CHTP,Poista tämä tägi
-FIF_REM_ELBL,Valitse tägi
-FIF_SE_EFI,Näytä lisää suodattimia
-FIF_EF_AC,Asset Creator
-FIF_EF_BH,Rakennuksen korkeus
-FIF_EF_MET,metriä
-FIF_EF_FEE,jalkaa
-FIF_SET_ACLS,Lajittele asset creatorin lista aakkosjärjestyksessä
-FIF_GR_RAN,Satunnainen valinta
-FIF_NET_SMR,Pienet tiet
-FIF_NET_MDR,Keskikokoiset tiet
-FIF_NET_LGR,Suuret tiet
-FIF_NET_HGHW,Moottoritiet
-FIF_NET_PATH,Polut
-FIF_NET_WALL,Seinät ja aidat
-FIF_NET_WAT,Vesirakenteet
-FIF_PROP_MAR,Editor-merkit
-FIF_NET_TNR,Pikkuruiset tiet
-FIF_NET_UTI,Julkiset palvelut
-FIF_NET_TRA,Juna
-FIF_SET_PM,Näytä marker-tyyppiset propit pelimuodossa
-FIF_SET_PMTP,Marker-tyyppiset propit ovat näkymättömiä ja suurin osa ei toimi pelimuodossa. Käytä Move It -modia poistaaksesti ne.
-FIF_SET_IC,
-FIF_EF_UN,
-FIF_QM_TIT,
-FIF_UIS_UN,
-FIF_UIS_IN,
-FIF_SET_ICTP,
-FIF_SET_PO,
-FIF_SET_ICO,
-FIF_SET_ICUS,
-FIF_SET_ICUN,
-FIF_TAG_BATTP,
-FIF_SE_SEBTP,
-FIF_SET_DB,
-FIF_SET_DBTP,
-FIF_NET_ONE,
-FIF_NET_PAR,
-FIF_NET_NOP,
-FIF_PROP_VEH,
-FIF_PROP_TRE,
-FIF_SET_BACK,
-FIF_SET_BACKTP,
-FIF_SET_DUN,
-FIF_PROP_MOT,
-FIF_PROP_RAI,
-FIF_PROP_AIR,
-FIF_PROP_WAT,
-FIF_EF_SB,
-FIF_ATP_TP,
-FIF_SET_ATP,
-FIF_EF_CT,
-FIF_EF_NCT,
-FIF_UPN_UP,
-FIF_PROP_TC,
-FIF_PROP_NTC,
-FIF_SET_SSK,
-FIF_SET_SSKTP,
-FIF_TAG_SA,
-FIF_TAG_SATP,
-FIF_EF_UNEXP,
-FIF_EF_UNEXPTP,
-FIF_EF_UNEXPSE,
-FIF_EF_UNEXPTPSE,
-FIF_EF_LC,
-FIF_EF_WC,
-FIF_EF_DLC,
-FIF_LOC_TOOL,
-FIF_REF_DIS,
-FIF_EF_US,
-FIF_EF_USEXPTP,
-FIF_EF_USEXPTPSE,
-FIF_SE_SIZEX,
-FIF_SET_UIVP,
-FIF_SET_UIVPTP,
-FIF_DOU_MESH,
-FIF_DOU_MESHNO,
-FIF_DOU_MESHTYPE,
-FIF_DOU_MESHOPEN,
-FIF_DOU_RICO,
-FIF_DOU_RICONO,
-FIF_DOU_RICOTYPE,
-FIF_DOU_RICOOPEN,
-FIF_DOU_FOLD,
-FIF_DOU_FOLDCUS,
-FIF_DOU_FOLDOPEN,
-FIF_UIS_CNWS,
-FIF_NET_BUS,
-FIF_NET_TRO,
-FIF_NET_BIK,
-FIF_NET_TRM,
-FIF_NET_MET,
-FIF_SET_REC,
-FIF_SET_RECPC,
-FIF_SET_RECPM,
-FIF_SET_RECFC,
-FIF_SET_RECFM,
-FIF_SET_DIS,
-FIF_SET_DISTP,
-FIF_SET_STAB,
-FIF_STAB_NTAB,
-FIF_SET_DSK,
-FIF_SET_DSKTP,
-FIF_SET_CFFL,
-FIF_DOU_WS,
-FIF_DOU_WS_STEAM,
-FIF_DOU_WS_BROWSER,
-FIF_DOU_WS_NOID,
-FIF_DOU_WS_STEAMTP,
-FIF_DOU_WS_BROWSERTP,
+"CODE","fi"
+"NAME","suomi"
+"FIF_DESC","Etsi ja järjestä assettisi"
+"FIF_SET_DM","Poista virheenkorjausloki käytöstä"
+"FIF_SET_DMTP","Jos valittu, virheenkorjausviestit eivät tallennu lokiin."
+"FIF_SET_CMT","Keskitä päätyökalurivi"
+"FIF_SET_CMTTP","Päätyökalurivi keskitetään, jos se ylittää tietyn pituuden."
+"FIF_SET_UL","Avaa kaikki"
+"FIF_SET_ULTP","Voit valita ja asettaa esineitä, vaikka ne olisivat lukittuja."
+"FIF_SET_BP","Korjaa huonoja proppeja, seuraavalla kerralla, kun tallennus ladataan"
+"FIF_SET_BPTP","Poista kaikki propit, jotka aiheuttavat ongelmia. Tarkista asetus ja lataa tallennuksesi."
+"FIF_SE_WF","Mukautettu"
+"FIF_SE_VF","Vanilla"
+"FIF_SE_IA","Kaikki"
+"FIF_SE_IN","Verkko"
+"FIF_SE_IP","Plopattava"
+"FIF_SE_IG","Kasvava"
+"FIF_SE_IR","RICO"
+"FIF_SE_IPR","Prop"
+"FIF_SE_ID","Decal"
+"FIF_SE_IT","Puu"
+"FIF_SE_LV","Rakennuksen taso"
+"FIF_SE_SZ","Koko:"
+"FIF_SE_SC","Pidä pohjassa SHIFT tai CTRL valitaksesi useamman kategorian"
+"FIF_PLOP_E","Sähkö"
+"FIF_PLOP_W","Vesi/Jätevesi"
+"FIF_PLOP_G","Roskat"
+"FIF_PLOP_H","Terveydenhuolto"
+"FIF_PLOP_F","Palokunta"
+"FIF_PLOP_P","Poliisi"
+"FIF_PLOP_ED","Koulutus"
+"FIF_PLOP_PT","Julkinen liikenne"
+"FIF_PLOP_PPW","Puisto/Aukio/Luonto"
+"FIF_PLOP_U","Uniikit rakennukset"
+"FIF_PLOP_I","Teollisuus"
+"FIF_PLOP_D","Katastrofi"
+"FIF_PLOP_C","Kampus"
+"FIF_PLOP_V","Yliopistotason urheilu"
+"FIF_PLOP_FI","Kalastus"
+"FIF_GR_LDR","Matalan tiheyden asutus"
+"FIF_GR_HDR","Korkean tiheyden asutus"
+"FIF_GR_LDRE","Matalan tiheyden asutus EKO"
+"FIF_GR_HDRE","Korkean tiheyden asutus EKO"
+"FIF_GR_LDC","Matalan tiheyden kaupallinen"
+"FIF_GR_HDC","Korkean tiheyden kaupallinen"
+"FIF_GR_CE","Kaupallinen EKO"
+"FIF_GR_O","Toimisto"
+"FIF_GR_ITC","IT-rypäs"
+"FIF_GR_GI","Yleinen teollisuus"
+"FIF_GR_FAI","Maatalous"
+"FIF_GR_FOI","Metsätalous"
+"FIF_GR_OII","Öljyteollisuus"
+"FIF_GR_ORI","Kaivosteollisuus"
+"FIF_GR_LC","Vapaa-ajan kaupallinen"
+"FIF_GR_TC","Matkailu"
+"FIF_SO_RETP","Lajittele merkityksellisyyden mukaan. Sama kuin alkuperäisessä Find It:ssä"
+"FIF_SO_NETP","Lajittele viimeksi ladattujen mukaan"
+"FIF_SO_RE","Merkityksellisyys"
+"FIF_SO_NE","Viimeisimmät lataukset"
+"TRN_CHOICE","Aseta kieli (vaihtuu seuraavalla kerralla)"
+"TRN_SYS","Käytä järjestelmän kieltä"
+"FIF_PROP_IND","Teollinen"
+"FIF_PROP_PAR","Puistot"
+"FIF_PROP_COM","Yleinen"
+"FIF_PROP_RES","Asuinalue"
+"FIF_PROP_BIL","Mainostaulut"
+"FIF_PROP_SPE","Erikoismainostaulut"
+"FIF_PROP_LIG","Valot"
+"FIF_PROP_NAT","Luonnollinen"
+"FIF_PROP_UNS","Lajittelematon"
+"FIF_SET_KS","Main Keyboard Shortcut"
+"FIF_SE_IGR","Grwb/RICO"
+"FIF_SET_CTFL","Mukautettujen tägien tiedostosijainti (Muista varmuuskopioida tämä tiedosto ajoittain)"
+"FIF_SET_CTFOP","Näytä resurssienhallinnassa"
+"FIF_SE_SCTP","Näytä mukautettujen tägien paneeli"
+"FIF_POP_SCR","Käytä hiiren rullaa liikkuaksesi ylös/alas"
+"FIF_POP_CON","Vahvista"
+"FIF_POP_CAN","Peruuta"
+"FIF_POP_NU","Tätä ei voi perua."
+"FIF_CO_TIT","Yhdistä"
+"FIF_CO_MSG","Valitse olemassaoleva tägi, jonka kanssa yhdistää."
+"FIF_CO_CH","Valitse"
+"FIF_CO_CHTP","Yhdistä tämän olemassaolevan tägin kanssa"
+"FIF_CO_CHLBL","Yhdistä:"
+"FIF_CO_NELBL","Valitse olemassaoleva tägi"
+"FIF_DE_TIT","Poista"
+"FIF_DE_MSG","Oletko varma, että haluat poistaa tämän tägin?"
+"FIF_RE_TIT","Nimeä uudelleen"
+"FIF_RE_MSG","Kirjoita tägille uusi nimi ja paina Enter."
+"FIF_RE_ITP","Paina Enter antaaksesi uuden nimen tägille"
+"FIF_RE_ELBL","Kirjoita uusi nimi tägille"
+"FIF_RE_NEWLBL","Tägin uusi nimi:"
+"FIF_RE_SLBL","Tämä nimi on liian lyhyt"
+"FIF_RE_AELBL","Tämä tägi on jo olemassa"
+"FIF_CT_TIT","Mukautettu tägi"
+"FIF_CT_DDMSG","Lisää olemassaoleva tägi tähän assettiin:"
+"FIF_CT_DDTP","Lisää olemassaoleva tägi tähän assettiin"
+"FIF_CT_ILBL1","Tai"
+"FIF_CT_ILBL2","Kirjoita uusi nimi tägille ja paina Enter:"
+"FIF_CT_ITP","Paina Enter lisätäksesi uusia tägejä"
+"FIF_SET_CTLS","Lajittele mukautettujen tägien lista aakkosjärjestyksessä"
+"FIF_TAG_DDTP","Näytä vain assetit, joissa on tämä tägi"
+"FIF_TAG_REF","Päivitä"
+"FIF_TAG_REFTP","Päivitä mukautettujen tägien pudotusvalikko"
+"FIF_TAG_REN","Nimeä uudelleen"
+"FIF_TAG_RENTP","Nimeä tämä tägi uudelleen"
+"FIF_TAG_COM","Yhdistä"
+"FIF_TAG_COMTP","Yhdistä tämä tägi toisen kanssa"
+"FIF_TAG_DEL","Poista"
+"FIF_TAG_DELTP","Poista tämä tägi"
+"FIF_UIS_WS","Klikkaa hiiren oikealla näppäimellä tarkastellaksesi tätä assettia Steam Workshopissa"
+"FIF_TREE_SM","Pienet puut"
+"FIF_TREE_MD","Keskikokoiset puut"
+"FIF_TREE_LG","Suuret puut"
+"FIF_TAG_BAT","Joukko"
+"FIF_TAG_BAC","Takaisin"
+"FIF_TAG_ADD","Lisää"
+"FIF_TAG_ADDTP","Lisää tägi valittuihin assetteihin"
+"FIF_TAG_REM","Poista"
+"FIF_TAG_REMTP","Poista tägi valituista asseteista"
+"FIF_TAG_CLE","Tyhjennä"
+"FIF_TAG_CLETP","Tyhjennä valinta"
+"FIF_ADD_TIT","Lisää joukko"
+"FIF_ADD_NUM","Valittujen assettien määrä:"
+"FIF_ADD_ADD","Lisää olemassaoleva tägi valittuihin assetteihin:"
+"FIF_ADD_CHTP","Lisää tähän olemassaolevaan tägiin"
+"FIF_ADD_TAG","Tägi:"
+"FIF_ADD_ELBL","Syötä uusi tägi tai valitse olemassaoleva"
+"FIF_REM_TIT","Poisto joukko"
+"FIF_REM_REM","Poista tägi valituista asseteista"
+"FIF_REM_CHTP","Poista tämä tägi"
+"FIF_REM_ELBL","Valitse tägi"
+"FIF_SE_EFI","Näytä lisää suodattimia"
+"FIF_EF_AC","Asset Creator"
+"FIF_EF_BH","Rakennuksen korkeus"
+"FIF_EF_MET","metriä"
+"FIF_EF_FEE","jalkaa"
+"FIF_SET_ACLS","Lajittele asset creatorin lista aakkosjärjestyksessä"
+"FIF_GR_RAN","Satunnainen valinta"
+"FIF_NET_SMR","Pienet tiet"
+"FIF_NET_MDR","Keskikokoiset tiet"
+"FIF_NET_LGR","Suuret tiet"
+"FIF_NET_HGHW","Moottoritiet"
+"FIF_NET_PATH","Polut"
+"FIF_NET_WALL","Seinät ja aidat"
+"FIF_NET_WAT","Vesirakenteet"
+"FIF_PROP_MAR","Editor-merkit"
+"FIF_NET_TNR","Pikkuruiset tiet"
+"FIF_NET_UTI","Julkiset palvelut"
+"FIF_NET_TRA","Juna"
+"FIF_SET_PM","Näytä marker-tyyppiset propit pelimuodossa"
+"FIF_SET_PMTP","Marker-tyyppiset propit ovat näkymättömiä ja suurin osa ei toimi pelimuodossa. Käytä Move It -modia poistaaksesti ne."
+"FIF_SET_IC","Show the number of existing instances of each asset"
+"FIF_EF_UN","Unused Assets"
+"FIF_QM_TIT","Quick Menu"
+"FIF_UIS_UN","Unused"
+"FIF_UIS_IN","In Use"
+"FIF_SET_ICTP","This option slightly slows down search speed. Disable it when it is not needed"
+"FIF_SET_PO","Include Procedural Objects"
+"FIF_SET_ICO","Use original sorting option"
+"FIF_SET_ICUS","Show used assets on top"
+"FIF_SET_ICUN","Show unused assets on top"
+"FIF_TAG_BATTP","Batch Editing"
+"FIF_SE_SEBTP","Clear the search box"
+"FIF_SET_DB","Use system default browser instead of Steam overlay"
+"FIF_SET_DBTP","Right click the Steam icon on an asset thumbnail to view the asset on Steam workshop"
+"FIF_NET_ONE","One-way Roads"
+"FIF_NET_PAR","Allow Street Parking"
+"FIF_NET_NOP","No Street Parking"
+"FIF_PROP_VEH","Unsorted Vehicle"
+"FIF_PROP_TRE","Tree"
+"FIF_SET_BACK","Use light background color for the main panel"
+"FIF_SET_BACKTP","Easier to see darker assets, but harder to see brighter assets"
+"FIF_SET_DUN","Disable future update notice"
+"FIF_PROP_MOT","Motor Vehicle"
+"FIF_PROP_RAI","Railway Vehicle"
+"FIF_PROP_AIR","Aircraft"
+"FIF_PROP_WAT","Watercraft"
+"FIF_EF_SB","Sub-buildings"
+"FIF_ATP_TP","Right-click to drag and move this panel"
+"FIF_SET_ATP","Show asset type panel"
+"FIF_EF_CT","With Custom Tag"
+"FIF_EF_NCT","Without Custom Tag"
+"FIF_UPN_UP","Update"
+"FIF_PROP_TC","Terrain Conforming"
+"FIF_PROP_NTC","Non-Terrain Conforming"
+"FIF_SET_SSK","Use separate search query keyword for each asset type"
+"FIF_SET_SSKTP","Hold SHIFT when switching asset type to share query keyword temporarily"
+"FIF_TAG_SA","Select All"
+"FIF_TAG_SATP","Select all displayed items"
+"FIF_EF_UNEXP","Export All"
+"FIF_EF_UNEXPTP","Export the list of all unused workshop ID's into an HTML file with workshop links"
+"FIF_EF_UNEXPSE","Export Searched"
+"FIF_EF_UNEXPTPSE","Export the list of unused workshop ID's from the last search into an HTML file with workshop links"
+"FIF_EF_LC","Local Custom"
+"FIF_EF_WC","Workshop Custom"
+"FIF_EF_DLC","Require DLC/CCP"
+"FIF_LOC_TOOL","Click to locate next instance of the selected asset. Hold SHIFT and click to locate the next PO instance."
+"FIF_REF_DIS","Refresh display"
+"FIF_EF_US","Used Assets"
+"FIF_EF_USEXPTP","Export the list of all used workshop ID's into an HTML file with workshop links"
+"FIF_EF_USEXPTPSE","Export the list of used workshop ID's from the last search into an HTML file with workshop links"
+"FIF_SE_SIZEX","Click this x to reset the building size filters"
+"FIF_SET_UIVP","Disable Find It 2's extra UI on vanilla panels(restart required)"
+"FIF_SET_UIVPTP","Including: custom tag icons, steam icons, and DLC icons"
+"FIF_DOU_MESH","View in Mesh Info"
+"FIF_DOU_MESHNO","Mesh Info mod not installed or enabled"
+"FIF_DOU_MESHTYPE","Mesh Info mod only supports custom non-network assets"
+"FIF_DOU_MESHOPEN","See this asset in Mesh Info mod"
+"FIF_DOU_RICO","View in RICO Revisited"
+"FIF_DOU_RICONO","Ploppable RICO Revisited mod not installed or enabled"
+"FIF_DOU_RICOTYPE","Ploppable RICO Revisited mod only supports building assets"
+"FIF_DOU_RICOOPEN","See this asset in Ploppable RICO Revisited mod"
+"FIF_DOU_FOLD","Open File Folder"
+"FIF_DOU_FOLDCUS","This feature only works with custom assets"
+"FIF_DOU_FOLDOPEN","Open the parent folder of this asset"
+"FIF_UIS_CNWS","Custom non-workshop asset"
+"FIF_NET_BUS","Bus Lanes"
+"FIF_NET_TRO","Trolley Bus Lanes"
+"FIF_NET_BIK","Bike Lanes"
+"FIF_NET_TRM","Tram Tracks"
+"FIF_NET_MET","Metro"
+"FIF_SET_REC","Recent DLs sorting method(restart required)"
+"FIF_SET_RECPC","Parent folder creation time"
+"FIF_SET_RECPM","Parent folder modification time"
+"FIF_SET_RECFC","CRP file creation time"
+"FIF_SET_RECFM","CRP file modificaiton time"
+"FIF_SET_DIS","Disable instant text search. Press ENTER to submit a new text search"
+"FIF_SET_DISTP","Use this option to reduce UI lag when typing in the search box"
+"FIF_SET_STAB","Show search tabs"
+"FIF_STAB_NTAB","New tab"
+"FIF_SET_DSK","Disable secondary keyboard shortcuts when Find It panel is closed"
+"FIF_SET_DSKTP","Avoid conflicts with TM:PE. Only the main keyboard shortcut will remain functional when Find It panel is closed"
+"FIF_SET_CFFL","Configuration File Location"
+"FIF_DOU_WS","Steam Workshop page"
+"FIF_DOU_WS_STEAM","via Steam"
+"FIF_DOU_WS_BROWSER","via default browser"
+"FIF_DOU_WS_NOID","This feature only works with custom assets with Steam Workshop IDs"
+"FIF_DOU_WS_STEAMTP","See this asset on Steam Workshop in Steam overlay"
+"FIF_DOU_WS_BROWSERTP","See this asset on Steam Workshop in default browser"
