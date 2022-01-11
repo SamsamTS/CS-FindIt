@@ -1,5 +1,5 @@
 CODE,pt-br
-NAME,Português (BR)
+NAME,Português(BR)
 FIF_DESC,Encontre e organize seus itens
 FIF_SET_DM,Desativar o registro de depuração de mensagens
 FIF_SET_DMTP,"Se marcada, as mensagens depuradas não serão gravadas."
@@ -202,7 +202,7 @@ FIF_EF_USEXPTP,Exportar a lista com a identificação de todos itens usados da o
 FIF_EF_USEXPTPSE,Exportar a lista com a identificação de todos itens usados da oficina mostrados na última pesquisa em um arquivo HTML com os links para a oficina
 FIF_SE_SIZEX,Clique neste 'x' para resetar os filtros de tamanho de construções
 FIF_SET_UIVP,Desativar a interface adicional do 'Find It 2' no painel original (necessário reiniciar)
-FIF_SET_UIVPTP,"Incluindo: ícones de marcador personalizado, ícones da steam, ícones dos pacote de expansão (DLC)"
+FIF_SET_UIVPTP,"Incluindo: ícones de marcador personalizado,  ícones da steam, ícones dos pacote de expansão (DLC)"
 FIF_DOU_MESH,Visualizar informações da Malha
 FIF_DOU_MESHNO,O mod 'Mesh Info' não está instalado ou ativo
 FIF_DOU_MESHTYPE,O mod 'Mesh Info' suporta apenas itens personalizados que não sejam vias

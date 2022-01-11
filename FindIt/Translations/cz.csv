@@ -1,0 +1,240 @@
+CODE,cz
+NAME,Česky
+FIF_DESC,Vyhledat a uspořádat všechny assety
+FIF_SET_DM,
+FIF_SET_DMTP,
+FIF_SET_CMT,Vystředit hlavní lištu
+FIF_SET_CMTTP,Hlavní lišta bude vystředěna pokud přesáhne určitou šířku
+FIF_SET_UL,Odemknout vše
+FIF_SET_ULTP,
+FIF_SET_BP,
+FIF_SET_BPTP,
+FIF_SE_WF,Vlastní
+FIF_SE_VF,Vanilla
+FIF_SE_IA,Vše
+FIF_SE_IN,Síť
+FIF_SE_IP,
+FIF_SE_IG,
+FIF_SE_IR,RICO
+FIF_SE_IPR,
+FIF_SE_ID,
+FIF_SE_IT,Strom
+FIF_SE_LV,Level budovy
+FIF_SE_SZ,Size:
+FIF_SE_SC,Drž SHIFT nebo CTRL k výběru více kategorií
+FIF_PLOP_E,Elektřina
+FIF_PLOP_W,Voda/Kanalizace
+FIF_PLOP_G,Odpad
+FIF_PLOP_H,Zdravotnictví
+FIF_PLOP_F,Hasiči
+FIF_PLOP_P,Policie
+FIF_PLOP_ED,Vzdělání
+FIF_PLOP_PT,Veřejná doprava
+FIF_PLOP_PPW,Park/Náměstí/Příroda
+FIF_PLOP_U,Unikátní budovy
+FIF_PLOP_I,Průmysl
+FIF_PLOP_D,Pohroma
+FIF_PLOP_C,Kampus
+FIF_PLOP_V,
+FIF_PLOP_FI,Rybaření
+FIF_GR_LDR,Řídké obytné
+FIF_GR_HDR,Husté obytné
+FIF_GR_LDRE,Řídké obytné EKO
+FIF_GR_HDRE,Husté obytné EKO
+FIF_GR_LDC,Řídké komerční
+FIF_GR_HDC,Husté komerční
+FIF_GR_CE,Komerční EKO
+FIF_GR_O,Kanceláře
+FIF_GR_ITC,IT Cluster
+FIF_GR_GI,Obecný průmysl
+FIF_GR_FAI,Zemědělský průmysl
+FIF_GR_FOI,Lesní průmysl
+FIF_GR_OII,Ropný průmysl
+FIF_GR_ORI,Hutní průmysl
+FIF_GR_LC,
+FIF_GR_TC,
+FIF_SO_RETP,
+FIF_SO_NETP,Seřadit podle data stažení
+FIF_SO_RE,Relevance
+FIF_SO_NE,
+TRN_CHOICE,Nastavit jazyk (platný od příštího spuštění)
+TRN_SYS,Použít systémový jazyk
+FIF_PROP_IND,Průmyslové
+FIF_PROP_PAR,Parky
+FIF_PROP_COM,Běžné
+FIF_PROP_RES,Obytné
+FIF_PROP_BIL,Billboardy
+FIF_PROP_SPE,Zvlášní Billboardy
+FIF_PROP_LIG,Světla
+FIF_PROP_NAT,Příroda
+FIF_PROP_UNS,Nezařazené
+FIF_SET_KS,
+FIF_SE_IGR,
+FIF_SET_CTFL,
+FIF_SET_CTFOP,Zobrazit v Průzkumníku souborů
+FIF_SE_SCTP,
+FIF_POP_SCR,Použít kolečko k rollování nahoru/dolů
+FIF_POP_CON,Potvrdit
+FIF_POP_CAN,Zrušit
+FIF_POP_NU,Toto nelze vzít zpět!
+FIF_CO_TIT,Sloučit
+FIF_CO_MSG,
+FIF_CO_CH,Zvolit
+FIF_CO_CHTP,
+FIF_CO_CHLBL,Sloučit s:
+FIF_CO_NELBL,
+FIF_DE_TIT,Smazat
+FIF_DE_MSG,
+FIF_RE_TIT,Přejmenovat
+FIF_RE_MSG,
+FIF_RE_ITP,
+FIF_RE_ELBL,
+FIF_RE_NEWLBL,
+FIF_RE_SLBL,
+FIF_RE_AELBL,
+FIF_CT_TIT,
+FIF_CT_DDMSG,
+FIF_CT_DDTP,
+FIF_CT_ILBL1,Nebo
+FIF_CT_ILBL2,
+FIF_CT_ITP,
+FIF_SET_CTLS,
+FIF_TAG_DDTP,
+FIF_TAG_REF,Znovu načíst
+FIF_TAG_REFTP,
+FIF_TAG_REN,Přejmenovat
+FIF_TAG_RENTP,
+FIF_TAG_COM,Sloučit
+FIF_TAG_COMTP,
+FIF_TAG_DEL,Smazat
+FIF_TAG_DELTP,
+FIF_UIS_WS,Klikni pravým k zobrazení této položky na Steam Workshop
+FIF_TREE_SM,Malé stromy
+FIF_TREE_MD,Střední stromy
+FIF_TREE_LG,Velké stromy
+FIF_TAG_BAT,Dávka
+FIF_TAG_BAC,Zpět
+FIF_TAG_ADD,Přidat
+FIF_TAG_ADDTP,
+FIF_TAG_REM,Odebrat
+FIF_TAG_REMTP,
+FIF_TAG_CLE,Vyčistit
+FIF_TAG_CLETP,
+FIF_ADD_TIT,
+FIF_ADD_NUM,
+FIF_ADD_ADD,
+FIF_ADD_CHTP,
+FIF_ADD_TAG,
+FIF_ADD_ELBL,
+FIF_REM_TIT,
+FIF_REM_REM,
+FIF_REM_CHTP,
+FIF_REM_ELBL,
+FIF_SE_EFI,
+FIF_EF_AC,
+FIF_EF_BH,
+FIF_EF_MET,metry
+FIF_EF_FEE,stopy
+FIF_SET_ACLS,
+FIF_GR_RAN,Náhodný výběr
+FIF_NET_SMR,Malé silnice
+FIF_NET_MDR,Střední silnice
+FIF_NET_LGR,Velké silnice
+FIF_NET_HGHW,Dálnice
+FIF_NET_PATH,Cesty
+FIF_NET_WALL,Zdi a ploty
+FIF_NET_WAT,
+FIF_PROP_MAR,
+FIF_NET_TNR,Drobné cesty
+FIF_NET_UTI,Užitkové
+FIF_NET_TRA,Vlak
+FIF_SET_PM,
+FIF_SET_PMTP,
+FIF_SET_IC,
+FIF_EF_UN,
+FIF_QM_TIT,Rychlé menu
+FIF_UIS_UN,Nepoužité
+FIF_UIS_IN,Použité
+FIF_SET_ICTP,
+FIF_SET_PO,
+FIF_SET_ICO,
+FIF_SET_ICUS,Zobrazit použité nahoře
+FIF_SET_ICUN,Zobrazit nepoužité nahoře
+FIF_TAG_BATTP,
+FIF_SE_SEBTP,
+FIF_SET_DB,
+FIF_SET_DBTP,
+FIF_NET_ONE,Jednosměrky
+FIF_NET_PAR,Parkovat na ulici
+FIF_NET_NOP,Neparkovat na ulici
+FIF_PROP_VEH,
+FIF_PROP_TRE,
+FIF_SET_BACK,
+FIF_SET_BACKTP,
+FIF_SET_DUN,Nezobrazovat příští aktualizaci
+FIF_PROP_MOT,
+FIF_PROP_RAI,
+FIF_PROP_AIR,
+FIF_PROP_WAT,
+FIF_EF_SB,
+FIF_ATP_TP,
+FIF_SET_ATP,
+FIF_EF_CT,
+FIF_EF_NCT,
+FIF_UPN_UP,Obnovit
+FIF_PROP_TC,
+FIF_PROP_NTC,
+FIF_SET_SSK,
+FIF_SET_SSKTP,
+FIF_TAG_SA,
+FIF_TAG_SATP,
+FIF_EF_UNEXP,
+FIF_EF_UNEXPTP,
+FIF_EF_UNEXPSE,
+FIF_EF_UNEXPTPSE,
+FIF_EF_LC,
+FIF_EF_WC,
+FIF_EF_DLC,
+FIF_LOC_TOOL,
+FIF_REF_DIS,
+FIF_EF_US,
+FIF_EF_USEXPTP,
+FIF_EF_USEXPTPSE,
+FIF_SE_SIZEX,
+FIF_SET_UIVP,
+FIF_SET_UIVPTP,
+FIF_DOU_MESH,
+FIF_DOU_MESHNO,
+FIF_DOU_MESHTYPE,
+FIF_DOU_MESHOPEN,
+FIF_DOU_RICO,
+FIF_DOU_RICONO,
+FIF_DOU_RICOTYPE,
+FIF_DOU_RICOOPEN,
+FIF_DOU_FOLD,
+FIF_DOU_FOLDCUS,
+FIF_DOU_FOLDOPEN,
+FIF_UIS_CNWS,
+FIF_NET_BUS,
+FIF_NET_TRO,
+FIF_NET_BIK,
+FIF_NET_TRM,
+FIF_NET_MET,
+FIF_SET_REC,
+FIF_SET_RECPC,
+FIF_SET_RECPM,
+FIF_SET_RECFC,
+FIF_SET_RECFM,
+FIF_SET_DIS,
+FIF_SET_DISTP,
+FIF_SET_STAB,
+FIF_STAB_NTAB,
+FIF_SET_DSK,
+FIF_SET_DSKTP,
+FIF_SET_CFFL,
+FIF_DOU_WS,
+FIF_DOU_WS_STEAM,
+FIF_DOU_WS_BROWSER,
+FIF_DOU_WS_NOID,
+FIF_DOU_WS_STEAMTP,
+FIF_DOU_WS_BROWSERTP,
