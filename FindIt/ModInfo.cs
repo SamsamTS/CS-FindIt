@@ -12,12 +12,15 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7.7-beta1";
+        public const string version = "2.7.7-beta2";
         public const bool isBeta = true;
         public const bool debug = false;
-        public const double updateNoticeDate = 20220109;
+        public const double updateNoticeDate = 20220114;
         public const string updateNotice =
+            "- Fix the bug where the double-click menu might be shown outside of\n" +
+            "  the screen when toolbar mods are used\n\n"+
 
+            "Other changes from 2.7.7-beta:\n" + 
             "- Migrate to new .csv based translation framework (thanks algernon!)\n\n";
 
         public string Name
