@@ -179,6 +179,15 @@ namespace FindIt
                                 if (!asset.prefab.m_isCustomContent)
                                 {
                                     m_dlcSprite.tooltip = "Tree & Vehicle Props Mod";
+
+                                    if (asset.prefab.m_dlcRequired == SteamHelper.DLC_BitMask.AirportDLC)
+                                    {
+                                        m_dlcSprite.tooltip += "\nAirports DLC";
+                                    }
+                                    else if (asset.prefab.m_dlcRequired == SteamHelper.DLC_BitMask.ModderPack10)
+                                    {
+                                        m_dlcSprite.tooltip += "\nVehicles of the World CCP by bsquiklehausen";
+                                    }
                                 }
                                 else
                                 {
@@ -357,6 +366,11 @@ namespace FindIt
             {
                 sprite.tooltip = "Sunset Harbor DLC";
                 sprite.spriteName = "DonutIcon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.AirportDLC)
+            {
+                sprite.tooltip = "Airports DLC";
+                sprite.spriteName = "AirportIcon";
             }
             else if (dlc == SteamHelper.DLC_BitMask.Football)
             {

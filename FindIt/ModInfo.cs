@@ -12,15 +12,27 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7.7-beta2";
-        public const bool isBeta = true;
+        public const string version = "2.7.7";
+        public const bool isBeta = false;
         public const bool debug = false;
-        public const double updateNoticeDate = 20220114;
+        public const double updateNoticeDate = 20220125;
         public const string updateNotice =
-            "- Fix the bug where the double-click menu might be shown outside of\n" +
-            "  the screen when toolbar mods are used\n\n"+
+            
+            "Update for the Airports DLC release:\n\n" +
 
-            "Other changes from 2.7.7-beta:\n" + 
+            "- Add a new Network filter tab for aircraft(runway, taxiway, concourse, etc.)\n\n" +
+
+            "- Add new DLC filtering options in the extra filters panel\n" +
+            "  - Airports DLC\n" +
+            "  - Vehicles of the World CCP (this only matters if you are using Tree & Vehicle Props mods)\n\n" +
+
+            "- Assets from Airports DLC will be shown with corresponding DLC icon\n\n" +
+
+            "Other update:\n\n" + 
+
+            "- Fix the bug where the double-click menu might be shown outside of the screen when toolbar\n" +
+            "  mods are used\n\n"+
+
             "- Migrate to new .csv based translation framework (thanks algernon!)\n\n";
 
         public string Name

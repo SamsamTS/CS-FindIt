@@ -691,7 +691,6 @@ namespace FindIt.GUI
                 }
             }
         }
-
         private void SetDLCSprite(UISprite sprite, SteamHelper.DLC_BitMask dlc)
         {
             if (dlc == SteamHelper.DLC_BitMask.None) return;
@@ -747,6 +746,11 @@ namespace FindIt.GUI
             {
                 sprite.tooltip = "Sunset Harbor DLC";
                 sprite.spriteName = "DonutIcon";
+            }
+            else if (dlc == SteamHelper.DLC_BitMask.AirportDLC)
+            {
+                sprite.tooltip = "Airports DLC";
+                sprite.spriteName = "AirportIcon";
             }
             else if (dlc == SteamHelper.DLC_BitMask.Football)
             {

@@ -553,6 +553,14 @@ namespace FindIt
                     {
                         asset.SetVehiclePropType(propVehicleInfoTable, propInfo);
                         tvppAssets.Add(asset);
+
+                        // extra handling for vehicle of the world CCP & TVP mod combination
+                        if (asset.prefab.m_dlcRequired == SteamHelper.DLC_BitMask.ModderPack10)
+                        {
+                            asset.author = "bsquiklehausen";
+                            if (!assetCreatorDictionary.ContainsKey(asset.author)) assetCreatorDictionary.Add(asset.author, 1);
+                            else assetCreatorDictionary[asset.author] += 1;
+                        }
                     }
 
                     // vehicle props marked(not generated) by TVP mod during its duplicate name checking process
