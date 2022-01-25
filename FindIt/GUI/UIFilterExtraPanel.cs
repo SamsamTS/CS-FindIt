@@ -85,6 +85,7 @@ namespace FindIt.GUI
         {
             BaseGame = 0,
             AfterDark,
+            Airports,
             Campus,
             GreenCities,
             Industries,
@@ -101,6 +102,7 @@ namespace FindIt.GUI
             ModernJapan,
             TrainStations,
             BridgesPiers,
+            VehiclesoftheWorld,
             Concerts,
             DeluxeUpgrade,
             MatchDay,
@@ -448,6 +450,7 @@ namespace FindIt.GUI
             DLCDropDownMenu.itemHeight = 30;
             DLCDropDownMenu.AddItem("Base Game");
             DLCDropDownMenu.AddItem("After Dark DLC");
+            DLCDropDownMenu.AddItem("Airports DLC");
             DLCDropDownMenu.AddItem("Campus DLC");
             DLCDropDownMenu.AddItem("Green Cities DLC");
             DLCDropDownMenu.AddItem("Industries DLC");
@@ -464,6 +467,7 @@ namespace FindIt.GUI
             DLCDropDownMenu.AddItem("Modern Japan CCP");
             DLCDropDownMenu.AddItem("Train Stations CCP");
             DLCDropDownMenu.AddItem("Bridges & Piers CCP");
+            DLCDropDownMenu.AddItem("Vehicles of the World CCP");
             DLCDropDownMenu.AddItem("Concerts DLC");
             DLCDropDownMenu.AddItem("Deluxe Upgrade Pack");
             DLCDropDownMenu.AddItem("Match Day DLC");

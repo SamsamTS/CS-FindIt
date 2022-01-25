@@ -88,12 +88,22 @@ namespace FindIt.GUI
                 instance.Show(true);
             }
 
-            float absoluteX = component.absolutePosition.x + component.width;
+            float uiScale = 1.0f;
+            UITabContainer tsContainer = GameObject.Find("TSContainer").GetComponent<UITabContainer>();
+            if (tsContainer != null) uiScale = tsContainer.transform.localScale.x;
+
+            float absoluteX = component.absolutePosition.x - (component.relativePosition.x * (1 - uiScale)) + (component.width * uiScale);
             if ((absoluteX + PanelWidth) > UIView.GetAView().fixedWidth)
             {
-                absoluteX = component.absolutePosition.x - PanelWidth;
+                absoluteX = absoluteX - PanelWidth - component.width;
             }
-            instance.absolutePosition = new Vector2(absoluteX, component.absolutePosition.y - 80);
+
+            float absoluteY = component.absolutePosition.y - (component.relativePosition.y * (1 - uiScale));
+            if ((absoluteY + PanelHeight) > UIView.GetAView().fixedHeight)
+            {
+                absoluteY = absoluteY - ((absoluteY + PanelHeight) - UIView.GetAView().fixedHeight);
+            }
+            instance.absolutePosition = new Vector2(absoluteX, absoluteY);
 
         }
 

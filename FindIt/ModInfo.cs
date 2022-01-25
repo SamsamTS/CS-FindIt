@@ -12,22 +12,28 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7.6";
+        public const string version = "2.7.7";
         public const bool isBeta = false;
         public const bool debug = false;
-        public const double updateNoticeDate = 20211226;
+        public const double updateNoticeDate = 20220125;
         public const string updateNotice =
+            
+            "Update for the Airports DLC release:\n\n" +
 
-            "- Better error handling for problematic assets\n\n" +
+            "- Add a new Network filter tab for aircraft(runway, taxiway, concourse, etc.)\n\n" +
 
-            "- Fix DLC icon scaling bug on vanilla panels when toolbar mods are used\n\n" +
+            "- Add new DLC filtering options in the extra filters panel\n" +
+            "  - Airports DLC\n" +
+            "  - Vehicles of the World CCP (this only matters if you are using Tree & Vehicle Props mods)\n\n" +
 
-            "- Fix bug caused by assets with problematic atlas\n\n" + 
+            "- Assets from Airports DLC will be shown with corresponding DLC icon\n\n" +
 
-            "- Update bundled EML API file\n\n" +
+            "Other update:\n\n" + 
 
-            "- Due to Crowdin import issues, some languages are temporarily removed\n" +
-            "  If you are interested, Crowdin project link can be found in workshop description\n\n";
+            "- Fix the bug where the double-click menu might be shown outside of the screen when toolbar\n" +
+            "  mods are used\n\n"+
+
+            "- Migrate to new .csv based translation framework (thanks algernon!)\n\n";
 
         public string Name
         {

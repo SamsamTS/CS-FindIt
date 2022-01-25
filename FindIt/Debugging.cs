@@ -1,9 +1,10 @@
-﻿// Modified from algernon's Advanced Building Level Control mod
-// https://github.com/algernon-A/AdvancedBuildingLevelControl
+﻿// from algernon
+// https://github.com/algernon-A/
 
 using System;
 using System.Text;
 using UnityEngine;
+
 
 namespace FindIt
 {
@@ -12,30 +13,56 @@ namespace FindIt
     /// </summary>
     internal static class Debugging
     {
+        // Logging detail flag.
+        internal static bool detailLogging = true;
+
         /// <summary>
-        /// Prints a single-line debugging message to the Unity output log.
+        /// Prints a single-line debugging message to the Unity output log with an "ERROR: " prefix, regardless of the 'detailed logging' setting.
         /// </summary>
-        /// <param name="message">Message to log</param>
-        internal static void Message(string message)
+        /// <param name="messages">Message to log (individual strings will be concatenated)</param>
+        internal static void Error(params object[] messages) => WriteMessage("ERROR: ", messages);
+
+
+        /// <summary>
+        /// Prints a single-line debugging message to the Unity output log, regardless of the 'detailed logging' setting.
+        /// </summary>
+        /// <param name="messages">Message to log (individual strings will be concatenated)</param>
+        internal static void KeyMessage(params object[] messages) => WriteMessage(String.Empty, messages);
+
+
+        /// <summary>
+        /// Prints a single-line debugging message to the Unity output log if the 'detailed logging' option is set (otherwise does nothing).
+        /// </summary>
+        /// <param name="messages">Message to log (individual strings will be concatenated)</param>
+        internal static void Message(params object[] messages)
         {
-            if (!ModInfo.debug) return;
-#pragma warning disable CS0162 // Unreachable code detected
-            Debug.Log("Find It 2: " + message + ".");
-#pragma warning restore CS0162 // Unreachable code detected
+            if (detailLogging)
+            {
+                WriteMessage(String.Empty, messages);
+            }
         }
 
 
         /// <summary>
         /// Prints an exception message to the Unity output log.
         /// </summary>
-        /// <param name="message">Message to log</param>
-        internal static void LogException(Exception exception)
+        /// <param name="exception">Exception</param>
+        /// <param name="messages">Message to log (individual strings will be concatenated)</param>
+        internal static void LogException(Exception exception, params object[] messages)
         {
             // Use StringBuilder for efficiency since we're doing a lot of manipulation here.
-            StringBuilder message = new StringBuilder();
+            // Start with mod name (to easily identify relevant messages), followed by colon to indicate start of actual message.
+            StringBuilder message = new StringBuilder("Find It 2: ");
 
-            message.AppendLine("caught exception!");
-            message.AppendLine("Exception:");
+            // Add each message parameter.
+            for (int i = 0; i < messages.Length; ++i)
+            {
+                message.Append(messages[i]);
+            }
+
+            // Finish with a new line and the exception information.
+            message.AppendLine();
+            message.AppendLine("Exception: ");
             message.AppendLine(exception.Message);
             message.AppendLine(exception.Source);
             message.AppendLine(exception.StackTrace);
@@ -50,7 +77,34 @@ namespace FindIt
             }
 
             // Write to log.
-            Debug.Log("Find It 2: " + message.ToString() + ".");
+            Debug.Log(message);
+        }
+
+
+        /// <summary>
+        /// Prints a single-line debugging message to the Unity output log with a specified prefix.
+        /// </summary>
+        /// <param name="prefix">Prefix for message, if any</param>
+        /// <param name="messages">Message to log (individual strings will be concatenated)</param>
+        private static void WriteMessage(string prefix, params object[] messages)
+        {
+            // Use StringBuilder for efficiency since we're doing a lot of manipulation here.
+            // Start with mod name (to easily identify relevant messages), followed by colon to indicate start of actual message.
+            StringBuilder message = new StringBuilder("Find It 2: ");
+
+            // Append prefix.
+            message.Append(prefix);
+
+            // Add each message parameter.
+            for (int i = 0; i < messages.Length; ++i)
+            {
+                message.Append(messages[i]);
+            }
+
+            // Terminating period to confirm end of messaage..
+            message.Append(".");
+
+            Debug.Log(message);
         }
     }
 }

@@ -73,6 +73,7 @@ namespace FindIt
             Utility,
             Train,
             Metro,
+            Aircraft,
             Unsorted
         }
 
@@ -457,6 +458,9 @@ namespace FindIt
             else if (info.m_class.m_subService == ItemClass.SubService.PublicTransportTrain) return Asset.NetworkType.Train;
             else if (info.m_class.m_subService == ItemClass.SubService.PublicTransportMetro) return Asset.NetworkType.Metro;
 
+            else if (info.m_class.m_subService == ItemClass.SubService.PublicTransportPlane) return Asset.NetworkType.Aircraft;
+            else if (info.m_class.m_subService == ItemClass.SubService.PublicTransportConcourse) return Asset.NetworkType.Aircraft;
+
             return NetworkType.Unsorted;
         }
 
@@ -484,6 +488,7 @@ namespace FindIt
                 else if (networkType == Asset.NetworkType.Utility) findIt2Description += Translations.Translate("FIF_NET_UTI");
                 else if (networkType == Asset.NetworkType.Train) findIt2Description += Translations.Translate("FIF_NET_TRA");
                 else if (networkType == Asset.NetworkType.Metro) findIt2Description += Translations.Translate("FIF_NET_MET");
+                else if (networkType == Asset.NetworkType.Aircraft) findIt2Description += Translations.Translate("FIF_PROP_AIR");
                 else if (networkType == Asset.NetworkType.Unsorted) findIt2Description += Translations.Translate("FIF_PROP_UNS");
 
                 if (UIFilterNetwork.IsNormalRoads(networkType))

@@ -632,6 +632,9 @@ namespace FindIt
             else if (dlc != SteamHelper.DLC_BitMask.AfterDarkDLC &&
                 selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.AfterDark) return false;
 
+            else if (dlc != SteamHelper.DLC_BitMask.AirportDLC &&
+                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.Airports) return false;
+
             else if (dlc != SteamHelper.DLC_BitMask.SnowFallDLC &&
                 selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.SnowFall) return false;
 
@@ -691,6 +694,9 @@ namespace FindIt
 
             else if (dlc != SteamHelper.DLC_BitMask.ModderPack8 &&
                 selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.BridgesPiers) return false;
+
+            else if (dlc != SteamHelper.DLC_BitMask.ModderPack10 &&
+                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.VehiclesoftheWorld) return false;
 
             return true;
         }

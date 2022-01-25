@@ -194,11 +194,11 @@ namespace FindIt
         {
             get
             {
-                return Translations.Language;
+                return Translations.CurrentLanguage;
             }
             set
             {
-                Translations.Language = value;
+                Translations.CurrentLanguage = value;
             }
         }
     }
