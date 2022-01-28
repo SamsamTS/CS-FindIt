@@ -27,6 +27,7 @@ namespace FindIt
         public static bool isTVPPatchEnabled = false; // Tree & Vehicle Props Patch mod enabled?
         public static bool isNTCPEnabled = false; // Non-terrain conforming mod enabled?
         public static bool isNext2Enabled = false; // Network Extension 2 mod enabled?
+        public static bool isNext3Enabled = false; // Network Extension 3 mod enabled?
         public static bool isETSTEnabled = false; // Extra Train Station Track mod enabled?
         public static bool isOWTTEnabled = false; // One-Way Train Tracks mod enabled?
         public static bool isMeshInfoEnabled = false; // MeshInfo mod enabled?
@@ -67,7 +68,7 @@ namespace FindIt
                 PropAPI.Initialize();
 
                 list = AssetTagList.instance;
-                if (isNext2Enabled) AssetTagList.instance.SetNext2Assets();
+                if (isNext2Enabled || isNext3Enabled) AssetTagList.instance.SetNext2Assets();
                 if (isETSTEnabled) AssetTagList.instance.SetETSTAssets();
                 if (isOWTTEnabled) AssetTagList.instance.SetOWTTAssets();
 
@@ -338,6 +339,7 @@ namespace FindIt
             isPOEnabled = enabledMods.Contains("proceduralobjects");
             isTVPPatchEnabled = enabledMods.Contains("tvproppatch");
             isNext2Enabled = enabledMods.Contains("networkextensions2");
+            isNext3Enabled = enabledMods.Contains("networkextensions3");
             isETSTEnabled = enabledMods.Contains("elevatedtrainstationtrack");
             isOWTTEnabled = enabledMods.Contains("singletraintrack");
             isMeshInfoEnabled = enabledMods.Contains("meshinfo");

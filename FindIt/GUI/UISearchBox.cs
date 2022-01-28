@@ -1003,7 +1003,8 @@ namespace FindIt.GUI
                 return false;
             }
 
-            if (targetAsset.assetType == Asset.AssetType.Rico || targetAsset.assetType == Asset.AssetType.Growable)
+            if (targetAsset.assetType == Asset.AssetType.Rico || targetAsset.assetType == Asset.AssetType.Growable 
+                || targetAsset.assetType == Asset.AssetType.Ploppable)
             {
                 /*
                 // set type drop-down
@@ -1031,9 +1032,35 @@ namespace FindIt.GUI
                 BuildingInfo buildingInfo = targetAsset.prefab as BuildingInfo;
                 if (buildingInfo == null) return false;
 
-                if (!UIFilterGrowable.instance.IsSelected(UIFilterGrowable.GetCategory(buildingInfo.m_class)))
+                if (targetAsset.assetType == Asset.AssetType.Ploppable)
                 {
-                    UIFilterGrowable.instance.SelectAll();
+                    if (!UIFilterGrowable.instance.IsSelected(UIFilterGrowable.GetCategory(buildingInfo.m_class)))
+                    {
+                        UIFilterGrowable.instance.SelectAll();
+                    }
+                }
+                else
+                {
+                    if (!UIFilterPloppable.instance.IsSelected(UIFilterPloppable.GetCategory(buildingInfo.m_class)))
+                    {
+                        UIFilterPloppable.instance.SelectAll();
+                    }
+                }
+            }
+
+            else if (targetAsset.assetType == Asset.AssetType.Tree)
+            {
+                if (!UIFilterTree.instance.IsSelected(UIFilterTree.GetCategory(targetAsset.treeType)))
+                {
+                    UIFilterTree.instance.SelectAll();
+                }
+            }
+
+            else if (targetAsset.assetType == Asset.AssetType.Network)
+            {
+                if (!UIFilterNetwork.instance.IsSelected(UIFilterNetwork.GetCategory(targetAsset.networkType)))
+                {
+                    UIFilterNetwork.instance.SelectAll();
                 }
             }
 
