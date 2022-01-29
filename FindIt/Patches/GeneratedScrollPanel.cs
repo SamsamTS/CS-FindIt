@@ -149,11 +149,11 @@ namespace FindIt
                         if (asset != null)
                         {
                             // next 2 assets, show blue steam icon
-                            if (FindIt.isNext2Enabled && AssetTagList.instance.next2Assets.Contains(asset))
+                            if ((FindIt.isNext2Enabled || FindIt.isNext3Enabled) && AssetTagList.instance.next2Assets.Contains(asset))
                             {
                                 m_dlcSprite.isVisible = true;
                                 m_dlcSprite.spriteName = "UIFilterWorkshopItemsFocusedHovered";
-                                m_dlcSprite.tooltip = "Network Extension 2 Mod";
+                                m_dlcSprite.tooltip = FindIt.isNext2Enabled ? "Network Extension 2 Mod" : "Network Extension 3 Mod";
                             }
                             // etst assets, show blue steam icon
                             else if (FindIt.isETSTEnabled && AssetTagList.instance.etstAssets.Contains(asset))
@@ -179,14 +179,9 @@ namespace FindIt
                                 if (!asset.prefab.m_isCustomContent)
                                 {
                                     m_dlcSprite.tooltip = "Tree & Vehicle Props Mod";
-
-                                    if (asset.prefab.m_dlcRequired == SteamHelper.DLC_BitMask.AirportDLC)
+                                    if (asset.prefab.m_dlcRequired != SteamHelper.DLC_BitMask.None)
                                     {
-                                        m_dlcSprite.tooltip += "\nAirports DLC";
-                                    }
-                                    else if (asset.prefab.m_dlcRequired == SteamHelper.DLC_BitMask.ModderPack10)
-                                    {
-                                        m_dlcSprite.tooltip += "\nVehicles of the World CCP by bsquiklehausen";
+                                        m_dlcSprite.tooltip += $"\n{UIScrollPanelItem.GetDLCSpriteToolTip(asset.prefab.m_dlcRequired)}";
                                     }
                                 }
                                 else
@@ -215,6 +210,10 @@ namespace FindIt
                                 if (!asset.prefab.m_isCustomContent)
                                 {
                                     m_dlcSprite.tooltip = "Non-terrain Conforming Props Mod";
+                                    if (asset.prefab.m_dlcRequired != SteamHelper.DLC_BitMask.None)
+                                    {
+                                        m_dlcSprite.tooltip += $"\n{UIScrollPanelItem.GetDLCSpriteToolTip(asset.prefab.m_dlcRequired)}";
+                                    }
                                 }
                                 else
                                 {
@@ -314,129 +313,9 @@ namespace FindIt
         private static void SetDLCSprite(UISprite sprite, SteamHelper.DLC_BitMask dlc)
         {
             if (dlc == SteamHelper.DLC_BitMask.None) return;
-
             sprite.isVisible = true;
-
-            if (dlc == SteamHelper.DLC_BitMask.DeluxeDLC)
-            {
-                sprite.tooltip = "Deluxe Upgrade Pack";
-                sprite.spriteName = "DeluxeIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.AfterDarkDLC)
-            {
-                sprite.tooltip = "After Dark DLC";
-                sprite.spriteName = "ADIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.SnowFallDLC)
-            {
-                sprite.tooltip = "Snow Fall DLC";
-                sprite.spriteName = "WWIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.NaturalDisastersDLC)
-            {
-                sprite.tooltip = "Natural Disasters DLC";
-                sprite.spriteName = "NaturalDisastersIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.InMotionDLC)
-            {
-                sprite.tooltip = "Mass Transit DLC";
-                sprite.spriteName = "MassTransitIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.GreenCitiesDLC)
-            {
-                sprite.tooltip = "Green Cities DLC";
-                sprite.spriteName = "GreenCitiesIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.ParksDLC)
-            {
-                sprite.tooltip = "Parklife DLC";
-                sprite.spriteName = "ParkLifeIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.IndustryDLC)
-            {
-                sprite.tooltip = "Industries DLC";
-                sprite.spriteName = "IndustriesIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.CampusDLC)
-            {
-                sprite.tooltip = "Campus DLC";
-                sprite.spriteName = "CampusIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.UrbanDLC)
-            {
-                sprite.tooltip = "Sunset Harbor DLC";
-                sprite.spriteName = "DonutIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.AirportDLC)
-            {
-                sprite.tooltip = "Airports DLC";
-                sprite.spriteName = "AirportIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.Football)
-            {
-                sprite.tooltip = "Match Day DLC";
-                sprite.spriteName = "MDIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.Football2345)
-            {
-                sprite.tooltip = "Stadiums: European Club Pack DLC";
-                sprite.spriteName = "StadiumsDLCIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.OrientalBuildings)
-            {
-                sprite.tooltip = "Pearls from the East DLC";
-                sprite.spriteName = "ChineseBuildingsTagIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.MusicFestival)
-            {
-                sprite.tooltip = "Concerts DLC";
-                sprite.spriteName = "ConcertsIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.ModderPack1)
-            {
-                sprite.tooltip = "Art Deco Content Creator Pack by Shroomblaze";
-                sprite.spriteName = "ArtDecoIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.ModderPack2)
-            {
-                sprite.tooltip = "High-Tech Buildings Content Creator Pack by GCVos";
-                sprite.spriteName = "HighTechIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.ModderPack3)
-            {
-                sprite.tooltip = "European Suburbias Content Creator Pack by Avanya";
-                sprite.spriteName = "Modderpack3Icon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.ModderPack4)
-            {
-                sprite.tooltip = "University City Content Creator Pack by KingLeno";
-                sprite.spriteName = "Modderpack4Icon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.ModderPack5)
-            {
-                sprite.tooltip = "Modern City Center Content Creator Pack by AmiPolizeiFunk";
-                sprite.spriteName = "Modderpack5Icon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.ModderPack6)
-            {
-                sprite.tooltip = "Modern Japan Content Creator Pack by Ryuichi Kaminogi";
-                sprite.spriteName = "Modderpack6Icon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.ModderPack7)
-            {
-                sprite.tooltip = "Train Stations Content Creator Pack by BadPeanut";
-                sprite.spriteName = "Modderpack7Icon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.ModderPack8)
-            {
-                sprite.tooltip = "Bridges & Piers Content Creator Pack by Armesto";
-                sprite.spriteName = "Modderpack8Icon";
-            }
-            else
-            {
-                sprite.tooltip = "Unknown DLC";
-                sprite.spriteName = "ToolbarIconHelp";
-            }
+            sprite.tooltip = UIScrollPanelItem.GetDLCSpriteToolTip(dlc);
+            sprite.spriteName = UIScrollPanelItem.GetDLCSpriteName(dlc);
         }
     }
 }

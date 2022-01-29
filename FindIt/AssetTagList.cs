@@ -558,6 +558,7 @@ namespace FindIt
                         if (asset.prefab.m_dlcRequired == SteamHelper.DLC_BitMask.ModderPack10)
                         {
                             asset.author = "bsquiklehausen";
+                            asset.isCCP = true;
                             if (!assetCreatorDictionary.ContainsKey(asset.author)) assetCreatorDictionary.Add(asset.author, 1);
                             else assetCreatorDictionary[asset.author] += 1;
                         }

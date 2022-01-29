@@ -238,3 +238,5 @@ FIF_DOU_WS_BROWSER,via default browser
 FIF_DOU_WS_NOID,This feature only works with custom assets with Steam Workshop IDs
 FIF_DOU_WS_STEAMTP,See this asset on Steam Workshop in Steam overlay
 FIF_DOU_WS_BROWSERTP,See this asset on Steam Workshop in default browser
+FIF_SET_RES_PANEL,Reset Find It panel when it is closed
+FIF_SET_RES_PANELTP,Reset all options in Find It when you close the panel

@@ -12,12 +12,14 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7.7";
+        public const string version = "2.7.8";
         public const bool isBeta = false;
         public const bool debug = false;
         public const double updateNoticeDate = 20220125;
         public const string updateNotice =
-            
+      
+            // same message as v2.7.7
+
             "Update for the Airports DLC release:\n\n" +
 
             "- Add a new Network filter tab for aircraft(runway, taxiway, concourse, etc.)\n\n" +
@@ -163,6 +165,15 @@ namespace FindIt
                     XMLUtils.SaveSettings();
                 });
                 disableSecondaryKeyboardShortcuts.tooltip = Translations.Translate("FIF_SET_DSKTP");
+                group.AddSpace(5);
+
+                // Reset Find It panel when it is closed
+                UICheckBox resetPanelWhenClosed = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_RES_PANEL"), Settings.resetPanelWhenClosed, (b) =>
+                {
+                    Settings.resetPanelWhenClosed = b;
+                    XMLUtils.SaveSettings();
+                });
+                resetPanelWhenClosed.tooltip = Translations.Translate("FIF_SET_RES_PANELTP");
                 group.AddSpace(5);
 
                 // Recent DLs sorting
