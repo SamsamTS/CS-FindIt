@@ -478,7 +478,7 @@ namespace FindIt.GUI
                     if (data.asset != null)
                     {
                         // next 2/3 assets, show blue steam icon
-                        if ((FindIt.isNext2Enabled || FindIt.isNext3Enabled)  && AssetTagList.instance.next2Assets.Contains(data.asset))
+                        if ((FindIt.isNext2Enabled || FindIt.isNext3Enabled) && AssetTagList.instance.next2Assets.Contains(data.asset))
                         {
                             m_dlcSprite.isVisible = true;
                             m_dlcSprite.spriteName = "UIFilterWorkshopItemsFocusedHovered";
@@ -508,6 +508,10 @@ namespace FindIt.GUI
                             if (!data.asset.prefab.m_isCustomContent)
                             {
                                 m_dlcSprite.tooltip = "Tree & Vehicle Props Mod";
+                                if (data.asset.prefab.m_dlcRequired != SteamHelper.DLC_BitMask.None)
+                                {
+                                    m_dlcSprite.tooltip += $"\n{UIScrollPanelItem.GetDLCSpriteToolTip(data.asset.prefab.m_dlcRequired)}";
+                                }
                             }
                             else
                             {
@@ -535,6 +539,10 @@ namespace FindIt.GUI
                             if (!data.asset.prefab.m_isCustomContent)
                             {
                                 m_dlcSprite.tooltip = "Non-terrain Conforming Props Mod";
+                                if (data.asset.prefab.m_dlcRequired != SteamHelper.DLC_BitMask.None)
+                                {
+                                    m_dlcSprite.tooltip += $"\n{UIScrollPanelItem.GetDLCSpriteToolTip(data.asset.prefab.m_dlcRequired)}";
+                                }
                             }
                             else
                             {
@@ -694,130 +702,68 @@ namespace FindIt.GUI
         private void SetDLCSprite(UISprite sprite, SteamHelper.DLC_BitMask dlc)
         {
             if (dlc == SteamHelper.DLC_BitMask.None) return;
-
             sprite.isVisible = true;
-
-            if (dlc == SteamHelper.DLC_BitMask.DeluxeDLC)
-            {
-                sprite.tooltip = "Deluxe Upgrade Pack";
-                sprite.spriteName = "DeluxeIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.AfterDarkDLC)
-            {
-                sprite.tooltip = "After Dark DLC";
-                sprite.spriteName = "ADIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.SnowFallDLC)
-            {
-                sprite.tooltip = "Snow Fall DLC";
-                sprite.spriteName = "WWIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.NaturalDisastersDLC)
-            {
-                sprite.tooltip = "Natural Disasters DLC";
-                sprite.spriteName = "NaturalDisastersIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.InMotionDLC)
-            {
-                sprite.tooltip = "Mass Transit DLC";
-                sprite.spriteName = "MassTransitIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.GreenCitiesDLC)
-            {
-                sprite.tooltip = "Green Cities DLC";
-                sprite.spriteName = "GreenCitiesIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.ParksDLC)
-            {
-                sprite.tooltip = "Parklife DLC";
-                sprite.spriteName = "ParkLifeIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.IndustryDLC)
-            {
-                sprite.tooltip = "Industries DLC";
-                sprite.spriteName = "IndustriesIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.CampusDLC)
-            {
-                sprite.tooltip = "Campus DLC";
-                sprite.spriteName = "CampusIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.UrbanDLC)
-            {
-                sprite.tooltip = "Sunset Harbor DLC";
-                sprite.spriteName = "DonutIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.AirportDLC)
-            {
-                sprite.tooltip = "Airports DLC";
-                sprite.spriteName = "AirportIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.Football)
-            {
-                sprite.tooltip = "Match Day DLC";
-                sprite.spriteName = "MDIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.Football2345)
-            {
-                sprite.tooltip = "Stadiums: European Club Pack DLC";
-                sprite.spriteName = "StadiumsDLCIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.OrientalBuildings)
-            {
-                sprite.tooltip = "Pearls from the East DLC";
-                sprite.spriteName = "ChineseBuildingsTagIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.MusicFestival)
-            {
-                sprite.tooltip = "Concerts DLC";
-                sprite.spriteName = "ConcertsIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.ModderPack1)
-            {
-                sprite.tooltip = "Art Deco Content Creator Pack by Shroomblaze";
-                sprite.spriteName = "ArtDecoIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.ModderPack2)
-            {
-                sprite.tooltip = "High-Tech Buildings Content Creator Pack by GCVos";
-                sprite.spriteName = "HighTechIcon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.ModderPack3)
-            {
-                sprite.tooltip = "European Suburbias Content Creator Pack by Avanya";
-                sprite.spriteName = "Modderpack3Icon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.ModderPack4)
-            {
-                sprite.tooltip = "University City Content Creator Pack by KingLeno";
-                sprite.spriteName = "Modderpack4Icon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.ModderPack5)
-            {
-                sprite.tooltip = "Modern City Center Content Creator Pack by AmiPolizeiFunk";
-                sprite.spriteName = "Modderpack5Icon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.ModderPack6)
-            {
-                sprite.tooltip = "Modern Japan Content Creator Pack by Ryuichi Kaminogi";
-                sprite.spriteName = "Modderpack6Icon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.ModderPack7)
-            {
-                sprite.tooltip = "Train Stations Content Creator Pack by BadPeanut";
-                sprite.spriteName = "Modderpack7Icon";
-            }
-            else if (dlc == SteamHelper.DLC_BitMask.ModderPack8)
-            {
-                sprite.tooltip = "Bridges & Piers Content Creator Pack by Armesto";
-                sprite.spriteName = "Modderpack8Icon";
-            }
-            else
-            {
-                sprite.tooltip = "Unknown DLC";
-                sprite.spriteName = "ToolbarIconHelp";
-            }
+            sprite.tooltip = GetDLCSpriteToolTip(dlc);
+            sprite.spriteName = GetDLCSpriteName(dlc);
         }
 
+        public static string GetDLCSpriteToolTip(SteamHelper.DLC_BitMask dlc)
+        {
+            if (dlc == SteamHelper.DLC_BitMask.DeluxeDLC) return "Deluxe Upgrade Pack";
+            else if (dlc == SteamHelper.DLC_BitMask.AfterDarkDLC) return "After Dark DLC";
+            else if (dlc == SteamHelper.DLC_BitMask.SnowFallDLC) return "Snow Fall DLC";
+            else if (dlc == SteamHelper.DLC_BitMask.NaturalDisastersDLC) return "Natural Disasters DLC";
+            else if (dlc == SteamHelper.DLC_BitMask.InMotionDLC) return "Mass Transit DLC";
+            else if (dlc == SteamHelper.DLC_BitMask.GreenCitiesDLC) return "Green Cities DLC";
+            else if (dlc == SteamHelper.DLC_BitMask.ParksDLC) return "Parklife DLC";
+            else if (dlc == SteamHelper.DLC_BitMask.IndustryDLC) return "Industries DLC";
+            else if (dlc == SteamHelper.DLC_BitMask.CampusDLC) return "Campus DLC";
+            else if (dlc == SteamHelper.DLC_BitMask.UrbanDLC) return "Sunset Harbor DLC";
+            else if (dlc == SteamHelper.DLC_BitMask.AirportDLC) return "Airports DLC";
+            else if (dlc == SteamHelper.DLC_BitMask.Football) return "Match Day DLC";
+            else if (dlc == SteamHelper.DLC_BitMask.Football2345) return "Stadiums: European Club Pack DLC";
+            else if (dlc == SteamHelper.DLC_BitMask.OrientalBuildings) return "Pearls from the East DLC";
+            else if (dlc == SteamHelper.DLC_BitMask.MusicFestival) return "Concerts DLC";
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack1) return "Art Deco Content Creator Pack by Shroomblaze";
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack2) return "High-Tech Buildings Content Creator Pack by GCVos";
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack3) return "European Suburbias Content Creator Pack by Avanya";
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack4) return "University City Content Creator Pack by KingLeno";
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack5) return "Modern City Center Content Creator Pack by AmiPolizeiFunk";
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack6) return "Modern Japan Content Creator Pack by Ryuichi Kaminogi";
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack7) return "Train Stations Content Creator Pack by BadPeanut";
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack8) return "Bridges & Piers Content Creator Pack by Armesto";
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack10) return "Vehicles of the World Content Creator Pack by bsquiklehausen";
+            else if (dlc == SteamHelper.DLC_BitMask.None) return "";
+            else return "Unknown DLC";
+        }
+
+        public static string GetDLCSpriteName(SteamHelper.DLC_BitMask dlc)
+        {
+            if (dlc == SteamHelper.DLC_BitMask.DeluxeDLC) return "DeluxeIcon";
+            else if (dlc == SteamHelper.DLC_BitMask.AfterDarkDLC) return "ADIcon";
+            else if (dlc == SteamHelper.DLC_BitMask.SnowFallDLC) return "WWIcon";
+            else if (dlc == SteamHelper.DLC_BitMask.NaturalDisastersDLC) return "NaturalDisastersIcon";
+            else if (dlc == SteamHelper.DLC_BitMask.InMotionDLC) return "MassTransitIcon";
+            else if (dlc == SteamHelper.DLC_BitMask.GreenCitiesDLC) return "GreenCitiesIcon";
+            else if (dlc == SteamHelper.DLC_BitMask.ParksDLC) return "ParkLifeIcon";
+            else if (dlc == SteamHelper.DLC_BitMask.IndustryDLC) return "IndustriesIcon";
+            else if (dlc == SteamHelper.DLC_BitMask.CampusDLC) return "CampusIcon";
+            else if (dlc == SteamHelper.DLC_BitMask.UrbanDLC) return "DonutIcon";
+            else if (dlc == SteamHelper.DLC_BitMask.AirportDLC) return "AirportIcon";
+            else if (dlc == SteamHelper.DLC_BitMask.Football) return "MDIcon";
+            else if (dlc == SteamHelper.DLC_BitMask.Football2345) return "StadiumsDLCIcon";
+            else if (dlc == SteamHelper.DLC_BitMask.OrientalBuildings) return "ChineseBuildingsTagIcon";
+            else if (dlc == SteamHelper.DLC_BitMask.MusicFestival) return "ConcertsIcon";
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack1) return "ArtDecoIcon";
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack2) return "HighTechIcon";
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack3) return "Modderpack3Icon";
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack4) return "Modderpack4Icon";
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack5) return "Modderpack5Icon";
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack6) return "Modderpack6Icon";
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack7) return "Modderpack7Icon";
+            else if (dlc == SteamHelper.DLC_BitMask.ModderPack8) return "Modderpack8Icon";
+            else if (dlc == SteamHelper.DLC_BitMask.None) return "";
+            else return "ToolbarIconHelp";
+        }
     }
 }
