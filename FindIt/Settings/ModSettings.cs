@@ -19,6 +19,8 @@ namespace FindIt
 
         internal static bool disableInstantSearch = false;
 
+        internal static bool resetPanelWhenClosed = false;
+
         /// <summary>
         /// 0 = sort by parent folder creation time,
         /// 1 = soty by parent folder modification time,
@@ -104,6 +106,9 @@ namespace FindIt
 
         [XmlElement("DisableInstantSearch")]
         public bool DisableInstantSearch { get => Settings.disableInstantSearch; set => Settings.disableInstantSearch = value; }
+
+        [XmlElement("ResetPanelWhenClosed")]
+        public bool ResetPanelWhenClosed { get => Settings.resetPanelWhenClosed; set => Settings.resetPanelWhenClosed = value; }
 
         [XmlElement("RecentDLSorting")]
         public int RecentDLSorting { get => Settings.recentDLSorting; set => Settings.recentDLSorting = value; }

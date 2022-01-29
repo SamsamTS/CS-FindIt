@@ -545,7 +545,7 @@ namespace FindIt.GUI
             }
 
             // do some initialization work when the UI is first shown
-            if (isVisible && !FindIt.instance.firstVisibleFlag)
+            if (!FindIt.instance.firstVisibleFlag && isVisible)
             {
                 FindIt.instance.firstVisibleFlag = true;
 
@@ -559,6 +559,21 @@ namespace FindIt.GUI
                 }
             }
 
+            // reset panel if the option is enabled
+            else if (Settings.resetPanelWhenClosed && !isVisible)
+            {
+                input.text = "";
+                typeFilter.selectedIndex = 0;
+                workshopFilter.isChecked = true;
+                vanillaFilter.isChecked = true;
+                sizeFilterX.selectedIndex = 0;
+                sizeFilterY.selectedIndex = 0;
+                UIFilterProp.instance.SelectAll();
+                UIFilterGrowable.instance.SelectAll();
+                UIFilterNetwork.instance.SelectAll();
+                UIFilterPloppable.instance.SelectAll();
+                UIFilterTree.instance.SelectAll();
+            }
         }
 
         /// <summary>
