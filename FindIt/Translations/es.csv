@@ -238,3 +238,5 @@
 "FIF_DOU_WS_NOID","Esta característica sólo funciona con assets personalizados con IDs de Steam Workshop"
 "FIF_DOU_WS_STEAMTP","Ver este assets en Steam Workshop en Steam overlay"
 "FIF_DOU_WS_BROWSERTP","Ver este asset en Steam Workshop en el navegador predeterminado"
+"FIF_SET_RES_PANEL","Reset Find It panel when it is closed"
+"FIF_SET_RES_PANELTP","Reset all options in Find It when you close the panel"

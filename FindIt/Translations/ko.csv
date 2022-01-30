@@ -238,3 +238,5 @@
 "FIF_DOU_WS_NOID","이 기능은 Steam 창작마당 ID가 있는 커스텀 에셋에서만 작동합니다."
 "FIF_DOU_WS_STEAMTP","이 에셋을 Steam 오버레이로 Steam 창작마당에서 보기"
 "FIF_DOU_WS_BROWSERTP","이 에셋을 기본 브라우저로 Steam 창작마당에서 보기"
+"FIF_SET_RES_PANEL","Reset Find It panel when it is closed"
+"FIF_SET_RES_PANELTP","Reset all options in Find It when you close the panel"

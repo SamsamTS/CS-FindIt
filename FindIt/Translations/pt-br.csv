@@ -238,3 +238,5 @@
 "FIF_DOU_WS_NOID","Esta função funciona apenas com itens baixados com a identificação da Oficina da Steam"
 "FIF_DOU_WS_STEAMTP","Ver este item na Oficina da Steam usando a sobreposição da Steam"
 "FIF_DOU_WS_BROWSERTP","Ver este item na Oficina da Steam usando o navegador padrão"
+"FIF_SET_RES_PANEL","Redefinir o painel do Find It quando fechado"
+"FIF_SET_RES_PANELTP","Redefine todas opções do Find It quando o painel for fechado"

@@ -238,3 +238,5 @@
 "FIF_DOU_WS_NOID","此功能僅適用帶有 Steam 工坊 ID 的自製素材"
 "FIF_DOU_WS_STEAMTP","在 Steam 程式內查看此素材的工坊頁面"
 "FIF_DOU_WS_BROWSERTP","使用預設瀏覽器查看此素材的工坊頁面"
+"FIF_SET_RES_PANEL","Reset Find It panel when it is closed"
+"FIF_SET_RES_PANELTP","Reset all options in Find It when you close the panel"

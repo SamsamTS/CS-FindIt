@@ -238,3 +238,5 @@
 "FIF_DOU_WS_NOID","この機能は、SteamのワークショップIDを持つアセットのみ有効です"
 "FIF_DOU_WS_STEAMTP","ワークショップにあるアセットを、Steamオーバーレイで確認する"
 "FIF_DOU_WS_BROWSERTP","ワークショップにあるアセットを、既定のブラウザーで確認する"
+"FIF_SET_RES_PANEL","閉じた時はFind It! のパネルをリセット"
+"FIF_SET_RES_PANELTP","パネルを閉じた時に、Find It! のオプションを全てリセットします"
