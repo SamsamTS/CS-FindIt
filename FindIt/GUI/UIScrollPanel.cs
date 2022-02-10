@@ -477,12 +477,12 @@ namespace FindIt.GUI
 
                     if (data.asset != null)
                     {
-                        // next 2/3 assets, show blue steam icon
-                        if ((FindIt.isNext2Enabled || FindIt.isNext3Enabled) && AssetTagList.instance.next2Assets.Contains(data.asset))
+                        // next 2 assets, show blue steam icon
+                        if (FindIt.isNext2Enabled && AssetTagList.instance.next2Assets.Contains(data.asset))
                         {
                             m_dlcSprite.isVisible = true;
                             m_dlcSprite.spriteName = "UIFilterWorkshopItemsFocusedHovered";
-                            m_dlcSprite.tooltip = FindIt.isNext2Enabled ? "Network Extension 2 Mod" : "Network Extension 3 Mod";
+                            m_dlcSprite.tooltip = "Network Extension 2 Mod";
                         }
                         // etst assets, show blue steam icon
                         else if (FindIt.isETSTEnabled && AssetTagList.instance.etstAssets.Contains(data.asset))
