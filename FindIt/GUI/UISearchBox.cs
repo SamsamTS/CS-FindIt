@@ -148,12 +148,26 @@ namespace FindIt.GUI
                 }
             };
 
-            // search icon
+            // search icon. Click to export search results
             searchIcon = inputPanel.AddUIComponent<UISprite>();
             searchIcon.size = new Vector2(25, 30);
             searchIcon.atlas = FindIt.atlas;
             searchIcon.spriteName = "FindItDisabled";
             searchIcon.relativePosition = new Vector3(5, 4);
+            searchIcon.tooltip = Translations.Translate("FIF_SE_ICONTP");
+            searchIcon.eventMouseEnter += (c, p) =>
+            {
+                searchIcon.spriteName = "FindItFocused";
+            };
+
+            searchIcon.eventMouseLeave += (c, p) =>
+            {
+                searchIcon.spriteName = "FindItDisabled";
+            };
+            searchIcon.eventClicked += (c, p) =>
+            {
+                UIExportSearchResultsPopUp.ShowAt(searchIcon);
+            };
 
             // clear search box
             clearButton = inputPanel.AddUIComponent<UISprite>();

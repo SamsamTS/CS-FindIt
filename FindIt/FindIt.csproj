@@ -74,6 +74,7 @@
     <Compile Include="GUI\ThumbnailManager.cs" />
     <Compile Include="GUI\UIAssetTypePanel.cs" />
     <Compile Include="GUI\UIDoubleClickMenu.cs" />
+    <Compile Include="GUI\UIExportSearchResultsPopUp.cs" />
     <Compile Include="GUI\UIFilterDecal.cs" />
     <Compile Include="GUI\UIFilterExtraPanel.cs" />
     <Compile Include="GUI\UIFilterGrowable.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Patches\GeneratedScrollPanel.cs" />
     <Compile Include="Patches\Patcher.cs" />
     <Compile Include="Patches\SelectUIButton.cs" />
+    <Compile Include="Tools\ExportSearchResultsTool.cs" />
     <Compile Include="Tools\ExportUnusedTool.cs" />
     <Compile Include="Tools\ExportUsedTool.cs" />
     <Compile Include="Tools\LocateNextInstanceTool.cs" />
