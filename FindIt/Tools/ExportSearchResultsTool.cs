@@ -41,8 +41,15 @@ namespace FindIt
                 file.WriteLine($"Find It 2 search results export<br>");
                 file.WriteLine($"Export Date: {currentTime}<br><br>");
 
+                file.WriteLine($"If you want to copy and paste into Loading Screen Mod's skip.txt file:<br><br>");
+
+                file.WriteLine($"Loading Screen Mod considers all building types as one type (Buildings) in skip.txt<br>");
+                file.WriteLine($"Loading Screen Mod considers props and decals as one type (Props) in skip.txt<br><br>");
+
+                file.WriteLine($"<a href=\"https://steamcommunity.com/workshop/filedetails/discussion/667342976/1741105805762370419/\">Check out Loading Screen Mod's page for more information</a><br><br>");
 
                 // output custom assets with steam ids
+                file.WriteLine($"<br>----------------------------------------------<br>\n");
                 file.WriteLine($"Custom assets with Steam workshop ID:<br>\n");
 
                 foreach (var pair in steamIds)
