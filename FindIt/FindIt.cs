@@ -256,6 +256,7 @@ namespace FindIt
                 Event e = Event.current;
                 if (e.control && isMoveItEnabled && !(prefab is NetInfo))
                 {
+                    if (!MoveItTool.initialized) MoveItTool.Init();
                     if (MoveItTool.MoveItClone(prefab)) return;
                 }
 
