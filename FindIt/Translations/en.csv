@@ -240,3 +240,5 @@ FIF_DOU_WS_STEAMTP,See this asset on Steam Workshop in Steam overlay
 FIF_DOU_WS_BROWSERTP,See this asset on Steam Workshop in default browser
 FIF_SET_RES_PANEL,Reset Find It panel when it is closed
 FIF_SET_RES_PANELTP,Reset all options in Find It when you close the panel
+FIF_SE_ICONTP,Export search results
+FIF_EXPORT_SEARCH,This will export the search results into an HTML file

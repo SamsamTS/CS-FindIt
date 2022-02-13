@@ -238,5 +238,5 @@
 "FIF_DOU_WS_NOID","Deze functie werkt alleen met aangepaste assets voorzien van een Steam Workshop ID"
 "FIF_DOU_WS_STEAMTP","Bekijk dit voorwerp op de Steam Workshop in Steam overlay"
 "FIF_DOU_WS_BROWSERTP","Bekijk dit voorwerp op de Steam Workshop in de standaardbrowser"
-"FIF_SET_RES_PANEL","Reset Find It panel when it is closed"
-"FIF_SET_RES_PANELTP","Reset all options in Find It when you close the panel"
+"FIF_SET_RES_PANEL","Reset Find It paneel bij het sluiten"
+"FIF_SET_RES_PANELTP","Zet alle opties terug in Find It wanneer het paneel gesloten wordt"
