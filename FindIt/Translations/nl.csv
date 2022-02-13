@@ -240,3 +240,5 @@
 "FIF_DOU_WS_BROWSERTP","Bekijk dit voorwerp op de Steam Workshop in de standaardbrowser"
 "FIF_SET_RES_PANEL","Reset Find It paneel bij het sluiten"
 "FIF_SET_RES_PANELTP","Zet alle opties terug in Find It wanneer het paneel gesloten wordt"
+"FIF_SE_ICONTP","Export search results"
+"FIF_EXPORT_SEARCH","This will export the search results into an HTML file"

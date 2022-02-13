@@ -240,3 +240,5 @@
 "FIF_DOU_WS_BROWSERTP","이 에셋을 기본 브라우저로 Steam 창작마당에서 보기"
 "FIF_SET_RES_PANEL","Reset Find It panel when it is closed"
 "FIF_SET_RES_PANELTP","Reset all options in Find It when you close the panel"
+"FIF_SE_ICONTP","Export search results"
+"FIF_EXPORT_SEARCH","This will export the search results into an HTML file"

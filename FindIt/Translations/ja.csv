@@ -240,3 +240,5 @@
 "FIF_DOU_WS_BROWSERTP","ワークショップにあるアセットを、既定のブラウザーで確認する"
 "FIF_SET_RES_PANEL","閉じた時はFind It! のパネルをリセット"
 "FIF_SET_RES_PANELTP","パネルを閉じた時に、Find It! のオプションを全てリセットします"
+"FIF_SE_ICONTP","検索結果をエクスポート"
+"FIF_EXPORT_SEARCH","検索結果をHTMLファイルにエクスポートします"

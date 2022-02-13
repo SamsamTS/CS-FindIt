@@ -12,30 +12,18 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.7.9";
+        public const string version = "2.8.0-beta1";
         public const bool isBeta = true;
         public const bool debug = false;
-        public const double updateNoticeDate = 20220125;
+        public const double updateNoticeDate = 20220213;
         public const string updateNotice =
-      
-            // same message as v2.7.7
 
-            "Update for the Airports DLC release:\n\n" +
+            "-Update to Cities Harmony API v.2.1.0\n\n" +
 
-            "- Add a new Network filter tab for aircraft(runway, taxiway, concourse, etc.)\n\n" +
+            "- Add a new feature to export Find It search results into HTML files\n" +
+            "  Click the magnifying glass icon in the search input box to use it\n\n" +
 
-            "- Add new DLC filtering options in the extra filters panel\n" +
-            "  - Airports DLC\n" +
-            "  - Vehicles of the World CCP (this only matters if you are using Tree & Vehicle Props mods)\n\n" +
-
-            "- Assets from Airports DLC will be shown with corresponding DLC icon\n\n" +
-
-            "Other update:\n\n" + 
-
-            "- Fix the bug where the double-click menu might be shown outside of the screen when toolbar\n" +
-            "  mods are used\n\n"+
-
-            "- Migrate to new .csv based translation framework (thanks algernon!)\n\n";
+            "- Add functionality for possible future Move It feature\n\n";
 
         public string Name
         {
