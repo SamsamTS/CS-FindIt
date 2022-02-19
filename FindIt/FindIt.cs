@@ -24,6 +24,7 @@ namespace FindIt
 
         public static bool isRicoEnabled = false; // Ploppable RICO (Revisited) mod enabled?
         public static bool isPOEnabled = false; // Procedural Object mod enabled?
+        public static bool isMoveItEnabled = false; // Move It mod enabled?
         public static bool isTVPPatchEnabled = false; // Tree & Vehicle Props Patch mod enabled?
         public static bool isNTCPEnabled = false; // Non-terrain conforming mod enabled?
         public static bool isNext2Enabled = false; // Network Extension 2 mod enabled?
@@ -250,6 +251,16 @@ namespace FindIt
 
                 string key = Asset.GetName(prefab);
                 LocateNextInstanceTool.selectedPrefab = prefab;
+
+                // Try to use Move It to place the asset
+                Event e = Event.current;
+                if (e.control && isMoveItEnabled && !(prefab is NetInfo))
+                {
+                    if (!MoveItTool.initialized) MoveItTool.Init();
+                    if (MoveItTool.MoveItClone(prefab)) return;
+                }
+
+                // Use normal way to place the asset
                 if (AssetTagList.instance.assets.ContainsKey(key) && AssetTagList.instance.assets[key].onButtonClicked != null)
                 {
                     AssetTagList.instance.assets[key].onButtonClicked(uIButton);
@@ -336,6 +347,7 @@ namespace FindIt
 
             isRicoEnabled = enabledMods.Contains("ploppablerico");
             isPOEnabled = enabledMods.Contains("proceduralobjects");
+            isMoveItEnabled = enabledMods.Contains("moveit");
             isTVPPatchEnabled = enabledMods.Contains("tvproppatch");
             isNext2Enabled = enabledMods.Contains("networkextensions2");
             isETSTEnabled = enabledMods.Contains("elevatedtrainstationtrack");

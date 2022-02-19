@@ -12,7 +12,7 @@ namespace FindIt
     {
         public static void ExportUsed(bool exportAllUsed)
         {
-            // get steam id of all workship assets
+            // get steam id of all workshop assets
             HashSet<ulong> steamIds = new HashSet<ulong>();
 
             if (exportAllUsed)

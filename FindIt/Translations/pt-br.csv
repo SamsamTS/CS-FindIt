@@ -240,3 +240,5 @@
 "FIF_DOU_WS_BROWSERTP","Ver este item na Oficina da Steam usando o navegador padrão"
 "FIF_SET_RES_PANEL","Redefinir o painel do Find It quando fechado"
 "FIF_SET_RES_PANELTP","Redefine todas opções do Find It quando o painel for fechado"
+"FIF_SE_ICONTP","Exportar resultado da pesquisa"
+"FIF_EXPORT_SEARCH","Isto irá exportar os resultados da pesquisa em um arquivo HTML"
