@@ -254,7 +254,10 @@ namespace FindIt
 
                 // Try to use Move It to place the asset
                 Event e = Event.current;
-                if (e.control && isMoveItEnabled && !(prefab is NetInfo))
+
+                bool ctrl = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
+
+                if (e.control && !UIThreading.CheckMoveItHotKeyCollision() && isMoveItEnabled && (prefab != null) && !(prefab is NetInfo))
                 {
                     if (!MoveItTool.initialized) MoveItTool.Init();
                     if (MoveItTool.MoveItClone(prefab)) return;

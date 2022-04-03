@@ -11,6 +11,19 @@ namespace FindIt
         // Flags.
         private bool _processed = false;
 
+        // Keys
+        private static KeyCode searchKey = (KeyCode)(Settings.searchKey.keyCode);
+        private static KeyCode allKey = (KeyCode)(Settings.allKey.keyCode);
+        private static KeyCode networkKey = (KeyCode)(Settings.networkKey.keyCode);
+        private static KeyCode ploppableKey = (KeyCode)(Settings.ploppableKey.keyCode);
+        private static KeyCode growableKey = (KeyCode)(Settings.growableKey.keyCode);
+        private static KeyCode ricoKey = (KeyCode)(Settings.ricoKey.keyCode);
+        private static KeyCode grwbRicoKey = (KeyCode)(Settings.grwbRicoKey.keyCode);
+        private static KeyCode propKey = (KeyCode)(Settings.propKey.keyCode);
+        private static KeyCode decalKey = (KeyCode)(Settings.decalKey.keyCode);
+        private static KeyCode treeKey = (KeyCode)(Settings.treeKey.keyCode);
+        private static KeyCode randomSelectionKey = (KeyCode)(Settings.randomSelectionKey.keyCode);
+
         /// <summary>
         /// Look for keypress to open GUI.
         /// </summary>
@@ -22,18 +35,6 @@ namespace FindIt
             UIButton mainButton = FindIt.instance?.mainButton;
             UISearchBox searchBox = FindIt.instance?.searchBox;
             if (searchBox == null || mainButton == null) return;
-
-            KeyCode searchKey = (KeyCode)(Settings.searchKey.keyCode);
-            KeyCode allKey = (KeyCode)(Settings.allKey.keyCode);
-            KeyCode networkKey = (KeyCode)(Settings.networkKey.keyCode);
-            KeyCode ploppableKey = (KeyCode)(Settings.ploppableKey.keyCode);
-            KeyCode growableKey = (KeyCode)(Settings.growableKey.keyCode);
-            KeyCode ricoKey = (KeyCode)(Settings.ricoKey.keyCode);
-            KeyCode grwbRicoKey = (KeyCode)(Settings.grwbRicoKey.keyCode);
-            KeyCode propKey = (KeyCode)(Settings.propKey.keyCode);
-            KeyCode decalKey = (KeyCode)(Settings.decalKey.keyCode);
-            KeyCode treeKey = (KeyCode)(Settings.treeKey.keyCode);
-            KeyCode randomSelectionKey = (KeyCode)(Settings.randomSelectionKey.keyCode);
 
             // Null checks for safety.
             // Check modifier keys according to settings.
@@ -83,7 +84,7 @@ namespace FindIt
             }
         }
 
-        public bool CheckHotkey(KeyBinding keyBinding, bool altPressed, bool ctrlPressed, bool shiftPressed)
+        public static bool CheckHotkey(KeyBinding keyBinding, bool altPressed, bool ctrlPressed, bool shiftPressed)
         {
             if ((altPressed != keyBinding.alt) || (ctrlPressed != keyBinding.control) || (shiftPressed != keyBinding.shift)) return false;
             return true;
@@ -150,6 +151,44 @@ namespace FindIt
             {
                 Debugging.LogException(e);
             }
+        }
+
+        /// <summary>
+        /// Move It integration uses ctrl. Check if there is a hotkey collision
+        /// Used in FindIt.OnButtonClicked
+        /// returns true if collision happens
+        /// </summary>
+        public static bool CheckMoveItHotKeyCollision()
+        {
+            bool altPressed = Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt) || Input.GetKey(KeyCode.AltGr);
+            bool ctrlPressed = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
+            bool shiftPressed = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+
+            // if a hotkey is pressed
+            if (searchKey != KeyCode.None && Input.GetKey(searchKey) && CheckHotkey(Settings.searchKey, altPressed, ctrlPressed, shiftPressed))
+                return true;
+            else if (allKey != KeyCode.None && Input.GetKey(allKey) && CheckHotkey(Settings.allKey, altPressed, ctrlPressed, shiftPressed))
+                return true;
+            else if (networkKey != KeyCode.None && Input.GetKey(networkKey) && CheckHotkey(Settings.networkKey, altPressed, ctrlPressed, shiftPressed))
+                return true;
+            else if (ploppableKey != KeyCode.None && Input.GetKey(ploppableKey) && CheckHotkey(Settings.ploppableKey, altPressed, ctrlPressed, shiftPressed))
+                return true;
+            else if (growableKey != KeyCode.None && Input.GetKey(growableKey) && CheckHotkey(Settings.growableKey, altPressed, ctrlPressed, shiftPressed))
+                return true;
+            else if (ricoKey != KeyCode.None && Input.GetKey(ricoKey) && CheckHotkey(Settings.ricoKey, altPressed, ctrlPressed, shiftPressed))
+                return true;
+            else if (grwbRicoKey != KeyCode.None && Input.GetKey(grwbRicoKey) && CheckHotkey(Settings.grwbRicoKey, altPressed, ctrlPressed, shiftPressed))
+                return true;
+            else if (propKey != KeyCode.None && Input.GetKey(propKey) && CheckHotkey(Settings.propKey, altPressed, ctrlPressed, shiftPressed))
+                return true;
+            else if (decalKey != KeyCode.None && Input.GetKey(decalKey) && CheckHotkey(Settings.decalKey, altPressed, ctrlPressed, shiftPressed))
+                return true;
+            else if (treeKey != KeyCode.None && Input.GetKey(treeKey) && CheckHotkey(Settings.treeKey, altPressed, ctrlPressed, shiftPressed))
+                return true;
+            else if (randomSelectionKey != KeyCode.None && Input.GetKey(randomSelectionKey) && CheckHotkey(Settings.randomSelectionKey, altPressed, ctrlPressed, shiftPressed))
+                return true;
+
+            return false;
         }
 
     }

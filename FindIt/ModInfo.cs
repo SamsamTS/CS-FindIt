@@ -12,18 +12,13 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.8.0";
-        public const bool isBeta = false;
+        public const string version = "2.8.1";
+        public const bool isBeta = true;
         public const bool debug = false;
-        public const double updateNoticeDate = 20220218;
+        public const double updateNoticeDate = 20220403;
         public const string updateNotice =
 
-            "- Update to Cities Harmony API v.2.1.0\n\n" +
-
-            "- Add a new feature to export Find It search results into HTML files\n" +
-            "  Click the magnifying glass icon in the search input box to use it\n\n" +
-
-            "- Add functionality for possible future Move It feature\n\n";
+            "- Fix hotkey collision bug affecting Move It mod integration\n\n";
 
         public string Name
         {
