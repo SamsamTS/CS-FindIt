@@ -1173,5 +1173,16 @@ namespace FindIt.GUI
             // Debugging.Message($"Test target: {testTarget.title}");
             Picker(testTarget.prefab);
         }
+
+        protected override void OnKeyDown(UIKeyEventParameter p) {
+            if(p.keycode == KeyCode.Escape) {
+                if (hasFocus)
+                {
+                    // If the search box is focussed, unfocus.
+                    input.Unfocus();
+                }
+            }
+            base.OnKeyDown(p);
+        }
     }
 }

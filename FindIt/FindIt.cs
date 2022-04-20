@@ -179,6 +179,8 @@ namespace FindIt
                 defaultPanelBackgroundSprite = defaultPanel.backgroundSprite;
                 UpdateDefaultPanelBackground();
 
+                Settings.RegisterHotkeys();
+
                 Debugging.Message("Initialized");
 
             }
@@ -257,7 +259,7 @@ namespace FindIt
 
                 bool ctrl = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
 
-                if (e.control && !UIThreading.CheckMoveItHotKeyCollision() && isMoveItEnabled && (prefab != null) && !(prefab is NetInfo))
+                if (e.control && /*!UIThreading.CheckMoveItHotKeyCollision() &&*/ isMoveItEnabled && (prefab != null) && !(prefab is NetInfo))
                 {
                     if (!MoveItTool.initialized) MoveItTool.Init();
                     if (MoveItTool.MoveItClone(prefab)) return;

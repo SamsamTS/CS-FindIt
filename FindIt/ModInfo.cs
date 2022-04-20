@@ -198,17 +198,17 @@ namespace FindIt
                 group.AddButton(Translations.Translate("FIF_SET_CTFOP"), () => System.Diagnostics.Process.Start(DataLocation.executableDirectory));
 
                 // shortcut keys
-                panel.gameObject.AddComponent<MainButtonKeyMapping>();
-                panel.gameObject.AddComponent<AllKeyMapping>();
-                panel.gameObject.AddComponent<NetworkKeyMapping>();
-                panel.gameObject.AddComponent<PloppableKeyMapping>();
-                panel.gameObject.AddComponent<GrowableKeyMapping>();
-                panel.gameObject.AddComponent<RicoKeyMapping>();
-                panel.gameObject.AddComponent<GrwbRicoKeyMapping>();
-                panel.gameObject.AddComponent<PropKeyMapping>();
-                panel.gameObject.AddComponent<DecalKeyMapping>();
-                panel.gameObject.AddComponent<TreeKeyMapping>();
-                panel.gameObject.AddComponent<RandomSelectionKeyMapping>();
+                panel.gameObject.AddComponent<OptionsKeymapping>().Init(Settings.searchKey);
+                panel.gameObject.AddComponent<OptionsKeymapping>().Init(Settings.allKey);
+                panel.gameObject.AddComponent<OptionsKeymapping>().Init(Settings.networkKey);
+                panel.gameObject.AddComponent<OptionsKeymapping>().Init(Settings.ploppableKey);
+                panel.gameObject.AddComponent<OptionsKeymapping>().Init(Settings.growableKey);
+                panel.gameObject.AddComponent<OptionsKeymapping>().Init(Settings.ricoKey);
+                panel.gameObject.AddComponent<OptionsKeymapping>().Init(Settings.grwbRicoKey);
+                panel.gameObject.AddComponent<OptionsKeymapping>().Init(Settings.propKey);
+                panel.gameObject.AddComponent<OptionsKeymapping>().Init(Settings.decalKey);
+                panel.gameObject.AddComponent<OptionsKeymapping>().Init(Settings.treeKey);
+                panel.gameObject.AddComponent<OptionsKeymapping>().Init(Settings.randomSelectionKey);
                 group.AddSpace(10);
 
             }
