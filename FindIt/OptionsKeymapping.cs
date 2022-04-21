@@ -40,6 +40,13 @@ namespace FindIt
             // Set label and button text.
             label.text = labelString;
             button.text = unsavedInputKey.ToLocalizedString("KEYNAME");
+            button.eventVisibilityChanged += ButtonVisibilityChanged;
+        }
+
+        private void ButtonVisibilityChanged(UIComponent component, bool isVisible) {
+            if (isVisible) {
+                button.text = unsavedInputKey.ToLocalizedString("KEYNAME");
+            }
         }
 
 
