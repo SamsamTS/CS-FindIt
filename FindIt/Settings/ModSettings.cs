@@ -124,6 +124,8 @@ namespace FindIt {
         {
             try
             {
+                SimulationManager.instance.AddAction(XMLUtils.SaveSettings); // save settings just in case searchBox hotkey was modified outside of FindIt.
+
                 // secondary keyboard shortcuts
                 // if users choose to disable secondary hotkeys when Find it is invisible, don't do anything
                 if (index != -1 && Settings.disableSecondaryKeyboardShortcuts && !FindIt.instance.searchBox.isVisible)
