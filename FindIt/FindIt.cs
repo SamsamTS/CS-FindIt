@@ -148,7 +148,7 @@ namespace FindIt
 
                             UIScrollPanelItem panelItem = scrollPanel.GetItem(0);
                             panelItem.Display(scrollPanel.selectedItem, 0);
-                            panelItem.component.SimulateClick();
+                            panelItem.SimulateClickSafe();
 
                             scrollPanel.selectedItem = item;
 
@@ -259,7 +259,7 @@ namespace FindIt
 
                 bool ctrl = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
 
-                if (e.control && /*!UIThreading.CheckMoveItHotKeyCollision() &&*/ isMoveItEnabled && (prefab != null) && !(prefab is NetInfo))
+                if (e.control && !UIScrollPanelItem.SimulatingClick && isMoveItEnabled && (prefab != null) && !(prefab is NetInfo))
                 {
                     if (!MoveItTool.initialized) MoveItTool.Init();
                     if (MoveItTool.MoveItClone(prefab)) return;
