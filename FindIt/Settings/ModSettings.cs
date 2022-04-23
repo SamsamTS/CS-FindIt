@@ -62,27 +62,27 @@ namespace FindIt {
 
         internal static float assetTypePanelY = -75.0f;
 
-        internal static UnsavedInputKey searchKey = new KeyBinding{ keyCode = (int)KeyCode.F, control = true, shift = false, alt = false }.ToUnSavedInputKey("FIF_SET_KS");
+        internal static UnsavedInputKey searchKey = new UnsavedInputKey(name: "FIF_SET_KS", KeyCode.F, control:true, shift:false, alt: false);
 
-        internal static UnsavedInputKey allKey = new KeyBinding { keyCode = (int)KeyCode.Alpha1, control = false, shift = false, alt = true }.ToUnSavedInputKey("FIF_SE_IA");
+        internal static UnsavedInputKey allKey = new UnsavedInputKey(name: "FIF_SE_IA", keyCode: KeyCode.Alpha1, control: false, shift: false, alt: true);
 
-        internal static UnsavedInputKey networkKey = new KeyBinding { keyCode = (int)KeyCode.Alpha2, control = false, shift = false, alt = true }.ToUnSavedInputKey("FIF_SE_IN");
+        internal static UnsavedInputKey networkKey = new UnsavedInputKey(name: "FIF_SE_IN", keyCode: KeyCode.Alpha2, control: false, shift: false, alt: true);
 
-        internal static UnsavedInputKey ploppableKey = new KeyBinding { keyCode = (int)KeyCode.Alpha3, control = false, shift = false, alt = true }.ToUnSavedInputKey("FIF_SE_IP");
+        internal static UnsavedInputKey ploppableKey = new UnsavedInputKey(name: "FIF_SE_IP", keyCode: KeyCode.Alpha3, control: false, shift: false, alt: true);
 
-        internal static UnsavedInputKey growableKey = new KeyBinding { keyCode = (int)KeyCode.Alpha4, control = false, shift = false, alt = true }.ToUnSavedInputKey("FIF_SE_IG");
+        internal static UnsavedInputKey growableKey = new UnsavedInputKey(name: "FIF_SE_IG", keyCode: KeyCode.Alpha4, control: false, shift: false, alt: true);
 
-        internal static UnsavedInputKey ricoKey = new KeyBinding { keyCode = (int)KeyCode.Alpha5, control = false, shift = false, alt = true }.ToUnSavedInputKey("FIF_SE_IR");
+        internal static UnsavedInputKey ricoKey = new UnsavedInputKey(name: "FIF_SE_IR", keyCode: KeyCode.Alpha5, control: false, shift: false, alt: true);
 
-        internal static UnsavedInputKey grwbRicoKey = new KeyBinding { keyCode = (int)KeyCode.Alpha6, control = false, shift = false, alt = true }.ToUnSavedInputKey("FIF_SE_IGR");
+        internal static UnsavedInputKey grwbRicoKey = new UnsavedInputKey(name: "FIF_SE_IGR", keyCode: KeyCode.Alpha6, control: false, shift: false, alt: true);
 
-        internal static UnsavedInputKey propKey = new KeyBinding { keyCode = (int)KeyCode.Alpha7, control = false, shift = false, alt = true }.ToUnSavedInputKey("FIF_SE_IPR");
+        internal static UnsavedInputKey propKey = new UnsavedInputKey(name: "FIF_SE_IPR", keyCode: KeyCode.Alpha7, control: false, shift: false, alt: true);
 
-        internal static UnsavedInputKey decalKey = new KeyBinding { keyCode = (int)KeyCode.Alpha8, control = false, shift = false, alt = true }.ToUnSavedInputKey("FIF_SE_ID");
+        internal static UnsavedInputKey decalKey = new UnsavedInputKey(name: "FIF_SE_ID", keyCode: KeyCode.Alpha8, control: false, shift: false, alt: true);
 
-        internal static UnsavedInputKey treeKey = new KeyBinding { keyCode = (int)KeyCode.Alpha9, control = false, shift = false, alt = true }.ToUnSavedInputKey("FIF_SE_IT");
+        internal static UnsavedInputKey treeKey = new UnsavedInputKey(name: "FIF_SE_IT", keyCode: KeyCode.Alpha9, control: false, shift: false, alt: true);
 
-        internal static UnsavedInputKey randomSelectionKey = new KeyBinding { keyCode = (int)KeyCode.V, control = false, shift = false, alt = true }.ToUnSavedInputKey("FIF_GR_RAN");
+        internal static UnsavedInputKey randomSelectionKey = new UnsavedInputKey(name: "FIF_GR_RAN", keyCode: KeyCode.V, control: false, shift: false, alt: true);
 
         internal static void RegisterHotkeys() {
             UnifiedUI.Helpers.UUIHelpers.RegisterHotkeys(
@@ -300,7 +300,7 @@ namespace FindIt {
 
 
     /// <summary>
-    /// Basic keybinding class - code and modifiers.
+    /// keybinding class for xml serialization.
     /// </summary>
     public struct KeyBinding {
         [XmlAttribute("KeyCode")]
@@ -316,15 +316,12 @@ namespace FindIt {
         public bool alt;
 
         internal InputKey Encode() => SavedInputKey.Encode((KeyCode)keyCode, control, shift, alt);
-
-        internal UnsavedInputKey ToUnSavedInputKey(string translationkey) => new UnsavedInputKey(translationkey, Encode());
     }
 
     ///<summary> since we want to save in XML file we don't save in CS settings file.</summary>
     public class UnsavedInputKey : UnifiedUI.Helpers.UnsavedInputKey {
-        public UnsavedInputKey(string name, InputKey key) : base(name, "FindIt2", key) { 
-            this.m_Synced = true; // no need to sync with file.
-        }
+        public UnsavedInputKey(string name, KeyCode keyCode, bool control, bool shift, bool alt) :
+            base(keyName: name, modName: "FindIt2", Encode(keyCode, control: control, shift: shift, alt: alt)) { }
 
         public override void OnConflictResolved() => XMLUtils.SaveSettings();
 
