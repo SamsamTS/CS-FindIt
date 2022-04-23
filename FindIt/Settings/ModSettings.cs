@@ -124,8 +124,6 @@ namespace FindIt {
         {
             try
             {
-                SimulationManager.instance.AddAction(XMLUtils.SaveSettings); // save settings just in case searchBox hotkey was modified outside of FindIt.
-
                 // secondary keyboard shortcuts
                 // if users choose to disable secondary hotkeys when Find it is invisible, don't do anything
                 if (index != -1 && Settings.disableSecondaryKeyboardShortcuts && !FindIt.instance.searchBox.isVisible)
@@ -323,10 +321,12 @@ namespace FindIt {
     }
 
     ///<summary> since we want to save in XML file we don't save in CS settings file.</summary>
-    public class UnsavedInputKey : SavedInputKey {
-        public UnsavedInputKey(string name, InputKey key) : base(name, "FindIt2", key, false) { 
+    public class UnsavedInputKey : UnifiedUI.Helpers.UnsavedInputKey {
+        public UnsavedInputKey(string name, InputKey key) : base(name, "FindIt2", key) { 
             this.m_Synced = true; // no need to sync with file.
         }
+
+        public override void OnConflictResolved() => XMLUtils.SaveSettings();
 
         public KeyBinding KeyBinding {
             get => new KeyBinding { keyCode = (int)Key, control = Control, shift = Shift, alt = Alt};
