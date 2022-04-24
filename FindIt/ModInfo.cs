@@ -12,13 +12,21 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.8.1";
+        public const string version = "2.8.2";
         public const bool isBeta = true;
         public const bool debug = false;
-        public const double updateNoticeDate = 20220403;
+        public const double updateNoticeDate = 20220424;
         public const string updateNotice =
 
-            "- Fix hotkey collision bug affecting Move It mod integration\n\n";
+            "- Use UUI for hotkey handling\n\n" +
+
+            "- Solve hotkey conflicts with other mods\n\n" +
+
+            "- Fix some other bugs\n\n" +
+
+            "Thanks to kian.zarrin for the contribution\n\n" +
+
+            "- Update translations\n";
 
         public string Name
         {
