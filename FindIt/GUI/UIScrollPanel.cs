@@ -170,6 +170,7 @@ namespace FindIt.GUI
         private static UIComponent m_tooltipBox;
 
         public static HashSet<PrefabInfo> fixedFocusedTexture = new HashSet<PrefabInfo>();
+        public static bool SimulatingClick;
 
         public UIButton component
         {
@@ -316,6 +317,15 @@ namespace FindIt.GUI
             if (PlatformService.IsOverlayEnabled())
             {
                 m_dlcSprite.eventMouseUp += OnTooltipClicked;
+            }
+        }
+
+        public void SimulateClickSafe() {
+            try {
+                SimulatingClick = true;
+                this.component.SimulateClick();
+            } finally {
+                SimulatingClick = false;
             }
         }
 
