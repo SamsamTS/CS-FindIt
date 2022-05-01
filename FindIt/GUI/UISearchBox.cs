@@ -8,6 +8,7 @@ using ColossalFramework.DataBinding;
 using ColossalFramework.UI;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace FindIt.GUI
 {
@@ -1183,6 +1184,41 @@ namespace FindIt.GUI
                 }
             }
             base.OnKeyDown(p);
+        }
+
+        void OnGUI() {
+            try {
+                if (!UIView.HasModalInput() && UIView.HasInputFocus() && input.hasFocus) {
+                    // UUI does not handle keys when input has focus.
+                    // handle hotkeys only if Findit panel is the input that has focus
+                    Event e = Event.current;
+                    if (Settings.searchKey.IsPressed(e))
+                        Settings.OpenFindIt(-1);
+                    else if (Settings.allKey.IsPressed(e))
+                        Settings.OpenFindIt(0);
+                    else if (Settings.networkKey.IsPressed(e))
+                        Settings.OpenFindIt(1);
+                    else if (Settings.ploppableKey.IsPressed(e))
+                        Settings.OpenFindIt(2);
+                    else if (Settings.grwbRicoKey.IsPressed(e))
+                        Settings.OpenFindIt(3);
+                    else if (Settings.ricoKey.IsPressed(e))
+                        Settings.OpenFindIt(4);
+                    else if (Settings.grwbRicoKey.IsPressed(e))
+                        Settings.OpenFindIt(5);
+                    else if (Settings.propKey.IsPressed(e))
+                        Settings.OpenFindIt(6);
+                    else if (Settings.decalKey.IsPressed(e))
+                        Settings.OpenFindIt(7);
+                    else if (Settings.treeKey.IsPressed(e))
+                        Settings.OpenFindIt(8);
+                    else if (Settings.randomSelectionKey.IsPressed(e))
+                        Settings.OpenFindIt(-2);
+                }
+            } catch (Exception e) {
+                Debug.Log("OnGUI failed");
+                Debug.LogException(e);
+            }
         }
     }
 }
