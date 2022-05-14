@@ -190,6 +190,7 @@
     <None Include="Translations\pt-br.csv" />
     <None Include="Translations\pt.csv" />
     <None Include="Translations\ru.csv" />
+    <None Include="Translations\tr.csv" />
     <None Include="Translations\zh-tw.csv" />
     <None Include="Translations\zh.csv" />
   </ItemGroup>
