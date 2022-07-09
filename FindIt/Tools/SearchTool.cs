@@ -72,7 +72,8 @@ namespace FindIt
                             {
                                 if (keyword.Length == 1 && searchPrefixes.Contains(keyword[0])) continue;
 
-                                if (searchPrefixes.Contains(keyword[0]) && keyword.Length > 1) {
+                                if (searchPrefixes.Contains(keyword[0]) && keyword.Length > 1)
+                                {
                                     if (keyword[0] == '!') // exclude search
                                     {
                                         score = GetOverallScore(asset, keyword.Substring(1), filter);
@@ -482,7 +483,7 @@ namespace FindIt
                 int level = (int)info.m_class.m_level;
 
                 if (level < UISearchBox.instance.extraFiltersPanel.buildingLevelMinDropDownMenu.selectedIndex ||
-                    level > UISearchBox.instance.extraFiltersPanel.buildingLevelMaxDropDownMenu.selectedIndex )
+                    level > UISearchBox.instance.extraFiltersPanel.buildingLevelMaxDropDownMenu.selectedIndex)
                 {
                     return false;
                 }
@@ -534,6 +535,12 @@ namespace FindIt
             else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtraPanel.DropDownOptions.DLC)
             {
                 if (!CheckDLCFilters(asset.prefab.m_dlcRequired)) return false;
+            }
+
+            // District Style filter
+            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtraPanel.DropDownOptions.DistrictStyle)
+            {
+                if (!CheckDistrictStyleFilters(asset.prefab)) return false;
             }
 
             // local custom filter
@@ -621,7 +628,7 @@ namespace FindIt
         }
         private bool CheckDLCFilters(SteamHelper.DLC_BitMask dlc)
         {
-            int selectedIndex = UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex;
+            int selectedIndex = UISearchBox.instance.extraFiltersPanel.dlcDropDownMenu.selectedIndex;
 
             if (dlc != SteamHelper.DLC_BitMask.None &&
                 selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.BaseGame) return false;
@@ -699,6 +706,13 @@ namespace FindIt
                 selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.VehiclesoftheWorld) return false;
 
             return true;
+        }
+        private bool CheckDistrictStyleFilters(PrefabInfo prefab)
+        {
+            BuildingInfo buildingInfo = prefab as BuildingInfo;
+            if (buildingInfo == null) return false;
+            if (UIFilterExtraPanel.instance.districtStyleList[UIFilterExtraPanel.instance.districtStyleDropDownMenu.selectedIndex].Contains(buildingInfo)) return true;
+            return false;
         }
 
         /// <summary>

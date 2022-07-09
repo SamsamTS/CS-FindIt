@@ -46,13 +46,19 @@ namespace FindIt.GUI
         private UIButton exportSearchedUsedButton;
 
         // DLC & CCP
-        public UIDropDown DLCDropDownMenu;
+        public UIDropDown dlcDropDownMenu;
+
+        // District Style
+        public UIDropDown districtStyleDropDownMenu;
+        public List<DistrictStyle> districtStyleList;
+        private string[] districtStyleListStrArray;
 
         public enum DropDownOptions
         {
             AssetCreator = 0,
             BuildingHeight,
             BuildingLevel,
+            DistrictStyle,
             DLC,
             SubBuildings,
             UsedAssets,
@@ -69,6 +75,7 @@ namespace FindIt.GUI
                     Translations.Translate("FIF_EF_AC"), // Asset Creator
                     Translations.Translate("FIF_EF_BH"), // Building Height
                     Translations.Translate("FIF_SE_LV"), // Building Level
+                    Translations.Translate("FIF_EF_DS"), // District Style
                     Translations.Translate("FIF_EF_DLC"), // Require DLC/CCP
                     Translations.Translate("FIF_EF_SB"), // Sub-building
                     Translations.Translate("FIF_EF_US"), // Used Asset
@@ -167,6 +174,10 @@ namespace FindIt.GUI
                 else if (optionDropDownMenu.selectedIndex == (int)DropDownOptions.DLC)
                 {
                     UpdateDLCVisibility(true);
+                }
+                else if (optionDropDownMenu.selectedIndex == (int)DropDownOptions.DistrictStyle)
+                {
+                    UpdateDistrictStyleVisibility(true);
                 }
                 else if (optionDropDownMenu.selectedIndex == (int)DropDownOptions.SubBuildings)
                 {
@@ -444,41 +455,60 @@ namespace FindIt.GUI
             };
 
             // DLC & CCP
-            DLCDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
-            DLCDropDownMenu.size = new Vector2(300, 25);
-            DLCDropDownMenu.listHeight = 300;
-            DLCDropDownMenu.itemHeight = 30;
-            DLCDropDownMenu.AddItem("Base Game");
-            DLCDropDownMenu.AddItem("After Dark DLC");
-            DLCDropDownMenu.AddItem("Airports DLC");
-            DLCDropDownMenu.AddItem("Campus DLC");
-            DLCDropDownMenu.AddItem("Green Cities DLC");
-            DLCDropDownMenu.AddItem("Industries DLC");
-            DLCDropDownMenu.AddItem("Mass Transit DLC");
-            DLCDropDownMenu.AddItem("Natural Disasters DLC");
-            DLCDropDownMenu.AddItem("Parklife DLC");
-            DLCDropDownMenu.AddItem("Snow Fall DLC");
-            DLCDropDownMenu.AddItem("Sunset Harbor DLC");
-            DLCDropDownMenu.AddItem("Art Deco CCP");
-            DLCDropDownMenu.AddItem("High-Tech Buildings CCP");
-            DLCDropDownMenu.AddItem("European Suburbias CCP");
-            DLCDropDownMenu.AddItem("University City CCP");
-            DLCDropDownMenu.AddItem("Modern City Center CCP");
-            DLCDropDownMenu.AddItem("Modern Japan CCP");
-            DLCDropDownMenu.AddItem("Train Stations CCP");
-            DLCDropDownMenu.AddItem("Bridges & Piers CCP");
-            DLCDropDownMenu.AddItem("Vehicles of the World CCP");
-            DLCDropDownMenu.AddItem("Concerts DLC");
-            DLCDropDownMenu.AddItem("Deluxe Upgrade Pack");
-            DLCDropDownMenu.AddItem("Match Day DLC");
-            DLCDropDownMenu.AddItem("Pearls from the East DLC");
-            DLCDropDownMenu.AddItem("Stadiums: European Club Pack DLC");
-            DLCDropDownMenu.isVisible = false;
-            DLCDropDownMenu.selectedIndex = 0;
-            DLCDropDownMenu.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 50, 5);
-            SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtraPanel.instance.DLCDropDownMenu);
+            dlcDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
+            dlcDropDownMenu.size = new Vector2(300, 25);
+            dlcDropDownMenu.listHeight = 300;
+            dlcDropDownMenu.itemHeight = 30;
+            dlcDropDownMenu.AddItem("Base Game");
+            dlcDropDownMenu.AddItem("After Dark DLC");
+            dlcDropDownMenu.AddItem("Airports DLC");
+            dlcDropDownMenu.AddItem("Campus DLC");
+            dlcDropDownMenu.AddItem("Green Cities DLC");
+            dlcDropDownMenu.AddItem("Industries DLC");
+            dlcDropDownMenu.AddItem("Mass Transit DLC");
+            dlcDropDownMenu.AddItem("Natural Disasters DLC");
+            dlcDropDownMenu.AddItem("Parklife DLC");
+            dlcDropDownMenu.AddItem("Snow Fall DLC");
+            dlcDropDownMenu.AddItem("Sunset Harbor DLC");
+            dlcDropDownMenu.AddItem("Art Deco CCP");
+            dlcDropDownMenu.AddItem("High-Tech Buildings CCP");
+            dlcDropDownMenu.AddItem("European Suburbias CCP");
+            dlcDropDownMenu.AddItem("University City CCP");
+            dlcDropDownMenu.AddItem("Modern City Center CCP");
+            dlcDropDownMenu.AddItem("Modern Japan CCP");
+            dlcDropDownMenu.AddItem("Train Stations CCP");
+            dlcDropDownMenu.AddItem("Bridges & Piers CCP");
+            dlcDropDownMenu.AddItem("Vehicles of the World CCP");
+            dlcDropDownMenu.AddItem("Concerts DLC");
+            dlcDropDownMenu.AddItem("Deluxe Upgrade Pack");
+            dlcDropDownMenu.AddItem("Match Day DLC");
+            dlcDropDownMenu.AddItem("Pearls from the East DLC");
+            dlcDropDownMenu.AddItem("Stadiums: European Club Pack DLC");
+            dlcDropDownMenu.isVisible = false;
+            dlcDropDownMenu.selectedIndex = 0;
+            dlcDropDownMenu.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 50, 5);
+            SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtraPanel.instance.dlcDropDownMenu);
 
-            DLCDropDownMenu.eventSelectedIndexChanged += (c, p) =>
+            dlcDropDownMenu.eventSelectedIndexChanged += (c, p) =>
+            {
+                if (optionDropDownCheckBox.isChecked)
+                {
+                    ((UISearchBox)parent).Search();
+                }
+            };
+
+            // District Style
+            districtStyleDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
+            districtStyleDropDownMenu.size = new Vector2(425, 25);
+            districtStyleDropDownMenu.tooltip = Translations.Translate("FIF_POP_SCR");
+            districtStyleDropDownMenu.listHeight = 300;
+            districtStyleDropDownMenu.itemHeight = 30;
+            districtStyleDropDownMenu.isVisible = false;
+            UpdateDistrictStyleList();
+            districtStyleDropDownMenu.selectedIndex = 0;
+            districtStyleDropDownMenu.relativePosition = new Vector3(optionDropDownMenu.relativePosition.x + optionDropDownMenu.width + 26, 5);
+            SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtraPanel.instance.districtStyleDropDownMenu);
+            districtStyleDropDownMenu.eventSelectedIndexChanged += (c, p) =>
             {
                 if (optionDropDownCheckBox.isChecked)
                 {
@@ -555,7 +585,38 @@ namespace FindIt.GUI
         }
         private void UpdateDLCVisibility(bool visibility)
         {
-            DLCDropDownMenu.isVisible = visibility;
+            dlcDropDownMenu.isVisible = visibility;
+        }
+
+        public void UpdateDistrictStyleList()
+        {
+            var styles = DistrictManager.instance.m_Styles;
+            if (styles == null) return;
+
+            districtStyleList = new List<DistrictStyle>();
+
+            foreach (var style in styles)
+            {
+                districtStyleList.Add(style);
+            }
+
+            List<string> list = new List<string>();
+            foreach (DistrictStyle style in districtStyleList)
+            {
+                if (style.Name.Equals(DistrictStyle.kEuropeanStyleName)) list.Add("European / Vanilla (" + style.Count.ToString() + ")");
+                else if (style.Name.Equals(DistrictStyle.kEuropeanSuburbiaStyleName)) list.Add("European Suburbia (" + style.Count.ToString() + ")");
+                else if (style.Name.Equals(DistrictStyle.kModderPack5StyleName)) list.Add("Modern City Center (" + style.Count.ToString() + ")");
+                else list.Add(style.FullName + " (" + style.Count.ToString() + ")");
+            }
+
+            districtStyleListStrArray = list.ToArray();
+            districtStyleDropDownMenu.items = districtStyleListStrArray;
+            districtStyleDropDownMenu.selectedIndex = 0;
+        }
+
+        private void UpdateDistrictStyleVisibility(bool visibility)
+        {
+            districtStyleDropDownMenu.isVisible = visibility;
         }
 
         private void HideAll()
@@ -566,6 +627,7 @@ namespace FindIt.GUI
             UpdateUnusedAssetsVisibility(false);
             UpdateUsedAssetsVisibility(false);
             UpdateDLCVisibility(false);
+            UpdateDistrictStyleVisibility(false);
         }
     }
 }

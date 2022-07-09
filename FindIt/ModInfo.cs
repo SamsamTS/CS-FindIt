@@ -12,19 +12,17 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.8.2-3";
-        public const bool isBeta = false;
+        public const string version = "2.8.3";
+        public const bool isBeta = true;
         public const bool debug = false;
-        public const double updateNoticeDate = 20220428;
+        public const double updateNoticeDate = 20220709;
         public const string updateNotice =
 
-            "- Use UUI for hotkey handling\n\n" +
+            "- New search filter: District Style\n\n" +
 
-            "- Solve hotkey conflicts with other mods\n\n" +
-
-            "- Fix some other bugs\n\n" +
-
-            "Thanks to kian.zarrin for the contribution\n\n" +
+            " You can find this filter in the extra filters panel\n" +
+            " It can be used to find buildings from a specific district style\n" +
+            " Remember to enable district styles in the content manager\n\n" +
 
             "- Update translations\n";
 

@@ -238,7 +238,8 @@ namespace FindIt.GUI
             public int builingHeightUnitSelectedIndex = 0;
             public int buildingLevelMinDropDownMenuSelectedIndex = 0;
             public int buildingLevelMaxDropDownMenuSelectedIndex = 0;
-            public int DLCDropDownMenuSelectedIndex = 0;
+            public int dlcDropDownMenuSelectedIndex = 0;
+            public int districtStyleDropDownMenuSelectedIndex = 0;
 
             public TabData()
             {
@@ -276,8 +277,9 @@ namespace FindIt.GUI
                 builingHeightUnitSelectedIndex = 0;
                 buildingLevelMinDropDownMenuSelectedIndex = 0;
                 buildingLevelMaxDropDownMenuSelectedIndex = 0;
-                DLCDropDownMenuSelectedIndex = 0;
-        }
+                dlcDropDownMenuSelectedIndex = 0;
+                districtStyleDropDownMenuSelectedIndex = 0;
+            }
         }
         private TabData tabData = new TabData();
 
@@ -357,7 +359,10 @@ namespace FindIt.GUI
                         tabData.buildingLevelMaxDropDownMenuSelectedIndex = UIFilterExtraPanel.instance.buildingLevelMaxDropDownMenu.selectedIndex;
                         break;
                     case (int)UIFilterExtraPanel.DropDownOptions.DLC:
-                        tabData.DLCDropDownMenuSelectedIndex = UIFilterExtraPanel.instance.DLCDropDownMenu.selectedIndex;
+                        tabData.dlcDropDownMenuSelectedIndex = UIFilterExtraPanel.instance.dlcDropDownMenu.selectedIndex;
+                        break;
+                    case (int)UIFilterExtraPanel.DropDownOptions.DistrictStyle:
+                        tabData.districtStyleDropDownMenuSelectedIndex = UIFilterExtraPanel.instance.districtStyleDropDownMenu.selectedIndex;
                         break;
                     default:
                         break;
@@ -416,7 +421,7 @@ namespace FindIt.GUI
 
             // restore custom tag panel info
             UIFilterTagPanel.instance.tagDropDownCheckBox.isChecked = tabData.customTagPanelEnabled;
-                
+
             if (tabData.customTagPanelEnabled)
             {
                 if (!UIFilterTagPanel.instance.isVisible)
@@ -463,7 +468,10 @@ namespace FindIt.GUI
                         UIFilterExtraPanel.instance.buildingLevelMaxDropDownMenu.selectedIndex = tabData.buildingLevelMaxDropDownMenuSelectedIndex;
                         break;
                     case (int)UIFilterExtraPanel.DropDownOptions.DLC:
-                        UIFilterExtraPanel.instance.DLCDropDownMenu.selectedIndex = tabData.DLCDropDownMenuSelectedIndex;
+                        UIFilterExtraPanel.instance.dlcDropDownMenu.selectedIndex = tabData.dlcDropDownMenuSelectedIndex;
+                        break;
+                    case (int)UIFilterExtraPanel.DropDownOptions.DistrictStyle:
+                        UIFilterExtraPanel.instance.districtStyleDropDownMenu.selectedIndex = tabData.districtStyleDropDownMenuSelectedIndex;
                         break;
                     default:
                         break;

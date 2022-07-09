@@ -66,8 +66,8 @@ namespace FindIt.GUI
                 SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtraPanel.instance.optionDropDownMenu);
                 SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterExtraPanel.instance.assetCreatorDropDownMenu);
                 SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtraPanel.instance.assetCreatorDropDownMenu);
-                SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterExtraPanel.instance.DLCDropDownMenu);
-                SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtraPanel.instance.DLCDropDownMenu);
+                SamsamTS.UIUtils.DestroyDropDownScrollBar(UIFilterExtraPanel.instance.dlcDropDownMenu);
+                SamsamTS.UIUtils.CreateDropDownScrollBar(UIFilterExtraPanel.instance.dlcDropDownMenu);
             }
             if (UIFilterTagPanel.instance != null)
             {
