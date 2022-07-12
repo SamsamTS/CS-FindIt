@@ -140,7 +140,6 @@ namespace FindIt
 
             foreach (Asset asset in assets.Values)
             {
-
                 if (asset.prefab != null)
                 {
                     try
@@ -172,6 +171,9 @@ namespace FindIt
 
                             if (asset.isCCP)
                             {
+                                // skip sub-buildings
+                                if (asset.isSubBuilding) continue;
+
                                 if (!assetCreatorDictionary.ContainsKey(asset.author)) assetCreatorDictionary.Add(asset.author, 1);
                                 else assetCreatorDictionary[asset.author] += 1;
                             }
@@ -181,6 +183,9 @@ namespace FindIt
                             if (downloadTimes.ContainsKey(asset.steamID))
                             {
                                 asset.downloadTime = downloadTimes[asset.steamID];
+
+                                // skip sub-buildings
+                                if (asset.isSubBuilding) continue;
 
                                 if (authors.ContainsKey(asset.steamID))
                                 {

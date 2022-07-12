@@ -24,6 +24,8 @@ namespace FindIt
             " It can be used to find buildings from a specific district style\n" +
             " Remember to enable district styles in the content manager\n\n" +
 
+            "- Adjust asset creators counter to exclude sub-buildings\n\n" + 
+
             "- Update translations\n";
 
         public string Name

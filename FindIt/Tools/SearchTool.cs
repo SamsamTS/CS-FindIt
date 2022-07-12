@@ -711,6 +711,7 @@ namespace FindIt
         {
             BuildingInfo buildingInfo = prefab as BuildingInfo;
             if (buildingInfo == null) return false;
+            if (UIFilterExtraPanel.instance.districtStyleList[UIFilterExtraPanel.instance.districtStyleDropDownMenu.selectedIndex] == null) return false;
             if (UIFilterExtraPanel.instance.districtStyleList[UIFilterExtraPanel.instance.districtStyleDropDownMenu.selectedIndex].Contains(buildingInfo)) return true;
             return false;
         }
