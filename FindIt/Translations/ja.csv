@@ -242,3 +242,4 @@
 "FIF_SET_RES_PANELTP","パネルを閉じた時に、Find It! のオプションを全てリセットします"
 "FIF_SE_ICONTP","検索結果をエクスポート"
 "FIF_EXPORT_SEARCH","検索結果をHTMLファイルにエクスポートします"
+"FIF_EF_DS","地区スタイル"
