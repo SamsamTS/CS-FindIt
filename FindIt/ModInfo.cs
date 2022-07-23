@@ -12,21 +12,31 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.8.3-beta2";
+        public const string version = "2.8.3-beta3";
         public const bool isBeta = true;
         public const bool debug = false;
-        public const double updateNoticeDate = 20220712;
+        public const double updateNoticeDate = 20220722;
         public const string updateNotice =
 
-            "- New search filter: District Style\n\n" +
+            "- Add a special custom tag \"hidden\" \n\n" +
 
-            " You can find this filter in the extra filters panel\n" +
-            " It can be used to find buildings from a specific district style\n" +
-            " Remember to enable district styles in the content manager\n\n" +
+            "  Assets tagged as hidden will be hidden from future search\n" +
+            "  You can use this tag to hide dependency assets\n" + 
+            "  Use the custom tag panel to see assets tagged as hidden\n" +
+            "  Remove the hidden tag to make the assets appear again\n\n" +
 
-            "- Adjust asset creators counter to exclude sub-buildings\n\n" + 
+            "- Minor UI tweaks & update translations\n";
 
-            "- Update translations\n";
+
+            //"- New search filter: District Style\n\n" +
+
+            //" You can find this filter in the extra filters panel\n" +
+            //" It can be used to find buildings from a specific district style\n" +
+            //" Remember to enable district styles in the content manager\n\n" +
+
+            //"- Adjust asset creators counter to exclude sub-buildings\n\n" + 
+
+            //"- Update translations\n";
 
         public string Name
         {

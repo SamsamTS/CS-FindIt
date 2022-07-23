@@ -210,6 +210,15 @@ namespace FindIt
                     {
                         if (!asset.tagsCustom.Contains(UISearchBox.instance.tagPanel.GetDropDownListKey())) return false;
                     }
+                    else
+                    {
+                        if (asset.tagsCustom.Contains("hidden")) return false;
+                    }
+                }
+                // sktip assets tagged as "hidden"
+                else
+                {
+                    if (asset.tagsCustom.Contains("hidden")) return false;
                 }
 
                 // extra filters check
