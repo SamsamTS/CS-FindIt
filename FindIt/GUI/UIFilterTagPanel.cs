@@ -52,7 +52,7 @@ namespace FindIt.GUI
 
             // tag dropdown
             tagDropDownMenu = SamsamTS.UIUtils.CreateDropDown(this);
-            tagDropDownMenu.size = new Vector2(200, 25);
+            tagDropDownMenu.size = new Vector2(270, 25);
             tagDropDownMenu.tooltip = Translations.Translate("FIF_POP_SCR");
             tagDropDownMenu.listHeight = 300;
             tagDropDownMenu.itemHeight = 30;
@@ -74,7 +74,7 @@ namespace FindIt.GUI
             refreshButton.textScale = 0.8f;
             refreshButton.textPadding = new RectOffset(0, 0, 5, 0);
             refreshButton.tooltip = Translations.Translate("FIF_TAG_REFTP");
-            refreshButton.relativePosition = new Vector3(tagDropDownMenu.relativePosition.x + tagDropDownMenu.width + 15, 5);
+            refreshButton.relativePosition = new Vector3(tagDropDownMenu.relativePosition.x + tagDropDownMenu.width + 2, 5);
             refreshButton.eventClick += (c, p) =>
             {
                 UpdateCustomTagList();
@@ -88,7 +88,7 @@ namespace FindIt.GUI
             renameButton.textScale = 0.8f;
             renameButton.textPadding = new RectOffset(0, 0, 5, 0);
             renameButton.tooltip = Translations.Translate("FIF_TAG_RENTP");
-            renameButton.relativePosition = new Vector3(refreshButton.relativePosition.x + refreshButton.width + 5, 5);
+            renameButton.relativePosition = new Vector3(refreshButton.relativePosition.x + refreshButton.width + 2, 5);
             renameButton.eventClick += (c, p) =>
             {
                 if (customTagListStrArray.Length != 0)
@@ -108,7 +108,7 @@ namespace FindIt.GUI
             mergeButton.textScale = 0.8f;
             mergeButton.textPadding = new RectOffset(0, 0, 5, 0);
             mergeButton.tooltip = Translations.Translate("FIF_TAG_COMTP");
-            mergeButton.relativePosition = new Vector3(renameButton.relativePosition.x + renameButton.width + 5, 5);
+            mergeButton.relativePosition = new Vector3(renameButton.relativePosition.x + renameButton.width + 2, 5);
             mergeButton.eventClick += (c, p) =>
             {
                 if (customTagListStrArray.Length != 0)
@@ -128,7 +128,7 @@ namespace FindIt.GUI
             deleteButton.textScale = 0.8f;
             deleteButton.textPadding = new RectOffset(0, 0, 5, 0);
             deleteButton.tooltip = Translations.Translate("FIF_TAG_DELTP");
-            deleteButton.relativePosition = new Vector3(mergeButton.relativePosition.x + mergeButton.width + 5, 5);
+            deleteButton.relativePosition = new Vector3(mergeButton.relativePosition.x + mergeButton.width + 2, 5);
             deleteButton.eventClick += (c, p) =>
             {
                 if (customTagListStrArray.Length != 0)
@@ -149,7 +149,7 @@ namespace FindIt.GUI
             batchAddButton.textPadding = new RectOffset(0, 0, 5, 0);
             batchAddButton.isVisible = false;
             batchAddButton.tooltip = Translations.Translate("FIF_TAG_ADDTP");
-            batchAddButton.relativePosition = new Vector3(refreshButton.relativePosition.x + refreshButton.width + 5, 5);
+            batchAddButton.relativePosition = new Vector3(refreshButton.relativePosition.x + refreshButton.width + 2, 5);
             batchAddButton.eventClick += (c, p) =>
             {
                 UITagsBatchAddPopUp.ShowAt(batchAddButton);
@@ -163,7 +163,7 @@ namespace FindIt.GUI
             batchRemoveButton.textPadding = new RectOffset(0, 0, 5, 0);
             batchRemoveButton.isVisible = false;
             batchRemoveButton.tooltip = Translations.Translate("FIF_TAG_REMTP");
-            batchRemoveButton.relativePosition = new Vector3(batchAddButton.relativePosition.x + batchAddButton.width + 5, 5);
+            batchRemoveButton.relativePosition = new Vector3(batchAddButton.relativePosition.x + batchAddButton.width + 2, 5);
             batchRemoveButton.eventClick += (c, p) =>
             {
                 UITagsBatchRemovePopUp.ShowAt(batchRemoveButton);
@@ -177,7 +177,7 @@ namespace FindIt.GUI
             batchSelectAllButton.textPadding = new RectOffset(0, 0, 5, 0);
             batchSelectAllButton.isVisible = false;
             batchSelectAllButton.tooltip = Translations.Translate("FIF_TAG_SATP");
-            batchSelectAllButton.relativePosition = new Vector3(batchRemoveButton.relativePosition.x + batchRemoveButton.width + 5, 5);
+            batchSelectAllButton.relativePosition = new Vector3(batchRemoveButton.relativePosition.x + batchRemoveButton.width + 2, 5);
             batchSelectAllButton.eventClick += (c, p) =>
             {
                 if (UISearchBox.instance.matches != null)
@@ -198,7 +198,7 @@ namespace FindIt.GUI
             batchClearButton.textPadding = new RectOffset(0, 0, 5, 0);
             batchClearButton.isVisible = false;
             batchClearButton.tooltip = Translations.Translate("FIF_TAG_CLETP");
-            batchClearButton.relativePosition = new Vector3(batchSelectAllButton.relativePosition.x + batchSelectAllButton.width + 5, 5);
+            batchClearButton.relativePosition = new Vector3(batchSelectAllButton.relativePosition.x + batchSelectAllButton.width + 2, 5);
             batchClearButton.eventClick += (c, p) =>
             {
                 batchAssetSet.Clear();
@@ -212,7 +212,7 @@ namespace FindIt.GUI
             batchButton.tooltip = Translations.Translate("FIF_TAG_BATTP");
             batchButton.textScale = 0.8f;
             batchButton.textPadding = new RectOffset(0, 0, 5, 0);
-            batchButton.relativePosition = new Vector3(deleteButton.relativePosition.x + deleteButton.width + 5, 5);
+            batchButton.relativePosition = new Vector3(deleteButton.relativePosition.x + deleteButton.width + 2, 5);
             batchButton.eventClick += (c, p) =>
             {
                 isBatchActionsEnabled = !isBatchActionsEnabled;
@@ -227,13 +227,13 @@ namespace FindIt.GUI
                 {
                     batchAssetSet.Clear();
                     batchButton.text = Translations.Translate("FIF_TAG_BAC");
-                    batchButton.relativePosition = new Vector3(batchClearButton.relativePosition.x + batchClearButton.width + 5, 5);
+                    batchButton.relativePosition = new Vector3(batchClearButton.relativePosition.x + batchClearButton.width + 2, 5);
                     width = UISearchBox.instance.sizeFilterX.position.x + batchClearButton.width + 5;
                 }
                 else
                 {
                     batchButton.text = Translations.Translate("FIF_TAG_BAT");
-                    batchButton.relativePosition = new Vector3(deleteButton.relativePosition.x + deleteButton.width + 5, 5);
+                    batchButton.relativePosition = new Vector3(deleteButton.relativePosition.x + deleteButton.width + 2, 5);
                     width = UISearchBox.instance.sizeFilterX.position.x;
                 }
                 UISearchBox.instance.scrollPanel.Refresh();

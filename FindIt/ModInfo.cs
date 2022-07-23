@@ -12,10 +12,10 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.8.3";
+        public const string version = "2.8.3-beta2";
         public const bool isBeta = true;
         public const bool debug = false;
-        public const double updateNoticeDate = 20220709;
+        public const double updateNoticeDate = 20220712;
         public const string updateNotice =
 
             "- New search filter: District Style\n\n" +
