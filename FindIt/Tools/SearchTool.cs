@@ -215,7 +215,7 @@ namespace FindIt
                         if (asset.tagsCustom.Contains("hidden")) return false;
                     }
                 }
-                // sktip assets tagged as "hidden"
+                // skip assets tagged as "hidden"
                 else
                 {
                     if (asset.tagsCustom.Contains("hidden")) return false;
@@ -230,12 +230,16 @@ namespace FindIt
                     }
                     else
                     {
+                        // check asset suggested to be hidden by its creator
+                        if (Settings.hideDependencyAsset && creatorHiddenAssets.Contains(asset)) return false;
                         if (asset.isSubBuilding) return false;
                     }
                 }
                 // skip sub-buildings if not using the extra filters panel
                 else
                 {
+                    // check asset suggested to be hidden by its creator
+                    if (Settings.hideDependencyAsset && creatorHiddenAssets.Contains(asset)) return false;
                     if (asset.isSubBuilding) return false;
                 }
             }
@@ -243,6 +247,8 @@ namespace FindIt
             {
                 Debugging.LogException(e);
             }
+
+
 
             return true;
         }
@@ -538,6 +544,11 @@ namespace FindIt
             else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtraPanel.DropDownOptions.WithoutCustomTag)
             {
                 if (asset.tagsCustom.Count > 0) return false;
+            }
+            // only show assets that are suggested to be hidden by their creators
+            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtraPanel.DropDownOptions.CreatorHidden)
+            {
+                if (!creatorHiddenAssets.Contains(asset)) return false;
             }
 
             // DLC & CCP filter

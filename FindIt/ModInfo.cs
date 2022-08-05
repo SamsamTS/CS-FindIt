@@ -12,31 +12,36 @@ namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.8.3-beta3";
+        public const string version = "2.8.3-beta4";
         public const bool isBeta = true;
         public const bool debug = false;
-        public const double updateNoticeDate = 20220722;
+        public const double updateNoticeDate = 20220805;
         public const string updateNotice =
 
-            "- Add a special custom tag \"hidden\" \n\n" +
+            "- Add an option to allow assets creators to define and hide dependency assets (disabled by default)\n\n" +
 
-            "  Assets tagged as hidden will be hidden from future search\n" +
-            "  You can use this tag to hide dependency assets\n" + 
-            "  Use the custom tag panel to see assets tagged as hidden\n" +
-            "  Remove the hidden tag to make the assets appear again\n\n" +
+            "If enabled, assets with creator_hidden or #creator_hidden in the description will be excluded from future search results\n" +
+            "These assets are always accessible under the creator_hidden option in the extra filters panel\n";
 
-            "- Minor UI tweaks & update translations\n";
+        //"- Add a special custom tag \"hidden\" \n\n" +
+
+        //"  Assets tagged as hidden will be hidden from future search\n" +
+        //"  You can use this tag to hide dependency assets\n" +
+        //"  Use the custom tag panel to see assets tagged as hidden\n" +
+        //"  Remove the hidden tag to make the assets appear again\n\n" +
+
+        //"- Minor UI tweaks & update translations\n";
 
 
-            //"- New search filter: District Style\n\n" +
+        //"- New search filter: District Style\n\n" +
 
-            //" You can find this filter in the extra filters panel\n" +
-            //" It can be used to find buildings from a specific district style\n" +
-            //" Remember to enable district styles in the content manager\n\n" +
+        //" You can find this filter in the extra filters panel\n" +
+        //" It can be used to find buildings from a specific district style\n" +
+        //" Remember to enable district styles in the content manager\n\n" +
 
-            //"- Adjust asset creators counter to exclude sub-buildings\n\n" + 
+        //"- Adjust asset creators counter to exclude sub-buildings\n\n" + 
 
-            //"- Update translations\n";
+        //"- Update translations\n";
 
         public string Name
         {
@@ -89,6 +94,24 @@ namespace FindIt
                 UIHelper group = helper.AddGroup(Name) as UIHelper;
                 UIPanel panel = group.self as UIPanel;
 
+                // Use system default browser instead of steam overlay
+                UICheckBox useDefaultBrowser = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DB"), Settings.useDefaultBrowser, (b) =>
+                {
+                    Settings.useDefaultBrowser = b;
+                    XMLUtils.SaveSettings();
+                });
+                useDefaultBrowser.tooltip = Translations.Translate("FIF_SET_DBTP");
+                group.AddSpace(5);
+
+                // Allow asset creators to hide dependency assets from search results. Assets with #creator_hidden in their description will be excluded
+                UICheckBox hideDependencyAsset = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_CHA"), Settings.hideDependencyAsset, (b) =>
+                {
+                    Settings.hideDependencyAsset = b;
+                    XMLUtils.SaveSettings();
+                });
+                hideDependencyAsset.tooltip = Translations.Translate("FIF_SET_CHATP");
+                group.AddSpace(5);
+
                 // Center the main toolbar
                 UICheckBox centerToolbar = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_CMT"), Settings.centerToolbar, (b) =>
                 {
@@ -123,15 +146,6 @@ namespace FindIt
                 fixProps.tooltip = Translations.Translate("FIF_SET_BPTP");
                 group.AddSpace(10);
                 */
-
-                // Use system default browser instead of steam overlay
-                UICheckBox useDefaultBrowser = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_DB"), Settings.useDefaultBrowser, (b) =>
-                {
-                    Settings.useDefaultBrowser = b;
-                    XMLUtils.SaveSettings();
-                });
-                useDefaultBrowser.tooltip = Translations.Translate("FIF_SET_DBTP");
-                group.AddSpace(5);
 
                 // Do not show extra Find It 2 UI on vanilla panels
                 UICheckBox hideExtraUIonVP = (UICheckBox)group.AddCheckbox(Translations.Translate("FIF_SET_UIVP"), Settings.hideExtraUIonVP, (b) =>

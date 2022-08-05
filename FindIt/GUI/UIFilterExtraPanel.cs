@@ -68,7 +68,8 @@ namespace FindIt.GUI
             WithCustomTag,
             WithoutCustomTag,
             TerrainConforming,
-            NonTerrainConforming
+            NonTerrainConforming,
+            CreatorHidden
         }
 
         string[] options = {
@@ -85,7 +86,8 @@ namespace FindIt.GUI
                     Translations.Translate("FIF_EF_CT"), // With Custom Tag
                     Translations.Translate("FIF_EF_NCT"), // Without Custom Tag
                     Translations.Translate("FIF_PROP_TC"), // Terrain conforming
-                    Translations.Translate("FIF_PROP_NTC") // Non-Terrain conforming
+                    Translations.Translate("FIF_PROP_NTC"), // Non-Terrain conforming
+                    "creator_hidden" // assets that are suggested to be hidden by their creators
                 };
 
         public enum DLCDropDownOptions

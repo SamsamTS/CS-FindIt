@@ -292,8 +292,8 @@ namespace FindIt.GUI
         public int GetDropDownListIndex(string key)
         {
             UpdateCustomTagList();
-            
-            for(int i = 0; i < customTagList.Count; ++i)
+
+            for (int i = 0; i < customTagList.Count; ++i)
             {
                 if (customTagList[i].Key == key)
                 {
