@@ -12,11 +12,11 @@ namespace FindIt
         public List<Asset> matches = new List<Asset>();
         private HashSet<char> searchPrefixes = new HashSet<char>
         {
-            '!',
-            '#',
-            '%',
-            '+',
-            '$'
+            '!', // NOT
+            '#', // custom tag only
+            '%', // workshop ID
+            '+', // OR
+            '$'  // without a specific custom tag
         };
 
         /// <summary>
@@ -204,16 +204,9 @@ namespace FindIt
             try
             {
                 // filter out assets without matching custom tag
-                if (UISearchBox.instance?.tagPanel != null)
+                if (UISearchBox.instance?.tagPanel != null && UISearchBox.instance.tagPanel.tagDropDownCheckBox.isChecked && UISearchBox.instance.tagPanel.customTagListStrArray.Length > 0)
                 {
-                    if (UISearchBox.instance.tagPanel.tagDropDownCheckBox.isChecked && UISearchBox.instance.tagPanel.customTagListStrArray.Length > 0)
-                    {
-                        if (!asset.tagsCustom.Contains(UISearchBox.instance.tagPanel.GetDropDownListKey())) return false;
-                    }
-                    else
-                    {
-                        if (asset.tagsCustom.Contains("hidden")) return false;
-                    }
+                    if (!asset.tagsCustom.Contains(UISearchBox.instance.tagPanel.GetDropDownListKey())) return false;
                 }
                 // skip assets tagged as "hidden"
                 else
@@ -222,33 +215,22 @@ namespace FindIt
                 }
 
                 // extra filters check
-                if (UISearchBox.instance?.extraFiltersPanel != null)
+                if (UISearchBox.instance?.extraFiltersPanel != null && UISearchBox.instance.extraFiltersPanel.optionDropDownCheckBox.isChecked)
                 {
-                    if (UISearchBox.instance.extraFiltersPanel.optionDropDownCheckBox.isChecked)
-                    {
-                        if (!CheckExtraFilters(asset)) return false;
-                    }
-                    else
-                    {
-                        // check asset suggested to be hidden by its creator
-                        if (Settings.hideDependencyAsset && creatorHiddenAssets.Contains(asset)) return false;
-                        if (asset.isSubBuilding) return false;
-                    }
+                    if (!CheckExtraFilters(asset)) return false;
                 }
-                // skip sub-buildings if not using the extra filters panel
                 else
                 {
+                    // skip sub-buildings if not using the extra filters panel
+                    if (asset.isSubBuilding) return false;
                     // check asset suggested to be hidden by its creator
                     if (Settings.hideDependencyAsset && creatorHiddenAssets.Contains(asset)) return false;
-                    if (asset.isSubBuilding) return false;
                 }
             }
             catch (Exception e)
             {
                 Debugging.LogException(e);
             }
-
-
 
             return true;
         }
@@ -271,10 +253,10 @@ namespace FindIt
             // filter out custom asset
             if (!Settings.useWorkshopFilter)
             {
+                if (asset.prefab.m_isCustomContent) return false;
                 if (FindIt.isNext2Enabled && next2Assets.Contains(asset)) return false;
                 if (FindIt.isETSTEnabled && etstAssets.Contains(asset)) return false;
                 if (FindIt.isOWTTEnabled && owttAssets.Contains(asset)) return false;
-                if (asset.prefab.m_isCustomContent) return false;
             }
 
             // filter out vanilla asset. will not filter out content creater pack assets
