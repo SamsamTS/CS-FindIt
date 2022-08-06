@@ -243,3 +243,5 @@
 "FIF_SE_ICONTP","검색 결과 내보내기"
 "FIF_EXPORT_SEARCH","검색 결과를 HTML 파일로 내보낼 것입니다"
 "FIF_EF_DS","District Style"
+"FIF_SET_CHA","Allow asset creators to hide dependency assets from search results"
+"FIF_SET_CHATP","assets with creator_hidden in their description will be excluded from future search results"

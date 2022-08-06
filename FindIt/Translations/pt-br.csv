@@ -243,3 +243,5 @@
 "FIF_SE_ICONTP","Exportar resultado da pesquisa"
 "FIF_EXPORT_SEARCH","Isto irá exportar os resultados da pesquisa em um arquivo HTML"
 "FIF_EF_DS","Estilo do Distrito"
+"FIF_SET_CHA","Allow asset creators to hide dependency assets from search results"
+"FIF_SET_CHATP","assets with creator_hidden in their description will be excluded from future search results"

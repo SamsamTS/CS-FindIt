@@ -243,3 +243,5 @@
 "FIF_SE_ICONTP","検索結果をエクスポート"
 "FIF_EXPORT_SEARCH","検索結果をHTMLファイルにエクスポートします"
 "FIF_EF_DS","地区スタイル"
+"FIF_SET_CHA","アセット作成者が指定したアセットを検索結果から非表示にすることを許可"
+"FIF_SET_CHATP","説明文に「creator_hidden」が含まれるアセットは、今後の検索結果から除外します。"

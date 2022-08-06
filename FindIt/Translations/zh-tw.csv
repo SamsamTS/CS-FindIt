@@ -243,3 +243,5 @@
 "FIF_SE_ICONTP","匯出搜尋結果"
 "FIF_EXPORT_SEARCH","將搜尋結果匯出成 HTML 檔案"
 "FIF_EF_DS","District Style"
+"FIF_SET_CHA","Allow asset creators to hide dependency assets from search results"
+"FIF_SET_CHATP","assets with creator_hidden in their description will be excluded from future search results"
