@@ -242,3 +242,6 @@
 "FIF_SET_RES_PANELTP","Zresetuj wszystkie opcje [Find it] po zamknięciu panelu"
 "FIF_SE_ICONTP","Eksportuj wyniki wyszukiwania"
 "FIF_EXPORT_SEARCH","Spowoduje to eksport wyników wyszukiwania do pliku HTML"
+"FIF_EF_DS","District Style"
+"FIF_SET_CHA","Allow asset creators to hide dependency assets from search results"
+"FIF_SET_CHATP","assets with creator_hidden in their description will be excluded from future search results"

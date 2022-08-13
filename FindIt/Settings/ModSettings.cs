@@ -4,11 +4,13 @@ using System;
 using System.Xml.Serialization;
 using UnityEngine;
 
-namespace FindIt {
+namespace FindIt
+{
     /// <summary>
     /// Class to hold global mod settings.
     /// </summary>
-    internal static class Settings {
+    internal static class Settings
+    {
         internal static bool unlockAll = false;
 
         internal static bool centerToolbar = true;
@@ -58,11 +60,13 @@ namespace FindIt {
 
         internal static bool showAssetTypePanel = true;
 
+        internal static bool hideDependencyAsset = false;
+
         internal static float assetTypePanelX = -80.0f;
 
         internal static float assetTypePanelY = -75.0f;
 
-        internal static UnsavedInputKey searchKey = new UnsavedInputKey(name: "FIF_SET_KS", KeyCode.F, control:true, shift:false, alt: false);
+        internal static UnsavedInputKey searchKey = new UnsavedInputKey(name: "FIF_SET_KS", KeyCode.F, control: true, shift: false, alt: false);
 
         internal static UnsavedInputKey allKey = new UnsavedInputKey(name: "FIF_SE_IA", keyCode: KeyCode.Alpha1, control: false, shift: false, alt: true);
 
@@ -84,7 +88,8 @@ namespace FindIt {
 
         internal static UnsavedInputKey randomSelectionKey = new UnsavedInputKey(name: "FIF_GR_RAN", keyCode: KeyCode.V, control: false, shift: false, alt: true);
 
-        internal static void RegisterHotkeys() {
+        internal static void RegisterHotkeys()
+        {
             UnifiedUI.Helpers.UUIHelpers.RegisterHotkeys(
                 onToggle: delegate () { OpenFindIt(-1); },
                 activationKey: searchKey);
@@ -184,7 +189,8 @@ namespace FindIt {
     /// Defines the XML settings file.
     /// </summary>
     [XmlRoot(ElementName = "FindIt", Namespace = "", IsNullable = false)]
-    public class XMLSettingsFile {
+    public class XMLSettingsFile
+    {
         [XmlElement("UnlockAll")]
         public bool UnlockAll { get => Settings.unlockAll; set => Settings.unlockAll = value; }
 
@@ -242,6 +248,9 @@ namespace FindIt {
         [XmlElement("UseVanillaFilter")]
         public bool UseVanillaFilter { get => Settings.useVanillaFilter; set => Settings.useVanillaFilter = value; }
 
+        [XmlElement("HideDependencyAsset")]
+        public bool HideDependencyAsset { get => Settings.hideDependencyAsset; set => Settings.hideDependencyAsset = value; }
+
         [XmlElement("LastUpdateNotice")]
         public double LastUpdateNotice { get => Settings.lastUpdateNotice; set => Settings.lastUpdateNotice = value; }
 
@@ -288,11 +297,14 @@ namespace FindIt {
         public KeyBinding RandomSelectionKey { get => Settings.randomSelectionKey.KeyBinding; set => Settings.randomSelectionKey.KeyBinding = value; }
 
         [XmlElement("Language")]
-        public string Language {
-            get {
+        public string Language
+        {
+            get
+            {
                 return Translations.CurrentLanguage;
             }
-            set {
+            set
+            {
                 Translations.CurrentLanguage = value;
             }
         }
@@ -302,7 +314,8 @@ namespace FindIt {
     /// <summary>
     /// keybinding class for xml serialization.
     /// </summary>
-    public struct KeyBinding {
+    public struct KeyBinding
+    {
         [XmlAttribute("KeyCode")]
         public int keyCode;
 
@@ -319,14 +332,17 @@ namespace FindIt {
     }
 
     ///<summary> since we want to save in XML file we don't save in CS settings file.</summary>
-    public class UnsavedInputKey : UnifiedUI.Helpers.UnsavedInputKey {
+    public class UnsavedInputKey : UnifiedUI.Helpers.UnsavedInputKey
+    {
         public UnsavedInputKey(string name, KeyCode keyCode, bool control, bool shift, bool alt) :
-            base(keyName: name, modName: "FindIt2", Encode(keyCode, control: control, shift: shift, alt: alt)) { }
+            base(keyName: name, modName: "FindIt2", Encode(keyCode, control: control, shift: shift, alt: alt))
+        { }
 
         public override void OnConflictResolved() => XMLUtils.SaveSettings();
 
-        public KeyBinding KeyBinding {
-            get => new KeyBinding { keyCode = (int)Key, control = Control, shift = Shift, alt = Alt};
+        public KeyBinding KeyBinding
+        {
+            get => new KeyBinding { keyCode = (int)Key, control = Control, shift = Shift, alt = Alt };
             set => this.value = value.Encode();
         }
     }

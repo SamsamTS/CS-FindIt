@@ -242,3 +242,6 @@
 "FIF_SET_RES_PANELTP","Zet alle opties terug in Find It wanneer het paneel gesloten wordt"
 "FIF_SE_ICONTP","Zoekresultaten exporteren"
 "FIF_EXPORT_SEARCH","Hiermee worden de zoekresultaten naar een HTML-bestand geëxporteerd"
+"FIF_EF_DS","Stijl van district"
+"FIF_SET_CHA","Allow asset creators to hide dependency assets from search results"
+"FIF_SET_CHATP","assets with creator_hidden in their description will be excluded from future search results"

@@ -242,3 +242,6 @@
 "FIF_SET_RES_PANELTP","패널을 닫을 때 Find It의 모든 옵션을 초기화합니다"
 "FIF_SE_ICONTP","검색 결과 내보내기"
 "FIF_EXPORT_SEARCH","검색 결과를 HTML 파일로 내보낼 것입니다"
+"FIF_EF_DS","지역 스타일"
+"FIF_SET_CHA","에셋 제작자가 검색 결과에서 디펜던시 에셋 숨기기를 허용"
+"FIF_SET_CHATP","설명에 creator_hidden이 포함된 에셋은 이후 검색 결과에서 제외됩니다"

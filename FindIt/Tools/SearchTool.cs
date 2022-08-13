@@ -12,11 +12,11 @@ namespace FindIt
         public List<Asset> matches = new List<Asset>();
         private HashSet<char> searchPrefixes = new HashSet<char>
         {
-            '!',
-            '#',
-            '%',
-            '+',
-            '$'
+            '!', // NOT
+            '#', // custom tag only
+            '%', // workshop ID
+            '+', // OR
+            '$'  // without a specific custom tag
         };
 
         /// <summary>
@@ -72,7 +72,8 @@ namespace FindIt
                             {
                                 if (keyword.Length == 1 && searchPrefixes.Contains(keyword[0])) continue;
 
-                                if (searchPrefixes.Contains(keyword[0]) && keyword.Length > 1) {
+                                if (searchPrefixes.Contains(keyword[0]) && keyword.Length > 1)
+                                {
                                     if (keyword[0] == '!') // exclude search
                                     {
                                         score = GetOverallScore(asset, keyword.Substring(1), filter);
@@ -203,30 +204,27 @@ namespace FindIt
             try
             {
                 // filter out assets without matching custom tag
-                if (UISearchBox.instance?.tagPanel != null)
+                if (UISearchBox.instance?.tagPanel != null && UISearchBox.instance.tagPanel.tagDropDownCheckBox.isChecked && UISearchBox.instance.tagPanel.customTagListStrArray.Length > 0)
                 {
-                    if (UISearchBox.instance.tagPanel.tagDropDownCheckBox.isChecked && UISearchBox.instance.tagPanel.customTagListStrArray.Length > 0)
-                    {
-                        if (!asset.tagsCustom.Contains(UISearchBox.instance.tagPanel.GetDropDownListKey())) return false;
-                    }
+                    if (!asset.tagsCustom.Contains(UISearchBox.instance.tagPanel.GetDropDownListKey())) return false;
+                }
+                // skip assets tagged as "hidden"
+                else
+                {
+                    if (asset.tagsCustom.Contains("hidden")) return false;
                 }
 
                 // extra filters check
-                if (UISearchBox.instance?.extraFiltersPanel != null)
+                if (UISearchBox.instance?.extraFiltersPanel != null && UISearchBox.instance.extraFiltersPanel.optionDropDownCheckBox.isChecked)
                 {
-                    if (UISearchBox.instance.extraFiltersPanel.optionDropDownCheckBox.isChecked)
-                    {
-                        if (!CheckExtraFilters(asset)) return false;
-                    }
-                    else
-                    {
-                        if (asset.isSubBuilding) return false;
-                    }
+                    if (!CheckExtraFilters(asset)) return false;
                 }
-                // skip sub-buildings if not using the extra filters panel
                 else
                 {
+                    // skip sub-buildings if not using the extra filters panel
                     if (asset.isSubBuilding) return false;
+                    // check asset suggested to be hidden by its creator
+                    if (Settings.hideDependencyAsset && creatorHiddenAssets.Contains(asset)) return false;
                 }
             }
             catch (Exception e)
@@ -255,10 +253,10 @@ namespace FindIt
             // filter out custom asset
             if (!Settings.useWorkshopFilter)
             {
+                if (asset.prefab.m_isCustomContent) return false;
                 if (FindIt.isNext2Enabled && next2Assets.Contains(asset)) return false;
                 if (FindIt.isETSTEnabled && etstAssets.Contains(asset)) return false;
                 if (FindIt.isOWTTEnabled && owttAssets.Contains(asset)) return false;
-                if (asset.prefab.m_isCustomContent) return false;
             }
 
             // filter out vanilla asset. will not filter out content creater pack assets
@@ -456,111 +454,142 @@ namespace FindIt
 
         private bool CheckExtraFilters(Asset asset)
         {
-            // filter out sub-builsings if sub-building filter not enabled
-            if (asset.isSubBuilding && UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex != (int)UIFilterExtraPanel.DropDownOptions.SubBuildings) return false;
-            // filter asset by asset creator
-            if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtraPanel.DropDownOptions.AssetCreator)
-            {
-                if (asset.author != UISearchBox.instance.extraFiltersPanel.GetAssetCreatorDropDownListKey()) return false;
-            }
-            // filter asset by building height
-            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtraPanel.DropDownOptions.BuildingHeight)
-            {
-                if (asset.assetType == Asset.AssetType.Ploppable || asset.assetType == Asset.AssetType.Rico || asset.assetType == Asset.AssetType.Growable)
-                {
-                    if (asset.buildingHeight > UISearchBox.instance.extraFiltersPanel.maxBuildingHeight) return false;
-                    if (asset.buildingHeight < UISearchBox.instance.extraFiltersPanel.minBuildingHeight) return false;
-                }
-                else return false;
-            }
-            // filter asset by building level
-            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtraPanel.DropDownOptions.BuildingLevel)
-            {
-                if (!(asset.prefab is BuildingInfo)) return false;
-                BuildingInfo info = asset.prefab as BuildingInfo;
+            UIFilterExtraPanel.DropDownOptions selectedOption = (UIFilterExtraPanel.DropDownOptions)UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex;
 
-                int level = (int)info.m_class.m_level;
+            // filter out sub-buildings if sub-building filter not enabled
+            if (asset.isSubBuilding && selectedOption != UIFilterExtraPanel.DropDownOptions.SubBuildings) return false;
 
-                if (level < UISearchBox.instance.extraFiltersPanel.buildingLevelMinDropDownMenu.selectedIndex ||
-                    level > UISearchBox.instance.extraFiltersPanel.buildingLevelMaxDropDownMenu.selectedIndex )
-                {
-                    return false;
-                }
-            }
-            // only show sub-buildings
-            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtraPanel.DropDownOptions.SubBuildings)
-            {
-                if (!asset.isSubBuilding) return false;
-                if (asset.assetType != Asset.AssetType.Invalid) return false;
-            }
-            // only show unused assets
-            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtraPanel.DropDownOptions.UnusedAssets)
-            {
-                if (prefabInstanceCountDictionary.ContainsKey(asset.prefab))
-                {
-                    if (prefabInstanceCountDictionary[asset.prefab] > 0) return false;
-                }
-                if (FindIt.isPOEnabled && Settings.includePOinstances)
-                {
-                    if (ProceduralObjectsTool.GetPrefabPOInstanceCount(asset.prefab) > 0) return false;
-                }
-            }
-            // only show used assets
-            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtraPanel.DropDownOptions.UsedAssets)
-            {
-                uint counter = 0;
-                if (prefabInstanceCountDictionary.ContainsKey(asset.prefab))
-                {
-                    counter += prefabInstanceCountDictionary[asset.prefab];
-                }
-                if (FindIt.isPOEnabled && Settings.includePOinstances)
-                {
-                    counter += ProceduralObjectsTool.GetPrefabPOInstanceCount(asset.prefab);
-                }
-                if (counter < 1) return false;
-            }
-            // only show assets with custom tags
-            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtraPanel.DropDownOptions.WithCustomTag)
-            {
-                if (asset.tagsCustom.Count < 1) return false;
-            }
-            // only show assets without custom tags
-            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtraPanel.DropDownOptions.WithoutCustomTag)
-            {
-                if (asset.tagsCustom.Count > 0) return false;
-            }
+            // filter out creator_hidden assets if creator_hidden filter not enabled
+            if (Settings.hideDependencyAsset && creatorHiddenAssets.Contains(asset) && selectedOption != UIFilterExtraPanel.DropDownOptions.CreatorHidden) return false;
 
-            // DLC & CCP filter
-            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtraPanel.DropDownOptions.DLC)
+            switch (selectedOption)
             {
-                if (!CheckDLCFilters(asset.prefab.m_dlcRequired)) return false;
-            }
+                // filter asset by asset creator
+                case UIFilterExtraPanel.DropDownOptions.AssetCreator:
+                    {
+                        if (asset.author != UISearchBox.instance.extraFiltersPanel.GetAssetCreatorDropDownListKey()) return false;
+                        break;
+                    }
+                // filter asset by building height
+                case UIFilterExtraPanel.DropDownOptions.BuildingHeight:
+                    {
+                        if (asset.assetType == Asset.AssetType.Ploppable || asset.assetType == Asset.AssetType.Rico || asset.assetType == Asset.AssetType.Growable)
+                        {
+                            if (asset.buildingHeight > UISearchBox.instance.extraFiltersPanel.maxBuildingHeight) return false;
+                            if (asset.buildingHeight < UISearchBox.instance.extraFiltersPanel.minBuildingHeight) return false;
+                        }
+                        else return false;
+                        break;
+                    }
+                // filter asset by building level
+                case UIFilterExtraPanel.DropDownOptions.BuildingLevel:
+                    {
+                        if (!(asset.prefab is BuildingInfo)) return false;
+                        BuildingInfo info = asset.prefab as BuildingInfo;
 
-            // local custom filter
-            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtraPanel.DropDownOptions.LocalCustom)
-            {
-                if (!asset.prefab.m_isCustomContent) return false;
-                if (!localWorkshopIDs.Contains(asset.steamID) && asset.steamID != 0) return false;
-            }
+                        int level = (int)info.m_class.m_level;
 
-            // workshop subscription assets
-            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtraPanel.DropDownOptions.WorkshopCustom)
-            {
-                if (!asset.prefab.m_isCustomContent) return false;
-                if (localWorkshopIDs.Contains(asset.steamID)) return false;
-                if (asset.steamID == 0) return false;
-            }
-
-            // Terrain conforming
-            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtraPanel.DropDownOptions.TerrainConforming)
-            {
-                if (!CheckTerrainConforming(asset, true)) return false;
-            }
-
-            // Non-Terrain conforming
-            else if (UISearchBox.instance.extraFiltersPanel.optionDropDownMenu.selectedIndex == (int)UIFilterExtraPanel.DropDownOptions.NonTerrainConforming)
-            {
-                if (!CheckTerrainConforming(asset, false)) return false;
+                        if (level < UISearchBox.instance.extraFiltersPanel.buildingLevelMinDropDownMenu.selectedIndex ||
+                            level > UISearchBox.instance.extraFiltersPanel.buildingLevelMaxDropDownMenu.selectedIndex)
+                        {
+                            return false;
+                        }
+                        break;
+                    }
+                // only show sub-buildings
+                case UIFilterExtraPanel.DropDownOptions.SubBuildings:
+                    {
+                        if (!asset.isSubBuilding) return false;
+                        if (asset.assetType != Asset.AssetType.Invalid) return false;
+                        break;
+                    }
+                // only show unused assets
+                case UIFilterExtraPanel.DropDownOptions.UnusedAssets:
+                    {
+                        if (prefabInstanceCountDictionary.ContainsKey(asset.prefab))
+                        {
+                            if (prefabInstanceCountDictionary[asset.prefab] > 0) return false;
+                        }
+                        if (FindIt.isPOEnabled && Settings.includePOinstances)
+                        {
+                            if (ProceduralObjectsTool.GetPrefabPOInstanceCount(asset.prefab) > 0) return false;
+                        }
+                        break;
+                    }
+                // only show used assets
+                case UIFilterExtraPanel.DropDownOptions.UsedAssets:
+                    {
+                        uint counter = 0;
+                        if (prefabInstanceCountDictionary.ContainsKey(asset.prefab))
+                        {
+                            counter += prefabInstanceCountDictionary[asset.prefab];
+                        }
+                        if (FindIt.isPOEnabled && Settings.includePOinstances)
+                        {
+                            counter += ProceduralObjectsTool.GetPrefabPOInstanceCount(asset.prefab);
+                        }
+                        if (counter < 1) return false;
+                        break;
+                    }
+                // only show assets with custom tags
+                case UIFilterExtraPanel.DropDownOptions.WithCustomTag:
+                    {
+                        if (asset.tagsCustom.Count < 1) return false;
+                        break;
+                    }
+                // only show assets without custom tags
+                case UIFilterExtraPanel.DropDownOptions.WithoutCustomTag:
+                    {
+                        if (asset.tagsCustom.Count > 0) return false;
+                        break;
+                    }
+                // DLC & CCP filter
+                case UIFilterExtraPanel.DropDownOptions.DLC:
+                    {
+                        if (!CheckDLCFilters(asset.prefab.m_dlcRequired)) return false;
+                        break;
+                    }
+                // District Style filter
+                case UIFilterExtraPanel.DropDownOptions.DistrictStyle:
+                    {
+                        if (!CheckDistrictStyleFilters(asset.prefab)) return false;
+                        break;
+                    }
+                // local custom filter
+                case UIFilterExtraPanel.DropDownOptions.LocalCustom:
+                    {
+                        if (!asset.prefab.m_isCustomContent) return false;
+                        if (!localWorkshopIDs.Contains(asset.steamID) && asset.steamID != 0) return false;
+                        break;
+                    }
+                // workshop subscription assets
+                case UIFilterExtraPanel.DropDownOptions.WorkshopCustom:
+                    {
+                        if (!asset.prefab.m_isCustomContent) return false;
+                        if (localWorkshopIDs.Contains(asset.steamID)) return false;
+                        if (asset.steamID == 0) return false;
+                        break;
+                    }
+                // Terrain conforming
+                case UIFilterExtraPanel.DropDownOptions.TerrainConforming:
+                    {
+                        if (!CheckTerrainConforming(asset, true)) return false;
+                        break;
+                    }
+                // Non-Terrain conforming
+                case UIFilterExtraPanel.DropDownOptions.NonTerrainConforming:
+                    {
+                        if (!CheckTerrainConforming(asset, false)) return false;
+                        break;
+                    }
+                // only show assets that are suggested to be hidden by their creators
+                case UIFilterExtraPanel.DropDownOptions.CreatorHidden:
+                    {
+                        if (!creatorHiddenAssets.Contains(asset)) return false;
+                        break;
+                    }
+                default:
+                    break;
             }
 
             return true;
@@ -619,86 +648,151 @@ namespace FindIt
             }
             return true;
         }
+
         private bool CheckDLCFilters(SteamHelper.DLC_BitMask dlc)
         {
-            int selectedIndex = UISearchBox.instance.extraFiltersPanel.DLCDropDownMenu.selectedIndex;
+            UIFilterExtraPanel.DLCDropDownOptions selectedOption = (UIFilterExtraPanel.DLCDropDownOptions)UISearchBox.instance.extraFiltersPanel.dlcDropDownMenu.selectedIndex;
 
-            if (dlc != SteamHelper.DLC_BitMask.None &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.BaseGame) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.DeluxeDLC &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.DeluxeUpgrade) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.AfterDarkDLC &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.AfterDark) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.AirportDLC &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.Airports) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.SnowFallDLC &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.SnowFall) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.NaturalDisastersDLC &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.NaturalDisasters) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.InMotionDLC &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.MassTransit) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.GreenCitiesDLC &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.GreenCities) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.ParksDLC &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.Parklife) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.IndustryDLC &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.Industries) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.CampusDLC &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.Campus) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.UrbanDLC &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.SunsetHarbor) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.Football &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.MatchDay) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.Football2345 &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.Stadiums) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.OrientalBuildings &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.PearlsFromTheEast) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.MusicFestival &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.Concerts) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.ModderPack1 &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.ArtDeco) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.ModderPack2 &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.HighTechBuildings) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.ModderPack3 &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.EuropeanSuburbias) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.ModderPack4 &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.UniverisityCity) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.ModderPack5 &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.ModernCityCenter) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.ModderPack6 &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.ModernJapan) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.ModderPack7 &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.TrainStations) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.ModderPack8 &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.BridgesPiers) return false;
-
-            else if (dlc != SteamHelper.DLC_BitMask.ModderPack10 &&
-                selectedIndex == (int)UIFilterExtraPanel.DLCDropDownOptions.VehiclesoftheWorld) return false;
+            switch (selectedOption)
+            {
+                case UIFilterExtraPanel.DLCDropDownOptions.BaseGame:
+                    {
+                        if ((dlc | SteamHelper.DLC_BitMask.None) != 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.DeluxeUpgrade:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.DeluxeDLC) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.AfterDark:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.AfterDarkDLC) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.Airports:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.AirportDLC) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.SnowFall:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.SnowFallDLC) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.NaturalDisasters:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.NaturalDisastersDLC) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.MassTransit:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.InMotionDLC) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.GreenCities:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.GreenCitiesDLC) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.Parklife:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.ParksDLC) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.Industries:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.IndustryDLC) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.Campus:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.CampusDLC) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.SunsetHarbor:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.UrbanDLC) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.MatchDay:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.Football) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.Stadiums:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.Football2345) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.PearlsFromTheEast:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.OrientalBuildings) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.Concerts:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.MusicFestival) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.ArtDeco:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.ModderPack1) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.HighTechBuildings:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.ModderPack2) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.EuropeanSuburbias:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.ModderPack3) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.UniverisityCity:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.ModderPack4) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.ModernCityCenter:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.ModderPack5) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.ModernJapan:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.ModderPack6) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.TrainStations:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.ModderPack7) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.BridgesPiers:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.ModderPack8) == 0) return false;
+                        break;
+                    }
+                case UIFilterExtraPanel.DLCDropDownOptions.VehiclesoftheWorld:
+                    {
+                        if ((dlc & SteamHelper.DLC_BitMask.ModderPack10) == 0) return false;
+                        break;
+                    }
+                default:
+                    break;
+            }
 
             return true;
+        }
+        private bool CheckDistrictStyleFilters(PrefabInfo prefab)
+        {
+            BuildingInfo buildingInfo = prefab as BuildingInfo;
+            if (buildingInfo == null) return false;
+            if (UIFilterExtraPanel.instance.districtStyleList[UIFilterExtraPanel.instance.districtStyleDropDownMenu.selectedIndex] == null) return false;
+            if (UIFilterExtraPanel.instance.districtStyleList[UIFilterExtraPanel.instance.districtStyleDropDownMenu.selectedIndex].Contains(buildingInfo)) return true;
+            return false;
         }
 
         /// <summary>

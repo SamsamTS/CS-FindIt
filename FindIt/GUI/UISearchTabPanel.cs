@@ -41,11 +41,9 @@ namespace FindIt.GUI
                     tab.isVisible = true;
                     tab.ResetTab();
 
-                    bool extraFiltersPanelFlag = UIFilterExtraPanel.instance.optionDropDownCheckBox.isChecked;
                     searchTabsList.Add(tab);
                     RefreshUIPositions();
                     tab.Selected();
-                    if (extraFiltersPanelFlag) UIFilterExtraPanel.instance.optionDropDownCheckBox.isChecked = true;
 
                     break;
                 }

@@ -242,3 +242,6 @@ FIF_SET_RES_PANEL,Reset Find It panel when it is closed
 FIF_SET_RES_PANELTP,Reset all options in Find It when you close the panel
 FIF_SE_ICONTP,Export search results
 FIF_EXPORT_SEARCH,This will export the search results into an HTML file
+FIF_EF_DS,District Style
+FIF_SET_CHA,Allow asset creators to hide dependency assets from search results
+FIF_SET_CHATP,When enabled, assets with creator_hidden in their description will be excluded from future search results

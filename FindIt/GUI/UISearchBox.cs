@@ -378,7 +378,6 @@ namespace FindIt.GUI
                 if (!extraFiltersPanel.isVisible)
                 {
                     OpenExtraFiltersPanel();
-                    Search();
                 }
                 else
                 {
@@ -449,8 +448,14 @@ namespace FindIt.GUI
 
             sizeLabel.eventClick += (c, p) =>
             {
+                // avoid triggering duplicate searches
+                searchEnabled = false;
+
                 sizeFilterX.selectedIndex = 0;
                 sizeFilterY.selectedIndex = 0;
+
+                searchEnabled = true;
+                Search();
             };
 
             sizeFilterY = SamsamTS.UIUtils.CreateDropDown(inputPanel);
@@ -577,6 +582,9 @@ namespace FindIt.GUI
             // reset panel if the option is enabled
             else if (Settings.resetPanelWhenClosed && !isVisible)
             {
+                // avoid triggering duplicate searches
+                searchEnabled = false;
+                
                 input.text = "";
                 typeFilter.selectedIndex = 0;
                 workshopFilter.isChecked = true;
@@ -588,6 +596,9 @@ namespace FindIt.GUI
                 UIFilterNetwork.instance.SelectAll();
                 UIFilterPloppable.instance.SelectAll();
                 UIFilterTree.instance.SelectAll();
+
+                searchEnabled = true;
+                Search();
             }
         }
 
@@ -710,7 +721,6 @@ namespace FindIt.GUI
             extraFiltersIcon.opacity = 0.5f;
             extraFiltersPanel.isVisible = false;
             extraFiltersPanel.optionDropDownCheckBox.isChecked = false;
-            Search();
             UpdateTopPanelsPosition();
         }
 
@@ -817,6 +827,9 @@ namespace FindIt.GUI
         /// </summary>
         public void ResetFilters()
         {
+            // avoid triggering duplicate searches
+            searchEnabled = false;
+
             input.text = "";
 
             vanillaFilter.isChecked = true;
@@ -832,11 +845,17 @@ namespace FindIt.GUI
             filterProp.SelectAll();
             filterTree.SelectAll();
             filterNetwork.SelectAll();
+
+            searchEnabled = true;
             Search();
         }
 
+        public bool searchEnabled = true;
         public void Search()
         {
+            // avoid triggering duplicate searches
+            if (!searchEnabled) return;
+
             PrefabInfo current = null;
             UIScrollPanelItem.ItemData selected = null;
             if (scrollPanel.selectedItem != null)
@@ -1033,6 +1052,9 @@ namespace FindIt.GUI
                 return false;
             }
 
+            // avoid triggering duplicate searches
+            searchEnabled = false;
+
             if (targetAsset.assetType == Asset.AssetType.Rico || targetAsset.assetType == Asset.AssetType.Growable 
                 || targetAsset.assetType == Asset.AssetType.Ploppable)
             {
@@ -1060,7 +1082,11 @@ namespace FindIt.GUI
 
                 // select filter tab
                 BuildingInfo buildingInfo = targetAsset.prefab as BuildingInfo;
-                if (buildingInfo == null) return false;
+                if (buildingInfo == null)
+                {
+                    searchEnabled = true;
+                    return false;
+                }
 
                 if (targetAsset.assetType == Asset.AssetType.Ploppable)
                 {
@@ -1117,6 +1143,7 @@ namespace FindIt.GUI
             else
             {
                 // Debugging.Message("Picker - wrong asset type");
+                searchEnabled = true;
                 return false;
             }
 
@@ -1127,6 +1154,7 @@ namespace FindIt.GUI
             if (targetAsset.prefab.m_isCustomContent) workshopFilter.isChecked = true;
             else vanillaFilter.isChecked = true;
 
+            searchEnabled = true;
             Search();
 
             // try to locate in the most recent search result

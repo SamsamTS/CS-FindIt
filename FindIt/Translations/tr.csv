@@ -242,3 +242,6 @@
 "FIF_SET_RES_PANELTP","Paneli kapattığınızda Find It'deki tüm seçenekleri sıfırlayın"
 "FIF_SE_ICONTP","Arama sonuçlarını dışa aktar"
 "FIF_EXPORT_SEARCH","Bu, arama sonuçlarını bir HTML dosyasına aktarır"
+"FIF_EF_DS","District Style"
+"FIF_SET_CHA","Allow asset creators to hide dependency assets from search results"
+"FIF_SET_CHATP","assets with creator_hidden in their description will be excluded from future search results"
