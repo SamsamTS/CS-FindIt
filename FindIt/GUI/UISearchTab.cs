@@ -376,6 +376,10 @@ namespace FindIt.GUI
         private void RestoreTabData()
         {
             UISearchBox searchbox = UISearchBox.instance;
+
+            // avoid triggering duplicate searches
+            searchbox.searchEnabled = false;
+
             searchbox.input.text = tabData.inputText;
             searchbox.typeFilter.selectedIndex = tabData.typeFilterSelectedIndex;
             searchbox.workshopFilter.isChecked = tabData.workshopFilterIsChecked;
@@ -478,6 +482,7 @@ namespace FindIt.GUI
                 }
             }
 
+            searchbox.searchEnabled = true;
             searchbox.Search();
 
             // restore the first displayed asset
