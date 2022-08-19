@@ -1,47 +1,43 @@
 ﻿// modified from SamsamTS's original Find It mod
 // https://github.com/SamsamTS/CS-FindIt
 
+using CitiesHarmony.API;
+using ColossalFramework.IO;
+using ColossalFramework.UI;
 using ICities;
 using System;
-using ColossalFramework.UI;
-using CitiesHarmony.API;
 using System.IO;
-using ColossalFramework.IO;
 
 namespace FindIt
 {
     public class ModInfo : IUserMod
     {
-        public const string version = "2.8.3-beta7";
-        public const bool isBeta = true;
+        public const string version = "2.9";
+        public const bool isBeta = false;
         public const bool debug = false;
-        public const double updateNoticeDate = 20220805;
+        public const double updateNoticeDate = 20220914;
         public const string updateNotice =
 
-            "- Add an option to allow assets creators to define and hide dependency assets (disabled by default)\n\n" +
+        "Add support for the new game update and the new DLC and 2 Content Creator Packs:\n" +
+        "  Plazas & Promenades DLC\n" +
+        "  Mid-Century Modern CCP by REV0\n" +
+        "  Seaside Resorts CCP by Gèze\n\n" +
 
-            "If enabled, assets with creator_hidden or #creator_hidden in the description will be excluded from future search results\n" +
-            "These assets are always accessible under the creator_hidden option in the extra filters panel\n";
+        "- Fix the Harmony patch broken by the new game update\n\n" +
 
-        //"- Add a special custom tag \"hidden\" \n\n" +
+        "- Add 3 growable filter tabs for the wall-to-wall types introduced by the new DLC\n\n" +
 
-        //"  Assets tagged as hidden will be hidden from future search\n" +
-        //"  You can use this tag to hide dependency assets\n" +
-        //"  Use the custom tag panel to see assets tagged as hidden\n" +
-        //"  Remove the hidden tag to make the assets appear again\n\n" +
+        "- Add a network filter tab for the new zonable paths introduced by the new DLC\n\n" +
 
-        //"- Minor UI tweaks & update translations\n";
+        "- Add a ploppable filter tab for the new service points introduced by the new DLC\n\n" +
 
+        "- Update district style filter to include the Mid-Century Modern style by REV0\n\n" +
 
-        //"- New search filter: District Style\n\n" +
+        "- Update DLC filter and Creator filter to include the new DLC and CCPs\n\n" +
 
-        //" You can find this filter in the extra filters panel\n" +
-        //" It can be used to find buildings from a specific district style\n" +
-        //" Remember to enable district styles in the content manager\n\n" +
+        "- Show icons of the new DLC & CCPs on asset thumbnails\n\n" +
 
-        //"- Adjust asset creators counter to exclude sub-buildings\n\n" + 
-
-        //"- Update translations\n";
+        "- UI changes\n";
 
         public string Name
         {
